@@ -23,8 +23,27 @@ interface IndexPageProps {
   }
 }
 
-export const pageQuery = graphql`
-  query PageQuery {
+export default class IndexPage extends React.Component<IndexPageProps, {}> {
+  readonly hello = `Hello`
+
+  public render() {
+    const { siteName } = this.props.data.site.siteMetadata
+    return (
+      <Layout>
+        <h1>{this.hello} Typescript world!</h1>
+        <p>
+          This site is named <strong>{siteName}</strong>
+        </p>
+        <div>
+          {this.props.data.allContentfulProject.edges.map((data, index) => (<Tile project={data.node} key={index} />))}
+        </div>
+      </Layout>
+    )
+  }
+}
+
+export const indexPageQuery = graphql`
+  query indexPageQuery {
     site {
       siteMetadata {
         siteName
@@ -51,22 +70,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default class IndexPage extends React.Component<IndexPageProps, {}> {
-  readonly hello = `Hello`
-
-  public render() {
-    const { siteName } = this.props.data.site.siteMetadata
-    return (
-      <Layout>
-        <h1>{this.hello} Typescript world!</h1>
-        <p>
-          This site is named <strong>{siteName}</strong>
-        </p>
-        <div>
-          {this.props.data.allContentfulProject.edges.map((data, index) => (<Tile project={data.node} key={index} />))}
-        </div>
-      </Layout>
-    )
-  }
-}
