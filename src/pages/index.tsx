@@ -11,22 +11,49 @@ interface IndexPageProps {
         siteName: string
       }
     }
+    allContentfulProject: {
+      edges: [
+        {
+          node: Project
+        }
+      ]
+    }
   }
 }
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query PageQuery {
     site {
       siteMetadata {
         siteName
       }
+    }    
+    allContentfulProject {
+      edges {
+        node {
+          title
+          client
+          description {
+            description
+            id
+          }
+          photos {
+            id
+            resolutions {
+              src
+            }
+          }
+        }
+      }
     }
   }
-`
+`;
 
 export default class IndexPage extends React.Component<IndexPageProps, {}> {
   readonly hello = `Hello`
+
   public render() {
+    console.log(this.props.data)
     const { siteName } = this.props.data.site.siteMetadata
     return (
       <Layout>

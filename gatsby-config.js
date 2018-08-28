@@ -5,7 +5,7 @@ require("dotenv").config({path: `.env`,})
 
 module.exports = {
   siteMetadata: {
-    siteName: `Using Typescript Example`,
+    siteName: `The Trevor Harmon`,
   },
   plugins: [
     `gatsby-plugin-typescript`,

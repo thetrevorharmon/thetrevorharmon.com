@@ -6,3 +6,25 @@
 
 // And to shim assets, use (one file extension per `declare`):
 // declare module "*.png"
+
+type Project = {
+  title: string;
+  client?: string;
+  description?: ProjectDescription;
+  projectCompletionDate?: Date;
+  photos: [contentfulPhotos]
+}
+
+type ProjectDescription = {
+  id?: string;
+  description: string;
+}
+
+type contentfulPhotos = {
+  id?: string;
+  resolutions: contentfulPhotosResolutions;
+}
+
+type contentfulPhotosResolutions = {
+  src: string;
+}
