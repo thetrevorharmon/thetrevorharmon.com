@@ -1,5 +1,5 @@
 import * as React from "react"
-import MainLayout from "../layouts"
+import Layout from "../layouts"
 
 export default () => (
   <Layout>

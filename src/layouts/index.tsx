@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const MainLayout: React.SFC = ({ children }) => (
+const Layout: React.SFC = ({ children }) => (
   <div
     style={{
       margin: `0 auto`,
@@ -11,4 +11,4 @@ const MainLayout: React.SFC = ({ children }) => (
   </div>
 )
 
-export default MainLayout
+export default Layout
