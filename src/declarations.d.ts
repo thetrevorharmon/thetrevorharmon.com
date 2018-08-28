@@ -9,6 +9,7 @@
 
 type Project = {
   title: string;
+  slug: string;
   client?: string;
   description?: ProjectDescription;
   projectCompletionDate?: Date;

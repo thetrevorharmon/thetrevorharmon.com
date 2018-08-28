@@ -6,13 +6,8 @@ import { Tile } from "../components";
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
-interface IndexPageProps {
+interface ProjectPageProps {
   data: {
-    site: {
-      siteMetadata: {
-        siteName: string
-      }
-    }
     allContentfulProject: {
       edges: [
         {
@@ -23,18 +18,12 @@ interface IndexPageProps {
   }
 }
 
-export const pageQuery = graphql`
-  query PageQuery {
-    site {
-      siteMetadata {
-        siteName
-      }
-    }    
-    allContentfulProject {
+export const projectPageQuery = graphql`
+  query ProjectPageQuery { 
+    allContentfulProject(filter: {slug: {eq: "i-am-a-tourist-tee"}}) {
       edges {
         node {
           title
-          slug
           client
           description {
             description
@@ -52,17 +41,12 @@ export const pageQuery = graphql`
   }
 `;
 
-export default class IndexPage extends React.Component<IndexPageProps, {}> {
-  readonly hello = `Hello`
-
+export default class ProjectPage extends React.Component<ProjectPageProps, {}> {
   public render() {
-    const { siteName } = this.props.data.site.siteMetadata
+
     return (
       <Layout>
-        <h1>{this.hello} Typescript world!</h1>
-        <p>
-          This site is named <strong>{siteName}</strong>
-        </p>
+        <h1>This is the project page</h1>
         <div>
           {this.props.data.allContentfulProject.edges.map((data, index) => (<Tile project={data.node} key={index} />))}
         </div>
