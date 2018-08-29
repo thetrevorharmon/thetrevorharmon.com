@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-sass`,
+    `gatsby-transformer-remark`, // this converts .md to .html
     {
       resolve: `gatsby-source-contentful`,
       options: {
