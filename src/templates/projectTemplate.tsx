@@ -1,7 +1,8 @@
 import { graphql } from "gatsby"
 import * as React from "react"
+
 import Layout from "../layouts"
-import Link from "gatsby-link"
+import { Button } from "../UI-Kit";
 
 interface TemplateProps {
   data: {
@@ -21,7 +22,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     return (
       <Layout>
-        <Link to="/">Go Back</Link>
+        <Button href="/">Go Back</Button>
         <h1>{project.title}</h1>
         <p>{project.description ? project.description.description : ''}</p>
       </Layout>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "gatsby-link"
+import { Button } from '../../UI-Kit';
 
 interface TileProps {
   project: Project;
@@ -10,7 +10,7 @@ const Tile: React.SFC<TileProps> = (props) => {
     <div>
       <h1>{props.project.title}</h1>
       <img src={props.project.photos[0].resolutions.src} />
-      <Link to={`/${props.project.slug}`}>View more</Link>
+      <Button href={`/${props.project.slug}`}>View more</Button>
     </div>
   )
 }

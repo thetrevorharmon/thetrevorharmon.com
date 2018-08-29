@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "gatsby-link"
+import Link from "../Link";
 
 import * as styles from "./Button.module.scss"
 
@@ -9,9 +9,9 @@ interface ButtonProps {
 
 const Button: React.SFC<ButtonProps> = (props) => {
   return (
-    <div className={styles.Button}>
-      <Link to={props.href}>{props.children}</Link>
-    </div>
+    <span className={styles.Button}>
+      <Link href={props.href} noStyling={true}>{props.children}</Link>
+    </span>
   )
 }
 

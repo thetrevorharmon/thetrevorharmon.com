@@ -1,3 +1,9 @@
 .Button {
-  color: red;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  background: red;
+  
+  *, > a {
+    color: white;
+  }
 }
