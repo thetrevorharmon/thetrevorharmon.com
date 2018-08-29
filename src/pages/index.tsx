@@ -1,8 +1,11 @@
 import { graphql } from "gatsby"
 import * as React from "react"
+import classnames from "classnames";
 
 import Layout from "../layouts";
 import { Tile } from "../components";
+
+import * as styles from './homepage.module.scss';
 
 import { Link, Button } from "../UI-Kit";
 
@@ -33,17 +36,20 @@ interface IndexPageProps {
 }
 
 export default class IndexPage extends React.Component<IndexPageProps, {}> {
-  readonly hello = `Hello`
 
   public render() {
-    const { siteName } = this.props.data.site.siteMetadata
     return (
       <Layout>
-        <h1>{this.hello} Typescript world!</h1>
+
         <p>
-          This site is named <strong>{siteName}</strong>
-          <Link href="http://google.com">Take me to Google</Link>
-          <Button href="i-am-a-tourist-tee">Show me a tourist tee</Button>
+          <h1 className={classnames(
+            `my-8`,
+            styles.MainHeader
+          )}>
+            <small>The</small><br/>
+            Trevor<br/>
+            Harmon
+          </h1>
         </p>
         <div>
           {this.props.data.allContentfulCaseStudy.edges.map((data, index) => (

@@ -5,7 +5,7 @@ import GastbyLink from "gatsby-link";
 import * as styles from "./Link.module.scss";
 
 interface LinkProps {
-  className: string;
+  className?: string;
   href: string;
   noLinkStyling?: boolean;
 }
