@@ -1,0 +1,32 @@
+/////////////////////
+// T H E   G R I D //
+/////////////////////
+
+// This file imports the bootstrap grid, which is included in a NPM
+// This also shows an example of how to make use of the scss included in the NPM:
+// You can declare a variable here and then import the .scss, which will override the variables
+// included in the package.
+//
+// For a list of all the variables, refer to here (it's just the bootstrap variables):
+// https://github.com/m-spyratos/bootstrap-4-grid/blob/master/scss/grid/_variables.scss
+
+// These override the default spacers in the bootstrap utilities
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3),
+    6: ($spacer * 4.5),
+    7: ($spacer * 6),
+    8: ($spacer * 8),
+    9: ($spacer * 10)
+  ),
+  $spacers
+);
+
+@import "../../node_modules/bootstrap-4-grid/scss/grid.scss";

@@ -1,8 +1,13 @@
 .Link {
   color: red;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    color: darken(red, 15%);
+  }
 }
 
 .Reset {
-  color: inherit;
   text-decoration: none;
 }

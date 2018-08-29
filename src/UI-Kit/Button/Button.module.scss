@@ -3,7 +3,13 @@
   padding: 1rem 1.5rem;
   background: red;
   
-  *, > a {
+  &, > a {
     color: white;
+  }
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    background: darken(red, 15%);
   }
 }

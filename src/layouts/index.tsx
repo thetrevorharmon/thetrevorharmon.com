@@ -4,10 +4,7 @@ import '../styles/global.scss';
 
 const Layout: React.SFC = ({ children }) => (
   <div
-    style={{
-      margin: `0 auto`,
-      maxWidth: 650,
-    }}
+    className='container'
   >
     {children}
   </div>

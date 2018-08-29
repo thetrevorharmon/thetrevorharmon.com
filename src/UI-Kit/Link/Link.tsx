@@ -5,17 +5,25 @@ import GastbyLink from "gatsby-link";
 import * as styles from "./Link.module.scss";
 
 interface LinkProps {
+  className: string;
   href: string;
-  noStyling?: boolean;
+  noLinkStyling?: boolean;
 }
 
-const Link: React.SFC<LinkProps> = ({href, noStyling, children}) => {
+const Link: React.SFC<LinkProps> = ({
+  href,
+  noLinkStyling,
+  className,
+  children
+}) => {
+
   const externalPattern = /^http/;
   const externalLink = externalPattern.test(href)
 
   const classname = classnames(
-    !noStyling && styles.Link,
-    noStyling && styles.Reset
+    className,
+    noLinkStyling && styles.Reset,
+    !noLinkStyling && styles.Link,
   )
 
   return externalLink ? (    
@@ -30,7 +38,8 @@ const Link: React.SFC<LinkProps> = ({href, noStyling, children}) => {
 }
 
 Link.defaultProps = {
-  noStyling: false
+  noLinkStyling: false,
+  className: undefined,
 };
 
 export default Link;

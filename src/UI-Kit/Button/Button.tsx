@@ -9,9 +9,13 @@ interface ButtonProps {
 
 const Button: React.SFC<ButtonProps> = (props) => {
   return (
-    <span className={styles.Button}>
-      <Link href={props.href} noStyling={true}>{props.children}</Link>
-    </span>
+    <Link
+      href={props.href}
+      noLinkStyling={true}
+      className={styles.Button}
+    >
+      {props.children}
+    </Link>
   )
 }
 

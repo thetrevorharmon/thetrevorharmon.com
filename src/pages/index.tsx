@@ -1,6 +1,5 @@
 import { graphql } from "gatsby"
 import * as React from "react"
-// import Link from "gatsby-link"
 
 import Layout from "../layouts";
 import { Tile } from "../components";
