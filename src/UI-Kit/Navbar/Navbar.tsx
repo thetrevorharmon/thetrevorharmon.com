@@ -30,20 +30,22 @@ const Navbar: React.SFC<NavbarProps> = (props) => {
   ]
 
   return (
-    <div className={classname}>
-      <div className="container">
-        <div className="row">
+    <>
+      <div className={styles.NavbarOffset} />
+      <div className={classname}>
+        <div className="container">
+          <div className="row">
+            <Link href="/" className={styles.NavbarBrand}>TH</Link>
+            <ul className={styles.NavbarLinks}>
+              {navbarLinks.map((link) => {
+                return <li><Link href={link.location}>{link.display}</Link></li>;
+              })}
+            </ul>
+          </div>
 
-          <Link href="/" className={styles.NavbarBrand}>TH</Link>
-          <ul className={styles.NavbarLinks}>
-            {navbarLinks.map((link) => {
-              return <li><Link href={link.location}>{link.display}</Link></li>;
-            })}
-          </ul>
         </div>
-
       </div>
-    </div>
+    </>
   )
 }
 

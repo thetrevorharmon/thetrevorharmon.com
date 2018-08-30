@@ -1,22 +1,33 @@
 import * as React from "react";
+import classnames from "classnames";
 import Link from "../Link";
 
 import * as styles from "./Button.module.scss"
 
 interface ButtonProps {
   href: string;
+  className?: string;
 }
 
-const Button: React.SFC<ButtonProps> = (props) => {
+const Button: React.SFC<ButtonProps> = ({href, className, children}) => {
+  const classname = classnames(
+    styles.Button,
+    className 
+  )
+
   return (
     <Link
-      href={props.href}
+      href={href}
       noLinkStyling={true}
-      className={styles.Button}
+      className={classname}
     >
-      {props.children}
+      {children}
     </Link>
   )
+}
+
+Button.defaultProps = {
+  className: undefined
 }
 
 export default Button;
