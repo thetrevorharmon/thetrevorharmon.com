@@ -48,7 +48,7 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
             </ul>
 
             {/* Mobile Toggle */}
-            <a href="#" className={classnames(styles.Toggle, 'd-inline-block d-sm-none')} onClick={handleMenuToggle}>
+            <a className={classnames(styles.Toggle, 'd-inline-block d-sm-none')} onClick={handleMenuToggle}>
               <div className={styles.Bar} />
               <div className={styles.Bar} />            
             </a>

@@ -93,24 +93,6 @@
   }
 }
 
-
-.Mobile {
-  background: #2a2a2a;
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100%;
-
-  padding: 1rem 0;
-
-  display: none;
-  // @include mobile-only {
-  //   display: block;
-  // }
-}
-
 .MobileLinks {
   display: block;
   list-style: none;
@@ -125,6 +107,10 @@
       text-decoration: none;
       color: #EEEEEE;
       text-transform: uppercase;
+
+      &:hover {
+        border-bottom-color: transparent;
+      }
     }
   }
 }
