@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 
 import 'normalize.css';
@@ -39,6 +40,9 @@ class Layout extends React.Component<LayoutProps, {}> {
 
     return (
       <>
+        <Helmet>
+          <title>The Trevor Harmon</title>
+        </Helmet>
         <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
         <div
           className={classname}
@@ -55,5 +59,7 @@ Layout.defaultProps = {
   hasContainer: true,
   className: undefined
 }
+
+
 
 export default Layout

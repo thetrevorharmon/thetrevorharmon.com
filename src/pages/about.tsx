@@ -36,7 +36,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
               rank={1}
               type="Headline"
               className={classnames(
-                "my-6 my-lg-7",
+                "my-6 my-lg-8",
               )}
             >
               {aboutPage.title}
