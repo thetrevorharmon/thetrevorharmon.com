@@ -2,7 +2,7 @@ import { graphql } from "gatsby"
 import * as React from "react"
 
 import Layout from "../layouts"
-import { Button } from "../UI-Kit";
+import { Button, Header } from "../UI-Kit";
 
 import { largestPhotoFromSet } from "../utils";
 
@@ -41,10 +41,10 @@ export default class Template extends React.Component<TemplateProps, {}> {
             })}
           </div>
           <div className="col-sm-6">
-            <h1>{project.title}</h1>
+            <Header rank={1} style="Title">{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
-            <p><strong>Client:</strong> {project.client}</p>
-            <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+            {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
+            {project.projectCompletionDate ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p> : undefined}
           </div>
         </div>
       </Layout>

@@ -45,7 +45,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               rank={1}
               type="Headline"
               className={classnames(
-                "my-8",
+                "my-6 my-lg-8",
                 styles.MainHeader
               )}
             >
@@ -68,7 +68,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         */}
         <div className="row">
           {this.props.data.allContentfulProject.edges.map((data, index) => (
-            <div className="col-sm-4">
+            <div className="col-md-6 col-lg-4">
               <Tile project={data.node} key={index} className='mb-4' />
             </div>
           ))}

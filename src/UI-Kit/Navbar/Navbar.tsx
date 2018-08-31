@@ -35,7 +35,7 @@ const Navbar: React.SFC<NavbarProps> = (props) => {
       <div className={classname}>
         <div className="container d-flex">
           <Link href="/" className={styles.NavbarBrand}>TH</Link>
-          <ul className={styles.NavbarLinks}>
+          <ul className={classnames(styles.NavbarLinks, 'd-none d-sm-flex')}>
             {navbarLinks.map((link, index) => {
               return <li key={index}><Link href={link.location}>{link.display}</Link></li>;
             })}
