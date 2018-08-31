@@ -23,10 +23,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node
     
-    const headerImages = caseStudy.heroImage.resolutions.srcSet.split(',');
+    const headerImages = caseStudy.featureImage.resolutions.srcSet.split(',');
     const headerImage = headerImages[headerImages.length - 1].split(' ')[0];
-
-    console.log(caseStudy.heroImage.resolutions);
 
     const heroStyle = {
       backgroundImage: `url(${headerImage})`
@@ -70,7 +68,7 @@ export const query = graphql`
           id
           title
           slug
-          heroImage {
+          featureImage {
             resolutions {
               srcSet
             }

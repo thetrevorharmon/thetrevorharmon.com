@@ -1,4 +1,4 @@
-type Project = {
+interface Project = {
   title: string;
   slug: string;
   client?: string;
@@ -7,10 +7,11 @@ type Project = {
     description: string;
   };
   projectCompletionDate?: Date;
-  photos: [contentfulAsset]
+  featureImage: contentfulAsset
+  projectImages: [contentfulAsset]
 }
 
-type CaseStudy = {
+interface CaseStudy = {
   title: string;
   slug: string;
   heroImage: contentfulAsset;
@@ -18,7 +19,7 @@ type CaseStudy = {
   post: contentfulLongText;
 }
 
-type contentfulLongText = {
+interface contentfulLongText = {
   id?: number;
   internal: {
     type?: string;
@@ -34,7 +35,7 @@ type contentfulLongText = {
   }
 }
 
-type contentfulAsset = {
+interface contentfulAsset = {
   id?: string;
   resolutions: {
     src: string;

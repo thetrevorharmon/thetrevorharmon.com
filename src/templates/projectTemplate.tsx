@@ -24,20 +24,20 @@ export default class Template extends React.Component<TemplateProps, {}> {
   render() {
     const project = this.props.data.allContentfulProject.edges[0].node
 
-    const photos: [string] = []
+    const projectImages: [string] = []
 
-    project.photos.map((photo) => {
-      photos.push(largestPhotoFromSet(photo));
-    })
+    projectImages.push(largestPhotoFromSet(project.featureImage))
 
-    console.log(photos)
+    if (project.projectImages) {    
+      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)))
+    }
 
     return (
       <Layout className={styles.ProjectTemplate}>
         <div className="row">
           <div className="col-sm-6">
-            {photos.map((photo, index) => {
-              return <img key={index} src={photo} />;
+            {projectImages.map((imageSrc, index) => {
+              return <img key={index} src={imageSrc} />;
             })}
           </div>
           <div className="col-sm-6">
@@ -64,13 +64,20 @@ export const query = graphql`
             description
             id
           }
-          photos {
+          projectImages {
             id
             resolutions {
               src
               srcSet
             }
           }
+          featureImage {
+            id
+            resolutions {
+              src
+              srcSet
+            }
+          }          
         }
       }
     }

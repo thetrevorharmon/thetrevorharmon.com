@@ -4,19 +4,14 @@ import classnames from "classnames";
 
 import Layout from "../layouts";
 
-import * as styles from './homepage.module.scss';
+// import * as styles from './projects.module.scss';
 
 import { Link, Button, Tile, Header } from "../UI-Kit";
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
-interface IndexPageProps {
+interface ProjectsPageProps {
   data: {
-    site: {
-      siteMetadata: {
-        siteName: string
-      }
-    }
     allContentfulProject: {
       edges: [
         {
@@ -24,37 +19,12 @@ interface IndexPageProps {
         }
       ]
     }
-    allContentfulCaseStudy: {
-      edges: [
-        {
-           node: CaseStudy 
-        }
-      ]
-    }
   }
 }
 
-export default class IndexPage extends React.Component<IndexPageProps, {}> {
+export default class ProjectsPage extends React.Component<ProjectsPageProps, {}> {
 
   public render() {
-
-    // const projects: [Project] = [];
-
-    // this.props.data.allContentfulProject.edges.map((item) => {
-    //   let project: Project = item;
-    //   projects.push(project);
-    // })
-
-    // projects.map((item) => {
-    //   console.log(item instanceof Project)
-    // })
-
-    // const projectsAndStudies: [Project | CaseStudy] = [...this.props.data.allContentfulProject.edges, ...this.props.data.allContentfulCaseStudy.edges]
-    
-    // projectsAndStudies.map((item) => {
-    //   console.log(item.type)
-    // })
-
     return (
       <Layout>
         <div className="row">
@@ -63,27 +33,16 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               rank={1}
               type="Headline"
               className={classnames(
-                "my-6 mt-lg-6 mb-lg-8",
-                styles.MainHeader
+                "my-6 my-lg-8",
               )}
             >
-              <span>The</span><br/>
-              Trevor<br/>
-              Harmon
+              Projects
             </Header>
           </div>
         </div>
         <div className="row">
           <Header rank={2} type="Subtitle" className="col">Featured</Header>
         </div>
-        {/*
-          <div className="row">
-            {this.props.data.allContentfulCaseStudy.edges.map((data, index) => (
-                <h2 key={index} className="col">{data.node.title} <Link href={data.node.slug}>Check it out</Link></h2>
-              )
-            )}
-          </div>
-        */}
         <div className="row">
           {this.props.data.allContentfulProject.edges.map((data, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
@@ -96,8 +55,8 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
   }
 }
 
-export const indexPageQuery = graphql`
-  query indexPageQuery {
+export const projectsPageQuery = graphql`
+  query projectsPageQuery {
     site {
       siteMetadata {
         siteName
@@ -113,13 +72,13 @@ export const indexPageQuery = graphql`
             description
             id
           }
-          projectImages {
+          featureImage {
             id
             resolutions {
               src
             }
           }
-          featureImage {
+          projectImages {
             id
             resolutions {
               src
@@ -128,13 +87,5 @@ export const indexPageQuery = graphql`
         }
       }
     }
-    allContentfulCaseStudy {
-      edges {
-        node {
-          title
-          slug
-        }
-      }
-    }    
   }
 `;

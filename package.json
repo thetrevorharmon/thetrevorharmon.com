@@ -1,7 +1,7 @@
 {
-  "name": "using-typescript",
+  "name": "The Trevor Harmon",
   "version": "1.0.0",
-  "description": "Gatsby example site demonstrating how to use Typescript with Gatsby",
+  "description": "The portfolio and personal site of Trevor Harmon",
   "author": "fabien0102 <fabien0102@gmail.com>",
   "license": "MIT",
   "scripts": {

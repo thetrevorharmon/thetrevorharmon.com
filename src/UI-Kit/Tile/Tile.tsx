@@ -11,7 +11,7 @@ interface TileProps {
 
 const Tile: React.SFC<TileProps> = ({project, className}) => {
   const tileStyle = {
-    backgroundImage: `url(${project.photos[0].resolutions.src})`
+    backgroundImage: `url(${project.featureImage.resolutions.src})`
   }
 
   const classname = classnames(

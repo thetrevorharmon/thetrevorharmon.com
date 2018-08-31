@@ -16,11 +16,11 @@ const Navbar: React.SFC<NavbarProps> = (props) => {
 
   const navbarLinks = [
     {
-      location: '/',
+      location: '/case-studies',
       display: 'Case Studies'
     },
     {
-      location: '/',
+      location: '/projects',
       display: 'Projects'
     },
     {
