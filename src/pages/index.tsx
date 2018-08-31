@@ -38,22 +38,10 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
   public render() {
 
-    // const projects: [Project] = [];
-
-    // this.props.data.allContentfulProject.edges.map((item) => {
-    //   let project: Project = item;
-    //   projects.push(project);
-    // })
-
-    // projects.map((item) => {
-    //   console.log(item instanceof Project)
-    // })
-
-    // const projectsAndStudies: [Project | CaseStudy] = [...this.props.data.allContentfulProject.edges, ...this.props.data.allContentfulCaseStudy.edges]
-    
-    // projectsAndStudies.map((item) => {
-    //   console.log(item.type)
-    // })
+    const featureItems: [PortfolioItem] = [
+      ...this.props.data.allContentfulCaseStudy.edges,
+      ...this.props.data.allContentfulProject.edges
+    ];
 
     return (
       <Layout>
@@ -76,18 +64,10 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         <div className="row">
           <Header rank={2} type="Subtitle" className="col">Featured</Header>
         </div>
-        {/*
-          <div className="row">
-            {this.props.data.allContentfulCaseStudy.edges.map((data, index) => (
-                <h2 key={index} className="col">{data.node.title} <Link href={data.node.slug}>Check it out</Link></h2>
-              )
-            )}
-          </div>
-        */}
         <div className="row">
-          {this.props.data.allContentfulProject.edges.map((data, index) => (
+          {featureItems.map((item, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
-              <Tile project={data.node} className='mb-4' />
+              <Tile item={item.node} className='mb-4' />
             </div>
           ))}
         </div>
@@ -103,22 +83,12 @@ export const indexPageQuery = graphql`
         siteName
       }
     }    
-    allContentfulProject {
+    allContentfulProject(filter: {featureOnHomepage: {eq: true}}) {
       edges {
         node {
           title
           slug
-          client
-          description {
-            description
-            id
-          }
-          projectImages {
-            id
-            resolutions {
-              src
-            }
-          }
+          featureOnHomepage
           featureImage {
             id
             resolutions {
@@ -128,11 +98,18 @@ export const indexPageQuery = graphql`
         }
       }
     }
-    allContentfulCaseStudy {
+    allContentfulCaseStudy(filter: {featureOnHomepage: {eq: true}}) {
       edges {
         node {
           title
           slug
+          featureOnHomepage
+          featureImage {
+            id
+            resolutions {
+              src
+            }
+          }          
         }
       }
     }    

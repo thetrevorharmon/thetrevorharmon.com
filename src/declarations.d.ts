@@ -1,20 +1,21 @@
-interface Project = {
+interface PortfolioItem = {
   title: string;
   slug: string;
+  featureImage: contentfulAsset;
+  featureOnHomepage: boolean;
+}
+
+interface Project extends PortfolioItem = {
   client?: string;
   description: {
     id?: string;
     description: string;
   };
   projectCompletionDate?: Date;
-  featureImage: contentfulAsset
   projectImages: [contentfulAsset]
 }
 
-interface CaseStudy = {
-  title: string;
-  slug: string;
-  heroImage: contentfulAsset;
+interface CaseStudy extends PortfolioItem = {
   tableOfContents: contentfulLongText;
   post: contentfulLongText;
 }

@@ -41,11 +41,10 @@ export default class CaseStudiesPage extends React.Component<CaseStudyPageProps,
           </div>
         </div>
         <div className="row">
-          <Header rank={2} type="Subtitle" className="col">Featured</Header>
-        </div>
-        <div className="row">
-          {this.props.data.allContentfulCaseStudy.edges.map((data, index) => (
-              <h2 key={index} className="col">{data.node.title} <Link href={data.node.slug}>Check it out</Link></h2>
+          {this.props.data.allContentfulCaseStudy.edges.map((item, index) => (
+              <div className="col-md-6 col-lg-4" key={index}>
+                <Tile item={item.node} className='mb-4' />
+              </div>
             )
           )}
         </div>
@@ -61,6 +60,11 @@ export const caseStudiesPageQuery = graphql`
         node {
           title
           slug
+          featureImage {
+            resolutions {
+              src
+            }
+          }  
         }
       }
     }    

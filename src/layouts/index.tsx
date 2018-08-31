@@ -7,30 +7,51 @@ import '../styles/global.scss';
 import { Navbar } from "../UI-Kit";
 
 interface LayoutProps {
-  container?: boolean;
+  hasContainer?: boolean;
   className?: string;
 }
 
-const Layout: React.SFC<LayoutProps> = ({ container, className, children }) => {
-  const classname = classnames(
-    container && 'container',
-    className
-  )
+class Layout extends React.Component<LayoutProps, {}> {
+  constructor(props) {
+    super(props);
+    this.state = {isMenuOpen: false};
 
-  return (
-    <>
-      <Navbar />
-      <div
-        className={classname}
-      >
-        {children}
-      </div>
-    </>
-  )
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isMenuOpen: !prevState.isMenuOpen
+    }));
+  }
+
+  render() {
+    const {
+      hasContainer,
+      className,
+      children
+    } = this.props
+
+    const classname = classnames(
+      hasContainer && 'container',
+      className
+    )
+
+    return (
+      <>
+        <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
+        <div
+          className={classname}
+        >
+          {children}
+        </div>
+      </>
+    )
+  }
 }
 
 Layout.defaultProps = {
-  container: true,
+  hasContainer: true,
   className: undefined
 }
 

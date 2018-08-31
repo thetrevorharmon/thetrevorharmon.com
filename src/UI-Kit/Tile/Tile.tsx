@@ -5,13 +5,13 @@ import { Button } from '../../UI-Kit';
 import * as styles from './Tile.module.scss';
 
 interface TileProps {
-  project: Project;
+  item: PortfolioItem;
   className?: string;
 }
 
-const Tile: React.SFC<TileProps> = ({project, className}) => {
+const Tile: React.SFC<TileProps> = ({item, className}) => {
   const tileStyle = {
-    backgroundImage: `url(${project.featureImage.resolutions.src})`
+    backgroundImage: `url(${item.featureImage.resolutions.src})`
   }
 
   const classname = classnames(
@@ -26,7 +26,7 @@ const Tile: React.SFC<TileProps> = ({project, className}) => {
     >
       <Button
         className={styles.Button}
-        href={`/${project.slug}`}
+        href={`/${item.slug}`}
       >
         View
       </Button>

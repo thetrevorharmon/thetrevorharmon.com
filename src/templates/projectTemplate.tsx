@@ -36,15 +36,15 @@ export default class Template extends React.Component<TemplateProps, {}> {
       <Layout className={styles.ProjectTemplate}>
         <div className="row">
           <div className="col-sm-6">
-            {projectImages.map((imageSrc, index) => {
-              return <img key={index} src={imageSrc} />;
-            })}
-          </div>
-          <div className="col-sm-6">
             <Header rank={1} style="Title">{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
             {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
             {project.projectCompletionDate ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p> : undefined}
+          </div>
+          <div className="col-sm-6">
+            {projectImages.map((imageSrc, index) => {
+              return <img key={index} src={imageSrc} />;
+            })}
           </div>
         </div>
       </Layout>

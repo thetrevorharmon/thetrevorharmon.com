@@ -1,17 +1,35 @@
+@import '../../styles/_mixins.scss';
+
 .Navbar {
   padding: 1rem 0;
   position: absolute;
   top: 0;
   width: 100%;
   background: white;
+  height: 6rem;
+  overflow: hidden;
+
+  transition: all 0.2s ease-in-out;
+
+  &.Open {
+    background: #2a2a2a;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+  }
 }
 
-.NavbarOffset {
+.TopElementsWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.Offset {
   width: 100%;
   height: 6rem;
 }
 
-.NavbarBrand {
+.Brand {
   display: inline-block;
   height: 4rem;
   width: 4rem;
@@ -34,7 +52,7 @@
   }
 }
 
-.NavbarLinks {
+.Links {
   display: flex;
   align-items: center;
 
@@ -54,6 +72,75 @@
 
     a {
       text-decoration: none;
+    }
+  }
+}
+
+.Toggle {
+  height: 4rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  padding: 1.5rem 0px;
+
+  .Bar {
+    height: 2px;
+    width: 1.8rem;
+    background: #2a2a2a;
+
+    &:last-child {
+      margin-top: 1rem;
+    }
+
+    transition: transform 0.2s;
+  }
+
+  .Open & {
+    .Bar {
+      background: #fff;
+
+      &:first-child {
+        transform: translate(0,9px) rotate(45deg);
+      }
+
+      &:last-child {
+        transform: translate(0,-9px) rotate(-45deg);
+      }    
+    }
+  }
+}
+
+
+.Mobile {
+  background: #2a2a2a;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100%;
+
+  padding: 1rem 0;
+
+  display: none;
+  // @include mobile-only {
+  //   display: block;
+  // }
+}
+
+.MobileLinks {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0 0;
+
+  li {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: #EEEEEE;
+      text-transform: uppercase;
     }
   }
 }

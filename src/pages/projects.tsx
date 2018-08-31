@@ -41,12 +41,9 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
           </div>
         </div>
         <div className="row">
-          <Header rank={2} type="Subtitle" className="col">Featured</Header>
-        </div>
-        <div className="row">
-          {this.props.data.allContentfulProject.edges.map((data, index) => (
+          {this.props.data.allContentfulProject.edges.map((item, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
-              <Tile project={data.node} className='mb-4' />
+              <Tile item={item.node} className='mb-4' />
             </div>
           ))}
         </div>
@@ -57,33 +54,16 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
 export const projectsPageQuery = graphql`
   query projectsPageQuery {
-    site {
-      siteMetadata {
-        siteName
-      }
-    }    
     allContentfulProject {
       edges {
         node {
           title
           slug
-          client
-          description {
-            description
-            id
-          }
           featureImage {
-            id
             resolutions {
               src
             }
-          }
-          projectImages {
-            id
-            resolutions {
-              src
-            }
-          }          
+          }        
         }
       }
     }

@@ -12,6 +12,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noUnusedLocals": true,
   }
 }
