@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.Header {
+  font-weight: bold;
+  font-style: normal;
+  color: $text-color-primary;
+}
+
+.Headline {
+  font-size: 5.125rem;
+  letter-spacing: -5px;
+}
+
+.Title {
+  font-size: 2.5rem;
+}
+
+.Subtitle {
+  font-size: 1.375rem;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+
+  color: $text-color-secondary;
+}

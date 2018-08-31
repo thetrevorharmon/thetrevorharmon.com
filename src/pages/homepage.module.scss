@@ -1,14 +1,9 @@
-.MainHeader {
-  font-size: 5.125rem;
-  color: #2a2a2a;
-  line-height: 4rem;
-  letter-spacing: -5px;
+@import '../UI-Kit/Header/Header.module.scss';
 
-  small {
-    font-size: 1.375rem;
-    color: #7A7A7A;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    line-height: 2.5rem;
+.MainHeader {
+  line-height: 4rem;
+
+  span {
+    @extend .Subtitle;
   }
 }

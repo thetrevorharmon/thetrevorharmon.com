@@ -33,16 +33,13 @@ const Navbar: React.SFC<NavbarProps> = (props) => {
     <>
       <div className={styles.NavbarOffset} />
       <div className={classname}>
-        <div className="container">
-          <div className="row">
-            <Link href="/" className={styles.NavbarBrand}>TH</Link>
-            <ul className={styles.NavbarLinks}>
-              {navbarLinks.map((link) => {
-                return <li><Link href={link.location}>{link.display}</Link></li>;
-              })}
-            </ul>
-          </div>
-
+        <div className="container d-flex">
+          <Link href="/" className={styles.NavbarBrand}>TH</Link>
+          <ul className={styles.NavbarLinks}>
+            {navbarLinks.map((link, index) => {
+              return <li key={index}><Link href={link.location}>{link.display}</Link></li>;
+            })}
+          </ul>
         </div>
       </div>
     </>
