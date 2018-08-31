@@ -4,6 +4,10 @@ import * as React from "react"
 import Layout from "../layouts"
 import { Button } from "../UI-Kit";
 
+import { largestPhotoFromSet } from "../utils";
+
+import * as styles from "./projectTemplate.module.scss";
+
 interface TemplateProps {
   data: {
     allContentfulProject: {
@@ -20,11 +24,29 @@ export default class Template extends React.Component<TemplateProps, {}> {
   render() {
     const project = this.props.data.allContentfulProject.edges[0].node
 
+    const photos: [string] = []
+
+    project.photos.map((photo) => {
+      photos.push(largestPhotoFromSet(photo));
+    })
+
+    console.log(photos)
+
     return (
-      <Layout>
-        <Button href="/">Go Back</Button>
-        <h1>{project.title}</h1>
-        <p>{project.description ? project.description.description : ''}</p>
+      <Layout className={styles.ProjectTemplate}>
+        <div className="row">
+          <div className="col-sm-6">
+            {photos.map((photo, index) => {
+              return <img key={index} src={photo} />;
+            })}
+          </div>
+          <div className="col-sm-6">
+            <h1>{project.title}</h1>
+            <p>{project.description ? project.description.description : ''}</p>
+            <p><strong>Client:</strong> {project.client}</p>
+            <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+          </div>
+        </div>
       </Layout>
     )  
   }
@@ -37,6 +59,7 @@ export const query = graphql`
         node {
           title
           client
+          projectCompletionDate(formatString: "MMMM DD, YYYY")
           description {
             description
             id
@@ -45,6 +68,7 @@ export const query = graphql`
             id
             resolutions {
               src
+              srcSet
             }
           }
         }

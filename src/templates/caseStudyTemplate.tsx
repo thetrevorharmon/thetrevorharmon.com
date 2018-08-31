@@ -72,10 +72,7 @@ export const query = graphql`
           slug
           heroImage {
             resolutions {
-              src
               srcSet
-              srcWebp
-              srcSetWebp
             }
           }
           post {
