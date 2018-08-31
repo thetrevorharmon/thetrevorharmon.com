@@ -27,7 +27,7 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
       display: 'Projects'
     },
     {
-      location: '/',
+      location: '/about',
       display: 'About'
     }
   ]

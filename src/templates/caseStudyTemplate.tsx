@@ -5,6 +5,7 @@ import Layout from "../layouts"
 import 'caseStudy.scss';
 
 import { Header } from '../UI-Kit';
+import { largestPhotoFromSet } from "../utils";
 
 interface CaseStudyTemplateProps {
   data: {
@@ -22,12 +23,9 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
   render() {
 
     const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node
-    
-    const headerImages = caseStudy.featureImage.resolutions.srcSet.split(',');
-    const headerImage = headerImages[headerImages.length - 1].split(' ')[0];
 
     const heroStyle = {
-      backgroundImage: `url(${headerImage})`
+      backgroundImage: `url(${largestPhotoFromSet(caseStudy.featureImage)})`
     }
 
     return (

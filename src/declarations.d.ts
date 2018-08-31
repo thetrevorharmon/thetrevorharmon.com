@@ -1,11 +1,11 @@
-interface PortfolioItem = {
+interface PortfolioItem {
   title: string;
   slug: string;
   featureImage: contentfulAsset;
   featureOnHomepage: boolean;
 }
 
-interface Project extends PortfolioItem = {
+interface Project extends PortfolioItem {
   client?: string;
   description: {
     id?: string;
@@ -15,12 +15,18 @@ interface Project extends PortfolioItem = {
   projectImages: [contentfulAsset]
 }
 
-interface CaseStudy extends PortfolioItem = {
+interface CaseStudy extends PortfolioItem {
   tableOfContents: contentfulLongText;
   post: contentfulLongText;
 }
 
-interface contentfulLongText = {
+interface AboutPageData {
+  title: string;
+  post: contentfulLongText;
+  featureImage: contentfulAsset;
+}
+
+interface contentfulLongText {
   id?: number;
   internal: {
     type?: string;
@@ -36,7 +42,7 @@ interface contentfulLongText = {
   }
 }
 
-interface contentfulAsset = {
+interface contentfulAsset {
   id?: string;
   resolutions: {
     src: string;
