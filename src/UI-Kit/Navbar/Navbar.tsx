@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import * as styles from "./Navbar.module.scss"
 
-import { Link } from '../../UI-Kit';
+import { Link, Button } from '../../UI-Kit';
 
 interface NavbarProps {
   handleMenuToggle: (event: React.MouseEvent<HTMLElement>) => void;
@@ -38,7 +38,7 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
       <div className={classname}>
         <div className="container d-flex flex-column">
           <div className={styles.TopElementsWrapper}>
-            <Link href="/" className={styles.Brand}>TH</Link>
+            <Button href="/" className={classnames(styles.Brand, 'global-brand')} noStyling={true}>TH</Button>
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>

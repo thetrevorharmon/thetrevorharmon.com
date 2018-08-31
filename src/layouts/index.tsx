@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import 'normalize.css';
 import '../styles/global.scss';
 
-import { Navbar } from "../UI-Kit";
+import { Navbar, Footer } from "../UI-Kit";
 
 interface LayoutProps {
   hasContainer?: boolean;
@@ -45,6 +45,7 @@ class Layout extends React.Component<LayoutProps, {}> {
         >
           {children}
         </div>
+        <Footer className="mt-5" />
       </>
     )
   }

@@ -7,11 +7,12 @@ import * as styles from "./Button.module.scss"
 interface ButtonProps {
   href: string;
   className?: string;
+  noStyling?: boolean;
 }
 
-const Button: React.SFC<ButtonProps> = ({href, className, children}) => {
+const Button: React.SFC<ButtonProps> = ({href, className, noStyling, children}) => {
   const classname = classnames(
-    styles.Button,
+    !noStyling && styles.Button,
     className 
   )
 
@@ -27,7 +28,8 @@ const Button: React.SFC<ButtonProps> = ({href, className, children}) => {
 }
 
 Button.defaultProps = {
-  className: undefined
+  className: undefined,
+  noStyling: false,
 }
 
 export default Button;

@@ -8,11 +8,13 @@ interface LinkProps {
   className?: string;
   href: string;
   noLinkStyling?: boolean;
+  target?: string;
 }
 
 const Link: React.SFC<LinkProps> = ({
   href,
   noLinkStyling,
+  target,
   className,
   children
 }) => {
@@ -27,11 +29,11 @@ const Link: React.SFC<LinkProps> = ({
   )
 
   return externalLink ? (    
-    <a className={classname} href={href}>
+    <a className={classname} href={href} target={target}>
       {children}
     </a>
   ) : (
-    <GastbyLink className={classname} to={href}>
+    <GastbyLink className={classname} to={href} target={target}>
       {children}
     </GastbyLink>
   )
@@ -40,6 +42,7 @@ const Link: React.SFC<LinkProps> = ({
 Link.defaultProps = {
   noLinkStyling: false,
   className: undefined,
+  target: undefined,
 };
 
 export default Link;

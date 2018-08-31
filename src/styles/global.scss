@@ -42,3 +42,20 @@ p {
 ol, ul {
   // padding-left: 0;
 }
+
+
+.global-brand {
+  display: inline-block;
+  height: 4rem;
+  width: 4rem;
+  line-height: 4rem;
+  font-size: 1.25rem;
+  
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  
+  background: white;
+  border: 1px solid #2a2a2a;
+}

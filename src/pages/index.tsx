@@ -61,7 +61,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </Header>
           </div>
         </div>
-        <div className="row">
+        <div className="row mb-3">
           <Header rank={2} type="Subtitle" className="col">Featured</Header>
         </div>
         <div className="row">
