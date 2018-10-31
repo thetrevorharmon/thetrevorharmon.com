@@ -2,7 +2,7 @@ import { graphql } from "gatsby"
 import * as React from "react"
 import Layout from "../layouts"
 
-import 'caseStudy.scss';
+import './caseStudy.scss';
 
 import { Header } from '../UI-Kit';
 import { largestPhotoFromSet } from "../utils";
