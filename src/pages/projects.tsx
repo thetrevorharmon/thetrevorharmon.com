@@ -63,7 +63,7 @@ export const projectsPageQuery = graphql`
             resolutions {
               src
             }
-          }        
+          }
         }
       }
     }

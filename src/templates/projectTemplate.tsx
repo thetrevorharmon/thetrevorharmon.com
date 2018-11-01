@@ -20,35 +20,39 @@ interface TemplateProps {
   }
 }
 
-export default class Template extends React.Component<TemplateProps, {}> {
-  render() {
+export class Template extends React.Component<TemplateProps, {}> {
+  public render() {
     const project = this.props.data.allContentfulProject.edges[0].node
 
     const projectImages: [string] = []
 
     projectImages.push(largestPhotoFromSet(project.featureImage))
 
-    if (project.projectImages) {    
+    if (project.projectImages) {
       project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)))
     }
 
     return (
       <Layout className={styles.ProjectTemplate}>
-        <div className='row'>
-          <div className='col-sm-6'>
-            <Header rank={1} style='Title'>{project.title}</Header>
+        <div className="row">
+          <div className="col-sm-6">
+            <Header rank={1} style="Title">{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
             {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
-            {project.projectCompletionDate ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p> : undefined}
+            {
+              project.projectCompletionDate
+              ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+              : undefined
+            }
           </div>
-          <div className='col-sm-6'>
+          <div className="col-sm-6">
             {projectImages.map((imageSrc, index) => {
               return <img key={index} src={imageSrc} />;
             })}
           </div>
         </div>
       </Layout>
-    )  
+    )
   }
 }
 
@@ -77,7 +81,7 @@ export const query = graphql`
               src
               srcSet
             }
-          }          
+          }
         }
       }
     }
