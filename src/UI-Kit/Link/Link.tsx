@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 import classnames from 'classnames';
-import GastbyLink from "gatsby-link";
+import GastbyLink from 'gatsby-link';
 
-import * as styles from "./Link.module.scss";
+import * as styles from './Link.module.scss';
 
 interface LinkProps {
   className?: string;

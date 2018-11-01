@@ -1,5 +1,5 @@
-import * as React from "react";
-import classnames from "classnames";
+import * as React from 'react';
+import classnames from 'classnames';
 import { Button } from '../../UI-Kit';
 
 import * as styles from './Tile.module.scss';

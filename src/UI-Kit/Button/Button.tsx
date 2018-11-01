@@ -1,8 +1,8 @@
-import * as React from "react";
-import classnames from "classnames";
-import Link from "../Link";
+import * as React from 'react';
+import classnames from 'classnames';
+import Link from '../Link';
 
-import * as styles from "./Button.module.scss"
+import * as styles from './Button.module.scss'
 
 interface ButtonProps {
   href: string;

@@ -1,6 +1,6 @@
 export function largestPhotoFromSet(photo: contentfulAsset): string {
   if (photo.resolutions === undefined || (photo.resolutions.srcSet === undefined && photo.resolutions.src === undefined)) {
-    throw "No Photo Source in Data. Try looking at your graphQL statement and make sure either a src or srcSet is included."
+    throw 'No Photo Source in Data. Try looking at your graphQL statement and make sure either a src or srcSet is included.'
   }
 
   if (photo.resolutions.srcSet === undefined) {

@@ -1,12 +1,12 @@
-import { graphql } from "gatsby"
-import * as React from "react"
+import { graphql } from 'gatsby'
+import * as React from 'react'
 
-import Layout from "../layouts"
-import { Button, Header } from "../UI-Kit";
+import Layout from '../layouts'
+import { Button, Header } from '../UI-Kit';
 
-import { largestPhotoFromSet } from "../utils";
+import { largestPhotoFromSet } from '../utils';
 
-import * as styles from "./projectTemplate.module.scss";
+import * as styles from './projectTemplate.module.scss';
 
 interface TemplateProps {
   data: {
@@ -34,14 +34,14 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     return (
       <Layout className={styles.ProjectTemplate}>
-        <div className="row">
-          <div className="col-sm-6">
-            <Header rank={1} style="Title">{project.title}</Header>
+        <div className='row'>
+          <div className='col-sm-6'>
+            <Header rank={1} style='Title'>{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
             {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
             {project.projectCompletionDate ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p> : undefined}
           </div>
-          <div className="col-sm-6">
+          <div className='col-sm-6'>
             {projectImages.map((imageSrc, index) => {
               return <img key={index} src={imageSrc} />;
             })}

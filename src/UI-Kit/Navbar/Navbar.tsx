@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 import classnames from 'classnames';
 
-import * as styles from "./Navbar.module.scss"
+import * as styles from './Navbar.module.scss';
 
 import { Link, Button } from '../../UI-Kit';
 
@@ -36,9 +36,9 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
     <>
       <div className={styles.Offset} />
       <div className={classname}>
-        <div className="container d-flex flex-column">
+        <div className='container d-flex flex-column'>
           <div className={styles.TopElementsWrapper}>
-            <Button href="/" className={classnames(styles.Brand, 'global-brand')} noStyling={true}>TH</Button>
+            <Button href='/' className={classnames(styles.Brand, 'global-brand')} noStyling={true}>TH</Button>
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>
