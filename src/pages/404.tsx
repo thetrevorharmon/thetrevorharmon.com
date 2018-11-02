@@ -1,6 +1,6 @@
-import Layout from '../layouts';
 import Link from 'gatsby-link';
 import * as React from 'react';
+import Layout from '../layouts';
 
 export default () => (
   <Layout>

@@ -16,7 +16,7 @@ const Link: React.SFC<LinkProps> = ({
   noLinkStyling,
   target,
   className,
-  children
+  children,
 }) => {
 
   const externalPattern = /^http/;

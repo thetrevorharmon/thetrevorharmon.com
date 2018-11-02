@@ -1,6 +1,6 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
-import Layout from '../layouts'
+import { graphql } from 'gatsby';
+import * as React from 'react';
+import Layout from '../layouts';
 
 import './caseStudy.scss';
 
@@ -12,49 +12,53 @@ interface CaseStudyTemplateProps {
     allContentfulCaseStudy: {
       edges: [
         {
-          node: CaseStudy
-        }
-      ]
-    }
-  }
+          node: CaseStudy,
+        },
+      ],
+    },
+  };
 }
 
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
-  render() {
+  public render() {
 
-    const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node
+    const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node;
 
     const heroStyle = {
-      backgroundImage: `url(${largestPhotoFromSet(caseStudy.featureImage)})`
-    }
+      backgroundImage: `url(${largestPhotoFromSet(caseStudy.featureImage)})`,
+    };
 
     return (
-      <Layout className='case-study-template' >
-        <div className='row post-header'>
-          <div className='col-lg-6'>
-            <Header rank={1} type='Headline'>{caseStudy.title}</Header>
+      <Layout className="case-study-template" >
+        <div className="row post-header">
+          <div className="col-lg-6">
+            <Header rank={1} type="Headline">{caseStudy.title}</Header>
 
-            <div className='table-of-contents'>
-              <Header rank={2} type='Subtitle'>Table of Contents</Header>
-              <div dangerouslySetInnerHTML={{
-                __html: caseStudy.tableOfContents.childMarkdownRemark.html
-              }} />
+            <div className="table-of-contents">
+              <Header rank={2} type="Subtitle">Table of Contents</Header>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: caseStudy.tableOfContents.childMarkdownRemark.html,
+                }}
+              />
             </div>
           </div>
 
-          <div className='col-lg-6'>
-            <div className='hero-header mt-2' style={heroStyle} />
+          <div className="col-lg-6">
+            <div className="hero-header mt-2" style={heroStyle} />
           </div>
         </div>
-        <div className='row post-body'>
-          <div className='col-lg-8 offset-lg-2'>
-            <div dangerouslySetInnerHTML={{
-              __html: caseStudy.post.childMarkdownRemark.html
-            }} />
+        <div className="row post-body">
+          <div className="col-lg-8 offset-lg-2">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: caseStudy.post.childMarkdownRemark.html,
+              }}
+            />
           </div>
         </div>
       </Layout>
-    )  
+    );
   }
 }
 
@@ -74,7 +78,7 @@ export const query = graphql`
           post {
             childMarkdownRemark {
               html
-            }            
+            }
             internal {
               mediaType
               content
@@ -83,14 +87,14 @@ export const query = graphql`
           tableOfContents {
             childMarkdownRemark {
               html
-            }            
+            }
             internal {
               mediaType
               content
             }
-          }          
+          }
         }
       }
-    }        
+    }
   }
-`
+`;
