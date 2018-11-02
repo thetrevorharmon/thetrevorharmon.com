@@ -1,5 +1,3 @@
-# using-typescript
+# Trevor Harmon's Portfolio Site
 
-https://using-typescript.gatsbyjs.org
-
-Demonstrates using Typescript to build Gatsby sites.
+This is my portfolio site. Feel free to look around!
