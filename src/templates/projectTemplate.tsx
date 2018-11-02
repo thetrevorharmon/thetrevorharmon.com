@@ -20,7 +20,7 @@ interface TemplateProps {
   };
 }
 
-export class Template extends React.Component<TemplateProps, {}> {
+export default class Template extends React.Component<TemplateProps, {}> {
   public render() {
     const project = this.props.data.allContentfulProject.edges[0].node;
 

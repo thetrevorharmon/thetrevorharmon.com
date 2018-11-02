@@ -33,9 +33,9 @@ const Link: React.SFC<LinkProps> = ({
       {children}
     </a>
   ) : (
-    <GastbyLink className={classname} to={href} target={target}>
+    <GatsbyLink className={classname} to={href} target={target}>
       {children}
-    </GastbyLink>
+    </GatsbyLink>
   );
 };
 
