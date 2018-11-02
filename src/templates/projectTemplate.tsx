@@ -1,35 +1,33 @@
-import { graphql } from "gatsby"
-import * as React from "react"
+import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import Layout from "../layouts"
-import { Button, Header } from "../UI-Kit";
+import Layout from '../layouts';
+import { Button, Header } from '../UI-Kit';
 
-import { largestPhotoFromSet } from "../utils";
+import { largestPhotoFromSet } from '../utils';
 
-import * as styles from "./projectTemplate.module.scss";
+import * as styles from './projectTemplate.module.scss';
 
 interface TemplateProps {
   data: {
     allContentfulProject: {
       edges: [
         {
-          node: Project
-        }
-      ]
-    }
-  }
+          node: Project,
+        },
+      ],
+    },
+  };
 }
 
 export default class Template extends React.Component<TemplateProps, {}> {
-  render() {
-    const project = this.props.data.allContentfulProject.edges[0].node
+  public render() {
+    const project = this.props.data.allContentfulProject.edges[0].node;
 
-    const projectImages: [string] = []
+    const projectImages: [string] = [largestPhotoFromSet(project.featureImage) || ''];
 
-    projectImages.push(largestPhotoFromSet(project.featureImage))
-
-    if (project.projectImages) {    
-      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)))
+    if (project.projectImages) {
+      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)));
     }
 
     return (
@@ -39,7 +37,11 @@ export default class Template extends React.Component<TemplateProps, {}> {
             <Header rank={1} style="Title">{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
             {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
-            {project.projectCompletionDate ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p> : undefined}
+            {
+              project.projectCompletionDate
+              ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+              : undefined
+            }
           </div>
           <div className="col-sm-6">
             {projectImages.map((imageSrc, index) => {
@@ -48,7 +50,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
           </div>
         </div>
       </Layout>
-    )  
+    );
   }
 }
 
@@ -77,9 +79,9 @@ export const query = graphql`
               src
               srcSet
             }
-          }          
+          }
         }
       }
     }
   }
-`
+`;

@@ -1,5 +1,6 @@
-import * as React from "react";
-import classnames from "classnames";
+import classnames from 'classnames';
+import * as React from 'react';
+
 import { Button } from '../../UI-Kit';
 
 import * as styles from './Tile.module.scss';
@@ -11,17 +12,17 @@ interface TileProps {
 
 const Tile: React.SFC<TileProps> = ({item, className}) => {
   const tileStyle = {
-    backgroundImage: `url(${item.featureImage.resolutions.src})`
-  }
+    backgroundImage: `url(${item.featureImage.resolutions.src})`,
+  };
 
   const classname = classnames(
     styles.Tile,
-    className
-  )
+    className,
+  );
 
   return (
     <div
-      className={classname} 
+      className={classname}
       style={tileStyle}
     >
       <Button
@@ -31,11 +32,11 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
         View
       </Button>
     </div>
-  )
-}
+  );
+};
 
 Tile.defaultProps = {
-  className: undefined
-}
+  className: undefined,
+};
 
 export default Tile;

@@ -1,20 +1,26 @@
-import * as React from "react";
-import classnames from "classnames";
-import Link from "../Link";
+import classnames from 'classnames';
+import * as React from 'react';
+import Link from '../Link';
 
-import * as styles from "./Button.module.scss"
+import * as styles from './Button.module.scss';
 
 interface ButtonProps {
-  href: string;
   className?: string;
+  href: string;
   noStyling?: boolean;
 }
 
-const Button: React.SFC<ButtonProps> = ({href, className, noStyling, children}) => {
+const Button: React.SFC<ButtonProps> = ({
+  className,
+  children,
+  href,
+  noStyling,
+}) => {
+
   const classname = classnames(
+    className,
     !noStyling && styles.Button,
-    className 
-  )
+  );
 
   return (
     <Link
@@ -24,12 +30,12 @@ const Button: React.SFC<ButtonProps> = ({href, className, noStyling, children}) 
     >
       {children}
     </Link>
-  )
-}
+  );
+};
 
 Button.defaultProps = {
   className: undefined,
   noStyling: false,
-}
+};
 
 export default Button;

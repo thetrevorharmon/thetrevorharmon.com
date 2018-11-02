@@ -1,32 +1,32 @@
-import { graphql } from "gatsby"
-import * as React from "react"
-import Layout from "../layouts"
+import { graphql } from 'gatsby';
+import * as React from 'react';
+import Layout from '../layouts';
 
 import './caseStudy.scss';
 
 import { Header } from '../UI-Kit';
-import { largestPhotoFromSet } from "../utils";
+import { largestPhotoFromSet } from '../utils';
 
 interface CaseStudyTemplateProps {
   data: {
     allContentfulCaseStudy: {
       edges: [
         {
-          node: CaseStudy
-        }
-      ]
-    }
-  }
+          node: CaseStudy,
+        },
+      ],
+    },
+  };
 }
 
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
-  render() {
+  public render() {
 
-    const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node
+    const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node;
 
     const heroStyle = {
-      backgroundImage: `url(${largestPhotoFromSet(caseStudy.featureImage)})`
-    }
+      backgroundImage: `url(${largestPhotoFromSet(caseStudy.featureImage)})`,
+    };
 
     return (
       <Layout className="case-study-template" >
@@ -36,9 +36,11 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
             <div className="table-of-contents">
               <Header rank={2} type="Subtitle">Table of Contents</Header>
-              <div dangerouslySetInnerHTML={{
-                __html: caseStudy.tableOfContents.childMarkdownRemark.html
-              }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: caseStudy.tableOfContents.childMarkdownRemark.html,
+                }}
+              />
             </div>
           </div>
 
@@ -48,13 +50,15 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         </div>
         <div className="row post-body">
           <div className="col-lg-8 offset-lg-2">
-            <div dangerouslySetInnerHTML={{
-              __html: caseStudy.post.childMarkdownRemark.html
-            }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: caseStudy.post.childMarkdownRemark.html,
+              }}
+            />
           </div>
         </div>
       </Layout>
-    )  
+    );
   }
 }
 
@@ -74,7 +78,7 @@ export const query = graphql`
           post {
             childMarkdownRemark {
               html
-            }            
+            }
             internal {
               mediaType
               content
@@ -83,14 +87,14 @@ export const query = graphql`
           tableOfContents {
             childMarkdownRemark {
               html
-            }            
+            }
             internal {
               mediaType
               content
             }
-          }          
+          }
         }
       }
-    }        
+    }
   }
-`
+`;

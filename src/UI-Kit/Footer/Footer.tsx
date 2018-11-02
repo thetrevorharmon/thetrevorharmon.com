@@ -1,8 +1,8 @@
-import * as React from "react";
-import classnames from "classnames";
-import Link from "../Link";
+import classnames from 'classnames';
+import * as React from 'react';
+import Link from '../Link';
 
-import * as styles from "./Footer.module.scss"
+import * as styles from './Footer.module.scss';
 
 interface FooterProps {
   className?: string;
@@ -10,25 +10,25 @@ interface FooterProps {
 
 const Footer: React.SFC<FooterProps> = ({href, className, children}) => {
   const classname = classnames(
+    className,
+    'container',
     styles.Footer,
-    "container",
-    className 
-  )
+  );
 
   const footerLinks = [
     {
+      display: 'LinkedIn',
       location: 'http://linkedin.com/in/trevorharmon',
-      display: 'LinkedIn'
     },
     {
+      display: 'Github',
       location: 'http://github.com/tdharmon',
-      display: 'Github'
     },
     {
+      display: 'Twitter',
       location: 'http://twitter.com/thetrevorharmon',
-      display: 'Twitter'
-    }
-  ]
+    },
+  ];
 
   return (
     <div
@@ -39,7 +39,7 @@ const Footer: React.SFC<FooterProps> = ({href, className, children}) => {
           &copy; {(new Date()).getFullYear()} The Trevor Harmon
         </div>
         <div className="col-12 col-md-2 order-1 order-md-2">
-          <div className={classnames(styles.Brand, "global-brand")}>TH</div>
+          <div className={classnames(styles.Brand, 'global-brand')}>TH</div>
         </div>
         <div className="col-md-5 order-2 order-md-3 my-2 my-md-0">
           <ul className={styles.FooterLinks}>
@@ -51,11 +51,11 @@ const Footer: React.SFC<FooterProps> = ({href, className, children}) => {
 
       </div>
     </div>
-  )
-}
+  );
+};
 
 Footer.defaultProps = {
-  className: undefined
-}
+  className: undefined,
+};
 
 export default Footer;

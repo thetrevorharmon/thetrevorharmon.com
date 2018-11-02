@@ -2,20 +2,21 @@
   "name": "the-trevor-harmon",
   "version": "1.0.0",
   "description": "The portfolio and personal site of Trevor Harmon",
-  "author": "fabien0102 <fabien0102@gmail.com>",
+  "author": "tdharmon <thetrevorharmon@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "gatsby develop",
     "develop": "gatsby develop",
+    "start": "gatsby develop",
     "build": "gatsby build",
-    "type-check": "tsc --noEmit",
-    "lint": "tslint --project ."
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/node": "^10.3.1",
     "@types/query-string": "^6.1.0",
     "@types/react": "16.3.16",
     "@types/react-dom": "16.0.6",
+    "@types/react-helmet": "^5.0.7",
     "@types/react-router": "^4.0.30",
     "@types/react-router-dom": "^4.3.0",
     "bootstrap-4-grid": "^2.4.1",
@@ -35,10 +36,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
+    "gatsby-plugin-tslint": "^0.0.1",
+    "tslint": "^5.11.0",
+    "tslint-loader": "^3.5.4",
     "tslint-react": "^3.6.0",
-    "typescript": "^2.9.1",
+    "typescript": "^3.1.3",
     "webpack": "^4.23.1"
   }
 }

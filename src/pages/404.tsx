@@ -1,6 +1,6 @@
-import * as React from "react"
-import Layout from "../layouts"
-import Link from "gatsby-link"
+import { Link } from 'gatsby';
+import * as React from 'react';
+import Layout from '../layouts';
 
 export default () => (
   <Layout>
@@ -8,4 +8,4 @@ export default () => (
     <h2>But nothing found for you #404</h2>
     <Link to="/">Go Home</Link>
   </Layout>
-)
+);
