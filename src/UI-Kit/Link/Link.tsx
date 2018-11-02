@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import GastbyLink from 'gatsby-link';
+import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
 
 import * as styles from './Link.module.scss';
