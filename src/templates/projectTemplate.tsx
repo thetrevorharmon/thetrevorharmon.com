@@ -1,7 +1,7 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
+import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import Layout from '../layouts'
+import Layout from '../layouts';
 import { Button, Header } from '../UI-Kit';
 
 import { largestPhotoFromSet } from '../utils';
@@ -13,23 +13,21 @@ interface TemplateProps {
     allContentfulProject: {
       edges: [
         {
-          node: Project
-        }
-      ]
-    }
-  }
+          node: Project,
+        },
+      ],
+    },
+  };
 }
 
 export class Template extends React.Component<TemplateProps, {}> {
   public render() {
-    const project = this.props.data.allContentfulProject.edges[0].node
+    const project = this.props.data.allContentfulProject.edges[0].node;
 
-    const projectImages: [string] = []
-
-    projectImages.push(largestPhotoFromSet(project.featureImage))
+    const projectImages: [string] = [largestPhotoFromSet(project.featureImage) || ''];
 
     if (project.projectImages) {
-      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)))
+      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)));
     }
 
     return (
@@ -52,7 +50,7 @@ export class Template extends React.Component<TemplateProps, {}> {
           </div>
         </div>
       </Layout>
-    )
+    );
   }
 }
 
@@ -86,4 +84,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

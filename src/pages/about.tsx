@@ -1,18 +1,18 @@
-import { graphql } from 'gatsby'
 import classnames from 'classnames';
-import * as React from 'react'
+import { graphql } from 'gatsby';
+import * as React from 'react';
 
 import Layout from '../layouts';
 
 import * as styles from './about.module.scss';
 
-import { largestPhotoFromSet } from '../utils';
-import { 
-  Button, 
+import {
+  Button,
   Header,
-  Link, 
-  Tile, 
+  Link,
+  Tile,
 } from '../UI-Kit';
+import { largestPhotoFromSet } from '../utils';
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -21,17 +21,17 @@ interface AboutPageProps {
     allContentfulAboutPage: {
       edges: [
         {
-          node: AboutPageData
-        }
-      ]
+          node: AboutPageData,
+        },
+      ],
     },
-  }
+  };
 }
 
 export default class AboutPage extends React.Component<AboutPageProps, {}> {
 
   public render() {
-    const aboutPage = this.props.data.allContentfulAboutPage.edges[0].node
+    const aboutPage = this.props.data.allContentfulAboutPage.edges[0].node;
 
     return (
       <Layout className={styles.AboutPage}>
@@ -41,7 +41,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
               rank={1}
               type="Headline"
               className={classnames(
-                "my-6 my-lg-8",
+                'my-6 my-lg-8',
               )}
             >
               {aboutPage.title}
@@ -53,13 +53,15 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
         </div>
         <div className="row">
           <div className="col-lg-8 offset-lg-2">
-            <div dangerouslySetInnerHTML={{
-                __html: aboutPage.post.childMarkdownRemark.html
-              }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: aboutPage.post.childMarkdownRemark.html,
+              }}
+            />
           </div>
         </div>
       </Layout>
-    )
+    );
   }
 }
 
