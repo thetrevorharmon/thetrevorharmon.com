@@ -11,10 +11,12 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/node": "^10.3.1",
     "@types/query-string": "^6.1.0",
     "@types/react": "16.3.16",
     "@types/react-dom": "16.0.6",
+    "@types/react-helmet": "^5.0.7",
     "@types/react-router": "^4.0.30",
     "@types/react-router-dom": "^4.3.0",
     "bootstrap-4-grid": "^2.4.1",

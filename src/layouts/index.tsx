@@ -1,42 +1,44 @@
-import * as React from 'react'
-import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
+import * as React from 'react';
+import { Helmet } from 'react-helmet';
 
 import 'normalize.css';
 import '../styles/global.scss';
 
-import { Navbar, Footer } from '../UI-Kit';
+import {
+  Footer,
+  Navbar,
+} from '../UI-Kit';
 
 interface LayoutProps {
-  hasContainer?: boolean;
   className?: string;
+  hasContainer?: boolean;
+}
+
+interface LayoutState {
+  isMenuOpen: boolean;
 }
 
 class Layout extends React.Component<LayoutProps, {}> {
-  constructor(props) {
+  public constructor(props: LayoutProps) {
     super(props);
-    this.state = {isMenuOpen: false};
+    const initalState: LayoutState = {isMenuOpen: false};
 
+    this.state = initalState;
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      isMenuOpen: !prevState.isMenuOpen
-    }));
-  }
-
-  render() {
+  public render() {
     const {
       hasContainer,
       className,
-      children
-    } = this.props
+      children,
+    } = this.props;
 
     const classname = classnames(
       hasContainer && 'container',
-      className
-    )
+      className,
+    );
 
     return (
       <>
@@ -49,17 +51,21 @@ class Layout extends React.Component<LayoutProps, {}> {
         >
           {children}
         </div>
-        <Footer className='mt-5' />
+        <Footer className="mt-5" />
       </>
-    )
+    );
+  }
+
+  private handleClick() {
+    this.setState((prevState: LayoutState) => ({
+      isMenuOpen: !prevState.isMenuOpen,
+    }));
   }
 }
 
 Layout.defaultProps = {
+  className: undefined,
   hasContainer: true,
-  className: undefined
-}
+};
 
-
-
-export default Layout
+export default Layout;
