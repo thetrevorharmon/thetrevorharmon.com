@@ -30,45 +30,41 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const breakpointColumnsObj = {
       default: 2,
-      600: 1
+      767: 1 // 767 is the medium-sized breakpoint (from bootstrap) minus 1 
     };
 
     if (project.projectImages) {
       project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)));
     }
 
+    const items = projectImages.map((imageSrc, index) => {
+      return <div><img key={index} src={imageSrc} /></div>;
+    });
+
+    const description = (
+      <div className={styles.Description}>
+        <Header rank={1} type="Title">{project.title}</Header>
+        <p>{project.description ? project.description.description : ''}</p>
+        {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
+        {
+          project.projectCompletionDate
+          ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+          : undefined
+        }
+      </div>
+    );
+
+    const finalItems = [description, ...items];
+
     return (
       <Layout className={styles.ProjectTemplate}>
-        <div className="row">
-          <div className="col-sm-6">
-            <Header rank={1} style="Title">{project.title}</Header>
-            <p>{project.description ? project.description.description : ''}</p>
-            {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
-            {
-              project.projectCompletionDate
-              ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
-              : undefined
-            }
-          </div>
-          <div className="col-sm-6">
-            {/*
-              <Masonry>
-                {projectImages.map((imageSrc, index) => {
-                  return <img key={index} src={imageSrc} />;
-                })}
-              </Masonry>
-            */}
-          </div>
-        </div>
         <div className="row">
           <div className="col-sm-12">
             <Masonry
               breakpointCols={breakpointColumnsObj}
               className={styles.Grid}
               columnClassName={styles.Column}>
-                {projectImages.map((imageSrc, index) => {
-                  return <div><img key={index} src={imageSrc} /></div>;
-                })}
+                {finalItems}
             </Masonry>          
           </div>
         </div>
