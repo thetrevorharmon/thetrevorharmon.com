@@ -1,7 +1,37 @@
+$grid-gutter-size: 1rem;
+
 .ProjectTemplate {
   img {
     max-width: 100%;
     border: 1px solid #2a2a2a;
-    margin-bottom: 1rem;
   }
+}
+
+.Description {
+  box-sizing: border-box;
+  padding-bottom: $grid-gutter-size;
+  padding-right: $grid-gutter-size;
+}
+
+.Item {
+  box-sizing: border-box;
+  width: (100% / 2);
+  float: left;
+  padding-left: 15px;
+}
+
+.Grid {
+  display: flex;
+  margin-left: -$grid-gutter-size;
+  width: auto;
+}
+
+.Column {
+  padding-left: $grid-gutter-size;
+  background-clip: padding-box;
+}
+
+/* change div to reference your elements you put in <Masonry> */
+.Column > div { 
+  margin-bottom: $grid-gutter-size;
 }
