@@ -1,6 +1,5 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-// import Masonry from 'react-masonry-component';
 import Masonry from 'react-masonry-css';
 
 import Layout from '../layouts';
