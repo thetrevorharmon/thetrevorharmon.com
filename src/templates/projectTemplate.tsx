@@ -29,7 +29,8 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const breakpointColumnsObj = {
       default: 2,
-      767: 1 // 767 is the medium-sized breakpoint (from bootstrap) minus 1 
+      767: 1,
+      // 767 is the medium-sized breakpoint (from bootstrap) minus 1
     };
 
     if (project.projectImages) {
@@ -37,7 +38,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
     }
 
     const items = projectImages.map((imageSrc, index) => {
-      return <div><img key={index} src={imageSrc} /></div>;
+      return <div key={index}><img src={imageSrc} /></div>;
     });
 
     const description = (
@@ -62,7 +63,8 @@ export default class Template extends React.Component<TemplateProps, {}> {
             <Masonry
               breakpointCols={breakpointColumnsObj}
               className={styles.Grid}
-              columnClassName={styles.Column}>
+              columnClassName={styles.Column}
+            >
                 {descriptionAndItems}
             </Masonry>
           </div>
