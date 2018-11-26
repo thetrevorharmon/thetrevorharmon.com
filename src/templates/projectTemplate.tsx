@@ -53,7 +53,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
       </div>
     );
 
-    const finalItems = [description, ...items];
+    const descriptionAndItems = [description, ...items];
 
     return (
       <Layout className={styles.ProjectTemplate}>
@@ -63,8 +63,8 @@ export default class Template extends React.Component<TemplateProps, {}> {
               breakpointCols={breakpointColumnsObj}
               className={styles.Grid}
               columnClassName={styles.Column}>
-                {finalItems}
-            </Masonry>          
+                {descriptionAndItems}
+            </Masonry>
           </div>
         </div>
       </Layout>
