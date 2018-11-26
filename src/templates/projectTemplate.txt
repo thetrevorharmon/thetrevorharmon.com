@@ -1,7 +1,6 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-// import Masonry from 'react-masonry-component';
-import Masonry from 'react-masonry-css';
+import Masonry, { MasonryOptions } from 'react-masonry-component';
 
 import Layout from '../layouts';
 import { Button, Header } from '../UI-Kit';
@@ -28,20 +27,28 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const projectImages: [string] = [largestPhotoFromSet(project.featureImage) || ''];
 
-    const breakpointColumnsObj = {
-      default: 2,
-      600: 1
+    const masonryOptions: MasonryOptions = {
+      // columnWidth: 200,
+      itemSelector: styles.Item,
     };
 
     if (project.projectImages) {
       project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)));
     }
 
+    const childElements = projectImages.map((imageSrc, index) => {
+      return (
+        <div key={index} className={styles.Item}>
+          <img src={imageSrc} />
+        </div>
+      );
+    })
+
     return (
       <Layout className={styles.ProjectTemplate}>
         <div className="row">
           <div className="col-sm-6">
-            <Header rank={1} style="Title">{project.title}</Header>
+            <Header rank={1} type="Title">{project.title}</Header>
             <p>{project.description ? project.description.description : ''}</p>
             {project.client ? <p><strong>Client:</strong> {project.client}</p> : undefined}
             {
@@ -50,26 +57,23 @@ export default class Template extends React.Component<TemplateProps, {}> {
               : undefined
             }
           </div>
+          {/* 
           <div className="col-sm-6">
-            {/*
-              <Masonry>
-                {projectImages.map((imageSrc, index) => {
-                  return <img key={index} src={imageSrc} />;
-                })}
-              </Masonry>
-            */}
+            <Masonry>
+              {projectImages.map((imageSrc, index) => {
+                return <img key={index} src={imageSrc} />;
+              })}
+            </Masonry>
           </div>
+          */}
         </div>
         <div className="row">
           <div className="col-sm-12">
             <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className={styles.Grid}
-              columnClassName={styles.Column}>
-                {projectImages.map((imageSrc, index) => {
-                  return <div><img key={index} src={imageSrc} /></div>;
-                })}
-            </Masonry>          
+              options={masonryOptions}
+            >
+              {childElements}
+            </Masonry>
           </div>
         </div>
       </Layout>

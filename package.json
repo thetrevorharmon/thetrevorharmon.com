@@ -32,11 +32,13 @@
     "query-string": "^6.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "react-masonry-component": "^6.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "gatsby-plugin-tslint": "^0.0.1",
+    "react-masonry-css": "^1.0.11",
     "tslint": "^5.11.0",
     "tslint-loader": "^3.5.4",
     "tslint-react": "^3.6.0",
