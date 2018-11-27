@@ -8,6 +8,7 @@ import * as styles from './homepage.module.scss';
 
 import {
   Button,
+  CaseStudyTile,
   Header,
   Link,
   Tile,
@@ -20,6 +21,7 @@ interface IndexPageProps {
     site: {
       siteMetadata: {
         siteName: string,
+        tagline: string,
       },
     },
     allContentfulProject: {
@@ -43,34 +45,51 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
   public render() {
 
-    const featureItems: Array<({node: Project} | {node: CaseStudy})> = [
-      ...this.props.data.allContentfulCaseStudy.edges,
-      ...this.props.data.allContentfulProject.edges,
-    ];
+    const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
+    const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
 
     return (
       <Layout>
         <div className="row">
-          <div className="col">
-            <Header
-              rank={1}
-              type="Headline"
+          <div className="col-sm-12 col-md-10 col-lg-8">
+            <div
               className={classnames(
-                'my-6 mt-lg-6 mb-lg-8',
                 styles.MainHeader,
+                'my-6 mt-lg-8 mb-lg-8',
               )}
             >
-              <span>The</span><br/>
-              Trevor<br/>
-              Harmon
-            </Header>
+              <span>Hi, I'm</span>
+              <Header
+                rank={1}
+                type="Headline"
+                className={classnames(
+                  styles.Name,
+                  'my-0',
+                )}
+              >
+                Trevor Harmon.
+              </Header>
+              <p className="mt-5">
+                {this.props.data.site.siteMetadata.tagline}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="row mb-3">
-          <Header rank={2} type="Subtitle" className="col">Featured</Header>
+        <div className="row mb-4">
+          <Header rank={2} type="Subtitle" className="col my-0">Case Studies</Header>
         </div>
         <div className="row">
-          {featureItems.map((item, index) => (
+          {featuredStudies.map((item, index) => (
+            <div className="col-sm-12 col-md-12 col-lg-8 mb-4" key={index}>
+              <CaseStudyTile item={item.node} />
+            </div>
+          ))}
+        </div>
+        <div className="row mt-6 mb-4">
+          <Header rank={2} type="Subtitle" className="col">Projects</Header>
+        </div>
+        <div className="row">
+          {featuredWork.map((item, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
               <Tile item={item.node} className="mb-4" />
             </div>
@@ -86,6 +105,7 @@ export const indexPageQuery = graphql`
     site {
       siteMetadata {
         siteName
+        tagline
       }
     }
     allContentfulProject(filter: {featureOnHomepage: {eq: true}}) {
@@ -108,6 +128,7 @@ export const indexPageQuery = graphql`
         node {
           title
           slug
+          tagline
           featureOnHomepage
           featureImage {
             id

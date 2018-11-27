@@ -1,9 +1,18 @@
 @import '../UI-Kit/Header/Header.module.scss';
 
 .MainHeader {
-  line-height: 4rem;
+  .Name {
+    line-height: 4rem;
+  }
 
-  span {
-    @extend .Subtitle;
+  span, p {
+    font-weight: normal;
+    font-size: 1.875rem;
+    letter-spacing: 0px;
+    color: $text-color-secondary;
+
+    @include mobile-only {
+      font-size: 1.5rem;
+    }
   }
 }

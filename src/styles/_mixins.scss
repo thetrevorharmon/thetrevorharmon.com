@@ -8,3 +8,21 @@
     @content;
   }
 }
+
+
+@mixin left-border() {
+  padding-left: 2rem;
+  position: relative;
+
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 15px;
+    background: $brand-primary;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }  
+}

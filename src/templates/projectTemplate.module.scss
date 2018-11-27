@@ -1,3 +1,6 @@
+@import "../styles/_variables.scss";
+@import "../styles/_mixins.scss";
+
 $grid-gutter-size: 1rem;
 
 .ProjectTemplate {
@@ -5,12 +8,6 @@ $grid-gutter-size: 1rem;
     max-width: 100%;
     border: 1px solid #2a2a2a;
   }
-}
-
-.Description {
-  box-sizing: border-box;
-  padding-bottom: $grid-gutter-size;
-  padding-right: $grid-gutter-size;
 }
 
 .Item {
@@ -34,4 +31,16 @@ $grid-gutter-size: 1rem;
 /* change div to reference your elements you put in <Masonry> */
 .Column > div { 
   margin-bottom: $grid-gutter-size;
+}
+
+.ProjectTemplate .Description {
+  box-sizing: border-box;
+  margin-bottom: $grid-gutter-size * 2;
+  margin-right: $grid-gutter-size;
+
+  @include left-border();
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
