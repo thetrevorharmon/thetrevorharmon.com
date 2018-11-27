@@ -3,20 +3,20 @@ import * as React from 'react';
 
 import { Link, Header } from '../../UI-Kit';
 
-import * as styles from './HomeTile.module.scss';
+import * as styles from './CaseStudyTile.module.scss';
 
-interface HomeTileProps {
+interface CaseStudyTileProps {
   item: CaseStudy;
   className?: string;
 }
 
-const HomeTile: React.SFC<HomeTileProps> = ({item, className}) => {
-  const homeTileStyle = {
+const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
+  const caseStudyTileStyle = {
     backgroundImage: `url(${item.featureImage.resolutions.src})`,
   };
 
   const classname = classnames(
-    styles.HomeTile,
+    styles.CaseStudyTile,
     'd-flex flex-row',
     className,
   );
@@ -40,13 +40,13 @@ const HomeTile: React.SFC<HomeTileProps> = ({item, className}) => {
           Read Case Study
         </Link>
       </div>
-      <div className={styles.TileImg} style={homeTileStyle} />
+      <div className={styles.TileImg} style={caseStudyTileStyle} />
     </div>
   );
 };
 
-HomeTile.defaultProps = {
+CaseStudyTile.defaultProps = {
   className: undefined,
 };
 
-export default HomeTile;
+export default CaseStudyTile;

@@ -9,7 +9,7 @@ import * as styles from './homepage.module.scss';
 import {
   Button,
   Header,
-  HomeTile,
+  CaseStudyTile,
   Link,
   Tile,
 } from '../UI-Kit';
@@ -79,7 +79,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         <div className="row">
           {featuredStudies.map((item, index) => (
             <div className="col-sm-12 col-md-12 col-lg-8 mb-4" key={index}>
-              <HomeTile item={item.node} />
+              <CaseStudyTile item={item.node} />
             </div>
           ))}
         </div>
