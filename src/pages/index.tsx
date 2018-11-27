@@ -8,8 +8,8 @@ import * as styles from './homepage.module.scss';
 
 import {
   Button,
-  Header,
   CaseStudyTile,
+  Header,
   Link,
   Tile,
 } from '../UI-Kit';
@@ -51,17 +51,19 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
       <Layout>
         <div className="row">
           <div className="col-sm-12 col-md-10 col-lg-8">
-            <div className={classnames(
+            <div
+              className={classnames(
                 styles.MainHeader,
-                'my-6 mt-lg-8 mb-lg-8'
-              )}>
+                'my-6 mt-lg-8 mb-lg-8',
+              )}
+            >
               <span>Hi, I'm</span>
               <Header
                 rank={1}
                 type="Headline"
                 className={classnames(
                   styles.Name,
-                  "my-0"
+                  'my-0',
                 )}
               >
                 Trevor Harmon.
@@ -85,14 +87,14 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
         <div className="row mt-6 mb-4">
           <Header rank={2} type="Subtitle" className="col">Projects</Header>
-        </div>        
+        </div>
         <div className="row">
           {featuredWork.map((item, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
               <Tile item={item.node} className="mb-4" />
             </div>
           ))}
-        </div>        
+        </div>
       </Layout>
     );
   }

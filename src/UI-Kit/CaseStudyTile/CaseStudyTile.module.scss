@@ -1,7 +1,7 @@
 @import "../../styles/_variables.scss";
 @import "../../styles/_mixins.scss";
 
-.CaseStudyTile {
+.Tile {
 
   width: 100%;
 
@@ -9,22 +9,7 @@
   padding-left: 2rem;
   box-sizing: border-box;
 
-  &:before {
-    display: block;
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 15px;
-    background: $brand-primary;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    transition: all 0.2s ease-in-out;
-  }
-
-  &:hover:before {
-    background: darken($brand-primary, 10%);
-  }
+  @include left-border();
 
   p {
     font-size: 1.25rem;
@@ -32,7 +17,7 @@
   }
 }
 
-.TileImg {
+.Img {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -49,7 +34,7 @@
   }
 }
 
-.TileTitle {
+.Title {
   font-size: 2.25rem;
 }
 

@@ -1,7 +1,10 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import { Link, Header } from '../../UI-Kit';
+import {
+  Header,
+  Link,
+} from '../../UI-Kit';
 
 import * as styles from './CaseStudyTile.module.scss';
 
@@ -11,12 +14,12 @@ interface CaseStudyTileProps {
 }
 
 const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
-  const caseStudyTileStyle = {
+  const imgBackgroundStyle = {
     backgroundImage: `url(${item.featureImage.resolutions.src})`,
   };
 
   const classname = classnames(
-    styles.CaseStudyTile,
+    styles.Tile,
     'd-flex flex-row',
     className,
   );
@@ -26,10 +29,14 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
       className={classname}
     >
       <div className="d-flex flex-column">
-        <Header rank={3} type="Title" className={classnames(
-          styles.TileTitle,
-          'mt-0 mb-0',
-        )}>
+        <Header
+          rank={3}
+          type="Title"
+          className={classnames(
+            styles.Title,
+            'mt-0 mb-0',
+          )}
+        >
           {item.title}
         </Header>
         <p className="pr-3 mt-2 mt-sm-0">{item.tagline}</p>
@@ -40,7 +47,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
           Read Case Study
         </Link>
       </div>
-      <div className={styles.TileImg} style={caseStudyTileStyle} />
+      <div className={styles.Img} style={imgBackgroundStyle} />
     </div>
   );
 };
