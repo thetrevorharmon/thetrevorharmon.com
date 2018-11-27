@@ -79,12 +79,12 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         <div className="row">
           {featuredStudies.map((item, index) => (
             <div className="col-sm-8" key={index}>
-              <HomeTile item={item.node} className="mb-4" />
+              <HomeTile item={item.node} />
             </div>
           ))}
         </div>
-        <div className="row mb-2">
-          <Header rank={2} type="Subtitle" className="col">Work</Header>
+        <div className="row mt-6 mb-4">
+          <Header rank={2} type="Subtitle" className="col">Projects</Header>
         </div>        
         <div className="row">
           {featuredWork.map((item, index) => (
