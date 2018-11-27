@@ -21,6 +21,7 @@ interface Project extends PortfolioItem {
 }
 
 interface CaseStudy extends PortfolioItem {
+  tagline: string;
   tableOfContents: contentfulLongText;
   post: contentfulLongText;
 }

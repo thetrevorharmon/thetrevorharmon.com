@@ -45,7 +45,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
   public render() {
 
     const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
-    const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;    
+    const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
 
     return (
       <Layout>
@@ -78,7 +78,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
         <div className="row">
           {featuredStudies.map((item, index) => (
-            <div className="col-sm-8" key={index}>
+            <div className="col-sm-12 col-md-12 col-lg-8 mb-4" key={index}>
               <HomeTile item={item.node} />
             </div>
           ))}
@@ -125,6 +125,7 @@ export const indexPageQuery = graphql`
         node {
           title
           slug
+          tagline
           featureOnHomepage
           featureImage {
             id
