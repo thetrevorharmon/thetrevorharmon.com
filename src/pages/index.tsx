@@ -21,6 +21,7 @@ interface IndexPageProps {
     site: {
       siteMetadata: {
         siteName: string,
+        tagline: string,
       },
     },
     allContentfulProject: {
@@ -69,8 +70,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
                 Trevor Harmon.
               </Header>
               <p className="mt-5">
-                I’ve been doing design &amp; development work for about ten years.
-                I love building beautiful, usable things.
+                {this.props.data.site.siteMetadata.tagline}
               </p>
             </div>
           </div>
@@ -105,6 +105,7 @@ export const indexPageQuery = graphql`
     site {
       siteMetadata {
         siteName
+        tagline
       }
     }
     allContentfulProject(filter: {featureOnHomepage: {eq: true}}) {
