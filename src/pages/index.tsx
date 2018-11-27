@@ -51,19 +51,27 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
     return (
       <Layout>
         <div className="row">
-          <div className="col">
-            <Header
-              rank={1}
-              type="Headline"
-              className={classnames(
-                'my-6 mt-lg-6 mb-lg-8',
+          <div className="col-sm-12 col-md-10 col-lg-8">
+            <div className={classnames(
                 styles.MainHeader,
-              )}
-            >
-              <span>The</span><br/>
-              Trevor<br/>
-              Harmon
-            </Header>
+                'my-6 mt-lg-8 mb-lg-8'
+              )}>
+              <span>Hi, I'm</span>
+              <Header
+                rank={1}
+                type="Headline"
+                className={classnames(
+                  styles.Name,
+                  "my-0"
+                )}
+              >
+                Trevor Harmon.
+              </Header>
+              <p className="mt-5">
+                I’ve been doing design &amp; development work for about ten years.
+                I love building beautiful, usable things.
+              </p>
+            </div>
           </div>
         </div>
         <div className="row mb-3">
