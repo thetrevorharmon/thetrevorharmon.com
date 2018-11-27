@@ -4,6 +4,8 @@ $sans-serif-font-stack: 'Work Sans', $default-sans-serif-stack;
 $text-color-primary: #2a2a2a;
 $text-color-secondary: #7a7a7a;
 
+$brand-primary: #DD0505;
+
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(
@@ -21,3 +23,4 @@ $spacers: map-merge(
   ),
   $spacers
 );
+

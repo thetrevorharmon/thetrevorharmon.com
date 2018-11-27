@@ -9,6 +9,7 @@ import * as styles from './homepage.module.scss';
 import {
   Button,
   Header,
+  HomeTile,
   Link,
   Tile,
 } from '../UI-Kit';
@@ -43,10 +44,8 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
   public render() {
 
-    const featureItems: Array<({node: Project} | {node: CaseStudy})> = [
-      ...this.props.data.allContentfulCaseStudy.edges,
-      ...this.props.data.allContentfulProject.edges,
-    ];
+    const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
+    const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;    
 
     return (
       <Layout>
@@ -74,16 +73,26 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           </div>
         </div>
-        <div className="row mb-3">
-          <Header rank={2} type="Subtitle" className="col">Featured</Header>
+        <div className="row mb-4">
+          <Header rank={2} type="Subtitle" className="col my-0">Case Studies</Header>
         </div>
         <div className="row">
-          {featureItems.map((item, index) => (
+          {featuredStudies.map((item, index) => (
+            <div className="col-sm-8" key={index}>
+              <HomeTile item={item.node} className="mb-4" />
+            </div>
+          ))}
+        </div>
+        <div className="row mb-2">
+          <Header rank={2} type="Subtitle" className="col">Work</Header>
+        </div>        
+        <div className="row">
+          {featuredWork.map((item, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
               <Tile item={item.node} className="mb-4" />
             </div>
           ))}
-        </div>
+        </div>        
       </Layout>
     );
   }

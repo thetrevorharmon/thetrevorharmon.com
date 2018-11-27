@@ -1,7 +1,9 @@
+@import "../../styles/_variables.scss";
+
 .Button {
   display: inline-block;
   padding: 1rem 1.5rem;
-  background: red;
+  background: $brand-primary;
 
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -13,6 +15,6 @@
   transition: all 0.2s linear;
 
   &:hover {
-    background: darken(red, 15%);
+    background: darken($brand-primary, 15%);
   }
 }
