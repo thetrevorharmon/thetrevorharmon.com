@@ -17,6 +17,22 @@
   }
 }
 
+.Tagline {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  font-weight: normal;
+}
+
+.Headline + .Tagline {
+  margin-top: -1rem;
+  color: $text-color-secondary;
+
+  @include mobile-only {
+    margin-top: 1rem;
+  }  
+}
+
 .Title {
   font-size: 3rem;
   letter-spacing: -2px;
@@ -25,7 +41,7 @@
   @include mobile-only {
     font-size: 2rem;
     line-height: 2rem;
-  }  
+  }
 }
 
 .Subtitle {
@@ -39,6 +55,7 @@
 
   @include mobile-only {
     font-size: 1.25rem;
-    line-height: 1.4rem;
+    line-height: 1.5rem;
+    letter-spacing: 4px;
   }
 }

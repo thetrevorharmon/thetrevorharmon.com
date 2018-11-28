@@ -5,7 +5,7 @@ import Link from '../Link';
 import * as styles from './Header.module.scss';
 
 type HeaderRank = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-type HeaderType = 'Headline' | 'Subtitle' | 'Title';
+type HeaderType = 'Headline' | 'Tagline' | 'Subtitle' | 'Title';
 
 interface HeaderProps {
   rank: HeaderRank;
