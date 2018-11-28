@@ -55,10 +55,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
     const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
     const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
-
-    const mediumPosts = this.props.data.allMediumPost.edges;
-
-    console.log(mediumPosts);
+    const mediumPosts: Array<{node: MediumPost}> = this.props.data.allMediumPost.edges;
 
     return (
       <Layout>
@@ -93,10 +90,13 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
         <div className="row">
           {featuredStudies.map((item, index) => (
-            <div className="col-sm-12 col-md-12 col-lg-8 mb-4" key={index}>
+            <div className="col-sm-12 col-lg-8 mb-4" key={index}>
               <CaseStudyTile item={item.node} />
             </div>
           ))}
+          <div className="col-sm-12 col-lg-8">
+            <Link href="/case-studies" target="_blank">See more case studies &rarr;</Link>
+          </div>
         </div>
 
         <div className="row mt-6 mb-4">
@@ -108,6 +108,9 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               <Tile item={item.node} />
             </div>
           ))}
+          <div className="col-sm-12">
+            <Link href="/projects" target="_blank">See more projects &rarr;</Link>
+          </div>
         </div>
 
         <div className="row mt-6 mb-4">
@@ -119,6 +122,9 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               <PostTile item={item.node} />
             </div>
           ))}
+          <div className="col-sm-12">
+            <Link href="http://medium.com/@thetrevorharmon" target="_blank">Read more posts on Medium &rarr;</Link>
+          </div>
         </div>
       </Layout>
     );

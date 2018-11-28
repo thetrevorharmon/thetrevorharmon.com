@@ -34,7 +34,7 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
         type="Title"
         className={classnames(
           styles.Header,
-          'mt-0'
+          'mt-0',
         )}
       >
         {item.title}
