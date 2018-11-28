@@ -11,6 +11,7 @@ import {
   CaseStudyTile,
   Header,
   Link,
+  PostTile,
   Tile,
 } from '../UI-Kit';
 
@@ -41,16 +42,7 @@ interface IndexPageProps {
     allMediumPost: {
       edges: [
         {
-          node: {
-            title: string;
-            uniqueSlug: string;
-            firstPublishedAt: string;
-            virtuals: {
-              previewImage: {
-                imageId: string
-              },
-            },
-          },
+          node: MediumPost,
         }
       ],
     },
@@ -95,6 +87,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           </div>
         </div>
+
         <div className="row mb-4">
           <Header rank={2} type="Subtitle" className="col my-0">Case Studies</Header>
         </div>
@@ -105,22 +98,25 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           ))}
         </div>
+
         <div className="row mt-6 mb-4">
           <Header rank={2} type="Subtitle" className="col">Projects</Header>
         </div>
         <div className="row">
           {featuredWork.map((item, index) => (
-            <div className="col-md-6 col-lg-4" key={index}>
-              <Tile item={item.node} className="mb-4" />
+            <div className="col-md-6 col-lg-4 mb-4" key={index}>
+              <Tile item={item.node} />
             </div>
           ))}
         </div>
+
+        <div className="row mt-6 mb-4">
+          <Header rank={2} type="Subtitle" className="col my-0">Recent Posts</Header>
+        </div>
         <div className="row">
           {mediumPosts.map((item, index) => (
-            <div className="col-sm-4 mb-4" key={index}>
-              {item.node.title}
-              <br/>
-              {item.node.firstPublishedAt}
+            <div className="col-sm-6 col-lg-4 mb-4" key={index}>
+              <PostTile item={item.node} />
             </div>
           ))}
         </div>
@@ -168,16 +164,16 @@ export const indexPageQuery = graphql`
         }
       }
     }
-    allMediumPost(sort: { fields: [firstPublishedAt], order: DESC }) {
+    allMediumPost(sort: { fields: [firstPublishedAt], order: DESC }, limit: 3) {
       edges {
         node {
           title
           uniqueSlug
-          firstPublishedAt
+          firstPublishedAt(formatString: "MMMM DD, YYYY")
           virtuals {
-            previewImage {
-              imageId
-            }
+            readingTime
+            subtitle
+            metaDescription
           }
         }
       }

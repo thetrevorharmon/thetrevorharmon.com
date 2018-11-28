@@ -1,17 +1,26 @@
-.Tile {
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
 
-  width: 100%;
-  height: 17.5rem;
+.PostTile {
+  display: block;
 
-  border: 1px solid #2a2a2a;
-  position: relative;
+  .Header {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  p {
+    color: $text-color-secondary;
+  }
+
+  .Meta {
+    color: $text-color-secondary;
+  }
+
+
+  &:hover .Header {
+    color: $brand-primary;
+  }
 }
 
-.Button {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-}
+
