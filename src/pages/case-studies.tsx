@@ -8,6 +8,7 @@ import Layout from '../layouts';
 
 import {
   Button,
+  CaseStudyTile,
   Header,
   Link,
   Tile,
@@ -47,8 +48,8 @@ export default class CaseStudiesPage extends React.Component<CaseStudyPageProps,
         </div>
         <div className="row">
           {this.props.data.allContentfulCaseStudy.edges.map((item, index) => (
-              <div className="col-md-6 col-lg-4" key={index}>
-                <Tile item={item.node} className="mb-4" />
+              <div className="col-sm-12 col-md-12 col-lg-8 mb-4" key={index}>
+                <CaseStudyTile item={item.node} className="mb-4" />
               </div>
             ),
           )}
@@ -65,6 +66,7 @@ export const caseStudiesPageQuery = graphql`
         node {
           title
           slug
+          tagline
           featureImage {
             resolutions {
               src

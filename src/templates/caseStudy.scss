@@ -51,7 +51,7 @@
     }
 
     .scrollable {
-      margin: 2rem 0;
+      margin: 2.5rem 0 3rem;
       position: relative;
 
       img {
@@ -62,10 +62,6 @@
         overflow: scroll;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
-
-        ::-webkit-scrollbar {
-          width: 0px !important;  /* remove scrollbar space */
-        }
 
         img {
           max-width: none;
