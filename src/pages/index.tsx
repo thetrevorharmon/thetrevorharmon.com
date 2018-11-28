@@ -38,6 +38,22 @@ interface IndexPageProps {
         }
       ],
     },
+    allMediumPost: {
+      edges: [
+        {
+          node: {
+            title: string;
+            uniqueSlug: string;
+            firstPublishedAt: string;
+            virtuals: {
+              previewImage: {
+                imageId: string
+              },
+            },
+          },
+        }
+      ],
+    },
   };
 }
 
@@ -47,6 +63,10 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
     const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
     const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
+
+    const mediumPosts = this.props.data.allMediumPost.edges;
+
+    console.log(mediumPosts);
 
     return (
       <Layout>
@@ -95,6 +115,15 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           ))}
         </div>
+        <div className="row">
+          {mediumPosts.map((item, index) => (
+            <div className="col-sm-4 mb-4" key={index}>
+              {item.node.title}
+              <br/>
+              {item.node.firstPublishedAt}
+            </div>
+          ))}
+        </div>
       </Layout>
     );
   }
@@ -134,6 +163,20 @@ export const indexPageQuery = graphql`
             id
             resolutions {
               src
+            }
+          }
+        }
+      }
+    }
+    allMediumPost(sort: { fields: [firstPublishedAt], order: DESC }) {
+      edges {
+        node {
+          title
+          uniqueSlug
+          firstPublishedAt
+          virtuals {
+            previewImage {
+              imageId
             }
           }
         }
