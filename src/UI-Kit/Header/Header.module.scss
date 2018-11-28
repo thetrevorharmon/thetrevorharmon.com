@@ -22,11 +22,6 @@
   line-height: 1.2;
   letter-spacing: -1px;
   font-weight: normal;
-
-  @include mobile-only {
-    // font-size: 4rem;
-    // line-height: 4rem;
-  }  
 }
 
 .Headline + .Tagline {
