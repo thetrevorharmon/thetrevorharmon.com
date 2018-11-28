@@ -6,6 +6,11 @@ import {
 
 import * as styles from './Footer.module.scss';
 
+import {
+  ExternalLinks,
+  Routes,
+} from '../../utils/routes';
+
 interface FooterProps {
   className?: string;
 }
@@ -20,15 +25,15 @@ const Footer: React.SFC<FooterProps> = ({className, children}) => {
   const footerLinks = [
     {
       display: 'LinkedIn',
-      location: 'http://linkedin.com/in/trevorharmon',
+      location: ExternalLinks.linkedIn(),
     },
     {
       display: 'Github',
-      location: 'http://github.com/tdharmon',
+      location: ExternalLinks.github(),
     },
     {
       display: 'Twitter',
-      location: 'http://twitter.com/thetrevorharmon',
+      location: ExternalLinks.twitter(),
     },
   ];
 
@@ -41,7 +46,7 @@ const Footer: React.SFC<FooterProps> = ({className, children}) => {
           &copy; {(new Date()).getFullYear()} The Trevor Harmon
         </div>
         <div className="col-12 col-md-2 order-1 order-md-2">
-          <Link href="/" className={classnames(styles.Brand, 'global-brand')}>TH</Link>
+          <Link href={Routes.home()} className={classnames(styles.Brand, 'global-brand')}>TH</Link>
         </div>
         <div className="col-md-5 order-2 order-md-3 my-2 my-md-0">
           <ul className={styles.FooterLinks}>

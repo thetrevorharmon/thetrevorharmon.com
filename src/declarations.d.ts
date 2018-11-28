@@ -75,3 +75,14 @@ interface contentfulAsset {
     srcSetWebp?: string;    
   };
 }
+
+interface MediumPost {
+  title: string;
+  uniqueSlug: string;
+  firstPublishedAt: string;
+  virtuals: {
+    subtitle: string;
+    metaDescription: string;
+    readingTime: number;
+  };
+}
