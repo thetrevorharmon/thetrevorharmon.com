@@ -30,6 +30,7 @@
 .Brand {
   display: block;
   margin: 0 auto;
+  color: white;
 
   @include mobile-only {
     margin: 0;

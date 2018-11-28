@@ -1,6 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import Link from '../Link';
+import {
+  Link,
+} from '../../UI-Kit';
 
 import * as styles from './Footer.module.scss';
 
@@ -8,7 +10,7 @@ interface FooterProps {
   className?: string;
 }
 
-const Footer: React.SFC<FooterProps> = ({href, className, children}) => {
+const Footer: React.SFC<FooterProps> = ({className, children}) => {
   const classname = classnames(
     className,
     'container',
@@ -39,7 +41,7 @@ const Footer: React.SFC<FooterProps> = ({href, className, children}) => {
           &copy; {(new Date()).getFullYear()} The Trevor Harmon
         </div>
         <div className="col-12 col-md-2 order-1 order-md-2">
-          <div className={classnames(styles.Brand, 'global-brand')}>TH</div>
+          <Link href="/" className={classnames(styles.Brand, 'global-brand')}>TH</Link>
         </div>
         <div className="col-md-5 order-2 order-md-3 my-2 my-md-0">
           <ul className={styles.FooterLinks}>
