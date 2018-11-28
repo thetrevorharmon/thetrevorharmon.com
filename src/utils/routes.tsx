@@ -1,18 +1,22 @@
-interface linkInterface {
-  [name: string]: () => string
-};
+interface LinkInterface {
+  [name: string]: () => string;
+}
 
-const ExternalLinks: linkInterface = {
-  linkedIn: () => 'http://linkedin.com/in/trevorharmon',
+const ExternalLinks: LinkInterface = {
   github: () => 'http://github.com/tdharmon',
-  twitter: () => 'http://twitter.com/thetrevorharmon'
+  linkedIn: () => 'http://linkedin.com/in/trevorharmon',
+  medium: () => 'http://medium.com/@thetrevorharmon',
+  twitter: () => 'http://twitter.com/thetrevorharmon',
 };
 
-const Routes: linkInterface = {
+const Routes: LinkInterface = {
+  about: () => '/about',
+  caseStudies: () => '/case-studies',
   home: () => '/',
+  projects: () => '/projects',
 };
 
 export {
   ExternalLinks,
   Routes,
-}
+};

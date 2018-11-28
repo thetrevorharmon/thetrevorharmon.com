@@ -6,7 +6,10 @@ import {
 
 import * as styles from './Footer.module.scss';
 
-import Routes from '../../utils/routes';
+import {
+  ExternalLinks,
+  Routes,
+} from '../../utils/routes';
 
 interface FooterProps {
   className?: string;
@@ -22,15 +25,15 @@ const Footer: React.SFC<FooterProps> = ({className, children}) => {
   const footerLinks = [
     {
       display: 'LinkedIn',
-      location: 'http://linkedin.com/in/trevorharmon',
+      location: ExternalLinks.linkedIn(),
     },
     {
       display: 'Github',
-      location: 'http://github.com/tdharmon',
+      location: ExternalLinks.github(),
     },
     {
       display: 'Twitter',
-      location: 'http://twitter.com/thetrevorharmon',
+      location: ExternalLinks.twitter(),
     },
   ];
 

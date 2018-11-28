@@ -8,6 +8,10 @@ import {
   Link,
 } from '../../UI-Kit';
 
+import {
+  Routes,
+} from '../../utils/routes';
+
 interface NavbarProps {
   handleMenuToggle: (event: React.MouseEvent<HTMLElement>) => void;
   isOpen: boolean;
@@ -23,15 +27,15 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
   const navbarLinks = [
     {
       display: 'Case Studies',
-      location: '/case-studies',
+      location: Routes.caseStudies(),
     },
     {
       display: 'Projects',
-      location: '/projects',
+      location: Routes.projects(),
     },
     {
       display: 'About',
-      location: '/about',
+      location: Routes.about(),
     },
   ];
 
@@ -41,7 +45,17 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
       <div className={classname}>
         <div className="container d-flex flex-column">
           <div className={styles.TopElementsWrapper}>
-            <Button href="/" className={classnames(styles.Brand, 'global-brand')} noStyling={true}>TH</Button>
+
+            <Button
+              href={Routes.home()}
+              className={classnames(
+                styles.Brand,
+                'global-brand',
+              )}
+              noStyling={true}
+            >
+              TH
+            </Button>
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>

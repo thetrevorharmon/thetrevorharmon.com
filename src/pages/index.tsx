@@ -7,6 +7,11 @@ import Layout from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
+  ExternalLinks,
+  Routes,
+} from '../utils/routes';
+
+import {
   Button,
   CaseStudyTile,
   Header,
@@ -95,7 +100,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           ))}
           <div className="col-sm-12 col-lg-8">
-            <Link href="/case-studies" target="_blank">See more case studies &rarr;</Link>
+            <Link href={Routes.caseStudies()} target="_blank">See more case studies &rarr;</Link>
           </div>
         </div>
 
@@ -109,7 +114,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           ))}
           <div className="col-sm-12">
-            <Link href="/projects" target="_blank">See more projects &rarr;</Link>
+            <Link href={Routes.projects()} target="_blank">See more projects &rarr;</Link>
           </div>
         </div>
 
@@ -123,7 +128,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             </div>
           ))}
           <div className="col-sm-12">
-            <Link href="http://medium.com/@thetrevorharmon" target="_blank">Read more posts on Medium &rarr;</Link>
+            <Link href={ExternalLinks.medium()} target="_blank">Read more posts on Medium &rarr;</Link>
           </div>
         </div>
       </Layout>
