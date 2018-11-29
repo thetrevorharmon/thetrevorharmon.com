@@ -57,7 +57,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
     const descriptionAndItems = [description, ...items];
 
     return (
-      <Layout className={styles.ProjectTemplate}>
+      <Layout className={styles.ProjectTemplate} pageTitle={project.title}>
         <div className="row">
           <div className="col-sm-12">
             <Masonry
