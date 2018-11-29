@@ -4,8 +4,6 @@ import * as React from 'react';
 
 import Layout from '../layouts';
 
-// import * as styles from './caseStudies.module.scss';
-
 import {
   Button,
   CaseStudyTile,
@@ -31,8 +29,10 @@ interface CaseStudyPageProps {
 export default class CaseStudiesPage extends React.Component<CaseStudyPageProps, {}> {
 
   public render() {
+    const pageTitle = 'Case Studies';
+
     return (
-      <Layout>
+      <Layout pageTitle={pageTitle}>
         <div className="row">
           <div className="col">
             <Header

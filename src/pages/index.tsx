@@ -9,7 +9,7 @@ import * as styles from './homepage.module.scss';
 import {
   ExternalLinks,
   Routes,
-} from '../utils/routes';
+} from '../utils';
 
 import {
   Button,
@@ -26,7 +26,6 @@ interface IndexPageProps {
   data: {
     site: {
       siteMetadata: {
-        siteName: string,
         tagline: string,
       },
     },
@@ -140,7 +139,6 @@ export const indexPageQuery = graphql`
   query indexPageQuery {
     site {
       siteMetadata {
-        siteName
         tagline
       }
     }

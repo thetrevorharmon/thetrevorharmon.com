@@ -29,7 +29,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     };
 
     return (
-      <Layout className="case-study-template" >
+      <Layout className="case-study-template" pageTitle={`${caseStudy.title} Case Study`}>
         <div className="row post-header my-5">
           <div className="col-lg-6">
             <Header rank={1} type="Headline" className="mb-0">{caseStudy.title}</Header>

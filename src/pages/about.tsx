@@ -32,9 +32,10 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
 
   public render() {
     const aboutPage = this.props.data.allContentfulAboutPage.edges[0].node;
+    const pageTitle = 'About';
 
     return (
-      <Layout className={styles.AboutPage}>
+      <Layout className={styles.AboutPage} pageTitle={pageTitle}>
         <div className="row mb-5">
           <div className="col-lg-12">
             <Header

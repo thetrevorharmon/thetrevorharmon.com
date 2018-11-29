@@ -1,27 +1,3 @@
-export function largestPhotoFromSet(photo: contentfulAsset): string {
-  if (
-    photo.resolutions === undefined ||
-    (photo.resolutions.srcSet === undefined && photo.resolutions.src === undefined)
-  ) {
-    throw new Error(`No Photo Source in Data. Try looking at your graphQL
-           statement and make sure either a src or srcSet is included.`);
-  }
-
-  if (photo.resolutions.srcSet === undefined) {
-    return photo.resolutions.src;
-  }
-
-  const photoSet = photo.resolutions.srcSet.split(',');
-  const photoWithSizeSet: { [key: string]: string; } = {};
-
-  photoSet.map((item) => {
-    const items: string[] = item.split(' ');
-
-    const size: string = items[1];
-    const url: string = items[0].trim();
-
-    photoWithSizeSet[size] = url;
-  });
-
-  return photoWithSizeSet['3x'] || photoWithSizeSet['2x'] || photoWithSizeSet['1.5x'] || photoWithSizeSet['1x'];
-}
+export { default as Helmet } from './Helmet';
+export { largestPhotoFromSet } from './helpers';
+export { ExternalLinks, Routes } from './routes';

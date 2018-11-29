@@ -9,7 +9,7 @@ import * as styles from './Footer.module.scss';
 import {
   ExternalLinks,
   Routes,
-} from '../../utils/routes';
+} from '../../utils';
 
 interface FooterProps {
   className?: string;
