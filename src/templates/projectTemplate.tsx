@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
@@ -24,8 +25,9 @@ interface TemplateProps {
 export default class Template extends React.Component<TemplateProps, {}> {
   public render() {
     const project = this.props.data.allContentfulProject.edges[0].node;
+    console.log(project);
 
-    const projectImages: [string] = [largestPhotoFromSet(project.featureImage) || ''];
+    const projectImages = project.projectImages ? [project.featureImage, ...project.projectImages] : [project.featureImage];
 
     const breakpointColumnsObj = {
       default: 2,
@@ -33,12 +35,8 @@ export default class Template extends React.Component<TemplateProps, {}> {
       // 767 is the medium-sized breakpoint (from bootstrap) minus 1
     };
 
-    if (project.projectImages) {
-      project.projectImages.map((image) => projectImages.push(largestPhotoFromSet(image)));
-    }
-
-    const items = projectImages.map((imageSrc, index) => {
-      return <div key={index}><img src={imageSrc} /></div>;
+    const items = projectImages.map((image, index) => {
+      return <div key={index}><Img fluid={image.fluid} /></div>;
     });
 
     const description = (
@@ -92,12 +90,18 @@ export const query = graphql`
               src
               srcSet
             }
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
+            }
           }
           featureImage {
             id
             resolutions {
               src
               srcSet
+            }
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
             }
           }
         }

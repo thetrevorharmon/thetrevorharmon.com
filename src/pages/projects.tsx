@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import * as React from 'react';
 
 import Layout from '../layouts';
@@ -29,6 +30,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
   public render() {
     const pageTitle = 'Projects';
+
+    console.log(this.props.data.allContentfulProject.edges);
 
     return (
       <Layout pageTitle={pageTitle}>
@@ -65,8 +68,8 @@ export const projectsPageQuery = graphql`
           title
           slug
           featureImage {
-            resolutions {
-              src
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
             }
           }
         }

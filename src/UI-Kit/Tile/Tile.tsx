@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import Img from 'gatsby-image';
 
 import { Button } from '../../UI-Kit';
 
@@ -11,9 +12,6 @@ interface TileProps {
 }
 
 const Tile: React.SFC<TileProps> = ({item, className}) => {
-  const tileStyle = {
-    backgroundImage: `url(${item.featureImage.resolutions.src})`,
-  };
 
   const classname = classnames(
     styles.Tile,
@@ -23,7 +21,6 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
   return (
     <div
       className={classname}
-      style={tileStyle}
     >
       <Button
         className={styles.Button}
@@ -31,6 +28,7 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
       >
         View
       </Button>
+      <Img className={styles.BackgroundImg} fluid={item.featureImage.fluid} />
     </div>
   );
 };

@@ -74,6 +74,13 @@ interface contentfulAsset {
     srcWebp?: string;
     srcSetWebp?: string;    
   };
+  fluid: {
+    aspectRatio: number;
+    base64: string;
+    sizes: object;
+    src: string;
+    srcSet: string;
+  }
 }
 
 interface MediumPost {

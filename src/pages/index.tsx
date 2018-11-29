@@ -149,10 +149,9 @@ export const indexPageQuery = graphql`
           slug
           featureOnHomepage
           featureImage {
-            id
-            resolutions {
-              src
-            }
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
+            }            
           }
         }
       }
