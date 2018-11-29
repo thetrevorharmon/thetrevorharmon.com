@@ -10,7 +10,7 @@ import {
 
 import {
   Routes,
-} from '../../utils/routes';
+} from '../../utils';
 
 interface NavbarProps {
   handleMenuToggle: (event: React.MouseEvent<HTMLElement>) => void;

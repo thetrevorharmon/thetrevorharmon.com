@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import Helmet from '../utils/Helmet';
+import { Helmet } from '../utils';
 
 import 'normalize.css';
 import '../styles/global.scss';

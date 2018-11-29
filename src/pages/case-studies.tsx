@@ -4,8 +4,6 @@ import * as React from 'react';
 
 import Layout from '../layouts';
 
-// import * as styles from './caseStudies.module.scss';
-
 import {
   Button,
   CaseStudyTile,

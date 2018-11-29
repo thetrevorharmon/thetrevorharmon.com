@@ -9,7 +9,7 @@ import * as styles from './homepage.module.scss';
 import {
   ExternalLinks,
   Routes,
-} from '../utils/routes';
+} from '../utils';
 
 import {
   Button,
