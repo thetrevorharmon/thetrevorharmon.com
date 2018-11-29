@@ -28,8 +28,10 @@ interface ProjectsPageProps {
 export default class ProjectsPage extends React.Component<ProjectsPageProps, {}> {
 
   public render() {
+    const pageTitle = 'Projects';
+
     return (
-      <Layout>
+      <Layout pageTitle={pageTitle}>
         <div className="row">
           <div className="col">
             <Header

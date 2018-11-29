@@ -44,7 +44,7 @@ class Layout extends React.Component<LayoutProps, {}> {
 
     return (
       <>
-        <Helmet />
+        <Helmet pageTitle={pageTitle} />
         <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
         <div
           className={classname}

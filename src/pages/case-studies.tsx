@@ -31,8 +31,10 @@ interface CaseStudyPageProps {
 export default class CaseStudiesPage extends React.Component<CaseStudyPageProps, {}> {
 
   public render() {
+    const pageTitle = 'Case Studies';
+
     return (
-      <Layout>
+      <Layout pageTitle={pageTitle}>
         <div className="row">
           <div className="col">
             <Header
