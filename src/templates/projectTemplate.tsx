@@ -83,24 +83,13 @@ export const query = graphql`
           projectCompletionDate(formatString: "MMMM DD, YYYY")
           description {
             description
-            id
           }
           projectImages {
-            id
-            resolutions {
-              src
-              srcSet
-            }
             fluid(maxWidth: 600) {
               ...GatsbyContentfulFluid
             }
           }
           featureImage {
-            id
-            resolutions {
-              src
-              srcSet
-            }
             fluid(maxWidth: 600) {
               ...GatsbyContentfulFluid
             }
