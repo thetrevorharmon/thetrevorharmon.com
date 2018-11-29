@@ -25,9 +25,10 @@ interface TemplateProps {
 export default class Template extends React.Component<TemplateProps, {}> {
   public render() {
     const project = this.props.data.allContentfulProject.edges[0].node;
-    console.log(project);
 
-    const projectImages = project.projectImages ? [project.featureImage, ...project.projectImages] : [project.featureImage];
+    const projectImages = project.projectImages
+      ? [project.featureImage, ...project.projectImages]
+      : [project.featureImage];
 
     const breakpointColumnsObj = {
       default: 2,

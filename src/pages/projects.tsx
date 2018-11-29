@@ -31,8 +31,6 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
   public render() {
     const pageTitle = 'Projects';
 
-    console.log(this.props.data.allContentfulProject.edges);
-
     return (
       <Layout pageTitle={pageTitle}>
         <div className="row">

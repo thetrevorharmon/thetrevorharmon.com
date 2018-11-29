@@ -151,7 +151,7 @@ export const indexPageQuery = graphql`
           featureImage {
             fluid(maxWidth: 600) {
               ...GatsbyContentfulFluid
-            }            
+            }
           }
         }
       }

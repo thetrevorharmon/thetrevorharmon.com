@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import * as React from 'react';
 import Img from 'gatsby-image';
+import * as React from 'react';
 
 import { Button } from '../../UI-Kit';
 
