@@ -5,14 +5,15 @@ require("dotenv").config({path: `.env`,})
 
 module.exports = {
   siteMetadata: {
-    siteName: `The Trevor Harmon`,
+    title: `The Trevor Harmon`,
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
   },
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-tslint`,
     `gatsby-plugin-sass`,
-    `gatsby-transformer-remark`, // this converts .md to .html
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-favicon`,
     {
       resolve: `gatsby-source-contentful`,
       options: {

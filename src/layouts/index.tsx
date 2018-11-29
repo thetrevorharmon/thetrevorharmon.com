@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+import Helmet from '../utils/Helmet';
 
 import 'normalize.css';
 import '../styles/global.scss';
@@ -13,6 +13,7 @@ import {
 interface LayoutProps {
   className?: string;
   hasContainer?: boolean;
+  pageTitle?: string;
 }
 
 interface LayoutState {
@@ -30,8 +31,9 @@ class Layout extends React.Component<LayoutProps, {}> {
 
   public render() {
     const {
-      hasContainer,
       className,
+      hasContainer,
+      pageTitle,
       children,
     } = this.props;
 
@@ -42,9 +44,7 @@ class Layout extends React.Component<LayoutProps, {}> {
 
     return (
       <>
-        <Helmet>
-          <title>The Trevor Harmon</title>
-        </Helmet>
+        <Helmet />
         <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
         <div
           className={classname}
