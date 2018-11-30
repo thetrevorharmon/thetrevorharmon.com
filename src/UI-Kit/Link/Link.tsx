@@ -29,7 +29,7 @@ const Link: React.SFC<LinkProps> = ({
   );
 
   return externalLink ? (
-    <a className={classname} href={href} target={target}>
+    <a className={classname} href={href} target={target} rel="noreferrer">
       {children}
     </a>
   ) : (

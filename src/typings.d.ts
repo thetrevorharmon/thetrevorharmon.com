@@ -63,17 +63,15 @@ interface contentfulLongText {
 
 interface contentfulAsset {
   id?: string;
-  resolutions: {
+  title: string;
+  description: string;
+  fluid: {
+    aspectRatio: number;
+    base64: string;
+    sizes: object;
     src: string;
-    base64?: string;
-    tracedSVG?: string;
-    aspectRatio?: number;
-    width?: number;
-    height?: number;
-    srcSet?: string;
-    srcWebp?: string;
-    srcSetWebp?: string;    
-  };
+    srcSet: string;
+  }
 }
 
 interface MediumPost {

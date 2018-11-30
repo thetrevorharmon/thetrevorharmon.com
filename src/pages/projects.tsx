@@ -59,14 +59,18 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
 export const projectsPageQuery = graphql`
   query projectsPageQuery {
-    allContentfulProject {
+    allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
       edges {
         node {
           title
+          description {
+            description
+          }
           slug
+          projectCompletionDate
           featureImage {
-            resolutions {
-              src
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

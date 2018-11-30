@@ -9,10 +9,10 @@ import * as styles from './about.module.scss';
 import {
   Button,
   Header,
+  Image,
   Link,
   Tile,
 } from '../UI-Kit';
-import { largestPhotoFromSet } from '../utils';
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -22,7 +22,7 @@ interface AboutPageProps {
       edges: [
         {
           node: AboutPageData,
-        },
+        }
       ],
     },
   };
@@ -49,7 +49,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
             </Header>
           </div>
           <div className="col-lg-12">
-            <img src={largestPhotoFromSet(aboutPage.featureImage)} className={styles.FeatureImage} />
+            <Image src={aboutPage.featureImage} className={styles.FeatureImage} />
           </div>
         </div>
         <div className="row">
@@ -73,9 +73,10 @@ export const AboutPageQuery = graphql`
         node {
           title
           featureImage {
-            resolutions {
-              src
-              srcSet
+            title
+            description
+            fluid(maxWidth: 1200) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
           post {

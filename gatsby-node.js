@@ -18,16 +18,17 @@ exports.createPages = ({ graphql, actions }) => {
               client
               description {
                 description
-                id
               }
               projectImages {
-                id
+                title
+                description                
                 resolutions {
                   src
                 }
               }            
               featureImage {
-                id
+                title
+                description                
                 resolutions {
                   src
                 }
@@ -38,10 +39,11 @@ exports.createPages = ({ graphql, actions }) => {
         allContentfulCaseStudy {
           edges {
             node {
-              id
               title
               slug
               featureImage {
+                title
+                description                
                 resolutions {
                   src
                 }

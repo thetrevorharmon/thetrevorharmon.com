@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import {
   Header,
+  Image,
   Link,
 } from '../../UI-Kit';
 
@@ -14,10 +15,6 @@ interface CaseStudyTileProps {
 }
 
 const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
-  const imgBackgroundStyle = {
-    backgroundImage: `url(${item.featureImage.resolutions.src})`,
-  };
-
   const classname = classnames(
     styles.Tile,
     'd-flex flex-row',
@@ -47,7 +44,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
           Read Case Study
         </Link>
       </div>
-      <div className={styles.Img} style={imgBackgroundStyle} />
+      <Image src={item.featureImage} className={styles.Img} />
     </div>
   );
 };

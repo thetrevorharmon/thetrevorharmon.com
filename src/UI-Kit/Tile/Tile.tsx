@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import { Button } from '../../UI-Kit';
+import { Button, Image } from '../../UI-Kit';
 
 import * as styles from './Tile.module.scss';
 
@@ -11,9 +11,6 @@ interface TileProps {
 }
 
 const Tile: React.SFC<TileProps> = ({item, className}) => {
-  const tileStyle = {
-    backgroundImage: `url(${item.featureImage.resolutions.src})`,
-  };
 
   const classname = classnames(
     styles.Tile,
@@ -23,7 +20,6 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
   return (
     <div
       className={classname}
-      style={tileStyle}
     >
       <Button
         className={styles.Button}
@@ -31,6 +27,7 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
       >
         View
       </Button>
+      <Image className={styles.BackgroundImg} src={item.featureImage} />
     </div>
   );
 };

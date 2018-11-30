@@ -7,13 +7,9 @@ module.exports = {
   siteMetadata: {
     title: `The Trevor Harmon`,
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
+    description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
   },
   plugins: [
-    `gatsby-plugin-typescript`,
-    `gatsby-plugin-tslint`,
-    `gatsby-plugin-sass`,
-    `gatsby-transformer-remark`,
-    `gatsby-plugin-favicon`,
     {
       resolve: `gatsby-source-contentful`,
       options: {
@@ -28,5 +24,12 @@ module.exports = {
         limit: 200,
       },
     },
+    `gatsby-plugin-typescript`,
+    `gatsby-plugin-tslint`,
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-favicon`,
+    `gatsby-plugin-sharp`, // for gatsby-img
+    `gatsby-transformer-sharp`, // for gatsby-img
+    `gatsby-transformer-remark`,
   ],
 }
