@@ -12,6 +12,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
+import { ContentfulCaseStudyTile } from './queries';
+
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface CaseStudyPageProps {
@@ -64,16 +66,7 @@ export const caseStudiesPageQuery = graphql`
     allContentfulCaseStudy {
       edges {
         node {
-          title
-          slug
-          tagline
-          featureImage {
-            title
-            description
-            fluid(maxWidth: 200) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulCaseStudyTile
         }
       }
     }

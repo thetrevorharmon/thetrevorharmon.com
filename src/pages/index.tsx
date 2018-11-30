@@ -7,8 +7,8 @@ import Layout from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
-  FeatureImageFieldsWidth200,
-  FeatureImageFieldsWidth600,
+  ContentfulCaseStudyTile,
+  ContentfulProjectTile,
 } from './queries';
 
 import {
@@ -148,38 +148,19 @@ export const indexPageQuery = graphql`
       }
     }
     allContentfulProject(
-      filter: {
-        featureOnHomepage: {
-          eq: true
-        }
-      },
-      sort: {
-        fields: [
-          projectCompletionDate
-        ],
-        order: DESC
-    }) {
+      filter: { featureOnHomepage: { eq: true }},
+      sort: {fields: [projectCompletionDate], order: DESC}
+    ) {
       edges {
         node {
-          title
-          slug
-          featureOnHomepage
-          featureImage {
-            ...FeatureImageFields_width600
-          }
+          ...ContentfulProjectTile
         }
       }
     }
     allContentfulCaseStudy(filter: {featureOnHomepage: {eq: true}}) {
       edges {
         node {
-          title
-          slug
-          tagline
-          featureOnHomepage
-          featureImage {
-            ...FeatureImageFields_width200
-          }
+          ...ContentfulCaseStudyTile
         }
       }
     }

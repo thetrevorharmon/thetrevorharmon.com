@@ -11,6 +11,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
+import { ContentfulProjectTile } from './queries';
+
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface ProjectsPageProps {
@@ -62,17 +64,7 @@ export const projectsPageQuery = graphql`
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
       edges {
         node {
-          title
-          description {
-            description
-          }
-          slug
-          projectCompletionDate
-          featureImage {
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulProjectTile
         }
       }
     }
