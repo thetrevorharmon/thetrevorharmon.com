@@ -39,7 +39,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
-        head: false, // Puts tracking script in the head instead of the body
+        head: true, // Puts tracking script in the head instead of the body
         anonymize: true,
         respectDNT: true,
         cookieDomain: `thetrevorharmon.com`,
