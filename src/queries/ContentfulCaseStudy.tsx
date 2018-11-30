@@ -1,8 +1,6 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import { FeatureImageFieldsWidth200 } from './queries';
-
 export const ContentfulCaseStudyTile = graphql`
   fragment ContentfulCaseStudyTile on ContentfulCaseStudy {
     title
@@ -10,7 +8,7 @@ export const ContentfulCaseStudyTile = graphql`
     tagline
     featureOnHomepage
     featureImage {
-      ...FeatureImageFields_width200
+      ...ContentfulAsset_width200
     }
   }
 `;

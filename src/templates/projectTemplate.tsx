@@ -82,18 +82,10 @@ export const query = graphql`
             description
           }
           projectImages {
-            title
-            description
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...ContentfulAsset_width600
           }
           featureImage {
-            title
-            description
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...ContentfulAsset_width600
           }
         }
       }

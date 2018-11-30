@@ -73,11 +73,7 @@ export const AboutPageQuery = graphql`
         node {
           title
           featureImage {
-            title
-            description
-            fluid(maxWidth: 1200) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...ContentfulAsset_width1200
           }
           post {
             childMarkdownRemark {

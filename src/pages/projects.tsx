@@ -11,8 +11,6 @@ import {
   Tile,
 } from '../UI-Kit';
 
-import { ContentfulProjectTile } from './queries';
-
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface ProjectsPageProps {

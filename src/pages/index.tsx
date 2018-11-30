@@ -7,11 +7,6 @@ import Layout from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
-  ContentfulCaseStudyTile,
-  ContentfulProjectTile,
-} from './queries';
-
-import {
   ExternalLinks,
   Routes,
 } from '../utils';
