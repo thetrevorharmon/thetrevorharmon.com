@@ -63,6 +63,8 @@ interface contentfulLongText {
 
 interface contentfulAsset {
   id?: string;
+  title: string;
+  description: string;
   fluid: {
     aspectRatio: number;
     base64: string;

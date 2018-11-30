@@ -1,11 +1,10 @@
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import * as React from 'react';
 import Layout from '../layouts';
 
 import './caseStudyTemplate.scss';
 
-import { Header } from '../UI-Kit';
+import { Header, Image } from '../UI-Kit';
 import { largestPhotoFromSet } from '../utils';
 
 interface CaseStudyTemplateProps {
@@ -33,7 +32,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             <Header rank={2} type="Tagline">{caseStudy.tagline}</Header>
           </div>
           <div className="col-lg-6">
-            <Img fluid={caseStudy.featureImage.fluid} className="mt-4 mt-lg-0 hero-header" />
+            <Image src={caseStudy.featureImage} className="mt-4 mt-lg-0 hero-header" />
           </div>
         </div>
         <div className="row post-body">
@@ -68,8 +67,10 @@ export const query = graphql`
           slug
           tagline
           featureImage {
+            title
+            description
             fluid(maxWidth: 750) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
           post {

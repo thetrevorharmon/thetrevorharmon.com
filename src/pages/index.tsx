@@ -142,15 +142,28 @@ export const indexPageQuery = graphql`
         tagline
       }
     }
-    allContentfulProject(filter: {featureOnHomepage: {eq: true}}, sort: {fields: [projectCompletionDate], order: DESC}) {
+    allContentfulProject(
+      filter: {
+        featureOnHomepage: {
+          eq: true
+        }
+      },
+      sort: {
+        fields: [
+          projectCompletionDate
+        ],
+        order: DESC
+    }) {
       edges {
         node {
           title
           slug
           featureOnHomepage
           featureImage {
+            title
+            description
             fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }
@@ -164,8 +177,10 @@ export const indexPageQuery = graphql`
           tagline
           featureOnHomepage
           featureImage {
+            title
+            description
             fluid(maxWidth: 200) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

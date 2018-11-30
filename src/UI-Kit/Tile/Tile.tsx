@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-import Img from 'gatsby-image';
 import * as React from 'react';
 
-import { Button } from '../../UI-Kit';
+import { Button, Image } from '../../UI-Kit';
 
 import * as styles from './Tile.module.scss';
 
@@ -28,7 +27,7 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
       >
         View
       </Button>
-      <Img className={styles.BackgroundImg} fluid={item.featureImage.fluid} />
+      <Image className={styles.BackgroundImg} src={item.featureImage} />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import * as React from 'react';
 
 import Layout from '../layouts';
@@ -64,11 +63,14 @@ export const projectsPageQuery = graphql`
       edges {
         node {
           title
+          description {
+            description
+          }
           slug
           projectCompletionDate
           featureImage {
             fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

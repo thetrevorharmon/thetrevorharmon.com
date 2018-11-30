@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import * as React from 'react';
 
 import Layout from '../layouts';
@@ -10,6 +9,7 @@ import * as styles from './about.module.scss';
 import {
   Button,
   Header,
+  Image,
   Link,
   Tile,
 } from '../UI-Kit';
@@ -50,7 +50,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
             </Header>
           </div>
           <div className="col-lg-12">
-            <Img fluid={aboutPage.featureImage.fluid} className={styles.FeatureImage} />
+            <Image src={aboutPage.featureImage} className={styles.FeatureImage} />
           </div>
         </div>
         <div className="row">
@@ -74,12 +74,10 @@ export const AboutPageQuery = graphql`
         node {
           title
           featureImage {
-            resolutions {
-              src
-              srcSet
-            }
+            title
+            description
             fluid(maxWidth: 1200) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
           post {

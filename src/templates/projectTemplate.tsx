@@ -1,10 +1,9 @@
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
 import Layout from '../layouts';
-import { Button, Header } from '../UI-Kit';
+import { Button, Header, Image } from '../UI-Kit';
 
 import { largestPhotoFromSet } from '../utils';
 
@@ -37,7 +36,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
     };
 
     const items = projectImages.map((image, index) => {
-      return <div key={index}><Img fluid={image.fluid} /></div>;
+      return <div key={index}><Image src={image} /></div>;
     });
 
     const description = (
@@ -85,13 +84,17 @@ export const query = graphql`
             description
           }
           projectImages {
+            title
+            description
             fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
           featureImage {
+            title
+            description
             fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }

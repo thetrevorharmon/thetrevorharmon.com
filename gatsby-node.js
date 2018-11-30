@@ -20,11 +20,15 @@ exports.createPages = ({ graphql, actions }) => {
                 description
               }
               projectImages {
+                title
+                description                
                 resolutions {
                   src
                 }
               }            
               featureImage {
+                title
+                description                
                 resolutions {
                   src
                 }
@@ -38,6 +42,8 @@ exports.createPages = ({ graphql, actions }) => {
               title
               slug
               featureImage {
+                title
+                description                
                 resolutions {
                   src
                 }

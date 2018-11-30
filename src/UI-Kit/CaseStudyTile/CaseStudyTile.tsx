@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import Img from 'gatsby-image';
 import * as React from 'react';
 
 import {
   Header,
+  Image,
   Link,
 } from '../../UI-Kit';
 
@@ -44,7 +44,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
           Read Case Study
         </Link>
       </div>
-      <Img fluid={item.featureImage.fluid} className={styles.Img} />
+      <Image src={item.featureImage} className={styles.Img} />
     </div>
   );
 };

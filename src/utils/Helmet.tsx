@@ -26,7 +26,8 @@ const Helmet: React.SFC<HelmetDataProps> = ({
 
   return (
     <ReactHelmet>
-      <title>{siteTitle}</title>
+      <html lang="en" />
+        <title>{siteTitle}</title>
     </ReactHelmet>
   );
 };
