@@ -17,13 +17,15 @@ const Image: React.SFC<ImageProps> = ({
     className,
   );
 
-  return (
+  return src ? (
     <Img
       className={classname}
       fluid={src.fluid}
       alt={`${src.title} | ${src.description}`}
       {...props}
     />
+  ) : (
+    <span />
   );
 };
 

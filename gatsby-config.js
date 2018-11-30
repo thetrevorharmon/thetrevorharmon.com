@@ -2,6 +2,7 @@
 // https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/environment-variables.md
 
 require("dotenv").config({path: `.env`,})
+let isDevelopment = (process.env.ACTIVE_ENV || process.env.NODE_ENV) === 'development';
 
 module.exports = {
   siteMetadata: {
@@ -14,14 +15,15 @@ module.exports = {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        accessToken: isDevelopment ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN : process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+        host: isDevelopment ?`preview.contentful.com` : undefined,
       },
     },
     {
       resolve: `gatsby-source-medium`,
       options: {
         username: `@thetrevorharmon`,
-        limit: 200,
+        limit: 10,
       },
     },
     `gatsby-plugin-typescript`,
