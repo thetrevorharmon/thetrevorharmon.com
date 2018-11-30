@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { Link as GatsbyLink } from 'gatsby';
+import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import * as React from 'react';
 
 import * as styles from './Link.module.scss';
@@ -8,7 +9,7 @@ interface LinkProps {
   className?: string;
   href: string;
   noLinkStyling?: boolean;
-  target?: string;
+  target: string;
 }
 
 const Link: React.SFC<LinkProps> = ({
@@ -29,9 +30,9 @@ const Link: React.SFC<LinkProps> = ({
   );
 
   return externalLink ? (
-    <a className={classname} href={href} target={target} rel="noreferrer">
+    <OutboundLink className={classname} href={href} target={target} rel="noreferrer">
       {children}
-    </a>
+    </OutboundLink>
   ) : (
     <GatsbyLink className={classname} to={href} target={target}>
       {children}
@@ -42,7 +43,7 @@ const Link: React.SFC<LinkProps> = ({
 Link.defaultProps = {
   className: undefined,
   noLinkStyling: false,
-  target: undefined,
+  target: '',
 };
 
 export default Link;
