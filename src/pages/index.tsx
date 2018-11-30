@@ -7,6 +7,11 @@ import Layout from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
+  FeatureImageFieldsWidth200,
+  FeatureImageFieldsWidth600,
+} from './queries';
+
+import {
   ExternalLinks,
   Routes,
 } from '../utils';
@@ -160,11 +165,7 @@ export const indexPageQuery = graphql`
           slug
           featureOnHomepage
           featureImage {
-            title
-            description
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...FeatureImageFields_width600
           }
         }
       }
@@ -177,11 +178,7 @@ export const indexPageQuery = graphql`
           tagline
           featureOnHomepage
           featureImage {
-            title
-            description
-            fluid(maxWidth: 200) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...FeatureImageFields_width200
           }
         }
       }
