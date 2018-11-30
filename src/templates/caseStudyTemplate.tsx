@@ -5,7 +5,6 @@ import Layout from '../layouts';
 import './caseStudyTemplate.scss';
 
 import { Header, Image } from '../UI-Kit';
-import { largestPhotoFromSet } from '../utils';
 
 interface CaseStudyTemplateProps {
   data: {
