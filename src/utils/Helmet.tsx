@@ -11,6 +11,7 @@ interface HelmetDataProps extends HelmetProps {
     site: {
       siteMetadata: {
         title: string;
+        description: string;
       },
     },
   };
@@ -28,6 +29,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     <ReactHelmet>
       <html lang="en" />
         <title>{siteTitle}</title>
+        <meta name="Description" content={data.site.siteMetadata.description} />
     </ReactHelmet>
   );
 };
@@ -39,6 +41,7 @@ export default (props: HelmetProps) => (
         site {
           siteMetadata {
             title
+            description
           }
         }
       }
