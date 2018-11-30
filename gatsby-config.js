@@ -1,8 +1,13 @@
 // to separate development & production variables, refer to:
 // https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/environment-variables.md
 
-require("dotenv").config({path: `.env`,})
-let isDevelopment = (process.env.ACTIVE_ENV || process.env.NODE_ENV) === 'development';
+let environment = process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development';
+require("dotenv").config({
+  path: `.env.${environment}`,
+});
+
+console.log(environment);
+console.log(process.env.CONTENTFUL_ACCESS_TOKEN);
 
 module.exports = {
   siteMetadata: {
@@ -15,8 +20,8 @@ module.exports = {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: isDevelopment ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN : process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
-        host: isDevelopment ?`preview.contentful.com` : undefined,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        host: environment === 'development' ? `preview.contentful.com` : undefined,
       },
     },
     {
@@ -30,23 +35,17 @@ module.exports = {
     `gatsby-plugin-tslint`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-favicon`,
-    `gatsby-plugin-sharp`, // for gatsby-img
-    `gatsby-transformer-sharp`, // for gatsby-img
+    `gatsby-plugin-sharp`, // for gatsby-image
+    `gatsby-transformer-sharp`, // for gatsby-image
     `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
-        // Puts tracking script in the head instead of the body
-        head: false,
-        // Setting this parameter is optional
+        head: false, // Puts tracking script in the head instead of the body
         anonymize: true,
-        // Setting this parameter is also optional
         respectDNT: true,
-        // Any additional create only fields (optional)
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: "thetrevorharmon.com",
+        cookieDomain: `thetrevorharmon.com`,
       },
     },
   ],
