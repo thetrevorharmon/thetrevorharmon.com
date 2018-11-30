@@ -6,9 +6,6 @@ require("dotenv").config({
   path: `.env.${environment}`,
 });
 
-console.log(environment);
-console.log(process.env.CONTENTFUL_ACCESS_TOKEN);
-
 module.exports = {
   siteMetadata: {
     title: `The Trevor Harmon`,
