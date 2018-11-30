@@ -20,7 +20,7 @@ interface LayoutState {
   isMenuOpen: boolean;
 }
 
-class Layout extends React.Component<LayoutProps, {}> {
+class Layout extends React.Component<LayoutProps, LayoutState> {
   public constructor(props: LayoutProps) {
     super(props);
     const initalState: LayoutState = {isMenuOpen: false};

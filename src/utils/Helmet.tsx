@@ -24,12 +24,19 @@ const Helmet: React.SFC<HelmetDataProps> = ({
 }) => {
 
   const siteTitle = pageTitle ? `${pageTitle} | ${data.site.siteMetadata.title}` : data.site.siteMetadata.title;
+  const meta = [
+    {
+      content: data.site.siteMetadata.description,
+      name: 'Description',
+    },
+  ];
 
   return (
-    <ReactHelmet>
+    <ReactHelmet
+      title={siteTitle}
+      meta={meta}
+    >
       <html lang="en" />
-        <title>{siteTitle}</title>
-        <meta name="Description" content={data.site.siteMetadata.description} />
     </ReactHelmet>
   );
 };
