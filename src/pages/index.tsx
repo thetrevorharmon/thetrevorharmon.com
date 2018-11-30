@@ -143,46 +143,19 @@ export const indexPageQuery = graphql`
       }
     }
     allContentfulProject(
-      filter: {
-        featureOnHomepage: {
-          eq: true
-        }
-      },
-      sort: {
-        fields: [
-          projectCompletionDate
-        ],
-        order: DESC
-    }) {
+      filter: { featureOnHomepage: { eq: true }},
+      sort: {fields: [projectCompletionDate], order: DESC}
+    ) {
       edges {
         node {
-          title
-          slug
-          featureOnHomepage
-          featureImage {
-            title
-            description
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulProjectTile
         }
       }
     }
     allContentfulCaseStudy(filter: {featureOnHomepage: {eq: true}}) {
       edges {
         node {
-          title
-          slug
-          tagline
-          featureOnHomepage
-          featureImage {
-            title
-            description
-            fluid(maxWidth: 200) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulCaseStudyTile
         }
       }
     }

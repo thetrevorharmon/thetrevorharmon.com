@@ -62,17 +62,7 @@ export const projectsPageQuery = graphql`
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
       edges {
         node {
-          title
-          description {
-            description
-          }
-          slug
-          projectCompletionDate
-          featureImage {
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulProjectTile
         }
       }
     }

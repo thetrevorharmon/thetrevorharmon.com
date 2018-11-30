@@ -66,11 +66,7 @@ export const query = graphql`
           slug
           tagline
           featureImage {
-            title
-            description
-            fluid(maxWidth: 750) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            ...ContentfulAsset_width750
           }
           post {
             childMarkdownRemark {

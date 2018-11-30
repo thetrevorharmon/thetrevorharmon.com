@@ -64,16 +64,7 @@ export const caseStudiesPageQuery = graphql`
     allContentfulCaseStudy {
       edges {
         node {
-          title
-          slug
-          tagline
-          featureImage {
-            title
-            description
-            fluid(maxWidth: 200) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-          }
+          ...ContentfulCaseStudyTile
         }
       }
     }
