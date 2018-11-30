@@ -164,9 +164,8 @@ export const indexPageQuery = graphql`
           tagline
           featureOnHomepage
           featureImage {
-            id
-            resolutions {
-              src
+            fluid(maxWidth: 200) {
+              ...GatsbyContentfulFluid
             }
           }
         }

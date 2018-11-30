@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import * as React from 'react';
 
 import Layout from '../layouts';
@@ -22,7 +23,7 @@ interface AboutPageProps {
       edges: [
         {
           node: AboutPageData,
-        },
+        }
       ],
     },
   };
@@ -49,7 +50,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
             </Header>
           </div>
           <div className="col-lg-12">
-            <img src={largestPhotoFromSet(aboutPage.featureImage)} className={styles.FeatureImage} />
+            <Img fluid={aboutPage.featureImage.fluid} className={styles.FeatureImage} />
           </div>
         </div>
         <div className="row">
@@ -76,6 +77,9 @@ export const AboutPageQuery = graphql`
             resolutions {
               src
               srcSet
+            }
+            fluid(maxWidth: 1200) {
+              ...GatsbyContentfulFluid
             }
           }
           post {

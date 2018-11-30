@@ -68,8 +68,8 @@ export const caseStudiesPageQuery = graphql`
           slug
           tagline
           featureImage {
-            resolutions {
-              src
+            fluid(maxWidth: 200) {
+              ...GatsbyContentfulFluid
             }
           }
         }

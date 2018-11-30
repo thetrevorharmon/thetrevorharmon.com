@@ -63,17 +63,6 @@ interface contentfulLongText {
 
 interface contentfulAsset {
   id?: string;
-  resolutions: {
-    src: string;
-    base64?: string;
-    tracedSVG?: string;
-    aspectRatio?: number;
-    width?: number;
-    height?: number;
-    srcSet?: string;
-    srcWebp?: string;
-    srcSetWebp?: string;    
-  };
   fluid: {
     aspectRatio: number;
     base64: string;

@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import Img from 'gatsby-image';
 import * as React from 'react';
 
 import {
@@ -14,10 +15,6 @@ interface CaseStudyTileProps {
 }
 
 const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
-  const imgBackgroundStyle = {
-    backgroundImage: `url(${item.featureImage.resolutions.src})`,
-  };
-
   const classname = classnames(
     styles.Tile,
     'd-flex flex-row',
@@ -47,7 +44,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
           Read Case Study
         </Link>
       </div>
-      <div className={styles.Img} style={imgBackgroundStyle} />
+      <Img fluid={item.featureImage.fluid} className={styles.Img} />
     </div>
   );
 };
