@@ -142,7 +142,7 @@ export const indexPageQuery = graphql`
         tagline
       }
     }
-    allContentfulProject(filter: {featureOnHomepage: {eq: true}}) {
+    allContentfulProject(filter: {featureOnHomepage: {eq: true}}, sort: {fields: [projectCompletionDate], order: DESC}) {
       edges {
         node {
           title
