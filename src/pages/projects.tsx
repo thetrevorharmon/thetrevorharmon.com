@@ -30,6 +30,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
   public render() {
 
     const pageMetadata: PageMetadata = {
+      description: `These projects represent some, but not all, of the design and
+       development work I've done for the past 5 (or so) years.`,
       title: 'Projects',
     };
 
