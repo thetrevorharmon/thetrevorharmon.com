@@ -32,10 +32,20 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
 
   public render() {
     const aboutPage = this.props.data.allContentfulAboutPage.edges[0].node;
-    const pageTitle = 'About';
+
+    const pageMetadata: PageMetadata = {
+      description: `
+        First off, introductions. My name is Trevor Harmon and I love to build things.
+        I've been designing and developing for about a decade now.
+        I've worked on a variety of projects and have done everything from design to full-stack development.
+        The thing I enjoy the most (and that people tend to say I'm good at) is front-end development.
+        I recently picked up react.js and have been enjoying that.
+      `,
+      title: 'About',
+    };
 
     return (
-      <Layout className={styles.AboutPage} pageTitle={pageTitle}>
+      <Layout className={styles.AboutPage} pageMetadata={pageMetadata}>
         <div className="row mb-5">
           <div className="col-lg-12">
             <Header

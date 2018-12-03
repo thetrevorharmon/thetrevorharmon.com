@@ -41,13 +41,13 @@ export default class Template extends React.Component<TemplateProps, {}> {
     const info = (
       <div className={styles.Description}>
         <Header rank={1} type="Title">{project.title}</Header>
-        { description 
+        { description
           ? <p>{description}</p>
           : undefined
         }
         {
-          project.client ? 
-          <p><strong>Client:</strong> {project.client}</p> 
+          project.client ?
+          <p><strong>Client:</strong> {project.client}</p>
           : undefined
         }
         {
@@ -60,8 +60,13 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const infoAndItems = [info, ...items];
 
+    const pageMetadata: PageMetadata = {
+      description: `${description}`,
+      title: project.title,
+    };
+
     return (
-      <Layout className={styles.ProjectTemplate} pageTitle={project.title} pageDescription={description}>
+      <Layout className={styles.ProjectTemplate} pageMetadata={pageMetadata}>
         <div className="row">
           <div className="col-sm-12">
             <Masonry

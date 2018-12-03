@@ -29,10 +29,13 @@ interface CaseStudyPageProps {
 export default class CaseStudiesPage extends React.Component<CaseStudyPageProps, {}> {
 
   public render() {
-    const pageTitle = 'Case Studies';
+
+    const pageMetadata: PageMetadata = {
+      title: 'Case Studies',
+    };
 
     return (
-      <Layout pageTitle={pageTitle}>
+      <Layout pageMetadata={pageMetadata}>
         <div className="row">
           <div className="col">
             <Header

@@ -25,9 +25,7 @@ import {
 interface IndexPageProps {
   data: {
     site: {
-      siteMetadata: {
-        tagline: string,
-      },
+      siteMetadata: SiteMetadata,
     },
     allContentfulProject: {
       edges: [

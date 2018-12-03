@@ -23,8 +23,13 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node;
 
+    const pageMetadata: PageMetadata = {
+      description: `${caseStudy.title} | ${caseStudy.tagline}`,
+      title: `${caseStudy.title} Case Study`,
+    };
+
     return (
-      <Layout className="case-study-template" pageTitle={`${caseStudy.title} Case Study`}>
+      <Layout className="case-study-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-6">
             <Header rank={1} type="Headline" className="mb-0">{caseStudy.title}</Header>

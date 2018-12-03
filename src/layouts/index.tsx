@@ -13,8 +13,7 @@ import {
 interface LayoutProps {
   className?: string;
   hasContainer?: boolean;
-  pageTitle?: string;
-  pageDescription?: string;
+  pageMetadata?: PageMetadata;
 }
 
 interface LayoutState {
@@ -34,8 +33,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     const {
       className,
       hasContainer,
-      pageTitle,
-      pageDescription,
+      pageMetadata,
       children,
     } = this.props;
 
@@ -46,7 +44,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
 
     return (
       <>
-        <Helmet pageTitle={pageTitle} pageDescription={pageDescription} />
+        <Helmet pageMetadata={pageMetadata} />
         <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
         <div
           className={classname}

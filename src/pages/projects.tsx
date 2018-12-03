@@ -28,10 +28,13 @@ interface ProjectsPageProps {
 export default class ProjectsPage extends React.Component<ProjectsPageProps, {}> {
 
   public render() {
-    const pageTitle = 'Projects';
+
+    const pageMetadata: PageMetadata = {
+      title: 'Projects',
+    };
 
     return (
-      <Layout pageTitle={pageTitle}>
+      <Layout pageMetadata={pageMetadata}>
         <div className="row">
           <div className="col">
             <Header
