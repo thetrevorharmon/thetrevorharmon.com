@@ -95,3 +95,12 @@ interface MediumPost {
     readingTime: number;
   };
 }
+
+interface SiteMetadata {
+  title: string;
+  description: string;
+  tagline: string;
+  siteUrl: string;
+}
+
+interface PageMetadata extends SiteMetadata {}

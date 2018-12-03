@@ -3,16 +3,13 @@ import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
 interface HelmetProps {
-  pageTitle?: string;
+  pageMetadata?: PageMetadata;
 }
 
 interface HelmetDataProps extends HelmetProps {
   data: {
     site: {
-      siteMetadata: {
-        title: string;
-        description: string;
-      },
+      siteMetadata: SiteMetadata,
     },
   };
 }
@@ -20,25 +17,36 @@ interface HelmetDataProps extends HelmetProps {
 const Helmet: React.SFC<HelmetDataProps> = ({
   children,
   data,
-  pageTitle,
+  pageMetadata,
 }) => {
 
-  const siteTitle = pageTitle ? `${pageTitle} | ${data.site.siteMetadata.title}` : data.site.siteMetadata.title;
+  const title = pageMetadata.title
+    ? `${pageMetadata.title} | ${data.site.siteMetadata.title}`
+    : data.site.siteMetadata.title;
+
+  const description = pageMetadata.description
+    ? pageMetadata.description
+    : data.site.siteMetadata.description;
+
   const meta = [
     {
-      content: data.site.siteMetadata.description,
+      content: description,
       name: 'Description',
     },
   ];
 
   return (
     <ReactHelmet
-      title={siteTitle}
+      title={title}
       meta={meta}
     >
       <html lang="en" />
     </ReactHelmet>
   );
+};
+
+Helmet.defaultProps = {
+  pageMetadata: {},
 };
 
 export default (props: HelmetProps) => (
