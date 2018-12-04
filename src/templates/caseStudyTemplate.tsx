@@ -40,7 +40,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
         </div>
         <div className="row post-body">
-          <div className="col-lg-8 offset-lg-2">
+          <div className="col-lg-8">
             <div className="table-of-contents mt-5 mb-7 pl-md-6">
               <Header rank={3} type="Subtitle">Table of Contents</Header>
               <div
