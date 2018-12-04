@@ -9,7 +9,7 @@ interface LinkProps {
   className?: string;
   href: string;
   noLinkStyling?: boolean;
-  target: string;
+  target?: string;
 }
 
 const Link: React.SFC<LinkProps> = ({

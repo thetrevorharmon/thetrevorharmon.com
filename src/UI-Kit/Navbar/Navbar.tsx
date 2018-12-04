@@ -1,6 +1,5 @@
 import classnames from 'classnames';
-import * as React from 'react';
-
+import React, { useState } from 'react';
 import * as styles from './Navbar.module.scss';
 
 import {
@@ -12,12 +11,9 @@ import {
   Routes,
 } from '../../utils';
 
-interface NavbarProps {
-  handleMenuToggle: (event: React.MouseEvent<HTMLElement>) => void;
-  isOpen: boolean;
-}
+const Navbar: React.SFC<{}> = () => {
 
-const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
+  const [isOpen, setOpen] = useState(false);
 
   const classname = classnames(
     styles.Navbar,
@@ -38,6 +34,8 @@ const Navbar: React.SFC<NavbarProps> = ({handleMenuToggle, isOpen}) => {
       location: Routes.about(),
     },
   ];
+
+  const handleMenuToggle = () => setOpen(!isOpen);
 
   return (
     <>

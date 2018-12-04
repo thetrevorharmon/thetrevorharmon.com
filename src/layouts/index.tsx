@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
+// import { useState } from 'react';
 import { Helmet } from '../utils';
 
 import 'normalize.css';
@@ -16,52 +17,31 @@ interface LayoutProps {
   pageMetadata?: PageMetadata;
 }
 
-interface LayoutState {
-  isMenuOpen: boolean;
-}
+const Layout: React.SFC<LayoutProps> = ({
+  className,
+  hasContainer,
+  pageMetadata,
+  children,
+}) => {
 
-class Layout extends React.Component<LayoutProps, LayoutState> {
-  public constructor(props: LayoutProps) {
-    super(props);
-    const initalState: LayoutState = {isMenuOpen: false};
+  const classname = classnames(
+    hasContainer && 'container',
+    className,
+  );
 
-    this.state = initalState;
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  public render() {
-    const {
-      className,
-      hasContainer,
-      pageMetadata,
-      children,
-    } = this.props;
-
-    const classname = classnames(
-      hasContainer && 'container',
-      className,
-    );
-
-    return (
-      <>
-        <Helmet pageMetadata={pageMetadata} />
-        <Navbar handleMenuToggle={this.handleClick} isOpen={this.state.isMenuOpen} />
-        <div
-          className={classname}
-        >
-          {children}
-        </div>
-        <Footer className="mt-5" />
-      </>
-    );
-  }
-
-  private handleClick() {
-    this.setState((prevState: LayoutState) => ({
-      isMenuOpen: !prevState.isMenuOpen,
-    }));
-  }
-}
+  return (
+    <>
+      <Helmet pageMetadata={pageMetadata} />
+      <Navbar />
+      <div
+        className={classname}
+      >
+        {children}
+      </div>
+      <Footer className="mt-5" />
+    </>
+  );
+};
 
 Layout.defaultProps = {
   className: undefined,
