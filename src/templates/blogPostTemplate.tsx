@@ -3,8 +3,7 @@ import * as React from 'react';
 import Layout from '../layouts';
 
 import './caseStudyTemplate.scss';
-
-import 'prismjs/themes/prism-solarizedlight.css';
+import './syntax-highlighting.scss';
 
 import { Header, Image } from '../UI-Kit';
 

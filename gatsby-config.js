@@ -40,9 +40,8 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-          },
+          `gatsby-remark-embed-gist`,
+          `gatsby-remark-prismjs`,
         ],
       },
     },    

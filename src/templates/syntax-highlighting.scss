@@ -1,0 +1,114 @@
+/**
+ * GHColors theme by Avi Aryan (http://aviaryan.in)
+ * Inspired by Github syntax coloring
+ */
+
+$background-color: #fafafa;
+$normal-text: #333;
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: $normal-text;
+  // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  font-size: 0.95em;
+  line-height: 1.2em;
+
+  tab-size: 4;
+  hyphens: none;
+
+  &::selection, & ::selection {
+    background: yellow;
+  }
+}
+
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  background-color: $background-color;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .2em;
+  padding-top: 1px; padding-bottom: 1px;
+  background: #f8f8f8;
+  border: 1px solid #dddddd;
+}
+
+.token {
+  &.comment,
+  &.prolog,
+  &.doctype,
+  &.cdata {
+    color: #999988;
+    font-style: italic;
+  }
+
+  &.namespace {
+    opacity: .7;
+  }
+
+  &.string,
+  &.attr-value {
+    color: #e3116c;
+  }
+
+  &.punctuation,
+  &.operator {
+    color: #393A34; /* no highlight */
+  }
+
+  &.entity,
+  &.url,
+  &.symbol,
+  &.number,
+  &.boolean,
+  &.variable,
+  &.constant,
+  &.property,
+  &.regex,
+  &.inserted {
+    color: #36acaa;
+  }
+
+  &.atrule,
+  &.keyword,
+  &.attr-name,
+  .language-autohotkey &.selector {
+    color: #00a4db;
+  }
+
+  &.function,
+  &.deleted,
+  .language-autohotkey &.tag {
+    color: #9a050f;
+  }
+
+  &.tag,
+  &.selector,
+  .language-autohotkey &.keyword {
+    color: #00009f;
+  }
+
+  &.important,
+  &.function,
+  &.bold {
+    font-weight: bold;
+  }
+
+  &.italic {
+    font-style: italic;
+  }
+}
