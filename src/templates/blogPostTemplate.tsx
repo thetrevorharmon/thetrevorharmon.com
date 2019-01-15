@@ -4,6 +4,8 @@ import Layout from '../layouts';
 
 import './caseStudyTemplate.scss';
 
+import 'prismjs/themes/prism-solarizedlight.css';
+
 import { Header, Image } from '../UI-Kit';
 
 interface CaseStudyTemplateProps {
