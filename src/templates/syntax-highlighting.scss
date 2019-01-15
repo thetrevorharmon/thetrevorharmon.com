@@ -1,14 +1,23 @@
+@import "../styles/_variables";
+
 /**
  * GHColors theme by Avi Aryan (http://aviaryan.in)
  * Inspired by Github syntax coloring
  */
 
 $background-color: #fafafa;
-$normal-text: #333;
+
+$keyword-color: $brand-primary; // red
+$string-color: #0569dd; // blue
+$class-color: #7805dd; // purple
+$comment-color: #999988; // gray
+$function-color: #0a7f06; // green
+$tag-color: #00009f; // dark blue
+
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: $normal-text;
+  color: lighten($text-color-primary, 10%);
   // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
   direction: ltr;
   text-align: left;
@@ -17,12 +26,13 @@ pre[class*="language-"] {
   word-break: normal;
   font-size: 0.95em;
   line-height: 1.2em;
+  border-radius: 3px;
 
   tab-size: 4;
   hyphens: none;
 
   &::selection, & ::selection {
-    background: yellow;
+    background: darken($background-color, 10%);
   }
 }
 
@@ -33,6 +43,7 @@ pre[class*="language-"] {
   margin: .5em 0;
   overflow: auto;
   background-color: $background-color;
+  border: 1px solid darken($background-color, 5%);
 }
 
 :not(pre) > code[class*="language-"],
@@ -41,10 +52,9 @@ pre[class*="language-"] {
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: .2em;
-  padding-top: 1px; padding-bottom: 1px;
-  background: #f8f8f8;
-  border: 1px solid #dddddd;
+  padding: 0 0.25rem;
+  display: inline-block;
+  background: $background-color;
 }
 
 .token {
@@ -52,7 +62,7 @@ pre[class*="language-"] {
   &.prolog,
   &.doctype,
   &.cdata {
-    color: #999988;
+    color: $comment-color;
     font-style: italic;
   }
 
@@ -60,14 +70,21 @@ pre[class*="language-"] {
     opacity: .7;
   }
 
-  &.string,
-  &.attr-value {
-    color: #e3116c;
+  &.class-name {
+    color: $class-color;
   }
 
-  &.punctuation,
+  &.string,
+  &.attr-value {
+    color: $string-color;
+  }
+
+  &.punctuation {
+    color: darken($text-color-primary, 20%); /* no highlight */
+  }
+
   &.operator {
-    color: #393A34; /* no highlight */
+    color: $keyword-color;
   }
 
   &.entity,
@@ -80,30 +97,29 @@ pre[class*="language-"] {
   &.property,
   &.regex,
   &.inserted {
-    color: #36acaa;
+    color: $class-color;
   }
 
   &.atrule,
   &.keyword,
   &.attr-name,
   .language-autohotkey &.selector {
-    color: #00a4db;
+    color: $keyword-color;
   }
 
   &.function,
   &.deleted,
   .language-autohotkey &.tag {
-    color: #9a050f;
+    color: $function-color;
   }
 
   &.tag,
   &.selector,
   .language-autohotkey &.keyword {
-    color: #00009f;
+    color: $tag-color;
   }
 
   &.important,
-  &.function,
   &.bold {
     font-weight: bold;
   }

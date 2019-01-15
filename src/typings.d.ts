@@ -65,29 +65,6 @@ interface BlogPost {
   tags: [string];
 }
 
-        // allContentfulBlogPost {
-        //   edges {
-        //     node {
-        //       title
-        //       slug
-        //       description {
-        //         description
-        //       }
-        //       publishDate
-        //       body {
-        //         childMarkdownRemark {
-        //           html
-        //         }            
-        //         internal {
-        //           mediaType
-        //           content
-        //         }
-        //       }
-        //       tags
-        //     }
-        //   }
-        // } 
-
 interface AboutPageData {
   title: string;
   post: contentfulLongText;
