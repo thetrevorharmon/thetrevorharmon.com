@@ -59,7 +59,29 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-        }         
+        } 
+        allContentfulBlogPost {
+          edges {
+            node {
+              title
+              slug
+              description {
+                description
+              }
+              publishDate
+              body {
+                childMarkdownRemark {
+                  html
+                }            
+                internal {
+                  mediaType
+                  content
+                }
+              }
+              tags
+            }
+          }
+        }   
       }
     `
   ).then(result => {
@@ -80,7 +102,16 @@ exports.createPages = ({ graphql, actions }) => {
             slug: node.slug,
           },
         })
-      })      
+      })  
+      result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
+        createPage({
+          path: `blog/${node.slug}`,
+          component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
+          context: {
+            slug: node.slug,
+          },
+        })
+      })            
       resolve()
     })
   })
