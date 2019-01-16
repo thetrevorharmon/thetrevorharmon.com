@@ -7,18 +7,46 @@
   color: $text-color-primary;
 }
 
+$header-size: (
+  headline: (
+    desktop: 4rem,
+    phone: 3rem
+  ),
+  tagline: (
+    desktop: 1.5rem,
+    phone: 1rem
+  ),
+  title: (
+    desktop: 2.5rem,
+    phone: 2rem
+  ),
+  subtitle: (
+    desktop: 2rem,
+    phone: 1.75rem
+  ),
+  section-title: (
+    desktop: 1.625rem,
+    phone: 1.25rem
+  ),  
+);
+
+@function header-size($header, $size) {
+  $_header: map-get($header-size, $header);
+  @return map-get($_header, $size);
+}
+
 .Headline {
-  font-size: 5.125rem;
-  letter-spacing: -5px;
+  font-size: header-size(headline, desktop);
+  letter-spacing: -3px;
 
   @include mobile-only {
-    font-size: 4rem;
-    line-height: 4rem;
+    font-size: header-size(headline, phone);
+    line-height: header-size(headline, phone);
   }
 }
 
 .Tagline {
-  font-size: 1.5rem;
+  font-size: header-size(tagline, desktop);
   line-height: 1.2;
   letter-spacing: -1px;
   font-weight: normal;
@@ -29,32 +57,43 @@
   color: $text-color-secondary;
 
   @include mobile-only {
-    margin-top: 1rem;
+    margin-top: header-size(tagline, phone);
   }  
 }
 
 .Title {
-  font-size: 3rem;
+  font-size: header-size(title, desktop);
   letter-spacing: -2px;
-  line-height: 3rem;
+  line-height: header-size(title, desktop);
 
   @include mobile-only {
-    font-size: 2rem;
-    line-height: 2rem;
+    font-size: header-size(title, phone);
+    line-height: header-size(title, phone);
   }
 }
 
 .Subtitle {
-  font-size: 1.625rem;
+  font-size: header-size(subtitle, desktop);
+  letter-spacing: -1px;
+  line-height: header-size(subtitle, desktop);
+
+  @include mobile-only {
+    font-size: header-size(subtitle, phone);
+    line-height: header-size(subtitle, phone);
+  }
+}
+
+.SectionTitle {
+  font-size: header-size(section-title, desktop);
   text-transform: uppercase;
   letter-spacing: 10px;
-  line-height: 1.625rem;
+  line-height: header-size(section-title, desktop);
   font-weight: normal;
 
   color: $text-color-secondary;
 
   @include mobile-only {
-    font-size: 1.25rem;
+    font-size: header-size(section-title, phone);
     line-height: 1.5rem;
     letter-spacing: 4px;
   }

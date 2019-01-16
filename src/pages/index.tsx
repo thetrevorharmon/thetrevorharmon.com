@@ -88,7 +88,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
 
         <div className="row mb-4">
-          <Header rank={2} type="Subtitle" className="col my-0">Case Studies</Header>
+          <Header rank={2} type="SectionTitle" className="col my-0">Case Studies</Header>
         </div>
         <div className="row">
           {featuredStudies.map((item, index) => (
@@ -102,7 +102,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
 
         <div className="row mt-6 mb-4">
-          <Header rank={2} type="Subtitle" className="col">Projects</Header>
+          <Header rank={2} type="SectionTitle" className="col">Projects</Header>
         </div>
         <div className="row">
           {featuredWork.map((item, index) => (
@@ -116,7 +116,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
 
         <div className="row mt-6 mb-4">
-          <Header rank={2} type="Subtitle" className="col my-0">Recent Posts</Header>
+          <Header rank={2} type="SectionTitle" className="col my-0">Recent Posts</Header>
         </div>
         <div className="row">
           {mediumPosts.map((item, index) => (

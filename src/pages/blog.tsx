@@ -51,7 +51,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
         </div>
         <div className="row">
           {this.props.data.allContentfulBlogPost.edges.map((item, index) => (
-            <div className="col-md-6 col-lg-4" key={index}>
+            <div className="col-sm-12" key={index}>
               <h2>
                 <Link href={`/blog/${item.node.slug}`}>
                   {item.node.title}

@@ -36,9 +36,6 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             <Header rank={1} type="Headline" className="mb-5">{blogPost.title}</Header>
             <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
           </div>
-          <div className="col-lg-6">
-            {/*<Image src={blogPost.featureImage} className="mt-4 mt-lg-0 hero-header" />*/}
-          </div>
         </div>
         <div className="row post-body">
           <div className="col-lg-8">
@@ -63,6 +60,9 @@ export const query = graphql`
           slug
           description {
             description
+          }
+          heroImage {
+            ...ContentfulAsset_width750
           }
           publishDate
           body {

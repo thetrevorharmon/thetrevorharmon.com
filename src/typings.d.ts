@@ -56,6 +56,7 @@ interface BlogPost {
   description: {
     description: string;
   }
+  heroImage: contentfulAsset;
   publishDate: Date;
   body: {
     childMarkdownRemark: {
