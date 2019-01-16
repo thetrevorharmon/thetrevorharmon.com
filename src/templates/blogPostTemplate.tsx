@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 import Layout from '../layouts';
 
-import './caseStudyTemplate.scss';
+import './blogPostTemplate.scss';
 import './syntax-highlighting.scss';
 
 import { Header, Image } from '../UI-Kit';
@@ -30,14 +30,14 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     };
 
     return (
-      <Layout className="case-study-template" pageMetadata={pageMetadata}>
+      <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
-          <div className="col-lg-6">
-            <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
+          <div className="col-lg-8">
+            <Header rank={1} type="Headline" className="mb-5">{blogPost.title}</Header>
             <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
           </div>
           <div className="col-lg-6">
-            <Image src={blogPost.featureImage} className="mt-4 mt-lg-0 hero-header" />
+            {/*<Image src={blogPost.featureImage} className="mt-4 mt-lg-0 hero-header" />*/}
           </div>
         </div>
         <div className="row post-body">
