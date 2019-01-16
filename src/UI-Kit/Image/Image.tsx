@@ -10,7 +10,7 @@ const Image: React.SFC<ImageProps> = ({
   className,
   src,
   children,
-  ...props,
+  ...props
 }) => {
 
   const classname = classnames(
