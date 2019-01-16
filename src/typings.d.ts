@@ -61,6 +61,8 @@ interface BlogPost {
   body: {
     childMarkdownRemark: {
       html: string;
+      excerpt: string;
+      timeToRead: string;
     }
   }
   tags: [string];

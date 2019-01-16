@@ -57,7 +57,8 @@ $header-size: (
   }
 }
 
-.Headline + .Tagline {
+.Headline + .Tagline,
+.Title + .Tagline {
   margin-top: -1rem;
   color: $text-color-secondary;
 
