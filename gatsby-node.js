@@ -48,7 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
       })
       result.data.allContentfulCaseStudy.edges.forEach(({ node }) => {
         createPage({
-          path: node.slug,
+          path: `case-studies/${node.slug}`,
           component: path.resolve(`./src/templates/caseStudyTemplate.tsx`),
           context: {
             slug: node.slug,

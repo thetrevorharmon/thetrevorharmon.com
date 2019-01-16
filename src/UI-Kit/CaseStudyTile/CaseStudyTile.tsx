@@ -39,7 +39,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
         <p className="pr-3 mt-2 mt-sm-0">{item.tagline}</p>
         <Link
           className={styles.Link}
-          href={`/${item.slug}`}
+          href={`/case-studies/${item.slug}`}
         >
           Read Case Study
         </Link>
