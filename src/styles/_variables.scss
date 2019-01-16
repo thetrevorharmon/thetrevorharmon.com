@@ -24,3 +24,25 @@ $spacers: map-merge(
   $spacers
 );
 
+$header-size: (
+  headline: (
+    desktop: 3.5rem,
+    phone: 2.25rem
+  ),
+  tagline: (
+    desktop: 1.5rem,
+    phone: 1.25rem
+  ),
+  title: (
+    desktop: 2.25rem,
+    phone: 1.8rem
+  ),
+  subtitle: (
+    desktop: 1.75rem,
+    phone: 1.4rem
+  ),
+  section-title: (
+    desktop: 1.625rem,
+    phone: 1.25rem
+  ),  
+);

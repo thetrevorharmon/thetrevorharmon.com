@@ -7,29 +7,6 @@
   color: $text-color-primary;
 }
 
-$header-size: (
-  headline: (
-    desktop: 3.5rem,
-    phone: 2.25rem
-  ),
-  tagline: (
-    desktop: 1.5rem,
-    phone: 1.25rem
-  ),
-  title: (
-    desktop: 2.25rem,
-    phone: 1.8rem
-  ),
-  subtitle: (
-    desktop: 1.75rem,
-    phone: 1.4rem
-  ),
-  section-title: (
-    desktop: 1.625rem,
-    phone: 1.25rem
-  ),  
-);
-
 @function header-size($header, $size) {
   $_header: map-get($header-size, $header);
   @return map-get($_header, $size);

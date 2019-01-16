@@ -15,24 +15,6 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
-              client
-              description {
-                description
-              }
-              projectImages {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }            
-              featureImage {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }
             }
           }
         }
@@ -41,22 +23,6 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
-              featureImage {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }
-              post {
-                childMarkdownRemark {
-                  html
-                }            
-                internal {
-                  mediaType
-                  content
-                }
-              }
             }
           }
         } 
@@ -65,20 +31,6 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
-              description {
-                description
-              }
-              publishDate
-              body {
-                childMarkdownRemark {
-                  html
-                }            
-                internal {
-                  mediaType
-                  content
-                }
-              }
-              tags
             }
           }
         }   
@@ -87,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
   ).then(result => {
       result.data.allContentfulProject.edges.forEach(({ node }) => {
         createPage({
-          path: node.slug,
+          path: `projects/${node.slug}`,
           component: path.resolve(`./src/templates/projectTemplate.tsx`),
           context: {
             slug: node.slug,
