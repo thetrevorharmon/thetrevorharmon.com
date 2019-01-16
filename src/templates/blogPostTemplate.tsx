@@ -62,9 +62,6 @@ export const query = graphql`
           description {
             description
           }
-          heroImage {
-            ...ContentfulAsset_width750
-          }
           publishDate(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
