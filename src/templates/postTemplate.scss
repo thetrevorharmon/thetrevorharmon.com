@@ -5,6 +5,11 @@
   font-size: 1.15rem;
   line-height: 1.8;
 
+  @include mobile-only {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
   a {
     color: $brand-primary;
     text-decoration: none;
@@ -48,6 +53,10 @@
       max-width: 100%;
       background: #fff;
       margin: 2rem 0;
+
+      @include mobile-only {
+        margin: 0;
+      }
     }
 
     .scrollable {

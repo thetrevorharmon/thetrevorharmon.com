@@ -25,7 +25,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
 
     const pageMetadata: PageMetadata = {
-      // description: `${blogPost.title} | ${blogPost.tagline}`,
+      description: `${blogPost.description.description}`,
       title: `${blogPost.title}`,
     };
 
@@ -33,7 +33,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-8">
-            <Header rank={1} type="Headline" className="mb-5">{blogPost.title}</Header>
+            <Header rank={1} type="Headline" className="mb-md-4">{blogPost.title}</Header>
             <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
           </div>
         </div>

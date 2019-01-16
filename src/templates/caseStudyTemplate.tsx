@@ -32,7 +32,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="case-study-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-6">
-            <Header rank={1} type="Headline" className="mb-0">{caseStudy.title}</Header>
+            <Header rank={1} type="Headline" className="mt-lg-8 mt-sm-1 mb-0">{caseStudy.title}</Header>
             <Header rank={2} type="Tagline">{caseStudy.tagline}</Header>
           </div>
           <div className="col-lg-6">

@@ -9,20 +9,20 @@
 
 $header-size: (
   headline: (
-    desktop: 4rem,
-    phone: 3rem
+    desktop: 3.5rem,
+    phone: 2.25rem
   ),
   tagline: (
     desktop: 1.5rem,
-    phone: 1rem
+    phone: 1.25rem
   ),
   title: (
-    desktop: 2.5rem,
-    phone: 2rem
+    desktop: 2.25rem,
+    phone: 1.8rem
   ),
   subtitle: (
-    desktop: 2rem,
-    phone: 1.75rem
+    desktop: 1.75rem,
+    phone: 1.4rem
   ),
   section-title: (
     desktop: 1.625rem,
@@ -40,6 +40,7 @@ $header-size: (
   letter-spacing: -3px;
 
   @include mobile-only {
+    letter-spacing: -2px;
     font-size: header-size(headline, phone);
     line-height: header-size(headline, phone);
   }
@@ -50,6 +51,10 @@ $header-size: (
   line-height: 1.2;
   letter-spacing: -1px;
   font-weight: normal;
+
+  @include mobile-only {
+    font-size: header-size(tagline, phone);
+  }
 }
 
 .Headline + .Tagline {
@@ -67,6 +72,7 @@ $header-size: (
   line-height: header-size(title, desktop);
 
   @include mobile-only {
+    letter-spacing: -1px;
     font-size: header-size(title, phone);
     line-height: header-size(title, phone);
   }
