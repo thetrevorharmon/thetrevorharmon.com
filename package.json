@@ -23,6 +23,7 @@
     "bootstrap-4-grid": "^2.4.1",
     "classnames": "^2.2.6",
     "dotenv": "^6.0.0",
+    "eslint-plugin-graphql": "^3.0.1",
     "gatsby": "^2.0.35",
     "gatsby-image": "^2.0.22",
     "gatsby-plugin-favicon": "^3.1.4",
@@ -38,8 +39,8 @@
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
     "query-string": "^6.1.0",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
     "react-helmet": "^5.2.0",
     "react-masonry-css": "^1.0.11"
   },
