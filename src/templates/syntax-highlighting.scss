@@ -1,0 +1,135 @@
+@import "../styles/_variables";
+
+/**
+ * GHColors theme by Avi Aryan (http://aviaryan.in)
+ * Inspired by Github syntax coloring
+ */
+
+$code-background-color: #ebebeb;
+$pre-background-color: #fafafa;
+
+$keyword-color: $brand-primary; // red
+$string-color: #0569dd; // blue
+$class-color: #7805dd; // purple
+$comment-color: #999988; // gray
+$function-color: #0a7f06; // green
+$tag-color: #00009f; // dark blue
+
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: lighten($text-color-primary, 10%);
+  // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  font-size: 0.95em;
+  line-height: 1.2em;
+  border-radius: 3px;
+
+  tab-size: 4;
+  hyphens: none;
+
+  background-color: $pre-background-color;
+  border: 1px solid darken($pre-background-color, 5%);
+
+  &::selection, & ::selection {
+    background: darken($pre-background-color, 10%);
+  }
+}
+
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  
+  code {
+    border: none;
+  }
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0 0.25rem;
+  display: inline-block;
+}
+
+.token {
+  &.comment,
+  &.prolog,
+  &.doctype,
+  &.cdata {
+    color: $comment-color;
+    font-style: italic;
+  }
+
+  &.namespace {
+    opacity: .7;
+  }
+
+  &.class-name {
+    color: $class-color;
+  }
+
+  &.string,
+  &.attr-value {
+    color: $string-color;
+  }
+
+  &.punctuation {
+    color: darken($text-color-primary, 20%); /* no highlight */
+  }
+
+  &.operator {
+    color: $keyword-color;
+  }
+
+  &.entity,
+  &.url,
+  &.symbol,
+  &.number,
+  &.boolean,
+  &.variable,
+  &.constant,
+  &.property,
+  &.regex,
+  &.inserted {
+    color: $class-color;
+  }
+
+  &.atrule,
+  &.keyword,
+  &.attr-name,
+  .language-autohotkey &.selector {
+    color: $keyword-color;
+  }
+
+  &.function,
+  &.deleted,
+  .language-autohotkey &.tag {
+    color: $function-color;
+  }
+
+  &.tag,
+  &.selector,
+  .language-autohotkey &.keyword {
+    color: $tag-color;
+  }
+
+  &.important,
+  &.bold {
+    font-weight: bold;
+  }
+
+  &.italic {
+    font-style: italic;
+  }
+}

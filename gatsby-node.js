@@ -15,24 +15,6 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
-              client
-              description {
-                description
-              }
-              projectImages {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }            
-              featureImage {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }
             }
           }
         }
@@ -41,31 +23,23 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
-              featureImage {
-                title
-                description                
-                resolutions {
-                  src
-                }
-              }
-              post {
-                childMarkdownRemark {
-                  html
-                }            
-                internal {
-                  mediaType
-                  content
-                }
-              }
             }
           }
-        }         
+        } 
+        allContentfulBlogPost {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }   
       }
     `
   ).then(result => {
       result.data.allContentfulProject.edges.forEach(({ node }) => {
         createPage({
-          path: node.slug,
+          path: `projects/${node.slug}`,
           component: path.resolve(`./src/templates/projectTemplate.tsx`),
           context: {
             slug: node.slug,
@@ -80,7 +54,16 @@ exports.createPages = ({ graphql, actions }) => {
             slug: node.slug,
           },
         })
-      })      
+      })  
+      result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
+        createPage({
+          path: `blog/${node.slug}`,
+          component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
+          context: {
+            slug: node.slug,
+          },
+        })
+      })            
       resolve()
     })
   })

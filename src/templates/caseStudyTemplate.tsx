@@ -32,29 +32,32 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="case-study-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-6">
-            <Header rank={1} type="Headline" className="mb-0">{caseStudy.title}</Header>
+            <Header rank={1} type="Headline" className="mt-lg-8 mt-sm-1 mb-0">{caseStudy.title}</Header>
             <Header rank={2} type="Tagline">{caseStudy.tagline}</Header>
           </div>
           <div className="col-lg-6">
             <Image src={caseStudy.featureImage} className="mt-4 mt-lg-0 hero-header" />
           </div>
         </div>
-        <div className="row post-body">
+        <div className="row">
           <div className="col-lg-8">
             <div className="table-of-contents mt-5 mb-7 pl-md-6">
-              <Header rank={3} type="Subtitle">Table of Contents</Header>
+              <Header rank={3} type="SectionTitle">Table of Contents</Header>
               <div
                 dangerouslySetInnerHTML={{
                   __html: caseStudy.tableOfContents.childMarkdownRemark.html,
                 }}
               />
             </div>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: caseStudy.post.childMarkdownRemark.html,
-              }}
-            />
           </div>
+        </div>
+        <div className="row post-body">
+          <div
+            className="col-lg-8"
+            dangerouslySetInnerHTML={{
+                __html: caseStudy.post.childMarkdownRemark.html,
+            }}
+          />
         </div>
       </Layout>
     );

@@ -3,11 +3,17 @@
 .MainHeader {
   .Name {
     line-height: 4rem;
+    font-size: 5.125rem;
+    letter-spacing: -5px;
+
+    @include mobile-only {
+      font-size: 4rem;
+    }
   }
 
   span, p {
     font-weight: normal;
-    font-size: 1.875rem;
+    font-size: 1.675rem;
     letter-spacing: 0px;
     color: $text-color-secondary;
 

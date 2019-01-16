@@ -50,6 +50,24 @@ interface CaseStudy extends PortfolioItem {
   post: contentfulLongText;
 }
 
+interface BlogPost {
+  title: string;
+  slug: string;
+  description: {
+    description: string;
+  }
+  heroImage: contentfulAsset;
+  publishDate: Date;
+  body: {
+    childMarkdownRemark: {
+      html: string;
+      excerpt: string;
+      timeToRead: string;
+    }
+  }
+  tags: [string];
+}
+
 interface AboutPageData {
   title: string;
   post: contentfulLongText;
@@ -97,10 +115,10 @@ interface MediumPost {
 }
 
 interface SiteMetadata {
-  title: string;
-  description: string;
-  tagline: string;
-  siteUrl: string;
+  title?: string;
+  description?: string;
+  tagline?: string;
+  siteUrl?: string;
 }
 
 interface PageMetadata extends SiteMetadata {}

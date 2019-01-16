@@ -30,11 +30,11 @@ const Link: React.SFC<LinkProps> = ({
   );
 
   return externalLink ? (
-    <OutboundLink className={classname} href={href} target={target} rel="noreferrer">
+    <OutboundLink className={classname} href={href} target={target || '_blank'} rel="noreferrer">
       {children}
     </OutboundLink>
   ) : (
-    <GatsbyLink className={classname} to={href} target={target}>
+    <GatsbyLink className={classname} to={href} target={target || ''}>
       {children}
     </GatsbyLink>
   );
@@ -43,7 +43,7 @@ const Link: React.SFC<LinkProps> = ({
 Link.defaultProps = {
   className: undefined,
   noLinkStyling: false,
-  target: '',
+  target: undefined,
 };
 
 export default Link;

@@ -1,0 +1,12 @@
+@import '../styles/_variables.scss';
+
+.Post {
+  color: $text-color-secondary;
+  .Title {
+    line-height: 1;
+  }
+
+  .Meta {
+    color: lighten($text-color-secondary, 20%);
+  }
+}

@@ -35,8 +35,16 @@ module.exports = {
     `gatsby-plugin-favicon`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sharp`, // for gatsby-image
-    `gatsby-transformer-sharp`, // for gatsby-image
-    `gatsby-transformer-remark`,
+    `gatsby-transformer-sharp`, // for gatsby-image,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-embed-gist`, // for embedding gists
+          `gatsby-remark-prismjs`, // for code highlighting
+        ],
+      },
+    },    
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

@@ -23,7 +23,7 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
     >
       <Button
         className={styles.Button}
-        href={`/${item.slug}`}
+        href={`/projects/${item.slug}`}
       >
         View
       </Button>
