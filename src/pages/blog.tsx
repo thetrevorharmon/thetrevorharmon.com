@@ -55,7 +55,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
         </div>
 
         {this.props.data.allContentfulBlogPost.edges.map((blogPost, index) => (
-          <div className={classnames(styles.Post, 'mb-5')}>
+          <div className={classnames(styles.Post, 'mb-5')} key={index}>
             <div className="row">
               <div className="col-lg-8">
                 <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
