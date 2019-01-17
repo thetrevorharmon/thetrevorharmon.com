@@ -12,6 +12,7 @@ module.exports = {
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
+    author: 'Trevor Harmon',
   },
   plugins: [
     {
@@ -55,5 +56,43 @@ module.exports = {
         cookieDomain: `thetrevorharmon.com`,
       },
     },
+    {
+      resolve: 'gatsby-plugin-feed-generator',
+      options: {
+        generator: `GatsbyJS`,
+        rss: true, // Set to false to stop rss generation
+        json: true, // Set to false to stop json feed generation
+        siteQuery: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                author
+              }
+            }
+          }
+        `,
+        // The plugin requires frontmatter of date, path(or slug/url), and title at minimum
+        feedQuery: `
+          {
+            allMarkdownRemark( filter: {frontmatter: {date: {ne: null}}}) {
+              edges {
+                node {
+                  html
+                  frontmatter {
+                    title
+                    description
+                    slug
+                    date
+                  }
+                }
+              }
+            }
+          }
+        `
+      }
+    }    
   ],
 }
