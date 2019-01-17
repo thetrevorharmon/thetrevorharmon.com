@@ -57,42 +57,91 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-feed-generator',
+      resolve: `gatsby-plugin-feed`,
       options: {
-        generator: `GatsbyJS`,
-        rss: true, // Set to false to stop rss generation
-        json: true, // Set to false to stop json feed generation
-        siteQuery: `
+        feeds: [
           {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                author
-              }
-            }
-          }
-        `,
-        // The plugin requires frontmatter of date, path(or slug/url), and title at minimum
-        feedQuery: `
-          {
-            allMarkdownRemark( filter: {frontmatter: {date: {ne: null}}}) {
-              edges {
-                node {
-                  html
-                  frontmatter {
-                    title
-                    description
-                    slug
-                    date
+            serialize: ({ query: { site, allContentfulBlogPost } }) => {
+              return allContentfulBlogPost.edges.map(edge => {
+                return Object.assign({}, {
+                  title: edge.node.title,
+                  description: edge.node.description.description,
+                  date: edge.node.publishDate,
+                  url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  // custom_elements: [{ "content:encoded": "<p>THIS IS A TEST</p>" }],
+                  custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allContentfulBlogPost {
+                  edges {
+                    node {
+                      title
+                      slug
+                      description {
+                        description
+                      }
+                      publishDate(formatString: "YYYY-MM-DD")
+                      body {
+                        body
+                        childMarkdownRemark {
+                          html
+                          timeToRead
+                        }
+                      }
+                      tags
+                    }
                   }
                 }
               }
-            }
+            `,
+            output: "/rss.xml",
+            title: "Gatsby RSS Feed",
           }
-        `
+        ]
       }
-    }    
+    },
+
+    // {
+    //   resolve: 'gatsby-plugin-feed-generator',
+    //   options: {
+    //     generator: `GatsbyJS`,
+    //     rss: true, // Set to false to stop rss generation
+    //     json: true, // Set to false to stop json feed generation
+    //     siteQuery: `
+    //       {
+    //         site {
+    //           siteMetadata {
+    //             title
+    //             description
+    //             siteUrl
+    //             author
+    //           }
+    //         }
+    //       }
+    //     `,
+    //     // The plugin requires frontmatter of date, path(or slug/url), and title at minimum
+    //     feedQuery: `
+          // {
+          //   allMarkdownRemark( filter: {frontmatter: {date: {ne: null}}}) {
+          //     edges {
+          //       node {
+          //         html
+          //         frontmatter {
+          //           title
+          //           description
+          //           slug
+          //           date
+          //         }
+          //       }
+          //     }
+          //   }
+          // }
+    //     `
+    //   }
+    // }    
   ],
 }
