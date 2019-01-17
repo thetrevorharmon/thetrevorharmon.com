@@ -12,6 +12,7 @@ module.exports = {
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
+    author: 'Trevor Harmon',
   },
   plugins: [
     {
@@ -55,5 +56,52 @@ module.exports = {
         cookieDomain: `thetrevorharmon.com`,
       },
     },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [
+          {
+            serialize: ({ query: { site, allContentfulBlogPost } }) => {
+              return allContentfulBlogPost.edges.map(edge => {
+                return Object.assign({}, {
+                  title: edge.node.title,
+                  description: edge.node.description.description,
+                  date: edge.node.date,
+                  url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allContentfulBlogPost(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [date] },
+                ) {
+                  edges {
+                    node {
+                      title
+                      slug
+                      description {
+                        description
+                      }
+                      date
+                      body {
+                        childMarkdownRemark {
+                          html
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Gatsby RSS Feed",
+          }
+        ]
+      }
+    },   
   ],
 }
