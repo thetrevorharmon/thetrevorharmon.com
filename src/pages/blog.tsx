@@ -64,7 +64,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
                 <Header rank={3} type="Tagline">{blogPost.node.description.description}</Header>
                 <p className={styles.Meta}>
-                  {blogPost.node.publishDate} • {blogPost.node.body.childMarkdownRemark.timeToRead} min read
+                  {blogPost.node.date} • {blogPost.node.body.childMarkdownRemark.timeToRead} min read
                 </p>
               </div>
             </div>
@@ -89,7 +89,9 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
 export const blogPageQuery = graphql`
   query blogPageQuery {
-    allContentfulBlogPost(sort: {fields: [publishDate], order: DESC}) {
+    allContentfulBlogPost(
+      sort: { order: DESC, fields: [date] },
+    ) {
       edges {
         node {
           title
@@ -97,7 +99,7 @@ export const blogPageQuery = graphql`
           description {
             description
           }
-          publishDate(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
               html

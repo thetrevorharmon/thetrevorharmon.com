@@ -4974,13 +4974,6 @@ gatsby-plugin-favicon@^3.1.4:
     html-react-parser "^0.4.6"
     lodash "^4.17.10"
 
-gatsby-plugin-feed-generator@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-feed-generator/-/gatsby-plugin-feed-generator-1.0.8.tgz#9212abd6b630861150e1f24d5fa2acd8aa3e3e73"
-  dependencies:
-    pify "^3.0.0"
-    rss "^1.2.2"
-
 gatsby-plugin-feed@^2.0.11:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-feed/-/gatsby-plugin-feed-2.0.11.tgz#1baa33565c131415a2c971aa49adea02a08bf935"

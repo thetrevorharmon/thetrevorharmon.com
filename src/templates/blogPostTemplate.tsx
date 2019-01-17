@@ -35,7 +35,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           <div className="col-lg-8">
             <Header rank={1} type="Headline" className="mb-md-4">{blogPost.title}</Header>
             <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
-            <p className="meta">{blogPost.publishDate} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
+            <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
         <div className="row post-body">
@@ -62,7 +62,7 @@ export const query = graphql`
           description {
             description
           }
-          publishDate(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
               html
