@@ -46,10 +46,13 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
               rank={1}
               type="Headline"
               className={classnames(
-                'my-6 my-lg-8',
+                'mt-6 mt-lg-8',
               )}
             >
               Blog
+            </Header>
+            <Header rank={3} type="Tagline" className="mb-6">
+              Mostly about design, code, with the occasional miscellaneous musing.
             </Header>
           </div>
         </div>
