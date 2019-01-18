@@ -21,13 +21,17 @@ const Navbar: React.SFC<{}> = () => {
   );
 
   const navbarLinks = [
-    {
-      display: 'Case Studies',
-      location: Routes.caseStudies(),
-    },
+    // {
+    //   display: 'Blog',
+    //   location: Routes.blog(),
+    // },
     {
       display: 'Projects',
       location: Routes.projects(),
+    },
+    {
+      display: 'Case Studies',
+      location: Routes.caseStudies(),
     },
     {
       display: 'About',

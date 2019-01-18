@@ -1,0 +1,14 @@
+@import '../styles/_variables.scss';
+
+.ErrorPage {
+  .Header {
+    color: $text-color-primary;
+    font-size: 10rem;
+    line-height: 10rem;
+    margin: 0;
+  }
+
+  p {
+    color: $text-color-secondary;
+  }
+}
