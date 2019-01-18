@@ -11,6 +11,7 @@ const ExternalLinks: LinkInterface = {
 
 const Routes: LinkInterface = {
   about: () => '/about',
+  blog: () => '/blog',
   caseStudies: () => '/case-studies',
   home: () => '/',
   projects: () => '/projects',
