@@ -21,10 +21,10 @@ const Navbar: React.SFC<{}> = () => {
   );
 
   const navbarLinks = [
-    {
-      display: 'Blog',
-      location: Routes.blog(),
-    },
+    // {
+    //   display: 'Blog',
+    //   location: Routes.blog(),
+    // },
     {
       display: 'Projects',
       location: Routes.projects(),

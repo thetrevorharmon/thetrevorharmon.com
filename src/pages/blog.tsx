@@ -52,7 +52,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
               Blog
             </Header>
             <Header rank={3} type="Tagline" className="mb-6">
-              Mostly about design, code, with the occasional miscellaneous musing.
+              My thoughts about code, design, and other musings.
             </Header>
           </div>
         </div>
