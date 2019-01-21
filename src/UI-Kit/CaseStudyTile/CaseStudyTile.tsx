@@ -7,6 +7,8 @@ import {
   Link,
 } from '../../UI-Kit';
 
+import { Routes } from '../../utils';
+
 import * as styles from './CaseStudyTile.module.scss';
 
 interface CaseStudyTileProps {
@@ -39,7 +41,7 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
         <p className="pr-3 mt-2 mt-sm-0">{item.tagline}</p>
         <Link
           className={styles.Link}
-          href={`/case-studies/${item.slug}`}
+          href={Routes.caseStudy(item.slug)}
         >
           Read Case Study
         </Link>

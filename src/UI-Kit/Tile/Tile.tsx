@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import { Button, Image } from '../../UI-Kit';
 
+import { Routes } from '../../utils';
+
 import * as styles from './Tile.module.scss';
 
 interface TileProps {
@@ -23,7 +25,7 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
     >
       <Button
         className={styles.Button}
-        href={`/projects/${item.slug}`}
+        href={Routes.project(item.slug)}
       >
         View
       </Button>

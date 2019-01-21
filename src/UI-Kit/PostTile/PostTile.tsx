@@ -6,6 +6,8 @@ import {
   Link,
 } from '../../UI-Kit';
 
+import { ExternalLinks } from '../../utils';
+
 import * as styles from './PostTile.module.scss';
 
 interface PostTileProps {
@@ -20,13 +22,11 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
     className,
   );
 
-  const baseUrl = 'http://medium.com/@thetrevorharmon/';
-
   return (
     <Link
       className={classname}
       noLinkStyling={true}
-      href={baseUrl + item.uniqueSlug}
+      href={ExternalLinks.mediumPost(item.uniqueSlug)}
       target="_blank"
     >
       <Header

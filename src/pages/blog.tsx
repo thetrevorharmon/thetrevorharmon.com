@@ -15,6 +15,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
+import { Routes } from '../utils';
+
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface ProjectsPageProps {
@@ -80,7 +82,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
             <div className="row">
               <div className="col-lg-8" key={index}>
-                <Link href={`/blog/${blogPost.node.slug}`}>Continue Reading &rarr;</Link>
+                <Link href={Routes.blogPost(blogPost.node.slug)}>Continue Reading &rarr;</Link>
               </div>
             </div>
           </div>
