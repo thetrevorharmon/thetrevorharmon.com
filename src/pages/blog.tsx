@@ -64,7 +64,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
             <div className="row">
               <div className="col-lg-8">
                 <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
-                  {blogPost.node.title}
+                  <Link href={Routes.blogPost(blogPost.node.slug)}>{blogPost.node.title}</Link>
                 </Header>
 
                 <Header rank={3} type="Tagline">{blogPost.node.description.description}</Header>
@@ -73,12 +73,13 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 </p>
               </div>
             </div>
-
+            {/*
             <div className="row">
               <div className="col-lg-8">
                 <p>{blogPost.node.body.childMarkdownRemark.excerpt}</p>
               </div>
             </div>
+            */}
 
             <div className="row">
               <div className="col-lg-8" key={index}>

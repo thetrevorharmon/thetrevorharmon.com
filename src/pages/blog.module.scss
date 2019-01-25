@@ -4,6 +4,16 @@
   color: $text-color-secondary;
   .Title {
     line-height: 1;
+
+    a {
+      color: $text-color-primary;
+      transition: color 0.1s linear;
+
+      &:hover {
+        border: none;
+        color: $brand-primary;
+      }
+    }
   }
 
   .Meta {
