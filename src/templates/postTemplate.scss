@@ -47,16 +47,26 @@
   }
 
   .post-body {
-    color: $text-color-secondary;
+    color: $text-color-primary;
 
     img {
       max-width: 100%;
       background: #fff;
-      margin: 2rem 0;
+      margin: 1rem 0;
 
       @include mobile-only {
         margin: 0;
       }
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    blockquote {
+      @include left-border();
+      margin-left: 0;
+      color: $text-color-secondary;
     }
 
     .scrollable {
@@ -90,10 +100,6 @@
           color: lighten($text-color-secondary, 30%);
         }
       }
-    }
-
-    p {
-      margin-bottom: 1.5rem;
     }
   }
 }
