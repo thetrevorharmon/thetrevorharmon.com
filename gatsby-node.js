@@ -56,15 +56,23 @@ exports.createPages = ({ graphql, actions }) => {
         })
       })  
       result.data.allContentfulBlogPost.edges.forEach(({ node }, index) => {
-        const nextPost = index > 0 ? result.data.allContentfulBlogPost.edges[index - 1].node : null;
-        const prevPost = index < result.data.allContentfulBlogPost.edges.length - 2 ? result.data.allContentfulBlogPost.edges[index + 1].node : null;
+        // these give an easy way to figure out which post is considered
+        // the next newer/older post from within a blog post
+        const newerPost = index > 0 
+          ? result.data.allContentfulBlogPost.edges[index - 1].node 
+          : null;
+
+        const olderPost = index < result.data.allContentfulBlogPost.edges.length - 1 
+          ? result.data.allContentfulBlogPost.edges[index + 1].node 
+          : null;
+
         createPage({
           path: `blog/${node.slug}`,
           component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
           context: {
             slug: node.slug,
-            nextPost: nextPost,
-            prevPost: prevPost,
+            newerPost: newerPost,
+            olderPost: olderPost,
           },
         })
       })            

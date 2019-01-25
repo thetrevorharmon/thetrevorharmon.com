@@ -24,12 +24,12 @@ interface CaseStudyTemplateProps {
     },
   };
   pageContext: {
-    slug: string, 
-    nextPost?: {
+    slug: string,
+    newerPost?: {
       title: string,
       slug: string,
     },
-    prevPost?: {
+    olderPost?: {
       title: string,
       slug: string,
     },
@@ -42,8 +42,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
 
     const {
-      nextPost,
-      prevPost
+      newerPost,
+      olderPost,
     } = this.props.pageContext;
 
     const pageMetadata: PageMetadata = {
@@ -72,28 +72,28 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         <div className="row post-footer">
           <div className="col-lg-6">
             {
-              prevPost
+              olderPost
               ? (
-                <Link href={Routes.blogPost(prevPost.slug)}>
-                  <span>{prevPost.title}</span>
+                <Link href={Routes.blogPost(olderPost.slug)}>
+                  <span>{olderPost.title}</span>
                   <br/>
-                  &larr; Read Previous
+                  &larr; Read Older
                 </Link>
               ) : undefined
             }
           </div>
           <div className="col-lg-6">
             {
-              nextPost
+              newerPost
               ? (
-                  <Link href={Routes.blogPost(nextPost.slug)}>
-                    <span>{nextPost.title}</span>
+                  <Link href={Routes.blogPost(newerPost.slug)}>
+                    <span>{newerPost.title}</span>
                     <br/>
-                    Read Next &rarr;
+                    Read Newer &rarr;
                   </Link>
               ) : undefined
             }
-          </div>          
+          </div>
         </div>
       </Layout>
     );
