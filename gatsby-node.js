@@ -26,7 +26,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         } 
-        allContentfulBlogPost {
+        allContentfulBlogPost(sort: { order: DESC, fields: [date] })  {
           edges {
             node {
               title
@@ -55,12 +55,16 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })  
-      result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
+      result.data.allContentfulBlogPost.edges.forEach(({ node }, index) => {
+        const nextPost = index > 0 ? result.data.allContentfulBlogPost.edges[index - 1].node : null;
+        const prevPost = index < result.data.allContentfulBlogPost.edges.length - 2 ? result.data.allContentfulBlogPost.edges[index + 1].node : null;
         createPage({
           path: `blog/${node.slug}`,
           component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
           context: {
             slug: node.slug,
+            nextPost: nextPost,
+            prevPost: prevPost,
           },
         })
       })            
