@@ -21,6 +21,8 @@
   }
 
   .post-body {  
+    color: $text-color-primary;
+
     h1 {
       @extend .Header;
       @extend .Headline;
@@ -44,10 +46,6 @@
         margin-bottom: 0.5em;
       }
     }
-  }
-
-  .post-body {
-    color: $text-color-primary;
 
     img {
       max-width: 100%;
@@ -100,6 +98,29 @@
           color: lighten($text-color-secondary, 30%);
         }
       }
+    }
+  }
+
+  .post-footer {
+    $footer-top-whitespace: 4rem;
+
+    position: relative;
+    padding-top: $footer-top-whitespace;
+
+    &:before {
+      $line-width: 2rem;
+      
+      position: absolute;
+      top: $footer-top-whitespace /2;
+      left: 50%;
+      margin-left: -$line-width / 2;
+      
+      background: lighten($text-color-secondary, 30%);
+      
+      display: block;
+      content: '';
+      height: 1px;
+      width: $line-width;
     }
   }
 }
