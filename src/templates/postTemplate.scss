@@ -21,6 +21,8 @@
   }
 
   .post-body {  
+    color: $text-color-primary;
+
     h1 {
       @extend .Header;
       @extend .Headline;
@@ -44,19 +46,25 @@
         margin-bottom: 0.5em;
       }
     }
-  }
-
-  .post-body {
-    color: $text-color-secondary;
 
     img {
       max-width: 100%;
       background: #fff;
-      margin: 2rem 0;
+      margin: 1rem 0;
 
       @include mobile-only {
         margin: 0;
       }
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    blockquote {
+      @include left-border();
+      margin-left: 0;
+      color: $text-color-secondary;
     }
 
     .scrollable {
@@ -91,9 +99,95 @@
         }
       }
     }
+  }
 
-    p {
-      margin-bottom: 1.5rem;
+  .post-footer {
+    $footer-top-whitespace: 4rem;
+
+    position: relative;
+    padding-top: $footer-top-whitespace;
+
+    // footer decorative divider
+    &:before {
+      $line-width: 2rem;
+      
+      position: absolute;
+      top: $footer-top-whitespace /2;
+      left: 50%;
+      margin-left: -$line-width / 2;
+      
+      background: lighten($text-color-secondary, 30%);
+      
+      display: block;
+      content: '';
+      height: 1px;
+      width: $line-width;
+    }
+
+    .post-navigation {
+      color: $text-color-secondary;
+      font-size: 1rem;
+
+      &:nth-child(2) {
+        text-align: right;
+
+        @include media-breakpoint-down(md) {
+          text-align: left;
+          margin-top: 1rem;
+        }
+      }
+
+      .post-link {
+        line-height: 1;
+
+        &:before, &:after {
+          display: inline-block;
+          transition: all 0.1s linear;
+        }
+      }
+
+      .older-post:before {
+        content: '←';
+        left: 0;
+        margin-right: 0.5rem;
+      }
+
+      .newer-post:after {
+        content: '→';
+        right: 0;
+        top: 0;
+        margin-left: 0.5rem;
+      }
+
+      @include media-breakpoint-up(lg) {
+        .post-link {
+          position: relative;
+          display: inline-block;
+          max-width: 100%;
+
+          &:before, &:after {
+            display: block;
+            position: absolute;
+            margin: 0;
+          }
+
+          .title {
+            display: inline-block;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &.older-post .title {
+            padding-left: 1.5rem;
+          }
+
+          &.newer-post .title {
+            padding-right: 1.5rem;
+          }
+        }
+      }
     }
   }
 }

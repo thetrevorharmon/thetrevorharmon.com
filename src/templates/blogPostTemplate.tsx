@@ -5,7 +5,15 @@ import Layout from '../layouts';
 import './blogPostTemplate.scss';
 import './syntax-highlighting.scss';
 
-import { Header, Image } from '../UI-Kit';
+import {
+  Header,
+  Image,
+  Link,
+} from '../UI-Kit';
+
+import { Routes } from '../utils';
+
+type PostNavigationDirection = 'older' | 'newer';
 
 interface CaseStudyTemplateProps {
   data: {
@@ -17,12 +25,42 @@ interface CaseStudyTemplateProps {
       ],
     },
   };
+  pageContext: {
+    slug: string,
+    newerPost?: {
+      title: string,
+      slug: string,
+    },
+    olderPost?: {
+      title: string,
+      slug: string,
+    },
+  };
 }
 
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
+
+  public makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
+    const className = `post-link ${direction}-post`;
+
+    return (
+      <div className="col-lg-6 post-navigation">
+        Read {direction}:<br/>
+        <Link href={Routes.blogPost(slug)} className={className}>
+          <span className="title">{title}</span>
+        </Link>
+      </div>
+    );
+  }
+
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
+
+    const {
+      newerPost,
+      olderPost,
+    } = this.props.pageContext;
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description.description}`,
@@ -33,19 +71,40 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-8">
-            <Header rank={1} type="Headline" className="mb-md-4">{blogPost.title}</Header>
-            <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
+            <Header rank={1} type="Headline" className="mb-md-2">{blogPost.title}</Header>
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
-        <div className="row post-body">
-          <div className="col-lg-8">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: blogPost.body.childMarkdownRemark.html,
-              }}
-            />
+        <div className="post-body">
+
+          <div className="row">
+            <div className="col-lg-8">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: blogPost.body.childMarkdownRemark.html,
+                }}
+              />
+            </div>
           </div>
+
+          {
+            blogPost.originalPublication
+            ? (
+              <div className="row">
+                <div className="col-lg-8">
+                  <i>
+                    This article was originally published
+                    on <Link href={blogPost.originalPublication}>Medium</Link>.
+                  </i>
+                </div>
+              </div>
+            ) : undefined
+          }
+        </div>
+
+        <div className="row post-footer">
+          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'older') : undefined}
+          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'newer') : undefined}
         </div>
       </Layout>
     );
@@ -59,6 +118,7 @@ export const query = graphql`
         node {
           title
           slug
+          originalPublication
           description {
             description
           }
