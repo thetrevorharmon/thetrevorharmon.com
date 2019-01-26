@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import Layout from '../layouts';
@@ -12,6 +13,8 @@ import {
 } from '../UI-Kit';
 
 import { Routes } from '../utils';
+
+type PostNavigationDirection = 'Older' | 'Newer';
 
 interface CaseStudyTemplateProps {
   data: {
@@ -37,6 +40,20 @@ interface CaseStudyTemplateProps {
 }
 
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
+
+  public makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
+    const className = `post-link ${direction.toLowerCase()}-post`;
+
+    return (
+      <div className={classnames('col-lg-6', 'post-navigation')}>
+        Read {direction}:<br/>
+        <Link href={Routes.blogPost(slug)} className={className}>
+          <span className="title">{title}</span>
+        </Link>
+      </div>
+    );
+  }
+
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
@@ -60,6 +77,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
         </div>
         <div className="post-body">
+
           <div className="row">
             <div className="col-lg-8">
               <div
@@ -69,7 +87,9 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
               />
             </div>
           </div>
-          { blogPost.originallyPublishedAt
+
+          {
+            blogPost.originallyPublishedAt
             ? (
               <div className="row">
                 <div className="col-lg-8">
@@ -82,31 +102,10 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             ) : undefined
           }
         </div>
+
         <div className="row post-footer">
-          <div className="col-lg-6">
-            {
-              olderPost
-              ? (
-                <Link href={Routes.blogPost(olderPost.slug)}>
-                  <span>{olderPost.title}</span>
-                  <br/>
-                  &larr; Read Older
-                </Link>
-              ) : undefined
-            }
-          </div>
-          <div className="col-lg-6">
-            {
-              newerPost
-              ? (
-                  <Link href={Routes.blogPost(newerPost.slug)}>
-                    <span>{newerPost.title}</span>
-                    <br/>
-                    Read Newer &rarr;
-                  </Link>
-              ) : undefined
-            }
-          </div>
+          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'Older') : undefined}
+          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'Newer') : undefined}
         </div>
       </Layout>
     );
