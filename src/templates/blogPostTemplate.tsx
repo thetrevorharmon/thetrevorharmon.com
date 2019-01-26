@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import Layout from '../layouts';
@@ -14,7 +13,7 @@ import {
 
 import { Routes } from '../utils';
 
-type PostNavigationDirection = 'Older' | 'Newer';
+type PostNavigationDirection = 'older' | 'newer';
 
 interface CaseStudyTemplateProps {
   data: {
@@ -42,10 +41,10 @@ interface CaseStudyTemplateProps {
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
 
   public makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
-    const className = `post-link ${direction.toLowerCase()}-post`;
+    const className = `post-link ${direction}-post`;
 
     return (
-      <div className={classnames('col-lg-6', 'post-navigation')}>
+      <div className="col-lg-6 post-navigation">
         Read {direction}:<br/>
         <Link href={Routes.blogPost(slug)} className={className}>
           <span className="title">{title}</span>
@@ -89,13 +88,13 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
 
           {
-            blogPost.originallyPublishedAt
+            blogPost.originalPublication
             ? (
               <div className="row">
                 <div className="col-lg-8">
                   <i>
                     This article was originally published
-                    on <Link href={blogPost.originallyPublishedAt}>Medium</Link>.
+                    on <Link href={blogPost.originalPublication}>Medium</Link>.
                   </i>
                 </div>
               </div>
@@ -104,8 +103,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         </div>
 
         <div className="row post-footer">
-          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'Older') : undefined}
-          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'Newer') : undefined}
+          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'older') : undefined}
+          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'newer') : undefined}
         </div>
       </Layout>
     );
@@ -119,7 +118,7 @@ export const query = graphql`
         node {
           title
           slug
-          originallyPublishedAt
+          originalPublication
           description {
             description
           }
