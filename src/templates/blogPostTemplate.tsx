@@ -55,19 +55,32 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-8">
-            <Header rank={1} type="Headline" className="mb-md-4">{blogPost.title}</Header>
-            <Header rank={2} type="Tagline">{blogPost.description.description}</Header>
+            <Header rank={1} type="Headline" className="mb-md-2">{blogPost.title}</Header>
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
-        <div className="row post-body">
-          <div className="col-lg-8">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: blogPost.body.childMarkdownRemark.html,
-              }}
-            />
+        <div className="post-body">
+          <div className="row">
+            <div className="col-lg-8">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: blogPost.body.childMarkdownRemark.html,
+                }}
+              />
+            </div>
           </div>
+          { blogPost.originallyPublishedAt
+            ? (
+              <div className="row">
+                <div className="col-lg-8">
+                  <i>
+                    This article was originally published
+                    on <Link href={blogPost.originallyPublishedAt}>Medium</Link>.
+                  </i>
+                </div>
+              </div>
+            ) : undefined
+          }
         </div>
         <div className="row post-footer">
           <div className="col-lg-6">
@@ -107,6 +120,7 @@ export const query = graphql`
         node {
           title
           slug
+          originallyPublishedAt
           description {
             description
           }

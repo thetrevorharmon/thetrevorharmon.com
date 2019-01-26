@@ -56,6 +56,7 @@ interface BlogPost {
   description: {
     description: string;
   }
+  originallyPublishedAt: string;
   heroImage: contentfulAsset;
   date: Date;
   body: {
