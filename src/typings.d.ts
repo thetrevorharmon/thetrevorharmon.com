@@ -53,9 +53,7 @@ interface CaseStudy extends PortfolioItem {
 interface BlogPost {
   title: string;
   slug: string;
-  description: {
-    description: string;
-  }
+  description: string;
   originalPublication: string;
   heroImage: contentfulAsset;
   date: Date;

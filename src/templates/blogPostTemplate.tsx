@@ -63,7 +63,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     } = this.props.pageContext;
 
     const pageMetadata: PageMetadata = {
-      description: `${blogPost.description.description}`,
+      description: `${blogPost.description}`,
       title: `${blogPost.title}`,
     };
 
@@ -119,9 +119,7 @@ export const query = graphql`
           title
           slug
           originalPublication
-          description {
-            description
-          }
+          description
           date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
