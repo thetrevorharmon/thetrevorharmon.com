@@ -71,7 +71,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header my-5">
           <div className="col-lg-8">
-            <Header rank={1} type="Headline" className="mb-md-2">{blogPost.title}</Header>
+            <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
