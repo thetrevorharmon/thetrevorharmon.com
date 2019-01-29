@@ -121,4 +121,6 @@ interface SiteMetadata {
   siteUrl?: string;
 }
 
-interface PageMetadata extends SiteMetadata {}
+interface PageMetadata extends SiteMetadata {
+  pageTitle?: string;
+}

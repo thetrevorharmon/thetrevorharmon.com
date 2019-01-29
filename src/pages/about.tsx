@@ -41,7 +41,7 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
         The thing I enjoy the most (and that people tend to say I'm good at) is front-end development.
         I recently picked up react.js and have been enjoying that.
       `,
-      title: 'About',
+      pageTitle: 'About',
     };
 
     return (

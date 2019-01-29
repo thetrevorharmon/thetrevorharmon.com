@@ -37,7 +37,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
     const pageMetadata: PageMetadata = {
       description: `My thoughts about code, design, and other musings.`,
-      title: 'Blog',
+      pageTitle: 'Blog',
     };
 
     return (
@@ -51,7 +51,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 'mt-6 mt-lg-8',
               )}
             >
-              {pageMetadata.title}
+              {pageMetadata.pageTitle}
             </Header>
             <Header rank={3} type="Tagline" className="mb-6">
               {pageMetadata.description}

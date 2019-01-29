@@ -83,9 +83,7 @@ module.exports = {
                     node {
                       title
                       slug
-                      description {
-                        description
-                      }
+                      description
                       date
                       body {
                         childMarkdownRemark {

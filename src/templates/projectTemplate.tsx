@@ -62,7 +62,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const pageMetadata: PageMetadata = {
       description: `${description}`,
-      title: project.title,
+      pageTitle: project.title,
     };
 
     return (

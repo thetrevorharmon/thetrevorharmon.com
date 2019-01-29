@@ -1,12 +1,14 @@
+@import '../styles/_variables.scss';
+
 .AboutPage {
   a {
-    color: red;
+    color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: all 0.1s linear;
 
     &:hover {
-      border-color: red;
+      border-color: $brand-primary;
     }
   }
 }

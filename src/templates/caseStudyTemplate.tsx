@@ -25,7 +25,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${caseStudy.title} | ${caseStudy.tagline}`,
-      title: `${caseStudy.title} Case Study`,
+      pageTitle: `${caseStudy.title} Case Study`,
     };
 
     return (
