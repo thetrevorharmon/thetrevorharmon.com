@@ -72,6 +72,10 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         <div className="row post-header my-5">
           <div className="col-lg-8">
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
+            { blogPost.subtitle
+              ? <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
+              : undefined
+            }
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
@@ -118,7 +122,7 @@ export const query = graphql`
         node {
           title
           slug
-          originalPublication
+          subtitle
           description
           date(formatString: "MMMM DD, YYYY")
           body {
@@ -128,6 +132,7 @@ export const query = graphql`
             }
           }
           tags
+          originalPublication
         }
       }
     }

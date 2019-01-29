@@ -53,6 +53,7 @@ interface CaseStudy extends PortfolioItem {
 interface BlogPost {
   title: string;
   slug: string;
+  subtitle: string;
   description: string;
   originalPublication: string;
   heroImage: contentfulAsset;
