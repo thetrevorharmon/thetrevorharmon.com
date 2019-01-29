@@ -14,10 +14,10 @@
 
 .Headline {
   font-size: header-size(headline, desktop);
-  letter-spacing: -3px;
+  letter-spacing: header-size(headline, desktop-kerning);
 
   @include mobile-only {
-    letter-spacing: -2px;
+    letter-spacing: header-size(headline, phone-kerning);
     font-size: header-size(headline, phone);
     line-height: header-size(headline, phone);
   }
@@ -26,7 +26,7 @@
 .Tagline {
   font-size: header-size(tagline, desktop);
   line-height: 1.2;
-  letter-spacing: -1px;
+  letter-spacing: header-size(tagline, kerning);
   font-weight: normal;
 
   @include mobile-only {
@@ -46,11 +46,11 @@
 
 .Title {
   font-size: header-size(title, desktop);
-  letter-spacing: -2px;
+  letter-spacing: header-size(title, desktop-kerning);
   line-height: header-size(title, desktop);
 
   @include mobile-only {
-    letter-spacing: -1px;
+    letter-spacing: header-size(title, phone-kerning);
     font-size: header-size(title, phone);
     line-height: header-size(title, phone);
   }
@@ -58,7 +58,7 @@
 
 .Subtitle {
   font-size: header-size(subtitle, desktop);
-  letter-spacing: -1px;
+  letter-spacing: header-size(subtitle, kerning);
   line-height: header-size(subtitle, desktop);
 
   @include mobile-only {
@@ -70,7 +70,7 @@
 .SectionTitle {
   font-size: header-size(section-title, desktop);
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: header-size(section-title, desktop-kerning);
   line-height: header-size(section-title, desktop);
   font-weight: normal;
 
@@ -78,7 +78,7 @@
 
   @include mobile-only {
     font-size: header-size(section-title, phone);
-    line-height: 1.5rem;
-    letter-spacing: 4px;
+    line-height: header-size(section-title, phone) / 0.833333;
+    letter-spacing: header-size(section-title, phone-kerning);
   }
 }

@@ -33,6 +33,7 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-plugin-tslint`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-favicon`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sharp`, // for gatsby-image
@@ -83,9 +84,7 @@ module.exports = {
                     node {
                       title
                       slug
-                      description {
-                        description
-                      }
+                      description
                       date
                       body {
                         childMarkdownRemark {

@@ -20,11 +20,11 @@ const Helmet: React.SFC<HelmetDataProps> = ({
   pageMetadata,
 }) => {
 
-  const title = pageMetadata.title
-    ? `${pageMetadata.title} | ${data.site.siteMetadata.title}`
+  const title = pageMetadata && pageMetadata.pageTitle
+    ? `${pageMetadata.pageTitle} | ${data.site.siteMetadata.title}`
     : data.site.siteMetadata.title;
 
-  const description = pageMetadata.description
+  const description = pageMetadata && pageMetadata.description
     ? pageMetadata.description
     : data.site.siteMetadata.description;
 
@@ -32,6 +32,26 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     {
       content: description,
       name: 'Description',
+    },
+    {
+      content: 'website',
+      property: 'og:type',
+    },
+    {
+      content: pageMetadata && pageMetadata.pageTitle || title,
+      property: 'og:title',
+    },
+    {
+      content: pageMetadata && pageMetadata.description || data.site.siteMetadata.description,
+      property: 'og:description',
+    },
+    {
+      content: data.site.siteMetadata.title,
+      property: 'og:site_name',
+    },
+    {
+      content: `${data.site.siteMetadata.siteUrl}`,
+      property: 'og:url',
     },
   ];
 
@@ -57,6 +77,7 @@ export default (props: HelmetProps) => (
           siteMetadata {
             title
             description
+            siteUrl
           }
         }
       }

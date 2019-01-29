@@ -53,9 +53,8 @@ interface CaseStudy extends PortfolioItem {
 interface BlogPost {
   title: string;
   slug: string;
-  description: {
-    description: string;
-  }
+  subtitle: string;
+  description: string;
   originalPublication: string;
   heroImage: contentfulAsset;
   date: Date;
@@ -122,4 +121,6 @@ interface SiteMetadata {
   siteUrl?: string;
 }
 
-interface PageMetadata extends SiteMetadata {}
+interface PageMetadata extends SiteMetadata {
+  pageTitle?: string;
+}

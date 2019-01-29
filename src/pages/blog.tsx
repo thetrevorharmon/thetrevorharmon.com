@@ -36,8 +36,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
   public render() {
 
     const pageMetadata: PageMetadata = {
-      description: `These are the writings of my blog.`,
-      title: 'Blog',
+      description: `My thoughts about code, design, and other musings.`,
+      pageTitle: 'Blog',
     };
 
     return (
@@ -51,10 +51,10 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 'mt-6 mt-lg-8',
               )}
             >
-              Blog
+              {pageMetadata.pageTitle}
             </Header>
             <Header rank={3} type="Tagline" className="mb-6">
-              My thoughts about code, design, and other musings.
+              {pageMetadata.description}
             </Header>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                   <Link href={Routes.blogPost(blogPost.node.slug)}>{blogPost.node.title}</Link>
                 </Header>
 
-                <Header rank={3} type="Tagline">{blogPost.node.description.description}</Header>
+                <Header rank={3} type="Tagline">{blogPost.node.description}</Header>
                 <p className={styles.Meta}>
                   {blogPost.node.date} • {blogPost.node.body.childMarkdownRemark.timeToRead} min read
                 </p>
@@ -102,9 +102,7 @@ export const blogPageQuery = graphql`
         node {
           title
           slug
-          description {
-            description
-          }
+          description
           date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {

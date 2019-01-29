@@ -33,7 +33,7 @@ export default class CaseStudiesPage extends React.Component<CaseStudyPageProps,
     const pageMetadata: PageMetadata = {
       description: `These case studies are an in-depth look at some of the more interesting design
       and development work I've done. I try to detail my process and the results of the work I did.`,
-      title: 'Case Studies',
+      pageTitle: 'Case Studies',
     };
 
     return (

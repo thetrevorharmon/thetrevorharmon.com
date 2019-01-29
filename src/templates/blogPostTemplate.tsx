@@ -63,15 +63,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     } = this.props.pageContext;
 
     const pageMetadata: PageMetadata = {
-      description: `${blogPost.description.description}`,
-      title: `${blogPost.title}`,
+      description: `${blogPost.description}`,
+      pageTitle: `${blogPost.title}`,
     };
 
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        <div className="row post-header my-5">
+        <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
           <div className="col-lg-8">
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
+            { blogPost.subtitle
+              ? <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
+              : undefined
+            }
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
@@ -118,10 +122,8 @@ export const query = graphql`
         node {
           title
           slug
-          originalPublication
-          description {
-            description
-          }
+          subtitle
+          description
           date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
@@ -130,6 +132,7 @@ export const query = graphql`
             }
           }
           tags
+          originalPublication
         }
       }
     }
