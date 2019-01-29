@@ -69,7 +69,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        <div className="row post-header my-5">
+        <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
           <div className="col-lg-8">
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
             { blogPost.subtitle
