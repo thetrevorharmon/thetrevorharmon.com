@@ -73,8 +73,8 @@ module.exports = {
                   title: edge.node.title,
                   description: edge.node.description.description,
                   date: edge.node.date,
-                  url: site.siteMetadata.url + '/blog/' + edge.node.slug,
-                  guid: site.siteMetadata.url + '/blog/' + edge.node.slug,
+                  url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
                   custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
                 })
               })
