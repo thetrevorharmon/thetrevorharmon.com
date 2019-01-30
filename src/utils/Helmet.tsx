@@ -1,8 +1,8 @@
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import favicon from '../favicon.png';
+// import favicon from './favicon.png';
 
 interface HelmetProps {
   pageMetadata?: PageMetadata;
@@ -60,7 +60,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:url',
     },
     {
-      content: `${favicon}`,
+      content: `${data.site.siteMetadata.siteUrl}/favicon.png`,
       property: 'og:image',
     },
     {

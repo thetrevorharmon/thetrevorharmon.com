@@ -34,7 +34,12 @@ module.exports = {
     `gatsby-plugin-tslint`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-favicon`,
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: "./static/favicon.png",
+      }
+    },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sharp`, // for gatsby-image
     `gatsby-transformer-sharp`, // for gatsby-image,
