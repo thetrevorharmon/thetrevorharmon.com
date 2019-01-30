@@ -8,30 +8,6 @@ declare module '*.png' {
   export = content;
 }
 
-declare module 'react-masonry-css' {
-  import * as React from 'react';
-
-  export interface MasonryProps {
-    breakpointCols?: Object;
-    columnClassName?: string;
-  }
-
-  export default class Masonry extends React.Component<MasonryProps & React.HTMLProps<HTMLElement>, any> {
-    render(): JSX.Element;
-  }
-}
-
-declare module 'gatsby-plugin-google-analytics' {
-  import * as React from "react";
-
-  interface OutboundLinkProps {
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-  }
-
-  class OutboundLink extends React.Component<OutboundLinkProps & React.HTMLProps<HTMLAnchorElement>, any> {}
-  export { OutboundLink };
-}
-
 interface PortfolioItem {
   title: string;
   slug: string;

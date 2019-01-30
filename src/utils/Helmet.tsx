@@ -4,8 +4,6 @@ import { Helmet as ReactHelmet } from 'react-helmet';
 
 import { checkHttp } from '../utils';
 
-// import favicon from './favicon.png';
-
 interface HelmetProps {
   pageMetadata?: PageMetadata;
 }
