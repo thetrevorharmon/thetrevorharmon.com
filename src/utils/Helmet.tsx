@@ -1,6 +1,8 @@
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
+
+import { checkHttp } from '../utils';
 
 interface HelmetProps {
   pageMetadata?: PageMetadata;
@@ -20,13 +22,17 @@ const Helmet: React.SFC<HelmetDataProps> = ({
   pageMetadata,
 }) => {
 
-  const title = pageMetadata && pageMetadata.pageTitle
-    ? `${pageMetadata.pageTitle} | ${data.site.siteMetadata.title}`
+  const title = pageMetadata && pageMetadata.title
+    ? `${pageMetadata.title} | ${data.site.siteMetadata.title}`
     : data.site.siteMetadata.title;
 
   const description = pageMetadata && pageMetadata.description
     ? pageMetadata.description
     : data.site.siteMetadata.description;
+
+  const url = pageMetadata && pageMetadata.url
+    ? `${data.site.siteMetadata.siteUrl}${pageMetadata.url}`
+    : data.site.siteMetadata.siteUrl;
 
   const meta = [
     {
@@ -38,11 +44,11 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:type',
     },
     {
-      content: pageMetadata && pageMetadata.pageTitle || title,
+      content: pageMetadata && pageMetadata.title || title,
       property: 'og:title',
     },
     {
-      content: pageMetadata && pageMetadata.description || data.site.siteMetadata.description,
+      content: description,
       property: 'og:description',
     },
     {
@@ -50,8 +56,26 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:site_name',
     },
     {
-      content: `${data.site.siteMetadata.siteUrl}`,
+      content: url,
       property: 'og:url',
+    },
+    {
+      content: pageMetadata && pageMetadata.image
+        ? checkHttp(pageMetadata.image)
+        : `${data.site.siteMetadata.siteUrl}/favicon.png`,
+      property: 'og:image',
+    },
+    {
+      content: 'summary',
+      name: 'twitter:card',
+    },
+    {
+      content: '@thetrevorharmon',
+      name: 'twitter:site',
+    },
+    {
+      content: '@thetrevorharmon',
+      name: 'twitter:creator',
     },
   ];
 

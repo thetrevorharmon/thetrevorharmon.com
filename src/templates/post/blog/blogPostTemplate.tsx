@@ -1,17 +1,16 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import Layout from '../layouts';
+import Layout from '../../../layouts';
 
 import './blogPostTemplate.scss';
-import './syntax-highlighting.scss';
 
 import {
   Header,
   Image,
   Link,
-} from '../UI-Kit';
+} from '../../../UI-Kit';
 
-import { Routes } from '../utils';
+import { Routes } from '../../../utils';
 
 type PostNavigationDirection = 'older' | 'newer';
 
@@ -58,13 +57,15 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
 
     const {
+      slug,
       newerPost,
       olderPost,
     } = this.props.pageContext;
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
-      pageTitle: `${blogPost.title}`,
+      title: `${blogPost.title}`,
+      url: Routes.blogPost(slug),
     };
 
     return (

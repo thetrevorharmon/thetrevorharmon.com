@@ -2,10 +2,12 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import Layout from '../layouts';
-import { Button, Header, Image } from '../UI-Kit';
+import Layout from '../../layouts';
+import { Button, Header, Image } from '../../UI-Kit';
 
 import * as styles from './projectTemplate.module.scss';
+
+import { Routes } from '../../utils';
 
 interface TemplateProps {
   data: {
@@ -16,6 +18,9 @@ interface TemplateProps {
         },
       ],
     },
+  };
+  pageContext: {
+    slug: string,
   };
 }
 
@@ -62,7 +67,9 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const pageMetadata: PageMetadata = {
       description: `${description}`,
-      pageTitle: project.title,
+      image: project.featureImage && project.featureImage.fluid.src || undefined,
+      title: project.title,
+      url: Routes.project(this.props.pageContext.slug),
     };
 
     return (

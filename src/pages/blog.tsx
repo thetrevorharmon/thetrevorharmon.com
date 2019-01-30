@@ -6,7 +6,7 @@ import Layout from '../layouts';
 
 import * as styles from './blog.module.scss';
 
-import '../templates/blogPostTemplate.scss';
+import '../templates/post/blog/blogPostTemplate.scss';
 
 import {
   Button,
@@ -17,8 +17,6 @@ import {
 
 import { Routes } from '../utils';
 
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
 interface ProjectsPageProps {
   data: {
     allContentfulBlogPost: {
@@ -37,7 +35,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
     const pageMetadata: PageMetadata = {
       description: `My thoughts about code, design, and other musings.`,
-      pageTitle: 'Blog',
+      title: 'Blog',
+      url: Routes.blog(),
     };
 
     return (
@@ -51,7 +50,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 'mt-6 mt-lg-8',
               )}
             >
-              {pageMetadata.pageTitle}
+              {pageMetadata.title}
             </Header>
             <Header rank={3} type="Tagline" className="mb-6">
               {pageMetadata.description}

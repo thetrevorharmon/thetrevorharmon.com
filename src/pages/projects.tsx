@@ -11,8 +11,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
+import { Routes } from '../utils';
+
 interface ProjectsPageProps {
   data: {
     allContentfulProject: {
@@ -32,7 +32,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
     const pageMetadata: PageMetadata = {
       description: `These projects represent some, but not all, of the design and
        development work I've done for the past 5 (or so) years.`,
-      pageTitle: 'Projects',
+      title: 'Projects',
+      url: Routes.projects(),
     };
 
     return (

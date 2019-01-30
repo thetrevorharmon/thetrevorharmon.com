@@ -1,10 +1,12 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import Layout from '../layouts';
+import Layout from '../../../layouts';
 
 import './caseStudyTemplate.scss';
 
-import { Header, Image } from '../UI-Kit';
+import { Header, Image } from '../../../UI-Kit';
+
+import { Routes } from '../../../utils';
 
 interface CaseStudyTemplateProps {
   data: {
@@ -16,6 +18,9 @@ interface CaseStudyTemplateProps {
       ],
     },
   };
+  pageContext: {
+    slug: string;
+  };
 }
 
 export default class CaseStudyTemplate extends React.Component<CaseStudyTemplateProps, {}> {
@@ -25,7 +30,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${caseStudy.title} | ${caseStudy.tagline}`,
-      pageTitle: `${caseStudy.title} Case Study`,
+      title: `${caseStudy.title} Case Study`,
+      url: Routes.caseStudy(this.props.pageContext.slug),
     };
 
     return (

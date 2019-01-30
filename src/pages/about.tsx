@@ -14,8 +14,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
+import { Routes } from '../utils';
+
 interface AboutPageProps {
   data: {
     allContentfulAboutPage: {
@@ -41,7 +41,8 @@ export default class AboutPage extends React.Component<AboutPageProps, {}> {
         The thing I enjoy the most (and that people tend to say I'm good at) is front-end development.
         I recently picked up react.js and have been enjoying that.
       `,
-      pageTitle: 'About',
+      title: 'About',
+      url: Routes.about(),
     };
 
     return (
