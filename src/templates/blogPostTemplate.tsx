@@ -58,6 +58,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
 
     const {
+      slug,
       newerPost,
       olderPost,
     } = this.props.pageContext;
@@ -65,6 +66,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
       pageTitle: `${blogPost.title}`,
+      pageUrl: Routes.blogPost(slug),
     };
 
     return (

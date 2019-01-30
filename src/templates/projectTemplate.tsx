@@ -7,6 +7,8 @@ import { Button, Header, Image } from '../UI-Kit';
 
 import * as styles from './projectTemplate.module.scss';
 
+import { Routes } from '../utils';
+
 interface TemplateProps {
   data: {
     allContentfulProject: {
@@ -16,6 +18,9 @@ interface TemplateProps {
         },
       ],
     },
+  };
+  pageContext: {
+    slug: string,
   };
 }
 
@@ -63,6 +68,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
     const pageMetadata: PageMetadata = {
       description: `${description}`,
       pageTitle: project.title,
+      pageUrl: Routes.project(this.props.pageContext.slug),
     };
 
     return (

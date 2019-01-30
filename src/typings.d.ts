@@ -3,6 +3,11 @@ declare module '*.scss' {
   export = content;
 }
 
+declare module '*.png' {
+  const content: any;
+  export content;
+}
+
 declare module 'react-masonry-css' {
   import * as React from 'react';
 
@@ -123,4 +128,5 @@ interface SiteMetadata {
 
 interface PageMetadata extends SiteMetadata {
   pageTitle?: string;
+  pageUrl?: string;
 }

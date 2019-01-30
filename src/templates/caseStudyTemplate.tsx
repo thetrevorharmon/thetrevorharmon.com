@@ -6,6 +6,8 @@ import './caseStudyTemplate.scss';
 
 import { Header, Image } from '../UI-Kit';
 
+import { Routes } from '../utils';
+
 interface CaseStudyTemplateProps {
   data: {
     allContentfulCaseStudy: {
@@ -15,6 +17,9 @@ interface CaseStudyTemplateProps {
         },
       ],
     },
+  };
+  pageContext: {
+    slug: string;
   };
 }
 
@@ -26,6 +31,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const pageMetadata: PageMetadata = {
       description: `${caseStudy.title} | ${caseStudy.tagline}`,
       pageTitle: `${caseStudy.title} Case Study`,
+      pageUrl: Routes.caseStudy(this.props.pageContext.slug),
     };
 
     return (

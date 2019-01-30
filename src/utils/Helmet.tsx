@@ -2,6 +2,8 @@ import { graphql, StaticQuery } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
+import favicon from '../favicon.png';
+
 interface HelmetProps {
   pageMetadata?: PageMetadata;
 }
@@ -28,6 +30,10 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     ? pageMetadata.description
     : data.site.siteMetadata.description;
 
+  const url = pageMetadata && pageMetadata.pageUrl
+    ? `${data.site.siteMetadata.siteUrl}${pageMetadata.pageUrl}`
+    : data.site.siteMetadata.siteUrl;
+
   const meta = [
     {
       content: description,
@@ -50,8 +56,12 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:site_name',
     },
     {
-      content: `${data.site.siteMetadata.siteUrl}`,
+      content: url,
       property: 'og:url',
+    },
+    {
+      content: `${favicon}`,
+      property: 'og:image',
     },
   ];
 

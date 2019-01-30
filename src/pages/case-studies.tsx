@@ -12,6 +12,8 @@ import {
   Tile,
 } from '../UI-Kit';
 
+import { Routes } from '../utils';
+
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface CaseStudyPageProps {
@@ -34,6 +36,7 @@ export default class CaseStudiesPage extends React.Component<CaseStudyPageProps,
       description: `These case studies are an in-depth look at some of the more interesting design
       and development work I've done. I try to detail my process and the results of the work I did.`,
       pageTitle: 'Case Studies',
+      pageUrl: Routes.caseStudies(),
     };
 
     return (
