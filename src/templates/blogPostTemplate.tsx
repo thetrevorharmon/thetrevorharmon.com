@@ -65,8 +65,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
-      pageTitle: `${blogPost.title}`,
-      pageUrl: Routes.blogPost(slug),
+      title: `${blogPost.title}`,
+      url: Routes.blogPost(slug),
     };
 
     return (

@@ -22,17 +22,17 @@ const Helmet: React.SFC<HelmetDataProps> = ({
   pageMetadata,
 }) => {
 
-  const title = pageMetadata && pageMetadata.pageTitle
-    ? `${pageMetadata.pageTitle} | ${data.site.siteMetadata.title}`
+  const title = pageMetadata && pageMetadata.title
+    ? `${pageMetadata.title} | ${data.site.siteMetadata.title}`
     : data.site.siteMetadata.title;
 
   const description = pageMetadata && pageMetadata.description
     ? pageMetadata.description
     : data.site.siteMetadata.description;
 
-  const url = pageMetadata && pageMetadata.pageUrl
-    ? `${data.site.siteMetadata.siteUrl}${pageMetadata.pageUrl}`
-    : data.site.siteMetadata.siteUrl;
+  const url = pageMetadata && pageMetadata.url
+    ? `${data.site.siteMetadata.url}${pageMetadata.url}`
+    : data.site.siteMetadata.url;
 
   const meta = [
     {
@@ -44,7 +44,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:type',
     },
     {
-      content: pageMetadata && pageMetadata.pageTitle || title,
+      content: pageMetadata && pageMetadata.title || title,
       property: 'og:title',
     },
     {
@@ -60,7 +60,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:url',
     },
     {
-      content: `${data.site.siteMetadata.siteUrl}/favicon.png`,
+      content: `${data.site.siteMetadata.url}/favicon.png`,
       property: 'og:image',
     },
     {
@@ -99,7 +99,7 @@ export default (props: HelmetProps) => (
           siteMetadata {
             title
             description
-            siteUrl
+            url
           }
         }
       }

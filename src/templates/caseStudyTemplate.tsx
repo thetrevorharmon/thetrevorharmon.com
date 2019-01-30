@@ -30,8 +30,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${caseStudy.title} | ${caseStudy.tagline}`,
-      pageTitle: `${caseStudy.title} Case Study`,
-      pageUrl: Routes.caseStudy(this.props.pageContext.slug),
+      title: `${caseStudy.title} Case Study`,
+      url: Routes.caseStudy(this.props.pageContext.slug),
     };
 
     return (

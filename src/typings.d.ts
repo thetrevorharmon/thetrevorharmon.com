@@ -123,10 +123,11 @@ interface SiteMetadata {
   title?: string;
   description?: string;
   tagline?: string;
-  siteUrl?: string;
+  url?: string;
 }
 
 interface PageMetadata extends SiteMetadata {
-  pageTitle?: string;
-  pageUrl?: string;
+  title?: string;
+  url?: string;
+  image?: string;
 }

@@ -11,7 +11,7 @@ module.exports = {
     title: `The Trevor Harmon`,
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
-    siteUrl: `https://thetrevorharmon.com`,
+    url: `https://thetrevorharmon.com`,
     author: 'Trevor Harmon',
   },
   plugins: [
@@ -73,8 +73,8 @@ module.exports = {
                   title: edge.node.title,
                   description: edge.node.description.description,
                   date: edge.node.date,
-                  url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
-                  guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
+                  url: site.siteMetadata.url + '/blog/' + edge.node.slug,
+                  guid: site.siteMetadata.url + '/blog/' + edge.node.slug,
                   custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
                 })
               })

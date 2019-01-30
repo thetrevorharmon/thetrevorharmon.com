@@ -37,8 +37,8 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
 
     const pageMetadata: PageMetadata = {
       description: `My thoughts about code, design, and other musings.`,
-      pageTitle: 'Blog',
-      pageUrl: Routes.blog(),
+      title: 'Blog',
+      url: Routes.blog(),
     };
 
     return (
