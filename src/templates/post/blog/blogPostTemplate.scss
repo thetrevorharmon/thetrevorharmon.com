@@ -1,5 +1,5 @@
-@import '../UI-Kit/Header/Header.module.scss';
-@import './postTemplate.scss';
+@import '../../../styles/_variables.scss';
+@import '../postTemplate.scss';
 
 .blog-post-template {
   @extend .post-template;

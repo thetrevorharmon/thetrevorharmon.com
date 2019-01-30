@@ -1,17 +1,16 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import Layout from '../layouts';
+import Layout from '../../../layouts';
 
 import './blogPostTemplate.scss';
-import './syntax-highlighting.scss';
 
 import {
   Header,
   Image,
   Link,
-} from '../UI-Kit';
+} from '../../../UI-Kit';
 
-import { Routes } from '../utils';
+import { Routes } from '../../../utils';
 
 type PostNavigationDirection = 'older' | 'newer';
 

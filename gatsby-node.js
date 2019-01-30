@@ -40,7 +40,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allContentfulProject.edges.forEach(({ node }) => {
         createPage({
           path: `projects/${node.slug}`,
-          component: path.resolve(`./src/templates/projectTemplate.tsx`),
+          component: path.resolve(`./src/templates/project/projectTemplate.tsx`),
           context: {
             slug: node.slug,
           },
@@ -49,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allContentfulCaseStudy.edges.forEach(({ node }) => {
         createPage({
           path: `case-studies/${node.slug}`,
-          component: path.resolve(`./src/templates/caseStudyTemplate.tsx`),
+          component: path.resolve(`./src/templates/post/caseStudy/caseStudyTemplate.tsx`),
           context: {
             slug: node.slug,
           },
@@ -68,7 +68,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         createPage({
           path: `blog/${node.slug}`,
-          component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
+          component: path.resolve(`./src/templates/post/blog/blogPostTemplate.tsx`),
           context: {
             slug: node.slug,
             newerPost: newerPost,

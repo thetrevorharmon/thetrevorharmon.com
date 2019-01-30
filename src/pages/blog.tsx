@@ -6,7 +6,7 @@ import Layout from '../layouts';
 
 import * as styles from './blog.module.scss';
 
-import '../templates/blogPostTemplate.scss';
+import '../templates/post/blog/blogPostTemplate.scss';
 
 import {
   Button,
@@ -52,7 +52,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 'mt-6 mt-lg-8',
               )}
             >
-              {pageMetadata.pageTitle}
+              {pageMetadata.title}
             </Header>
             <Header rank={3} type="Tagline" className="mb-6">
               {pageMetadata.description}
