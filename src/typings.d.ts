@@ -5,7 +5,7 @@ declare module '*.scss' {
 
 declare module '*.png' {
   const content: any;
-  export content;
+  export = content;
 }
 
 declare module 'react-masonry-css' {
@@ -123,11 +123,10 @@ interface SiteMetadata {
   title?: string;
   description?: string;
   tagline?: string;
-  url?: string;
+  siteUrl?: string;
 }
 
 interface PageMetadata extends SiteMetadata {
-  title?: string;
   url?: string;
   image?: string;
 }

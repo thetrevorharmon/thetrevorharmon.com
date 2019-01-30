@@ -11,7 +11,7 @@ module.exports = {
     title: `The Trevor Harmon`,
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
-    url: `https://thetrevorharmon.com`,
+    siteUrl: `https://thetrevorharmon.com`,
     author: 'Trevor Harmon',
   },
   plugins: [

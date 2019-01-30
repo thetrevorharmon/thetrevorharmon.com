@@ -2,6 +2,8 @@ import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
+import { checkHttp } from '../utils';
+
 // import favicon from './favicon.png';
 
 interface HelmetProps {
@@ -31,8 +33,8 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     : data.site.siteMetadata.description;
 
   const url = pageMetadata && pageMetadata.url
-    ? `${data.site.siteMetadata.url}${pageMetadata.url}`
-    : data.site.siteMetadata.url;
+    ? `${data.site.siteMetadata.siteUrl}${pageMetadata.url}`
+    : data.site.siteMetadata.siteUrl;
 
   const meta = [
     {
@@ -60,7 +62,9 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       property: 'og:url',
     },
     {
-      content: `${data.site.siteMetadata.url}/favicon.png`,
+      content: pageMetadata && pageMetadata.image
+        ? checkHttp(pageMetadata.image)
+        : `${data.site.siteMetadata.siteUrl}/favicon.png`,
       property: 'og:image',
     },
     {
@@ -99,7 +103,7 @@ export default (props: HelmetProps) => (
           siteMetadata {
             title
             description
-            url
+            siteUrl
           }
         }
       }

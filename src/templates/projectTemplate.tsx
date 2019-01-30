@@ -67,6 +67,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const pageMetadata: PageMetadata = {
       description: `${description}`,
+      image: project.featureImage && project.featureImage.fluid.src || undefined,
       title: project.title,
       url: Routes.project(this.props.pageContext.slug),
     };
