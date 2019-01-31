@@ -29,7 +29,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     const caseStudy = this.props.data.allContentfulCaseStudy.edges[0].node;
 
     const pageMetadata: PageMetadata = {
-      description: `${caseStudy.title} | ${caseStudy.tagline}`,
+      description: `${caseStudy.tagline}`,
+      image: caseStudy.featureImage.fluid.src,
       title: `${caseStudy.title} Case Study`,
       url: Routes.caseStudy(this.props.pageContext.slug),
     };

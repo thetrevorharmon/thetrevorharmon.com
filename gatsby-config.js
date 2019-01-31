@@ -13,6 +13,10 @@ module.exports = {
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
     author: 'Trevor Harmon',
+    twitter: {
+      author: '@thetrevorharmon',
+      site: '@thetrevorharmon',
+    }
   },
   plugins: [
     {
@@ -38,9 +42,13 @@ module.exports = {
       resolve: `gatsby-plugin-favicon`,
       options: {
         logo: "./static/favicon.png",
+        icons: {
+          appleStartup: false,
+        }
       }
     },
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sharp`, // for gatsby-image
     `gatsby-transformer-sharp`, // for gatsby-image,
     {

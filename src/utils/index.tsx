@@ -1,3 +1,4 @@
 export { default as Helmet } from './Helmet';
-export { ExternalLinks, Routes } from './routes';
 export { checkHttp } from './helpers';
+export { openGraphMeta } from './openGraphMeta';
+export { ExternalLinks, Routes } from './routes';

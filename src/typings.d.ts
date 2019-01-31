@@ -96,13 +96,19 @@ interface MediumPost {
 }
 
 interface SiteMetadata {
-  title?: string;
-  description?: string;
-  tagline?: string;
-  siteUrl?: string;
+  title: string;
+  description: string;   
+  tagline: string;
+  siteUrl: string;
+  twitter: {
+    author: string;
+    site: string;
+  }
 }
 
-interface PageMetadata extends SiteMetadata {
+interface PageMetadata {
+  title?: string;
+  description?: string;   
   url?: string;
   image?: string;
 }
