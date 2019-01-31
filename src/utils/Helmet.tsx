@@ -2,10 +2,10 @@ import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import { checkHttp } from '../utils';
+import { openGraphMeta } from '../utils';
 
 interface HelmetProps {
-  pageMetadata?: PageMetadata;
+  pageMetadata: PageMetadata;
 }
 
 interface HelmetDataProps extends HelmetProps {
@@ -22,67 +22,32 @@ const Helmet: React.SFC<HelmetDataProps> = ({
   pageMetadata,
 }) => {
 
-  const title = pageMetadata && pageMetadata.title
-    ? `${pageMetadata.title} | ${data.site.siteMetadata.title}`
-    : data.site.siteMetadata.title;
+  const {
+    siteMetadata,
+  } = data.site;
+
+  const title = pageMetadata.title
+    ? `${pageMetadata.title} | ${siteMetadata.title}`
+    : siteMetadata.title;
 
   const description = pageMetadata && pageMetadata.description
     ? pageMetadata.description
-    : data.site.siteMetadata.description;
+    : siteMetadata.description;
 
-  const url = pageMetadata && pageMetadata.url
-    ? `${data.site.siteMetadata.siteUrl}${pageMetadata.url}`
-    : data.site.siteMetadata.siteUrl;
+  const generatedMeta = openGraphMeta(siteMetadata, pageMetadata);
 
   const meta = [
     {
-      content: description,
+      content: pageMetadata.description || siteMetadata.description,
       name: 'Description',
     },
-    {
-      content: 'website',
-      property: 'og:type',
-    },
-    {
-      content: pageMetadata && pageMetadata.title || title,
-      property: 'og:title',
-    },
-    {
-      content: description,
-      property: 'og:description',
-    },
-    {
-      content: data.site.siteMetadata.title,
-      property: 'og:site_name',
-    },
-    {
-      content: url,
-      property: 'og:url',
-    },
-    {
-      content: pageMetadata && pageMetadata.image
-        ? checkHttp(pageMetadata.image)
-        : `${data.site.siteMetadata.siteUrl}/favicon.png`,
-      property: 'og:image',
-    },
-    {
-      content: 'summary',
-      name: 'twitter:card',
-    },
-    {
-      content: '@thetrevorharmon',
-      name: 'twitter:site',
-    },
-    {
-      content: '@thetrevorharmon',
-      name: 'twitter:creator',
-    },
+    ...generatedMeta,
   ];
 
   return (
     <ReactHelmet
       title={title}
-      meta={meta}
+      meta={generatedMeta}
     >
       <html lang="en" />
     </ReactHelmet>
@@ -102,6 +67,10 @@ export default (props: HelmetProps) => (
             title
             description
             siteUrl
+            twitter {
+              author
+              site
+            }
           }
         }
       }
