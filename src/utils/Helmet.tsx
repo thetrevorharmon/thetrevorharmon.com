@@ -2,7 +2,7 @@ import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import { openGraphMeta } from '../utils';
+import { openGraphMetaSimple } from '../utils';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
@@ -34,7 +34,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     ? pageMetadata.description
     : siteMetadata.description;
 
-  const generatedMeta = openGraphMeta(siteMetadata, pageMetadata);
+  const generatedMeta = openGraphMetaSimple(siteMetadata, pageMetadata);
 
   const meta = [
     {

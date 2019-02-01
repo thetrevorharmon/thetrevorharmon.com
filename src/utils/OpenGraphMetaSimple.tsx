@@ -1,7 +1,7 @@
 import { checkHttp } from '../utils';
-const openGraphMeta = (site: SiteMetadata, page: PageMetadata) => {
+const openGraphMetaSimple = (site: SiteMetadata, page: PageMetadata) => {
 
-  interface OpenGraphConstants {
+  interface OpenGraphConstantsSimple {
     description: string;
     image: string;
     siteName: string;
@@ -26,14 +26,14 @@ const openGraphMeta = (site: SiteMetadata, page: PageMetadata) => {
     url: string;
   }
 
-  interface OpenGraphMeta {
+  interface OpenGraphMetaSimple {
     content: string;
     property?: string;
     name?: string;
   }
 
   // og means openGraph, to save space
-  const og: OpenGraphConstants = {
+  const og: OpenGraphConstantsSimple = {
     description: 'og:description',
     image: 'og:image',
     siteName: 'og:site_name',
@@ -58,7 +58,7 @@ const openGraphMeta = (site: SiteMetadata, page: PageMetadata) => {
     url: 'og:url',
   };
 
-  const meta: OpenGraphMeta[] = [
+  const meta: OpenGraphMetaSimple[] = [
     {
       content: page.title || site.title,
       property: og.title,
@@ -101,5 +101,5 @@ const openGraphMeta = (site: SiteMetadata, page: PageMetadata) => {
 };
 
 export {
-  openGraphMeta,
+  openGraphMetaSimple,
 };
