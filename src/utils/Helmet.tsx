@@ -44,28 +44,33 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     ...generatedMeta,
   ];
 
-  const test = OpenGraphMeta.collection({
-    page: {
+  const metaProps = {
+    basic: {
       title: pageMetadata.title || siteMetadata.title,
-      description: pageMetadata.description || siteMetadata.description, 
       url: pageMetadata.url ? `${siteMetadata.siteUrl}${pageMetadata.url}/` : siteMetadata.siteUrl,
       image: pageMetadata.image ? checkHttp(pageMetadata.image) : `${siteMetadata.siteUrl}/favicon.png`
     },
-    site: {
-      name: siteMetadata.title
+    optional: {
+      description: pageMetadata.description || siteMetadata.description, 
+      siteName: siteMetadata.title
     },
     twitter: {
       authorHandle: siteMetadata.twitter.author,
       siteHandle: siteMetadata.twitter.site,
     }
-  })
+  };
+
+  const metaTags = new OpenGraphMeta(metaProps).metaTagArray();
+
+  console.log(metaTags);
 
   return (
     <ReactHelmet
       title={title}
-      meta={generatedMeta}
+      // meta={metaTags}
     >
       <html lang="en" />
+
     </ReactHelmet>
   );
 };

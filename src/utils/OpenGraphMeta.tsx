@@ -1,8 +1,6 @@
 import { checkHttp } from '../utils';
 import * as React from 'react';
 
-
-
 interface OpenGraphMetaPropsIndexSignature {
   [key: string]: {
     [key: string]: string | undefined;
@@ -10,16 +8,15 @@ interface OpenGraphMetaPropsIndexSignature {
 }
 
 interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
-  page: {
+  basic: {
     title: string;
-    description: string;
     url: string;
-    image?: string;
-  };
-  site?: {
-    image?: string;
+    image: string;
     type?: string;
-    name?: string;
+  };
+  optional?: {
+    description?: string;
+    siteName?: string;
     locale?: string;
   };
   twitter?: {
@@ -59,8 +56,13 @@ interface OpenGraphConstants {
   url: string;
 }
 
-export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {}> {
-  static og: OpenGraphConstants = {
+interface OpenGraphMetaTag {
+  content: string;
+  property: string;
+}
+
+export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps> {
+  private static og: OpenGraphConstants = {
     description: 'og:description',
     image: 'og:image',
     locale: 'og:locale',
@@ -88,15 +90,14 @@ export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {
     url: 'og:url',
   };
 
-  static mapping: { [key: string]: string } = {
-    'page.title': `${OpenGraphMeta.og.title}`,
-    'page.description': `${OpenGraphMeta.og.description}`,
-    'page.url': `${OpenGraphMeta.og.url}`,
-    'page.image': `${OpenGraphMeta.og.image}`,
-    'site.image': `${OpenGraphMeta.og.image}`,
-    'site.type': `${OpenGraphMeta.og.type.propertyName}`,
-    'site.name': `${OpenGraphMeta.og.siteName}`,
-    'site.locale': `${OpenGraphMeta.og.locale}`,
+  private static mapping: { [key: string]: string } = {
+    'basic.title': `${OpenGraphMeta.og.title}`,
+    'basic.url': `${OpenGraphMeta.og.url}`,
+    'basic.image': `${OpenGraphMeta.og.image}`,
+    'basic.type': `${OpenGraphMeta.og.type.propertyName}`,
+    'optional.description': `${OpenGraphMeta.og.description}`,
+    'optional.siteName': `${OpenGraphMeta.og.siteName}`,
+    'optional.locale': `${OpenGraphMeta.og.locale}`,
     'twitter.image': `${OpenGraphMeta.og.twitter.image}`,
     'twitter.description': `${OpenGraphMeta.og.twitter.description}`,
     'twitter.cardType': `${OpenGraphMeta.og.twitter.card.propertyName}`,
@@ -104,31 +105,29 @@ export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {
     'twitter.authorHandle': `${OpenGraphMeta.og.twitter.attributions.site}`,
   };
 
-  public static collection = (props: OpenGraphMetaProps) => {
-    const {
-      site,
-      page,
-      twitter,
-    } = props;
+  private static defaults: OpenGraphMetaTag[] = [
+    {
+      content: OpenGraphMeta.og.twitter.card.type.summary,
+      property: OpenGraphMeta.og.twitter.card.propertyName,
+    },
+    {
+      content: OpenGraphMeta.og.type.website,
+      property: OpenGraphMeta.og.type.propertyName,
+    },
+  ];
 
-    const og = OpenGraphMeta.og;
+  public metaTagArray = (): OpenGraphMetaTag[] => {
+    let meta: OpenGraphMetaTag[] = [];
 
-    interface Meta {
-      content: string;
-      property: string;
-    }
-
-    let meta: Meta[] = [];
-
-    for (let propGroupName in props) {
+    for (let propGroupName in this.props) {
       if (propGroupName) {
-        let propGroup = props[propGroupName];
+        let propGroup = this.props[propGroupName];
 
         for (let propName in propGroup) {
           let key = `${propGroupName}.${propName}`;
           let content = propGroup[propName]
 
-          content ? meta.push({
+          content && content != "null" ? meta.push({
             content: content,
             property: OpenGraphMeta.mapping[key]
           }) : undefined;
@@ -136,33 +135,20 @@ export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {
       }
     }
 
-    let defaults: Meta[] = [
-      {
-        content: og.twitter.card.type.summary,
-        property: og.twitter.card.propertyName,
-      },
-      {
-        content: og.type.website,
-        property: og.type.propertyName,
-      },
-    ]
+    return [...OpenGraphMeta.defaults, ...meta];
+  }
 
-    let metaWithDefaults = [...defaults, ...meta];
-
-    console.log(metaWithDefaults);
-
-
+  public render() {
+    const metaTags = this.metaTagArray();
+    return (
+      <>
+        {metaTags.map(tag => {
+          <meta property={tag.property} content={tag.content} />
+        })}
+      </>
+    )
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 const openGraphMetaSimple = (site: SiteMetadata, page: PageMetadata) => {
