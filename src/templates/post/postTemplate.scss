@@ -65,13 +65,14 @@
       }
     }
 
-    p {
-      margin-bottom: 1.5rem;
+    p,
+    .gatsby-highlight {
+      margin: 0.5rem 0 1.5rem;
+    }
 
-      img {
-        margin-bottom: 0;
-        margin-top: 0.5rem;
-      }
+    p img {
+      margin-bottom: 0;
+      margin-top: 0.5rem;
     }
 
     blockquote {

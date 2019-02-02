@@ -2,7 +2,7 @@ import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import { openGraphMeta } from '../utils';
+import { checkHttp, OpenGraphMetaTags } from '../utils';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
@@ -26,30 +26,44 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     siteMetadata,
   } = data.site;
 
-  const title = pageMetadata.title
-    ? `${pageMetadata.title} | ${siteMetadata.title}`
-    : siteMetadata.title;
+  const page = pageMetadata;
+  const site = siteMetadata;
 
-  const description = pageMetadata && pageMetadata.description
-    ? pageMetadata.description
-    : siteMetadata.description;
+  const title = page.title
+    ? `${page.title} | ${site.title}`
+    : site.title;
 
-  const generatedMeta = openGraphMeta(siteMetadata, pageMetadata);
+  const openGraphMeta = OpenGraphMetaTags({
+    basic: {
+      image: page.image ? checkHttp(page.image) : `${site.siteUrl}/favicon.png`,
+      title: page.title || site.title,
+      url: page.url ? `${site.siteUrl}${page.url}/` : site.siteUrl,
+    },
+    optional: {
+      description: page.description || site.description,
+      siteName: site.title,
+    },
+    twitter: {
+      authorHandle: site.twitter.author,
+      siteHandle: site.twitter.site,
+    },
+  });
 
   const meta = [
     {
-      content: pageMetadata.description || siteMetadata.description,
+      content: page.description || site.description,
       name: 'Description',
     },
-    ...generatedMeta,
+    ...openGraphMeta,
   ];
 
   return (
     <ReactHelmet
       title={title}
-      meta={generatedMeta}
+      meta={meta}
     >
       <html lang="en" />
+
     </ReactHelmet>
   );
 };
