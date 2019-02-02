@@ -60,9 +60,9 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     }
   };
 
-  const metaTags = new OpenGraphMeta(metaProps).metaTagArray();
+  // const metaTags = new OpenGraphMeta(metaProps).metaTagArray();
 
-  console.log(metaTags);
+  // console.log(metaTags);
 
   return (
     <ReactHelmet
@@ -70,6 +70,7 @@ const Helmet: React.SFC<HelmetDataProps> = ({
       // meta={metaTags}
     >
       <html lang="en" />
+        <OpenGraphMeta basic={metaProps.basic} />
 
     </ReactHelmet>
   );

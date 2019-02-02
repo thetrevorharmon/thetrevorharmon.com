@@ -1,3 +1,5 @@
+import { Helmet } from 'react-helmet';
+
 import { checkHttp } from '../utils';
 import * as React from 'react';
 
@@ -61,7 +63,7 @@ interface OpenGraphMetaTag {
   property: string;
 }
 
-export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps> {
+export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {}> {
   private static og: OpenGraphConstants = {
     description: 'og:description',
     image: 'og:image',
@@ -140,12 +142,13 @@ export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps> {
 
   public render() {
     const metaTags = this.metaTagArray();
+    console.log(metaTags);
     return (
-      <>
+      <Helmet>
         {metaTags.map(tag => {
           <meta property={tag.property} content={tag.content} />
         })}
-      </>
+      </Helmet>
     )
   }
 }
