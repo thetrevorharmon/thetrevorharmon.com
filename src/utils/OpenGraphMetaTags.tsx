@@ -144,18 +144,6 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps) => {
   };
 
   return metaTagArray(props);
-
-  // public render() {
-  //   const metaTags = this.metaTagArray();
-  //   console.log(metaTags);
-  //   return (
-  //     <Helmet>
-  //       {metaTags.map(tag => {
-  //         <meta property={tag.property} content={tag.content} />
-  //       })}
-  //     </Helmet>
-  //   )
-  // }
 };
 
 export {
