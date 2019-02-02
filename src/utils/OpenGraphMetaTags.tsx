@@ -60,7 +60,7 @@ export interface OpenGraphMetaTag {
   property: string;
 }
 
-const OpenGraphMeta = (props: OpenGraphMetaProps) => {
+const OpenGraphMetaTags = (props: OpenGraphMetaProps) => {
   const og: OpenGraphMetaConstants = {
     description: 'og:description',
     image: 'og:image',
@@ -94,9 +94,11 @@ const OpenGraphMeta = (props: OpenGraphMetaProps) => {
     'basic.title': `${og.title}`,
     'basic.type': `${og.type.propertyName}`,
     'basic.url': `${og.url}`,
+
     'optional.description': `${og.description}`,
     'optional.locale': `${og.locale}`,
     'optional.siteName': `${og.siteName}`,
+
     'twitter.authorHandle': `${og.twitter.attributions.site}`,
     'twitter.cardType': `${og.twitter.card.propertyName}`,
     'twitter.description': `${og.twitter.description}`,
@@ -127,7 +129,7 @@ const OpenGraphMeta = (props: OpenGraphMetaProps) => {
             const key = `${propGroupName}.${propName}`;
             const content = propGroup[propName];
 
-            if (content && content !== 'null') {
+            if (content && content !== 'null' && mapping[key]) {
               meta.push({
                 content: `${content}`,
                 property: mapping[key],
@@ -157,5 +159,5 @@ const OpenGraphMeta = (props: OpenGraphMetaProps) => {
 };
 
 export {
-  OpenGraphMeta,
+  OpenGraphMetaTags,
 };
