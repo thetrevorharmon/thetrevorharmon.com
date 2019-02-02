@@ -26,44 +26,41 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     siteMetadata,
   } = data.site;
 
-  const title = pageMetadata.title
-    ? `${pageMetadata.title} | ${siteMetadata.title}`
-    : siteMetadata.title;
+  const page = pageMetadata;
+  const site = siteMetadata;
 
-  const description = pageMetadata && pageMetadata.description
-    ? pageMetadata.description
-    : siteMetadata.description;
+  const title = page.title
+    ? `${page.title} | ${site.title}`
+    : site.title;
 
-  // const generatedMeta = openGraphMetaSimple(siteMetadata, pageMetadata);
+  const openGraphMeta = OpenGraphMetaTags({
+    basic: {
+      image: page.image ? checkHttp(page.image) : `${site.siteUrl}/favicon.png`,
+      title: page.title || site.title,
+      url: page.url ? `${site.siteUrl}${page.url}/` : site.siteUrl,
+    },
+    optional: {
+      description: page.description || site.description,
+      siteName: site.title,
+    },
+    twitter: {
+      authorHandle: site.twitter.author,
+      siteHandle: site.twitter.site,
+    },
+  });
 
   const meta = [
     {
-      content: pageMetadata.description || siteMetadata.description,
+      content: page.description || site.description,
       name: 'Description',
     },
-    // ...generatedMeta,
+    ...openGraphMeta,
   ];
-
-  const metaProps = {
-    basic: {
-      image: pageMetadata.image ? checkHttp(pageMetadata.image) : `${siteMetadata.siteUrl}/favicon.png`,
-      title: pageMetadata.title || siteMetadata.title,
-      url: pageMetadata.url ? `${siteMetadata.siteUrl}${pageMetadata.url}/` : siteMetadata.siteUrl,
-    },
-    optional: {
-      description: pageMetadata.description || siteMetadata.description,
-      siteName: siteMetadata.title,
-    },
-    twitter: {
-      authorHandle: siteMetadata.twitter.author,
-      siteHandle: siteMetadata.twitter.site,
-    },
-  };
 
   return (
     <ReactHelmet
       title={title}
-      meta={OpenGraphMetaTags(metaProps)}
+      meta={meta}
     >
       <html lang="en" />
 
