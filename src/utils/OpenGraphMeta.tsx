@@ -1,15 +1,12 @@
-import { Helmet } from 'react-helmet';
-
-import { checkHttp } from '../utils';
 import * as React from 'react';
 
-interface OpenGraphMetaPropsIndexSignature {
+export interface OpenGraphMetaPropsIndexSignature {
   [key: string]: {
     [key: string]: string | undefined;
-  } | undefined
+  } | undefined;
 }
 
-interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
+export interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
   basic: {
     title: string;
     url: string;
@@ -30,7 +27,7 @@ interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
   };
 }
 
-interface OpenGraphConstants {
+export interface OpenGraphMetaConstants {
   description: string;
   image: string;
   locale: string;
@@ -58,13 +55,13 @@ interface OpenGraphConstants {
   url: string;
 }
 
-interface OpenGraphMetaTag {
+export interface OpenGraphMetaTag {
   content: string;
   property: string;
 }
 
-export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {}> {
-  private static og: OpenGraphConstants = {
+const OpenGraphMeta = (props: OpenGraphMetaProps) => {
+  const og: OpenGraphMetaConstants = {
     description: 'og:description',
     image: 'og:image',
     locale: 'og:locale',
@@ -92,170 +89,73 @@ export default class OpenGraphMeta extends React.Component<OpenGraphMetaProps, {
     url: 'og:url',
   };
 
-  private static mapping: { [key: string]: string } = {
-    'basic.title': `${OpenGraphMeta.og.title}`,
-    'basic.url': `${OpenGraphMeta.og.url}`,
-    'basic.image': `${OpenGraphMeta.og.image}`,
-    'basic.type': `${OpenGraphMeta.og.type.propertyName}`,
-    'optional.description': `${OpenGraphMeta.og.description}`,
-    'optional.siteName': `${OpenGraphMeta.og.siteName}`,
-    'optional.locale': `${OpenGraphMeta.og.locale}`,
-    'twitter.image': `${OpenGraphMeta.og.twitter.image}`,
-    'twitter.description': `${OpenGraphMeta.og.twitter.description}`,
-    'twitter.cardType': `${OpenGraphMeta.og.twitter.card.propertyName}`,
-    'twitter.siteHandle': `${OpenGraphMeta.og.twitter.attributions.site}`,
-    'twitter.authorHandle': `${OpenGraphMeta.og.twitter.attributions.site}`,
+  const mapping: { [key: string]: string } = {
+    'basic.image': `${og.image}`,
+    'basic.title': `${og.title}`,
+    'basic.type': `${og.type.propertyName}`,
+    'basic.url': `${og.url}`,
+    'optional.description': `${og.description}`,
+    'optional.locale': `${og.locale}`,
+    'optional.siteName': `${og.siteName}`,
+    'twitter.authorHandle': `${og.twitter.attributions.site}`,
+    'twitter.cardType': `${og.twitter.card.propertyName}`,
+    'twitter.description': `${og.twitter.description}`,
+    'twitter.image': `${og.twitter.image}`,
+    'twitter.siteHandle': `${og.twitter.attributions.site}`,
   };
 
-  private static defaults: OpenGraphMetaTag[] = [
+  const defaults: OpenGraphMetaTag[] = [
     {
-      content: OpenGraphMeta.og.twitter.card.type.summary,
-      property: OpenGraphMeta.og.twitter.card.propertyName,
-    },
-    {
-      content: OpenGraphMeta.og.type.website,
-      property: OpenGraphMeta.og.type.propertyName,
-    },
-  ];
-
-  public metaTagArray = (): OpenGraphMetaTag[] => {
-    let meta: OpenGraphMetaTag[] = [];
-
-    for (let propGroupName in this.props) {
-      if (propGroupName) {
-        let propGroup = this.props[propGroupName];
-
-        for (let propName in propGroup) {
-          let key = `${propGroupName}.${propName}`;
-          let content = propGroup[propName]
-
-          content && content != "null" ? meta.push({
-            content: content,
-            property: OpenGraphMeta.mapping[key]
-          }) : undefined;
-        }
-      }
-    }
-
-    return [...OpenGraphMeta.defaults, ...meta];
-  }
-
-  public render() {
-    const metaTags = this.metaTagArray();
-    console.log(metaTags);
-    return (
-      <Helmet>
-        {metaTags.map(tag => {
-          <meta property={tag.property} content={tag.content} />
-        })}
-      </Helmet>
-    )
-  }
-}
-
-
-const openGraphMetaSimple = (site: SiteMetadata, page: PageMetadata) => {
-
-  interface OpenGraphConstants {
-    description: string;
-    image: string;
-    siteName: string;
-    title: string;
-    twitter: {
-      attributions: {
-        creator: string;
-        site: string;
-      },
-      card: {
-        propertyName: string;
-        type: {
-          largeImage: string;
-          summary: string;
-        },
-      },
-    };
-    type: {
-      propertyName: string;
-      website: string;
-    };
-    url: string;
-  }
-
-  interface OpenGraphMetaSimple {
-    content: string;
-    property?: string;
-    name?: string;
-  }
-
-  // og means openGraph, to save space
-  const og: OpenGraphConstants = {
-    description: 'og:description',
-    image: 'og:image',
-    siteName: 'og:site_name',
-    title: 'og:title',
-    twitter: {
-      attributions: {
-        creator: 'twitter:creator',
-        site: 'twitter:site',
-      },
-      card: {
-        propertyName: 'twitter:card',
-        type: {
-          largeImage: 'summary_large_image',
-          summary: 'summary',
-        },
-      },
-    },
-    type: {
-      propertyName: 'og:type',
-      website: 'website',
-    },
-    url: 'og:url',
-  };
-
-  const meta: OpenGraphMetaSimple[] = [
-    {
-      content: page.title || site.title,
-      property: og.title,
-    },
-    {
-      content: page.description || site.description,
-      property: og.description,
-    },
-    {
-      content: page.url ? `${site.siteUrl}${page.url}/` : site.siteUrl,
-      property: og.url,
-    },
-    {
-      content: page.image ? checkHttp(page.image) : `${site.siteUrl}/favicon.png`,
-      property: og.image,
-    },
-    {
-      content: page.image ? og.twitter.card.type.largeImage : og.twitter.card.type.summary,
+      content: og.twitter.card.type.summary,
       property: og.twitter.card.propertyName,
     },
     {
       content: og.type.website,
       property: og.type.propertyName,
     },
-    {
-      content: site.title,
-      property: og.siteName,
-    },
-    {
-      content: site.twitter.site,
-      name: og.twitter.attributions.site,
-    },
-    {
-      content: site.twitter.author,
-      name: og.twitter.attributions.creator,
-    },
   ];
 
-  return meta;
+  const metaTagArray = (metaProps: OpenGraphMetaProps): OpenGraphMetaTag[] => {
+    const meta: OpenGraphMetaTag[] = [];
+
+    for (const propGroupName of Object.keys(metaProps)) {
+      if (propGroupName) {
+        const propGroup = metaProps[propGroupName];
+
+        if (propGroup) {
+          for (const propName of Object.keys(propGroup)) {
+            const key = `${propGroupName}.${propName}`;
+            const content = propGroup[propName];
+
+            if (content && content !== 'null') {
+              meta.push({
+                content: `${content}`,
+                property: mapping[key],
+              });
+            }
+          }
+        }
+      }
+    }
+
+    return [...defaults, ...meta];
+  };
+
+  return metaTagArray(props);
+
+  // public render() {
+  //   const metaTags = this.metaTagArray();
+  //   console.log(metaTags);
+  //   return (
+  //     <Helmet>
+  //       {metaTags.map(tag => {
+  //         <meta property={tag.property} content={tag.content} />
+  //       })}
+  //     </Helmet>
+  //   )
+  // }
 };
 
 export {
-  openGraphMetaSimple,
   OpenGraphMeta,
 };

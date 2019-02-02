@@ -2,7 +2,7 @@ import { graphql, StaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import { openGraphMetaSimple, OpenGraphMeta, checkHttp } from '../utils';
+import { checkHttp, OpenGraphMeta } from '../utils';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
@@ -34,43 +34,38 @@ const Helmet: React.SFC<HelmetDataProps> = ({
     ? pageMetadata.description
     : siteMetadata.description;
 
-  const generatedMeta = openGraphMetaSimple(siteMetadata, pageMetadata);
+  // const generatedMeta = openGraphMetaSimple(siteMetadata, pageMetadata);
 
   const meta = [
     {
       content: pageMetadata.description || siteMetadata.description,
       name: 'Description',
     },
-    ...generatedMeta,
+    // ...generatedMeta,
   ];
 
   const metaProps = {
     basic: {
+      image: pageMetadata.image ? checkHttp(pageMetadata.image) : `${siteMetadata.siteUrl}/favicon.png`,
       title: pageMetadata.title || siteMetadata.title,
       url: pageMetadata.url ? `${siteMetadata.siteUrl}${pageMetadata.url}/` : siteMetadata.siteUrl,
-      image: pageMetadata.image ? checkHttp(pageMetadata.image) : `${siteMetadata.siteUrl}/favicon.png`
     },
     optional: {
-      description: pageMetadata.description || siteMetadata.description, 
-      siteName: siteMetadata.title
+      description: pageMetadata.description || siteMetadata.description,
+      siteName: siteMetadata.title,
     },
     twitter: {
       authorHandle: siteMetadata.twitter.author,
       siteHandle: siteMetadata.twitter.site,
-    }
+    },
   };
-
-  // const metaTags = new OpenGraphMeta(metaProps).metaTagArray();
-
-  // console.log(metaTags);
 
   return (
     <ReactHelmet
       title={title}
-      // meta={metaTags}
+      meta={OpenGraphMeta(metaProps)}
     >
       <html lang="en" />
-        <OpenGraphMeta basic={metaProps.basic} />
 
     </ReactHelmet>
   );
