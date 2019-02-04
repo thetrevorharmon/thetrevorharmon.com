@@ -47,6 +47,7 @@ interface BlogPost {
     }
   }
   tags: [string];
+  photoAttribution?: contentfulAttribution;
 }
 
 interface AboutPageData {
@@ -82,6 +83,18 @@ interface contentfulAsset {
     src: string;
     srcSet: string;
   }
+}
+
+type contentfulAttributionType = 'Photo' | 'Article';
+type contentfulAttributionSource = 'Unsplash' | 'Medium';
+
+interface contentfulAttribution {
+  id?: string;
+  description: string;
+  sourceLocation: string;
+  sourceName: contentfulAttributionSource;
+  author: string;
+  type: contentfulAttributionType;
 }
 
 interface MediumPost {

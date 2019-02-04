@@ -68,9 +68,32 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       url: Routes.blogPost(slug),
     };
 
+    const makeAttribution = (attribution: contentfulAttribution) => {
+      const className = `${attribution.type.toLowerCase()}-attribution`;
+
+      return (
+        <div className={className}>
+          {`${attribution.type} by ${attribution.author} on `}
+          <Link href={attribution.sourceLocation}>
+            {attribution.sourceName}
+          </Link>.
+        </div>
+      );
+    };
+
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
+          {
+            blogPost.heroImage
+            ? (
+              <div className="col-lg-8">
+                <Image src={blogPost.heroImage} />
+                {blogPost.photoAttribution ? makeAttribution(blogPost.photoAttribution) : undefined}
+              </div>
+            ) : undefined
+          }
+
           <div className="col-lg-8">
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
             { blogPost.subtitle
@@ -121,6 +144,10 @@ export const query = graphql`
     allContentfulBlogPost(filter: {slug: {eq: $slug}}) {
       edges {
         node {
+          heroImage {
+            description
+            ...ContentfulAsset_width750
+          }
           title
           slug
           subtitle
@@ -134,6 +161,12 @@ export const query = graphql`
           }
           tags
           originalPublication
+          photoAttribution {
+            sourceLocation
+            sourceName
+            author
+            type
+          }
         }
       }
     }
