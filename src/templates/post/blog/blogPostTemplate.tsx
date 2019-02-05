@@ -153,7 +153,6 @@ export const query = graphql`
       edges {
         node {
           heroImage {
-            description
             ...ContentfulAsset_width750
           }
           title
