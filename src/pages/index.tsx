@@ -35,14 +35,14 @@ interface IndexPageProps {
     allContentfulCaseStudy: {
       edges: [
         {
-           node: CaseStudy,
+          node: CaseStudy,
         }
       ],
     },
-    allMediumPost: {
+    allContentfulBlogPost: {
       edges: [
         {
-          node: MediumPost,
+          node: BlogPost,
         }
       ],
     },
@@ -55,7 +55,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
     const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
     const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
-    const mediumPosts: Array<{node: MediumPost}> = this.props.data.allMediumPost.edges;
+    const blogPosts: Array<{node: BlogPost}> = this.props.data.allContentfulBlogPost.edges;
 
     return (
       <Layout>
@@ -117,13 +117,13 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
           <Header rank={2} type="SectionTitle" className="col my-0">Recent Posts</Header>
         </div>
         <div className="row">
-          {mediumPosts.map((item, index) => (
+          {blogPosts.map((item, index) => (
             <div className="col-sm-6 col-lg-4 mb-4" key={index}>
               <PostTile item={item.node} />
             </div>
           ))}
           <div className="col-sm-12">
-            <Link href={ExternalLinks.medium()} target="_blank">Read more posts on Medium &rarr;</Link>
+            <Link href={Routes.blog()} target="_blank">Read more posts &rarr;</Link>
           </div>
         </div>
       </Layout>
@@ -155,17 +155,24 @@ export const indexPageQuery = graphql`
         }
       }
     }
-    allMediumPost(sort: { fields: [firstPublishedAt], order: DESC }, limit: 3) {
+    allContentfulBlogPost(
+      sort: { order: DESC, fields: [date] },
+      limit: 3,
+    ) {
       edges {
         node {
           title
-          uniqueSlug
-          firstPublishedAt(formatString: "MMMM DD, YYYY")
-          virtuals {
-            readingTime
-            subtitle
-            metaDescription
+          slug
+          description
+          date(formatString: "MMMM DD, YYYY")
+          body {
+            childMarkdownRemark {
+              html
+              excerpt
+              timeToRead
+            }
           }
+          tags
         }
       }
     }

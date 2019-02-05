@@ -6,12 +6,12 @@ import {
   Link,
 } from '../../UI-Kit';
 
-import { ExternalLinks } from '../../utils';
+import { Routes } from '../../utils';
 
 import * as styles from './PostTile.module.scss';
 
 interface PostTileProps {
-  item: MediumPost;
+  item: BlogPost;
   className?: string;
 }
 
@@ -26,7 +26,7 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
     <Link
       className={classname}
       noLinkStyling={true}
-      href={ExternalLinks.mediumPost(item.uniqueSlug)}
+      href={Routes.blogPost(item.slug)}
       target="_blank"
     >
       <Header
@@ -40,8 +40,10 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
         {item.title}
       </Header>
 
-      <p>{item.virtuals.metaDescription || item.virtuals.subtitle}</p>
-      <span className={styles.Meta}>{Math.floor(item.virtuals.readingTime)} min read • {item.firstPublishedAt}</span>
+      <p>{item.description || ''}</p>
+      <span className={styles.Meta}>
+        {Math.floor(+item.body.childMarkdownRemark.timeToRead)} min read • {item.date}
+      </span>
     </Link>
   );
 };
