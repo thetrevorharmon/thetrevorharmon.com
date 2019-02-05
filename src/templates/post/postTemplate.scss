@@ -24,6 +24,8 @@
       text-align: center;
       font-size: 0.9rem;
       padding-top: 0.5rem;
+      
+      color: $text-color-secondary;
     }
   }
 
@@ -121,9 +123,14 @@
         }
       }
     }
+
+    .article-attribution {
+      font-style: italic;
+    }    
   }
 
   .post-footer {
+
     $footer-top-whitespace: 4rem;
 
     position: relative;

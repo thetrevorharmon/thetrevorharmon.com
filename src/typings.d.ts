@@ -47,6 +47,7 @@ interface BlogPost {
     }
   }
   tags: [string];
+  sourceAttribution?: contentfulAttribution;
   photoAttribution?: contentfulAttribution;
 }
 
@@ -90,7 +91,7 @@ type contentfulAttributionSource = 'Unsplash' | 'Medium';
 
 interface contentfulAttribution {
   id?: string;
-  description: string;
+  name: string;
   sourceLocation: string;
   sourceName: contentfulAttributionSource;
   author: string;
