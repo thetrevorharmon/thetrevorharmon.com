@@ -98,17 +98,6 @@ interface contentfulAttribution {
   type: contentfulAttributionType;
 }
 
-interface MediumPost {
-  title: string;
-  uniqueSlug: string;
-  firstPublishedAt: string;
-  virtuals: {
-    subtitle: string;
-    metaDescription: string;
-    readingTime: number;
-  };
-}
-
 interface SiteMetadata {
   title: string;
   description: string;   
@@ -125,4 +114,15 @@ interface PageMetadata {
   description?: string;   
   url?: string;
   image?: string;
+}
+
+interface MediumPost {
+  title: string;
+  uniqueSlug: string;
+  firstPublishedAt: string;
+  virtuals: {
+    subtitle: string;
+    metaDescription: string;
+    readingTime: number;
+  };
 }

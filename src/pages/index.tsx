@@ -7,7 +7,6 @@ import Layout from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
-  ExternalLinks,
   Routes,
 } from '../utils';
 
