@@ -64,14 +64,48 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
+      image: blogPost.heroImage ? blogPost.heroImage.fluid.src : undefined,
       title: `${blogPost.title}`,
       url: Routes.blogPost(slug),
     };
 
+    const makeAttribution = (attribution: contentfulAttribution) => {
+      const className = `${attribution.type.toLowerCase()}-attribution`;
+
+      return attribution.type === 'Photo'
+      ? (
+        <div className={className}>
+          {`${attribution.type} by ${attribution.author} on `}
+          <Link href={attribution.sourceLocation}>
+            {attribution.sourceName}
+          </Link>.
+        </div>
+      ) : (
+        <div className={className}>
+          This {`${attribution.type.toLowerCase()} was originally published on `}
+          <Link href={attribution.sourceLocation}>
+            {attribution.sourceName}
+          </Link>.
+        </div>
+      );
+    };
+
+    const pageLayoutClassName = 'col-lg-8';
+
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
-          <div className="col-lg-8">
+          {
+            blogPost.heroImage
+            ? (
+              <div className={pageLayoutClassName}>
+                <Image src={blogPost.heroImage} />
+                {blogPost.photoAttribution ? makeAttribution(blogPost.photoAttribution) : undefined}
+              </div>
+            ) : undefined
+          }
+
+          <div className={pageLayoutClassName}>
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
             { blogPost.subtitle
               ? <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
@@ -83,7 +117,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         <div className="post-body">
 
           <div className="row">
-            <div className="col-lg-8">
+            <div className={pageLayoutClassName}>
               <div
                 dangerouslySetInnerHTML={{
                   __html: blogPost.body.childMarkdownRemark.html,
@@ -93,14 +127,11 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
 
           {
-            blogPost.originalPublication
+            blogPost.sourceAttribution
             ? (
               <div className="row">
-                <div className="col-lg-8">
-                  <i>
-                    This article was originally published
-                    on <Link href={blogPost.originalPublication}>Medium</Link>.
-                  </i>
+                <div className={pageLayoutClassName}>
+                  {makeAttribution(blogPost.sourceAttribution)}
                 </div>
               </div>
             ) : undefined
@@ -121,6 +152,9 @@ export const query = graphql`
     allContentfulBlogPost(filter: {slug: {eq: $slug}}) {
       edges {
         node {
+          heroImage {
+            ...ContentfulAsset_width750
+          }
           title
           slug
           subtitle
@@ -134,6 +168,12 @@ export const query = graphql`
           }
           tags
           originalPublication
+          sourceAttribution {
+            ...ContentfulAttribution
+          }
+          photoAttribution {
+            ...ContentfulAttribution
+          }
         }
       }
     }

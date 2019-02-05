@@ -47,6 +47,8 @@ interface BlogPost {
     }
   }
   tags: [string];
+  sourceAttribution?: contentfulAttribution;
+  photoAttribution?: contentfulAttribution;
 }
 
 interface AboutPageData {
@@ -84,15 +86,16 @@ interface contentfulAsset {
   }
 }
 
-interface MediumPost {
-  title: string;
-  uniqueSlug: string;
-  firstPublishedAt: string;
-  virtuals: {
-    subtitle: string;
-    metaDescription: string;
-    readingTime: number;
-  };
+type contentfulAttributionType = 'Photo' | 'Article';
+type contentfulAttributionSource = 'Unsplash' | 'Medium';
+
+interface contentfulAttribution {
+  id?: string;
+  name: string;
+  sourceLocation: string;
+  sourceName: contentfulAttributionSource;
+  author: string;
+  type: contentfulAttributionType;
 }
 
 interface SiteMetadata {
@@ -111,4 +114,15 @@ interface PageMetadata {
   description?: string;   
   url?: string;
   image?: string;
+}
+
+interface MediumPost {
+  title: string;
+  uniqueSlug: string;
+  firstPublishedAt: string;
+  virtuals: {
+    subtitle: string;
+    metaDescription: string;
+    readingTime: number;
+  };
 }

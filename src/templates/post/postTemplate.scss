@@ -19,6 +19,16 @@
     }
   }
 
+  .post-header {
+    .photo-attribution {
+      text-align: center;
+      font-size: 0.9rem;
+      padding-top: 0.5rem;
+      
+      color: $text-color-secondary;
+    }
+  }
+
   .post-body {  
     color: $text-color-primary;
 
@@ -113,9 +123,14 @@
         }
       }
     }
+
+    .article-attribution {
+      font-style: italic;
+    }    
   }
 
   .post-footer {
+
     $footer-top-whitespace: 4rem;
 
     position: relative;
