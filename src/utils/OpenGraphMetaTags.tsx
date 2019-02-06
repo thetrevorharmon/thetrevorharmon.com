@@ -27,97 +27,42 @@ export interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
   };
 }
 
-export interface OpenGraphMetaConstants {
-  description: string;
-  image: string;
-  locale: string;
-  siteName: string;
-  title: string;
-  twitter: {
-    attributions: {
-      creator: string;
-      site: string;
-    },
-    card: {
-      propertyName: string;
-      type: {
-        largeImage: string;
-        summary: string;
-      },
-    },
-    description: string;
-    image: string;
-  };
-  type: {
-    propertyName: string;
-    website: string;
-  };
-  url: string;
-}
-
 export interface OpenGraphMetaTag {
   content: string;
   property: string;
 }
 
 const OpenGraphMetaTags = (props: OpenGraphMetaProps) => {
-  const og: OpenGraphMetaConstants = {
-    description: 'og:description',
-    image: 'og:image',
-    locale: 'og:locale',
-    siteName: 'og:site_name',
-    title: 'og:title',
-    twitter: {
-      attributions: {
-        creator: 'twitter:creator',
-        site: 'twitter:site',
-      },
-      card: {
-        propertyName: 'twitter:card',
-        type: {
-          largeImage: 'summary_large_image',
-          summary: 'summary',
-        },
-      },
-      description: 'twitter:description',
-      image: 'twitter:image',
-    },
-    type: {
-      propertyName: 'og:type',
-      website: 'website',
-    },
-    url: 'og:url',
-  };
 
   const ogMapping: OpenGraphMetaProps = {
     basic: {
-      image: og.image,
-      title: og.title,
-      type: og.type.propertyName,
-      url: og.url,
+      image: 'og:image',
+      title: 'og:title',
+      type: 'og:type',
+      url: 'og:url',
     },
     optional: {
-      description: og.description,
-      locale: og.locale,
-      siteName: og.siteName,
+      description: 'og:description',
+      locale: 'og:locale',
+      siteName: 'og:site_name',
     },
     twitter: {
-      authorHandle: og.twitter.attributions.creator,
-      cardType: og.twitter.card.propertyName,
-      description: og.twitter.description,
-      image: og.twitter.image,
-      siteHandle: og.twitter.attributions.site,
+      authorHandle: 'twitter:creator',
+      cardType: 'twitter:card',
+      description: 'twitter:description',
+      image: 'twitter:image',
+      siteHandle: 'twitter:site',
     },
   };
 
   const defaults: OpenGraphMetaTag[] = [
     {
-      content: og.twitter.card.type.summary,
-      property: og.twitter.card.propertyName,
+      content: 'summary',
+      property: 'twitter:card',
     },
     {
-      content: og.type.website,
-      property: og.type.propertyName,
+      content: 'website',
+      property: 'og:type',
     },
   ];
 
