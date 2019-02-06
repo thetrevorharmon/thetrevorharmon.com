@@ -34,8 +34,6 @@ const Tile: React.SFC<TileProps> = ({item, className}) => {
   );
 };
 
-Tile.defaultProps = {
-  className: undefined,
-};
+Tile.defaultProps = {};
 
 export default Tile;

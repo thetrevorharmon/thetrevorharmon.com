@@ -51,8 +51,6 @@ const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
   );
 };
 
-CaseStudyTile.defaultProps = {
-  className: undefined,
-};
+CaseStudyTile.defaultProps = {};
 
 export default CaseStudyTile;

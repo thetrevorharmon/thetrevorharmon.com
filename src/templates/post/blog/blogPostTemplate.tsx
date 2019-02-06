@@ -64,7 +64,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
-      image: blogPost.heroImage ? blogPost.heroImage.fluid.src : undefined,
+      image: blogPost.heroImage && blogPost.heroImage.fluid.src,
       title: `${blogPost.title}`,
       url: Routes.blogPost(slug),
     };
@@ -96,21 +96,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
           {
-            blogPost.heroImage
-            ? (
+            blogPost.heroImage && (
               <div className={pageLayoutClassName}>
                 <Image src={blogPost.heroImage} />
-                {blogPost.photoAttribution ? makeAttribution(blogPost.photoAttribution) : undefined}
+                {blogPost.photoAttribution && makeAttribution(blogPost.photoAttribution)}
               </div>
-            ) : undefined
+            )
           }
 
           <div className={pageLayoutClassName}>
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
-            { blogPost.subtitle
-              ? <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
-              : undefined
-            }
+            {blogPost.subtitle && (
+              <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
+            )}
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
@@ -127,20 +125,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
 
           {
-            blogPost.sourceAttribution
-            ? (
+            blogPost.sourceAttribution && (
               <div className="row">
                 <div className={pageLayoutClassName}>
                   {makeAttribution(blogPost.sourceAttribution)}
                 </div>
               </div>
-            ) : undefined
+            )
           }
         </div>
 
         <div className="row post-footer">
-          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'older') : undefined}
-          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'newer') : undefined}
+          {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
+          {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
         </div>
       </Layout>
     );
