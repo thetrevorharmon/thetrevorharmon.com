@@ -89,21 +89,25 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps) => {
     url: 'og:url',
   };
 
-  const mapping: { [key: string]: string } = {
-    'basic.image': `${og.image}`,
-    'basic.title': `${og.title}`,
-    'basic.type': `${og.type.propertyName}`,
-    'basic.url': `${og.url}`,
-
-    'optional.description': `${og.description}`,
-    'optional.locale': `${og.locale}`,
-    'optional.siteName': `${og.siteName}`,
-
-    'twitter.authorHandle': `${og.twitter.attributions.site}`,
-    'twitter.cardType': `${og.twitter.card.propertyName}`,
-    'twitter.description': `${og.twitter.description}`,
-    'twitter.image': `${og.twitter.image}`,
-    'twitter.siteHandle': `${og.twitter.attributions.site}`,
+  const ogMapping: OpenGraphMetaProps = {
+    basic: {
+      image: og.image,
+      title: og.title,
+      type: og.type.propertyName,
+      url: og.url,
+    },
+    optional: {
+      description: og.description,
+      locale: og.locale,
+      siteName: og.siteName,
+    },
+    twitter: {
+      authorHandle: og.twitter.attributions.creator,
+      cardType: og.twitter.card.propertyName,
+      description: og.twitter.description,
+      image: og.twitter.image,
+      siteHandle: og.twitter.attributions.site,
+    },
   };
 
   const defaults: OpenGraphMetaTag[] = [
@@ -122,17 +126,19 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps) => {
 
     for (const propGroupName of Object.keys(metaProps)) {
       if (propGroupName) {
+        const mappingGroup = ogMapping[propGroupName];
         const propGroup = metaProps[propGroupName];
 
-        if (propGroup) {
+        if (propGroup && mappingGroup) {
           for (const propName of Object.keys(propGroup)) {
-            const key = `${propGroupName}.${propName}`;
+
+            const property = mappingGroup[propName];
             const content = propGroup[propName];
 
-            if (content && content !== 'null' && mapping[key]) {
+            if (property && content) {
               meta.push({
                 content: `${content}`,
-                property: mapping[key],
+                property: `${property}`,
               });
             }
           }

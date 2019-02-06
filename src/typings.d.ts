@@ -36,7 +36,6 @@ interface BlogPost {
   slug: string;
   subtitle: string;
   description: string;
-  originalPublication: string;
   heroImage: contentfulAsset;
   date: Date;
   body: {

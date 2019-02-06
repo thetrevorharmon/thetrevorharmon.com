@@ -164,7 +164,6 @@ export const query = graphql`
             }
           }
           tags
-          originalPublication
           sourceAttribution {
             ...ContentfulAttribution
           }
