@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-export interface OpenGraphMetaPropsIndexSignature {
+export interface MetaPropsIndexSignature {
   [key: string]: {
     [key: string]: string | undefined;
   } | undefined;
 }
 
-export interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
+export interface MetaProps extends MetaPropsIndexSignature {
   basic?: {
     title?: string;
     url?: string;
@@ -27,15 +27,15 @@ export interface OpenGraphMetaProps extends OpenGraphMetaPropsIndexSignature {
   };
 }
 
-export interface OpenGraphMetaTag {
+export interface MetaTag {
   content: string;
   property?: string;
   name?: string;
 }
 
-const OpenGraphMetaTags = (props: OpenGraphMetaProps, userMeta?: OpenGraphMetaTag[]): OpenGraphMetaTag[] => {
+const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
 
-  const ogMapping: OpenGraphMetaProps = {
+  const ogMapping: MetaProps = {
     basic: {
       image: 'og:image',
       title: 'og:title',
@@ -56,7 +56,7 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps, userMeta?: OpenGraphMetaTa
     },
   };
 
-  const defaults: OpenGraphMetaTag[] = [
+  const defaults: MetaTag[] = [
     {
       content: 'summary',
       property: 'twitter:card',
@@ -67,8 +67,8 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps, userMeta?: OpenGraphMetaTa
     },
   ];
 
-  const makeTags = (metaProps: OpenGraphMetaProps, userTags: OpenGraphMetaTag[]): OpenGraphMetaTag[] => {
-    const meta: OpenGraphMetaTag[] = [];
+  const makeTagArray = (metaProps: MetaProps, userTags: MetaTag[]): MetaTag[] => {
+    const meta: MetaTag[] = [];
 
     for (const propGroupName of Object.keys(metaProps)) {
       if (propGroupName) {
@@ -99,9 +99,9 @@ const OpenGraphMetaTags = (props: OpenGraphMetaProps, userMeta?: OpenGraphMetaTa
     ];
   };
 
-  return makeTags(props, userMeta);
+  return makeTagArray(props, userMeta || []);
 };
 
 export {
-  OpenGraphMetaTags,
+  MetaTags,
 };
