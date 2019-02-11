@@ -6,6 +6,7 @@ import './blogPostTemplate.scss';
 
 import {
   Header,
+  Icon,
   Image,
   Link,
 } from '../../../UI-Kit';
@@ -138,6 +139,10 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         <div className="row post-footer">
           {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
           {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
+        </div>
+
+        <div className="row">
+          <p>Test! <Icon /></p>
         </div>
       </Layout>
     );

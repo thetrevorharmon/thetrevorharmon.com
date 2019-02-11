@@ -8,6 +8,11 @@ declare module '*.png' {
   export = content;
 }
 
+declare module '*.svg' {
+  const content: any;
+  export = content;
+}
+
 interface PortfolioItem {
   title: string;
   slug: string;
