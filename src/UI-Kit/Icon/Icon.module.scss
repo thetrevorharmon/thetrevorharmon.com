@@ -1,10 +1,6 @@
-.Icon {
-  max-width: 2rem;
-  max-height: 2rem;
+.Icon svg {
+  max-width: 1.75rem;
+  max-height: 1.75rem;
   height: auto;
   width: auto;
-
-  & + .Icon {
-    margin-left: 0.5rem;
-  }
 }

@@ -24,6 +24,9 @@ interface CaseStudyTemplateProps {
         },
       ],
     },
+    site: {
+      siteMetadata: SiteMetadata,
+    },
   };
   pageContext: {
     slug: string,
@@ -53,9 +56,18 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     );
   }
 
+  public twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
+    const twitterText = encodeURI(`I just finished reading "${blogPost.title}" by ${siteData.twitter.author}`);
+    const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(blogPost.slug)}`;
+    const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
+
+    return shareUrl;
+  }
+
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
+    const siteData = this.props.data.site.siteMetadata;
 
     const {
       slug,
@@ -135,14 +147,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             )
           }
         </div>
-
         <div className="row post-footer">
-          {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
-          {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
-        </div>
-
-        <div className="row">
-          <p><Icon name="rss"/><Icon name="twitter"/></p>
+          <div className="post-links col-sm-12">
+            <Link href={siteData.feedUrl} className="link">
+              <Icon name="rss"/>
+            </Link>
+            <Link href={this.twitterShareUrl(siteData, blogPost)} className="link">
+              <Icon name="twitter"/>
+            </Link>
+          </div>
+          <div className="post-navigation-wrapper">
+            {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
+            {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
+          </div>
         </div>
       </Layout>
     );
@@ -175,6 +192,15 @@ export const query = graphql`
           photoAttribution {
             ...ContentfulAttribution
           }
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
+        feedUrl
+        twitter {
+          author
         }
       }
     }

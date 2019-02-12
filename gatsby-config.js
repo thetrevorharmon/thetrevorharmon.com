@@ -12,6 +12,7 @@ module.exports = {
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
+    feedUrl: `https://thetrevorharmon.com/rss.xml`,
     author: 'Trevor Harmon',
     twitter: {
       author: '@thetrevorharmon',
@@ -118,7 +119,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Blog RSS Feed",
+            title: "Trevor Harmon's Blog RSS Feed",
           }
         ]
       }

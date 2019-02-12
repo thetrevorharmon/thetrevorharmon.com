@@ -130,90 +130,88 @@
   }
 
   .post-footer {
-
-    $footer-top-whitespace: 4rem;
-
     position: relative;
-    padding-top: $footer-top-whitespace;
+    flex-direction: column;
+    padding-top: 1rem;
 
-    // footer decorative divider
-    &:before {
-      $line-width: 2rem;
+    .post-links {
+      margin-bottom: 3rem;
       
-      position: absolute;
-      top: $footer-top-whitespace /2;
-      left: 50%;
-      margin-left: -$line-width / 2;
-      
-      background: lighten($text-color-secondary, 30%);
-      
-      display: block;
-      content: '';
-      height: 1px;
-      width: $line-width;
+      .link {
+        margin-right: 0.5rem;
+        border: none;
+
+        &:hover svg path {
+          fill: $brand-primary;
+        }
+      }
     }
 
-    .post-navigation {
-      color: lighten($text-color-secondary, 20%);
-      font-size: 1rem;
+    .post-navigation-wrapper {
+      display: flex;
 
-      &:nth-child(2) {
-        text-align: right;
+      .post-navigation {
+        color: lighten($text-color-secondary, 20%);
+        font-size: 1rem;
 
-        @include media-breakpoint-down(md) {
-          text-align: left;
-          margin-top: 1rem;
+        &:nth-child(2) {
+          text-align: right;
+
+          @include media-breakpoint-down(md) {
+            text-align: left;
+            margin-top: 1rem;
+          }
         }
-      }
 
-      .post-link {
-        line-height: 1;
-
-        &:before, &:after {
-          display: inline-block;
-          transition: all 0.1s linear;
-        }
-      }
-
-      .older-post:before {
-        content: '←';
-        left: 0;
-        margin-right: 0.5rem;
-      }
-
-      .newer-post:after {
-        content: '→';
-        right: 0;
-        top: 0;
-        margin-left: 0.5rem;
-      }
-
-      @include media-breakpoint-up(lg) {
         .post-link {
-          position: relative;
-          display: inline-block;
-          max-width: 100%;
+          line-height: 1;
 
           &:before, &:after {
-            display: block;
-            position: absolute;
-            margin: 0;
+            display: inline-block;
+            transition: all 0.1s linear;
           }
+        }
 
-          .title {
+        .older-post:before {
+          content: '←';
+          left: 0;
+          margin-right: 0.5rem;
+        }
+
+        .newer-post:after {
+          content: '→';
+          right: 0;
+          top: 0;
+          margin-left: 0.5rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+          .post-link {
+            position: relative;
             display: inline-block;
             max-width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
 
-          &.older-post .title {
-            padding-left: 1.5rem;
-          }
+            &:before, &:after {
+              display: block;
+              position: absolute;
+              margin: 0;
+            }
 
-          &.newer-post .title {
-            padding-right: 1.5rem;
+            .title {
+              display: inline-block;
+              max-width: 100%;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            &.older-post .title {
+              padding-left: 1.5rem;
+            }
+
+            &.newer-post .title {
+              padding-right: 1.5rem;
+            }
           }
         }
       }

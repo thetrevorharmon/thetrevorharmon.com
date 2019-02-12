@@ -107,6 +107,7 @@ interface SiteMetadata {
   description: string;   
   tagline: string;
   siteUrl: string;
+  feedUrl: string;
   twitter: {
     author: string;
     site: string;
