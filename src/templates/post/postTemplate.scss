@@ -148,7 +148,9 @@
     }
 
     .post-navigation-wrapper {
-      display: flex;
+      // display: flex;
+      // flex-direction: column;
+
 
       .post-navigation {
         color: lighten($text-color-secondary, 20%);
@@ -186,6 +188,7 @@
         }
 
         @include media-breakpoint-up(lg) {
+
           .post-link {
             position: relative;
             display: inline-block;

@@ -147,8 +147,8 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             )
           }
         </div>
-        <div className="row post-footer">
-          <div className="post-links col-sm-12">
+        <div className="post-footer">
+          <div className="post-links">
             <Link href={siteData.feedUrl} className="link">
               <Icon name="rss"/>
             </Link>
@@ -156,7 +156,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
               <Icon name="twitter"/>
             </Link>
           </div>
-          <div className="post-navigation-wrapper">
+          <div className="row post-navigation-wrapper">
             {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
             {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
           </div>
