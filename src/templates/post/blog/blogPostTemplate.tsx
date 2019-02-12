@@ -142,7 +142,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         </div>
 
         <div className="row">
-          <p>Test! <Icon /></p>
+          <p><Icon name="rss"/><Icon name="twitter"/></p>
         </div>
       </Layout>
     );

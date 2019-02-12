@@ -1,0 +1,10 @@
+.Icon {
+  max-width: 2rem;
+  max-height: 2rem;
+  height: auto;
+  width: auto;
+
+  & + .Icon {
+    margin-left: 0.5rem;
+  }
+}
