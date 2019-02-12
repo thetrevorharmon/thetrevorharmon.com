@@ -1,6 +1,12 @@
+@import "../../styles/_variables.scss";
+
 .Icon svg {
   max-width: 1.75rem;
   max-height: 1.75rem;
   height: auto;
   width: auto;
+
+  path {
+    fill: $text-color-primary;
+  }
 }

@@ -48,14 +48,7 @@ module.exports = {
         }
       }
     },
-    {
-      resolve: 'gatsby-plugin-react-svg',
-      // options: {
-      //   rule: {
-      //     include: /assets/
-      //   }
-      // }
-    },  
+    `gatsby-plugin-react-svg`,  
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sharp`, // for gatsby-image
