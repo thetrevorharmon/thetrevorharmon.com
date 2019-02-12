@@ -43,7 +43,6 @@ const Layout: React.SFC<LayoutProps> = ({
 };
 
 Layout.defaultProps = {
-  className: undefined,
   hasContainer: true,
 };
 

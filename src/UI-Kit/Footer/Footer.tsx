@@ -61,8 +61,6 @@ const Footer: React.SFC<FooterProps> = ({className, children}) => {
   );
 };
 
-Footer.defaultProps = {
-  className: undefined,
-};
+Footer.defaultProps = {};
 
 export default Footer;

@@ -46,20 +46,14 @@ export default class Template extends React.Component<TemplateProps, {}> {
     const info = (
       <div className={styles.Description}>
         <Header rank={1} type="Title">{project.title}</Header>
-        { description
-          ? <p>{description}</p>
-          : undefined
-        }
-        {
-          project.client ?
-          <p><strong>Client:</strong> {project.client}</p>
-          : undefined
-        }
-        {
-          project.projectCompletionDate
-          ? <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
-          : undefined
-        }
+
+        {description && <p>{description}</p>}
+
+        {project.client && <p><strong>Client:</strong> {project.client}</p>}
+
+        {project.projectCompletionDate && (
+          <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+        )}
       </div>
     );
 
@@ -67,7 +61,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
 
     const pageMetadata: PageMetadata = {
       description: `${description}`,
-      image: project.featureImage && project.featureImage.fluid.src || undefined,
+      image: project.featureImage && project.featureImage.fluid.src,
       title: project.title,
       url: Routes.project(this.props.pageContext.slug),
     };

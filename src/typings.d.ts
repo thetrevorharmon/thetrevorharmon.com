@@ -8,6 +8,11 @@ declare module '*.png' {
   export = content;
 }
 
+declare module '*.svg' {
+  const content: any;
+  export = content;
+}
+
 interface PortfolioItem {
   title: string;
   slug: string;
@@ -36,7 +41,6 @@ interface BlogPost {
   slug: string;
   subtitle: string;
   description: string;
-  originalPublication: string;
   heroImage: contentfulAsset;
   date: Date;
   body: {
@@ -103,6 +107,7 @@ interface SiteMetadata {
   description: string;   
   tagline: string;
   siteUrl: string;
+  feedUrl: string;
   twitter: {
     author: string;
     site: string;

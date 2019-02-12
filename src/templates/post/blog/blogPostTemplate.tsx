@@ -6,6 +6,7 @@ import './blogPostTemplate.scss';
 
 import {
   Header,
+  Icon,
   Image,
   Link,
 } from '../../../UI-Kit';
@@ -22,6 +23,9 @@ interface CaseStudyTemplateProps {
           node: BlogPost,
         },
       ],
+    },
+    site: {
+      siteMetadata: SiteMetadata,
     },
   };
   pageContext: {
@@ -52,9 +56,18 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
     );
   }
 
+  public twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
+    const twitterText = encodeURI(`I just finished reading "${blogPost.title}" by ${siteData.twitter.author}`);
+    const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(blogPost.slug)}`;
+    const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
+
+    return shareUrl;
+  }
+
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
+    const siteData = this.props.data.site.siteMetadata;
 
     const {
       slug,
@@ -64,7 +77,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
 
     const pageMetadata: PageMetadata = {
       description: `${blogPost.description}`,
-      image: blogPost.heroImage ? blogPost.heroImage.fluid.src : undefined,
+      image: blogPost.heroImage && blogPost.heroImage.fluid.src,
       title: `${blogPost.title}`,
       url: Routes.blogPost(slug),
     };
@@ -96,21 +109,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
           {
-            blogPost.heroImage
-            ? (
+            blogPost.heroImage && (
               <div className={pageLayoutClassName}>
                 <Image src={blogPost.heroImage} />
-                {blogPost.photoAttribution ? makeAttribution(blogPost.photoAttribution) : undefined}
+                {blogPost.photoAttribution && makeAttribution(blogPost.photoAttribution)}
               </div>
-            ) : undefined
+            )
           }
 
           <div className={pageLayoutClassName}>
             <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
-            { blogPost.subtitle
-              ? <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
-              : undefined
-            }
+            {blogPost.subtitle && (
+              <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
+            )}
             <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
           </div>
         </div>
@@ -127,20 +138,28 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
           </div>
 
           {
-            blogPost.sourceAttribution
-            ? (
+            blogPost.sourceAttribution && (
               <div className="row">
                 <div className={pageLayoutClassName}>
                   {makeAttribution(blogPost.sourceAttribution)}
                 </div>
               </div>
-            ) : undefined
+            )
           }
         </div>
-
-        <div className="row post-footer">
-          {olderPost ? this.makeNavigation(olderPost.title, olderPost.slug, 'older') : undefined}
-          {newerPost ? this.makeNavigation(newerPost.title, newerPost.slug, 'newer') : undefined}
+        <div className="post-footer">
+          <div className="post-links">
+            <Link href={siteData.feedUrl} className="link">
+              <Icon name="rss"/>
+            </Link>
+            <Link href={this.twitterShareUrl(siteData, blogPost)} className="link">
+              <Icon name="twitter"/>
+            </Link>
+          </div>
+          <div className="row post-navigation-wrapper">
+            {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
+            {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
+          </div>
         </div>
       </Layout>
     );
@@ -167,13 +186,21 @@ export const query = graphql`
             }
           }
           tags
-          originalPublication
           sourceAttribution {
             ...ContentfulAttribution
           }
           photoAttribution {
             ...ContentfulAttribution
           }
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
+        feedUrl
+        twitter {
+          author
         }
       }
     }

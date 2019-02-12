@@ -34,7 +34,6 @@ const Button: React.SFC<ButtonProps> = ({
 };
 
 Button.defaultProps = {
-  className: undefined,
   noStyling: false,
 };
 

@@ -48,8 +48,6 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
   );
 };
 
-PostTile.defaultProps = {
-  className: undefined,
-};
+PostTile.defaultProps = {};
 
 export default PostTile;

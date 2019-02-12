@@ -12,6 +12,7 @@ module.exports = {
     tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
+    feedUrl: `https://thetrevorharmon.com/rss.xml`,
     author: 'Trevor Harmon',
     twitter: {
       author: '@thetrevorharmon',
@@ -24,7 +25,7 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        host: environment === 'development' ? `preview.contentful.com` : undefined,
+        host: environment === 'development' && `preview.contentful.com`,
       },
     },
     {
@@ -47,6 +48,7 @@ module.exports = {
         }
       }
     },
+    `gatsby-plugin-react-svg`,  
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sharp`, // for gatsby-image
@@ -110,7 +112,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Blog RSS Feed",
+            title: "Trevor Harmon's Blog RSS Feed",
           }
         ]
       }

@@ -41,9 +41,7 @@ const Link: React.SFC<LinkProps> = ({
 };
 
 Link.defaultProps = {
-  className: undefined,
   noLinkStyling: false,
-  target: undefined,
 };
 
 export default Link;
