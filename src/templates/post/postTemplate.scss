@@ -89,6 +89,8 @@
       @include left-border();
       margin-left: 0;
       color: $text-color-secondary;
+      font-size: 1.25rem;
+      line-height: 1.5;
     }
 
     .scrollable {
@@ -150,7 +152,6 @@
     .post-navigation-wrapper {
       // display: flex;
       // flex-direction: column;
-
 
       .post-navigation {
         color: lighten($text-color-secondary, 20%);
