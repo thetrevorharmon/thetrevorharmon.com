@@ -8,35 +8,26 @@ interface HelmetProps {
   pageMetadata: PageMetadata;
 }
 
-interface HelmetData {
-  site: {
-    siteMetadata: SiteMetadata,
+interface HelmetDataProps extends HelmetProps {
+  data: {
+    site: {
+      siteMetadata: SiteMetadata,
+    },
   };
 }
 
-const Helmet: React.SFC<HelmetProps> = ({
+const Helmet: React.SFC<HelmetDataProps> = ({
   children,
+  data,
   pageMetadata,
 }) => {
 
-  const data: HelmetData = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          description
-          siteUrl
-          twitter {
-            author
-            site
-          }
-        }
-      }
-    }
-  `);
+  const {
+    siteMetadata,
+  } = data.site;
 
   const page = pageMetadata;
-  const site = data.site.siteMetadata;
+  const site = siteMetadata;
 
   const title = page.title
     ? `${page.title} | ${site.title}`
@@ -80,4 +71,25 @@ Helmet.defaultProps = {
   pageMetadata: {},
 };
 
-export default Helmet;
+export default (props: HelmetProps) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          twitter {
+            author
+            site
+          }
+        }
+      }
+    }
+  `);
+
+  // tslint:disable-next-line jsx-no-lambda
+  return (
+     <Helmet data={data} {...props} />
+  );
+};
