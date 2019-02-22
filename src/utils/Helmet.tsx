@@ -1,4 +1,4 @@
-import { graphql, StaticQuery, withPrefix, useStaticQuery } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
@@ -71,24 +71,25 @@ Helmet.defaultProps = {
   pageMetadata: {},
 };
 
-export default (props: HelmetProps) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            siteUrl
-            twitter {
-              author
-              site
-            }
+export default (props: HelmetProps) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          twitter {
+            author
+            site
           }
         }
       }
-    `}
-    // tslint:disable-next-line jsx-no-lambda
-    render={(data) => <Helmet data={data} {...props} />}
-  />
-);
+    }
+  `);
+
+  // tslint:disable-next-line jsx-no-lambda
+  return (
+     <Helmet data={data} {...props} />
+  );
+};
