@@ -1,4 +1,4 @@
-import { graphql, StaticQuery, useStaticQuery, withPrefix } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
