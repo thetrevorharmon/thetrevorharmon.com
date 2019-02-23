@@ -1,4 +1,4 @@
-import { graphql, StaticQuery, withPrefix } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery, withPrefix } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
@@ -8,26 +8,35 @@ interface HelmetProps {
   pageMetadata: PageMetadata;
 }
 
-interface HelmetDataProps extends HelmetProps {
-  data: {
-    site: {
-      siteMetadata: SiteMetadata,
-    },
+interface HelmetData {
+  site: {
+    siteMetadata: SiteMetadata,
   };
 }
 
-const Helmet: React.SFC<HelmetDataProps> = ({
+const Helmet: React.SFC<HelmetProps> = ({
   children,
-  data,
   pageMetadata,
 }) => {
 
-  const {
-    siteMetadata,
-  } = data.site;
+  const data: HelmetData = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          twitter {
+            author
+            site
+          }
+        }
+      }
+    }
+  `);
 
   const page = pageMetadata;
-  const site = siteMetadata;
+  const site = data.site.siteMetadata;
 
   const title = page.title
     ? `${page.title} | ${site.title}`
@@ -71,24 +80,4 @@ Helmet.defaultProps = {
   pageMetadata: {},
 };
 
-export default (props: HelmetProps) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            siteUrl
-            twitter {
-              author
-              site
-            }
-          }
-        }
-      }
-    `}
-    // tslint:disable-next-line jsx-no-lambda
-    render={(data) => <Helmet data={data} {...props} />}
-  />
-);
+export default Helmet;
