@@ -59,6 +59,13 @@ module.exports = {
         plugins: [
           `gatsby-remark-embed-gist`, // for embedding gists
           `gatsby-remark-prismjs`, // for code highlighting
+          {
+            resolve: `gatsby-remark-images-contentful`,
+            options: {
+              maxWidth: 800,
+              linkImagesToOriginal: false,
+            },
+          },
         ],
       },
     },    
@@ -83,6 +90,7 @@ module.exports = {
                   title: edge.node.title,
                   description: edge.node.description.description,
                   date: edge.node.date,
+                  image_url: edge.node.heroImage && edge.node.heroImage.fixed.src,
                   url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
                   guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
                   custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
@@ -101,6 +109,11 @@ module.exports = {
                       slug
                       description
                       date
+                      heroImage {
+                        fixed {
+                          src
+                        }
+                      }
                       body {
                         childMarkdownRemark {
                           html

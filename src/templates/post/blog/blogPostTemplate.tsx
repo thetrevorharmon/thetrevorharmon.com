@@ -103,7 +103,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
       );
     };
 
-    const pageLayoutClassName = 'col-lg-8';
+    const pageLayoutClassName = 'col-lg-7';
 
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
