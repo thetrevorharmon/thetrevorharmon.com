@@ -63,7 +63,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             <div
               className={classnames(
                 styles.MainHeader,
-                'my-6 mt-lg-8 mb-lg-8',
+                'my-6 mt-lg-8',
               )}
             >
               <span>Hi, I'm</span>
@@ -84,17 +84,17 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
           </div>
         </div>
 
-        <div className="row mb-4">
-          <Header rank={2} type="SectionTitle" className="col my-0">Case Studies</Header>
+        <div className="row mt-6 mb-4">
+          <Header rank={2} type="SectionTitle" className="col my-0">Recent Posts</Header>
         </div>
         <div className="row">
-          {featuredStudies.map((item, index) => (
-            <div className="col-sm-12 col-lg-8 mb-4" key={index}>
-              <CaseStudyTile item={item.node} />
+          {blogPosts.map((item, index) => (
+            <div className="col-sm-6 col-lg-4 mb-4" key={index}>
+              <PostTile item={item.node} />
             </div>
           ))}
-          <div className="col-sm-12 col-lg-8">
-            <Link href={Routes.caseStudies()} target="_blank">See more case studies &rarr;</Link>
+          <div className="col-sm-12">
+            <Link href={Routes.blog()} target="_blank">Read more posts &rarr;</Link>
           </div>
         </div>
 
@@ -113,18 +113,19 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         </div>
 
         <div className="row mt-6 mb-4">
-          <Header rank={2} type="SectionTitle" className="col my-0">Recent Posts</Header>
+          <Header rank={2} type="SectionTitle" className="col my-0">Case Studies</Header>
         </div>
         <div className="row">
-          {blogPosts.map((item, index) => (
-            <div className="col-sm-6 col-lg-4 mb-4" key={index}>
-              <PostTile item={item.node} />
+          {featuredStudies.map((item, index) => (
+            <div className="col-sm-12 col-lg-8 mb-4" key={index}>
+              <CaseStudyTile item={item.node} />
             </div>
           ))}
-          <div className="col-sm-12">
-            <Link href={Routes.blog()} target="_blank">Read more posts &rarr;</Link>
+          <div className="col-sm-12 col-lg-8">
+            <Link href={Routes.caseStudies()} target="_blank">See more case studies &rarr;</Link>
           </div>
         </div>
+
       </Layout>
     );
   }
