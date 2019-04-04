@@ -92,6 +92,15 @@ const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
       }
     }
 
+    // checks to see if any of the defaults already exist
+    for (const tag of meta) {
+      const tagIndex = defaults.findIndex((d) => d.property === tag.property);
+
+      if (tagIndex > -1) {
+        defaults.splice(tagIndex, 1);
+      }
+    }
+
     return [
       ...defaults,
       ...meta,

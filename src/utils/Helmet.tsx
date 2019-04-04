@@ -61,6 +61,7 @@ const Helmet: React.SFC<HelmetProps> = ({
     },
     twitter: {
       authorHandle: site.twitter.author,
+      cardType: page.image && 'summary_large_image',
       siteHandle: site.twitter.site,
     },
   }, extraMeta);

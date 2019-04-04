@@ -28,13 +28,6 @@ module.exports = {
         host: environment === 'development' && `preview.contentful.com`,
       },
     },
-    {
-      resolve: `gatsby-source-medium`,
-      options: {
-        username: `@thetrevorharmon`,
-        limit: 10,
-      },
-    },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-tslint`,
     `gatsby-plugin-sass`,
