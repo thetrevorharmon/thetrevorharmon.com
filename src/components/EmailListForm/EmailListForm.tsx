@@ -6,9 +6,12 @@ interface EmailListFormState {
   email?: string;
 }
 
-interface MailchimpResult { 
-  result: string;
-  msg: string; 
+// tslint:disable-next-line
+type MailchimpResult = "success" | "error"; // ignoring because 'error' (single quotes) throws a lint error
+
+interface MailchimpResponse {
+  result: MailchimpResult;
+  msg: string;
 }
 
 export default class EmailListForm extends React.Component<{}, EmailListFormState> {
@@ -19,43 +22,19 @@ export default class EmailListForm extends React.Component<{}, EmailListFormStat
   // these values can be pulled from React state, form fields,
   // or wherever.  (Personally, I recommend storing in state).
 
-  // 1. via `.then`
-  // _handleSubmit = e => {
-    // e.preventDefault();
-    // addToMailchimp(email, listFields) // listFields are optional if you are only capturing the email address.
-    //   .then(data => {
-    //     // I recommend setting data to React state
-    //     // but you can do whatever you want (including ignoring this `then()` altogether)
-    //     console.log(data)
-    //   })
-    //   .catch(() => {
-    //     // unnecessary because Mailchimp only ever
-    //     // returns a 200 status code
-    //     // see below for how to handle errors
-    //   })
-  // }
-
-  // 2. via `async/await`
-  // _handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const result = await addToMailchimp(email, listFields)
-  //   // I recommend setting `result` to React state
-  //   // but you can do whatever you want
-  // }
-
   public handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = 'thetrevorharmon+mailchimptest1@gmail.com';
 
     addToMailchimp(email)
-    // listFields are optional if you are only capturing the email address.
-      .then((data: MailchimpResult) => {
+      .then((data: MailchimpResponse) => {
         // I recommend setting data to React state
         // but you can do whatever you want (including ignoring this `then()` altogether)
         console.log(data);
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         console.error(error);
+        console.log(error);
         // unnecessary because Mailchimp only ever
         // returns a 200 status code
         // see below for how to handle errors

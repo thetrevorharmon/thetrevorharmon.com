@@ -1,7 +1,6 @@
 declare module 'gatsby-plugin-mailchimp' {
   import * as React from 'react';
-  import addToMailchimp from 'gatsby-plugin-mailchimp';
-
+  // import addToMailchimp from 'gatsby-plugin-mailchimp';
 
   // export interface AddToMailchimpProps {
   //   email: String;
