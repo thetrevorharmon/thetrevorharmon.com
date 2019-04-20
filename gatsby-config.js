@@ -47,6 +47,12 @@ module.exports = {
     `gatsby-plugin-sharp`, // for gatsby-image
     `gatsby-transformer-sharp`, // for gatsby-image,
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: process.env.MAILCHIMP_ACTION_URL,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
