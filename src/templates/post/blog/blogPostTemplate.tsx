@@ -11,6 +11,10 @@ import {
   Link,
 } from '../../../UI-Kit';
 
+import {
+  EmailListForm,
+} from '../../../components';
+
 import { Routes } from '../../../utils';
 
 type PostNavigationDirection = 'older' | 'newer';
@@ -146,6 +150,9 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
               </div>
             )
           }
+        </div>
+        <div>
+          <EmailListForm />
         </div>
         <div className="post-footer">
           <div className="post-links">

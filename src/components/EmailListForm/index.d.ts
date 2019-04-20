@@ -8,7 +8,7 @@ declare module 'gatsby-plugin-mailchimp' {
   //   fields: Object;
   // }
 
-  export type addToMailchimp = (email: String, fields: Object) => Promise<any>;
+  export type addToMailchimp = (email: String, listFields?: Object) => Promise<any>;
 
   // addToMailchimp(email: String, fields: Object): Promise<any>;
 
