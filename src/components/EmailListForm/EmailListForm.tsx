@@ -1,5 +1,6 @@
 import addToMailchimp from 'gatsby-plugin-mailchimp';
 import React, { useState } from 'react';
+import * as styles from './EmailListForm.module.scss';
 
 const EmailListForm: React.FunctionComponent<{}> = () => {
 
@@ -25,9 +26,12 @@ const EmailListForm: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="email" type="text" onChange={handleEmailChange} />
-      <button type="submit">Subscribe</button>
+    <form onSubmit={handleSubmit} className={styles.EmailListForm}>
+      <h2>Subscribe to my email list!</h2>
+      <div className={styles.Wrapper}>
+        <input placeholder="Email address" name="email" type="text" id="emailLabel" onChange={handleEmailChange} />
+        <button type="submit">Subscribe</button>
+      </div>
     </form>
   );
 };

@@ -1,0 +1,48 @@
+.EmailListForm {
+  display: flex;
+  flex-direction: column;
+  
+  background: #f2f2f2;
+  color: #2a2a2a;
+
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  padding: 2rem;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .Wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  input {
+    color: #2a2a2a;
+    width: 100%;
+    border: none;
+  }
+
+  button,
+  input {
+    padding: 1rem 1.5rem;
+  }
+
+  button {
+    display: inline-block;
+    
+    border: none;
+    background-image: none;
+    background-color: #DD0505;
+    color: white;
+
+    letter-spacing: 1px;
+    transition: all 0.1s linear;
+    
+    &:hover {
+      cursor: pointer;
+      background: darken(#DD0505, 15%);
+    }    
+  }
+}

@@ -151,8 +151,10 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             )
           }
         </div>
-        <div>
-          <EmailListForm />
+        <div className="row mt-9 mt-lg-6 mb-9 mb-lg-4">
+          <div className={pageLayoutClassName}>
+            <EmailListForm />
+          </div>
         </div>
         <div className="post-footer">
           <div className="post-links">
