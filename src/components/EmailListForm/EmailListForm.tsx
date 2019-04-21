@@ -2,7 +2,7 @@ import addToMailchimp from 'gatsby-plugin-mailchimp';
 import React, { useState } from 'react';
 
 // tslint:disable-next-line
-type MailchimpResult = "success" | "error"; // ignoring because 'error' (single quotes) throws a lint error
+type MailchimpResult = "success" | "error"; // disabled because 'error' (single quotes) throws a lint error
 
 interface MailchimpResponse {
   result: MailchimpResult;
