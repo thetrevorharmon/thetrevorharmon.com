@@ -29,7 +29,12 @@ const EmailListForm: React.FunctionComponent<{}> = () => {
     <form onSubmit={handleSubmit} className={styles.EmailListForm}>
       <h2>Subscribe to my email list!</h2>
       <div className={styles.Wrapper}>
-        <input placeholder="Email address" name="email" type="text" id="emailLabel" onChange={handleEmailChange} />
+        <input
+          placeholder="Email address"
+          name="email"
+          type="text"
+          onChange={handleEmailChange}
+        />
         <button type="submit">Subscribe</button>
       </div>
     </form>
