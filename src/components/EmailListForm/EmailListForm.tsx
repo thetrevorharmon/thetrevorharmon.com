@@ -1,10 +1,5 @@
 import addToMailchimp from 'gatsby-plugin-mailchimp';
-import * as React from 'react';
-
-interface EmailListFormState {
-  name?: string;
-  email?: string;
-}
+import React, { useState } from 'react';
 
 // tslint:disable-next-line
 type MailchimpResult = "success" | "error"; // ignoring because 'error' (single quotes) throws a lint error
@@ -14,39 +9,35 @@ interface MailchimpResponse {
   msg: string;
 }
 
-export default class EmailListForm extends React.Component<{}, EmailListFormState> {
-  // Since `addToMailchimp` returns a promise, you
-  // can handle the response in two different ways:
+const EmailListForm: React.FunctionComponent<{}> = () => {
 
-  // Note that you need to send an email & optionally, listFields
-  // these values can be pulled from React state, form fields,
-  // or wherever.  (Personally, I recommend storing in state).
+  const [email, setEmail] = useState('');
 
-  public handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = 'thetrevorharmon+mailchimptest1@gmail.com';
 
     addToMailchimp(email)
       .then((data: MailchimpResponse) => {
-        // I recommend setting data to React state
-        // but you can do whatever you want (including ignoring this `then()` altogether)
-        console.log(data);
+        alert(data.result);
       })
       .catch((error: Error) => {
-        console.error(error);
-        console.log(error);
-        // unnecessary because Mailchimp only ever
-        // returns a 200 status code
-        // see below for how to handle errors
+        // Errors in here are client side
+        // Mailchimp always returns a 200
+        // tslint:disable-next-line
+        console.error(error); // allowing this console.error so that I can see any errors in production
       });
-  }
+  };
 
-  public render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input name="email" type="text"/>
-        <button type="submit">Submit!</button>
-      </form>
-    )
-  }
-}
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.currentTarget.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input name="email" type="text" onChange={handleEmailChange} />
+      <button type="submit">Subscribe</button>
+    </form>
+  );
+};
+
+export default EmailListForm;
