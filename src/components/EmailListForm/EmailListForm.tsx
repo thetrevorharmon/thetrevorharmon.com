@@ -1,14 +1,6 @@
 import addToMailchimp from 'gatsby-plugin-mailchimp';
 import React, { useState } from 'react';
 
-// tslint:disable-next-line
-type MailchimpResult = "success" | "error"; // disabled because 'error' (single quotes) throws a lint error
-
-interface MailchimpResponse {
-  result: MailchimpResult;
-  msg: string;
-}
-
 const EmailListForm: React.FunctionComponent<{}> = () => {
 
   const [email, setEmail] = useState('');
@@ -17,7 +9,7 @@ const EmailListForm: React.FunctionComponent<{}> = () => {
     e.preventDefault();
 
     addToMailchimp(email)
-      .then((data: MailchimpResponse) => {
+      .then((data) => {
         alert(data.result);
       })
       .catch((error: Error) => {
