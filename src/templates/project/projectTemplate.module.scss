@@ -33,14 +33,31 @@ $grid-gutter-size: 1rem;
   margin-bottom: $grid-gutter-size;
 }
 
-.ProjectTemplate .Description {
-  box-sizing: border-box;
-  margin-bottom: $grid-gutter-size * 2;
-  margin-right: $grid-gutter-size;
+.ProjectTemplate {
 
-  @include left-border();
+  a {
+    color: $brand-primary;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
 
-  p:last-child {
-    margin-bottom: 0;
+    &:hover {
+      border-color: #DD0505;
+    }
+  }
+
+  .Description {
+    box-sizing: border-box;
+    margin-bottom: $grid-gutter-size * 2;
+    margin-right: $grid-gutter-size;
+
+    @include left-border();
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .DescriptionHtml {
+    margin-bottom: 1rem;
   }
 }

@@ -27,7 +27,7 @@ interface TemplateProps {
 export default class Template extends React.Component<TemplateProps, {}> {
   public render() {
     const project = this.props.data.allContentfulProject.edges[0].node;
-    const description = project.description ? project.description.description : '';
+    const description = project.description.childMarkdownRemark ? project.description.childMarkdownRemark.html : null;
 
     const images = project.projectImages
       ? [project.featureImage, ...project.projectImages]
@@ -47,7 +47,7 @@ export default class Template extends React.Component<TemplateProps, {}> {
       <div className={styles.Description}>
         <Header rank={1} type="Title">{project.title}</Header>
 
-        {description && <p>{description}</p>}
+        {description && <div className={styles.DescriptionHtml} dangerouslySetInnerHTML={{__html: description}} />}
 
         {project.client && <p><strong>Client:</strong> {project.client}</p>}
 
@@ -94,6 +94,9 @@ export const query = graphql`
           projectCompletionDate(formatString: "MMMM DD, YYYY")
           description {
             description
+            childMarkdownRemark {
+              html
+            }
           }
           projectImages {
             ...ContentfulAsset_width600

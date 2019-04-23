@@ -13,6 +13,12 @@ declare module '*.svg' {
   export = content;
 }
 
+interface MarkdownRemark {
+  html: string;
+  excerpt?: string;
+  timeToRead?: string;
+}
+
 interface PortfolioItem {
   title: string;
   slug: string;
@@ -25,6 +31,7 @@ interface Project extends PortfolioItem {
   description: {
     id?: string;
     description: string;
+    childMarkdownRemark?: MarkdownRemark;
   };
   projectCompletionDate?: Date;
   projectImages: [contentfulAsset]
@@ -44,11 +51,7 @@ interface BlogPost {
   heroImage: contentfulAsset;
   date: Date;
   body: {
-    childMarkdownRemark: {
-      html: string;
-      excerpt: string;
-      timeToRead: string;
-    }
+    childMarkdownRemark: MarkdownRemark;
   }
   tags: [string];
   sourceAttribution?: contentfulAttribution;
