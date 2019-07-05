@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import Layout from '../layouts';
+import { Layout } from '../layouts';
 
 import {
   Header,

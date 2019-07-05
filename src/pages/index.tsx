@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import Layout from '../layouts';
+import { Layout } from '../layouts';
 
 import * as styles from './homepage.module.scss';
 

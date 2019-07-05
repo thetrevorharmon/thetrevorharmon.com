@@ -46,4 +46,6 @@ Layout.defaultProps = {
   hasContainer: true,
 };
 
-export default Layout;
+export {
+  Layout,
+};

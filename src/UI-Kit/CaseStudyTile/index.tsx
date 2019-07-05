@@ -1,2 +1,1 @@
-import CaseStudyTile from './CaseStudyTile';
-export default CaseStudyTile;
+export { default }  from './CaseStudyTile';
