@@ -81,4 +81,6 @@ Helmet.defaultProps = {
   pageMetadata: {},
 };
 
-export default Helmet;
+export {
+  Helmet,
+};
