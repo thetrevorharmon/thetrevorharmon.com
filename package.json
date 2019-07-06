@@ -10,7 +10,8 @@
     "start-broadcast": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "type-check": "tsc --noEmit",
-    "lint": "tslint --config tslint.json --project tsconfig.json"
+    "lint": "tslint --config tslint.json --project tsconfig.json",
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@types/classnames": "^2.2.6",
