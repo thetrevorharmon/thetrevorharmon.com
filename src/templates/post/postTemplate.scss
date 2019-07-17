@@ -19,6 +19,10 @@
     }
   }
 
+  a.icon-link {
+    border-bottom: none;
+  }
+
   .post-header {
     .photo-attribution {
       text-align: center;
@@ -135,19 +139,6 @@
     position: relative;
     flex-direction: column;
     padding-top: 1rem;
-
-    .post-links {
-      margin-bottom: 3rem;
-      
-      .link {
-        margin-right: 0.5rem;
-        border: none;
-
-        &:hover svg path {
-          fill: $brand-primary;
-        }
-      }
-    }
 
     .post-navigation-wrapper {
       // display: flex;

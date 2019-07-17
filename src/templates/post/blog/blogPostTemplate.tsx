@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import Layout from '../../../layouts';
+import { Layout } from '../../../layouts';
 
 import './blogPostTemplate.scss';
 
@@ -10,6 +10,10 @@ import {
   Image,
   Link,
 } from '../../../UI-Kit';
+
+import {
+  EmailListForm,
+} from '../../../components';
 
 import { Routes } from '../../../utils';
 
@@ -147,15 +151,19 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             )
           }
         </div>
-        <div className="post-footer">
-          <div className="post-links">
-            <Link href={siteData.feedUrl} className="link">
-              <Icon name="rss"/>
-            </Link>
-            <Link href={this.twitterShareUrl(siteData, blogPost)} className="link">
-              <Icon name="twitter"/>
-            </Link>
+        <div className="row my-5 my-lg-6">
+          <div className={pageLayoutClassName}>
+            <EmailListForm>
+              <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
+                <Icon name="rss" />
+              </Link>
+              <Link href={this.twitterShareUrl(siteData, blogPost)} isIconLink={true} className="ml-2 icon-link">
+                <Icon name="twitter" />
+              </Link>
+            </EmailListForm>
           </div>
+        </div>
+        <div className="post-footer">
           <div className="row post-navigation-wrapper">
             {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
             {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}

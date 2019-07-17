@@ -1,2 +1,1 @@
-import PostTile from './PostTile';
-export default PostTile;
+export { default } from './PostTile';

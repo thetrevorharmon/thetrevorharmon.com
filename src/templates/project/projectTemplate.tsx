@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import Layout from '../../layouts';
+import { Layout } from '../../layouts';
 import { Button, Header, Image } from '../../UI-Kit';
 
 import * as styles from './projectTemplate.module.scss';

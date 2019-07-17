@@ -1,2 +1,1 @@
-import Tile from './Tile';
-export default Tile;
+export { default } from './Tile';

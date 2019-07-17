@@ -30,7 +30,7 @@ const Layout: React.SFC<LayoutProps> = ({
 
   return (
     <>
-      <Helmet pageMetadata={pageMetadata} />
+      <Helmet pageMetadata={pageMetadata || {}} />
       <Navbar />
       <div
         className={classname}
@@ -46,4 +46,6 @@ Layout.defaultProps = {
   hasContainer: true,
 };
 
-export default Layout;
+export {
+  Layout,
+};
