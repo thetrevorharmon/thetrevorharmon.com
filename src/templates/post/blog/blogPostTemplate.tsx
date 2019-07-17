@@ -151,7 +151,7 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
             )
           }
         </div>
-        <div className="row mt-9 mt-lg-6 mb-9 mb-lg-4">
+        <div className="row my-5 my-lg-6">
           <div className={pageLayoutClassName}>
             <EmailListForm>
               <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
