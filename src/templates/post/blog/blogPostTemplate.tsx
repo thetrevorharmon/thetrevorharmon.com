@@ -153,18 +153,17 @@ export default class CaseStudyTemplate extends React.Component<CaseStudyTemplate
         </div>
         <div className="row mt-9 mt-lg-6 mb-9 mb-lg-4">
           <div className={pageLayoutClassName}>
-            <EmailListForm />
+            <EmailListForm>
+              <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
+                <Icon name="rss" />
+              </Link>
+              <Link href={this.twitterShareUrl(siteData, blogPost)} isIconLink={true} className="ml-2 icon-link">
+                <Icon name="twitter" />
+              </Link>
+            </EmailListForm>
           </div>
         </div>
         <div className="post-footer">
-          <div className="post-links">
-            <Link href={siteData.feedUrl} className="link">
-              <Icon name="rss"/>
-            </Link>
-            <Link href={this.twitterShareUrl(siteData, blogPost)} className="link">
-              <Icon name="twitter"/>
-            </Link>
-          </div>
           <div className="row post-navigation-wrapper">
             {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
             {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}

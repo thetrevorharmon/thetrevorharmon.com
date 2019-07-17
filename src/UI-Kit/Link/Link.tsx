@@ -8,12 +8,14 @@ import * as styles from './Link.module.scss';
 interface LinkProps {
   className?: string;
   href: string;
+  isIconLink?: boolean;
   noLinkStyling?: boolean;
   target?: string;
 }
 
 const Link: React.SFC<LinkProps> = ({
   href,
+  isIconLink,
   noLinkStyling,
   target,
   className,
@@ -27,6 +29,7 @@ const Link: React.SFC<LinkProps> = ({
     className,
     noLinkStyling && styles.Reset,
     !noLinkStyling && styles.Link,
+    isIconLink && styles.IconLink,
   );
 
   return externalLink ? (

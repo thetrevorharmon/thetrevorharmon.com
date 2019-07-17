@@ -15,3 +15,20 @@
 .Reset {
   text-decoration: none;
 }
+
+.IconLink {
+  &, &:hover {
+    border: none;
+    text-decoration: none;
+  }
+
+  transition: all 0.2s linear;
+
+  & svg path {
+    fill: $brand-primary;
+  }
+
+  &:hover svg path {
+    fill: darken($brand-primary, 15%);
+  }
+}

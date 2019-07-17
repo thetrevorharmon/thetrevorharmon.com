@@ -9,4 +9,10 @@
   path {
     fill: $text-color-primary;
   }
+
+  a & {
+    path {
+      fill: $brand-primary;
+    }
+  }
 }
