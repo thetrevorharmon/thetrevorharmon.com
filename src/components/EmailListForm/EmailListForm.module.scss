@@ -14,8 +14,12 @@
     background: #e1e1e1;
     position: relative;
 
+    $signup-complete-animation-speed: 0.7s;
+
     &.SignupComplete .SignupFields {
-      visibility: hidden;
+      animation: hide-form-fields $signup-complete-animation-speed ease-in-out;
+      opacity: 0;
+      z-index: -1;
     }
 
     .SignupCompletionMessage {
@@ -28,13 +32,14 @@
       width: 100%;
       padding: 2rem;
 
-      visibility: hidden;
+      opacity: 0;
       z-index: -1;
     }
 
     &.SignupComplete .SignupCompletionMessage {
-      visibility: visible;
+      animation: show-completion-message $signup-complete-animation-speed ease-in-out;
       z-index: 1;
+      opacity: 1;
     }
   }
 
@@ -76,7 +81,45 @@
     
     &:hover {
       cursor: pointer;
-      background: darken($brand-primary, 15%);
-    }    
+      background-color: darken($brand-primary, 15%);
+    }
+
+    &:disabled {
+      background-color: $text-color-secondary;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@keyframes hide-form-fields {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  51% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes show-completion-message {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+  50% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    z-index: 1;
   }
 }

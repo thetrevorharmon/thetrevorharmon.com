@@ -1,4 +1,4 @@
-import addToMailchimp from 'gatsby-plugin-mailchimp';
+import addToMailchimp, { MailchimpFields, MailchimpResponse } from 'gatsby-plugin-mailchimp';
 import React, { useState } from 'react';
 import * as styles from './EmailListForm.module.scss';
 
@@ -15,15 +15,15 @@ const EmailListForm: React.FunctionComponent<{}> = ({children}) => {
   const [hasEmailError, setEmailError] = useState(false);
   const [hasNameError, setNameError] = useState(false);
 
-  const prepareNameFields = (subscriberName: string) => {
+  const prepareNameFields = (subscriberName: string): MailchimpFields => {
     const nameParts = subscriberName.split(' ');
     if (nameParts.length === 1) {
       return {
-        FNAME: nameParts[0],
+        FNAME: subscriberName,
       };
     } else {
       return {
-        FNAME: nameParts.shift(),
+        FNAME: nameParts.shift() || '', // needs the default to fix lint errors
         LNAME: nameParts.join(' '),
       };
     }
@@ -32,6 +32,7 @@ const EmailListForm: React.FunctionComponent<{}> = ({children}) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Check to see if there are any errors (catches blank submission)
     checkForError(name, 'name', setNameError);
     checkForError(email, 'email', setEmailError);
 
@@ -39,26 +40,30 @@ const EmailListForm: React.FunctionComponent<{}> = ({children}) => {
       return;
     }
 
+    // if no errors, prepare fields and change state
+    setSignupIsRequesting(true);
     const fields = {
       ...prepareNameFields(name),
     };
 
-    setSignupIsRequesting(true);
+    addToMailchimp(email, fields)
+      .then((data: MailchimpResponse) => {
+        if (data.result === 'success') {
+          setSignupComplete(true);
+        } else {
+          // tslint:disable-next-line
+          console.error(data.msg);
 
-    setTimeout(() => {
-      setSignupComplete(true);
-    }, 3000);
-
-    // addToMailchimp(email)
-    //   .then((data) => {
-    //     alert(data.result);
-    //   })
-    //   .catch((error: Error) => {
-    //     // Errors in here are client side
-    //     // Mailchimp always returns a 200
-    //     // tslint:disable-next-line
-    //     console.error(error); // allowing this console.error so that I can see any errors in production
-    //   });
+          alert('There was a problem signing you up for the mailing list.');
+          setSignupIsRequesting(false);
+        }
+      })
+      .catch((error: Error) => {
+        // Errors in here are client side
+        // Mailchimp always returns a 200
+        // tslint:disable-next-line
+        console.error(error); // allowing this console.error so that I can see any errors in production
+      });
   };
 
   type fieldType = 'name' | 'email';
@@ -143,7 +148,7 @@ const EmailListForm: React.FunctionComponent<{}> = ({children}) => {
         <div className={styles.SignupCompletionMessage}>
           <div>
             <h2 className="mt-0">{name}, thank you for signing up!</h2>
-            <p className="mb-2">Check your email for confirmation.</p>
+            <p className="mb-2">You'll be getting my articles in your inbox.</p>
           </div>
         </div>
       </div>
