@@ -87,9 +87,8 @@ module.exports = {
               return allContentfulBlogPost.edges.map(edge => {
                 return Object.assign({}, {
                   title: edge.node.title,
-                  description: edge.node.description.description,
+                  description: edge.node.description,
                   date: edge.node.date,
-                  image_url: edge.node.heroImage && edge.node.heroImage.fixed.src,
                   url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
                   guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
                   custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
