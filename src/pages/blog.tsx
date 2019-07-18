@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import { Layout } from '../layouts';
+import { Helpers, Routes } from '../utils';
 
 import * as styles from './blog.module.scss';
 
@@ -14,8 +15,6 @@ import {
   Link,
   Tile,
 } from '../UI-Kit';
-
-import { Routes } from '../utils';
 
 interface ProjectsPageProps {
   data: {
@@ -46,21 +45,9 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
       url: Routes.blog(),
     };
 
-    const posts: Post[] = [
-      // blog posts
-      ...this.props.data.allContentfulBlogPost.edges.map((edge) => edge.node),
-      // link posts
-      ...this.props.data.allContentfulLinkPost.edges.map((edge) => edge.node),
-    ].sort(
-      (firstDate: BlogPost | LinkPost, secondDate: BlogPost | LinkPost) => {
-        const a = new Date(firstDate.date);
-        const b = new Date(secondDate.date);
-
-        if (a < b) { return 1; }
-        if (a > b) { return -1; }
-
-        return 0;
-      },
+    const posts = Helpers.combinePostTypes(
+      this.props.data.allContentfulBlogPost,
+      this.props.data.allContentfulLinkPost,
     );
 
     return (
