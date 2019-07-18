@@ -50,8 +50,8 @@
     "prismjs": "^1.15.0",
     "prop-types": "^15.7.1",
     "query-string": "^6.1.0",
-    "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
     "react-masonry-css": "^1.0.11"
   },
