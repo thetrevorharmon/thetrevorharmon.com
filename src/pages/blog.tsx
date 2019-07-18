@@ -26,6 +26,13 @@ interface ProjectsPageProps {
         }
       ],
     },
+    allContentfulLinkPost: {
+      edges: [
+        {
+          node: LinkPost,
+        }
+      ],
+    },
   };
 }
 
@@ -38,6 +45,23 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
       title: 'Blog',
       url: Routes.blog(),
     };
+
+    const posts: Post[] = [
+      // blog posts
+      ...this.props.data.allContentfulBlogPost.edges.map((edge) => edge.node),
+      // link posts
+      ...this.props.data.allContentfulLinkPost.edges.map((edge) => edge.node),
+    ].sort(
+      (firstDate: BlogPost | LinkPost, secondDate: BlogPost | LinkPost) => {
+        const a = new Date(firstDate.date);
+        const b = new Date(secondDate.date);
+
+        if (a < b) { return 1; }
+        if (a > b) { return -1; }
+
+        return 0;
+      },
+    );
 
     return (
       <Layout pageMetadata={pageMetadata}>
@@ -58,31 +82,23 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
           </div>
         </div>
 
-        {this.props.data.allContentfulBlogPost.edges.map((blogPost, index) => (
+        {posts.map((post, index) => (
           <div className={classnames(styles.Post, 'mb-5')} key={index}>
             <div className="row">
               <div className="col-lg-8">
                 <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
-                  <Link href={Routes.blogPost(blogPost.node.slug)}>{blogPost.node.title}</Link>
+                  <Link href={Routes.blogPost(post.slug)}>{post.title}</Link>
                 </Header>
 
-                <Header rank={3} type="Tagline">{blogPost.node.description}</Header>
+                <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
                 <p className={styles.Meta}>
-                  {blogPost.node.date} • {blogPost.node.body.childMarkdownRemark.timeToRead} min read
+                  {post.date} • {post.body.childMarkdownRemark.timeToRead} min read
                 </p>
               </div>
             </div>
-            {/*
-            <div className="row">
-              <div className="col-lg-8">
-                <p>{blogPost.node.body.childMarkdownRemark.excerpt}</p>
-              </div>
-            </div>
-            */}
-
             <div className="row">
               <div className="col-lg-8" key={index}>
-                <Link href={Routes.blogPost(blogPost.node.slug)}>Continue Reading &rarr;</Link>
+                <Link href={Routes.blogPost(post.slug)}>Continue Reading &rarr;</Link>
               </div>
             </div>
           </div>
@@ -114,5 +130,24 @@ export const blogPageQuery = graphql`
         }
       }
     }
+    allContentfulLinkPost(
+      sort: { order: DESC, fields: [date] },
+    ) {
+	  edges {
+	    node {
+	      title
+        slug
+        link
+        date(formatString: "MMMM DD, YYYY")
+        body {
+          childMarkdownRemark {
+            html
+            excerpt
+            timeToRead
+          }
+        }
+	    }
+	  }
+	}
   }
 `;

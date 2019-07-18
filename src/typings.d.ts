@@ -43,19 +43,26 @@ interface CaseStudy extends PortfolioItem {
   post: contentfulLongText;
 }
 
-interface BlogPost {
+interface Post {
   title: string;
   slug: string;
-  subtitle: string;
-  description: string;
-  heroImage: contentfulAsset;
+  subtitle?: string;
+  description?: string;
   date: Date;
   body: {
     childMarkdownRemark: MarkdownRemark;
-  }
-  tags: [string];
+  }  
+  tags?: [string];
+}
+
+interface BlogPost extends Post {
+  heroImage: contentfulAsset;
   sourceAttribution?: contentfulAttribution;
   photoAttribution?: contentfulAttribution;
+}
+
+interface LinkPost extends Post {
+  link: string;
 }
 
 interface AboutPageData {
