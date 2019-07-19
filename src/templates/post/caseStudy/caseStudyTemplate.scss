@@ -1,31 +1,31 @@
-// @import '../postTemplate.scss';
+@import './postTemplate.scss';
 
-// .case-study-template {
-//   @extend .post-template;
+.case-study-template {
+  @extend .post-template;
 
-//   .hero-header {
-//     border: 1px solid $text-color-primary;
-//     height: 26rem;
-//     width: 100%;
-//   }
+  .hero-header {
+    border: 1px solid $text-color-primary;
+    height: 26rem;
+    width: 100%;
+  }
 
-//   .table-of-contents {
-//     @include left-border;
+  .table-of-contents {
+    @include left-border;
 
-//     ol { 
-//       counter-reset: item;
-//       padding-left: 0;
+    ol { 
+      counter-reset: item;
+      padding-left: 0;
       
-//       li {
-//         display: block;
+      li {
+        display: block;
 
-//         &:before { 
-//           content: counter(item) ".";
-//           counter-increment: item;
-//           width: 1.75em;
-//           display: inline-block;
-//         }
-//       }
-//     }
-//   }
-// }
+        &:before { 
+          content: counter(item) ".";
+          counter-increment: item;
+          width: 1.75em;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
