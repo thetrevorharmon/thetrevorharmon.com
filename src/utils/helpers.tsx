@@ -23,9 +23,23 @@ const combinePostTypes = (
 
   const posts = [
     // blog posts
-    ...blogPosts.edges.map((edge) => edge.node),
+    ...blogPosts.edges.map((edge) => {
+      const blogPost: BlogPost = {
+        ...edge.node as BlogPost,
+        postType: 'Blog',
+      };
+
+      return blogPost;
+    }),
     // link posts
-    ...linkPosts.edges.map((edge) => edge.node),
+    ...linkPosts.edges.map((edge) => {
+      const linkPost: LinkPost = {
+        ...edge.node as LinkPost,
+        postType: 'Link',
+      };
+
+      return linkPost;
+    }),
   ].sort(
     (firstDate, secondDate) => {
       const a = new Date(firstDate.date);
