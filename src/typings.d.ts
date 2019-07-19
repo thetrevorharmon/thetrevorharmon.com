@@ -13,13 +13,34 @@ declare module '*.svg' {
   export = content;
 }
 
+type ContentfulObjectType = (
+  'ContentfulBlogPost' | 
+  'ContentfulLinkPost' | 
+  'ContentfulProject' | 
+  'ContentfulCaseStudy' | 
+  'ContentfulAboutPage'
+);
+
+interface BaseObject {
+  internal?: {
+    content?: string;
+    contentDigest?: string;
+    description?: string;
+    fieldOwners?: string;
+    ignoreType?: string;
+    mediaType?: string;
+    owner?: string;
+    type?: ContentfulObjectType;
+  }
+}
+
 interface MarkdownRemark {
   html: string;
   excerpt?: string;
   timeToRead?: string;
 }
 
-interface PortfolioItem {
+interface PortfolioItem extends BaseObject {
   title: string;
   slug: string;
   featureImage: contentfulAsset;
@@ -43,7 +64,7 @@ interface CaseStudy extends PortfolioItem {
   post: contentfulLongText;
 }
 
-interface Post {
+interface Post extends BaseObject {
   title: string;
   slug: string;
   subtitle?: string;
@@ -65,7 +86,7 @@ interface LinkPost extends Post {
   link: string;
 }
 
-interface AboutPageData {
+interface AboutPageData extends BaseObject {
   title: string;
   post: contentfulLongText;
   featureImage: contentfulAsset;
@@ -87,7 +108,7 @@ interface contentfulLongText {
   }
 }
 
-interface contentfulAsset {
+interface contentfulAsset extends BaseObject {
   id?: string;
   title: string;
   description: string;
@@ -129,15 +150,4 @@ interface PageMetadata {
   description?: string;   
   url?: string;
   image?: string;
-}
-
-interface MediumPost {
-  title: string;
-  uniqueSlug: string;
-  firstPublishedAt: string;
-  virtuals: {
-    subtitle: string;
-    metaDescription: string;
-    readingTime: number;
-  };
 }

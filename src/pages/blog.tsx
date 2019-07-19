@@ -12,6 +12,7 @@ import '../templates/post/blog/blogPostTemplate.scss';
 import {
   Button,
   Header,
+  Icon,
   Link,
   Tile,
 } from '../UI-Kit';
@@ -74,7 +75,12 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
             <div className="row">
               <div className="col-lg-8">
                 <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
-                  <Link href={Routes.blogPost(post.slug)}>{post.title}</Link>
+                  <Link href={Routes.blogPost(post.slug)}>
+                    {post.title}
+                    {post.internal && post.internal.type === 'ContentfulLinkPost' && (
+                      <Icon className={styles.Icon} name="link" />
+                    )}
+                  </Link>
                 </Header>
 
                 <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
@@ -106,6 +112,9 @@ export const blogPageQuery = graphql`
           slug
           description
           date(formatString: "MMMM DD, YYYY")
+          internal {
+            type
+          }
           body {
             childMarkdownRemark {
               html
@@ -126,6 +135,9 @@ export const blogPageQuery = graphql`
         slug
         link
         date(formatString: "MMMM DD, YYYY")
+        internal {
+          type
+        }
         body {
           childMarkdownRemark {
             html

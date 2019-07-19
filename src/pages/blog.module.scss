@@ -9,10 +9,25 @@
       color: $text-color-primary;
       transition: color 0.1s linear;
 
+      .Icon svg {
+        position: relative;
+        top: 7px;
+        left: 12px;
+        height: 30px;
+        width: 30px;
+        background: $text-color-primary;
+        padding: 7px;
+
+        path {
+          fill: white;
+        }
+      }
+
       &:hover {
         border: none;
         color: $brand-primary;
       }
+
     }
   }
 
