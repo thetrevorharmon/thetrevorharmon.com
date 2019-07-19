@@ -21,7 +21,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
     layoutClassName,
   } = props;
 
-  const makeAttribution = (attribution: contentfulAttribution) => {
+  const makeAttribution = (attribution: ContentfulAttribution) => {
     return (
       <div className={styles.Attribution}>
         {`${attribution.type} by ${attribution.author} on `}

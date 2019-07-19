@@ -78,8 +78,8 @@ interface Post extends BaseObject {
 
 interface BlogPost extends Post {
   heroImage: ContentfulAsset;
-  sourceAttribution?: contentfulAttribution;
-  photoAttribution?: contentfulAttribution;
+  sourceAttribution?: ContentfulAttribution;
+  photoAttribution?: ContentfulAttribution;
 }
 
 interface LinkPost extends Post {
@@ -121,16 +121,16 @@ interface ContentfulAsset extends BaseObject {
   }
 }
 
-type contentfulAttributionType = 'Photo' | 'Article';
-type contentfulAttributionSource = 'Unsplash' | 'Medium';
+type ContentfulAttributionType = 'Photo' | 'Article';
+type ContentfulAttributionSource = 'Unsplash' | 'Medium';
 
-interface contentfulAttribution {
+interface ContentfulAttribution {
   id?: string;
   name: string;
   sourceLocation: string;
-  sourceName: contentfulAttributionSource;
+  sourceName: ContentfulAttributionSource;
   author: string;
-  type: contentfulAttributionType;
+  type: ContentfulAttributionType;
 }
 
 interface SiteMetadata {

@@ -86,7 +86,7 @@ export default class LinkPostTemplate extends React.Component<LinkPostTemplatePr
       url: Routes.blogPost(slug),
     };
 
-    const makeAttribution = (attribution: contentfulAttribution) => {
+    const makeAttribution = (attribution: ContentfulAttribution) => {
       const className = `${attribution.type.toLowerCase()}-attribution`;
 
       return attribution.type === 'Photo'
