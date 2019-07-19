@@ -1,3 +1,5 @@
+import { Routes } from '../utils';
+
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;
   const hasProtocol = completeProtocol.test(link);
@@ -10,25 +12,13 @@ const checkHttp = (link: string) => {
   return `https://${preparedLink}`;
 };
 
-interface BlogPostEdges {
-  edges: [
-    {
-      node: BlogPost,
-    }
-  ];
-}
+interface PostEdges { edges: [{ node: BlogPost | LinkPost }]; }
 
-interface LinkPostEdges {
-  edges: [
-    {
-      node: LinkPost,
-    }
-  ];
-}
-
-type PostOrder = 'desc' | 'asc';
-
-const combinePostTypes = (blogPosts: BlogPostEdges, linkPosts: LinkPostEdges, order: PostOrder = 'desc') => {
+const combinePostTypes = (
+  blogPosts: PostEdges,
+  linkPosts: PostEdges,
+  order: ('desc' | 'asc') = 'desc',
+): Array<BlogPost | LinkPost> => {
   const orderMultiplier = order === 'desc' ? 1 : -1;
 
   const posts = [
@@ -51,7 +41,16 @@ const combinePostTypes = (blogPosts: BlogPostEdges, linkPosts: LinkPostEdges, or
   return posts;
 };
 
+const twitterShareUrl = (post: BlogPost | LinkPost, siteData: SiteMetadata) => {
+  const twitterText = encodeURI(`I just finished reading "${post.title}" by ${siteData.twitter.author}`);
+  const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(post.slug)}`;
+  const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
+
+  return shareUrl;
+};
+
 export {
   combinePostTypes,
   checkHttp,
+  twitterShareUrl,
 };

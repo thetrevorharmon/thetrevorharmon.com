@@ -18,7 +18,7 @@ import {
   EmailListForm,
 } from '../../../components';
 
-import { Routes } from '../../../utils';
+import { Routes, Helpers } from '../../../utils';
 
 type PostNavigationDirection = 'older' | 'newer';
 
@@ -91,14 +91,6 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
 
     const pageLayoutClassName = 'col-lg-7';
 
-    const twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
-      const twitterText = encodeURI(`I just finished reading "${blogPost.title}" by ${siteData.twitter.author}`);
-      const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(blogPost.slug)}`;
-      const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
-
-      return shareUrl;
-    };
-
     const makeBody = (post: BlogPost) => {
       return (
         <div className="post-body">
@@ -134,7 +126,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
               <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
                 <Icon name="rss" />
               </Link>
-              <Link href={twitterShareUrl(siteData, post)} isIconLink={true} className="ml-2 icon-link">
+              <Link href={Helpers.twitterShareUrl(post, siteData)} isIconLink={true} className="ml-2 icon-link">
                 <Icon name="twitter" />
               </Link>
             </EmailListForm>
