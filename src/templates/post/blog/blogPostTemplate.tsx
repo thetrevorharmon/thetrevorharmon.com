@@ -10,8 +10,8 @@ import {
 } from '../../../UI-Kit';
 
 import {
-  Footer,
-  Header,
+  PostFooter,
+  PostHeader,
 } from './components';
 
 import {
@@ -107,17 +107,17 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
             <div className={pageLayoutClassName}>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: blogPost.body.childMarkdownRemark.html,
+                  __html: post.body.childMarkdownRemark.html,
                 }}
               />
             </div>
           </div>
 
           {
-            blogPost.sourceAttribution && (
+            post.sourceAttribution && (
               <div className="row">
                 <div className={pageLayoutClassName}>
-                  {makeAttribution(blogPost.sourceAttribution)}
+                  {makeAttribution(post.sourceAttribution)}
                 </div>
               </div>
             )
@@ -145,10 +145,10 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
 
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        <Header post={blogPost} layoutClassName={pageLayoutClassName} />
+        <PostHeader post={blogPost} layoutClassName={pageLayoutClassName} />
         {makeBody(blogPost)}
         {makeSignupForm(siteData, blogPost)}
-        <Footer olderPost={olderPost} newerPost={newerPost} />
+        <PostFooter olderPost={olderPost} newerPost={newerPost} />
       </Layout>
     );
   }

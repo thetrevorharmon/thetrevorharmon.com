@@ -1,21 +1,21 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './Header.module.scss';
+import * as styles from './PostHeader.module.scss';
 
 import {
-  Header as TextHeader,
+  Header,
   Icon,
   Image,
   Link,
 } from '../../../../UI-Kit';
 
-interface HeaderProps {
+interface PostHeaderProps {
   post: BlogPost;
   layoutClassName: string;
 }
 
-const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
+const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
   const {
     post,
     layoutClassName,
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   return (
     <div
       className={classnames(
-        styles.Header,
+        styles.PostHeader,
         'row',
         'mt-4 mb-2',
         'mt-lg-6 mb-lg-4',
@@ -51,9 +51,9 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       }
 
       <div className={layoutClassName}>
-        <TextHeader rank={1} type="Headline" className="mb-0">{post.title}</TextHeader>
+        <Header rank={1} type="Headline" className="mb-0">{post.title}</Header>
         {post.subtitle && (
-          <TextHeader rank={2} type="Tagline" className="mt-1">{post.subtitle}</TextHeader>
+          <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
         )}
         <p className={styles.Meta}>{post.date} • {post.body.childMarkdownRemark.timeToRead} min read</p>
       </div>
@@ -62,5 +62,5 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
 };
 
 export {
-  Header,
+  PostHeader,
 };

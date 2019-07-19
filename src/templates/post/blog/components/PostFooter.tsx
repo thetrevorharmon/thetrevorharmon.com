@@ -14,14 +14,14 @@ interface BasicPost {
   slug: string;
 }
 
-interface FooterProps {
+interface PostFooterProps {
   olderPost?: BasicPost;
   newerPost?: BasicPost;
 }
 
 type PostNavigationDirection = 'older' | 'newer';
 
-const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
   const {
     olderPost,
     newerPost,
@@ -56,5 +56,5 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
 };
 
 export {
-  Footer,
+  PostFooter,
 };

@@ -1,7 +1,7 @@
-import { Footer } from './Footer';
-import { Header } from './Header';
+import { PostFooter } from './PostFooter';
+import { PostHeader } from './PostHeader';
 
 export {
-  Footer,
-  Header,
+  PostFooter,
+  PostHeader,
 };
