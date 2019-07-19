@@ -83,10 +83,12 @@ interface BlogPost extends Post {
   heroImage: ContentfulAsset;
   sourceAttribution?: ContentfulAttribution;
   photoAttribution?: ContentfulAttribution;
+  postType: 'Blog';
 }
 
 interface LinkPost extends Post {
   link: string;
+  postType: 'Link';
 }
 
 interface AboutPageData extends BaseObject {

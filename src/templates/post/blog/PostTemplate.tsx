@@ -13,7 +13,7 @@ import {
 import { Routes } from '../../../utils';
 
 interface PostTemplateProps {
-  post: BlogPost;
+  post: BlogPost | LinkPost;
   siteMetadata: SiteMetadata;
   newerPost?: BasicPost;
   olderPost?: BasicPost;
@@ -28,7 +28,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 
   const pageMetadata: PageMetadata = {
     description: `${post.description}`,
-    image: post.heroImage && post.heroImage.fluid.src,
+    image: post.postType === 'Blog' && post.heroImage ? post.heroImage.fluid.src : undefined,
     title: `${post.title}`,
     url: Routes.blogPost(post.slug),
   };

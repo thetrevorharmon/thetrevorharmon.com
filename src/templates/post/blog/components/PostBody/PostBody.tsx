@@ -9,7 +9,7 @@ import * as styles from './PostBody.module.scss';
 import './PostBody.scss';
 
 interface PostBodyProps {
-  post: BlogPost;
+  post: BlogPost | LinkPost;
   layoutClassName: string;
 }
 
@@ -44,7 +44,7 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
         </div>
       </div>
       {
-        post.sourceAttribution && (
+        post.postType === 'Blog' && post.sourceAttribution && (
           <div className="row">
             <div className={layoutClassName}>
               {makeSourceAttribution(post.sourceAttribution)}

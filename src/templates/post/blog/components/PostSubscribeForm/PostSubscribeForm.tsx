@@ -16,7 +16,7 @@ import * as styles from './PostSubscribeForm.module.scss';
 
 interface PostSubscribeFormProps {
   layoutClassName: string;
-  post: BlogPost;
+  post: BlogPost | LinkPost;
   siteData: SiteMetadata;
 }
 

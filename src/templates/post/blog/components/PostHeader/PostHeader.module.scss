@@ -1,6 +1,48 @@
 @import 'foundation';
+@import '../UI-Kit/Header/Header.module.scss';
 
 .PostHeader {
+  .Link {
+    @extend .Headline; // important because it sets the correct font-size
+    display: inline-block;
+    margin-top: 1em;
+
+    .Wrapper {
+      display: flex;
+      align-items: center;
+
+      .LinkHeader {
+        margin-top: 0;
+        transition: all 0.1s linear;
+      }
+
+      .Icon {
+        line-height: 0;
+
+          svg {
+            width: 0.85em;
+            max-height: none;
+            max-width: none;
+            padding: 0.25em;
+            
+            background: $text-color-primary;
+      
+            path {
+              fill: white;
+            }
+        }
+      }
+    }
+
+    &:hover {
+      border-bottom-color: transparent;
+
+      .Wrapper .LinkHeader {
+        color: $brand-primary;
+      }
+    }
+  }
+
   .Attribution {
     text-align: center;
     font-size: 0.9rem;

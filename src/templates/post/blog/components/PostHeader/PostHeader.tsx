@@ -11,7 +11,7 @@ import {
 } from '../../../../../UI-Kit';
 
 interface PostHeaderProps {
-  post: BlogPost;
+  post: BlogPost | LinkPost;
   layoutClassName: string;
 }
 
@@ -32,6 +32,19 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
     );
   };
 
+  const header = (className?: string) => (
+    <Header
+      rank={1}
+      type="Headline"
+      className={classnames(
+        'mb-0',
+        className,
+      )}
+    >
+      {post.title}
+    </Header>
+  );
+
   return (
     <div
       className={classnames(
@@ -42,7 +55,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
       )}
     >
       {
-        post.heroImage && (
+        post.postType === 'Blog' && post.heroImage && (
           <div className={layoutClassName}>
             <Image src={post.heroImage} />
             {post.photoAttribution && makeAttribution(post.photoAttribution)}
@@ -51,7 +64,20 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
       }
 
       <div className={layoutClassName}>
-        <Header rank={1} type="Headline" className="mb-0">{post.title}</Header>
+        {
+          post.postType === 'Link' && post.link ? (
+            <Link href={post.link} className={styles.Link}>
+              <div className={styles.Wrapper}>
+                {header(styles.LinkHeader)}
+                <Icon className={styles.Icon} name="link" />
+              </div>
+            </Link>
+          ) : (
+            <>
+              {header()}
+            </>
+          )
+        }
         {post.subtitle && (
           <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
         )}

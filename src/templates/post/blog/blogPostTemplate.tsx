@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import { PostTemplate } from './PostTemplate';
@@ -25,8 +25,11 @@ interface BlogPostTemplateProps {
 
 export default (props: BlogPostTemplateProps) => {
 
-  const blogPost = props.data.allContentfulBlogPost.edges[0].node;
   const siteMetadata = props.data.site.siteMetadata;
+  const blogPost: BlogPost = {
+    ...props.data.allContentfulBlogPost.edges[0].node,
+    postType: 'Blog',
+  };
 
   const {
     newerPost,
