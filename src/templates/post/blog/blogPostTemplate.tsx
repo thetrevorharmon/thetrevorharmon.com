@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 import { Layout } from '../../../layouts';
 
-import './blogPostTemplate.scss';
+import * as styles from './blogPostTemplate.module.scss';
 
 import {
   Icon,
@@ -89,7 +89,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
     };
 
     return (
-      <Layout className="blog-post-template" pageMetadata={pageMetadata}>
+      <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
         <PostHeader post={blogPost} layoutClassName={pageLayoutClassName} />
         <PostBody post={blogPost} layoutClassName={pageLayoutClassName} />
         {makeSignupForm(siteData, blogPost)}
