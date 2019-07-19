@@ -7,8 +7,6 @@ import { Helpers, Routes } from '../utils';
 
 import * as styles from './blog.module.scss';
 
-// import '../templates/post/blog/blogPostTemplate.scss';
-
 import {
   Button,
   Header,
