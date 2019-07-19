@@ -43,7 +43,7 @@ interface MarkdownRemark {
 interface PortfolioItem extends BaseObject {
   title: string;
   slug: string;
-  featureImage: contentfulAsset;
+  featureImage: ContentfulAsset;
   featureOnHomepage: boolean;
 }
 
@@ -55,7 +55,7 @@ interface Project extends PortfolioItem {
     childMarkdownRemark?: MarkdownRemark;
   };
   projectCompletionDate?: Date;
-  projectImages: [contentfulAsset]
+  projectImages: [ContentfulAsset]
 }
 
 interface CaseStudy extends PortfolioItem {
@@ -77,7 +77,7 @@ interface Post extends BaseObject {
 }
 
 interface BlogPost extends Post {
-  heroImage: contentfulAsset;
+  heroImage: ContentfulAsset;
   sourceAttribution?: contentfulAttribution;
   photoAttribution?: contentfulAttribution;
 }
@@ -89,7 +89,7 @@ interface LinkPost extends Post {
 interface AboutPageData extends BaseObject {
   title: string;
   post: contentfulLongText;
-  featureImage: contentfulAsset;
+  featureImage: ContentfulAsset;
 }
 
 interface contentfulLongText {
@@ -108,7 +108,7 @@ interface contentfulLongText {
   }
 }
 
-interface contentfulAsset extends BaseObject {
+interface ContentfulAsset extends BaseObject {
   id?: string;
   title: string;
   description: string;

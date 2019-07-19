@@ -126,8 +126,8 @@ exports.createPages = ({ graphql, actions }) => {
       posts.forEach((node, index) => {
         // these give an easy way to figure out which post is considered
         // the next newer/older post from within a blog post
-        const newerPost = index > 0 ? posts[index - 1].node : null;
-        const olderPost = index < posts.length - 1 ? posts[index + 1].node : null;
+        const newerPost = index > 0 ? posts[index - 1] : null;
+        const olderPost = index < posts.length - 1 ? posts[index + 1] : null;
 
         createPage({
           path: `blog/${node.slug}`,

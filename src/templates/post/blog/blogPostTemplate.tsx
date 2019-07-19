@@ -47,27 +47,6 @@ interface BlogPostTemplateProps {
 
 export default class BlogPostTemplate extends React.Component<BlogPostTemplateProps, {}> {
 
-  public makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
-    const className = `post-link ${direction}-post`;
-
-    return (
-      <div className="col-lg-6 post-navigation">
-        Read {direction}:<br/>
-        <Link href={Routes.blogPost(slug)} className={className}>
-          <span className="title">{title}</span>
-        </Link>
-      </div>
-    );
-  }
-
-  public twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
-    const twitterText = encodeURI(`I just finished reading "${blogPost.title}" by ${siteData.twitter.author}`);
-    const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(blogPost.slug)}`;
-    const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
-
-    return shareUrl;
-  }
-
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
@@ -90,45 +69,48 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
       const className = `${attribution.type.toLowerCase()}-attribution`;
 
       return attribution.type === 'Photo'
-      ? (
-        <div className={className}>
-          {`${attribution.type} by ${attribution.author} on `}
-          <Link href={attribution.sourceLocation}>
-            {attribution.sourceName}
-          </Link>.
+        ? (
+          <div className={className}>
+            {`${attribution.type} by ${attribution.author} on `}
+            <Link href={attribution.sourceLocation}>
+              {attribution.sourceName}
+            </Link>.
         </div>
-      ) : (
-        <div className={className}>
-          This {`${attribution.type.toLowerCase()} was originally published on `}
-          <Link href={attribution.sourceLocation}>
-            {attribution.sourceName}
-          </Link>.
+        ) : (
+          <div className={className}>
+            This {`${attribution.type.toLowerCase()} was originally published on `}
+            <Link href={attribution.sourceLocation}>
+              {attribution.sourceName}
+            </Link>.
+        </div>
+        );
+    };
+
+    const makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
+      const className = `post-link ${direction}-post`;
+
+      return (
+        <div className="col-lg-6 post-navigation">
+          Read {direction}:<br />
+          <Link href={Routes.blogPost(slug)} className={className}>
+            <span className="title">{title}</span>
+          </Link>
         </div>
       );
     };
 
     const pageLayoutClassName = 'col-lg-7';
 
-    return (
-      <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
-          {
-            blogPost.heroImage && (
-              <div className={pageLayoutClassName}>
-                <Image src={blogPost.heroImage} />
-                {blogPost.photoAttribution && makeAttribution(blogPost.photoAttribution)}
-              </div>
-            )
-          }
+    const twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
+      const twitterText = encodeURI(`I just finished reading "${blogPost.title}" by ${siteData.twitter.author}`);
+      const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(blogPost.slug)}`;
+      const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
 
-          <div className={pageLayoutClassName}>
-            <Header rank={1} type="Headline" className="mb-0">{blogPost.title}</Header>
-            {blogPost.subtitle && (
-              <Header rank={2} type="Tagline" className="mt-1">{blogPost.subtitle}</Header>
-            )}
-            <p className="meta">{blogPost.date} • {blogPost.body.childMarkdownRemark.timeToRead} min read</p>
-          </div>
-        </div>
+      return shareUrl;
+    };
+
+    const makeBody = (post: BlogPost) => {
+      return (
         <div className="post-body">
 
           <div className="row">
@@ -151,24 +133,67 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
             )
           }
         </div>
+      );
+    };
+
+    const makeHeader = (post: BlogPost) => {
+      return (
+        <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
+          {
+            post.heroImage && (
+              <div className={pageLayoutClassName}>
+                <Image src={post.heroImage} />
+                {post.photoAttribution && makeAttribution(post.photoAttribution)}
+              </div>
+            )
+          }
+
+          <div className={pageLayoutClassName}>
+            <Header rank={1} type="Headline" className="mb-0">{post.title}</Header>
+            {post.subtitle && (
+              <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
+            )}
+            <p className="meta">{post.date} • {post.body.childMarkdownRemark.timeToRead} min read</p>
+          </div>
+        </div>
+      );
+    };
+
+    const makeSignupForm = (siteData: SiteMetadata, post: BlogPost) => {
+      return (
         <div className="row my-5 my-lg-6">
           <div className={pageLayoutClassName}>
             <EmailListForm>
               <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
                 <Icon name="rss" />
               </Link>
-              <Link href={this.twitterShareUrl(siteData, blogPost)} isIconLink={true} className="ml-2 icon-link">
+              <Link href={twitterShareUrl(siteData, post)} isIconLink={true} className="ml-2 icon-link">
                 <Icon name="twitter" />
               </Link>
             </EmailListForm>
           </div>
         </div>
+      );
+    };
+
+    const makeFooter = () => {
+      return (
         <div className="post-footer">
           <div className="row post-navigation-wrapper">
-            {olderPost && this.makeNavigation(olderPost.title, olderPost.slug, 'older')}
-            {newerPost && this.makeNavigation(newerPost.title, newerPost.slug, 'newer')}
+            {console.log(`older post: ${olderPost}`)}
+            {olderPost && makeNavigation(olderPost.title, olderPost.slug, 'older')}
+            {newerPost && makeNavigation(newerPost.title, newerPost.slug, 'newer')}
           </div>
         </div>
+      );
+    };
+
+    return (
+      <Layout className="blog-post-template" pageMetadata={pageMetadata}>
+        {makeHeader(blogPost)}
+        {makeBody(blogPost)}
+        {makeSignupForm(siteData, blogPost)}
+        {makeFooter()}
       </Layout>
     );
   }
