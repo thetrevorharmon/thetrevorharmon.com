@@ -13,14 +13,16 @@
 
       .LinkHeader {
         margin-top: 0;
-        transition: all 0.1s linear;
+        transition: all 0.1s ease-in-out;
       }
 
       .Icon {
         line-height: 0;
 
           svg {
+            transition: all 0.1s ease-in-out;
             width: 0.85em;
+            height: 0.85em;
             max-height: none;
             max-width: none;
             padding: 0.25em;
@@ -39,6 +41,10 @@
 
       .Wrapper .LinkHeader {
         color: $brand-primary;
+      }
+      
+      .Icon svg {
+        transform: rotate(45deg);
       }
     }
   }

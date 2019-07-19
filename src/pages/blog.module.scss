@@ -11,6 +11,8 @@
 
       .Icon svg {
         position: relative;
+        transition: all 0.1s ease-in-out;
+
         top: 7px;
         left: 12px;
         height: 30px;
@@ -27,6 +29,10 @@
       &:hover {
         border: none;
         color: $brand-primary;
+
+        .Icon svg {
+          transform: rotate(45deg);
+        }
       }
 
     }
