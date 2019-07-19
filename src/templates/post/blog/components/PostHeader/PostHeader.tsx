@@ -8,7 +8,7 @@ import {
   Icon,
   Image,
   Link,
-} from '../../../../UI-Kit';
+} from '../../../../../UI-Kit';
 
 interface PostHeaderProps {
   post: BlogPost;

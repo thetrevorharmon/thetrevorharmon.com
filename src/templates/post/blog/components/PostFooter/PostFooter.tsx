@@ -3,9 +3,9 @@ import * as React from 'react';
 
 import {
   Link,
-} from '../../../../UI-Kit';
+} from '../../../../../UI-Kit';
 
-import { Routes } from '../../../../utils';
+import { Routes } from '../../../../../utils';
 
 import * as styles from './PostFooter.module.scss';
 
