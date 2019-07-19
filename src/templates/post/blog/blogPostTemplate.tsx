@@ -1,17 +1,5 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import { Layout } from '../../../layouts';
-
-import * as styles from './blogPostTemplate.module.scss';
-
-import {
-  PostBody,
-  PostFooter,
-  PostHeader,
-  PostSubscribeForm,
-} from './components';
-
-import { Routes } from '../../../utils';
 
 import { PostTemplate } from './PostTemplate';
 
@@ -43,7 +31,6 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
     const siteMetadata = this.props.data.site.siteMetadata;
 
     const {
-      slug,
       newerPost,
       olderPost,
     } = this.props.pageContext;
