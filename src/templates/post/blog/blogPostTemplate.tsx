@@ -10,6 +10,7 @@ import {
 } from '../../../UI-Kit';
 
 import {
+  PostBody,
   PostFooter,
   PostHeader,
 } from './components';
@@ -68,55 +69,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
       url: Routes.blogPost(slug),
     };
 
-    const makeAttribution = (attribution: ContentfulAttribution) => {
-      const className = `${attribution.type.toLowerCase()}-attribution`;
-
-      return attribution.type === 'Photo'
-        ? (
-          <div className={className}>
-            {`${attribution.type} by ${attribution.author} on `}
-            <Link href={attribution.sourceLocation}>
-              {attribution.sourceName}
-            </Link>.
-        </div>
-        ) : (
-          <div className={className}>
-            This {`${attribution.type.toLowerCase()} was originally published on `}
-            <Link href={attribution.sourceLocation}>
-              {attribution.sourceName}
-            </Link>.
-        </div>
-        );
-    };
-
     const pageLayoutClassName = 'col-lg-7';
-
-    const makeBody = (post: BlogPost) => {
-      return (
-        <div className="post-body">
-
-          <div className="row">
-            <div className={pageLayoutClassName}>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: post.body.childMarkdownRemark.html,
-                }}
-              />
-            </div>
-          </div>
-
-          {
-            post.sourceAttribution && (
-              <div className="row">
-                <div className={pageLayoutClassName}>
-                  {makeAttribution(post.sourceAttribution)}
-                </div>
-              </div>
-            )
-          }
-        </div>
-      );
-    };
 
     const makeSignupForm = (siteData: SiteMetadata, post: BlogPost) => {
       return (
@@ -138,7 +91,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
         <PostHeader post={blogPost} layoutClassName={pageLayoutClassName} />
-        {makeBody(blogPost)}
+        <PostBody post={blogPost} layoutClassName={pageLayoutClassName} />
         {makeSignupForm(siteData, blogPost)}
         <PostFooter olderPost={olderPost} newerPost={newerPost} />
       </Layout>
