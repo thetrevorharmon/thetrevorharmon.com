@@ -13,6 +13,8 @@ import {
 
 import { Routes } from '../../../utils';
 
+import { PostTemplate } from './PostTemplate';
+
 interface BlogPostTemplateProps {
   data: {
     allContentfulBlogPost: {
@@ -28,14 +30,8 @@ interface BlogPostTemplateProps {
   };
   pageContext: {
     slug: string,
-    newerPost?: {
-      title: string,
-      slug: string,
-    },
-    olderPost?: {
-      title: string,
-      slug: string,
-    },
+    newerPost?: BasicPost,
+    olderPost?: BasicPost,
   };
 }
 
@@ -44,7 +40,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
   public render() {
 
     const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
-    const siteData = this.props.data.site.siteMetadata;
+    const siteMetadata = this.props.data.site.siteMetadata;
 
     const {
       slug,
@@ -52,22 +48,13 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
       olderPost,
     } = this.props.pageContext;
 
-    const pageMetadata: PageMetadata = {
-      description: `${blogPost.description}`,
-      image: blogPost.heroImage && blogPost.heroImage.fluid.src,
-      title: `${blogPost.title}`,
-      url: Routes.blogPost(slug),
-    };
-
-    const pageLayoutClassName = 'col-lg-7';
-
     return (
-      <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
-        <PostHeader post={blogPost} layoutClassName={pageLayoutClassName} />
-        <PostBody post={blogPost} layoutClassName={pageLayoutClassName} />
-        <PostSubscribeForm post={blogPost} layoutClassName={pageLayoutClassName} siteData={siteData} />
-        <PostFooter olderPost={olderPost} newerPost={newerPost} />
-      </Layout>
+      <PostTemplate
+        post={blogPost}
+        newerPost={newerPost}
+        olderPost={olderPost}
+        siteMetadata={siteMetadata}
+      />
     );
   }
 }

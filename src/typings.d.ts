@@ -64,9 +64,12 @@ interface CaseStudy extends PortfolioItem {
   post: contentfulLongText;
 }
 
-interface Post extends BaseObject {
+interface BasicPost extends BaseObject {
   title: string;
   slug: string;
+}
+
+interface Post extends BasicPost {
   subtitle?: string;
   description?: string;
   date: Date;

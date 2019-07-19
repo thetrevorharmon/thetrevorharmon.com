@@ -9,11 +9,6 @@ import { Routes } from '../../../../../utils';
 
 import * as styles from './PostFooter.module.scss';
 
-interface BasicPost {
-  title: string;
-  slug: string;
-}
-
 interface PostFooterProps {
   olderPost?: BasicPost;
   newerPost?: BasicPost;
