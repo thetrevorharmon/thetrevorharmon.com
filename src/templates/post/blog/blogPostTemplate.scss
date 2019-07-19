@@ -1,13 +1,8 @@
-@import '../../../styles/_variables.scss';
-@import '../postTemplate.scss';
-
 .blog-post-template {
-  @extend .post-template;
-
   h1 {
     line-height: 1;
   }
-
+  
   h2 {
     line-height: 1.2;
   }

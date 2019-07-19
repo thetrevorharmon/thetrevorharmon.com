@@ -5,7 +5,8 @@ import {
   Link,
 } from '../../../../../UI-Kit';
 
-// import * as styles from './PostBody.module.scss';
+import * as styles from './PostBody.module.scss';
+import './PostBody.scss';
 
 interface PostBodyProps {
   post: BlogPost;
@@ -19,10 +20,8 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
   } = props;
 
   const makeAttribution = (attribution: ContentfulAttribution) => {
-    const className = `${attribution.type.toLowerCase()}-attribution`;
-
     return (
-      <div className={className}>
+      <div className={styles.Attribution}>
         This {`${attribution.type.toLowerCase()} was originally published on `}
         <Link href={attribution.sourceLocation}>
           {attribution.sourceName}
@@ -32,18 +31,18 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
   };
 
   return (
-    <div className="post-body">
-
-      <div className="row">
-        <div className={layoutClassName}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: post.body.childMarkdownRemark.html,
-            }}
-          />
+    <>
+      <div className="post-body">
+        <div className="row">
+          <div className={layoutClassName}>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: post.body.childMarkdownRemark.html,
+              }}
+            />
+          </div>
         </div>
       </div>
-
       {
         post.sourceAttribution && (
           <div className="row">
@@ -53,7 +52,7 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
           </div>
         )
       }
-    </div>
+    </>
   );
 };
 
