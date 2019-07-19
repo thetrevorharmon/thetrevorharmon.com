@@ -58,6 +58,7 @@ export const query = graphql`
           body {
             childMarkdownRemark {
               html
+              excerpt
               timeToRead
             }
           }

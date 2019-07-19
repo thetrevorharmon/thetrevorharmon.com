@@ -27,7 +27,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 }) => {
 
   const pageMetadata: PageMetadata = {
-    description: `${post.description}`,
+    description: post.description ? `${post.description}` : `${post.body.childMarkdownRemark.excerpt}`,
     image: post.postType === 'Blog' && post.heroImage ? post.heroImage.fluid.src : undefined,
     title: `${post.title}`,
     url: Routes.blogPost(post.slug),
