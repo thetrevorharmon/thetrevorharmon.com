@@ -77,7 +77,7 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
                 <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
                   <Link href={Routes.blogPost(post.slug)}>
                     {post.title}
-                    {post.internal && post.internal.type === 'ContentfulLinkPost' && (
+                    {post.postType === 'Link' && (
                       <Icon className={styles.Icon} name="link" />
                     )}
                   </Link>
