@@ -5,11 +5,13 @@ import { Layout } from '../../../layouts';
 import './blogPostTemplate.scss';
 
 import {
-  Header,
   Icon,
-  Image,
   Link,
 } from '../../../UI-Kit';
+
+import {
+  Header,
+} from './components';
 
 import {
   EmailListForm,
@@ -136,29 +138,6 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
       );
     };
 
-    const makeHeader = (post: BlogPost) => {
-      return (
-        <div className="row post-header mt-4 mt-lg-6 mb-2 mb-lg-4">
-          {
-            post.heroImage && (
-              <div className={pageLayoutClassName}>
-                <Image src={post.heroImage} />
-                {post.photoAttribution && makeAttribution(post.photoAttribution)}
-              </div>
-            )
-          }
-
-          <div className={pageLayoutClassName}>
-            <Header rank={1} type="Headline" className="mb-0">{post.title}</Header>
-            {post.subtitle && (
-              <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
-            )}
-            <p className="meta">{post.date} • {post.body.childMarkdownRemark.timeToRead} min read</p>
-          </div>
-        </div>
-      );
-    };
-
     const makeSignupForm = (siteData: SiteMetadata, post: BlogPost) => {
       return (
         <div className="row my-5 my-lg-6">
@@ -190,7 +169,7 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
 
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        {makeHeader(blogPost)}
+        <Header post={blogPost} className={pageLayoutClassName} />
         {makeBody(blogPost)}
         {makeSignupForm(siteData, blogPost)}
         {makeFooter()}
