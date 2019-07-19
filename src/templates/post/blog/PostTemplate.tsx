@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout } from '../../../layouts';
 
-import * as styles from './blogPostTemplate.module.scss';
+import * as styles from './PostTemplate.module.scss';
 
 import {
   PostBody,
