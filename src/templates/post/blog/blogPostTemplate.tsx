@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 
 import { PostTemplate } from './PostTemplate';
@@ -23,28 +23,25 @@ interface BlogPostTemplateProps {
   };
 }
 
-export default class BlogPostTemplate extends React.Component<BlogPostTemplateProps, {}> {
+export default (props: BlogPostTemplateProps) => {
 
-  public render() {
+  const blogPost = props.data.allContentfulBlogPost.edges[0].node;
+  const siteMetadata = props.data.site.siteMetadata;
 
-    const blogPost = this.props.data.allContentfulBlogPost.edges[0].node;
-    const siteMetadata = this.props.data.site.siteMetadata;
+  const {
+    newerPost,
+    olderPost,
+  } = props.pageContext;
 
-    const {
-      newerPost,
-      olderPost,
-    } = this.props.pageContext;
-
-    return (
-      <PostTemplate
-        post={blogPost}
-        newerPost={newerPost}
-        olderPost={olderPost}
-        siteMetadata={siteMetadata}
-      />
-    );
-  }
-}
+  return (
+    <PostTemplate
+      post={blogPost}
+      newerPost={newerPost}
+      olderPost={olderPost}
+      siteMetadata={siteMetadata}
+    />
+  );
+};
 
 export const query = graphql`
   query($slug: String!) {
