@@ -19,7 +19,7 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
     layoutClassName,
   } = props;
 
-  const makeAttribution = (attribution: ContentfulAttribution) => {
+  const makeSourceAttribution = (attribution: ContentfulAttribution) => {
     return (
       <div className={styles.Attribution}>
         This {`${attribution.type.toLowerCase()} was originally published on `}
@@ -47,7 +47,7 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
         post.sourceAttribution && (
           <div className="row">
             <div className={layoutClassName}>
-              {makeAttribution(post.sourceAttribution)}
+              {makeSourceAttribution(post.sourceAttribution)}
             </div>
           </div>
         )

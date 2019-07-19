@@ -5,23 +5,13 @@ import { Layout } from '../../../layouts';
 import * as styles from './blogPostTemplate.module.scss';
 
 import {
-  Icon,
-  Link,
-} from '../../../UI-Kit';
-
-import {
   PostBody,
   PostFooter,
   PostHeader,
+  PostSubscribeForm,
 } from './components';
 
-import {
-  EmailListForm,
-} from '../../../components';
-
-import { Routes, Helpers } from '../../../utils';
-
-type PostNavigationDirection = 'older' | 'newer';
+import { Routes } from '../../../utils';
 
 interface BlogPostTemplateProps {
   data: {
@@ -71,28 +61,11 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
 
     const pageLayoutClassName = 'col-lg-7';
 
-    const makeSignupForm = (siteData: SiteMetadata, post: BlogPost) => {
-      return (
-        <div className="row my-5 my-lg-6">
-          <div className={pageLayoutClassName}>
-            <EmailListForm>
-              <Link href={siteData.feedUrl} isIconLink={true} className="icon-link">
-                <Icon name="rss" />
-              </Link>
-              <Link href={Helpers.twitterShareUrl(post, siteData)} isIconLink={true} className="ml-2 icon-link">
-                <Icon name="twitter" />
-              </Link>
-            </EmailListForm>
-          </div>
-        </div>
-      );
-    };
-
     return (
       <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
         <PostHeader post={blogPost} layoutClassName={pageLayoutClassName} />
         <PostBody post={blogPost} layoutClassName={pageLayoutClassName} />
-        {makeSignupForm(siteData, blogPost)}
+        <PostSubscribeForm post={blogPost} layoutClassName={pageLayoutClassName} siteData={siteData} />
         <PostFooter olderPost={olderPost} newerPost={newerPost} />
       </Layout>
     );
