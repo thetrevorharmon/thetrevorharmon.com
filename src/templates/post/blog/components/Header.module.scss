@@ -1,0 +1,16 @@
+@import '../../../../styles/_mixins.scss';
+@import '../../../../styles/variables.scss';
+
+.Header {
+  .Attribution {
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 0.5rem;
+    
+    color: $text-color-secondary;
+  }
+
+  .Meta {
+    color: lighten($text-color-secondary, 20%);
+  }
+}
