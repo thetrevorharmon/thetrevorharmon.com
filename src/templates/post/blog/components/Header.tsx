@@ -12,17 +12,16 @@ import {
 
 interface HeaderProps {
   post: BlogPost;
-  className: string;
+  layoutClassName: string;
 }
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const {
     post,
-    className,
+    layoutClassName,
   } = props;
 
   const makeAttribution = (attribution: contentfulAttribution) => {
-
     return (
       <div className={styles.Attribution}>
         {`${attribution.type} by ${attribution.author} on `}
@@ -44,14 +43,14 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     >
       {
         post.heroImage && (
-          <div className={className}>
+          <div className={layoutClassName}>
             <Image src={post.heroImage} />
             {post.photoAttribution && makeAttribution(post.photoAttribution)}
           </div>
         )
       }
 
-      <div className={className}>
+      <div className={layoutClassName}>
         <TextHeader rank={1} type="Headline" className="mb-0">{post.title}</TextHeader>
         {post.subtitle && (
           <TextHeader rank={2} type="Tagline" className="mt-1">{post.subtitle}</TextHeader>

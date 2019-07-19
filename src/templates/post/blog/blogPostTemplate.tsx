@@ -10,6 +10,7 @@ import {
 } from '../../../UI-Kit';
 
 import {
+  Footer,
   Header,
 } from './components';
 
@@ -88,19 +89,6 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
         );
     };
 
-    const makeNavigation = (title: string, slug: string, direction: PostNavigationDirection) => {
-      const className = `post-link ${direction}-post`;
-
-      return (
-        <div className="col-lg-6 post-navigation">
-          Read {direction}:<br />
-          <Link href={Routes.blogPost(slug)} className={className}>
-            <span className="title">{title}</span>
-          </Link>
-        </div>
-      );
-    };
-
     const pageLayoutClassName = 'col-lg-7';
 
     const twitterShareUrl = (siteData: SiteMetadata, blogPost: BlogPost) => {
@@ -155,24 +143,12 @@ export default class BlogPostTemplate extends React.Component<BlogPostTemplatePr
       );
     };
 
-    const makeFooter = () => {
-      return (
-        <div className="post-footer">
-          <div className="row post-navigation-wrapper">
-            {console.log(`older post: ${olderPost}`)}
-            {olderPost && makeNavigation(olderPost.title, olderPost.slug, 'older')}
-            {newerPost && makeNavigation(newerPost.title, newerPost.slug, 'newer')}
-          </div>
-        </div>
-      );
-    };
-
     return (
       <Layout className="blog-post-template" pageMetadata={pageMetadata}>
-        <Header post={blogPost} className={pageLayoutClassName} />
+        <Header post={blogPost} layoutClassName={pageLayoutClassName} />
         {makeBody(blogPost)}
         {makeSignupForm(siteData, blogPost)}
-        {makeFooter()}
+        <Footer olderPost={olderPost} newerPost={newerPost} />
       </Layout>
     );
   }
