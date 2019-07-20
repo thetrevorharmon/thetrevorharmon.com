@@ -4,8 +4,8 @@ import Link from '../Link';
 
 import * as styles from './Header.module.scss';
 
-type HeaderRank = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-type HeaderType = 'Headline' | 'Tagline' | 'Title' | 'Subtitle' | 'SectionTitle';
+export type HeaderRank = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type HeaderType = 'Headline' | 'Tagline' | 'Title' | 'Subtitle' | 'SectionTitle';
 
 interface HeaderProps {
   rank: HeaderRank;

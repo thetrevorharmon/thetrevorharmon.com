@@ -8,6 +8,7 @@ import {
   Icon,
   Image,
   Link,
+  LinkHeader,
 } from '../../../../../UI-Kit';
 
 interface PostHeaderProps {
@@ -32,18 +33,32 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
     );
   };
 
-  const header = (className?: string) => (
-    <Header
-      rank={1}
-      type="Headline"
-      className={classnames(
-        'mb-0',
-        className,
-      )}
-    >
-      {post.title}
-    </Header>
-  );
+  const makeHeader = (className?: string) => {
+    const rank = 1;
+    const type = 'Headline';
+    const classname = classnames('mb-0', className);
+
+    return post.postType === 'Link' ?
+    (
+      <LinkHeader
+        rank={rank}
+        type={type}
+        className={classname}
+        href={post.link}
+        hasLinkIcon={true}
+      >
+        {post.title}
+      </LinkHeader>
+    ) : (
+      <Header
+        rank={rank}
+        type={type}
+        className={classname}
+      >
+        {post.title}
+      </Header>
+    );
+  };
 
   return (
     <div
@@ -64,20 +79,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
       }
 
       <div className={layoutClassName}>
-        {
-          post.postType === 'Link' && post.link ? (
-            <Link href={post.link} className={styles.Link}>
-              <div className={styles.Wrapper}>
-                {header(styles.LinkHeader)}
-                <Icon className={styles.Icon} name="link" />
-              </div>
-            </Link>
-          ) : (
-            <>
-              {header()}
-            </>
-          )
-        }
+        {makeHeader()}
         {post.subtitle && (
           <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
         )}

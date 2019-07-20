@@ -12,6 +12,7 @@ import {
   Header,
   Icon,
   Link,
+  LinkHeader,
   Tile,
 } from '../UI-Kit';
 
@@ -72,15 +73,15 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
           <div className={classnames(styles.Post, 'mb-5')} key={index}>
             <div className="row">
               <div className="col-lg-8">
-                <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
-                  <Link href={Routes.blogPost(post.slug)}>
-                    {post.title}
-                    {post.postType === 'Link' && (
-                      <Icon className={styles.Icon} name="link" />
-                    )}
-                  </Link>
-                </Header>
-
+                <LinkHeader
+                  hasLinkIcon={post.postType === 'Link'}
+                  rank={2}
+                  type="Title"
+                  className="mb-md-4"
+                  href={Routes.blogPost(post.slug)}
+                >
+                  {post.title}
+                </LinkHeader>
                 <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
                 <p className={styles.Meta}>
                   {post.date} • {post.body.childMarkdownRemark.timeToRead} min read
