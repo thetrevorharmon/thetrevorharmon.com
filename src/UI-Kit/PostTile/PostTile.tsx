@@ -11,7 +11,7 @@ import { Routes } from '../../utils';
 import * as styles from './PostTile.module.scss';
 
 interface PostTileProps {
-  item: BlogPost;
+  item: BlogPost | LinkPost;
   className?: string;
 }
 
@@ -21,6 +21,15 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
     styles.PostTile,
     className,
   );
+
+  const timeToRead = item.body.childMarkdownRemark.timeToRead
+    ? `${Math.floor(+item.body.childMarkdownRemark.timeToRead)} min read`
+    : undefined;
+
+  const meta = [
+    timeToRead,
+    item.date,
+  ].filter(Boolean).join(' • ');
 
   return (
     <Link
@@ -40,9 +49,9 @@ const PostTile: React.SFC<PostTileProps> = ({item, className}) => {
         {item.title}
       </Header>
 
-      <p>{item.description || ''}</p>
+      <p>{item.description || item.body.childMarkdownRemark.excerpt || ''}</p>
       <span className={styles.Meta}>
-        {Math.floor(+item.body.childMarkdownRemark.timeToRead)} min read • {item.date}
+        {meta}
       </span>
     </Link>
   );

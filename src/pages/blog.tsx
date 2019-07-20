@@ -147,5 +147,5 @@ export const blogPageQuery = graphql`
 	    }
 	  }
 	}
-  }
+}
 `;

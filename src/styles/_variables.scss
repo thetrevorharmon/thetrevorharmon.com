@@ -3,6 +3,7 @@ $sans-serif-font-stack: 'Work Sans', $default-sans-serif-stack;
 
 $text-color-primary: #2a2a2a;
 $text-color-secondary: #7a7a7a;
+$text-color-tertiary: lighten($text-color-secondary, 20%);
 
 $brand-primary: #DD0505;
 
