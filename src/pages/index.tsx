@@ -102,7 +102,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
         <div className="row">
           {posts.map((post: (BlogPost | LinkPost), index: number) => (
             <div className="col-sm-6 col-lg-4 mb-4" key={index}>
-              <PostTile item={post} />
+              <PostTile post={post} />
             </div>
           ))}
           <div className="col-sm-12">
