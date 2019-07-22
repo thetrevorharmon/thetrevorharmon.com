@@ -3,12 +3,12 @@ import * as React from 'react';
 
 import { PostTemplate } from './PostTemplate';
 
-interface BlogPostTemplateProps {
+interface LinkPostTemplateProps {
   data: {
-    allContentfulBlogPost: {
+    allContentfulLinkPost: {
       edges: [
         {
-          node: BlogPost,
+          node: LinkPost,
         },
       ],
     },
@@ -23,12 +23,12 @@ interface BlogPostTemplateProps {
   };
 }
 
-export default (props: BlogPostTemplateProps) => {
+export default (props: LinkPostTemplateProps) => {
 
   const siteMetadata = props.data.site.siteMetadata;
-  const blogPost: BlogPost = {
-    ...props.data.allContentfulBlogPost.edges[0].node,
-    postType: 'Blog',
+  const linkPost: LinkPost = {
+    ...props.data.allContentfulLinkPost.edges[0].node,
+    postType: 'Link',
   };
 
   const {
@@ -38,7 +38,7 @@ export default (props: BlogPostTemplateProps) => {
 
   return (
     <PostTemplate
-      post={blogPost}
+      post={linkPost}
       newerPost={newerPost}
       olderPost={olderPost}
       siteMetadata={siteMetadata}
@@ -48,16 +48,12 @@ export default (props: BlogPostTemplateProps) => {
 
 export const query = graphql`
   query($slug: String!) {
-    allContentfulBlogPost(filter: {slug: {eq: $slug}}) {
+    allContentfulLinkPost(filter: {slug: {eq: $slug}}) {
       edges {
         node {
-          heroImage {
-            ...ContentfulAsset_width750
-          }
           title
           slug
-          subtitle
-          description
+          link
           date(formatString: "MMMM DD, YYYY")
           body {
             childMarkdownRemark {
@@ -65,13 +61,6 @@ export const query = graphql`
               excerpt
               timeToRead
             }
-          }
-          tags
-          sourceAttribution {
-            ...ContentfulAttribution
-          }
-          photoAttribution {
-            ...ContentfulAttribution
           }
         }
       }

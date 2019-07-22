@@ -7,6 +7,7 @@ import { Layout } from '../layouts';
 import * as styles from './homepage.module.scss';
 
 import {
+  Helpers,
   Routes,
 } from '../utils';
 
@@ -45,6 +46,13 @@ interface IndexPageProps {
         }
       ],
     },
+    allContentfulLinkPost: {
+      edges: [
+        {
+          node: LinkPost,
+        }
+      ],
+    },
   };
 }
 
@@ -54,7 +62,11 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
     const featuredWork: Array<{node: Project}> = this.props.data.allContentfulProject.edges;
     const featuredStudies: Array<{node: CaseStudy}> = this.props.data.allContentfulCaseStudy.edges;
-    const blogPosts: Array<{node: BlogPost}> = this.props.data.allContentfulBlogPost.edges;
+
+    const posts = Helpers.combinePostTypes(
+      this.props.data.allContentfulBlogPost,
+      this.props.data.allContentfulLinkPost,
+    ).slice(0, 3);
 
     return (
       <Layout>
@@ -88,9 +100,9 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
           <Header rank={2} type="SectionTitle" className="col my-0">Recent Posts</Header>
         </div>
         <div className="row">
-          {blogPosts.map((item, index) => (
+          {posts.map((post: (BlogPost | LinkPost), index: number) => (
             <div className="col-sm-6 col-lg-4 mb-4" key={index}>
-              <PostTile item={item.node} />
+              <PostTile post={post} />
             </div>
           ))}
           <div className="col-sm-12">
@@ -173,6 +185,32 @@ export const indexPageQuery = graphql`
             }
           }
           tags
+        }
+      }
+    }
+    allContentfulLinkPost(
+      sort: { order: DESC, fields: [date] },
+      limit: 3,
+    ) {
+      edges {
+        node {
+          title
+          slug
+          link
+          date(formatString: "MMMM DD, YYYY")
+          internal {
+            type
+          }
+          body {
+            childMarkdownRemark {
+              html
+              excerpt(
+                format: PLAIN
+                pruneLength: 116
+              )
+              timeToRead
+            }
+          }
         }
       }
     }

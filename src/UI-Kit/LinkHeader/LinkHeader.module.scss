@@ -1,0 +1,53 @@
+@import 'foundation';
+@import '../Header/Header.module.scss';
+
+.LinkHeader {
+  @extend .Header;
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.Link {
+  @extend .Header;
+  margin-right: 0.5em;
+}
+
+.Icon {
+  line-height: 0;
+
+    svg {
+      position: relative;
+      top: 1px;
+
+      transition: all 0.1s ease-in-out;
+      width: 1.05em;
+      height: 1.05em;
+      max-height: none;
+      max-width: none;
+      padding: 0.275em;
+      
+      background: $text-color-primary;
+
+      .Headline & {
+        height: 0.85em;
+        width: 0.85em;
+      }
+
+      path {
+        fill: white;
+      }
+  }
+}
+
+.LinkHeader:hover {
+  .Link {
+    color: $brand-primary;
+    border-bottom-color: transparent;
+  }
+  
+  .Icon svg {
+    transform: rotate(45deg);
+  }
+}

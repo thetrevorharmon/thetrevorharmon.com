@@ -1,0 +1,75 @@
+@import 'foundation';
+
+.PostFooter {
+  position: relative;
+  flex-direction: column;
+  padding-top: 1rem;
+
+  .Navigation {
+    color: lighten($text-color-secondary, 20%);
+    font-size: 1rem;
+
+    &:nth-child(2) {
+      text-align: right;
+
+      @include media-breakpoint-down(md) {
+        text-align: left;
+        margin-top: 1rem;
+      }
+    }
+
+    .Link {
+      line-height: 1;
+
+      &:before, &:after {
+        display: inline-block;
+        transition: all 0.1s linear;
+      }
+    }
+
+    .Older:before {
+      content: '←';
+      left: 0;
+      margin-right: 0.5rem;
+    }
+
+    .Newer:after {
+      content: '→';
+      right: 0;
+      top: 0;
+      margin-left: 0.5rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+
+      .Link {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+
+        &:before, &:after {
+          display: block;
+          position: absolute;
+          margin: 0;
+        }
+
+        .Title {
+          display: inline-block;
+          max-width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &.Older .Title {
+          padding-left: 1.5rem;
+        }
+
+        &.Newer .Title {
+          padding-right: 1.5rem;
+        }
+      }
+    }
+  }
+}
+

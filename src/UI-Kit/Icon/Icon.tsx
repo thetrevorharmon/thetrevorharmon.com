@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as styles from './Icon.module.scss';
 
 import {
+  link,
   rss,
   twitter,
 } from './icons';
@@ -20,6 +21,7 @@ interface IconProps {
 
 /* tslint:disable object-literal-shorthand */
 const mapping: { [name: string]: () => any } = {
+  link: link,
   rss: rss,
   twitter: twitter,
 };

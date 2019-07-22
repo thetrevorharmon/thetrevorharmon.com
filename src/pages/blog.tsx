@@ -3,19 +3,18 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import { Layout } from '../layouts';
+import { Helpers, Routes } from '../utils';
 
 import * as styles from './blog.module.scss';
-
-import '../templates/post/blog/blogPostTemplate.scss';
 
 import {
   Button,
   Header,
+  Icon,
   Link,
+  LinkHeader,
   Tile,
 } from '../UI-Kit';
-
-import { Routes } from '../utils';
 
 interface ProjectsPageProps {
   data: {
@@ -23,6 +22,13 @@ interface ProjectsPageProps {
       edges: [
         {
           node: BlogPost,
+        }
+      ],
+    },
+    allContentfulLinkPost: {
+      edges: [
+        {
+          node: LinkPost,
         }
       ],
     },
@@ -38,6 +44,11 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
       title: 'Blog',
       url: Routes.blog(),
     };
+
+    const posts = Helpers.combinePostTypes(
+      this.props.data.allContentfulBlogPost,
+      this.props.data.allContentfulLinkPost,
+    );
 
     return (
       <Layout pageMetadata={pageMetadata}>
@@ -58,31 +69,28 @@ export default class ProjectsPage extends React.Component<ProjectsPageProps, {}>
           </div>
         </div>
 
-        {this.props.data.allContentfulBlogPost.edges.map((blogPost, index) => (
+        {posts.map((post, index) => (
           <div className={classnames(styles.Post, 'mb-5')} key={index}>
             <div className="row">
               <div className="col-lg-8">
-                <Header rank={2} type="Title" className={classnames('mb-md-4', styles.Title)}>
-                  <Link href={Routes.blogPost(blogPost.node.slug)}>{blogPost.node.title}</Link>
-                </Header>
-
-                <Header rank={3} type="Tagline">{blogPost.node.description}</Header>
+                <LinkHeader
+                  hasLinkIcon={post.postType === 'Link'}
+                  rank={2}
+                  type="Title"
+                  className="mb-md-4"
+                  href={Routes.blogPost(post.slug)}
+                >
+                  {post.title}
+                </LinkHeader>
+                <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
                 <p className={styles.Meta}>
-                  {blogPost.node.date} • {blogPost.node.body.childMarkdownRemark.timeToRead} min read
+                  {post.date} • {post.body.childMarkdownRemark.timeToRead} min read
                 </p>
               </div>
             </div>
-            {/*
-            <div className="row">
-              <div className="col-lg-8">
-                <p>{blogPost.node.body.childMarkdownRemark.excerpt}</p>
-              </div>
-            </div>
-            */}
-
             <div className="row">
               <div className="col-lg-8" key={index}>
-                <Link href={Routes.blogPost(blogPost.node.slug)}>Continue Reading &rarr;</Link>
+                <Link href={Routes.blogPost(post.slug)}>Continue Reading &rarr;</Link>
               </div>
             </div>
           </div>
@@ -103,6 +111,9 @@ export const blogPageQuery = graphql`
           slug
           description
           date(formatString: "MMMM DD, YYYY")
+          internal {
+            type
+          }
           body {
             childMarkdownRemark {
               html
@@ -114,5 +125,27 @@ export const blogPageQuery = graphql`
         }
       }
     }
-  }
+    allContentfulLinkPost(
+      sort: { order: DESC, fields: [date] },
+    ) {
+	  edges {
+	    node {
+	      title
+        slug
+        link
+        date(formatString: "MMMM DD, YYYY")
+        internal {
+          type
+        }
+        body {
+          childMarkdownRemark {
+            html
+            excerpt
+            timeToRead
+          }
+        }
+	    }
+	  }
+	}
+}
 `;

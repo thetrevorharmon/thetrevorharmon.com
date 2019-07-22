@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
-import { checkHttp, MetaTags } from '../utils';
+import { Helpers, MetaTags } from '../utils';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
@@ -51,7 +51,7 @@ const Helmet: React.SFC<HelmetProps> = ({
 
   const meta = MetaTags({
     basic: {
-      image: page.image ? checkHttp(page.image) : `${site.siteUrl}/favicon.png`,
+      image: page.image ? Helpers.checkHttp(page.image) : `${site.siteUrl}/favicon.png`,
       title: page.title || site.title,
       url: page.url ? `${site.siteUrl}${page.url}/` : site.siteUrl,
     },

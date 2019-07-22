@@ -13,16 +13,37 @@ declare module '*.svg' {
   export = content;
 }
 
+type ContentfulObjectType = (
+  'ContentfulBlogPost' | 
+  'ContentfulLinkPost' | 
+  'ContentfulProject' | 
+  'ContentfulCaseStudy' | 
+  'ContentfulAboutPage'
+);
+
+interface BaseObject {
+  internal?: {
+    content?: string;
+    contentDigest?: string;
+    description?: string;
+    fieldOwners?: string;
+    ignoreType?: string;
+    mediaType?: string;
+    owner?: string;
+    type?: ContentfulObjectType;
+  }
+}
+
 interface MarkdownRemark {
   html: string;
   excerpt?: string;
   timeToRead?: string;
 }
 
-interface PortfolioItem {
+interface PortfolioItem extends BaseObject {
   title: string;
   slug: string;
-  featureImage: contentfulAsset;
+  featureImage: ContentfulAsset;
   featureOnHomepage: boolean;
 }
 
@@ -34,7 +55,7 @@ interface Project extends PortfolioItem {
     childMarkdownRemark?: MarkdownRemark;
   };
   projectCompletionDate?: Date;
-  projectImages: [contentfulAsset]
+  projectImages: [ContentfulAsset]
 }
 
 interface CaseStudy extends PortfolioItem {
@@ -43,25 +64,37 @@ interface CaseStudy extends PortfolioItem {
   post: contentfulLongText;
 }
 
-interface BlogPost {
+interface BasicPost extends BaseObject {
   title: string;
   slug: string;
-  subtitle: string;
-  description: string;
-  heroImage: contentfulAsset;
+}
+
+interface Post extends BasicPost {
+  subtitle?: string;
+  description?: string;
   date: Date;
   body: {
     childMarkdownRemark: MarkdownRemark;
-  }
-  tags: [string];
-  sourceAttribution?: contentfulAttribution;
-  photoAttribution?: contentfulAttribution;
+  }  
+  tags?: [string];
 }
 
-interface AboutPageData {
+interface BlogPost extends Post {
+  heroImage: ContentfulAsset;
+  sourceAttribution?: ContentfulAttribution;
+  photoAttribution?: ContentfulAttribution;
+  postType: 'Blog';
+}
+
+interface LinkPost extends Post {
+  link: string;
+  postType: 'Link';
+}
+
+interface AboutPageData extends BaseObject {
   title: string;
   post: contentfulLongText;
-  featureImage: contentfulAsset;
+  featureImage: ContentfulAsset;
 }
 
 interface contentfulLongText {
@@ -80,7 +113,7 @@ interface contentfulLongText {
   }
 }
 
-interface contentfulAsset {
+interface ContentfulAsset extends BaseObject {
   id?: string;
   title: string;
   description: string;
@@ -93,16 +126,16 @@ interface contentfulAsset {
   }
 }
 
-type contentfulAttributionType = 'Photo' | 'Article';
-type contentfulAttributionSource = 'Unsplash' | 'Medium';
+type ContentfulAttributionType = 'Photo' | 'Article';
+type ContentfulAttributionSource = 'Unsplash' | 'Medium';
 
-interface contentfulAttribution {
+interface ContentfulAttribution {
   id?: string;
   name: string;
   sourceLocation: string;
-  sourceName: contentfulAttributionSource;
+  sourceName: ContentfulAttributionSource;
   author: string;
-  type: contentfulAttributionType;
+  type: ContentfulAttributionType;
 }
 
 interface SiteMetadata {
@@ -122,15 +155,4 @@ interface PageMetadata {
   description?: string;   
   url?: string;
   image?: string;
-}
-
-interface MediumPost {
-  title: string;
-  uniqueSlug: string;
-  firstPublishedAt: string;
-  virtuals: {
-    subtitle: string;
-    metaDescription: string;
-    readingTime: number;
-  };
 }

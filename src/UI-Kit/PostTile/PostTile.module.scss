@@ -1,5 +1,4 @@
-@import '../../styles/_variables.scss';
-@import '../../styles/_mixins.scss';
+@import 'foundation';
 
 .PostTile {
   display: block;
@@ -9,12 +8,7 @@
   }
 
   .Meta {
-    color: $text-color-secondary;
-  }
-
-
-  &:hover .Header {
-    color: $brand-primary;
+    color: $text-color-tertiary;
   }
 }
 

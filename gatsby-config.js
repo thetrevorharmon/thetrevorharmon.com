@@ -83,15 +83,42 @@ module.exports = {
       options: {
         feeds: [
           {
-            serialize: ({ query: { site, allContentfulBlogPost } }) => {
-              return allContentfulBlogPost.edges.map(edge => {
+            serialize: ({ query: { site, allContentfulBlogPost, allContentfulLinkPost } }) => {
+              // This combines blog posts and link posts into a single array of posts
+              // First combines and then sorts according to date (newest first)
+              const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
+                const orderMultiplier = order === 'desc' ? 1 : -1;
+
+                const posts = [
+                  // blog posts
+                  ...blogPosts.edges.map((edge) => edge.node),
+                  // link posts
+                  ...linkPosts.edges.map((edge) => edge.node),
+                ].sort(
+                  (firstDate, secondDate) => {
+                    const a = new Date(firstDate.date);
+                    const b = new Date(secondDate.date);
+
+                    if (a < b) { return 1 * orderMultiplier; }
+                    if (a > b) { return -1 * orderMultiplier; }
+
+                    return 0;
+                  },
+                );
+
+                return posts;
+              }
+
+              const posts = combinePostTypes(allContentfulBlogPost, allContentfulLinkPost);
+
+              return posts.map(post => {
                 return Object.assign({}, {
-                  title: edge.node.title,
-                  description: edge.node.description,
-                  date: edge.node.date,
-                  url: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
-                  guid: site.siteMetadata.siteUrl + '/blog/' + edge.node.slug,
-                  custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
+                  title: post.title,
+                  description: post.description ? post.description : post.body.childMarkdownRemark.excerpt,
+                  date: post.date,
+                  url: site.siteMetadata.siteUrl + '/blog/' + post.slug,
+                  guid: site.siteMetadata.siteUrl + '/blog/' + post.slug,
+                  custom_elements: [{ "content:encoded": post.body.childMarkdownRemark.html }],
                 })
               })
             },
@@ -107,20 +134,36 @@ module.exports = {
                       slug
                       description
                       date
-                      heroImage {
-                        fixed {
-                          src
-                        }
-                      }
                       body {
                         childMarkdownRemark {
                           html
+                          excerpt
                         }
                       }
                     }
                   }
                 }
-              }
+                allContentfulLinkPost(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [date] },
+                ) {
+                  edges {
+                    node {
+                      title
+                      slug
+                      # add description back in when needed
+                      # description
+                      date
+                      body {
+                        childMarkdownRemark {
+                          html
+                          excerpt
+                        }
+                      }
+                    }
+                  }
+                }
+              }              
             `,
             output: "/rss.xml",
             title: "Trevor Harmon's Blog RSS Feed",
