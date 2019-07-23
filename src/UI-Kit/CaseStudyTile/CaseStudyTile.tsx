@@ -16,7 +16,7 @@ interface CaseStudyTileProps {
   className?: string;
 }
 
-const CaseStudyTile: React.SFC<CaseStudyTileProps> = ({item, className}) => {
+const CaseStudyTile: React.FC<CaseStudyTileProps> = ({item, className}) => {
   const classname = classnames(
     styles.Tile,
     'd-flex flex-row',

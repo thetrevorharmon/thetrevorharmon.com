@@ -16,7 +16,7 @@ interface LayoutProps {
   pageMetadata?: PageMetadata;
 }
 
-const Layout: React.SFC<LayoutProps> = ({
+const Layout: React.FC<LayoutProps> = ({
   className,
   hasContainer,
   pageMetadata,

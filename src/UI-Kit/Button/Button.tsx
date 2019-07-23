@@ -10,7 +10,7 @@ interface ButtonProps {
   noStyling?: boolean;
 }
 
-const Button: React.SFC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   className,
   children,
   href,

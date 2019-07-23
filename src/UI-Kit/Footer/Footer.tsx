@@ -15,7 +15,7 @@ interface FooterProps {
   className?: string;
 }
 
-const Footer: React.SFC<FooterProps> = ({className, children}) => {
+const Footer: React.FC<FooterProps> = ({className, children}) => {
   const classname = classnames(
     className,
     'container',

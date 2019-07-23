@@ -3,7 +3,7 @@ import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
 import { Layout } from '../../layouts';
-import { Button, Header, Image } from '../../UI-Kit';
+import { Header, Image } from '../../UI-Kit';
 
 import * as styles from './projectTemplate.module.scss';
 
@@ -24,65 +24,66 @@ interface TemplateProps {
   };
 }
 
-export default class Template extends React.Component<TemplateProps, {}> {
-  public render() {
-    const project = this.props.data.allContentfulProject.edges[0].node;
-    const description = project.description.childMarkdownRemark ? project.description.childMarkdownRemark.html : null;
+export default (props: TemplateProps) => {
 
-    const images = project.projectImages
-      ? [project.featureImage, ...project.projectImages]
-      : [project.featureImage];
+  const project = props.data.allContentfulProject.edges[0].node;
+  const description = project.description.childMarkdownRemark
+    ? project.description.childMarkdownRemark.html
+    : null;
 
-    const breakpointColumnsObj = {
-      default: 2,
-      767: 1,
-      // 767 is the medium-sized breakpoint (from bootstrap) minus 1
-    };
+  const images = project.projectImages
+    ? [project.featureImage, ...project.projectImages]
+    : [project.featureImage];
 
-    const items = images.map((image, index) => {
-      return <div key={index}><Image src={image} /></div>;
-    });
+  const breakpointColumnsObj = {
+    default: 2,
+    767: 1,
+    // 767 is the medium-sized breakpoint (from bootstrap) minus 1
+  };
 
-    const info = (
-      <div className={styles.Description}>
-        <Header rank={1} type="Title">{project.title}</Header>
+  const items = images.map((image, index) => {
+    return <div key={index}><Image src={image} /></div>;
+  });
 
-        {description && <div className={styles.DescriptionHtml} dangerouslySetInnerHTML={{__html: description}} />}
+  const info = (
+    <div className={styles.Description}>
+      <Header rank={1} type="Title">{project.title}</Header>
 
-        {project.client && <p><strong>Client:</strong> {project.client}</p>}
+      {description && <div className={styles.DescriptionHtml} dangerouslySetInnerHTML={{__html: description}} />}
 
-        {project.projectCompletionDate && (
-          <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
-        )}
-      </div>
-    );
+      {project.client && <p><strong>Client:</strong> {project.client}</p>}
 
-    const infoAndItems = [info, ...items];
+      {project.projectCompletionDate && (
+        <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+      )}
+    </div>
+  );
 
-    const pageMetadata: PageMetadata = {
-      description: `${description}`,
-      image: project.featureImage && project.featureImage.fluid.src,
-      title: project.title,
-      url: Routes.project(this.props.pageContext.slug),
-    };
+  const infoAndItems = [info, ...items];
 
-    return (
-      <Layout className={styles.ProjectTemplate} pageMetadata={pageMetadata}>
-        <div className="row">
-          <div className="col-sm-12">
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className={styles.Grid}
-              columnClassName={styles.Column}
-            >
-                {infoAndItems}
-            </Masonry>
-          </div>
+  const pageMetadata: PageMetadata = {
+    description: `${description}`,
+    image: project.featureImage && project.featureImage.fluid.src,
+    title: project.title,
+    url: Routes.project(props.pageContext.slug),
+  };
+
+  return (
+    <Layout className={styles.ProjectTemplate} pageMetadata={pageMetadata}>
+      <div className="row">
+        <div className="col-sm-12">
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className={styles.Grid}
+            columnClassName={styles.Column}
+          >
+              {infoAndItems}
+          </Masonry>
         </div>
-      </Layout>
-    );
-  }
-}
+      </div>
+    </Layout>
+  );
+};
 
 export const query = graphql`
   query($slug: String!) {

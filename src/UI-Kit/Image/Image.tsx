@@ -3,10 +3,10 @@ import Img, { GatsbyImageProps } from 'gatsby-image';
 import * as React from 'react';
 
 interface ImageProps extends GatsbyImageProps {
-  src: contentfulAsset;
+  src: ContentfulAsset;
 }
 
-const Image: React.SFC<ImageProps> = ({
+const Image: React.FC<ImageProps> = ({
   className,
   src,
   children,
