@@ -110,6 +110,7 @@ interface contentfulLongText {
   // it's not a contentful thing
   childMarkdownRemark: {
     html: string;
+    excerpt?: string;
   }
 }
 

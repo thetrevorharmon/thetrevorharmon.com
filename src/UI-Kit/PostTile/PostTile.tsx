@@ -16,7 +16,7 @@ interface PostTileProps {
   className?: string;
 }
 
-const PostTile: React.SFC<PostTileProps> = ({post, className}) => {
+const PostTile: React.FC<PostTileProps> = ({post, className}) => {
 
   const classname = classnames(
     styles.PostTile,

@@ -14,7 +14,7 @@ interface HelmetData {
   };
 }
 
-const Helmet: React.SFC<HelmetProps> = ({
+const Helmet: React.FC<HelmetProps> = ({
   children,
   pageMetadata,
 }) => {

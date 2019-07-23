@@ -4,7 +4,7 @@ import * as styles from './EmailListForm.module.scss';
 
 import classnames from 'classnames';
 
-const EmailListForm: React.FunctionComponent<{}> = ({children}) => {
+const EmailListForm: React.FC<{}> = ({children}) => {
 
   const [isSendingSignupRequest, setSignupIsRequesting] = useState(false);
   const [isSignupComplete, setSignupComplete] = useState(false);

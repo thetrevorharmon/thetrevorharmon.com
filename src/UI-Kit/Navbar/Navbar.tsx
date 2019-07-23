@@ -11,7 +11,7 @@ import {
   Routes,
 } from '../../utils';
 
-const Navbar: React.SFC<{}> = () => {
+const Navbar: React.FC<{}> = () => {
 
   const [isOpen, setOpen] = useState(false);
 

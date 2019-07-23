@@ -13,7 +13,7 @@ interface LinkProps {
   target?: string;
 }
 
-const Link: React.SFC<LinkProps> = ({
+const Link: React.FC<LinkProps> = ({
   href,
   isIconLink,
   noLinkStyling,

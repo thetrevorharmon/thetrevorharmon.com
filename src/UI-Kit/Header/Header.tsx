@@ -13,7 +13,7 @@ interface HeaderProps {
   className?: string;
 }
 
-const Header: React.SFC<HeaderProps> = ({rank, type, className, children}) => {
+const Header: React.FC<HeaderProps> = ({rank, type, className, children}) => {
 
   const classname = classnames(
     styles.Header,

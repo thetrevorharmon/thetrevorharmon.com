@@ -25,45 +25,42 @@ interface ProjectsPageProps {
   };
 }
 
-export default class ProjectsPage extends React.Component<ProjectsPageProps, {}> {
+export default (props: ProjectsPageProps) => {
 
-  public render() {
+  const pageMetadata: PageMetadata = {
+    description: `These projects represent some, but not all, of the design and
+      development work I've done for the past 5 (or so) years.`,
+    title: 'Projects',
+    url: Routes.projects(),
+  };
 
-    const pageMetadata: PageMetadata = {
-      description: `These projects represent some, but not all, of the design and
-       development work I've done for the past 5 (or so) years.`,
-      title: 'Projects',
-      url: Routes.projects(),
-    };
-
-    return (
-      <Layout pageMetadata={pageMetadata}>
-        <div className="row">
-          <div className="col">
-            <Header
-              rank={1}
-              type="Headline"
-              className={classnames(
-                'my-6 my-lg-8',
-              )}
-            >
-              Projects
-            </Header>
+  return (
+    <Layout pageMetadata={pageMetadata}>
+      <div className="row">
+        <div className="col">
+          <Header
+            rank={1}
+            type="Headline"
+            className={classnames(
+              'my-6 my-lg-8',
+            )}
+          >
+            Projects
+          </Header>
+        </div>
+      </div>
+      <div className="row">
+        {props.data.allContentfulProject.edges.map(({node}, index) => (
+          <div className="col-md-6 col-lg-4" key={index}>
+            <Tile item={node} className="mb-4" />
           </div>
-        </div>
-        <div className="row">
-          {this.props.data.allContentfulProject.edges.map((item, index) => (
-            <div className="col-md-6 col-lg-4" key={index}>
-              <Tile item={item.node} className="mb-4" />
-            </div>
-          ))}
-        </div>
-      </Layout>
-    );
-  }
-}
+        ))}
+      </div>
+    </Layout>
+  );
+};
 
-export const projectsPageQuery = graphql`
+export const query = graphql`
   query projectsPageQuery {
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
       edges {

@@ -22,7 +22,14 @@ interface LinkHeaderProps {
   className?: string;
 }
 
-const LinkHeader: React.SFC<LinkHeaderProps> = ({ rank, type, href, hasLinkIcon, className, children }) => {
+const LinkHeader: React.FC<LinkHeaderProps> = ({
+  rank,
+  type,
+  href,
+  hasLinkIcon,
+  className,
+  children,
+}) => {
 
   const classname = classnames(
     styles.LinkHeader,

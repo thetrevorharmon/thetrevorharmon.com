@@ -26,7 +26,7 @@ const mapping: { [name: string]: () => any } = {
   twitter: twitter,
 };
 
-const Icon: React.SFC<IconProps> = ({
+const Icon: React.FC<IconProps> = ({
   className,
   children,
   href,

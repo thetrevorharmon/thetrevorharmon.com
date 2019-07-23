@@ -12,7 +12,7 @@ interface TileProps {
   className?: string;
 }
 
-const Tile: React.SFC<TileProps> = ({item, className}) => {
+const Tile: React.FC<TileProps> = ({item, className}) => {
 
   const classname = classnames(
     styles.Tile,
