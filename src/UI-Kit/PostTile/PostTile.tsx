@@ -6,7 +6,7 @@ import {
   Meta,
 } from '../../UI-Kit';
 
-import { Helpers, Routes } from '../../utils';
+import { Routes } from '../../utils';
 
 import * as styles from './PostTile.module.scss';
 

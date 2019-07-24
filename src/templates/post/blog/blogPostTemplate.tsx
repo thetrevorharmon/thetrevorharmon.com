@@ -56,7 +56,6 @@ export const query = graphql`
           }
           title
           slug
-          subtitle
           description
           date(formatString: "MMMM DD, YYYY")
           body {
