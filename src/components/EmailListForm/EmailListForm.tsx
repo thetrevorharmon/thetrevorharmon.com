@@ -1,8 +1,15 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import addToMailchimp, { MailchimpFields, MailchimpResponse } from 'gatsby-plugin-mailchimp';
 import React, { useState } from 'react';
 import * as styles from './EmailListForm.module.scss';
 
 import classnames from 'classnames';
+
+interface SiteData {
+  site: {
+    siteMetadata: SiteMetadata,
+  };
+}
 
 const EmailListForm: React.FC<{}> = ({children}) => {
 
@@ -26,6 +33,30 @@ const EmailListForm: React.FC<{}> = ({children}) => {
         FNAME: nameParts.shift() || '', // needs the default to fix lint errors
         LNAME: nameParts.join(' '),
       };
+    }
+  };
+
+  const siteData: SiteData = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          mailchimpFallbackUrl
+        }
+      }
+    }
+  `);
+
+  const triggerFallback = (userEmail: string, userFields: MailchimpFields) => {
+    const mailchimpFallbackUrl: (string | undefined) = siteData.site.siteMetadata.mailchimpFallbackUrl;
+
+    if (mailchimpFallbackUrl) {
+      // Merge fields lets us prefill fields in Mailchimp
+      let mergeFields = `&MERGE0=${encodeURI(userEmail)}`;
+      Object.keys(userFields).forEach((key, index) => {
+        mergeFields += `&MERGE${index + 1}=${userFields[key]}`;
+      });
+
+      window.open(`${mailchimpFallbackUrl}${mergeFields}`, '_blank');
     }
   };
 
@@ -54,8 +85,8 @@ const EmailListForm: React.FC<{}> = ({children}) => {
           // tslint:disable-next-line
           console.error(data.msg);
 
-          alert('There was a problem signing you up for the mailing list.');
           setSignupIsRequesting(false);
+          triggerFallback(email, fields);
         }
       })
       .catch((error: Error) => {
@@ -63,6 +94,9 @@ const EmailListForm: React.FC<{}> = ({children}) => {
         // Mailchimp always returns a 200
         // tslint:disable-next-line
         console.error(error); // allowing this console.error so that I can see any errors in production
+
+        setSignupIsRequesting(false);
+        triggerFallback(email, fields);
       });
   };
 
