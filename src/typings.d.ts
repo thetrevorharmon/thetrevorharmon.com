@@ -70,7 +70,6 @@ interface BasicPost extends BaseObject {
 }
 
 interface Post extends BasicPost {
-  subtitle?: string;
   description?: string;
   date: Date;
   body: {
