@@ -20,8 +20,6 @@ interface PostSubscribeFormProps {
   siteData: SiteMetadata;
 }
 
-type PostNavigationDirection = 'Older' | 'Newer';
-
 const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscribeFormProps) => {
   const {
     layoutClassName,
