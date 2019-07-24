@@ -1,5 +1,3 @@
-import { Routes } from '../utils';
-
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;
   const hasProtocol = completeProtocol.test(link);
@@ -55,16 +53,7 @@ const combinePostTypes = (
   return posts;
 };
 
-const twitterShareUrl = (post: BlogPost | LinkPost, siteData: SiteMetadata) => {
-  const twitterText = encodeURI(`I just finished reading "${post.title}" by ${siteData.twitter.author}`);
-  const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(post.slug)}`;
-  const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
-
-  return shareUrl;
-};
-
 export {
   combinePostTypes,
   checkHttp,
-  twitterShareUrl,
 };

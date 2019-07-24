@@ -10,7 +10,7 @@ import {
   EmailListForm,
 } from '../../../../../components';
 
-import { Helpers } from '../../../../../utils';
+import { Routes } from '../../../../../utils';
 
 import * as styles from './PostSubscribeForm.module.scss';
 
@@ -29,6 +29,14 @@ const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscrib
     siteData,
   } = props;
 
+  const twitterShareUrl = (() => {
+    const twitterText = encodeURI(`I just finished reading "${post.title}" by ${siteData.twitter.author}`);
+    const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(post.slug)}`;
+    const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
+
+    return shareUrl;
+  })();
+
   return (
     <div className="row my-5 my-lg-6">
       <div className={layoutClassName}>
@@ -41,7 +49,7 @@ const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscrib
             <Icon name="rss" />
           </Link>
           <Link
-            href={Helpers.twitterShareUrl(post, siteData)}
+            href={twitterShareUrl}
             isIconLink={true}
             className={classnames(
               styles.IconLink,
