@@ -8,12 +8,10 @@ import { Helpers, Routes } from '../utils';
 import * as styles from './blog.module.scss';
 
 import {
-  Button,
   Header,
-  Icon,
   Link,
   LinkHeader,
-  Tile,
+  Meta,
 } from '../UI-Kit';
 
 interface ProjectsPageProps {
@@ -81,9 +79,7 @@ export default (props: ProjectsPageProps) => {
                 {post.title}
               </LinkHeader>
               <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
-              <p className={styles.Meta}>
-                {post.date} • {post.body.childMarkdownRemark.timeToRead} min read
-              </p>
+              <Meta post={post} />
             </div>
           </div>
           <div className="row">

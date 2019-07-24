@@ -9,7 +9,10 @@ import {
   Image,
   Link,
   LinkHeader,
+  Meta,
 } from '../../../../../UI-Kit';
+
+import { Helpers } from '../../../../../utils';
 
 interface PostHeaderProps {
   post: BlogPost | LinkPost;
@@ -80,10 +83,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
 
       <div className={layoutClassName}>
         {makeHeader()}
-        {post.subtitle && (
-          <Header rank={2} type="Tagline" className="mt-1">{post.subtitle}</Header>
-        )}
-        <p className={styles.Meta}>{post.date} • {post.body.childMarkdownRemark.timeToRead} min read</p>
+        <Meta post={post} />
       </div>
     </div>
   );

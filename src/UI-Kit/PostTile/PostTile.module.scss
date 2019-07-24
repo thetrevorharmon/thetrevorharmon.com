@@ -3,12 +3,8 @@
 .PostTile {
   display: block;
 
-  p {
+  .Description {
     color: $text-color-secondary;
-  }
-
-  .Meta {
-    color: $text-color-tertiary;
   }
 }
 
