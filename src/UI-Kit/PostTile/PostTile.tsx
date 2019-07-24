@@ -2,12 +2,11 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {
-  Header,
-  Link,
   LinkHeader,
+  Meta,
 } from '../../UI-Kit';
 
-import { Routes } from '../../utils';
+import { Helpers, Routes } from '../../utils';
 
 import * as styles from './PostTile.module.scss';
 
@@ -23,15 +22,6 @@ const PostTile: React.FC<PostTileProps> = ({post, className}) => {
     className,
   );
 
-  const timeToRead = post.body.childMarkdownRemark.timeToRead
-    ? `${Math.floor(+post.body.childMarkdownRemark.timeToRead)} min read`
-    : undefined;
-
-  const meta = [
-    timeToRead,
-    post.date,
-  ].filter(Boolean).join(' • ');
-
   return (
     <>
     <div className={classname}>
@@ -45,10 +35,8 @@ const PostTile: React.FC<PostTileProps> = ({post, className}) => {
         {post.title}
       </LinkHeader>
 
-      <p>{post.description || post.body.childMarkdownRemark.excerpt || ''}</p>
-      <span className={styles.Meta}>
-        {meta}
-      </span>
+      <p className={styles.Description}>{post.description || post.body.childMarkdownRemark.excerpt || ''}</p>
+      <Meta post={post} />
     </div>
     </>
   );
