@@ -1,26 +1,44 @@
-$default-sans-serif-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$default-sans-serif-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol';
 $sans-serif-font-stack: 'Work Sans', $default-sans-serif-stack;
 
 $text-color-primary: #2a2a2a;
 $text-color-secondary: #7a7a7a;
 $text-color-tertiary: lighten($text-color-secondary, 20%);
 
-$brand-primary: #DD0505;
+$brand-primary: #dd0505;
 
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(
   (
     0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
+    1: (
+      $spacer * 0.25,
+    ),
+    2: (
+      $spacer * 0.5,
+    ),
     3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3),
-    6: ($spacer * 4.5),
-    7: ($spacer * 6),
-    8: ($spacer * 8),
-    9: ($spacer * 10)
+    4: (
+      $spacer * 1.5,
+    ),
+    5: (
+      $spacer * 3,
+    ),
+    6: (
+      $spacer * 4.5,
+    ),
+    7: (
+      $spacer * 6,
+    ),
+    8: (
+      $spacer * 8,
+    ),
+    9: (
+      $spacer * 10,
+    ),
   ),
   $spacers
 );
@@ -44,7 +62,7 @@ $header-size: (
     phone-kerning: -1px,
   ),
   subtitle: (
-    desktop: 1.6rem,
+    desktop: 1.4rem,
     phone: 1.4rem,
     kerning: -1px,
   ),
@@ -52,6 +70,6 @@ $header-size: (
     desktop: 1.5rem,
     phone: 1.25rem,
     desktop-kerning: 10px,
-    phone-kerning: 4px
-  ),  
+    phone-kerning: 4px,
+  ),
 );
