@@ -70,7 +70,7 @@ const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
 
   const makeTagArray = (
     metaProps: MetaProps,
-    userTags: MetaTag[]
+    userTags: MetaTag[],
   ): MetaTag[] => {
     const meta: MetaTag[] = [];
 

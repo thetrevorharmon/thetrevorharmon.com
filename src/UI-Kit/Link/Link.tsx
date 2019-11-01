@@ -28,7 +28,7 @@ const Link: React.FC<LinkProps> = ({
     className,
     noLinkStyling && styles.Reset,
     !noLinkStyling && styles.Link,
-    isIconLink && styles.IconLink
+    isIconLink && styles.IconLink,
   );
 
   return externalLink ? (

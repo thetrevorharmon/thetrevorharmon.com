@@ -62,7 +62,7 @@ const Helmet: React.FC<HelmetProps> = ({children, pageMetadata}) => {
         siteHandle: site.twitter.site,
       },
     },
-    extraMeta
+    extraMeta,
   );
 
   return (

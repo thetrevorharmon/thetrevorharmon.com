@@ -19,7 +19,7 @@ interface PostEdges {
 const combinePostTypes = (
   blogPosts: PostEdges,
   linkPosts: PostEdges,
-  order: 'desc' | 'asc' = 'desc'
+  order: 'desc' | 'asc' = 'desc',
 ): Array<BlogPost | LinkPost> => {
   const orderMultiplier = order === 'desc' ? 1 : -1;
 

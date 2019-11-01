@@ -9,7 +9,7 @@ interface LinkPostTemplateProps {
       edges: [
         {
           node: LinkPost;
-        }
+        },
       ];
     };
     site: {

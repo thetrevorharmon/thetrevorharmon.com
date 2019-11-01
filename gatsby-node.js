@@ -121,7 +121,7 @@ exports.createPages = ({graphql, actions}) => {
 
       const posts = combinePostTypes(
         result.data.allContentfulBlogPost,
-        result.data.allContentfulLinkPost
+        result.data.allContentfulLinkPost,
       );
 
       posts.forEach((node, index) => {

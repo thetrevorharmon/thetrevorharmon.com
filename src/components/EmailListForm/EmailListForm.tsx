@@ -107,7 +107,7 @@ const EmailListForm: React.FC<{}> = ({children}) => {
   const checkForError = (
     value: string,
     type: fieldType,
-    setError: (value: boolean) => void
+    setError: (value: boolean) => void,
   ) => {
     const regex = {
       // this came from https://emailregex.com/
@@ -139,7 +139,7 @@ const EmailListForm: React.FC<{}> = ({children}) => {
           styles.SubscribeCallout,
           'col-sm-5',
           'py-3',
-          'px-4'
+          'px-4',
         )}
       >
         <h2 className="mt-3">Sign up for the Newsletter</h2>
@@ -152,7 +152,7 @@ const EmailListForm: React.FC<{}> = ({children}) => {
           isSignupComplete && styles.SignupComplete,
           'col-sm-7',
           'py-3',
-          'px-4'
+          'px-4',
         )}
       >
         <div className={styles.SignupFields}>

@@ -94,7 +94,7 @@ module.exports = {
               const combinePostTypes = (
                 blogPosts,
                 linkPosts,
-                order = 'desc'
+                order = 'desc',
               ) => {
                 const orderMultiplier = order === 'desc' ? 1 : -1;
 
@@ -122,7 +122,7 @@ module.exports = {
 
               const posts = combinePostTypes(
                 allContentfulBlogPost,
-                allContentfulLinkPost
+                allContentfulLinkPost,
               );
 
               return posts.map((post) => {
@@ -139,7 +139,7 @@ module.exports = {
                     custom_elements: [
                       {'content:encoded': post.body.childMarkdownRemark.html},
                     ],
-                  }
+                  },
                 );
               });
             },

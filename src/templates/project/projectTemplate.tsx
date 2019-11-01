@@ -15,7 +15,7 @@ interface TemplateProps {
       edges: [
         {
           node: Project;
-        }
+        },
       ];
     };
   };

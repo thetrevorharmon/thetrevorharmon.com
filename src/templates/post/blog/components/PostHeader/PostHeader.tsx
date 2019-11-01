@@ -59,7 +59,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
         styles.PostHeader,
         'row',
         'mt-4 mb-2',
-        'mt-lg-6 mb-lg-4'
+        'mt-lg-6 mb-lg-4',
       )}
     >
       {post.postType === 'Blog' && post.heroImage && (

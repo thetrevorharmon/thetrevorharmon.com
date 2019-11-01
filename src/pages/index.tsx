@@ -30,7 +30,7 @@ export default (props: IndexPageProps) => {
 
   const posts = Helpers.combinePostTypes(
     props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost
+    props.data.allContentfulLinkPost,
   ).slice(0, 3);
 
   return (

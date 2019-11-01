@@ -9,7 +9,7 @@ interface BlogPostTemplateProps {
       edges: [
         {
           node: BlogPost;
-        }
+        },
       ];
     };
     site: {

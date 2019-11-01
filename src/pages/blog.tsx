@@ -15,14 +15,14 @@ interface ProjectsPageProps {
       edges: [
         {
           node: BlogPost;
-        }
+        },
       ];
     };
     allContentfulLinkPost: {
       edges: [
         {
           node: LinkPost;
-        }
+        },
       ];
     };
   };
@@ -37,7 +37,7 @@ export default (props: ProjectsPageProps) => {
 
   const posts = Helpers.combinePostTypes(
     props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost
+    props.data.allContentfulLinkPost,
   );
 
   return (

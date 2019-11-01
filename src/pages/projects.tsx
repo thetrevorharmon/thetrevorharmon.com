@@ -14,7 +14,7 @@ interface ProjectsPageProps {
       edges: [
         {
           node: Project;
-        }
+        },
       ];
     };
   };

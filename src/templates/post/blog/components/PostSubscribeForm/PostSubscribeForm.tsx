@@ -16,13 +16,13 @@ interface PostSubscribeFormProps {
 }
 
 const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (
-  props: PostSubscribeFormProps
+  props: PostSubscribeFormProps,
 ) => {
   const {layoutClassName, post, siteData} = props;
 
   const twitterShareUrl = (() => {
     const twitterText = encodeURI(
-      `I just finished reading "${post.title}" by ${siteData.twitter.author}`
+      `I just finished reading "${post.title}" by ${siteData.twitter.author}`,
     );
     const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(post.slug)}`;
     const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;

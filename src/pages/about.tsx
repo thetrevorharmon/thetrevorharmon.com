@@ -16,7 +16,7 @@ interface AboutPageProps {
       edges: [
         {
           node: AboutPageData;
-        }
+        },
       ];
     };
   };

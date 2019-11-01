@@ -14,7 +14,7 @@ interface CaseStudyPageProps {
       edges: [
         {
           node: CaseStudy;
-        }
+        },
       ];
     };
   };

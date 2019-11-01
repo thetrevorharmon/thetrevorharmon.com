@@ -19,7 +19,7 @@ const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
 
   const makeNavigation = (
     post: BasicPost,
-    direction: PostNavigationDirection
+    direction: PostNavigationDirection,
   ) => {
     const {title, slug} = post;
 
