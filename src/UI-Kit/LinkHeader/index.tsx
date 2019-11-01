@@ -1,1 +1,1 @@
-export { default } from './LinkHeader';
+export {default} from './LinkHeader';

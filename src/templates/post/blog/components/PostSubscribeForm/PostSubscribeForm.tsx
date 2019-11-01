@@ -1,16 +1,11 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {
-  Icon,
-  Link,
-} from '../../../../../UI-Kit';
+import {Icon, Link} from '../../../../../UI-Kit';
 
-import {
-  EmailListForm,
-} from '../../../../../components';
+import {EmailListForm} from '../../../../../components';
 
-import { Routes } from '../../../../../utils';
+import {Routes} from '../../../../../utils';
 
 import * as styles from './PostSubscribeForm.module.scss';
 
@@ -20,15 +15,15 @@ interface PostSubscribeFormProps {
   siteData: SiteMetadata;
 }
 
-const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscribeFormProps) => {
-  const {
-    layoutClassName,
-    post,
-    siteData,
-  } = props;
+const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (
+  props: PostSubscribeFormProps,
+) => {
+  const {layoutClassName, post, siteData} = props;
 
   const twitterShareUrl = (() => {
-    const twitterText = encodeURI(`I just finished reading "${post.title}" by ${siteData.twitter.author}`);
+    const twitterText = encodeURI(
+      `I just finished reading "${post.title}" by ${siteData.twitter.author}`,
+    );
     const postAbsoluteUrl = `${siteData.siteUrl}${Routes.blogPost(post.slug)}`;
     const shareUrl = `https://twitter.com/intent/tweet?url=${postAbsoluteUrl}&text=${twitterText}`;
 
@@ -49,10 +44,7 @@ const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscrib
           <Link
             href={twitterShareUrl}
             isIconLink={true}
-            className={classnames(
-              styles.IconLink,
-              'ml-2',
-            )}
+            className={classnames(styles.IconLink, 'ml-2')}
           >
             <Icon name="twitter" />
           </Link>
@@ -62,6 +54,4 @@ const PostSubscribeForm: React.FC<PostSubscribeFormProps> = (props: PostSubscrib
   );
 };
 
-export {
-  PostSubscribeForm,
-};
+export {PostSubscribeForm};

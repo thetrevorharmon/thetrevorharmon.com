@@ -6,7 +6,10 @@ declare module 'react-masonry-css' {
     columnClassName?: string;
   }
 
-  export default class Masonry extends React.Component<MasonryProps & React.HTMLProps<HTMLElement>, any> {
+  export default class Masonry extends React.Component<
+    MasonryProps & React.HTMLProps<HTMLElement>,
+    any
+  > {
     render(): JSX.Element;
   }
 }

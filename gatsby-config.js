@@ -1,8 +1,9 @@
 // to separate development & production variables, refer to:
 // https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/environment-variables.md
 
-let environment = process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development';
-require("dotenv").config({
+let environment =
+  process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development';
+require('dotenv').config({
   path: `.env.${environment}`,
 });
 
@@ -18,7 +19,7 @@ module.exports = {
     twitter: {
       author: '@thetrevorharmon',
       site: '@thetrevorharmon',
-    }
+    },
   },
   plugins: [
     {
@@ -26,7 +27,8 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        host: environment === 'development' ? `preview.contentful.com` : undefined,
+        host:
+          environment === 'development' ? `preview.contentful.com` : undefined,
       },
     },
     `gatsby-plugin-typescript`,
@@ -36,13 +38,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
-        logo: "./static/favicon.png",
+        logo: './static/favicon.png',
         icons: {
           appleStartup: false,
-        }
-      }
+        },
+      },
     },
-    `gatsby-plugin-react-svg`,  
+    `gatsby-plugin-react-svg`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sharp`, // for gatsby-image
@@ -68,7 +70,7 @@ module.exports = {
           },
         ],
       },
-    },    
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -84,10 +86,16 @@ module.exports = {
       options: {
         feeds: [
           {
-            serialize: ({ query: { site, allContentfulBlogPost, allContentfulLinkPost } }) => {
+            serialize: ({
+              query: {site, allContentfulBlogPost, allContentfulLinkPost},
+            }) => {
               // This combines blog posts and link posts into a single array of posts
               // First combines and then sorts according to date (newest first)
-              const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
+              const combinePostTypes = (
+                blogPosts,
+                linkPosts,
+                order = 'desc',
+              ) => {
                 const orderMultiplier = order === 'desc' ? 1 : -1;
 
                 const posts = [
@@ -95,33 +103,45 @@ module.exports = {
                   ...blogPosts.edges.map((edge) => edge.node),
                   // link posts
                   ...linkPosts.edges.map((edge) => edge.node),
-                ].sort(
-                  (firstDate, secondDate) => {
-                    const a = new Date(firstDate.date);
-                    const b = new Date(secondDate.date);
+                ].sort((firstDate, secondDate) => {
+                  const a = new Date(firstDate.date);
+                  const b = new Date(secondDate.date);
 
-                    if (a < b) { return 1 * orderMultiplier; }
-                    if (a > b) { return -1 * orderMultiplier; }
+                  if (a < b) {
+                    return 1 * orderMultiplier;
+                  }
+                  if (a > b) {
+                    return -1 * orderMultiplier;
+                  }
 
-                    return 0;
-                  },
-                );
+                  return 0;
+                });
 
                 return posts;
-              }
+              };
 
-              const posts = combinePostTypes(allContentfulBlogPost, allContentfulLinkPost);
+              const posts = combinePostTypes(
+                allContentfulBlogPost,
+                allContentfulLinkPost,
+              );
 
-              return posts.map(post => {
-                return Object.assign({}, {
-                  title: post.title,
-                  description: post.description ? post.description : post.body.childMarkdownRemark.excerpt,
-                  date: post.date,
-                  url: site.siteMetadata.siteUrl + '/blog/' + post.slug,
-                  guid: site.siteMetadata.siteUrl + '/blog/' + post.slug,
-                  custom_elements: [{ "content:encoded": post.body.childMarkdownRemark.html }],
-                })
-              })
+              return posts.map((post) => {
+                return Object.assign(
+                  {},
+                  {
+                    title: post.title,
+                    description: post.description
+                      ? post.description
+                      : post.body.childMarkdownRemark.excerpt,
+                    date: post.date,
+                    url: site.siteMetadata.siteUrl + '/blog/' + post.slug,
+                    guid: site.siteMetadata.siteUrl + '/blog/' + post.slug,
+                    custom_elements: [
+                      {'content:encoded': post.body.childMarkdownRemark.html},
+                    ],
+                  },
+                );
+              });
             },
             query: `
               {
@@ -166,11 +186,11 @@ module.exports = {
                 }
               }              
             `,
-            output: "/rss.xml",
+            output: '/rss.xml',
             title: "Trevor Harmon's Blog RSS Feed",
-          }
-        ]
-      }
-    },   
+          },
+        ],
+      },
+    },
   ],
-}
+};

@@ -2,7 +2,9 @@ const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;
   const hasProtocol = completeProtocol.test(link);
 
-  if (hasProtocol) { return link; }
+  if (hasProtocol) {
+    return link;
+  }
 
   const partialProtocol = /^:?\/\//;
   const preparedLink = link.replace(partialProtocol, '');
@@ -10,12 +12,14 @@ const checkHttp = (link: string) => {
   return `https://${preparedLink}`;
 };
 
-interface PostEdges { edges: [{ node: BlogPost | LinkPost }]; }
+interface PostEdges {
+  edges: [{node: BlogPost | LinkPost}];
+}
 
 const combinePostTypes = (
   blogPosts: PostEdges,
   linkPosts: PostEdges,
-  order: ('desc' | 'asc') = 'desc',
+  order: 'desc' | 'asc' = 'desc',
 ): Array<BlogPost | LinkPost> => {
   const orderMultiplier = order === 'desc' ? 1 : -1;
 
@@ -23,7 +27,7 @@ const combinePostTypes = (
     // blog posts
     ...blogPosts.edges.map((edge) => {
       const blogPost: BlogPost = {
-        ...edge.node as BlogPost,
+        ...(edge.node as BlogPost),
         postType: 'Blog',
       };
 
@@ -32,28 +36,27 @@ const combinePostTypes = (
     // link posts
     ...linkPosts.edges.map((edge) => {
       const linkPost: LinkPost = {
-        ...edge.node as LinkPost,
+        ...(edge.node as LinkPost),
         postType: 'Link',
       };
 
       return linkPost;
     }),
-  ].sort(
-    (firstDate, secondDate) => {
-      const a = new Date(firstDate.date);
-      const b = new Date(secondDate.date);
+  ].sort((firstDate, secondDate) => {
+    const a = new Date(firstDate.date);
+    const b = new Date(secondDate.date);
 
-      if (a < b) { return 1 * orderMultiplier; }
-      if (a > b) { return -1 * orderMultiplier; }
+    if (a < b) {
+      return 1 * orderMultiplier;
+    }
+    if (a > b) {
+      return -1 * orderMultiplier;
+    }
 
-      return 0;
-    },
-  );
+    return 0;
+  });
 
   return posts;
 };
 
-export {
-  combinePostTypes,
-  checkHttp,
-};
+export {combinePostTypes, checkHttp};

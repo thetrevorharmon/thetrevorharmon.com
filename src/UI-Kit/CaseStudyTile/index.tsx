@@ -1,1 +1,1 @@
-export { default }  from './CaseStudyTile';
+export {default} from './CaseStudyTile';

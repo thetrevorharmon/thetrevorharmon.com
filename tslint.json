@@ -1,14 +1,12 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:latest",
-    "tslint-react"
-  ],
+  "extends": ["tslint:latest", "tslint-react"],
   "jsRules": {},
   "rules": {
     "quotemark": [true, "single", "jsx-double"],
     "interface-name": [false],
     "jsx-no-multiline-js": [false]
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "exclude": ["node_modules"]
 }

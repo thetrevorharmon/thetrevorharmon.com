@@ -1,40 +1,36 @@
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import { PostTemplate } from './PostTemplate';
+import {PostTemplate} from './PostTemplate';
 
 interface BlogPostTemplateProps {
   data: {
     allContentfulBlogPost: {
       edges: [
         {
-          node: BlogPost,
+          node: BlogPost;
         },
-      ],
-    },
+      ];
+    };
     site: {
-      siteMetadata: SiteMetadata,
-    },
+      siteMetadata: SiteMetadata;
+    };
   };
   pageContext: {
-    slug: string,
-    newerPost?: BasicPost,
-    olderPost?: BasicPost,
+    slug: string;
+    newerPost?: BasicPost;
+    olderPost?: BasicPost;
   };
 }
 
 export default (props: BlogPostTemplateProps) => {
-
   const siteMetadata = props.data.site.siteMetadata;
   const blogPost: BlogPost = {
     ...props.data.allContentfulBlogPost.edges[0].node,
     postType: 'Blog',
   };
 
-  const {
-    newerPost,
-    olderPost,
-  } = props.pageContext;
+  const {newerPost, olderPost} = props.pageContext;
 
   return (
     <PostTemplate

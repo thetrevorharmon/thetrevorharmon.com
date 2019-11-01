@@ -1,16 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {
-  Header,
-  Icon,
-  Link,
-} from '../../UI-Kit';
+import {Header, Icon, Link} from '../../UI-Kit';
 
-import {
-  HeaderRank,
-  HeaderType,
-} from '../Header/Header';
+import {HeaderRank, HeaderType} from '../Header/Header';
 
 import * as styles from './LinkHeader.module.scss';
 
@@ -30,19 +23,14 @@ const LinkHeader: React.FC<LinkHeaderProps> = ({
   className,
   children,
 }) => {
-
-  const classname = classnames(
-    styles.LinkHeader,
-    styles[type],
-    className,
-  );
+  const classname = classnames(styles.LinkHeader, styles[type], className);
 
   return (
     <Header rank={rank} type={type} className={classname}>
       <Link href={href} className={styles.Link}>
         {children}
       </Link>
-      {hasLinkIcon && (<Icon name="link" className={styles.Icon} />)}
+      {hasLinkIcon && <Icon name="link" className={styles.Icon} />}
     </Header>
   );
 };

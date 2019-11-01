@@ -17,27 +17,27 @@
 .Icon {
   line-height: 0;
 
-    svg {
-      position: relative;
-      top: 1px;
+  svg {
+    position: relative;
+    top: 1px;
 
-      transition: all 0.1s ease-in-out;
-      width: 1.05em;
-      height: 1.05em;
-      max-height: none;
-      max-width: none;
-      padding: 0.275em;
-      
-      background: $text-color-primary;
+    transition: all 0.1s ease-in-out;
+    width: 1.05em;
+    height: 1.05em;
+    max-height: none;
+    max-width: none;
+    padding: 0.275em;
 
-      .Headline & {
-        height: 0.85em;
-        width: 0.85em;
-      }
+    background: $text-color-primary;
 
-      path {
-        fill: white;
-      }
+    .Headline & {
+      height: 0.85em;
+      width: 0.85em;
+    }
+
+    path {
+      fill: white;
+    }
   }
 }
 
@@ -46,7 +46,7 @@
     color: $brand-primary;
     border-bottom-color: transparent;
   }
-  
+
   .Icon svg {
     transform: rotate(45deg);
   }

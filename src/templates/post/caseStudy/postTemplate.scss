@@ -1,7 +1,6 @@
 @import '../../../UI-Kit/Header/Header.module.scss';
 
 .post-template {
-
   line-height: 1.8;
 
   @include mobile-only {
@@ -27,12 +26,12 @@
       text-align: center;
       font-size: 0.9rem;
       padding-top: 0.5rem;
-      
+
       color: $text-color-secondary;
     }
   }
 
-  .post-body {  
+  .post-body {
     color: $text-color-primary;
 
     h1 {
@@ -131,7 +130,7 @@
 
     .article-attribution {
       font-style: italic;
-    }    
+    }
   }
 
   .post-footer {
@@ -159,7 +158,8 @@
         .post-link {
           line-height: 1;
 
-          &:before, &:after {
+          &:before,
+          &:after {
             display: inline-block;
             transition: all 0.1s linear;
           }
@@ -179,13 +179,13 @@
         }
 
         @include media-breakpoint-up(lg) {
-
           .post-link {
             position: relative;
             display: inline-block;
             max-width: 100%;
 
-            &:before, &:after {
+            &:before,
+            &:after {
               display: block;
               position: absolute;
               margin: 0;

@@ -1,5 +1,3 @@
 import EmailListForm from './EmailListForm';
 
-export {
-  EmailListForm,
-};
+export {EmailListForm};

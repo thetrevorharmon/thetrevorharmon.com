@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require(`path`)
+const path = require(`path`);
 
 // This combines blog posts and link posts into a single array of posts
 // First combines and then sorts according to date (newest first)
@@ -15,20 +15,22 @@ const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
     ...blogPosts.edges.map((edge) => edge.node),
     // link posts
     ...linkPosts.edges.map((edge) => edge.node),
-  ].sort(
-    (firstDate, secondDate) => {
-      const a = new Date(firstDate.date);
-      const b = new Date(secondDate.date);
+  ].sort((firstDate, secondDate) => {
+    const a = new Date(firstDate.date);
+    const b = new Date(secondDate.date);
 
-      if (a < b) { return 1 * orderMultiplier; }
-      if (a > b) { return -1 * orderMultiplier; }
+    if (a < b) {
+      return 1 * orderMultiplier;
+    }
+    if (a > b) {
+      return -1 * orderMultiplier;
+    }
 
-      return 0;
-    },
-  );
+    return 0;
+  });
 
   return posts;
-}
+};
 
 // Given a type, this returns the location of the template for the type
 // It throws an error when it encounters a type that doesn't exist
@@ -38,17 +40,17 @@ const pathTemplateForPostType = (type) => {
     ContentfulLinkPost: `./src/templates/post/blog/linkPostTemplate.tsx`,
     ContentfulProject: `./src/templates/project/projectTemplate.tsx`,
     ContentfulCaseStudy: `./src/templates/post/caseStudy/caseStudyTemplate.tsx`,
-  }
+  };
 
   if (!paths[type]) {
     throw new Error(`Cannot find template path for type: ${type}`);
   }
 
   return paths[type];
-}
+};
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+exports.createPages = ({graphql, actions}) => {
+  const {createPage} = actions;
   return new Promise((resolve, reject) => {
     graphql(`
       {
@@ -59,7 +61,7 @@ exports.createPages = ({ graphql, actions }) => {
               slug
               internal {
                 type
-              }              
+              }
             }
           }
         }
@@ -70,22 +72,11 @@ exports.createPages = ({ graphql, actions }) => {
               slug
               internal {
                 type
-              }              
-            }
-          }
-        } 
-        allContentfulBlogPost(sort: { order: DESC, fields: [date] })  {
-          edges {
-            node {
-              title
-              slug
-              internal {
-                type
-              }     
+              }
             }
           }
         }
-        allContentfulLinkPost(sort: { order: DESC, fields: [date] })  {
+        allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
           edges {
             node {
               title
@@ -95,34 +86,44 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-        }           
+        }
+        allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
+          edges {
+            node {
+              title
+              slug
+              internal {
+                type
+              }
+            }
+          }
+        }
       }
-    `
-  ).then(result => {
-      result.data.allContentfulProject.edges.forEach(({ node }) => {
+    `).then((result) => {
+      result.data.allContentfulProject.edges.forEach(({node}) => {
         createPage({
           path: `projects/${node.slug}`,
           component: path.resolve(pathTemplateForPostType(node.internal.type)),
           context: {
             slug: node.slug,
           },
-        })
-      })
-      result.data.allContentfulCaseStudy.edges.forEach(({ node }) => {
+        });
+      });
+      result.data.allContentfulCaseStudy.edges.forEach(({node}) => {
         createPage({
           path: `case-studies/${node.slug}`,
           component: path.resolve(pathTemplateForPostType(node.internal.type)),
           context: {
             slug: node.slug,
           },
-        })
+        });
       });
 
       const posts = combinePostTypes(
         result.data.allContentfulBlogPost,
         result.data.allContentfulLinkPost,
-      )
-      
+      );
+
       posts.forEach((node, index) => {
         // these give an easy way to figure out which post is considered
         // the next newer/older post from within a blog post
@@ -137,10 +138,10 @@ exports.createPages = ({ graphql, actions }) => {
             newerPost: newerPost,
             olderPost: olderPost,
           },
-        })
+        });
       });
 
-      resolve()
-    })
-  })
-}
+      resolve();
+    });
+  });
+};

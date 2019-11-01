@@ -1,40 +1,36 @@
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import { PostTemplate } from './PostTemplate';
+import {PostTemplate} from './PostTemplate';
 
 interface LinkPostTemplateProps {
   data: {
     allContentfulLinkPost: {
       edges: [
         {
-          node: LinkPost,
+          node: LinkPost;
         },
-      ],
-    },
+      ];
+    };
     site: {
-      siteMetadata: SiteMetadata,
-    },
+      siteMetadata: SiteMetadata;
+    };
   };
   pageContext: {
-    slug: string,
-    newerPost?: BasicPost,
-    olderPost?: BasicPost,
+    slug: string;
+    newerPost?: BasicPost;
+    olderPost?: BasicPost;
   };
 }
 
 export default (props: LinkPostTemplateProps) => {
-
   const siteMetadata = props.data.site.siteMetadata;
   const linkPost: LinkPost = {
     ...props.data.allContentfulLinkPost.edges[0].node,
     postType: 'Link',
   };
 
-  const {
-    newerPost,
-    olderPost,
-  } = props.pageContext;
+  const {newerPost, olderPost} = props.pageContext;
 
   return (
     <PostTemplate

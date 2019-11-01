@@ -1,35 +1,28 @@
 import classnames from 'classnames';
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import { Layout } from '../layouts';
+import {Layout} from '../layouts';
 
 import * as styles from './about.module.scss';
 
-import {
-  Button,
-  Header,
-  Image,
-  Link,
-  Tile,
-} from '../UI-Kit';
+import {Button, Header, Image, Link, Tile} from '../UI-Kit';
 
-import { Routes } from '../utils';
+import {Routes} from '../utils';
 
 interface AboutPageProps {
   data: {
     allContentfulAboutPage: {
       edges: [
         {
-          node: AboutPageData,
-        }
-      ],
-    },
+          node: AboutPageData;
+        },
+      ];
+    };
   };
 }
 
 export default (props: AboutPageProps) => {
-
   const aboutPage = props.data.allContentfulAboutPage.edges[0].node;
 
   const pageMetadata: PageMetadata = {
@@ -45,9 +38,7 @@ export default (props: AboutPageProps) => {
           <Header
             rank={1}
             type="Headline"
-            className={classnames(
-              'my-6 my-lg-8',
-            )}
+            className={classnames('my-6 my-lg-8')}
           >
             {aboutPage.title}
           </Header>

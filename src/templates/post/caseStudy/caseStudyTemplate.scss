@@ -12,15 +12,15 @@
   .table-of-contents {
     @include left-border;
 
-    ol { 
+    ol {
       counter-reset: item;
       padding-left: 0;
-      
+
       li {
         display: block;
 
-        &:before { 
-          content: counter(item) ".";
+        &:before {
+          content: counter(item) '.';
           counter-increment: item;
           width: 1.75em;
           display: inline-block;

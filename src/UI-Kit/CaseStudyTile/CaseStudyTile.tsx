@@ -1,13 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {
-  Header,
-  Image,
-  Link,
-} from '../../UI-Kit';
+import {Header, Image, Link} from '../../UI-Kit';
 
-import { Routes } from '../../utils';
+import {Routes} from '../../utils';
 
 import * as styles from './CaseStudyTile.module.scss';
 
@@ -17,32 +13,20 @@ interface CaseStudyTileProps {
 }
 
 const CaseStudyTile: React.FC<CaseStudyTileProps> = ({item, className}) => {
-  const classname = classnames(
-    styles.Tile,
-    'd-flex flex-row',
-    className,
-  );
+  const classname = classnames(styles.Tile, 'd-flex flex-row', className);
 
   return (
-    <div
-      className={classname}
-    >
+    <div className={classname}>
       <div className="d-flex flex-column">
         <Header
           rank={3}
           type="Title"
-          className={classnames(
-            styles.Title,
-            'mt-0 mb-0',
-          )}
+          className={classnames(styles.Title, 'mt-0 mb-0')}
         >
           {item.title}
         </Header>
         <p className="pr-3 mt-2 mt-sm-0">{item.tagline}</p>
-        <Link
-          className={styles.Link}
-          href={Routes.caseStudy(item.slug)}
-        >
+        <Link className={styles.Link} href={Routes.caseStudy(item.slug)}>
           Read Case Study
         </Link>
       </div>
