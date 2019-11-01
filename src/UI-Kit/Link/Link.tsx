@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import { Link as GatsbyLink } from 'gatsby';
-import { OutboundLink } from 'gatsby-plugin-google-analytics';
+import {Link as GatsbyLink} from 'gatsby';
+import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import * as React from 'react';
 
 import * as styles from './Link.module.scss';
@@ -21,7 +21,6 @@ const Link: React.FC<LinkProps> = ({
   className,
   children,
 }) => {
-
   const externalPattern = /^http/;
   const externalLink = externalPattern.test(href);
 
@@ -29,11 +28,16 @@ const Link: React.FC<LinkProps> = ({
     className,
     noLinkStyling && styles.Reset,
     !noLinkStyling && styles.Link,
-    isIconLink && styles.IconLink,
+    isIconLink && styles.IconLink
   );
 
   return externalLink ? (
-    <OutboundLink className={classname} href={href} target={target || '_blank'} rel="noreferrer">
+    <OutboundLink
+      className={classname}
+      href={href}
+      target={target || '_blank'}
+      rel="noreferrer"
+    >
       {children}
     </OutboundLink>
   ) : (

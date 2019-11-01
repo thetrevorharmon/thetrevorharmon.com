@@ -1,24 +1,15 @@
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import * as styles from './Navbar.module.scss';
 
-import {
-  Button,
-  Link,
-} from '../../UI-Kit';
+import {Button, Link} from '../../UI-Kit';
 
-import {
-  Routes,
-} from '../../utils';
+import {Routes} from '../../utils';
 
 const Navbar: React.FC<{}> = () => {
-
   const [isOpen, setOpen] = useState(false);
 
-  const classname = classnames(
-    styles.Navbar,
-    isOpen && styles.Open,
-  );
+  const classname = classnames(styles.Navbar, isOpen && styles.Open);
 
   const navbarLinks = [
     {
@@ -47,13 +38,9 @@ const Navbar: React.FC<{}> = () => {
       <div className={classname}>
         <div className="container d-flex flex-column">
           <div className={styles.TopElementsWrapper}>
-
             <Button
               href={Routes.home()}
-              className={classnames(
-                styles.Brand,
-                'global-brand',
-              )}
+              className={classnames(styles.Brand, 'global-brand')}
               noStyling={true}
             >
               TH
@@ -61,18 +48,29 @@ const Navbar: React.FC<{}> = () => {
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>
-              {navbarLinks.map((link, index) => <li key={index}><Link href={link.location}>{link.display}</Link></li>)}
+              {navbarLinks.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.location}>{link.display}</Link>
+                </li>
+              ))}
             </ul>
 
             {/* Mobile Toggle */}
-            <a className={classnames(styles.Toggle, 'd-inline-block d-sm-none')} onClick={handleMenuToggle}>
+            <a
+              className={classnames(styles.Toggle, 'd-inline-block d-sm-none')}
+              onClick={handleMenuToggle}
+            >
               <div className={styles.Bar} />
               <div className={styles.Bar} />
             </a>
           </div>
 
           <ul className={styles.MobileLinks}>
-            {navbarLinks.map((link, index) => <li key={index}><Link href={link.location}>{link.display}</Link></li>)}
+            {navbarLinks.map((link, index) => (
+              <li key={index}>
+                <Link href={link.location}>{link.display}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

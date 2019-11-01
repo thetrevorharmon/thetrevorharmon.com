@@ -16,18 +16,10 @@ const Button: React.FC<ButtonProps> = ({
   href,
   noStyling,
 }) => {
-
-  const classname = classnames(
-    className,
-    !noStyling && styles.Button,
-  );
+  const classname = classnames(className, !noStyling && styles.Button);
 
   return (
-    <Link
-      href={href}
-      noLinkStyling={true}
-      className={classname}
-    >
+    <Link href={href} noLinkStyling={true} className={classname}>
       {children}
     </Link>
   );

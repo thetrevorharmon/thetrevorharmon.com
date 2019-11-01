@@ -1,1 +1,1 @@
-export { default } from './PostTile';
+export {default} from './PostTile';

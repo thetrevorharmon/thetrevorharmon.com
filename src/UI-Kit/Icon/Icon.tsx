@@ -3,11 +3,7 @@ import * as React from 'react';
 
 import * as styles from './Icon.module.scss';
 
-import {
-  link,
-  rss,
-  twitter,
-} from './icons';
+import {link, rss, twitter} from './icons';
 
 interface IconProps {
   className?: string;
@@ -20,23 +16,14 @@ interface IconProps {
 // I can't have a 'dynamic' icon name that works
 
 /* tslint:disable object-literal-shorthand */
-const mapping: { [name: string]: () => any } = {
+const mapping: {[name: string]: () => any} = {
   link: link,
   rss: rss,
   twitter: twitter,
 };
 
-const Icon: React.FC<IconProps> = ({
-  className,
-  children,
-  href,
-  name,
-}) => {
-
-  const classname = classnames(
-    styles.Icon,
-    className,
-  );
+const Icon: React.FC<IconProps> = ({className, children, href, name}) => {
+  const classname = classnames(styles.Icon, className);
 
   if (!(`${name}` in mapping)) {
     throw new Error('Icon name not found!');

@@ -1,7 +1,7 @@
-@import "./_variables.scss";
-@import "../../node_modules/bootstrap-4-grid/scss/grid/_functions.scss";
-@import "../../node_modules/bootstrap-4-grid/scss/grid/_variables.scss";
-@import "../../node_modules/bootstrap-4-grid/scss/breakpoints/mixins/_breakpoints.scss";
+@import './_variables.scss';
+@import '../../node_modules/bootstrap-4-grid/scss/grid/_functions.scss';
+@import '../../node_modules/bootstrap-4-grid/scss/grid/_variables.scss';
+@import '../../node_modules/bootstrap-4-grid/scss/breakpoints/mixins/_breakpoints.scss';
 
 @mixin mobile-only {
   @include media-breakpoint-down(sm) {
@@ -23,5 +23,5 @@
     left: 0;
     top: 0;
     z-index: -1;
-  }  
+  }
 }

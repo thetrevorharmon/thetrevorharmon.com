@@ -9,9 +9,12 @@ declare module 'gatsby-plugin-mailchimp' {
   }
 
   export interface MailchimpFields {
-    [key: string]: string
+    [key: string]: string;
   }
 
-  function addToMailchimp(email: String, listFields?: MailchimpFields): Promise<MailchimpResponse>;
+  function addToMailchimp(
+    email: String,
+    listFields?: MailchimpFields
+  ): Promise<MailchimpResponse>;
   export default addToMailchimp;
 }

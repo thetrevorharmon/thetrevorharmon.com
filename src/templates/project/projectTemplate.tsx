@@ -1,31 +1,30 @@
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import { Layout } from '../../layouts';
-import { Header, Image } from '../../UI-Kit';
+import {Layout} from '../../layouts';
+import {Header, Image} from '../../UI-Kit';
 
 import * as styles from './projectTemplate.module.scss';
 
-import { Routes } from '../../utils';
+import {Routes} from '../../utils';
 
 interface TemplateProps {
   data: {
     allContentfulProject: {
       edges: [
         {
-          node: Project,
-        },
-      ],
-    },
+          node: Project;
+        }
+      ];
+    };
   };
   pageContext: {
-    slug: string,
+    slug: string;
   };
 }
 
 export default (props: TemplateProps) => {
-
   const project = props.data.allContentfulProject.edges[0].node;
   const description = project.description.childMarkdownRemark
     ? project.description.childMarkdownRemark.html
@@ -42,19 +41,36 @@ export default (props: TemplateProps) => {
   };
 
   const items = images.map((image, index) => {
-    return <div key={index}><Image src={image} /></div>;
+    return (
+      <div key={index}>
+        <Image src={image} />
+      </div>
+    );
   });
 
   const info = (
     <div className={styles.Description}>
-      <Header rank={1} type="Title">{project.title}</Header>
+      <Header rank={1} type="Title">
+        {project.title}
+      </Header>
 
-      {description && <div className={styles.DescriptionHtml} dangerouslySetInnerHTML={{__html: description}} />}
+      {description && (
+        <div
+          className={styles.DescriptionHtml}
+          dangerouslySetInnerHTML={{__html: description}}
+        />
+      )}
 
-      {project.client && <p><strong>Client:</strong> {project.client}</p>}
+      {project.client && (
+        <p>
+          <strong>Client:</strong> {project.client}
+        </p>
+      )}
 
       {project.projectCompletionDate && (
-        <p><strong>Project completed:</strong> {project.projectCompletionDate}</p>
+        <p>
+          <strong>Project completed:</strong> {project.projectCompletionDate}
+        </p>
       )}
     </div>
   );
@@ -77,7 +93,7 @@ export default (props: TemplateProps) => {
             className={styles.Grid}
             columnClassName={styles.Column}
           >
-              {infoAndItems}
+            {infoAndItems}
           </Masonry>
         </div>
       </div>

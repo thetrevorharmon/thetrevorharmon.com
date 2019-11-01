@@ -1,7 +1,7 @@
-@import "../../styles/_variables.scss";
-@import "../../styles/_mixins.scss";
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
 
-.EmailListForm { 
+.EmailListForm {
   background: #f5f5f5;
   color: $text-color-primary;
 
@@ -37,7 +37,8 @@
     }
 
     &.SignupComplete .SignupCompletionMessage {
-      animation: show-completion-message $signup-complete-animation-speed ease-in-out;
+      animation: show-completion-message $signup-complete-animation-speed
+        ease-in-out;
       z-index: 1;
       opacity: 1;
     }
@@ -70,7 +71,7 @@
 
   button {
     display: inline-block;
-    
+
     border: none;
     background-image: none;
     background-color: $brand-primary;
@@ -78,7 +79,7 @@
 
     letter-spacing: 1px;
     transition: all 0.1s linear;
-    
+
     &:hover {
       cursor: pointer;
       background-color: darken($brand-primary, 15%);

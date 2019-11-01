@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from '../../../layouts';
+import {Layout} from '../../../layouts';
 
 import * as styles from './PostTemplate.module.scss';
 
@@ -10,7 +10,7 @@ import {
   PostSubscribeForm,
 } from './components';
 
-import { Routes } from '../../../utils';
+import {Routes} from '../../../utils';
 
 interface PostTemplateProps {
   post: BlogPost | LinkPost;
@@ -25,10 +25,14 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   newerPost,
   olderPost,
 }) => {
-
   const pageMetadata: PageMetadata = {
-    description: post.description ? `${post.description}` : `${post.body.childMarkdownRemark.excerpt}`,
-    image: post.postType === 'Blog' && post.heroImage ? post.heroImage.fluid.src : undefined,
+    description: post.description
+      ? `${post.description}`
+      : `${post.body.childMarkdownRemark.excerpt}`,
+    image:
+      post.postType === 'Blog' && post.heroImage
+        ? post.heroImage.fluid.src
+        : undefined,
     title: `${post.title}`,
     url: Routes.blogPost(post.slug),
   };
@@ -39,12 +43,14 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
     <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
       <PostHeader post={post} layoutClassName={pageLayoutClassName} />
       <PostBody post={post} layoutClassName={pageLayoutClassName} />
-      <PostSubscribeForm post={post} layoutClassName={pageLayoutClassName} siteData={siteMetadata} />
+      <PostSubscribeForm
+        post={post}
+        layoutClassName={pageLayoutClassName}
+        siteData={siteMetadata}
+      />
       <PostFooter olderPost={olderPost} newerPost={newerPost} />
     </Layout>
   );
 };
 
-export {
-  PostTemplate,
-};
+export {PostTemplate};

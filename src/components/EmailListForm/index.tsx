@@ -1,1 +1,1 @@
-export { default } from './EmailListForm';
+export {default} from './EmailListForm';

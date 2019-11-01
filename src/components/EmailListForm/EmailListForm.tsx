@@ -1,18 +1,20 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import addToMailchimp, { MailchimpFields, MailchimpResponse } from 'gatsby-plugin-mailchimp';
-import React, { useState } from 'react';
+import {graphql, useStaticQuery} from 'gatsby';
+import addToMailchimp, {
+  MailchimpFields,
+  MailchimpResponse,
+} from 'gatsby-plugin-mailchimp';
+import React, {useState} from 'react';
 import * as styles from './EmailListForm.module.scss';
 
 import classnames from 'classnames';
 
 interface SiteData {
   site: {
-    siteMetadata: SiteMetadata,
+    siteMetadata: SiteMetadata;
   };
 }
 
 const EmailListForm: React.FC<{}> = ({children}) => {
-
   const [isSendingSignupRequest, setSignupIsRequesting] = useState(false);
   const [isSignupComplete, setSignupComplete] = useState(false);
 
@@ -47,7 +49,8 @@ const EmailListForm: React.FC<{}> = ({children}) => {
   `);
 
   const triggerFallback = (userEmail: string, userFields: MailchimpFields) => {
-    const mailchimpFallbackUrl: (string | undefined) = siteData.site.siteMetadata.mailchimpFallbackUrl;
+    const mailchimpFallbackUrl: string | undefined =
+      siteData.site.siteMetadata.mailchimpFallbackUrl;
 
     if (mailchimpFallbackUrl) {
       // Merge fields lets us prefill fields in Mailchimp
@@ -101,7 +104,11 @@ const EmailListForm: React.FC<{}> = ({children}) => {
   };
 
   type fieldType = 'name' | 'email';
-  const checkForError = (value: string, type: fieldType, setError: (value: boolean) => void) => {
+  const checkForError = (
+    value: string,
+    type: fieldType,
+    setError: (value: boolean) => void
+  ) => {
     const regex = {
       // this came from https://emailregex.com/
       // tslint:disable-next-line
@@ -109,7 +116,7 @@ const EmailListForm: React.FC<{}> = ({children}) => {
       name: /^[a-zA-Z\ ]+$/g,
     };
 
-    setError(!(regex[type].test(value)));
+    setError(!regex[type].test(value));
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,24 +132,19 @@ const EmailListForm: React.FC<{}> = ({children}) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={classnames(
-        styles.EmailListForm,
-        'row',
-      )}
+      className={classnames(styles.EmailListForm, 'row')}
     >
       <div
         className={classnames(
           styles.SubscribeCallout,
           'col-sm-5',
           'py-3',
-          'px-4',
+          'px-4'
         )}
       >
         <h2 className="mt-3">Sign up for the Newsletter</h2>
         <p>Get articles like this one in your inbox.</p>
-        <div className="mt-auto">
-          {children}
-        </div>
+        <div className="mt-auto">{children}</div>
       </div>
       <div
         className={classnames(
@@ -150,7 +152,7 @@ const EmailListForm: React.FC<{}> = ({children}) => {
           isSignupComplete && styles.SignupComplete,
           'col-sm-7',
           'py-3',
-          'px-4',
+          'px-4'
         )}
       >
         <div className={styles.SignupFields}>

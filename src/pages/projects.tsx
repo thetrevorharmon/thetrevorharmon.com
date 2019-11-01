@@ -1,32 +1,26 @@
 import classnames from 'classnames';
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import { Layout } from '../layouts';
+import {Layout} from '../layouts';
 
-import {
-  Button,
-  Header,
-  Link,
-  Tile,
-} from '../UI-Kit';
+import {Button, Header, Link, Tile} from '../UI-Kit';
 
-import { Routes } from '../utils';
+import {Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {
     allContentfulProject: {
       edges: [
         {
-          node: Project,
+          node: Project;
         }
-      ],
-    },
+      ];
+    };
   };
 }
 
 export default (props: ProjectsPageProps) => {
-
   const pageMetadata: PageMetadata = {
     description: `These projects represent some, but not all, of the design and
       development work I've done for the past 5 (or so) years.`,
@@ -41,9 +35,7 @@ export default (props: ProjectsPageProps) => {
           <Header
             rank={1}
             type="Headline"
-            className={classnames(
-              'my-6 my-lg-8',
-            )}
+            className={classnames('my-6 my-lg-8')}
           >
             Projects
           </Header>

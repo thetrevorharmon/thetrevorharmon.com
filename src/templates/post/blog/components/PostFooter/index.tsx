@@ -1,1 +1,1 @@
-export { PostFooter } from './PostFooter';
+export {PostFooter} from './PostFooter';

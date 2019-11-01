@@ -81,12 +81,12 @@
       background: #fff;
 
       &:first-child {
-        transform: translate(0,9px) rotate(45deg);
+        transform: translate(0, 9px) rotate(45deg);
       }
 
       &:last-child {
-        transform: translate(0,-9px) rotate(-45deg);
-      }    
+        transform: translate(0, -9px) rotate(-45deg);
+      }
     }
   }
 }
@@ -103,7 +103,7 @@
 
     a {
       text-decoration: none;
-      color: #EEEEEE;
+      color: #eeeeee;
       text-transform: uppercase;
 
       &:hover {

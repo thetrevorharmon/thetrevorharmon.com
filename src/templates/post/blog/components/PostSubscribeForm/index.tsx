@@ -1,1 +1,1 @@
-export { PostSubscribeForm } from './PostSubscribeForm';
+export {PostSubscribeForm} from './PostSubscribeForm';

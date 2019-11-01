@@ -8,30 +8,16 @@ interface MetaProps {
   className?: string;
 }
 
-const Meta: React.FC<MetaProps> = ({
-  post,
-  className,
-}) => {
-
-  const classname = classnames(
-    className,
-    styles.Meta,
-  );
+const Meta: React.FC<MetaProps> = ({post, className}) => {
+  const classname = classnames(className, styles.Meta);
 
   const timeToRead = post.body.childMarkdownRemark.timeToRead
     ? `${Math.floor(+post.body.childMarkdownRemark.timeToRead)} min read`
     : undefined;
 
-  const meta = [
-    post.date,
-    timeToRead,
-  ].filter(Boolean).join(' • ');
+  const meta = [post.date, timeToRead].filter(Boolean).join(' • ');
 
-  return (
-    <p className={classname}>
-      {meta}
-    </p>
-  );
+  return <p className={classname}>{meta}</p>;
 };
 
 export default Meta;

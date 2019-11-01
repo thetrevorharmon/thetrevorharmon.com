@@ -21,7 +21,8 @@
     .Link {
       line-height: 1;
 
-      &:before, &:after {
+      &:before,
+      &:after {
         display: inline-block;
         transition: all 0.1s linear;
       }
@@ -41,13 +42,13 @@
     }
 
     @include media-breakpoint-up(lg) {
-
       .Link {
         position: relative;
         display: inline-block;
         max-width: 100%;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           display: block;
           position: absolute;
           margin: 0;
@@ -72,4 +73,3 @@
     }
   }
 }
-

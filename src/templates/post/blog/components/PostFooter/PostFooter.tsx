@@ -1,11 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {
-  Link,
-} from '../../../../../UI-Kit';
+import {Link} from '../../../../../UI-Kit';
 
-import { Routes } from '../../../../../utils';
+import {Routes} from '../../../../../utils';
 
 import * as styles from './PostFooter.module.scss';
 
@@ -17,31 +15,20 @@ interface PostFooterProps {
 type PostNavigationDirection = 'Older' | 'Newer';
 
 const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
-  const {
-    olderPost,
-    newerPost,
-  } = props;
+  const {olderPost, newerPost} = props;
 
-  const makeNavigation = (post: BasicPost, direction: PostNavigationDirection) => {
-    const {
-      title,
-      slug,
-    } = post;
+  const makeNavigation = (
+    post: BasicPost,
+    direction: PostNavigationDirection
+  ) => {
+    const {title, slug} = post;
 
     return (
-      <div
-        className={classnames(
-          styles.Navigation,
-          'col-lg-6',
-        )}
-      >
+      <div className={classnames(styles.Navigation, 'col-lg-6')}>
         Read {direction.toLowerCase()}:<br />
         <Link
           href={Routes.blogPost(slug)}
-          className={classnames(
-            styles.Link,
-            styles[direction],
-          )}
+          className={classnames(styles.Link, styles[direction])}
         >
           <span className={styles.Title}>{title}</span>
         </Link>
@@ -59,6 +46,4 @@ const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
   );
 };
 
-export {
-  PostFooter,
-};
+export {PostFooter};

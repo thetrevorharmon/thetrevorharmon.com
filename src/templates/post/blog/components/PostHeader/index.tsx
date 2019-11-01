@@ -1,1 +1,1 @@
-export { PostHeader } from './PostHeader';
+export {PostHeader} from './PostHeader';

@@ -1,1 +1,1 @@
-export { PostBody } from './PostBody';
+export {PostBody} from './PostBody';

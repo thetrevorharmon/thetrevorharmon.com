@@ -1,40 +1,34 @@
 import classnames from 'classnames';
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import { Layout } from '../layouts';
-import { Helpers, Routes } from '../utils';
+import {Layout} from '../layouts';
+import {Helpers, Routes} from '../utils';
 
 import * as styles from './blog.module.scss';
 
-import {
-  Header,
-  Link,
-  LinkHeader,
-  Meta,
-} from '../UI-Kit';
+import {Header, Link, LinkHeader, Meta} from '../UI-Kit';
 
 interface ProjectsPageProps {
   data: {
     allContentfulBlogPost: {
       edges: [
         {
-          node: BlogPost,
+          node: BlogPost;
         }
-      ],
-    },
+      ];
+    };
     allContentfulLinkPost: {
       edges: [
         {
-          node: LinkPost,
+          node: LinkPost;
         }
-      ],
-    },
+      ];
+    };
   };
 }
 
 export default (props: ProjectsPageProps) => {
-
   const pageMetadata: PageMetadata = {
     description: `My thoughts about code, design, and other musings.`,
     title: 'Blog',
@@ -43,7 +37,7 @@ export default (props: ProjectsPageProps) => {
 
   const posts = Helpers.combinePostTypes(
     props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost,
+    props.data.allContentfulLinkPost
   );
 
   return (
@@ -53,9 +47,7 @@ export default (props: ProjectsPageProps) => {
           <Header
             rank={1}
             type="Headline"
-            className={classnames(
-              'mt-6 mt-lg-8',
-            )}
+            className={classnames('mt-6 mt-lg-8')}
           >
             {pageMetadata.title}
           </Header>
@@ -78,13 +70,17 @@ export default (props: ProjectsPageProps) => {
               >
                 {post.title}
               </LinkHeader>
-              <Header rank={3} type="Tagline">{post.description || post.body.childMarkdownRemark.excerpt}</Header>
+              <Header rank={3} type="Tagline">
+                {post.description || post.body.childMarkdownRemark.excerpt}
+              </Header>
               <Meta post={post} />
             </div>
           </div>
           <div className="row">
             <div className="col-lg-8" key={index}>
-              <Link href={Routes.blogPost(post.slug)}>Continue Reading &rarr;</Link>
+              <Link href={Routes.blogPost(post.slug)}>
+                Continue Reading &rarr;
+              </Link>
             </div>
           </div>
         </div>
@@ -95,9 +91,7 @@ export default (props: ProjectsPageProps) => {
 
 export const query = graphql`
   query blogPageQuery {
-    allContentfulBlogPost(
-      sort: { order: DESC, fields: [date] },
-    ) {
+    allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
       edges {
         node {
           title
@@ -118,27 +112,25 @@ export const query = graphql`
         }
       }
     }
-    allContentfulLinkPost(
-      sort: { order: DESC, fields: [date] },
-    ) {
-	  edges {
-	    node {
-	      title
-        slug
-        link
-        date(formatString: "MMMM DD, YYYY")
-        internal {
-          type
-        }
-        body {
-          childMarkdownRemark {
-            html
-            excerpt
-            timeToRead
+    allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
+      edges {
+        node {
+          title
+          slug
+          link
+          date(formatString: "MMMM DD, YYYY")
+          internal {
+            type
+          }
+          body {
+            childMarkdownRemark {
+              html
+              excerpt
+              timeToRead
+            }
           }
         }
-	    }
-	  }
-	}
-}
+      }
+    }
+  }
 `;

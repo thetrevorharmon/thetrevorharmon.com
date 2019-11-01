@@ -13,11 +13,12 @@
 // https://github.com/m-spyratos/bootstrap-4-grid/blob/master/scss/grid/_variables.scss
 
 // These override the default spacers in the bootstrap utilities
-@import "../../node_modules/bootstrap-4-grid/scss/grid.scss";
+@import '../../node_modules/bootstrap-4-grid/scss/grid.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
 
-body, html {
+body,
+html {
   font-family: $sans-serif-font-stack;
   font-size: 16px;
   line-height: 1.5;
@@ -29,7 +30,12 @@ hr {
   background: #aaaaaa;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   padding: 0;
   margin: 1em 0 0.3em;
 }
@@ -39,7 +45,8 @@ p {
   margin: 0.5rem 0 1rem;
 }
 
-ol, ul {
+ol,
+ul {
   // padding-left: 0;
 }
 
@@ -49,12 +56,12 @@ ol, ul {
   width: 4rem;
   line-height: 4rem;
   font-size: 1.25rem;
-  
+
   color: white;
   text-decoration: none;
   text-align: center;
   font-weight: bold;
-  
+
   background: $brand-primary;
 }
 

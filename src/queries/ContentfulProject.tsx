@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 import * as React from 'react';
 
 export const ContentfulProjectTile = graphql`

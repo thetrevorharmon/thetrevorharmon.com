@@ -1,9 +1,11 @@
 import * as React from 'react';
 
 export interface MetaPropsIndexSignature {
-  [key: string]: {
-    [key: string]: string | undefined;
-  } | undefined;
+  [key: string]:
+    | {
+        [key: string]: string | undefined;
+      }
+    | undefined;
 }
 
 export interface MetaProps extends MetaPropsIndexSignature {
@@ -34,7 +36,6 @@ export interface MetaTag {
 }
 
 const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
-
   const ogMapping: MetaProps = {
     basic: {
       image: 'og:image',
@@ -67,7 +68,10 @@ const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
     },
   ];
 
-  const makeTagArray = (metaProps: MetaProps, userTags: MetaTag[]): MetaTag[] => {
+  const makeTagArray = (
+    metaProps: MetaProps,
+    userTags: MetaTag[]
+  ): MetaTag[] => {
     const meta: MetaTag[] = [];
 
     for (const propGroupName of Object.keys(metaProps)) {
@@ -77,7 +81,6 @@ const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
 
         if (propGroup && mappingGroup) {
           for (const propName of Object.keys(propGroup)) {
-
             const property = mappingGroup[propName];
             const content = propGroup[propName];
 
@@ -101,16 +104,10 @@ const MetaTags = (props: MetaProps, userMeta?: MetaTag[]): MetaTag[] => {
       }
     }
 
-    return [
-      ...defaults,
-      ...meta,
-      ...userTags,
-    ];
+    return [...defaults, ...meta, ...userTags];
   };
 
   return makeTagArray(props, userMeta || []);
 };
 
-export {
-  MetaTags,
-};
+export {MetaTags};

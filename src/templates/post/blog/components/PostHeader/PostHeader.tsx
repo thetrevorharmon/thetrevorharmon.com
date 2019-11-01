@@ -12,7 +12,7 @@ import {
   Meta,
 } from '../../../../../UI-Kit';
 
-import { Helpers } from '../../../../../utils';
+import {Helpers} from '../../../../../utils';
 
 interface PostHeaderProps {
   post: BlogPost | LinkPost;
@@ -20,18 +20,13 @@ interface PostHeaderProps {
 }
 
 const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
-  const {
-    post,
-    layoutClassName,
-  } = props;
+  const {post, layoutClassName} = props;
 
   const makeAttribution = (attribution: ContentfulAttribution) => {
     return (
       <div className={styles.Attribution}>
         {`${attribution.type} by ${attribution.author} on `}
-        <Link href={attribution.sourceLocation}>
-          {attribution.sourceName}
-        </Link>.
+        <Link href={attribution.sourceLocation}>{attribution.sourceName}</Link>.
       </div>
     );
   };
@@ -41,8 +36,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
     const type = 'Headline';
     const classname = classnames('mb-0', className);
 
-    return post.postType === 'Link' ?
-    (
+    return post.postType === 'Link' ? (
       <LinkHeader
         rank={rank}
         type={type}
@@ -53,11 +47,7 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
         {post.title}
       </LinkHeader>
     ) : (
-      <Header
-        rank={rank}
-        type={type}
-        className={classname}
-      >
+      <Header rank={rank} type={type} className={classname}>
         {post.title}
       </Header>
     );
@@ -69,17 +59,15 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
         styles.PostHeader,
         'row',
         'mt-4 mb-2',
-        'mt-lg-6 mb-lg-4',
+        'mt-lg-6 mb-lg-4'
       )}
     >
-      {
-        post.postType === 'Blog' && post.heroImage && (
-          <div className={layoutClassName}>
-            <Image src={post.heroImage} />
-            {post.photoAttribution && makeAttribution(post.photoAttribution)}
-          </div>
-        )
-      }
+      {post.postType === 'Blog' && post.heroImage && (
+        <div className={layoutClassName}>
+          <Image src={post.heroImage} />
+          {post.photoAttribution && makeAttribution(post.photoAttribution)}
+        </div>
+      )}
 
       <div className={layoutClassName}>
         {makeHeader()}
@@ -89,6 +77,4 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
   );
 };
 
-export {
-  PostHeader,
-};
+export {PostHeader};

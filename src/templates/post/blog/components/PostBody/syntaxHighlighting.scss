@@ -1,4 +1,4 @@
-@import "../../styles/_variables";
+@import '../../styles/_variables';
 
 /**
  * GHColors theme by Avi Aryan (http://aviaryan.in)
@@ -15,9 +15,8 @@ $comment-color: #999988; // gray
 $function-color: #0a7f06; // green
 $tag-color: #00009f; // dark blue
 
-
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   color: lighten($text-color-primary, 10%);
   // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
   direction: ltr;
@@ -35,29 +34,29 @@ pre[class*="language-"] {
   background-color: $pre-background-color;
   border: 1px solid darken($pre-background-color, 5%);
 
-  &::selection, & ::selection {
+  &::selection,
+  & ::selection {
     background: darken($pre-background-color, 10%);
   }
 }
 
-
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
   padding: 1em;
   margin: 0;
   overflow: auto;
-  
+
   code {
     border: none;
   }
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code[class*='language-'] {
   padding: 0 0.25rem;
   display: inline-block;
 }
@@ -72,7 +71,7 @@ pre[class*="language-"] {
   }
 
   &.namespace {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   &.class-name {

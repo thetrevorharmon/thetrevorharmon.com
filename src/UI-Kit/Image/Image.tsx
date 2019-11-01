@@ -1,21 +1,13 @@
 import classnames from 'classnames';
-import Img, { GatsbyImageProps } from 'gatsby-image';
+import Img, {GatsbyImageProps} from 'gatsby-image';
 import * as React from 'react';
 
 interface ImageProps extends GatsbyImageProps {
   src: ContentfulAsset;
 }
 
-const Image: React.FC<ImageProps> = ({
-  className,
-  src,
-  children,
-  ...props
-}) => {
-
-  const classname = classnames(
-    className,
-  );
+const Image: React.FC<ImageProps> = ({className, src, children, ...props}) => {
+  const classname = classnames(className);
 
   return src ? (
     <Img

@@ -28,19 +28,18 @@ $grid-gutter-size: 1rem;
 }
 
 /* change div to reference your elements you put in <Masonry> */
-.Column > div { 
+.Column > div {
   margin-bottom: $grid-gutter-size;
 }
 
 .ProjectTemplate {
-
   a {
     color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
 
     &:hover {
-      border-color: #DD0505;
+      border-color: #dd0505;
     }
   }
 
