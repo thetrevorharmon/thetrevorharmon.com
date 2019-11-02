@@ -1,34 +1,27 @@
 import classnames from 'classnames';
-import * as React from 'react';
-import Link from '../Link';
-
+import React from 'react';
 import * as styles from './Header.module.scss';
+import {Theme} from '../../utils/Theme';
 
 export type HeaderRank = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-export type HeaderType =
-  | 'Headline'
-  | 'Tagline'
-  | 'Title'
-  | 'Subtitle'
-  | 'SectionTitle';
+export type HeaderType = 'Display' | 'Title' | 'Heading' | 'Subheading';
 
 interface HeaderProps {
+  theme: Theme;
   rank: HeaderRank;
   type: HeaderType;
   className?: string;
+  children: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({rank, type, className, children}) => {
-  const classname = classnames(styles.Header, styles[`${type}`], className);
+const Header = ({theme, rank, type, className, children}: HeaderProps) => {
+  const classname = classnames(styles[`Header-${theme}`], className);
+
+  console.log(`Header-${theme}`);
 
   const Tag = rank < 1 || rank > 6 ? 'span' : `h${rank}`;
 
   return <Tag className={classname}>{children}</Tag>;
-};
-
-Header.defaultProps = {
-  rank: 2,
-  type: 'Title',
 };
 
 export default Header;

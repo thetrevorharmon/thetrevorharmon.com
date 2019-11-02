@@ -33,7 +33,14 @@ module.exports = {
     },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-tslint`,
-    `gatsby-plugin-sass`,
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        cssLoaderOptions: {
+          camelCase: false,
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-favicon`,
