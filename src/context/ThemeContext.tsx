@@ -49,6 +49,4 @@ class ThemeProvider extends React.Component {
   }
 }
 
-export default ThemeContext;
-
-export {ThemeProvider};
+export {ThemeContext, ThemeProvider};

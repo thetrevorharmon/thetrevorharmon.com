@@ -1,8 +1,10 @@
 import classnames from 'classnames';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import * as styles from './Navbar.module.scss';
 
 import {Button, Link} from '../../UI-Kit';
+
+import {ThemeContext} from '../../context/ThemeContext';
 
 import {Routes} from '../../utils';
 
@@ -32,6 +34,8 @@ const Navbar: React.FC<{}> = () => {
 
   const handleMenuToggle = () => setOpen(!isOpen);
 
+  const {toggleDark} = useContext(ThemeContext);
+
   return (
     <>
       <div className={styles.Offset} />
@@ -45,6 +49,8 @@ const Navbar: React.FC<{}> = () => {
             >
               TH
             </Button>
+
+            <button onClick={toggleDark}>Change the theme</button>
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>
