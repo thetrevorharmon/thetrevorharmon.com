@@ -34,7 +34,7 @@ const Navbar: React.FC<{}> = () => {
 
   const handleMenuToggle = () => setOpen(!isOpen);
 
-  const {toggleDark} = useContext(ThemeContext);
+  const {toggleTheme} = useContext(ThemeContext);
 
   return (
     <>
@@ -50,7 +50,7 @@ const Navbar: React.FC<{}> = () => {
               TH
             </Button>
 
-            <button onClick={toggleDark}>Change the theme</button>
+            <button onClick={toggleTheme}>Change the theme</button>
 
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>
