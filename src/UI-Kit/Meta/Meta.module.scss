@@ -1,5 +1,9 @@
 @import 'foundation';
 
-.Meta {
-  color: $text-color-tertiary;
+.Meta-Light {
+  color: color(light, text-muted);
+}
+
+.Meta-Dark {
+  color: color(dark, text-muted);
 }

@@ -48,7 +48,7 @@ $grid-gutter-size: 1rem;
     margin-bottom: $grid-gutter-size * 2;
     margin-right: $grid-gutter-size;
 
-    @include left-border();
+    @include left-border($brand-primary);
 
     p:last-child {
       margin-bottom: 0;

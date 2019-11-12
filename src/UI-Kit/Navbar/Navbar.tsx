@@ -4,14 +4,19 @@ import * as styles from './Navbar.module.scss';
 
 import {Button, Link} from '../../UI-Kit';
 
-import {useToggleTheme} from '../../context/ThemeContext';
+import {useTheme, useToggleTheme} from '../../context/ThemeContext';
 
 import {Routes} from '../../utils';
 
 const Navbar: React.FC<{}> = () => {
+  const theme = useTheme();
   const [isOpen, setOpen] = useState(false);
 
-  const classname = classnames(styles.Navbar, isOpen && styles.Open);
+  const classname = classnames(
+    styles.Navbar,
+    styles[`Navbar-${theme}`],
+    isOpen && styles.Open,
+  );
 
   const navbarLinks = [
     {

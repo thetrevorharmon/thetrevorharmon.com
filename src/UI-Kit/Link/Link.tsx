@@ -3,6 +3,7 @@ import {Link as GatsbyLink} from 'gatsby';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import * as React from 'react';
 
+import {useTheme} from '../../context/ThemeContext';
 import * as styles from './Link.module.scss';
 
 interface LinkProps {
@@ -24,11 +25,14 @@ const Link: React.FC<LinkProps> = ({
   const externalPattern = /^http/;
   const externalLink = externalPattern.test(href);
 
+  const theme = useTheme();
   const classname = classnames(
     className,
     noLinkStyling && styles.Reset,
     !noLinkStyling && styles.Link,
+    !noLinkStyling && styles[`Link-${theme}`],
     isIconLink && styles.IconLink,
+    isIconLink && styles[`IconLink-${theme}`],
   );
 
   return externalLink ? (

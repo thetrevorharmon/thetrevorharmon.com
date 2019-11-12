@@ -54,19 +54,21 @@
       height: 0.85em;
       width: 0.85em;
     }
-
-    path {
-      fill: white;
-    }
   }
 }
 
 .LinkHeader-Light .Icon svg {
   background: color(light, text-bold);
+  path {
+    fill: color(light, body-bg);
+  }
 }
 
 .LinkHeader-Dark .Icon svg {
   background: color(dark, text-bold);
+  path {
+    fill: color(dark, body-bg);
+  }
 }
 
 .LinkHeader:hover {

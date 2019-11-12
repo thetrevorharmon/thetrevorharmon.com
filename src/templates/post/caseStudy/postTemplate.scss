@@ -88,7 +88,7 @@
     }
 
     blockquote {
-      @include left-border();
+      @include left-border($brand-primary);
       margin-left: 0;
       color: $text-color-secondary;
       font-size: 1.25rem;

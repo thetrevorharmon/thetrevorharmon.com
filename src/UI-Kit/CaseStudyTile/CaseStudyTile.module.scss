@@ -7,11 +7,24 @@
   padding-left: 2rem;
   box-sizing: border-box;
 
-  @include left-border();
-
   p {
     font-size: 1.25rem;
-    color: $text-color-secondary;
+  }
+}
+
+.Tile-Light {
+  @include left-border(color(light, primary));
+
+  p {
+    color: color(light, text);
+  }
+}
+
+.Tile-Dark {
+  @include left-border(color(dark, primary));
+
+  p {
+    color: color(dark, text);
   }
 }
 

@@ -10,7 +10,7 @@
   }
 
   .table-of-contents {
-    @include left-border;
+    @include left-border(color(light, primary));
 
     ol {
       counter-reset: item;

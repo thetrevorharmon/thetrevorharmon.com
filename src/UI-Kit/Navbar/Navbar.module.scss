@@ -5,14 +5,12 @@
   position: absolute;
   top: 0;
   width: 100%;
-  background: white;
   height: 6.1rem;
   overflow: hidden;
 
   transition: all 0.2s ease-in-out;
 
   &.Open {
-    background: #2a2a2a;
     height: 100%;
     position: fixed;
     z-index: 10;
@@ -31,10 +29,6 @@
 
 .Brand {
   transition: none;
-
-  &:hover {
-    background: darken($brand-primary, 10%);
-  }
 }
 
 .Links {
@@ -67,7 +61,6 @@
   .Bar {
     height: 2px;
     width: 1.8rem;
-    background: #2a2a2a;
 
     &:last-child {
       margin-top: 1rem;
@@ -78,8 +71,6 @@
 
   .Open & {
     .Bar {
-      background: #fff;
-
       &:first-child {
         transform: translate(0, 9px) rotate(45deg);
       }
@@ -103,12 +94,47 @@
 
     a {
       text-decoration: none;
-      color: #eeeeee;
       text-transform: uppercase;
 
       &:hover {
         border-bottom-color: transparent;
       }
     }
+  }
+}
+
+.Navbar-Light {
+  &.Open {
+    background: color(light, body-bg);
+  }
+
+  .Brand:hover {
+    background: darken(color(light, primary), 10%);
+  }
+
+  .Toggle .Bar {
+    background: color(dark, body-bg);
+  }
+
+  .MobileLinks a {
+    color: color(light, text);
+  }
+}
+
+.Navbar-Dark {
+  &.Open {
+    background: color(dark, body-bg);
+  }
+
+  .Brand:hover {
+    background: darken(color(dark, primary), 10%);
+  }
+
+  .Toggle .Bar {
+    background: color(light, body-bg);
+  }
+
+  .MobileLinks a {
+    color: color(dark, text);
   }
 }

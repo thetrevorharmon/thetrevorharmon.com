@@ -1,14 +1,25 @@
 @import 'foundation';
 
 .Link {
-  color: $brand-primary;
   text-decoration: none;
 
   transition: all 0.1s linear;
   border-bottom: 1px solid transparent;
+}
+
+.Link-Light {
+  color: color(light, primary-text);
 
   &:hover {
-    border-color: $brand-primary;
+    border-color: color(light, primary-text);
+  }
+}
+
+.Link-Dark {
+  color: color(dark, primary-text);
+
+  &:hover {
+    border-color: color(dark, primary-text);
   }
 }
 
@@ -24,12 +35,24 @@
   }
 
   transition: all 0.2s linear;
+}
 
+.IconLink-Light {
   & svg path {
-    fill: $brand-primary;
+    fill: color(light, primary-text);
   }
 
   &:hover svg path {
-    fill: darken($brand-primary, 15%);
+    fill: darken(color(light, primary-text), 15%);
+  }
+}
+
+.IconLink-Dark {
+  & svg path {
+    fill: color(dark, primary-text);
+  }
+
+  &:hover svg path {
+    fill: darken(color(dark, primary-text), 15%);
   }
 }

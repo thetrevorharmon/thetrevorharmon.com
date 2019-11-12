@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../context/ThemeContext';
 import * as styles from './Meta.module.scss';
 
 interface MetaProps {
@@ -9,7 +10,8 @@ interface MetaProps {
 }
 
 const Meta: React.FC<MetaProps> = ({post, className}) => {
-  const classname = classnames(className, styles.Meta);
+  const theme = useTheme();
+  const classname = classnames(className, styles[`Meta-${theme}`]);
 
   const timeToRead = post.body.childMarkdownRemark.timeToRead
     ? `${Math.floor(+post.body.childMarkdownRemark.timeToRead)} min read`
