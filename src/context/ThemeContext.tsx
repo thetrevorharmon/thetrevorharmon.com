@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 
 export enum Theme {
   Light = 'Light',
@@ -10,28 +10,50 @@ interface ThemeContext {
   toggleTheme(): void;
 }
 
-// const defaultState = {
-//   dark: false,
-//   toggleDark: () => {},
-// };
-
 const ThemeContext = React.createContext<ThemeContext>({
   theme: Theme.Light,
-  toggleTheme: () => {},
+  toggleTheme: () => {
+    throw new Error('You forgot to wrap your theme consumer with a provider');
+  },
 });
 
-// Getting dark mode information from OS!
-// You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
-const supportsDarkMode = () =>
-  window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
 const ThemeProvider = ({children}: {children: React.ReactNode}) => {
+  const THEME_COOKIE_NAME = 'theme';
   const [theme, setTheme] = useState<Theme>(Theme.Light);
 
+  useEffect(() => {
+    const savedTheme = loadTheme();
+
+    if (savedTheme != null) {
+      setTheme(savedTheme);
+    } else if (
+      window.matchMedia('(prefers-color-scheme: dark)').matches === true
+    ) {
+      setTheme(Theme.Dark);
+      saveTheme(Theme.Dark);
+    }
+  }, []);
+
+  const saveTheme = (theme: Theme) => {
+    localStorage.setItem(THEME_COOKIE_NAME, JSON.stringify(theme));
+  };
+
+  const loadTheme = (): Theme | null => {
+    const savedTheme = JSON.parse(
+      localStorage.getItem(THEME_COOKIE_NAME) || '',
+    );
+    console.log(`cookie: ${savedTheme}`);
+    if (savedTheme) {
+      return savedTheme as Theme;
+    }
+
+    return null;
+  };
+
   const toggleTheme = () => {
-    let newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
-    localStorage.setItem('theme', JSON.stringify(theme));
+    const newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
     setTheme(newTheme);
+    saveTheme(newTheme);
   };
 
   return (
@@ -39,53 +61,16 @@ const ThemeProvider = ({children}: {children: React.ReactNode}) => {
       {children}
     </ThemeContext.Provider>
   );
-
-  // componentDidMount() {
-  //   // Getting dark mode value from localStorage!
-  //   const lsDark = JSON.parse(localStorage.getItem('dark'));
-  //   if (lsDark) {
-  //     this.setState({ dark: lsDark });
-  //   } else if (supportsDarkMode()) {
-  //     this.setState({ dark: true });
-  //   }
-  // }
 };
 
-// class ThemeProvider extends React.Component {
-//   state = {
-//     dark: false,
-//   };
+const useToggleTheme = () => {
+  const {toggleTheme} = useContext(ThemeContext);
+  return toggleTheme;
+};
 
-//   toggleDark = () => {
-//     let dark = !this.state.dark;
-//     localStorage.setItem('dark', JSON.stringify(dark));
-//     this.setState({dark});
-//   };
+const useTheme = () => {
+  const {theme} = useContext(ThemeContext);
+  return theme;
+};
 
-//   componentDidMount() {
-//     // Getting dark mode value from localStorage!
-//     const lsDark = JSON.parse(localStorage.getItem('dark'));
-//     if (lsDark) {
-//       this.setState({dark: lsDark});
-//     } else if (supportsDarkMode()) {
-//       this.setState({dark: true});
-//     }
-//   }
-
-//   render() {
-//     const {children} = this.props;
-//     const {dark} = this.state;
-//     return (
-//       <ThemeContext.Provider
-//         value={{
-//           dark,
-//           toggleDark: this.toggleDark,
-//         }}
-//       >
-//         {children}
-//       </ThemeContext.Provider>
-//     );
-//   }
-// }
-
-export {ThemeContext, ThemeProvider};
+export {ThemeContext, ThemeProvider, useToggleTheme, useTheme};

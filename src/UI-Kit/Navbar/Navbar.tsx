@@ -4,7 +4,7 @@ import * as styles from './Navbar.module.scss';
 
 import {Button, Link} from '../../UI-Kit';
 
-import {ThemeContext} from '../../context/ThemeContext';
+import {useToggleTheme} from '../../context/ThemeContext';
 
 import {Routes} from '../../utils';
 
@@ -34,7 +34,7 @@ const Navbar: React.FC<{}> = () => {
 
   const handleMenuToggle = () => setOpen(!isOpen);
 
-  const {toggleTheme} = useContext(ThemeContext);
+  const toggleTheme = useToggleTheme();
 
   return (
     <>
