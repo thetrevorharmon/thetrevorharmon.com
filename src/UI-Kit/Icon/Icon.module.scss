@@ -5,14 +5,28 @@
   max-height: 1.75rem;
   height: auto;
   width: auto;
+}
 
+.Icon-Light svg {
   path {
-    fill: $text-color-primary;
+    fill: color(light, text);
   }
 
   a & {
     path {
-      fill: $brand-primary;
+      fill: color(light, primary-text);
+    }
+  }
+}
+
+.Icon-Dark svg {
+  path {
+    fill: color(dark, text);
+  }
+
+  a & {
+    path {
+      fill: color(dark, primary-text);
     }
   }
 }

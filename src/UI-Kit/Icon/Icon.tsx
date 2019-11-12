@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import * as styles from './Icon.module.scss';
 
+import {useTheme} from '../../context/ThemeContext';
+
 import {link, rss, twitter} from './icons';
 
 interface IconProps {
@@ -23,7 +25,8 @@ const mapping: {[name: string]: () => any} = {
 };
 
 const Icon: React.FC<IconProps> = ({className, children, href, name}) => {
-  const classname = classnames(styles.Icon, className);
+  const theme = useTheme();
+  const classname = classnames(styles.Icon, styles[`Icon-${theme}`], className);
 
   if (!(`${name}` in mapping)) {
     throw new Error('Icon name not found!');
