@@ -16,13 +16,23 @@
 @import '../../node_modules/bootstrap-4-grid/scss/grid.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
+@import 'foundation';
 
 body,
 html {
-  color: #444;
   font-family: $sans-serif-font-stack;
   font-size: 16px;
   line-height: 1.5;
+}
+
+body.Light {
+  color: color(light, text);
+  background-color: color(light, body-bg);
+}
+
+body.Dark {
+  color: color(dark, text);
+  background-color: color(dark, body-bg);
 }
 
 hr {
@@ -58,12 +68,18 @@ ul {
   line-height: 4rem;
   font-size: 1.25rem;
 
-  color: white;
   text-decoration: none;
   text-align: center;
   font-weight: bold;
+  color: white;
 
-  background: $brand-primary;
+  body.Light & {
+    background: color(light, primary);
+  }
+
+  body.Dark & {
+    background: color(dark, primary);
+  }
 }
 
 .text-right {
