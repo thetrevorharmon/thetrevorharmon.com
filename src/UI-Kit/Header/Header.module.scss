@@ -1,26 +1,18 @@
 @import 'foundation';
 
 .Header {
-  display: block;
   font-weight: bold;
-  font-size: 2rem;
+  font-style: normal;
+  color: $text-color-primary;
 }
 
 .Header-Light {
-  @extend .Header;
   color: color(light, text-bold);
 }
 
 .Header-Dark {
-  @extend .Header;
   color: color(dark, text-bold);
 }
-
-// .Header {
-//   font-weight: bold;
-//   font-style: normal;
-//   color: $text-color-primary;
-// }
 
 @function header-size($header, $size) {
   $_header: map-get($header-size, $header);

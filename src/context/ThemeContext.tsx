@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 export enum Theme {
   Light = 'Light',
@@ -34,15 +34,15 @@ const ThemeProvider = ({children}: {children: React.ReactNode}) => {
     }
   }, []);
 
-  const saveTheme = (theme: Theme) => {
-    localStorage.setItem(THEME_COOKIE_NAME, JSON.stringify(theme));
+  const saveTheme = (themeToSave: Theme) => {
+    localStorage.setItem(THEME_COOKIE_NAME, JSON.stringify(themeToSave));
   };
 
   const loadTheme = (): Theme | null => {
     const savedTheme = JSON.parse(
       localStorage.getItem(THEME_COOKIE_NAME) || '',
     );
-    console.log(`cookie: ${savedTheme}`);
+
     if (savedTheme) {
       return savedTheme as Theme;
     }

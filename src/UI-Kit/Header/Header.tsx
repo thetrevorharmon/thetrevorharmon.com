@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import Link from '../Link';
+import {useTheme} from '../../context/ThemeContext';
 
 import * as styles from './Header.module.scss';
 
@@ -19,7 +19,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({rank, type, className, children}) => {
-  const classname = classnames(styles.Header, styles[`${type}`], className);
+  const theme = useTheme();
+  const classname = classnames(
+    styles.Header,
+    styles[`Header-${theme}`],
+    styles[`${type}`],
+    className,
+  );
 
   const Tag = rank < 1 || rank > 6 ? 'span' : `h${rank}`;
 

@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import * as styles from './Navbar.module.scss';
 
 import {Button, Link} from '../../UI-Kit';
