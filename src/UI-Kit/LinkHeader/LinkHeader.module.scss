@@ -14,6 +14,28 @@
   margin-right: 0.5em;
 }
 
+.LinkHeader-Light {
+  .Link {
+    color: color(light, text-bold);
+    border-bottom-color: transparent;
+  }
+
+  &:hover .Link {
+    color: color(light, primary);
+  }
+}
+
+.LinkHeader-Dark {
+  .Link {
+    color: color(dark, text-bold);
+    border-bottom-color: transparent;
+  }
+
+  &:hover .Link {
+    color: color(dark, primary);
+  }
+}
+
 .Icon {
   line-height: 0;
 
@@ -28,8 +50,6 @@
     max-width: none;
     padding: 0.275em;
 
-    background: $text-color-primary;
-
     .Headline & {
       height: 0.85em;
       width: 0.85em;
@@ -41,12 +61,15 @@
   }
 }
 
-.LinkHeader:hover {
-  .Link {
-    color: $brand-primary;
-    border-bottom-color: transparent;
-  }
+.LinkHeader-Light .Icon svg {
+  background: color(light, text-bold);
+}
 
+.LinkHeader-Dark .Icon svg {
+  background: color(dark, text-bold);
+}
+
+.LinkHeader:hover {
   .Icon svg {
     transform: rotate(45deg);
   }
