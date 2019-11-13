@@ -3,9 +3,8 @@ import * as React from 'react';
 import {Layout} from '../../../layouts';
 
 import './caseStudyTemplate.scss';
-
+import {useTheme} from '../../../context/ThemeContext';
 import {Header, Image} from '../../../UI-Kit';
-
 import {Routes} from '../../../utils';
 
 interface CaseStudyTemplateProps {
@@ -33,8 +32,13 @@ export default (props: CaseStudyTemplateProps) => {
     url: Routes.caseStudy(props.pageContext.slug),
   };
 
+  const theme = useTheme();
+
   return (
-    <Layout className="case-study-template" pageMetadata={pageMetadata}>
+    <Layout
+      className={`case-study-template ${theme}`}
+      pageMetadata={pageMetadata}
+    >
       <div className="row post-header my-5">
         <div className="col-lg-6">
           <Header rank={1} type="Headline" className="mt-lg-8 mt-sm-1 mb-0">
