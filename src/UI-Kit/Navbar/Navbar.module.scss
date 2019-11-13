@@ -140,10 +140,14 @@
   }
 
   .ThemeToggle {
+    svg path {
+      fill: color(light, primary);
+    }
+
     &:focus,
     &:hover {
       svg path {
-        fill: color(light, primary);
+        fill: color(light, text);
       }
     }
   }
@@ -167,10 +171,14 @@
   }
 
   .ThemeToggle {
+    svg path {
+      fill: color(dark, primary);
+    }
+
     &:focus,
     &:hover {
       svg path {
-        fill: color(dark, primary);
+        fill: color(dark, text);
       }
     }
   }
