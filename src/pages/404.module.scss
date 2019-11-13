@@ -2,13 +2,28 @@
 
 .ErrorPage {
   .Header {
-    color: $text-color-primary;
     font-size: 10rem;
     line-height: 10rem;
     margin: 0;
   }
+}
+
+.ErrorPage-Light {
+  .Header {
+    color: color(light, text-bold);
+  }
 
   p {
-    color: $text-color-secondary;
+    color: color(light, text);
+  }
+}
+
+.ErrorPage-Dark {
+  .Header {
+    color: color(dark, text-bold);
+  }
+
+  p {
+    color: color(dark, text);
   }
 }

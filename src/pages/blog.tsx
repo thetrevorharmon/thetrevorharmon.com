@@ -4,9 +4,6 @@ import * as React from 'react';
 
 import {Layout} from '../layouts';
 import {Helpers, Routes} from '../utils';
-
-import * as styles from './blog.module.scss';
-
 import {Header, Link, LinkHeader, Meta} from '../UI-Kit';
 
 interface ProjectsPageProps {
@@ -58,7 +55,7 @@ export default (props: ProjectsPageProps) => {
       </div>
 
       {posts.map((post, index) => (
-        <div className={classnames(styles.Post, 'mb-5')} key={index}>
+        <div className={classnames('mb-5')} key={index}>
           <div className="row">
             <div className="col-lg-8">
               <LinkHeader
