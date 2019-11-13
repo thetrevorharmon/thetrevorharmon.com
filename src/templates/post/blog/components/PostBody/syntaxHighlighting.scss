@@ -6,15 +6,19 @@
   }
 
   $colors: (
-    pre-background: (
-      light: color(dark, caption-bg),
-      dark: color(dark, caption-bg),
-    ),
     code-background: (
       light: color(light, caption-bg),
       dark: color(dark, caption-bg),
     ),
-    border: (
+    code-border: (
+      light: darken(color(light, caption-bg), 15%),
+      dark: lighten(color(dark, caption-bg), 25%),
+    ),
+    pre-background: (
+      light: color(dark, caption-bg),
+      dark: color(dark, caption-bg),
+    ),
+    pre-border: (
       light: darken(#111, 5%),
       dark: darken(#111, 5%),
     ),
@@ -82,6 +86,7 @@ pre[class*='language-'] {
     color: lighten(color(light, text-bold), 10%);
 
     background-color: code-color(light, code-background);
+    border: 1px solid code-color(light, code-border);
 
     &::selection,
     & ::selection {
@@ -93,6 +98,7 @@ pre[class*='language-'] {
   pre[class*='language-'] > code[class*='language'] {
     & > code[class*='language-'] {
       background-color: transparent;
+      border-color: transparent;
     }
 
     color: lighten(color(dark, text-bold), 10%);
@@ -111,6 +117,24 @@ pre[class*='language-'] {
   pre[class*='language-'] {
     color: lighten(color(dark, text-bold), 10%);
 
+    background-color: code-color(dark, pre-background);
+    border: 1px solid code-color(dark, code-border);
+
+    &::selection,
+    & ::selection {
+      background: code-color(dark, selection);
+    }
+  }
+
+  pre[class*='language-'],
+  pre[class*='language-'] > code[class*='language'] {
+    & > code[class*='language-'] {
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    color: lighten(color(dark, text-bold), 10%);
+    border-color: transparent;
     background-color: code-color(dark, pre-background);
 
     &::selection,

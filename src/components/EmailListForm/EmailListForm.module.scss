@@ -132,7 +132,7 @@
     color: white;
 
     &:hover {
-      background-color: darken(color(light, primary), 15%);
+      background-color: color(light, primary-focus);
     }
 
     &:disabled {
@@ -164,7 +164,7 @@
     color: white;
 
     &:hover {
-      background-color: darken(color(dark, primary), 15%);
+      background-color: color(dark, primary-focus);
     }
 
     &:disabled {

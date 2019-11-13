@@ -153,7 +153,7 @@
   }
 
   .Brand:hover {
-    background: darken(color(light, primary), 10%);
+    background: color(light, primary-focus);
   }
 
   .Toggle .Bar {
@@ -184,7 +184,7 @@
   }
 
   .Brand:hover {
-    background: darken(color(dark, primary), 10%);
+    background: color(dark, primary-focus);
   }
 
   .Toggle .Bar {

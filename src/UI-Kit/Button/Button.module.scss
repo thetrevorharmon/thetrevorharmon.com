@@ -14,17 +14,13 @@
   }
 
   transition: all 0.2s linear;
-
-  &:hover {
-    background: darken($brand-primary, 15%);
-  }
 }
 
 .Button-Light {
   background: color(light, primary);
 
   &:hover {
-    background: darken(color(light, primary), 15%);
+    background: color(light, primary-focus);
   }
 }
 
@@ -32,6 +28,6 @@
   background: color(dark, primary);
 
   &:hover {
-    background: darken(color(dark, primary), 15%);
+    background: color(dark, primary-focus);
   }
 }
