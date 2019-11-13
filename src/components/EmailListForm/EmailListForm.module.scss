@@ -114,8 +114,9 @@
   color: color(light, text);
 
   input {
+    background: color(light, body-bg);
     color: color(light, text);
-    border-color: transparent;
+    border-color: color(light, text-muted);
 
     &:focus {
       border-color: color(light, text);
@@ -146,8 +147,9 @@
   color: color(dark, text);
 
   input {
+    background: color(dark, body-bg);
     color: color(dark, text);
-    border-color: transparent;
+    border-color: color(dark, text-muted);
 
     &:focus {
       border-color: color(dark, text);
