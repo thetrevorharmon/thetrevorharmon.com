@@ -1,11 +1,9 @@
 import classnames from 'classnames';
 import React, {useState} from 'react';
+
 import * as styles from './Navbar.module.scss';
-
-import {Button, Link} from '../../UI-Kit';
-
-import {useTheme, useToggleTheme} from '../../context/ThemeContext';
-
+import {Button, Link, Icon} from '../../UI-Kit';
+import {useTheme, useToggleTheme, Theme} from '../../context/ThemeContext';
 import {Routes} from '../../utils';
 
 const Navbar: React.FC<{}> = () => {
@@ -55,8 +53,6 @@ const Navbar: React.FC<{}> = () => {
               TH
             </Button>
 
-            <button onClick={toggleTheme}>Change the theme</button>
-
             {/* Normal Links */}
             <ul className={classnames(styles.Links, 'd-none d-sm-flex')}>
               {navbarLinks.map((link, index) => (
@@ -74,6 +70,13 @@ const Navbar: React.FC<{}> = () => {
               <div className={styles.Bar} />
               <div className={styles.Bar} />
             </a>
+
+            <button onClick={toggleTheme} className={styles.ThemeToggle}>
+              <Icon
+                name={theme === Theme.Dark ? 'sun' : 'moon'}
+                className={styles.ThemeToggleIcon}
+              />
+            </button>
           </div>
 
           <ul className={styles.MobileLinks}>
