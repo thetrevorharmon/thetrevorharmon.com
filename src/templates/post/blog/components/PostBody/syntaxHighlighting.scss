@@ -6,37 +6,45 @@
   }
 
   $colors: (
-    background: (
-      light: #f0f0f0,
-      dark: #111,
+    pre-background: (
+      light: color(dark, caption-bg),
+      dark: color(dark, caption-bg),
+    ),
+    code-background: (
+      light: color(light, caption-bg),
+      dark: color(dark, caption-bg),
     ),
     border: (
-      light: darken(#f0f0f0, 5%),
+      light: darken(#111, 5%),
       dark: darken(#111, 5%),
     ),
     selection: (
-      light: darken(#f0f0f0, 10%),
-      dark: darken(#111, 10%),
+      light: darken(color(light, caption-bg), 10%),
+      dark: lighten(color(dark, caption-bg), 10%),
     ),
     keyword: (
-      light: color(light, primary-text),
-      dark: color(dark, primary-text),
+      light: #beaaf9,
+      dark: #beaaf9,
     ),
     string: (
-      light: #0569dd,
-      dark: #0569dd,
+      light: #c1e38a,
+      dark: #c1e38a,
+    ),
+    punctuation: (
+      light: darken(color(dark, text), 20%),
+      dark: darken(color(dark, text), 20%),
     ),
     class: (
-      light: #7805dd,
-      dark: #7805dd,
+      light: #70cde3,
+      dark: #70cde3,
     ),
     comment: (
       light: #999988,
       dark: #999988,
     ),
     function: (
-      light: #0a7f06,
-      dark: #0a7f06,
+      light: #fcd58b,
+      dark: #fcd58b,
     ),
     tag: (
       light: #00009f,
@@ -67,32 +75,43 @@ pre[class*='language-'] {
 
   tab-size: 4;
   hyphens: none;
-
-  border: 1px solid;
 }
 
 .Light {
-  code[class*='language-'],
-  pre[class*='language-'] {
+  code[class*='language-'] {
     color: lighten(color(light, text-bold), 10%);
 
-    background-color: code-color(light, background);
-    border-color: code-color(light, border);
+    background-color: code-color(light, code-background);
 
     &::selection,
     & ::selection {
       background: code-color(light, selection);
     }
   }
+
+  pre[class*='language-'],
+  pre[class*='language-'] > code[class*='language'] {
+    & > code[class*='language-'] {
+      background-color: transparent;
+    }
+
+    color: lighten(color(dark, text-bold), 10%);
+
+    background-color: code-color(dark, pre-background);
+
+    &::selection,
+    & ::selection {
+      background: code-color(dark, selection);
+    }
+  }
 }
 
-.Light {
+.Dark {
   code[class*='language-'],
   pre[class*='language-'] {
     color: lighten(color(dark, text-bold), 10%);
 
-    background-color: code-color(dark, background);
-    border-color: code-color(dark, border);
+    background-color: code-color(dark, pre-background);
 
     &::selection,
     & ::selection {
@@ -163,7 +182,7 @@ pre[class*='language-'] {
     }
 
     &.punctuation {
-      color: darken(color(light, text), 20%); /* no highlight */
+      color: code-color(light, punctuation);
     }
 
     &.operator {
@@ -223,7 +242,7 @@ pre[class*='language-'] {
     }
 
     &.punctuation {
-      color: darken(color(dark, text), 20%); /* no highlight */
+      color: code-color(dark, punctuation);
     }
 
     &.operator {
