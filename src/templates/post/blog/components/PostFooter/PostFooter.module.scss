@@ -73,10 +73,11 @@
   }
 }
 
-.PostFooter-Light .Navigation {
-  color: color(light, text-muted);
+@mixin PostFooter($theme) {
+  .PostFooter-#{$theme} .Navigation {
+    color: color($theme, text-muted);
+  }
 }
 
-.PostFooter-Dark .Navigation {
-  color: color(dark, text-muted);
-}
+@include PostFooter(Light);
+@include PostFooter(Dark);

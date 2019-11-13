@@ -9,10 +9,11 @@
   }
 }
 
-.PostHeader-Light .Attribution {
-  color: color(light, text-muted);
+@mixin PostHeader($theme) {
+  .PostHeader-#{$theme} .Attribution {
+    color: color($theme, text-muted);
+  }
 }
 
-.PostHeader-Dark .Attribution {
-  color: color(dark, text-muted);
-}
+@include PostHeader(Light);
+@include PostHeader(Dark);
