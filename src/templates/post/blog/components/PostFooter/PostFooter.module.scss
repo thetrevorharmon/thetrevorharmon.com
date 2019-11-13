@@ -6,7 +6,6 @@
   padding-top: 1rem;
 
   .Navigation {
-    color: lighten($text-color-secondary, 20%);
     font-size: 1rem;
 
     &:nth-child(2) {
@@ -72,4 +71,12 @@
       }
     }
   }
+}
+
+.PostFooter-Light .Navigation {
+  color: color(light, text-muted);
+}
+
+.PostFooter-Dark .Navigation {
+  color: color(dark, text-muted);
 }
