@@ -39,13 +39,15 @@ const ThemeProvider = ({children}: {children: React.ReactNode}) => {
   };
 
   const loadTheme = (): Theme | null => {
-    const savedTheme = JSON.parse(
-      localStorage.getItem(THEME_COOKIE_NAME) || '',
-    );
+    try {
+      const savedTheme = JSON.parse(
+        localStorage.getItem(THEME_COOKIE_NAME) || '',
+      );
 
-    if (savedTheme) {
-      return savedTheme as Theme;
-    }
+      if (savedTheme) {
+        return savedTheme as Theme;
+      }
+    } catch {}
 
     return null;
   };
