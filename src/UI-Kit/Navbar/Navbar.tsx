@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import React, {useState} from 'react';
 
 import * as styles from './Navbar.module.scss';
-import {Button, Link, Icon} from '../../UI-Kit';
-import {useTheme, useToggleTheme, Theme} from '../../context/ThemeContext';
+import {Theme, useTheme, useToggleTheme} from '../../context/ThemeContext';
+import {Button, Icon, Link} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 const Navbar: React.FC<{}> = () => {

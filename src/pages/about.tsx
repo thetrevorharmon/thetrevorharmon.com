@@ -4,8 +4,8 @@ import * as React from 'react';
 
 import {Layout} from '../layouts';
 import * as styles from './about.module.scss';
-import {Header, Image} from '../UI-Kit';
 import {useTheme} from '../context/ThemeContext';
+import {Header, Image} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface AboutPageProps {
