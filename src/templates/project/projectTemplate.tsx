@@ -1,13 +1,13 @@
+import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
 import {Layout} from '../../layouts';
+import {useTheme} from '../../context/ThemeContext';
 import {Header, Image} from '../../UI-Kit';
-
-import * as styles from './projectTemplate.module.scss';
-
 import {Routes} from '../../utils';
+import * as styles from './projectTemplate.module.scss';
 
 interface TemplateProps {
   data: {
@@ -84,8 +84,16 @@ export default (props: TemplateProps) => {
     url: Routes.project(props.pageContext.slug),
   };
 
+  const theme = useTheme();
+
   return (
-    <Layout className={styles.ProjectTemplate} pageMetadata={pageMetadata}>
+    <Layout
+      className={classnames(
+        styles.ProjectTemplate,
+        styles[`ProjectTemplate-${theme}`],
+      )}
+      pageMetadata={pageMetadata}
+    >
       <div className="row">
         <div className="col-sm-12">
           <Masonry

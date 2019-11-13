@@ -5,7 +5,7 @@ $grid-gutter-size: 1rem;
 .ProjectTemplate {
   img {
     max-width: 100%;
-    border: 1px solid #2a2a2a;
+    border: 1px solid;
   }
 }
 
@@ -34,21 +34,14 @@ $grid-gutter-size: 1rem;
 
 .ProjectTemplate {
   a {
-    color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-
-    &:hover {
-      border-color: #dd0505;
-    }
   }
 
   .Description {
     box-sizing: border-box;
     margin-bottom: $grid-gutter-size * 2;
     margin-right: $grid-gutter-size;
-
-    @include left-border($brand-primary);
 
     p:last-child {
       margin-bottom: 0;
@@ -57,5 +50,41 @@ $grid-gutter-size: 1rem;
 
   .DescriptionHtml {
     margin-bottom: 1rem;
+  }
+}
+
+.ProjectTemplate-Light {
+  img {
+    border-color: color(dark, caption-bg);
+  }
+
+  a {
+    color: color(light, primary-text);
+
+    &:hover {
+      border-color: color(light, primary-text);
+    }
+  }
+
+  .Description {
+    @include left-border(color(light, primary));
+  }
+}
+
+.ProjectTemplate-Dark {
+  img {
+    border-color: color(light, caption-bg);
+  }
+
+  a {
+    color: color(dark, primary-text);
+
+    &:hover {
+      border-color: color(dark, primary-text);
+    }
+  }
+
+  .Description {
+    @include left-border(color(dark, primary));
   }
 }

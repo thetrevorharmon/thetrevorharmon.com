@@ -3,11 +3,9 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-
 import * as styles from './about.module.scss';
-
-import {Button, Header, Image, Link, Tile} from '../UI-Kit';
-
+import {Header, Image} from '../UI-Kit';
+import {useTheme} from '../context/ThemeContext';
 import {Routes} from '../utils';
 
 interface AboutPageProps {
@@ -31,8 +29,13 @@ export default (props: AboutPageProps) => {
     url: Routes.about(),
   };
 
+  const theme = useTheme();
+
   return (
-    <Layout className={styles.AboutPage} pageMetadata={pageMetadata}>
+    <Layout
+      className={classnames(styles.AboutPage, styles[`AboutPage-${theme}`])}
+      pageMetadata={pageMetadata}
+    >
       <div className="row mb-5">
         <div className="col-lg-12">
           <Header
