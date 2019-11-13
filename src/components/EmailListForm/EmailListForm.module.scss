@@ -1,17 +1,12 @@
-@import '../../styles/_variables.scss';
-@import '../../styles/_mixins.scss';
+@import 'foundation';
 
 .EmailListForm {
-  background: #f5f5f5;
-  color: $text-color-primary;
-
   .SubscribeCallout {
     display: flex;
     flex-direction: column;
   }
 
   .DataEntry {
-    background: #e1e1e1;
     position: relative;
 
     $signup-complete-animation-speed: 0.7s;
@@ -49,18 +44,12 @@
   }
 
   input {
-    color: $text-color-primary;
     width: 100%;
-    border: 1px solid white;
+    border: 1px solid;
     transition: all 0.1s linear;
 
     &:focus {
       outline: none;
-      border-color: $text-color-primary;
-    }
-
-    &.Error {
-      color: red;
     }
   }
 
@@ -74,20 +63,15 @@
 
     border: none;
     background-image: none;
-    background-color: $brand-primary;
-    color: white;
 
     letter-spacing: 1px;
     transition: all 0.1s linear;
 
     &:hover {
       cursor: pointer;
-      background-color: darken($brand-primary, 15%);
     }
 
     &:disabled {
-      background-color: $text-color-secondary;
-
       &:hover {
         cursor: not-allowed;
       }
@@ -122,5 +106,69 @@
   100% {
     opacity: 1;
     z-index: 1;
+  }
+}
+
+.EmailListForm-Light {
+  background: color(light, caption-bg);
+  color: color(light, text);
+
+  input {
+    color: color(light, text);
+    border-color: transparent;
+
+    &:focus {
+      border-color: color(light, text);
+    }
+
+    &.Error {
+      color: color(light, primary-text);
+      border-color: color(light, primary-text);
+    }
+  }
+
+  button {
+    background-color: color(light, primary);
+    color: white;
+
+    &:hover {
+      background-color: darken(color(light, primary), 15%);
+    }
+
+    &:disabled {
+      background-color: color(light, text-muted);
+    }
+  }
+}
+
+.EmailListForm-Dark {
+  background: color(dark, caption-bg);
+  color: color(dark, text);
+
+  input {
+    color: color(dark, text);
+    border-color: transparent;
+
+    &:focus {
+      border-color: color(dark, text);
+    }
+
+    &.Error {
+      color: color(dark, primary-text);
+      border-color: color(dark, primary-text);
+    }
+  }
+
+  button {
+    background-color: color(dark, primary);
+    color: white;
+
+    &:hover {
+      background-color: darken(color(dark, primary), 15%);
+    }
+
+    &:disabled {
+      background-color: color(dark, text-muted);
+    }
   }
 }
