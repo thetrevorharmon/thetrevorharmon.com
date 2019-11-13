@@ -44,11 +44,20 @@
 .Headline + .Tagline,
 .Title + .Tagline {
   margin-top: -1rem;
-  color: $text-color-secondary;
 
   @include mobile-only {
     margin-top: header-size(tagline, phone);
   }
+}
+
+.Header-Light.Headline + .Tagline,
+.Header-Light.Title + .Tagline {
+  color: color(light, text-muted);
+}
+
+.Header-Dark.Headline + .Tagline,
+.Header-Dark.Title + .Tagline {
+  color: color(dark, text-muted);
 }
 
 .Title {
@@ -81,11 +90,17 @@
   line-height: header-size(section-title, desktop);
   font-weight: normal;
 
-  color: $text-color-secondary;
-
   @include mobile-only {
     font-size: header-size(section-title, phone);
     line-height: header-size(section-title, phone) / 0.833333;
     letter-spacing: header-size(section-title, phone-kerning);
   }
+}
+
+.Header-Light .SectionTitle {
+  color: color(light, text);
+}
+
+.Header-Dark .SectionTitle {
+  color: color(dark, text);
 }

@@ -12,22 +12,6 @@
   }
 }
 
-.Tile-Light {
-  @include left-border(color(light, primary));
-
-  p {
-    color: color(light, text);
-  }
-}
-
-.Tile-Dark {
-  @include left-border(color(dark, primary));
-
-  p {
-    color: color(dark, text);
-  }
-}
-
 .Img {
   background-position: center center;
   background-size: cover;
@@ -55,17 +39,18 @@
   font-size: 1.15rem;
 }
 
-// .Wrapper {
-//   background: red;
-//   flex: 1 0 auto;
-//   position: relative;
-//   width: 20%;
-//   height: 0;
-//   padding-bottom: 20%;
-// }
-// .Wrapper:after {
-//   content: "";
-//   float:left;
-//   display: block;
-//   padding-top: 100%;
-// }
+.Tile-Light {
+  @include left-border(color(light, primary));
+
+  p {
+    color: color(light, text-muted);
+  }
+}
+
+.Tile-Dark {
+  @include left-border(color(dark, primary));
+
+  p {
+    color: color(dark, text-muted);
+  }
+}

@@ -2,8 +2,16 @@
 
 .PostTile {
   display: block;
+}
 
+.PostTile-Light {
   .Description {
-    color: $text-color-secondary;
+    color: color(light, text);
+  }
+}
+
+.PostTile-Dark {
+  .Description {
+    color: color(dark, text);
   }
 }
