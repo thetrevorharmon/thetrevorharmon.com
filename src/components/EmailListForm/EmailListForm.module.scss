@@ -109,68 +109,40 @@
   }
 }
 
-.EmailListForm-Light {
-  background: color(light, caption-bg);
-  color: color(light, text);
+@mixin EmailListForm($theme) {
+  .EmailListForm-#{$theme} {
+    background: color($theme, caption-bg);
+    color: color($theme, text);
 
-  input {
-    background: color(light, body-bg);
-    color: color(light, text);
-    border-color: color(light, text-muted);
+    input {
+      background: color($theme, body-bg);
+      color: color($theme, text);
+      border-color: color($theme, text-muted);
 
-    &:focus {
-      border-color: color(light, text);
+      &:focus {
+        border-color: color($theme, text);
+      }
+
+      &.Error {
+        color: color($theme, primary-text);
+        border-color: color($theme, primary-text);
+      }
     }
 
-    &.Error {
-      color: color(light, primary-text);
-      border-color: color(light, primary-text);
-    }
-  }
+    button {
+      background-color: color($theme, primary);
+      color: white;
 
-  button {
-    background-color: color(light, primary);
-    color: white;
+      &:hover {
+        background-color: color($theme, primary-focus);
+      }
 
-    &:hover {
-      background-color: color(light, primary-focus);
-    }
-
-    &:disabled {
-      background-color: color(light, text-muted);
-    }
-  }
-}
-
-.EmailListForm-Dark {
-  background: color(dark, caption-bg);
-  color: color(dark, text);
-
-  input {
-    background: color(dark, body-bg);
-    color: color(dark, text);
-    border-color: color(dark, text-muted);
-
-    &:focus {
-      border-color: color(dark, text);
-    }
-
-    &.Error {
-      color: color(dark, primary-text);
-      border-color: color(dark, primary-text);
-    }
-  }
-
-  button {
-    background-color: color(dark, primary);
-    color: white;
-
-    &:hover {
-      background-color: color(dark, primary-focus);
-    }
-
-    &:disabled {
-      background-color: color(dark, text-muted);
+      &:disabled {
+        background-color: color($theme, text-muted);
+      }
     }
   }
 }
+
+@include EmailListForm(Light);
+@include EmailListForm(Dark);

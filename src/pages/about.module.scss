@@ -13,30 +13,21 @@
   border: 1px solid;
 }
 
-.AboutPage-Light {
-  a {
-    color: color(light, primary-text);
+@mixin AboutPage($theme) {
+  .AboutPage-#{$theme} {
+    a {
+      color: color($theme, primary-text);
 
-    &:hover {
-      border-color: color(light, primary-text);
+      &:hover {
+        border-color: color($theme, primary-text);
+      }
     }
-  }
 
-  .FeatureImage {
-    border-color: color(light, img-border);
+    .FeatureImage {
+      border-color: color($theme, img-border);
+    }
   }
 }
 
-.AboutPage-Dark {
-  a {
-    color: color(dark, primary-text);
-
-    &:hover {
-      border-color: color(dark, primary-text);
-    }
-  }
-
-  .FeatureImage {
-    border-color: color(dark, img-border);
-  }
-}
+@include AboutPage(Light);
+@include AboutPage(Dark);

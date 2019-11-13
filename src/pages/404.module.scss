@@ -8,22 +8,17 @@
   }
 }
 
-.ErrorPage-Light {
-  .Header {
-    color: color(light, text-bold);
-  }
+@mixin ErrorPage($theme) {
+  .ErrorPage-#{$theme} {
+    .Header {
+      color: color($theme, text-bold);
+    }
 
-  p {
-    color: color(light, text);
+    p {
+      color: color($theme, text);
+    }
   }
 }
 
-.ErrorPage-Dark {
-  .Header {
-    color: color(dark, text-bold);
-  }
-
-  p {
-    color: color(dark, text);
-  }
-}
+@include ErrorPage(Light);
+@include ErrorPage(Dark);

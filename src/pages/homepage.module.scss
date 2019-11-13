@@ -23,16 +23,14 @@
   }
 }
 
-.MainHeader-Light {
-  span,
-  p {
-    color: color(light, text-muted);
+@mixin MainHeader($theme) {
+  .MainHeader-#{$theme} {
+    span,
+    p {
+      color: color($theme, text-muted);
+    }
   }
 }
 
-.MainHeader-Dark {
-  span,
-  p {
-    color: color(dark, text-muted);
-  }
-}
+@include MainHeader(Light);
+@include MainHeader(Dark);
