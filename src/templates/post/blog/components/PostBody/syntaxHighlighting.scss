@@ -1,23 +1,60 @@
 @import '../../styles/_variables';
 
+@function code-color($theme, $name) {
+  @if ($theme != 'light' and $theme != 'dark') {
+    @error 'You must pass in either light or dark as the theme';
+  }
+
+  $colors: (
+    background: (
+      light: #f0f0f0,
+      dark: #111,
+    ),
+    border: (
+      light: darken(#f0f0f0, 5%),
+      dark: darken(#111, 5%),
+    ),
+    selection: (
+      light: darken(#f0f0f0, 10%),
+      dark: darken(#111, 10%),
+    ),
+    keyword: (
+      light: color(light, primary-text),
+      dark: color(dark, primary-text),
+    ),
+    string: (
+      light: #0569dd,
+      dark: #0569dd,
+    ),
+    class: (
+      light: #7805dd,
+      dark: #7805dd,
+    ),
+    comment: (
+      light: #999988,
+      dark: #999988,
+    ),
+    function: (
+      light: #0a7f06,
+      dark: #0a7f06,
+    ),
+    tag: (
+      light: #00009f,
+      dark: #00009f,
+    ),
+  );
+
+  $selected-color-map: map-get($colors, $name);
+  @return map-get($selected-color-map, $theme);
+}
+
 /**
  * GHColors theme by Avi Aryan (http://aviaryan.in)
  * Inspired by Github syntax coloring
  */
 
-$code-background-color: #ebebeb;
-$pre-background-color: #fafafa;
-
-$keyword-color: $brand-primary; // red
-$string-color: #0569dd; // blue
-$class-color: #7805dd; // purple
-$comment-color: #999988; // gray
-$function-color: #0a7f06; // green
-$tag-color: #00009f; // dark blue
-
 code[class*='language-'],
 pre[class*='language-'] {
-  color: lighten($text-color-primary, 10%);
   // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
   direction: ltr;
   text-align: left;
@@ -31,12 +68,36 @@ pre[class*='language-'] {
   tab-size: 4;
   hyphens: none;
 
-  background-color: $pre-background-color;
-  border: 1px solid darken($pre-background-color, 5%);
+  border: 1px solid;
+}
 
-  &::selection,
-  & ::selection {
-    background: darken($pre-background-color, 10%);
+.Light {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: lighten(color(light, text-bold), 10%);
+
+    background-color: code-color(light, background);
+    border-color: code-color(light, border);
+
+    &::selection,
+    & ::selection {
+      background: code-color(light, selection);
+    }
+  }
+}
+
+.Light {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: lighten(color(dark, text-bold), 10%);
+
+    background-color: code-color(dark, background);
+    border-color: code-color(dark, border);
+
+    &::selection,
+    & ::selection {
+      background: code-color(dark, selection);
+    }
   }
 }
 
@@ -66,61 +127,11 @@ pre[class*='language-'] {
   &.prolog,
   &.doctype,
   &.cdata {
-    color: $comment-color;
     font-style: italic;
   }
 
   &.namespace {
     opacity: 0.7;
-  }
-
-  &.class-name {
-    color: $class-color;
-  }
-
-  &.string,
-  &.attr-value {
-    color: $string-color;
-  }
-
-  &.punctuation {
-    color: darken($text-color-primary, 20%); /* no highlight */
-  }
-
-  &.operator {
-    color: $keyword-color;
-  }
-
-  &.entity,
-  &.url,
-  &.symbol,
-  &.number,
-  &.boolean,
-  &.variable,
-  &.constant,
-  &.property,
-  &.regex,
-  &.inserted {
-    color: $class-color;
-  }
-
-  &.atrule,
-  &.keyword,
-  &.attr-name,
-  .language-autohotkey &.selector {
-    color: $keyword-color;
-  }
-
-  &.function,
-  &.deleted,
-  .language-autohotkey &.tag {
-    color: $function-color;
-  }
-
-  &.tag,
-  &.selector,
-  .language-autohotkey &.keyword {
-    color: $tag-color;
   }
 
   &.important,
@@ -130,5 +141,125 @@ pre[class*='language-'] {
 
   &.italic {
     font-style: italic;
+  }
+}
+
+.Light {
+  .token {
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+      color: code-color(light, comment);
+    }
+
+    &.class-name {
+      color: code-color(light, class);
+    }
+
+    &.string,
+    &.attr-value {
+      color: code-color(light, string);
+    }
+
+    &.punctuation {
+      color: darken(color(light, text), 20%); /* no highlight */
+    }
+
+    &.operator {
+      color: code-color(light, keyword);
+    }
+
+    &.entity,
+    &.url,
+    &.symbol,
+    &.number,
+    &.boolean,
+    &.variable,
+    &.constant,
+    &.property,
+    &.regex,
+    &.inserted {
+      color: code-color(light, class);
+    }
+
+    &.atrule,
+    &.keyword,
+    &.attr-name,
+    .language-autohotkey &.selector {
+      color: code-color(light, keyword);
+    }
+
+    &.function,
+    &.deleted,
+    .language-autohotkey &.tag {
+      color: code-color(light, function);
+    }
+
+    &.tag,
+    &.selector,
+    .language-autohotkey &.keyword {
+      color: code-color(light, tag);
+    }
+  }
+}
+
+.Dark {
+  .token {
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+      color: code-color(dark, comment);
+    }
+
+    &.class-name {
+      color: code-color(dark, class);
+    }
+
+    &.string,
+    &.attr-value {
+      color: code-color(dark, string);
+    }
+
+    &.punctuation {
+      color: darken(color(dark, text), 20%); /* no highlight */
+    }
+
+    &.operator {
+      color: code-color(dark, keyword);
+    }
+
+    &.entity,
+    &.url,
+    &.symbol,
+    &.number,
+    &.boolean,
+    &.variable,
+    &.constant,
+    &.property,
+    &.regex,
+    &.inserted {
+      color: code-color(dark, class);
+    }
+
+    &.atrule,
+    &.keyword,
+    &.attr-name,
+    .language-autohotkey &.selector {
+      color: code-color(dark, keyword);
+    }
+
+    &.function,
+    &.deleted,
+    .language-autohotkey &.tag {
+      color: code-color(dark, function);
+    }
+
+    &.tag,
+    &.selector,
+    .language-autohotkey &.keyword {
+      color: code-color(dark, tag);
+    }
   }
 }
