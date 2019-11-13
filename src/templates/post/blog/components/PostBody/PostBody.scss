@@ -3,16 +3,9 @@
 
 .post-body {
   a {
-    color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-
-    &:hover {
-      border-color: $brand-primary;
-    }
   }
-
-  color: $text-color-primary;
 
   h1 {
     @extend .Header;
@@ -49,7 +42,6 @@
 
   img {
     max-width: 100%;
-    background: #fff;
     margin: 1rem 0;
 
     @include mobile-only {
@@ -68,9 +60,7 @@
   }
 
   blockquote {
-    @include left-border($brand-primary);
     margin-left: 0;
-    color: $text-color-secondary;
     font-size: 1.25rem;
     line-height: 1.5;
   }
@@ -103,7 +93,100 @@
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: lighten($text-color-secondary, 30%);
+      }
+    }
+  }
+}
+
+.post-body.Light {
+  a {
+    color: color(light, primary-text);
+
+    &:hover {
+      border-color: color(light, primary-text);
+    }
+  }
+
+  color: color(light, text);
+
+  h1 {
+    @extend .Header;
+    @extend .Headline;
+    color: color(light, text-bold);
+  }
+
+  h2 {
+    @extend .Header;
+    @extend .Title;
+    color: color(light, text-bold);
+  }
+
+  h3 {
+    @extend .Header;
+    @extend .Subtitle;
+    color: color(light, text-bold);
+  }
+
+  img {
+    background-color: color(light, caption-bg);
+  }
+
+  blockquote {
+    @include left-border(color(light, primary));
+    color: color(light, text-muted);
+  }
+
+  .scrollable {
+    @include mobile-only {
+      &:after {
+        color: color(light, text-muted);
+      }
+    }
+  }
+}
+
+.post-body.Dark {
+  a {
+    color: color(dark, primary-text);
+
+    &:hover {
+      border-color: color(dark, primary-text);
+    }
+  }
+
+  color: color(dark, text);
+
+  h1 {
+    @extend .Header;
+    @extend .Headline;
+    color: color(dark, text-bold);
+  }
+
+  h2 {
+    @extend .Header;
+    @extend .Title;
+    color: color(dark, text-bold);
+  }
+
+  h3 {
+    @extend .Header;
+    @extend .Subtitle;
+    color: color(dark, text-bold);
+  }
+
+  img {
+    background-color: color(dark, caption-bg);
+  }
+
+  blockquote {
+    @include left-border(color(dark, primary));
+    color: color(dark, text-muted);
+  }
+
+  .scrollable {
+    @include mobile-only {
+      &:after {
+        color: color(dark, text-muted);
       }
     }
   }
