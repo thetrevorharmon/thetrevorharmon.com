@@ -23,7 +23,7 @@
   }
 
   .FeatureImage {
-    border-color: color(dark, caption-bg);
+    border-color: color(light, img-border);
   }
 }
 
@@ -37,6 +37,6 @@
   }
 
   .FeatureImage {
-    border-color: color(light, caption-bg);
+    border-color: color(dark, img-border);
   }
 }

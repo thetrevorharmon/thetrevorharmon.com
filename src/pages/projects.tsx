@@ -3,9 +3,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-
-import {Button, Header, Link, Tile} from '../UI-Kit';
-
+import {Header, Tile} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface ProjectsPageProps {

@@ -32,6 +32,10 @@
       light: #fff,
       dark: #2a2a2a,
     ),
+    img-border: (
+      light: #111111,
+      dark: #f0f0f0,
+    ),
   );
 
   $selected-color-map: map-get($colors, $name);

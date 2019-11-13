@@ -55,7 +55,7 @@ $grid-gutter-size: 1rem;
 
 .ProjectTemplate-Light {
   img {
-    border-color: color(dark, caption-bg);
+    border-color: color(light, img-border);
   }
 
   a {
@@ -73,7 +73,7 @@ $grid-gutter-size: 1rem;
 
 .ProjectTemplate-Dark {
   img {
-    border-color: color(light, caption-bg);
+    border-color: color(dark, img-border);
   }
 
   a {
