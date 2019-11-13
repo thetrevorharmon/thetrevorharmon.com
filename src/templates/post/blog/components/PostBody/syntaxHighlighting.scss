@@ -1,58 +1,58 @@
 @import '../../styles/_variables';
 
 @function code-color($theme, $name) {
-  @if ($theme != 'light' and $theme != 'dark') {
-    @error 'You must pass in either light or dark as the theme';
+  @if ($theme != 'Light' and $theme != 'Dark') {
+    @error 'You must pass in either Light or Dark as the theme';
   }
 
   $colors: (
     code-background: (
-      light: color(light, caption-bg),
-      dark: color(dark, caption-bg),
+      Light: color(Light, caption-bg),
+      Dark: color(Dark, caption-bg),
     ),
     code-border: (
-      light: darken(color(light, caption-bg), 15%),
-      dark: lighten(color(dark, caption-bg), 25%),
+      Light: darken(color(Light, caption-bg), 15%),
+      Dark: lighten(color(Dark, caption-bg), 25%),
     ),
     pre-background: (
-      light: color(dark, caption-bg),
-      dark: color(dark, caption-bg),
+      Light: color(Dark, caption-bg),
+      Dark: color(Dark, caption-bg),
     ),
     pre-border: (
-      light: darken(#111, 5%),
-      dark: darken(#111, 5%),
+      Light: darken(#111, 5%),
+      Dark: darken(#111, 5%),
     ),
     selection: (
-      light: darken(color(light, caption-bg), 10%),
-      dark: lighten(color(dark, caption-bg), 10%),
+      Light: darken(color(Light, caption-bg), 10%),
+      Dark: lighten(color(Dark, caption-bg), 10%),
     ),
     keyword: (
-      light: #beaaf9,
-      dark: #beaaf9,
+      Light: #beaaf9,
+      Dark: #beaaf9,
     ),
     string: (
-      light: #c1e38a,
-      dark: #c1e38a,
+      Light: #c1e38a,
+      Dark: #c1e38a,
     ),
     punctuation: (
-      light: darken(color(dark, text), 20%),
-      dark: darken(color(dark, text), 20%),
+      Light: darken(color(Dark, text), 20%),
+      Dark: darken(color(Dark, text), 20%),
     ),
     class: (
-      light: #70cde3,
-      dark: #70cde3,
+      Light: #70cde3,
+      Dark: #70cde3,
     ),
     comment: (
-      light: #999988,
-      dark: #999988,
+      Light: #999988,
+      Dark: #999988,
     ),
     function: (
-      light: #fcd58b,
-      dark: #fcd58b,
+      Light: #fcd58b,
+      Dark: #fcd58b,
     ),
     tag: (
-      light: #00009f,
-      dark: #00009f,
+      Light: #828eff,
+      Dark: #828eff,
     ),
   );
 
@@ -81,68 +81,41 @@ pre[class*='language-'] {
   hyphens: none;
 }
 
-.Light {
-  code[class*='language-'] {
-    color: lighten(color(light, text-bold), 10%);
+@mixin SyntaxHighlighting($theme) {
+  .#{$theme} {
+    code[class*='language-'] {
+      color: lighten(color($theme, text-bold), 10%);
 
-    background-color: code-color(light, code-background);
-    border: 1px solid code-color(light, code-border);
+      background-color: code-color($theme, code-background);
+      border: 1px solid code-color($theme, code-border);
 
-    &::selection,
-    & ::selection {
-      background: code-color(light, selection);
-    }
-  }
-
-  pre[class*='language-'],
-  pre[class*='language-'] > code[class*='language'] {
-    & > code[class*='language-'] {
-      background-color: transparent;
-      border-color: transparent;
+      &::selection,
+      & ::selection {
+        background: code-color($theme, selection);
+      }
     }
 
-    color: lighten(color(dark, text-bold), 10%);
+    pre[class*='language-'],
+    pre[class*='language-'] > code[class*='language'] {
+      & > code[class*='language-'] {
+        background-color: transparent;
+        border-color: transparent;
+      }
 
-    background-color: code-color(dark, pre-background);
+      color: lighten(color(Dark, text-bold), 10%);
 
-    &::selection,
-    & ::selection {
-      background: code-color(dark, selection);
-    }
-  }
-}
+      background-color: code-color(Dark, pre-background);
 
-.Dark {
-  code[class*='language-'],
-  pre[class*='language-'] {
-    color: lighten(color(dark, text-bold), 10%);
-
-    background-color: code-color(dark, pre-background);
-    border: 1px solid code-color(dark, code-border);
-
-    &::selection,
-    & ::selection {
-      background: code-color(dark, selection);
-    }
-  }
-
-  pre[class*='language-'],
-  pre[class*='language-'] > code[class*='language'] {
-    & > code[class*='language-'] {
-      background-color: transparent;
-      border-color: transparent;
-    }
-
-    color: lighten(color(dark, text-bold), 10%);
-    border-color: transparent;
-    background-color: code-color(dark, pre-background);
-
-    &::selection,
-    & ::selection {
-      background: code-color(dark, selection);
+      &::selection,
+      & ::selection {
+        background: code-color(Dark, selection);
+      }
     }
   }
 }
+
+@include SyntaxHighlighting(Light);
+@include SyntaxHighlighting(Dark);
 
 /* Code blocks */
 pre[class*='language-'] {
@@ -193,24 +166,24 @@ pre[class*='language-'] {
     &.prolog,
     &.doctype,
     &.cdata {
-      color: code-color(light, comment);
+      color: code-color(Light, comment);
     }
 
     &.class-name {
-      color: code-color(light, class);
+      color: code-color(Light, class);
     }
 
     &.string,
     &.attr-value {
-      color: code-color(light, string);
+      color: code-color(Light, string);
     }
 
     &.punctuation {
-      color: code-color(light, punctuation);
+      color: code-color(Light, punctuation);
     }
 
     &.operator {
-      color: code-color(light, keyword);
+      color: code-color(Light, keyword);
     }
 
     &.entity,
@@ -223,26 +196,26 @@ pre[class*='language-'] {
     &.property,
     &.regex,
     &.inserted {
-      color: code-color(light, class);
+      color: code-color(Light, class);
     }
 
     &.atrule,
     &.keyword,
     &.attr-name,
     .language-autohotkey &.selector {
-      color: code-color(light, keyword);
+      color: code-color(Light, keyword);
     }
 
     &.function,
     &.deleted,
     .language-autohotkey &.tag {
-      color: code-color(light, function);
+      color: code-color(Light, function);
     }
 
     &.tag,
     &.selector,
     .language-autohotkey &.keyword {
-      color: code-color(light, tag);
+      color: code-color(Light, tag);
     }
   }
 }
@@ -253,24 +226,24 @@ pre[class*='language-'] {
     &.prolog,
     &.doctype,
     &.cdata {
-      color: code-color(dark, comment);
+      color: code-color(Dark, comment);
     }
 
     &.class-name {
-      color: code-color(dark, class);
+      color: code-color(Dark, class);
     }
 
     &.string,
     &.attr-value {
-      color: code-color(dark, string);
+      color: code-color(Dark, string);
     }
 
     &.punctuation {
-      color: code-color(dark, punctuation);
+      color: code-color(Dark, punctuation);
     }
 
     &.operator {
-      color: code-color(dark, keyword);
+      color: code-color(Dark, keyword);
     }
 
     &.entity,
@@ -283,26 +256,26 @@ pre[class*='language-'] {
     &.property,
     &.regex,
     &.inserted {
-      color: code-color(dark, class);
+      color: code-color(Dark, class);
     }
 
     &.atrule,
     &.keyword,
     &.attr-name,
     .language-autohotkey &.selector {
-      color: code-color(dark, keyword);
+      color: code-color(Dark, keyword);
     }
 
     &.function,
     &.deleted,
     .language-autohotkey &.tag {
-      color: code-color(dark, function);
+      color: code-color(Dark, function);
     }
 
     &.tag,
     &.selector,
     .language-autohotkey &.keyword {
-      color: code-color(dark, tag);
+      color: code-color(Dark, tag);
     }
   }
 }
