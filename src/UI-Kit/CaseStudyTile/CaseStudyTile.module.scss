@@ -39,18 +39,12 @@
   font-size: 1.15rem;
 }
 
-.Tile-Light {
-  @include left-border(color(light, primary));
+@mixin Tile($theme) {
+  .Tile-#{$theme} {
+    @include left-border(color($theme, primary));
 
-  p {
-    color: color(light, text-muted);
-  }
-}
-
-.Tile-Dark {
-  @include left-border(color(dark, primary));
-
-  p {
-    color: color(dark, text-muted);
+    p {
+      color: color($theme, text-muted);
+    }
   }
 }

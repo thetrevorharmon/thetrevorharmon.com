@@ -1,9 +1,10 @@
 @import 'foundation';
 
-.Meta-Light {
-  color: color(light, text-muted);
+@mixin Meta($theme) {
+  .Meta-#{$theme} {
+    color: color($theme, text-muted);
+  }
 }
 
-.Meta-Dark {
-  color: color(dark, text-muted);
-}
+@include Meta(Light);
+@include Meta(Dark);

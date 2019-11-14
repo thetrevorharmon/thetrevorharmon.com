@@ -31,10 +31,11 @@
   z-index: 1;
 }
 
-.Tile-Light {
-  border-color: color(light, img-border);
+@mixin Tile($theme) {
+  .Tile-#{$theme} {
+    border-color: color($theme, img-border);
+  }
 }
 
-.Tile-Dark {
-  border-color: color(dark, img-border);
-}
+@include Tile(Light);
+@include Tile(Dark);

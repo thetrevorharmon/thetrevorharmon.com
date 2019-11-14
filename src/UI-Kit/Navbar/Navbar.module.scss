@@ -134,64 +134,38 @@
   }
 }
 
-.Navbar-Light {
-  &.Open {
-    background: color(light, body-bg);
-  }
-
-  .ThemeToggle {
-    svg path {
-      fill: color(light, primary);
+@mixin Navbar($theme) {
+  .Navbar-#{$theme} {
+    &.Open {
+      background: color($theme, body-bg);
     }
 
-    &:focus,
-    &:hover {
+    .ThemeToggle {
       svg path {
-        fill: color(light, text);
+        fill: color($theme, primary);
+      }
+
+      &:focus,
+      &:hover {
+        svg path {
+          fill: color($theme, text);
+        }
       }
     }
-  }
 
-  .Brand:hover {
-    background: color(light, primary-focus);
-  }
+    .Brand:hover {
+      background: color($theme, primary-focus);
+    }
 
-  .Toggle .Bar {
-    background: color(dark, body-bg);
-  }
+    .Toggle .Bar {
+      background: color($theme, text-bold);
+    }
 
-  .MobileLinks a {
-    color: color(light, text);
+    .MobileLinks a {
+      color: color($theme, text);
+    }
   }
 }
 
-.Navbar-Dark {
-  &.Open {
-    background: color(dark, body-bg);
-  }
-
-  .ThemeToggle {
-    svg path {
-      fill: color(dark, primary);
-    }
-
-    &:focus,
-    &:hover {
-      svg path {
-        fill: color(dark, text);
-      }
-    }
-  }
-
-  .Brand:hover {
-    background: color(dark, primary-focus);
-  }
-
-  .Toggle .Bar {
-    background: color(light, body-bg);
-  }
-
-  .MobileLinks a {
-    color: color(dark, text);
-  }
-}
+@include Navbar(Light);
+@include Navbar(Dark);

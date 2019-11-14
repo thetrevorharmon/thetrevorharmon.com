@@ -3,15 +3,6 @@
 .Header {
   font-weight: bold;
   font-style: normal;
-  color: $text-color-primary;
-}
-
-.Header-Light {
-  color: color(light, text-bold);
-}
-
-.Header-Dark {
-  color: color(dark, text-bold);
 }
 
 @function header-size($header, $size) {
@@ -48,16 +39,6 @@
   @include mobile-only {
     margin-top: header-size(tagline, phone);
   }
-}
-
-.Header-Light.Headline + .Tagline,
-.Header-Light.Title + .Tagline {
-  color: color(light, text-muted);
-}
-
-.Header-Dark.Headline + .Tagline,
-.Header-Dark.Title + .Tagline {
-  color: color(dark, text-muted);
 }
 
 .Title {
@@ -97,10 +78,20 @@
   }
 }
 
-.Header-Light .SectionTitle {
-  color: color(light, text);
+@mixin Header($theme) {
+  .Header-#{$theme} {
+    color: color($theme, text-bold);
+
+    .SectionTitle {
+      color: color($theme, text);
+    }
+
+    &.Headline + .Tagline,
+    &.Title + .Tagline {
+      color: color($theme, text-muted);
+    }
+  }
 }
 
-.Header-Dark .SectionTitle {
-  color: color(dark, text);
-}
+@include Header(Light);
+@include Header(Dark);

@@ -7,26 +7,19 @@
   width: auto;
 }
 
-.Icon-Light svg {
-  path {
-    fill: color(light, text);
-  }
-
-  a & {
+@mixin Icon($theme) {
+  .Icon-#{$theme} svg {
     path {
-      fill: color(light, primary-text);
+      fill: color($theme, text);
+    }
+
+    a & {
+      path {
+        fill: color($theme, primary-text);
+      }
     }
   }
 }
 
-.Icon-Dark svg {
-  path {
-    fill: color(dark, text);
-  }
-
-  a & {
-    path {
-      fill: color(dark, primary-text);
-    }
-  }
-}
+@include Icon(Light);
+@include Icon(Dark);

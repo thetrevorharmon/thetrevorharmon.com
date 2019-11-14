@@ -14,28 +14,6 @@
   margin-right: 0.5em;
 }
 
-.LinkHeader-Light {
-  .Link {
-    color: color(light, text-bold);
-    border-bottom-color: transparent;
-  }
-
-  &:hover .Link {
-    color: color(light, primary);
-  }
-}
-
-.LinkHeader-Dark {
-  .Link {
-    color: color(dark, text-bold);
-    border-bottom-color: transparent;
-  }
-
-  &:hover .Link {
-    color: color(dark, primary);
-  }
-}
-
 .Icon {
   line-height: 0;
 
@@ -57,22 +35,31 @@
   }
 }
 
-.LinkHeader-Light .Icon svg {
-  background: color(light, text-bold);
-  path {
-    fill: color(light, body-bg);
-  }
-}
-
-.LinkHeader-Dark .Icon svg {
-  background: color(dark, text-bold);
-  path {
-    fill: color(dark, body-bg);
-  }
-}
-
 .LinkHeader:hover {
   .Icon svg {
     transform: rotate(45deg);
   }
 }
+
+@mixin LinkHeader($theme) {
+  .LinkHeader-#{$theme} {
+    .Link {
+      color: color($theme, text-bold);
+      border-bottom-color: transparent;
+    }
+
+    &:hover .Link {
+      color: color($theme, primary);
+    }
+
+    .Icon svg {
+      background: color($theme, text-bold);
+      path {
+        fill: color($theme, body-bg);
+      }
+    }
+  }
+}
+
+@include LinkHeader(Light);
+@include LinkHeader(Dark);

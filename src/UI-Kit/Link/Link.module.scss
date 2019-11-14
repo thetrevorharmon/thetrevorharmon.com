@@ -7,21 +7,18 @@
   border-bottom: 1px solid transparent;
 }
 
-.Link-Light {
-  color: color(light, primary-text);
+@mixin Link($theme) {
+  .Link-#{$theme} {
+    color: color($theme, primary-text);
 
-  &:hover {
-    border-color: color(light, primary-text);
+    &:hover {
+      border-color: color($theme, primary-text);
+    }
   }
 }
 
-.Link-Dark {
-  color: color(dark, primary-text);
-
-  &:hover {
-    border-color: color(dark, primary-text);
-  }
-}
+@include Link(Light);
+@include Link(Dark);
 
 .Reset {
   text-decoration: none;
@@ -37,22 +34,17 @@
   transition: all 0.2s linear;
 }
 
-.IconLink-Light {
-  & svg path {
-    fill: color(light, primary-text);
-  }
+@mixin IconLink($theme) {
+  .IconLink-#{$theme} {
+    & svg path {
+      fill: color($theme, primary-text);
+    }
 
-  &:hover svg path {
-    fill: color(light, primary-text-focus);
+    &:hover svg path {
+      fill: color($theme, primary-text-focus);
+    }
   }
 }
 
-.IconLink-Dark {
-  & svg path {
-    fill: color(dark, primary-text);
-  }
-
-  &:hover svg path {
-    fill: color(dark, primary-text-focus);
-  }
-}
+@include IconLink(Light);
+@include IconLink(Dark);

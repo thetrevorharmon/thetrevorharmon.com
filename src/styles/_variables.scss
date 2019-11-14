@@ -14,64 +14,48 @@
 
   $colors: (
     primary: (
-      light: #ec4242,
       Light: #ec4242,
-      dark: #fa5a5a,
       Dark: #fa5a5a,
     ),
     primary-focus: (
-      light: #db1616,
       Light: #db1616,
-      dark: #f81f1f,
       Dark: #f81f1f,
     ),
     primary-text: (
-      light: #dd0404,
       Light: #dd0404,
-      dark: #f95b5b,
       Dark: #f95b5b,
     ),
     primary-text-focus: (
-      light: #a10303,
       Light: #a10303,
-      dark: #f72020,
       Dark: #f72020,
     ),
     text: (
-      light: #444,
       Light: #444,
-      dark: #ddd,
       Dark: #ddd,
     ),
     text-bold: (
-      light: #222,
       Light: #222,
-      dark: #eee,
       Dark: #eee,
     ),
     text-muted: (
-      light: #767676,
       Light: #767676,
-      dark: #b5b5b5,
       Dark: #b5b5b5,
     ),
     caption-bg: (
-      light: #f0f0f0,
       Light: #f0f0f0,
-      dark: #111111,
       Dark: #111111,
     ),
     body-bg: (
-      light: #fff,
       Light: #fff,
-      dark: #2a2a2a,
       Dark: #2a2a2a,
     ),
     img-border: (
-      light: #111111,
       Light: #111111,
-      dark: #f0f0f0,
       Dark: #f0f0f0,
+    ),
+    accent-line: (
+      Light: #dddddd,
+      Dark: #3f3f3f,
     ),
   );
 

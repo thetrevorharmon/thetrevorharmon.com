@@ -4,14 +4,10 @@
   display: block;
 }
 
-.PostTile-Light {
-  .Description {
-    color: color(light, text);
-  }
-}
-
-.PostTile-Dark {
-  .Description {
-    color: color(dark, text);
+@mixin PostTile($theme) {
+  .PostTile-#{$theme} {
+    .Description {
+      color: color($theme, text);
+    }
   }
 }
