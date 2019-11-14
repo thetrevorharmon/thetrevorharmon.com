@@ -25,20 +25,9 @@ html {
   line-height: 1.5;
 }
 
-body.Light {
-  color: color(light, text);
-  background-color: color(light, body-bg);
-}
-
-body.Dark {
-  color: color(dark, text);
-  background-color: color(dark, body-bg);
-}
-
 hr {
   border: 0px solid;
   height: 1px;
-  background: #aaaaaa;
 }
 
 h1,
@@ -72,14 +61,6 @@ ul {
   text-align: center;
   font-weight: bold;
   color: white;
-
-  body.Light & {
-    background: color(light, primary);
-  }
-
-  body.Dark & {
-    background: color(dark, primary);
-  }
 }
 
 .text-right {
@@ -101,3 +82,21 @@ ul {
 .float-right {
   float: right !important;
 }
+
+@mixin Body($theme) {
+  body.#{$theme} {
+    color: color($theme, text);
+    background-color: color($theme, body-bg);
+
+    hr {
+      background: color($theme, accent-line);
+    }
+
+    .global-brand {
+      background: color($theme, primary);
+    }
+  }
+}
+
+@include Body(Light);
+@include Body(Dark);
