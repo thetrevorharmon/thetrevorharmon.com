@@ -1,7 +1,7 @@
 import link from './link.svg';
-import rss from './rss.svg';
-import twitter from './twitter.svg';
 import moon from './moon.svg';
+import rss from './rss.svg';
 import sun from './sun.svg';
+import twitter from './twitter.svg';
 
-export {link, rss, twitter, moon, sun};
+export {link, moon, rss, sun, twitter};

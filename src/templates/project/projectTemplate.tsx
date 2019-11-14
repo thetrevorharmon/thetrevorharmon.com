@@ -3,8 +3,8 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import {Layout} from '../../layouts';
 import {useTheme} from '../../context/ThemeContext';
+import {Layout} from '../../layouts';
 import {Header, Image} from '../../UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './projectTemplate.module.scss';

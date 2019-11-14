@@ -2,11 +2,11 @@ import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {Layout} from '../layouts';
-import * as styles from './about.module.scss';
 import {useTheme} from '../context/ThemeContext';
+import {Layout} from '../layouts';
 import {Header, Image} from '../UI-Kit';
 import {Routes} from '../utils';
+import * as styles from './about.module.scss';
 
 interface AboutPageProps {
   data: {

@@ -5,9 +5,9 @@ import addToMailchimp, {
 } from 'gatsby-plugin-mailchimp';
 import React, {useState} from 'react';
 
+import classnames from 'classnames';
 import {useTheme} from '../../context/ThemeContext';
 import * as styles from './EmailListForm.module.scss';
-import classnames from 'classnames';
 
 interface SiteData {
   site: {

@@ -5,7 +5,7 @@ import * as styles from './Icon.module.scss';
 
 import {useTheme} from '../../context/ThemeContext';
 
-import {link, rss, twitter, moon, sun} from './icons';
+import {link, moon, rss, sun, twitter} from './icons';
 
 interface IconProps {
   className?: string;
@@ -20,10 +20,10 @@ interface IconProps {
 /* tslint:disable object-literal-shorthand */
 const mapping: {[name: string]: () => any} = {
   link: link,
-  rss: rss,
-  twitter: twitter,
   moon: moon,
+  rss: rss,
   sun: sun,
+  twitter: twitter,
 };
 
 const Icon: React.FC<IconProps> = ({className, children, href, name}) => {

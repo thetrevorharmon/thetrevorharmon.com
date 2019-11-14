@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 import React, {useState} from 'react';
 
-import * as styles from './Navbar.module.scss';
 import {Theme, useTheme, useToggleTheme} from '../../context/ThemeContext';
 import {Button, Icon, Link} from '../../UI-Kit';
 import {Routes} from '../../utils';
+import * as styles from './Navbar.module.scss';
 
 const Navbar: React.FC<{}> = () => {
   const theme = useTheme();

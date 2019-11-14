@@ -37,7 +37,9 @@ const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
   };
 
   return (
-    <div className={(styles[`PostFooter-${theme}`], styles.PostFooter)}>
+    <div
+      className={classnames(styles[`PostFooter-${theme}`], styles.PostFooter)}
+    >
       <div className="row">
         {olderPost && makeNavigation(olderPost, 'Older')}
         {newerPost && makeNavigation(newerPost, 'Newer')}

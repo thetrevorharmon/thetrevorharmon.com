@@ -3,8 +3,8 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Helpers, Routes} from '../utils';
 import {Header, Link, LinkHeader, Meta} from '../UI-Kit';
+import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {

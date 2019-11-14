@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './Footer.module.scss';
 import {useTheme} from '../../context/ThemeContext';
 import {Link} from '../../UI-Kit';
 import {ExternalLinks, Routes} from '../../utils';
+import * as styles from './Footer.module.scss';
 
 interface FooterProps {
   className?: string;

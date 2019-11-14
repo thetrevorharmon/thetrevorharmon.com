@@ -2,10 +2,10 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 import {Layout} from '../../../layouts';
 
-import './caseStudyTemplate.scss';
 import {useTheme} from '../../../context/ThemeContext';
 import {Header, Image} from '../../../UI-Kit';
 import {Routes} from '../../../utils';
+import './caseStudyTemplate.scss';
 
 interface CaseStudyTemplateProps {
   data: {

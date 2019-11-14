@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './PostHeader.module.scss';
 import {useTheme} from '../../../../../context/ThemeContext';
 import {Header, Image, Link, LinkHeader, Meta} from '../../../../../UI-Kit';
+import * as styles from './PostHeader.module.scss';
 
 interface PostHeaderProps {
   post: BlogPost | LinkPost;

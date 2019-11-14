@@ -4,9 +4,9 @@ import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import * as styles from './homepage.module.scss';
 import {CaseStudyTile, Header, Link, PostTile, Tile} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
+import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
   data: {
