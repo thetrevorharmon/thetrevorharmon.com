@@ -1,10 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './Icon.module.scss';
-
 import {useTheme} from '../../context/ThemeContext';
-
+import * as styles from './Icon.module.scss';
 import {link, moon, rss, sun, twitter} from './icons';
 
 interface IconProps {
