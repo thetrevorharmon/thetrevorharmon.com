@@ -37,11 +37,11 @@
 @mixin IconLink($theme) {
   .IconLink-#{$theme} {
     & svg path {
-      fill: color($theme, primary-text);
+      fill: color($theme, primary);
     }
 
     &:hover svg path {
-      fill: color($theme, primary-text-focus);
+      fill: color($theme, primary-focus);
     }
   }
 }
