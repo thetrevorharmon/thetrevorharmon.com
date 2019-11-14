@@ -73,6 +73,7 @@ module.exports = {
             options: {
               maxWidth: 800,
               linkImagesToOriginal: false,
+              backgroundColor: `transparent`,
             },
           },
         ],
