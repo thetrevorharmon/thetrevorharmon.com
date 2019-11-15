@@ -6,6 +6,7 @@ export const ContentfulProjectTile = graphql`
     title
     slug
     featureOnHomepage
+    projectCompletionDate(formatString: "DD MMM YYYY")
     featureImage {
       ...ContentfulAsset_width600
     }

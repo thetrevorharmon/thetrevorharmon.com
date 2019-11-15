@@ -1,0 +1,21 @@
+@import './Header.mixins.scss';
+
+@mixin Header($theme) {
+  .Header-#{$theme} {
+    &.Header-Display {
+      @include Header-Display($theme);
+    }
+    &.Header-Title {
+      @include Header-Title($theme);
+    }
+    &.Header-Heading {
+      @include Header-Heading($theme);
+    }
+    &.Header-Subheading {
+      @include Header-Subheading($theme);
+    }
+  }
+}
+
+@include Header(Light);
+@include Header(Dark);

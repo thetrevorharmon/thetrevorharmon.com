@@ -2,8 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../../../../context/ThemeContext';
-import {Button, Link} from '../../../../../UI-Kit';
-import * as styles from './PostBody.module.scss';
+import {Attribution, Button} from '../../../../../new-UI-Kit';
 import './PostBody.scss';
 
 interface PostBodyProps {
@@ -13,16 +12,6 @@ interface PostBodyProps {
 
 const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
   const {post, layoutClassName} = props;
-
-  const makeSourceAttribution = (attribution: ContentfulAttribution) => {
-    return (
-      <div className={styles.Attribution}>
-        This {`${attribution.type.toLowerCase()} was originally published on `}
-        <Link href={attribution.sourceLocation}>{attribution.sourceName}</Link>.
-      </div>
-    );
-  };
-
   const theme = useTheme();
 
   return (
@@ -41,7 +30,7 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
       {post.postType === 'Blog' && post.sourceAttribution && (
         <div className="row">
           <div className={layoutClassName}>
-            {makeSourceAttribution(post.sourceAttribution)}
+            <Attribution attribution={post.sourceAttribution} />
           </div>
         </div>
       )}

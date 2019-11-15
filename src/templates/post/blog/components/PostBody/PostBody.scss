@@ -1,27 +1,9 @@
 @import '../../../../../UI-Kit/Header/Header.module.scss';
 @import './syntaxHighlighting.scss';
 
+@import 'ui-kit-mixins';
+
 .post-body {
-  a {
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-  }
-
-  h1 {
-    @extend .Header;
-    @extend .Headline;
-  }
-
-  h2 {
-    @extend .Header;
-    @extend .Title;
-  }
-
-  h3 {
-    @extend .Header;
-    @extend .Subtitle;
-  }
-
   h1,
   h2,
   h3,
@@ -101,31 +83,21 @@
 @mixin PostBody($theme) {
   .post-body.#{$theme} {
     a {
-      color: color($theme, primary-text);
-
-      &:hover {
-        border-color: color($theme, primary-text);
-      }
+      @include Link($theme);
     }
 
     color: color($theme, text);
 
     h1 {
-      @extend .Header;
-      @extend .Headline;
-      color: color($theme, text-bold);
+      @include Header-Title($theme);
     }
 
     h2 {
-      @extend .Header;
-      @extend .Title;
-      color: color($theme, text-bold);
+      @include Header-Heading($theme);
     }
 
     h3 {
-      @extend .Header;
-      @extend .Subtitle;
-      color: color($theme, text-bold);
+      @include Header-Subheading($theme);
     }
 
     img {
@@ -133,8 +105,7 @@
     }
 
     blockquote {
-      @include left-border(color($theme, primary));
-      color: color($theme, text-muted);
+      @include Blockquote($theme);
     }
 
     .scrollable {

@@ -128,10 +128,6 @@ pre[class*='language-'] {
   }
 }
 
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-}
-
 /* Inline code */
 :not(pre) > code[class*='language-'] {
   padding: 0 0.25rem;

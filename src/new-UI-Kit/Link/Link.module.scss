@@ -1,0 +1,15 @@
+@import 'foundation';
+@import './Link.mixins.scss';
+
+@mixin Link-Theme($theme) {
+  .Link-#{$theme} {
+    @include Link($theme);
+
+    &.Muted {
+      @include Link-Muted($theme);
+    }
+  }
+}
+
+@include Link-Theme(Light);
+@include Link-Theme(Dark);

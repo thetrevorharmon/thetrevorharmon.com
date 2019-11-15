@@ -1,0 +1,11 @@
+@import 'foundation';
+
+@mixin FeaturedItem($theme) {
+  .FeaturedItem-#{$theme} {
+    background-color: color($theme, caption-bg);
+    padding: space(big);
+  }
+}
+
+@include FeaturedItem(Light);
+@include FeaturedItem(Dark);

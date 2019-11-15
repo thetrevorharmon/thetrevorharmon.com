@@ -1,0 +1,43 @@
+@import 'foundation';
+@import '../TextStyle/TextStyle.mixins.scss';
+
+@mixin header-background-wrap($line-height, $x-padding, $y-padding, $theme) {
+  line-height: $line-height;
+  padding-left: $x-padding;
+
+  span {
+    box-shadow: ($x-padding * 1.4) 0 0 color($theme, primary),
+      -$x-padding 0 0 color($theme, primary);
+    background: color($theme, primary);
+    padding-top: $y-padding;
+    padding-bottom: $y-padding;
+  }
+}
+
+@mixin Header-Display($theme) {
+  @include text-style-Display;
+  @include header-background-wrap(1.2, 10px, 4px, $theme);
+
+  color: white;
+}
+
+@mixin Header-Title($theme) {
+  @include text-style-Title;
+  @include header-background-wrap(1.4, 7px, 2px, $theme);
+
+  color: white;
+}
+
+@mixin Header-Heading($theme) {
+  @include text-style-Heading;
+
+  line-height: 1.2;
+  color: color($theme, text-bold);
+}
+
+@mixin Header-Subheading($theme) {
+  @include text-style-Subheading;
+
+  line-height: 1.2;
+  color: color($theme, text-bold);
+}

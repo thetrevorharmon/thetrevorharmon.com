@@ -127,6 +127,9 @@ exports.createPages = ({graphql, actions}) => {
       posts.forEach((node, index) => {
         // these give an easy way to figure out which post is considered
         // the next newer/older post from within a blog post
+
+        // TODO: redo these for featured + 2 random
+        // TODO: pass formatted date as well
         const newerPost = index > 0 ? posts[index - 1] : null;
         const olderPost = index < posts.length - 1 ? posts[index + 1] : null;
 
