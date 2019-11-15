@@ -18,7 +18,7 @@ const ThemeContext = React.createContext<ThemeContext>({
 });
 
 const ThemeProvider = ({children}: {children: React.ReactNode}) => {
-  const THEME_COOKIE_NAME = 'theme';
+  const THEME_LOCAL_STORAGE_NAME = 'theme';
   const [theme, setTheme] = useState<Theme>(Theme.Light);
 
   useEffect(() => {
@@ -35,11 +35,11 @@ const ThemeProvider = ({children}: {children: React.ReactNode}) => {
   }, []);
 
   const saveTheme = (themeToSave: Theme) => {
-    localStorage.setItem(THEME_COOKIE_NAME, JSON.stringify(themeToSave));
+    localStorage.setItem(THEME_LOCAL_STORAGE_NAME, JSON.stringify(themeToSave));
   };
 
   const loadTheme = (): Theme | null => {
-    const savedCookie = localStorage.getItem(THEME_COOKIE_NAME);
+    const savedCookie = localStorage.getItem(THEME_LOCAL_STORAGE_NAME);
 
     if (savedCookie !== '' && savedCookie != null) {
       const savedTheme = JSON.parse(savedCookie);
