@@ -74,4 +74,4 @@ const useTheme = () => {
   return theme;
 };
 
-export {ThemeContext, ThemeProvider, useToggleTheme, useTheme};
+export {ThemeProvider, useToggleTheme, useTheme};
