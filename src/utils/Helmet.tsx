@@ -2,6 +2,7 @@ import {graphql, useStaticQuery} from 'gatsby';
 import * as React from 'react';
 import {Helmet as ReactHelmet} from 'react-helmet';
 
+import {useTheme} from '../context/ThemeContext';
 import {Helpers, MetaTags} from '../utils';
 
 interface HelmetProps {
@@ -65,9 +66,12 @@ const Helmet: React.FC<HelmetProps> = ({children, pageMetadata}) => {
     extraMeta,
   );
 
+  const theme = useTheme();
+
   return (
     <ReactHelmet title={title} meta={meta}>
       <html lang="en" />
+      <body className={theme} />
     </ReactHelmet>
   );
 };

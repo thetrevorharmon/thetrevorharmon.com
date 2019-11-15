@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import Link from '../Link';
 
+import {useTheme} from '../../context/ThemeContext';
+import Link from '../Link';
 import * as styles from './Button.module.scss';
 
 interface ButtonProps {
@@ -16,7 +17,12 @@ const Button: React.FC<ButtonProps> = ({
   href,
   noStyling,
 }) => {
-  const classname = classnames(className, !noStyling && styles.Button);
+  const theme = useTheme();
+  const classname = classnames(
+    className,
+    !noStyling && styles.Button,
+    styles[`Button-${theme}`],
+  );
 
   return (
     <Link href={href} noLinkStyling={true} className={classname}>

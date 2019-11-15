@@ -5,14 +5,21 @@
   max-height: 1.75rem;
   height: auto;
   width: auto;
+}
 
-  path {
-    fill: $text-color-primary;
-  }
-
-  a & {
+@mixin Icon($theme) {
+  .Icon-#{$theme} svg {
     path {
-      fill: $brand-primary;
+      fill: color($theme, text);
+    }
+
+    a & {
+      path {
+        fill: color($theme, primary);
+      }
     }
   }
 }
+
+@include Icon(Light);
+@include Icon(Dark);

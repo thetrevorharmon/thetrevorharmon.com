@@ -16,6 +16,7 @@
 @import '../../node_modules/bootstrap-4-grid/scss/grid.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
+@import 'foundation';
 
 body,
 html {
@@ -27,7 +28,6 @@ html {
 hr {
   border: 0px solid;
   height: 1px;
-  background: #aaaaaa;
 }
 
 h1,
@@ -57,12 +57,10 @@ ul {
   line-height: 4rem;
   font-size: 1.25rem;
 
-  color: white;
   text-decoration: none;
   text-align: center;
   font-weight: bold;
-
-  background: $brand-primary;
+  color: white;
 }
 
 .text-right {
@@ -84,3 +82,21 @@ ul {
 .float-right {
   float: right !important;
 }
+
+@mixin Body($theme) {
+  body.#{$theme} {
+    color: color($theme, text);
+    background-color: color($theme, body-bg);
+
+    hr {
+      background: color($theme, accent-line);
+    }
+
+    .global-brand {
+      background: color($theme, primary);
+    }
+  }
+}
+
+@include Body(Light);
+@include Body(Dark);

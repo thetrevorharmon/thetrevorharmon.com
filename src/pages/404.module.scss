@@ -2,13 +2,23 @@
 
 .ErrorPage {
   .Header {
-    color: $text-color-primary;
     font-size: 10rem;
     line-height: 10rem;
     margin: 0;
   }
+}
 
-  p {
-    color: $text-color-secondary;
+@mixin ErrorPage($theme) {
+  .ErrorPage-#{$theme} {
+    .Header {
+      color: color($theme, text-bold);
+    }
+
+    p {
+      color: color($theme, text);
+    }
   }
 }
+
+@include ErrorPage(Light);
+@include ErrorPage(Dark);

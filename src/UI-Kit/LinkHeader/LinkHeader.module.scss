@@ -28,26 +28,38 @@
     max-width: none;
     padding: 0.275em;
 
-    background: $text-color-primary;
-
     .Headline & {
       height: 0.85em;
       width: 0.85em;
-    }
-
-    path {
-      fill: white;
     }
   }
 }
 
 .LinkHeader:hover {
-  .Link {
-    color: $brand-primary;
-    border-bottom-color: transparent;
-  }
-
   .Icon svg {
     transform: rotate(45deg);
   }
 }
+
+@mixin LinkHeader($theme) {
+  .LinkHeader-#{$theme} {
+    .Link {
+      color: color($theme, text-bold);
+      border-bottom-color: transparent;
+    }
+
+    &:hover .Link {
+      color: color($theme, primary);
+    }
+
+    .Icon svg {
+      background: color($theme, text-bold);
+      path {
+        fill: color($theme, body-bg);
+      }
+    }
+  }
+}
+
+@include LinkHeader(Light);
+@include LinkHeader(Dark);

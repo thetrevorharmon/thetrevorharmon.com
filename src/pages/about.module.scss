@@ -2,18 +2,32 @@
 
 .AboutPage {
   a {
-    color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: all 0.1s linear;
-
-    &:hover {
-      border-color: $brand-primary;
-    }
   }
 }
 
 .FeatureImage {
   max-width: 100%;
-  border: 1px solid #2a2a2a;
+  border: 1px solid;
 }
+
+@mixin AboutPage($theme) {
+  .AboutPage-#{$theme} {
+    a {
+      color: color($theme, primary-text);
+
+      &:hover {
+        border-color: color($theme, primary-text);
+      }
+    }
+
+    .FeatureImage {
+      border-color: color($theme, img-border);
+    }
+  }
+}
+
+@include AboutPage(Light);
+@include AboutPage(Dark);

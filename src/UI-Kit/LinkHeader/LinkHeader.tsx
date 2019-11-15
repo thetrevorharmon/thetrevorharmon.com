@@ -1,6 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../context/ThemeContext';
+
 import {Header, Icon, Link} from '../../UI-Kit';
 
 import {HeaderRank, HeaderType} from '../Header/Header';
@@ -23,7 +25,13 @@ const LinkHeader: React.FC<LinkHeaderProps> = ({
   className,
   children,
 }) => {
-  const classname = classnames(styles.LinkHeader, styles[type], className);
+  const theme = useTheme();
+  const classname = classnames(
+    styles.LinkHeader,
+    styles[`LinkHeader-${theme}`],
+    styles[type],
+    className,
+  );
 
   return (
     <Header rank={rank} type={type} className={classname}>

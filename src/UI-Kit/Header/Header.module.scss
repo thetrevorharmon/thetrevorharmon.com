@@ -3,7 +3,6 @@
 .Header {
   font-weight: bold;
   font-style: normal;
-  color: $text-color-primary;
 }
 
 @function header-size($header, $size) {
@@ -36,7 +35,6 @@
 .Headline + .Tagline,
 .Title + .Tagline {
   margin-top: -1rem;
-  color: $text-color-secondary;
 
   @include mobile-only {
     margin-top: header-size(tagline, phone);
@@ -73,11 +71,27 @@
   line-height: header-size(section-title, desktop);
   font-weight: normal;
 
-  color: $text-color-secondary;
-
   @include mobile-only {
     font-size: header-size(section-title, phone);
     line-height: header-size(section-title, phone) / 0.833333;
     letter-spacing: header-size(section-title, phone-kerning);
   }
 }
+
+@mixin Header($theme) {
+  .Header-#{$theme} {
+    color: color($theme, text-bold);
+
+    .SectionTitle {
+      color: color($theme, text);
+    }
+
+    &.Headline + .Tagline,
+    &.Title + .Tagline {
+      color: color($theme, text-muted);
+    }
+  }
+}
+
+@include Header(Light);
+@include Header(Dark);

@@ -5,7 +5,7 @@ $grid-gutter-size: 1rem;
 .ProjectTemplate {
   img {
     max-width: 100%;
-    border: 1px solid #2a2a2a;
+    border: 1px solid;
   }
 }
 
@@ -34,21 +34,14 @@ $grid-gutter-size: 1rem;
 
 .ProjectTemplate {
   a {
-    color: $brand-primary;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-
-    &:hover {
-      border-color: #dd0505;
-    }
   }
 
   .Description {
     box-sizing: border-box;
     margin-bottom: $grid-gutter-size * 2;
     margin-right: $grid-gutter-size;
-
-    @include left-border();
 
     p:last-child {
       margin-bottom: 0;
@@ -59,3 +52,26 @@ $grid-gutter-size: 1rem;
     margin-bottom: 1rem;
   }
 }
+
+@mixin ProjectTemplate($theme) {
+  .ProjectTemplate-#{$theme} {
+    img {
+      border-color: color($theme, img-border);
+    }
+
+    a {
+      color: color($theme, primary-text);
+
+      &:hover {
+        border-color: color($theme, primary-text);
+      }
+    }
+
+    .Description {
+      @include left-border(color($theme, primary));
+    }
+  }
+}
+
+@include ProjectTemplate(Light);
+@include ProjectTemplate(Dark);

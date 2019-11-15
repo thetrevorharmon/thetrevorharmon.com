@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../context/ThemeContext';
 import {Button, Image} from '../../UI-Kit';
-
 import {Routes} from '../../utils';
-
 import * as styles from './Tile.module.scss';
 
 interface TileProps {
@@ -13,7 +12,8 @@ interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({item, className}) => {
-  const classname = classnames(styles.Tile, className);
+  const theme = useTheme();
+  const classname = classnames(styles.Tile, styles[`Tile-${theme}`], className);
 
   return (
     <div className={classname}>

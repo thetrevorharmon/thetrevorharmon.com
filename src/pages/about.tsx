@@ -2,13 +2,11 @@ import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-
-import * as styles from './about.module.scss';
-
-import {Button, Header, Image, Link, Tile} from '../UI-Kit';
-
+import {Header, Image} from '../UI-Kit';
 import {Routes} from '../utils';
+import * as styles from './about.module.scss';
 
 interface AboutPageProps {
   data: {
@@ -31,8 +29,13 @@ export default (props: AboutPageProps) => {
     url: Routes.about(),
   };
 
+  const theme = useTheme();
+
   return (
-    <Layout className={styles.AboutPage} pageMetadata={pageMetadata}>
+    <Layout
+      className={classnames(styles.AboutPage, styles[`AboutPage-${theme}`])}
+      pageMetadata={pageMetadata}
+    >
       <div className="row mb-5">
         <div className="col-lg-12">
           <Header

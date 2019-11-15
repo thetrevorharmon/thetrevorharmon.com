@@ -1,18 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../../../../context/ThemeContext';
+import {Header, Image, Link, LinkHeader, Meta} from '../../../../../UI-Kit';
 import * as styles from './PostHeader.module.scss';
-
-import {
-  Header,
-  Icon,
-  Image,
-  Link,
-  LinkHeader,
-  Meta,
-} from '../../../../../UI-Kit';
-
-import {Helpers} from '../../../../../utils';
 
 interface PostHeaderProps {
   post: BlogPost | LinkPost;
@@ -53,10 +44,13 @@ const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
     );
   };
 
+  const theme = useTheme();
+
   return (
     <div
       className={classnames(
         styles.PostHeader,
+        styles[`PostHeader-${theme}`],
         'row',
         'mt-4 mb-2',
         'mt-lg-6 mb-lg-4',

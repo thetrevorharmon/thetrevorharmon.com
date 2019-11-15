@@ -1,3 +1,5 @@
+@import 'foundation';
+
 .Tile {
   position: relative;
   overflow: hidden;
@@ -9,7 +11,7 @@
   width: 100%;
   height: 17.5rem;
 
-  border: 1px solid #2a2a2a;
+  border: 1px solid;
   position: relative;
 }
 
@@ -28,3 +30,12 @@
   height: 100%;
   z-index: 1;
 }
+
+@mixin Tile($theme) {
+  .Tile-#{$theme} {
+    border-color: color($theme, img-border);
+  }
+}
+
+@include Tile(Light);
+@include Tile(Dark);

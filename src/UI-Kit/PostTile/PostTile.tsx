@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../context/ThemeContext';
 import {LinkHeader, Meta} from '../../UI-Kit';
-
 import {Routes} from '../../utils';
-
 import * as styles from './PostTile.module.scss';
 
 interface PostTileProps {
@@ -13,7 +12,12 @@ interface PostTileProps {
 }
 
 const PostTile: React.FC<PostTileProps> = ({post, className}) => {
-  const classname = classnames(styles.PostTile, className);
+  const theme = useTheme();
+  const classname = classnames(
+    styles.PostTile,
+    styles[`PostTile-${theme}`],
+    className,
+  );
 
   return (
     <>

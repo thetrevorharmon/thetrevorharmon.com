@@ -1,5 +1,10 @@
 @import 'foundation';
 
-.Meta {
-  color: $text-color-tertiary;
+@mixin Meta($theme) {
+  .Meta-#{$theme} {
+    color: color($theme, text-muted);
+  }
 }
+
+@include Meta(Light);
+@include Meta(Dark);

@@ -1,17 +1,29 @@
-@import './postTemplate.scss';
+@import 'foundation';
+@import '../../../UI-Kit/Header/Header.module.scss';
 
 .case-study-template {
-  @extend .post-template;
+  line-height: 1.8;
+
+  @include mobile-only {
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  a.icon-link {
+    border-bottom: none;
+  }
 
   .hero-header {
-    border: 1px solid $text-color-primary;
+    border: 1px solid;
     height: 26rem;
     width: 100%;
   }
 
   .table-of-contents {
-    @include left-border;
-
     ol {
       counter-reset: item;
       padding-left: 0;
@@ -28,4 +40,166 @@
       }
     }
   }
+
+  .post-header {
+    .photo-attribution {
+      text-align: center;
+      font-size: 0.9rem;
+      padding-top: 0.5rem;
+    }
+  }
+
+  .post-body {
+    h1 {
+      @extend .Header;
+      @extend .Headline;
+    }
+
+    h2 {
+      @extend .Header;
+      @extend .Title;
+    }
+
+    h3 {
+      @extend .Header;
+      @extend .Subtitle;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 1.5em 0 0.3em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      @include mobile-only {
+        margin-top: 1.65em;
+        margin-bottom: 0.5em;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      margin: 1rem 0;
+
+      @include mobile-only {
+        margin: 0;
+      }
+    }
+
+    p,
+    .gatsby-highlight {
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    p img {
+      margin-bottom: 0;
+      margin-top: 0.5rem;
+    }
+
+    blockquote {
+      margin-left: 0;
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .scrollable {
+      margin: 2.5rem 0 3rem;
+      position: relative;
+
+      img {
+        margin: 0;
+      }
+
+      @include mobile-only {
+        overflow: scroll;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        img {
+          max-width: none;
+          min-height: 15rem;
+          max-height: 30rem;
+          margin-bottom: 2rem;
+        }
+
+        &:after {
+          content: 'Scroll →';
+          display: block;
+          position: absolute;
+          bottom: 0;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .article-attribution {
+      font-style: italic;
+    }
+  }
+
+  .post-footer {
+    position: relative;
+    flex-direction: column;
+    padding-top: 1rem;
+  }
 }
+
+@mixin CaseStudyTemplate($theme) {
+  .case-study-template.#{$theme} {
+    a {
+      color: color($theme, primary-text);
+
+      &:hover {
+        border-color: color($theme, primary-text);
+      }
+    }
+
+    .post-header {
+      .photo-attribution {
+        color: color($theme, text-muted);
+      }
+    }
+
+    .table-of-contents {
+      @include left-border(color($theme, primary));
+    }
+
+    .post-body {
+      color: color($theme, text);
+
+      h1,
+      h2,
+      h3 {
+        color: color($theme, text-bold);
+      }
+
+      img {
+        background: color($theme, body-bg);
+      }
+
+      blockquote {
+        @include left-border(color($theme, primary));
+        color: color($theme, text-muted);
+      }
+
+      .scrollable {
+        @include mobile-only {
+          &:after {
+            color: color($theme, text-muted);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include CaseStudyTemplate(Light);
+@include CaseStudyTemplate(Dark);

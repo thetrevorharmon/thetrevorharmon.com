@@ -1,17 +1,23 @@
 import classnames from 'classnames';
 import * as React from 'react';
+
+import {useTheme} from '../../context/ThemeContext';
 import {Link} from '../../UI-Kit';
-
-import * as styles from './Footer.module.scss';
-
 import {ExternalLinks, Routes} from '../../utils';
+import * as styles from './Footer.module.scss';
 
 interface FooterProps {
   className?: string;
 }
 
 const Footer: React.FC<FooterProps> = ({className, children}) => {
-  const classname = classnames(className, 'container', styles.Footer);
+  const theme = useTheme();
+  const classname = classnames(
+    className,
+    'container',
+    styles.Footer,
+    styles[`Footer-${theme}`],
+  );
 
   const footerLinks = [
     {

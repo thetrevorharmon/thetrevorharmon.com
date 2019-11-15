@@ -5,17 +5,46 @@
   position: absolute;
   top: 0;
   width: 100%;
-  background: white;
   height: 6.1rem;
   overflow: hidden;
 
   transition: all 0.2s ease-in-out;
 
   &.Open {
-    background: #2a2a2a;
     height: 100%;
     position: fixed;
     z-index: 10;
+  }
+}
+
+.ThemeToggle {
+  background: none;
+  padding: 0;
+  border: none;
+  margin-left: 2rem;
+
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .ThemeToggleIcon {
+    position: relative;
+    top: 2px;
+    display: block;
+    width: 1.25rem;
+  }
+  @include mobile-only {
+    margin-left: 1rem;
+
+    .ThemeToggleIcon {
+      top: 4px;
+      width: 1.5rem;
+    }
   }
 }
 
@@ -31,10 +60,6 @@
 
 .Brand {
   transition: none;
-
-  &:hover {
-    background: darken($brand-primary, 10%);
-  }
 }
 
 .Links {
@@ -67,7 +92,6 @@
   .Bar {
     height: 2px;
     width: 1.8rem;
-    background: #2a2a2a;
 
     &:last-child {
       margin-top: 1rem;
@@ -78,8 +102,6 @@
 
   .Open & {
     .Bar {
-      background: #fff;
-
       &:first-child {
         transform: translate(0, 9px) rotate(45deg);
       }
@@ -103,7 +125,6 @@
 
     a {
       text-decoration: none;
-      color: #eeeeee;
       text-transform: uppercase;
 
       &:hover {
@@ -112,3 +133,39 @@
     }
   }
 }
+
+@mixin Navbar($theme) {
+  .Navbar-#{$theme} {
+    &.Open {
+      background: color($theme, body-bg);
+    }
+
+    .ThemeToggle {
+      svg path {
+        fill: color($theme, primary);
+      }
+
+      &:focus,
+      &:hover {
+        svg path {
+          fill: color($theme, text);
+        }
+      }
+    }
+
+    .Brand:hover {
+      background: color($theme, primary-focus);
+    }
+
+    .Toggle .Bar {
+      background: color($theme, text-bold);
+    }
+
+    .MobileLinks a {
+      color: color($theme, text);
+    }
+  }
+}
+
+@include Navbar(Light);
+@include Navbar(Dark);

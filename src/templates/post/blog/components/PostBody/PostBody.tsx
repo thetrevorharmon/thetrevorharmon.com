@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../../../../context/ThemeContext';
 import {Button, Link} from '../../../../../UI-Kit';
-
 import * as styles from './PostBody.module.scss';
 import './PostBody.scss';
 
@@ -23,9 +23,11 @@ const PostBody: React.FC<PostBodyProps> = (props: PostBodyProps) => {
     );
   };
 
+  const theme = useTheme();
+
   return (
     <>
-      <div className="post-body">
+      <div className={`post-body ${theme}`}>
         <div className="row">
           <div className={layoutClassName}>
             <div

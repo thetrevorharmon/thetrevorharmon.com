@@ -1,15 +1,20 @@
 import classnames from 'classnames';
 import React, {useState} from 'react';
+
+import {Theme, useTheme, useToggleTheme} from '../../context/ThemeContext';
+import {Button, Icon, Link} from '../../UI-Kit';
+import {Routes} from '../../utils';
 import * as styles from './Navbar.module.scss';
 
-import {Button, Link} from '../../UI-Kit';
-
-import {Routes} from '../../utils';
-
 const Navbar: React.FC<{}> = () => {
+  const theme = useTheme();
   const [isOpen, setOpen] = useState(false);
 
-  const classname = classnames(styles.Navbar, isOpen && styles.Open);
+  const classname = classnames(
+    styles.Navbar,
+    styles[`Navbar-${theme}`],
+    isOpen && styles.Open,
+  );
 
   const navbarLinks = [
     {
@@ -31,6 +36,8 @@ const Navbar: React.FC<{}> = () => {
   ];
 
   const handleMenuToggle = () => setOpen(!isOpen);
+
+  const toggleTheme = useToggleTheme();
 
   return (
     <>
@@ -63,6 +70,13 @@ const Navbar: React.FC<{}> = () => {
               <div className={styles.Bar} />
               <div className={styles.Bar} />
             </a>
+
+            <button onClick={toggleTheme} className={styles.ThemeToggle}>
+              <Icon
+                name={theme === Theme.Dark ? 'sun' : 'moon'}
+                className={styles.ThemeToggleIcon}
+              />
+            </button>
           </div>
 
           <ul className={styles.MobileLinks}>

@@ -2,13 +2,11 @@ import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-
-import * as styles from './homepage.module.scss';
-
-import {Helpers, Routes} from '../utils';
-
 import {CaseStudyTile, Header, Link, PostTile, Tile} from '../UI-Kit';
+import {Helpers, Routes} from '../utils';
+import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
   data: {
@@ -33,11 +31,19 @@ export default (props: IndexPageProps) => {
     props.data.allContentfulLinkPost,
   ).slice(0, 3);
 
+  const theme = useTheme();
+
   return (
     <Layout>
       <div className="row">
         <div className="col-sm-12 col-md-10 col-lg-8">
-          <div className={classnames(styles.MainHeader, 'my-6 mt-lg-8')}>
+          <div
+            className={classnames(
+              styles.MainHeader,
+              styles[`MainHeader-${theme}`],
+              'my-6 mt-lg-8',
+            )}
+          >
             <span>Hi, I'm</span>
             <Header
               rank={1}

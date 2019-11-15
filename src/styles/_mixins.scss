@@ -9,7 +9,7 @@
   }
 }
 
-@mixin left-border() {
+@mixin left-border($color) {
   padding-left: 2rem;
   position: relative;
 
@@ -19,7 +19,7 @@
     position: absolute;
     height: 100%;
     width: 15px;
-    background: $brand-primary;
+    background: $color;
     left: 0;
     top: 0;
     z-index: -1;

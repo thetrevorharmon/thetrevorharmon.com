@@ -2,8 +2,12 @@
 
 .PostTile {
   display: block;
+}
 
-  .Description {
-    color: $text-color-secondary;
+@mixin PostTile($theme) {
+  .PostTile-#{$theme} {
+    .Description {
+      color: color($theme, text);
+    }
   }
 }

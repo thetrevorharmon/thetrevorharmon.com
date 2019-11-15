@@ -7,11 +7,8 @@
   padding-left: 2rem;
   box-sizing: border-box;
 
-  @include left-border();
-
   p {
     font-size: 1.25rem;
-    color: $text-color-secondary;
   }
 }
 
@@ -42,17 +39,15 @@
   font-size: 1.15rem;
 }
 
-// .Wrapper {
-//   background: red;
-//   flex: 1 0 auto;
-//   position: relative;
-//   width: 20%;
-//   height: 0;
-//   padding-bottom: 20%;
-// }
-// .Wrapper:after {
-//   content: "";
-//   float:left;
-//   display: block;
-//   padding-top: 100%;
-// }
+@mixin Tile($theme) {
+  .Tile-#{$theme} {
+    @include left-border(color($theme, primary));
+
+    p {
+      color: color($theme, text-muted);
+    }
+  }
+}
+
+@include Tile(Light);
+@include Tile(Dark);

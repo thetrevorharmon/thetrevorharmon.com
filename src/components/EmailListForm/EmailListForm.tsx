@@ -4,9 +4,10 @@ import addToMailchimp, {
   MailchimpResponse,
 } from 'gatsby-plugin-mailchimp';
 import React, {useState} from 'react';
-import * as styles from './EmailListForm.module.scss';
 
 import classnames from 'classnames';
+import {useTheme} from '../../context/ThemeContext';
+import * as styles from './EmailListForm.module.scss';
 
 interface SiteData {
   site: {
@@ -129,10 +130,16 @@ const EmailListForm: React.FC<{}> = ({children}) => {
     checkForError(event.currentTarget.value, 'email', setEmailError);
   };
 
+  const theme = useTheme();
+
   return (
     <form
       onSubmit={handleSubmit}
-      className={classnames(styles.EmailListForm, 'row')}
+      className={classnames(
+        styles.EmailListForm,
+        styles[`EmailListForm-${theme}`],
+        'row',
+      )}
     >
       <div
         className={classnames(

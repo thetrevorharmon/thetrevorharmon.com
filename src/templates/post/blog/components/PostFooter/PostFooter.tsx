@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {useTheme} from '../../../../../context/ThemeContext';
 import {Link} from '../../../../../UI-Kit';
-
 import {Routes} from '../../../../../utils';
-
 import * as styles from './PostFooter.module.scss';
 
 interface PostFooterProps {
@@ -15,6 +14,7 @@ interface PostFooterProps {
 type PostNavigationDirection = 'Older' | 'Newer';
 
 const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
+  const theme = useTheme();
   const {olderPost, newerPost} = props;
 
   const makeNavigation = (
@@ -37,7 +37,9 @@ const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
   };
 
   return (
-    <div className={styles.PostFooter}>
+    <div
+      className={classnames(styles[`PostFooter-${theme}`], styles.PostFooter)}
+    >
       <div className="row">
         {olderPost && makeNavigation(olderPost, 'Older')}
         {newerPost && makeNavigation(newerPost, 'Newer')}
