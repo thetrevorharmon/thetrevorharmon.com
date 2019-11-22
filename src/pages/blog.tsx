@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Header, Link, LinkHeader, Meta} from '../UI-Kit';
+import {BlogItem, FeaturedItem, Header, Spacer, TextStyle} from '../new-UI-Kit';
 import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
@@ -27,7 +27,7 @@ interface ProjectsPageProps {
 
 export default (props: ProjectsPageProps) => {
   const pageMetadata: PageMetadata = {
-    description: `My thoughts about code, design, and other musings.`,
+    description: `A collection of my thoughts, typically related to code or design.`,
     title: 'Blog',
     url: Routes.blog(),
   };
@@ -39,53 +39,44 @@ export default (props: ProjectsPageProps) => {
 
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="row">
-        <div className="col">
-          <Header
-            rank={1}
-            type="Headline"
-            className={classnames('mt-6 mt-lg-8')}
-          >
-            {pageMetadata.title}
-          </Header>
-          <Header rank={3} type="Tagline" className="mb-6">
-            {pageMetadata.description}
-          </Header>
-        </div>
-      </div>
-
-      {posts.map((post, index) => (
-        <div className={classnames('mb-5')} key={index}>
-          <div className="row">
-            <div className="col-lg-8">
-              <LinkHeader
-                hasLinkIcon={post.postType === 'Link'}
-                rank={2}
-                type="Title"
-                className="mb-md-4"
-                href={Routes.blogPost(post.slug)}
+      <Spacer size="huge">
+        <div className="row">
+          <div className="col">
+            <Spacer size="small">
+              <Header
+                rank={1}
+                type="Display"
+                className={classnames('mt-6 mt-lg-8')}
               >
-                {post.title}
-              </LinkHeader>
-              <Header rank={3} type="Tagline">
-                {post.description || post.body.childMarkdownRemark.excerpt}
+                {pageMetadata.title}
               </Header>
-              <Meta post={post} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-8" key={index}>
-              <Link href={Routes.blogPost(post.slug)}>
-                Continue Reading &rarr;
-              </Link>
-            </div>
+              <p>
+                <TextStyle style="Body">{pageMetadata.description}</TextStyle>
+              </p>
+            </Spacer>
           </div>
         </div>
-      ))}
+
+        {posts.map((post, index) => (
+          <Spacer size="large" key={index}>
+            <div className="row">
+              <div className="col-lg-8">
+                {index === 1 ? (
+                  // TODO: fix assertion
+                  <FeaturedItem post={post as BlogPost} />
+                ) : (
+                  <BlogItem post={post} />
+                )}
+              </div>
+            </div>
+          </Spacer>
+        ))}
+      </Spacer>
     </Layout>
   );
 };
 
+// TODO: figure out featured post
 export const query = graphql`
   query blogPageQuery {
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
@@ -94,9 +85,12 @@ export const query = graphql`
           title
           slug
           description
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMM YYYY")
           internal {
             type
+          }
+          heroImage {
+            ...ContentfulAsset_width750
           }
           body {
             childMarkdownRemark {
@@ -115,7 +109,7 @@ export const query = graphql`
           title
           slug
           link
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMM YYYY")
           internal {
             type
           }

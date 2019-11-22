@@ -39,21 +39,21 @@ interface MarkdownRemark {
   timeToRead?: string;
 }
 
-interface PortfolioItem extends BaseObject {
+interface ProjectPreview extends BaseObject {
   title: string;
   slug: string;
   featureImage: ContentfulAsset;
   featureOnHomepage: boolean;
+  projectCompletionDate?: Date;
 }
 
-interface Project extends PortfolioItem {
+interface Project extends ProjectPreview {
   client?: string;
   description: {
     id?: string;
     description: string;
     childMarkdownRemark?: MarkdownRemark;
   };
-  projectCompletionDate?: Date;
   projectImages: [ContentfulAsset];
 }
 

@@ -1,0 +1,20 @@
+@import 'foundation';
+
+.Item {
+  &,
+  & > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@mixin ItemSize($size) {
+  .Item-#{$size} + .Item-#{$size} {
+    margin-top: space($size);
+  }
+}
+
+$sizes: tiny, little, small, normal, medium, big, large, huge;
+@each $size in $sizes {
+  @include ItemSize($size);
+}

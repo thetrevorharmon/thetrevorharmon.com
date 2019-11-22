@@ -1,0 +1,32 @@
+@import 'foundation';
+
+.LinkList {
+  width: 100%;
+  max-width: 500px; // TODO: remove this
+}
+
+.Pair {
+  display: flex;
+  width: 100%;
+}
+
+.Link {
+  max-width: 100%;
+  margin-right: space(normal);
+  box-sizing: border-box;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin Date($theme) {
+  .Date-#{$theme} {
+    color: color($theme, text-muted);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+}
+
+@include Date(Light);
+@include Date(dark);

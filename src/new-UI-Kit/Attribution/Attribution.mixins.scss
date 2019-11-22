@@ -1,0 +1,17 @@
+@import 'foundation';
+@import 'ui-kit-mixins';
+
+@mixin Attribution($theme) {
+  &.Attribution-Photo {
+    @include text-style-Caption;
+    margin-top: space(tiny);
+    text-align: center;
+  }
+
+  &.Attribution-Article {
+    @include text-style-Body;
+    font-style: italic;
+  }
+
+  color: color($theme, text-muted);
+}

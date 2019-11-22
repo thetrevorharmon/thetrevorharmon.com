@@ -20,9 +20,9 @@
 
 body,
 html {
-  font-family: $sans-serif-font-stack;
-  font-size: 16px;
-  line-height: 1.5;
+  font-family: $font-stack;
+  font-size: $base-font-size;
+  line-height: 1.666667;
 }
 
 hr {

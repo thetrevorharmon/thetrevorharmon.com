@@ -9,7 +9,7 @@ interface MetaProps {
   className?: string;
 }
 
-const Meta: React.FC<MetaProps> = ({post, className}) => {
+const Meta = ({post, className}: MetaProps) => {
   const theme = useTheme();
   const classname = classnames(className, styles[`Meta-${theme}`]);
 

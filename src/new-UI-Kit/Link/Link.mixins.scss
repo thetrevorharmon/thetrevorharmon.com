@@ -1,0 +1,23 @@
+@import 'foundation';
+
+@mixin Link($theme) {
+  color: color($theme, primary-text);
+  text-decoration: underline;
+  transition: all 0.1s ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: color($theme, primary-text-focus);
+  }
+}
+
+@mixin Link-Muted($theme) {
+  color: color($theme, text-muted);
+  text-decoration: underline;
+  transition: all 0.1s ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: color($theme, text);
+  }
+}

@@ -1,0 +1,10 @@
+@import './Meta.mixins.scss';
+
+@mixin Meta-Theme($theme) {
+  .Meta-#{$theme} {
+    @include Meta($theme);
+  }
+}
+
+@include Meta-Theme(Light);
+@include Meta-Theme(Dark);
