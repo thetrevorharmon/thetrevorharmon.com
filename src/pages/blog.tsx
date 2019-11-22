@@ -3,85 +3,56 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Header, Link, LinkHeader, Meta} from '../UI-Kit';
+import {BlogPost, LinkPost} from '../types';
+import {
+  FeaturedPostItem,
+  Header,
+  PostItem,
+  Space,
+  Spacer,
+  TextStyle,
+} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulBlogPost: {
-      edges: [
-        {
-          node: BlogPost;
-        },
-      ];
-    };
-    allContentfulLinkPost: {
-      edges: [
-        {
-          node: LinkPost;
-        },
-      ];
-    };
+    allContentfulBlogPost: allContentfulNodes<BlogPost>;
+    allContentfulLinkPost: allContentfulNodes<LinkPost>;
   };
 }
 
 export default (props: ProjectsPageProps) => {
   const pageMetadata: PageMetadata = {
-    description: `My thoughts about code, design, and other musings.`,
+    description: `A collection of my thoughts, typically related to code or design.`,
     title: 'Blog',
     url: Routes.blog(),
   };
 
-  const posts = Helpers.combinePostTypes(
-    props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost,
-  );
+  const [featuredPost, posts] = Helpers.combinePostTypes({
+    blogPosts: props.data.allContentfulBlogPost.nodes,
+    linkPosts: props.data.allContentfulLinkPost.nodes,
+  });
 
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="row">
-        <div className="col">
-          <Header
-            rank={1}
-            type="Headline"
-            className={classnames('mt-6 mt-lg-8')}
-          >
-            {pageMetadata.title}
-          </Header>
-          <Header rank={3} type="Tagline" className="mb-6">
-            {pageMetadata.description}
-          </Header>
-        </div>
-      </div>
+      <Spacer>
+        <Space size="huge" />
+        <Header rank={1} type="Display">
+          {pageMetadata.title}
+        </Header>
+        <Space size="small" />
+        <p>
+          <TextStyle style="Body">{pageMetadata.description}</TextStyle>
+        </p>
+        <Space size="huge" />
 
-      {posts.map((post, index) => (
-        <div className={classnames('mb-5')} key={index}>
-          <div className="row">
-            <div className="col-lg-8">
-              <LinkHeader
-                hasLinkIcon={post.postType === 'Link'}
-                rank={2}
-                type="Title"
-                className="mb-md-4"
-                href={Routes.blogPost(post.slug)}
-              >
-                {post.title}
-              </LinkHeader>
-              <Header rank={3} type="Tagline">
-                {post.description || post.body.childMarkdownRemark.excerpt}
-              </Header>
-              <Meta post={post} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-8" key={index}>
-              <Link href={Routes.blogPost(post.slug)}>
-                Continue Reading &rarr;
-              </Link>
-            </div>
-          </div>
-        </div>
-      ))}
+        <Spacer size="large">
+          <FeaturedPostItem post={featuredPost} />
+          {posts.map((post) => (
+            <PostItem post={post} key={post.slug} />
+          ))}
+        </Spacer>
+      </Spacer>
     </Layout>
   );
 };
@@ -89,44 +60,13 @@ export default (props: ProjectsPageProps) => {
 export const query = graphql`
   query blogPageQuery {
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
-      edges {
-        node {
-          title
-          slug
-          description
-          date(formatString: "MMMM DD, YYYY")
-          internal {
-            type
-          }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-          tags
-        }
+      nodes {
+        ...ContentfulBlogPost
       }
     }
     allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
-      edges {
-        node {
-          title
-          slug
-          link
-          date(formatString: "MMMM DD, YYYY")
-          internal {
-            type
-          }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-        }
+      nodes {
+        ...ContentfulLinkPost
       }
     }
   }

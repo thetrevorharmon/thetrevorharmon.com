@@ -4,55 +4,82 @@ import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {Icon, IconName} from '../../UI-Kit';
 import * as styles from './Link.module.scss';
+
+interface LinkIconProps {
+  position: 'leading' | 'trailing';
+  name: IconName;
+}
 
 interface LinkProps {
   className?: string;
-  href: string;
-  isIconLink?: boolean;
-  noLinkStyling?: boolean;
+  url: string;
   target?: string;
+  isMuted?: boolean;
+  icon?: LinkIconProps;
+  children: React.ReactNode;
 }
 
-const Link: React.FC<LinkProps> = ({
-  href,
-  isIconLink,
-  noLinkStyling,
+export const Link = ({
+  url,
   target,
   className,
+  isMuted,
+  icon,
   children,
-}) => {
-  const externalPattern = /^http/;
-  const externalLink = externalPattern.test(href);
+}: LinkProps) => {
+  const externalUrlPattern = /^http/;
+  const isExternalUrl = externalUrlPattern.test(url);
 
   const theme = useTheme();
   const classname = classnames(
     className,
-    noLinkStyling && styles.Reset,
-    !noLinkStyling && styles.Link,
-    !noLinkStyling && styles[`Link-${theme}`],
-    isIconLink && styles.IconLink,
-    isIconLink && styles[`IconLink-${theme}`],
+    styles.Link,
+    styles[`Link-${theme}`],
+    isMuted && styles.Muted,
   );
 
-  return externalLink ? (
+  const getInnerMarkup = () => {
+    if (icon == null) {
+      return children;
+    }
+
+    const iconElement = (
+      <Icon
+        name={icon.name}
+        size="normal"
+        className={classnames([styles.Icon, styles[`Icon-${icon.position}`]])}
+      />
+    );
+
+    return icon.position === 'leading' ? (
+      <>
+        {iconElement}
+        {children}
+      </>
+    ) : (
+      <>
+        {children}
+        {iconElement}
+      </>
+    );
+  };
+
+  const innerMarkup = getInnerMarkup();
+
+  return isExternalUrl ? (
     <OutboundLink
       className={classname}
-      href={href}
+      href={url}
       target={target || '_blank'}
       rel="noreferrer"
     >
-      {children}
+      {innerMarkup}
     </OutboundLink>
   ) : (
-    <GatsbyLink className={classname} to={href} target={target || ''}>
-      {children}
+    <GatsbyLink className={classname} to={url} target={target || ''}>
+      {innerMarkup}
     </GatsbyLink>
   );
 };
-
-Link.defaultProps = {
-  noLinkStyling: false,
-};
-
-export default Link;

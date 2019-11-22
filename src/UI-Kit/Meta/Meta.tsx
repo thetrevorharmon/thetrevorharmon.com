@@ -2,24 +2,33 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {Icon} from '../../UI-Kit';
 import * as styles from './Meta.module.scss';
+import {MetaProps} from './types';
 
-interface MetaProps {
-  post: BlogPost | LinkPost;
-  className?: string;
-}
-
-const Meta: React.FC<MetaProps> = ({post, className}) => {
+export const Meta = ({
+  className,
+  date,
+  isLinkPost = false,
+  timeToRead,
+  client,
+}: MetaProps) => {
   const theme = useTheme();
   const classname = classnames(className, styles[`Meta-${theme}`]);
 
-  const timeToRead = post.body.childMarkdownRemark.timeToRead
-    ? `${Math.floor(+post.body.childMarkdownRemark.timeToRead)} min read`
+  const timeToReadPhrase = timeToRead
+    ? `${Math.floor(+timeToRead)} min read`
     : undefined;
 
-  const meta = [post.date, timeToRead].filter(Boolean).join(' • ');
+  const meta = [date, timeToReadPhrase, client].filter(Boolean).join(' / ');
+  const icon = isLinkPost ? (
+    <Icon name="link" size="small" className={styles.Icon} />
+  ) : null;
 
-  return <p className={classname}>{meta}</p>;
+  return meta ? (
+    <p className={classname}>
+      {meta}
+      {icon}
+    </p>
+  ) : null;
 };
-
-export default Meta;

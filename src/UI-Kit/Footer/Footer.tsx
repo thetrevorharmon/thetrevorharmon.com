@@ -2,68 +2,56 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Link} from '../../UI-Kit';
-import {ExternalLinks, Routes} from '../../utils';
+import {Link, TextStyle} from '../../UI-Kit';
+import {ExternalLinks, useSiteData} from '../../utils';
 import * as styles from './Footer.module.scss';
 
 interface FooterProps {
   className?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({className, children}) => {
+export const Footer = ({className}: FooterProps) => {
+  const {title} = useSiteData();
   const theme = useTheme();
   const classname = classnames(
     className,
-    'container',
     styles.Footer,
     styles[`Footer-${theme}`],
   );
 
   const footerLinks = [
     {
-      display: 'LinkedIn',
-      location: ExternalLinks.linkedIn(),
+      display: 'Twitter',
+      location: ExternalLinks.twitter(),
     },
     {
       display: 'Github',
       location: ExternalLinks.github(),
     },
     {
-      display: 'Twitter',
-      location: ExternalLinks.twitter(),
+      display: 'LinkedIn',
+      location: ExternalLinks.linkedIn(),
     },
   ];
 
+  const linkMarkup = (
+    <ul className={styles.FooterLinks}>
+      {footerLinks.map((link) => (
+        <li key={link.display}>
+          <Link url={link.location} target="_blank">
+            {link.display}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <div className={classname}>
-      <div className="row py-5 d-flex align-items-center">
-        <div className="col-md-5 order-3 order-md-1">
-          &copy; {new Date().getFullYear()} The Trevor Harmon
-        </div>
-        <div className="col-12 col-md-2 order-1 order-md-2">
-          <Link
-            href={Routes.home()}
-            className={classnames(styles.Brand, 'global-brand')}
-          >
-            TH
-          </Link>
-        </div>
-        <div className="col-md-5 order-2 order-md-3 my-2 my-md-0">
-          <ul className={styles.FooterLinks}>
-            {footerLinks.map((link, index) => (
-              <li key={index}>
-                <Link href={link.location} target="_blank">
-                  {link.display}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <TextStyle style="Button">
+        &copy; {new Date().getFullYear()} {title}
+      </TextStyle>
+      {linkMarkup}
     </div>
   );
 };
-
-Footer.defaultProps = {};
-
-export default Footer;

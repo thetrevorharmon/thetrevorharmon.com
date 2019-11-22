@@ -1,0 +1,10 @@
+@import './Blockquote.mixins.scss';
+
+@mixin Blockquote-Theme($theme) {
+  .Blockquote-#{$theme} {
+    @include Blockquote($theme);
+  }
+}
+
+@include Blockquote-Theme(Light);
+@include Blockquote-Theme(Dark);

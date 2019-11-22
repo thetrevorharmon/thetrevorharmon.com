@@ -1,0 +1,72 @@
+@import 'foundation';
+
+@mixin font-size($size, $multiplier: 0.8) {
+  font-size: $size;
+
+  @include on-small-screens {
+    font-size: $size * $multiplier;
+  }
+}
+
+@mixin text-style-Display {
+  @include font-size(3.066666667rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+@mixin text-style-Title {
+  @include font-size(2.4rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+@mixin text-style-Blockquote {
+  @include font-size(2rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+
+@mixin text-style-Heading {
+  @include font-size(1.866666667rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+
+@mixin text-style-Subheading {
+  @include font-size(1.6rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  font-style: italic;
+}
+
+@mixin text-style-Body {
+  font-size: 1rem;
+}
+
+@mixin text-style-Label {
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+@mixin text-style-Meta {
+  font-size: 0.866666667rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@mixin text-style-Caption {
+  font-size: 0.866666667rem;
+}
+
+@mixin text-style-Button {
+  font-size: 1rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+}

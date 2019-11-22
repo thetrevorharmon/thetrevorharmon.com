@@ -1,0 +1,46 @@
+@import './TextStyle.mixins.scss';
+@import 'foundation';
+
+.TextStyle {
+  font-family: $font-stack;
+}
+
+.TextStyle-Display {
+  @include text-style-Display;
+}
+
+.TextStyle-Title {
+  @include text-style-Title;
+}
+
+.TextStyle-Blockquote {
+  @include text-style-Blockquote;
+}
+
+.TextStyle-Heading {
+  @include text-style-Heading;
+}
+
+.TextStyle-Subheading {
+  @include text-style-Subheading;
+}
+
+.TextStyle-Body {
+  @include text-style-Body;
+}
+
+.TextStyle-Label {
+  @include text-style-Label;
+}
+
+.TextStyle-Meta {
+  @include text-style-Meta;
+}
+
+.TextStyle-Caption {
+  @include text-style-Caption;
+}
+
+.TextStyle-Button {
+  @include text-style-Button;
+}

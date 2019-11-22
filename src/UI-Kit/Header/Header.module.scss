@@ -1,94 +1,18 @@
-@import 'foundation';
-
-.Header {
-  font-weight: bold;
-  font-style: normal;
-}
-
-@function header-size($header, $size) {
-  $_header: map-get($header-size, $header);
-  @return map-get($_header, $size);
-}
-
-.Headline {
-  font-size: header-size(headline, desktop);
-  letter-spacing: header-size(headline, desktop-kerning);
-
-  @include mobile-only {
-    letter-spacing: header-size(headline, phone-kerning);
-    font-size: header-size(headline, phone);
-    line-height: header-size(headline, phone);
-  }
-}
-
-.Tagline {
-  font-size: header-size(tagline, desktop);
-  line-height: 1.2;
-  letter-spacing: header-size(tagline, kerning);
-  font-weight: normal;
-
-  @include mobile-only {
-    font-size: header-size(tagline, phone);
-  }
-}
-
-.Headline + .Tagline,
-.Title + .Tagline {
-  margin-top: -1rem;
-
-  @include mobile-only {
-    margin-top: header-size(tagline, phone);
-  }
-}
-
-.Title {
-  font-size: header-size(title, desktop);
-  letter-spacing: header-size(title, desktop-kerning);
-  line-height: header-size(title, desktop);
-
-  @include mobile-only {
-    letter-spacing: header-size(title, phone-kerning);
-    font-size: header-size(title, phone);
-    line-height: header-size(title, phone);
-  }
-}
-
-.Subtitle {
-  font-size: header-size(subtitle, desktop);
-  letter-spacing: header-size(subtitle, kerning);
-  line-height: header-size(subtitle, desktop);
-
-  @include mobile-only {
-    font-size: header-size(subtitle, phone);
-    line-height: header-size(subtitle, phone);
-  }
-}
-
-.SectionTitle {
-  font-size: header-size(section-title, desktop);
-  text-transform: uppercase;
-  letter-spacing: header-size(section-title, desktop-kerning);
-  line-height: header-size(section-title, desktop);
-  font-weight: normal;
-
-  @include mobile-only {
-    font-size: header-size(section-title, phone);
-    line-height: header-size(section-title, phone) / 0.833333;
-    letter-spacing: header-size(section-title, phone-kerning);
-  }
-}
+@import './Header.mixins.scss';
 
 @mixin Header($theme) {
   .Header-#{$theme} {
-    color: color($theme, text-bold);
-
-    .SectionTitle {
-      color: color($theme, text);
+    &.Header-Display {
+      @include Header-Display($theme);
     }
-
-    &.Headline + .Tagline,
-    &.Title + .Tagline {
-      color: color($theme, text-muted);
+    &.Header-Title {
+      @include Header-Title($theme);
+    }
+    &.Header-Heading {
+      @include Header-Heading($theme);
+    }
+    &.Header-Subheading {
+      @include Header-Subheading($theme);
     }
   }
 }

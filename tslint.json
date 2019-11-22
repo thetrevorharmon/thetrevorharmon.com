@@ -5,7 +5,8 @@
   "rules": {
     "quotemark": [true, "single", "jsx-double"],
     "interface-name": [false],
-    "jsx-no-multiline-js": [false]
+    "jsx-no-multiline-js": [false],
+    "jsx-boolean-value": ["never"]
   },
   "rulesDirectory": [],
   "exclude": ["node_modules"]

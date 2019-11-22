@@ -1,0 +1,28 @@
+@import 'foundation';
+
+.Form {
+  $name-input-width: 1.6fr;
+  $email-input-width: 2fr;
+  $button-width: 6.1rem;
+
+  display: grid;
+  grid-template-columns: $name-input-width $email-input-width $button-width;
+  grid-column-gap: space(small);
+
+  @include on-small-screens {
+    display: flex;
+    flex-direction: column;
+    > div,
+    > button {
+      margin-bottom: space(small);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .SubmitButton {
+    align-self: end;
+  }
+}

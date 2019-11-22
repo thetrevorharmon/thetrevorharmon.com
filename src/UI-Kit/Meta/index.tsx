@@ -1,1 +1,2 @@
-export {default} from './Meta';
+export {Meta} from './Meta';
+export {MetaProps} from './types';

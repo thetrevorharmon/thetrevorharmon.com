@@ -1,25 +1,22 @@
 @import 'foundation';
 
 .Footer {
+  display: flex;
+  flex-wrap: wrap;
+
   border-top: 1px solid;
+  padding-top: space(medium);
+  padding-bottom: space(medium);
 }
 
 .FooterLinks {
   list-style-type: none;
   padding: 0;
-  margin: 0;
-
-  display: inline-block;
-  text-align: right;
-  width: 100%;
-
-  @include mobile-only {
-    text-align: left;
-  }
+  margin: 0 0 0 auto;
 
   li {
     display: inline-block;
-    margin-left: 2rem;
+    margin-left: space(small);
 
     &:first-child {
       margin-left: 0;
@@ -27,13 +24,9 @@
   }
 }
 
-.Brand {
-  display: block;
-  margin: 0 auto;
-  color: white;
-
-  @include mobile-only {
-    margin: 0;
+@include on-small-screens {
+  .FooterLinks {
+    width: 100%;
   }
 }
 

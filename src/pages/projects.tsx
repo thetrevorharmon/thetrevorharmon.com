@@ -1,20 +1,24 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
+import Masonry from 'react-masonry-css';
 
+import {ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
-import {Header, Tile} from '../UI-Kit';
+import {Project} from '../types';
+import {
+  Breakout,
+  FeaturedPostItem,
+  Header,
+  Meta,
+  Space,
+  Spacer,
+} from '../UI-Kit';
 import {Routes} from '../utils';
+import * as styles from './projects.module.scss';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulProject: {
-      edges: [
-        {
-          node: Project;
-        },
-      ];
-    };
+    allContentfulProject: allContentfulNodes<Project>;
   };
 }
 
@@ -26,26 +30,49 @@ export default (props: ProjectsPageProps) => {
     url: Routes.projects(),
   };
 
+  const projectNodes = props.data.allContentfulProject.nodes;
+  let featuredProject = null;
+  let projects = projectNodes;
+
+  if (projectNodes.length > 1) {
+    featuredProject = projectNodes.slice(0, 1)[0];
+    projects = projectNodes.slice(1, projectNodes.length - 1);
+  }
+
+  const featured =
+    featuredProject != null ? (
+      <>
+        <FeaturedPostItem post={featuredProject} />
+        <Space size="normal" />
+      </>
+    ) : null;
+
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="row">
-        <div className="col">
-          <Header
-            rank={1}
-            type="Headline"
-            className={classnames('my-6 my-lg-8')}
-          >
-            Projects
-          </Header>
-        </div>
-      </div>
-      <div className="row">
-        {props.data.allContentfulProject.edges.map(({node}, index) => (
-          <div className="col-md-6 col-lg-4" key={index}>
-            <Tile item={node} className="mb-4" />
-          </div>
-        ))}
-      </div>
+      <Spacer>
+        <Space size="huge" />
+        <Header rank={1} type="Display">
+          Projects
+        </Header>
+        <Space size="huge" />
+        {featured}
+        {projects && (
+          <Breakout>
+            <Masonry
+              breakpointCols={{
+                default: 2,
+                560: 1,
+              }}
+              className={styles.Grid}
+              columnClassName={styles.Column}
+            >
+              {projects.map((project, index) => (
+                <ProjectPreviewTile project={project} key={index} />
+              ))}
+            </Masonry>
+          </Breakout>
+        )}
+      </Spacer>
     </Layout>
   );
 };
@@ -53,10 +80,9 @@ export default (props: ProjectsPageProps) => {
 export const query = graphql`
   query projectsPageQuery {
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
-      edges {
-        node {
-          ...ContentfulProjectTile
-        }
+      nodes {
+        ...ContentfulProject
+        slug
       }
     }
   }

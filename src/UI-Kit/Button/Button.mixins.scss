@@ -1,0 +1,39 @@
+@import 'foundation';
+
+@mixin ButtonStyle($className, $theme) {
+  .#{$className} {
+    display: inline-block;
+    padding: space(small) space(normal);
+    line-height: 1;
+
+    transition: all 0.2s linear;
+
+    color: white;
+    background: color($theme, primary);
+
+    &:hover,
+    &:focus {
+      background: color($theme, primary-focus);
+    }
+  }
+
+  .FormButton {
+    padding: 0 space(small);
+
+    height: $input-height;
+    line-height: $input-height;
+  }
+
+  a.#{$className} {
+    text-decoration: none;
+  }
+
+  button.#{$className} {
+    background-image: none;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
