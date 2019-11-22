@@ -1,0 +1,18 @@
+@import 'foundation';
+
+@mixin IconColor($theme, $color) {
+  svg {
+    path,
+    polygon {
+      fill: color($theme, $color);
+
+      @content;
+    }
+  }
+}
+
+@mixin Icon($theme) {
+  .Icon-#{$theme} {
+    @include IconColor($theme, text);
+  }
+}

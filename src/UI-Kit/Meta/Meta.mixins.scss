@@ -1,0 +1,10 @@
+@import 'foundation';
+@import '../TextStyle/TextStyle.mixins.scss';
+@import '../Icon/Icon.mixins.scss';
+
+@mixin Meta($theme) {
+  @include text-style-Meta;
+  color: color($theme, text-muted);
+
+  @include IconColor($theme, primary-text);
+}

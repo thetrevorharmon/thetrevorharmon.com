@@ -1,0 +1,10 @@
+@import './Attribution.mixins.scss';
+
+@mixin Attribution-Theme($theme) {
+  .Attribution-#{$theme} {
+    @include Attribution($theme);
+  }
+}
+
+@include Attribution-Theme(Light);
+@include Attribution-Theme(Dark);

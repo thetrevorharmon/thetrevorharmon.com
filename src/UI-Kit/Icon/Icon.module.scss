@@ -1,22 +1,30 @@
-@import 'foundation';
+@import './Icon.mixins.scss';
 
-.Icon svg {
-  max-width: 1.75rem;
-  max-height: 1.75rem;
+.Icon {
   height: auto;
   width: auto;
-}
 
-@mixin Icon($theme) {
-  .Icon-#{$theme} svg {
-    path {
-      fill: color($theme, text);
+  &-large {
+    &,
+    svg {
+      max-height: 25px;
+      max-width: 25px;
     }
+  }
 
-    a & {
-      path {
-        fill: color($theme, primary);
-      }
+  &-normal {
+    &,
+    svg {
+      max-height: 17px;
+      max-width: 17px;
+    }
+  }
+
+  &-small {
+    &,
+    svg {
+      max-height: 14px;
+      max-width: 14px;
     }
   }
 }

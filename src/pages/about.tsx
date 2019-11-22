@@ -4,24 +4,29 @@ import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {Header, Image} from '../UI-Kit';
+import {
+  ContentfulAsset,
+  ContentfulBaseObject,
+  ContentfulLongText,
+} from '../types';
+import {Breakout, Header, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './about.module.scss';
 
+interface AboutPageData extends ContentfulBaseObject {
+  title: string;
+  post: ContentfulLongText;
+  featureImage: ContentfulAsset;
+}
+
 interface AboutPageProps {
   data: {
-    allContentfulAboutPage: {
-      edges: [
-        {
-          node: AboutPageData;
-        },
-      ];
-    };
+    allContentfulAboutPage: allContentfulNodes<AboutPageData>;
   };
 }
 
 export default (props: AboutPageProps) => {
-  const aboutPage = props.data.allContentfulAboutPage.edges[0].node;
+  const aboutPage = props.data.allContentfulAboutPage.nodes[0];
 
   const pageMetadata: PageMetadata = {
     description: aboutPage.post.childMarkdownRemark.excerpt || '',
@@ -36,29 +41,24 @@ export default (props: AboutPageProps) => {
       className={classnames(styles.AboutPage, styles[`AboutPage-${theme}`])}
       pageMetadata={pageMetadata}
     >
-      <div className="row mb-5">
-        <div className="col-lg-12">
-          <Header
-            rank={1}
-            type="Headline"
-            className={classnames('my-6 my-lg-8')}
-          >
-            {aboutPage.title}
-          </Header>
-        </div>
-        <div className="col-lg-12">
+      <Spacer>
+        <Space size="huge" />
+        <Header rank={1} type="Display">
+          {aboutPage.title}
+        </Header>
+        <Space size="huge" />
+
+        <Breakout>
           <Image src={aboutPage.featureImage} className={styles.FeatureImage} />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-lg-8 offset-lg-2">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: aboutPage.post.childMarkdownRemark.html,
-            }}
-          />
-        </div>
-      </div>
+        </Breakout>
+
+        <Space size="medium" />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: aboutPage.post.childMarkdownRemark.html,
+          }}
+        />
+      </Spacer>
     </Layout>
   );
 };
@@ -66,21 +66,18 @@ export default (props: AboutPageProps) => {
 export const query = graphql`
   query AboutPageQuery {
     allContentfulAboutPage {
-      edges {
-        node {
-          title
-          featureImage {
-            ...ContentfulAsset_width1200
+      nodes {
+        title
+        featureImage {
+          ...ContentfulAsset
+        }
+        post {
+          childMarkdownRemark {
+            html
+            excerpt
           }
-          post {
-            childMarkdownRemark {
-              html
-              excerpt
-            }
-            internal {
-              mediaType
-              content
-            }
+          internal {
+            type
           }
         }
       }

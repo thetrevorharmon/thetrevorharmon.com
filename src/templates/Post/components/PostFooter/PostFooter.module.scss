@@ -1,0 +1,48 @@
+@import 'foundation';
+
+.PostFooter {
+  width: 100%;
+}
+
+.Pair {
+  display: flex;
+  width: 100%;
+
+  @include on-small-screens {
+    flex-direction: column;
+  }
+}
+
+.Link {
+  max-width: 100%;
+  margin-right: space(normal);
+  box-sizing: border-box;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include on-small-screens {
+    margin-right: 0;
+    white-space: pre-wrap;
+    overflow: visible;
+  }
+}
+
+.Date {
+  margin-left: auto;
+  flex-shrink: 0;
+
+  @include on-small-screens {
+    margin-left: 0;
+  }
+}
+
+@mixin Date($theme) {
+  .Date-#{$theme} {
+    color: color($theme, text-muted);
+  }
+}
+
+@include Date(Light);
+@include Date(Dark);

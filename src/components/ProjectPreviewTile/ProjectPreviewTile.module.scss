@@ -1,0 +1,11 @@
+@import 'foundation';
+
+@mixin ProjectPreviewTile($theme) {
+  .ProjectPreviewTile-#{$theme} {
+    padding: space(normal);
+    background-color: color($theme, caption-bg);
+  }
+}
+
+@include ProjectPreviewTile(Light);
+@include ProjectPreviewTile(Dark);

@@ -1,31 +1,8 @@
-@import 'foundation';
-
-.AboutPage {
-  a {
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: all 0.1s linear;
-  }
-}
-
-.FeatureImage {
-  max-width: 100%;
-  border: 1px solid;
-}
+@import 'body-styles';
 
 @mixin AboutPage($theme) {
   .AboutPage-#{$theme} {
-    a {
-      color: color($theme, primary-text);
-
-      &:hover {
-        border-color: color($theme, primary-text);
-      }
-    }
-
-    .FeatureImage {
-      border-color: color($theme, img-border);
-    }
+    @include BodyStylesTheme($theme);
   }
 }
 

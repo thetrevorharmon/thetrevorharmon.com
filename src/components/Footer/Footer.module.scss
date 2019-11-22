@@ -1,0 +1,40 @@
+@import 'foundation';
+
+.Footer {
+  display: flex;
+  flex-wrap: wrap;
+
+  border-top: 1px solid;
+  padding-top: space(medium);
+  padding-bottom: space(medium);
+}
+
+.FooterLinks {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 0 auto;
+
+  li {
+    display: inline-block;
+    margin-left: space(small);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+@include on-small-screens {
+  .FooterLinks {
+    width: 100%;
+  }
+}
+
+@mixin Footer($theme) {
+  .Footer-#{$theme} {
+    border-color: color($theme, accent-line);
+  }
+}
+
+@include Footer(Light);
+@include Footer(Dark);

@@ -1,10 +1,16 @@
-@import 'foundation';
+@import './Meta.mixins.scss';
 
-@mixin Meta($theme) {
+.Icon {
+  margin-left: space(tiny);
+  position: relative;
+  top: 3px;
+}
+
+@mixin Meta-Theme($theme) {
   .Meta-#{$theme} {
-    color: color($theme, text-muted);
+    @include Meta($theme);
   }
 }
 
-@include Meta(Light);
-@include Meta(Dark);
+@include Meta-Theme(Light);
+@include Meta-Theme(Dark);
