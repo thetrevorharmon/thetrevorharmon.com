@@ -1,5 +1,10 @@
 @import './Input.mixins.scss';
 
+.Container {
+  display: flex;
+  flex-direction: column;
+}
+
 @include Input-Theme(Light);
 @include Input-Theme(Dark);
 

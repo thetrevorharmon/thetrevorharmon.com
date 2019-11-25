@@ -1,7 +1,10 @@
 declare module 'gatsby-plugin-mailchimp' {
   import * as React from 'react';
 
-  type MailchimpResult = 'success' | 'error';
+  export enum MailchimpResult {
+    Success = 'success',
+    Error = 'error',
+  }
 
   export interface MailchimpResponse {
     result: MailchimpResult;

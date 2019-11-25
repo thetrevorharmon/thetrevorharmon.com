@@ -24,6 +24,10 @@
   &.FullWidth {
     width: 100%;
   }
+
+  &.Invalid {
+    color: color($theme, primary-text);
+  }
 }
 
 @mixin Label($theme) {

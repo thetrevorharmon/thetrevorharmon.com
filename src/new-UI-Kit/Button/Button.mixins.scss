@@ -1,7 +1,7 @@
 @import 'foundation';
 
-@mixin Button($theme) {
-  .Button {
+@mixin ButtonStyle($className, $theme) {
+  .#{$className} {
     display: inline-block;
     padding: space(small) space(normal);
     line-height: 1;
@@ -18,18 +18,17 @@
   }
 
   .FormButton {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0 space(small);
 
     height: $input-height;
     line-height: $input-height;
   }
 
-  a.Button {
+  a.#{$className} {
     text-decoration: none;
   }
 
-  button.Button {
+  button.#{$className} {
     background-image: none;
     border: none;
 

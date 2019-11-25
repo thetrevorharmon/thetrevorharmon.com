@@ -1,39 +1,17 @@
-import {graphql, useStaticQuery} from 'gatsby';
 import * as React from 'react';
 import {Helmet as ReactHelmet} from 'react-helmet';
 
 import {useTheme} from '../context/ThemeContext';
 import {Helpers, MetaTags} from '../utils';
+import {useSiteData} from '../utils/hooks';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
 }
 
-interface HelmetData {
-  site: {
-    siteMetadata: SiteMetadata;
-  };
-}
-
 const Helmet: React.FC<HelmetProps> = ({children, pageMetadata}) => {
-  const data: HelmetData = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          description
-          siteUrl
-          twitter {
-            author
-            site
-          }
-        }
-      }
-    }
-  `);
-
   const page = pageMetadata;
-  const site = data.site.siteMetadata;
+  const site = useSiteData();
 
   const title = page.title ? `${page.title} | ${site.title}` : site.title;
 

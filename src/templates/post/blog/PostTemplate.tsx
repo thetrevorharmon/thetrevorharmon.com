@@ -43,11 +43,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
     <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
       <PostHeader post={post} layoutClassName={pageLayoutClassName} />
       <PostBody post={post} layoutClassName={pageLayoutClassName} />
-      <PostSubscribeForm
-        post={post}
-        layoutClassName={pageLayoutClassName}
-        siteData={siteMetadata}
-      />
+      <PostSubscribeForm layoutClassName={pageLayoutClassName} />
       <PostFooter olderPost={olderPost} newerPost={newerPost} />
     </Layout>
   );

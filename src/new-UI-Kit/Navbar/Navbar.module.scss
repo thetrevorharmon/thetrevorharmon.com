@@ -1,0 +1,46 @@
+@import 'foundation';
+
+.Navbar {
+  padding: 1rem 0;
+  width: 100%;
+  overflow: hidden;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.TopElementsWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.Links {
+  display: flex;
+  align-items: center;
+
+  list-style-type: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+
+  li {
+    margin-left: space(small);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.ToggleThemeButton {
+  margin-left: space(small);
+}
+
+@mixin Navbar($theme) {
+  .Navbar-#{$theme} {
+    .Brand:hover {
+      background: color($theme, primary-focus);
+    }
+  }
+}
+
+@include Navbar(Light);
+@include Navbar(Dark);

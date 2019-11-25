@@ -5,7 +5,7 @@ import {Helmet} from '../utils';
 import 'normalize.css';
 import '../styles/global.scss';
 
-import {Footer, Navbar} from '../UI-Kit';
+import {Footer, Navbar} from '../new-UI-Kit';
 
 interface LayoutProps {
   className?: string;

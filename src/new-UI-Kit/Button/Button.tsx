@@ -11,19 +11,16 @@ interface ButtonProps {
   className?: string;
   children: React.ReactNode;
   href?: string;
-  isFormButton?: boolean;
   onClick?(): void;
 }
 
-export const Button = ({
-  className,
-  children,
-  href,
-  onClick,
-  isFormButton = false,
-}: ButtonProps) => {
+export const Button = ({className, children, href, onClick}: ButtonProps) => {
+  if (href != null && onClick != null) {
+    throw new Error('Cannot use both the href and onClick props');
+  }
+
   if (href == null && onClick == null) {
-    throw new Error('Must pass either an href or a click handler');
+    throw new Error('Must use either the href or onClick prop');
   }
 
   const buttonText = <TextStyle style="Button">{children}</TextStyle>;
@@ -32,7 +29,6 @@ export const Button = ({
     className,
     styles.Button,
     styles[`Button-${theme}`],
-    isFormButton && styles.FormButton,
   ]);
 
   const linkMarkup = (linkHref?: string) => {
@@ -61,7 +57,7 @@ export const Button = ({
 
   const buttonMarkup = (clickHandler?: () => void) => {
     if (clickHandler == null) {
-      throw new Error('Href must not be null');
+      throw new Error('You must provide a clickHandler');
     }
 
     return (
