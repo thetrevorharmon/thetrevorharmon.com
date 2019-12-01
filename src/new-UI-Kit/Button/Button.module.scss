@@ -1,4 +1,4 @@
 @import './Button.mixins.scss';
 
-@include Button(Light);
-@include Button(Dark);
+@include ButtonStyle(Button, Light);
+@include ButtonStyle(Button, Dark);

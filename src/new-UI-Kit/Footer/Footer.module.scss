@@ -1,0 +1,43 @@
+@import 'foundation';
+
+.Footer {
+  border-top: 1px solid;
+  padding-top: space(medium);
+  padding-bottom: space(medium);
+}
+
+.FooterLinks {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 0 auto;
+
+  li {
+    display: inline-block;
+    margin-left: space(small);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+// TODO: revisit when layout utilities are done
+@include mobile-only {
+  .Footer {
+    padding-left: space(small);
+  }
+
+  .FooterLinks {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@mixin Footer($theme) {
+  .Footer-#{$theme} {
+    border-color: color($theme, accent-line);
+  }
+}
+
+@include Footer(Light);
+@include Footer(Dark);

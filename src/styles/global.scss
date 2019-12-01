@@ -50,19 +50,6 @@ ul {
   // padding-left: 0;
 }
 
-.global-brand {
-  display: inline-block;
-  height: 4rem;
-  width: 4rem;
-  line-height: 4rem;
-  font-size: 1.25rem;
-
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-}
-
 .text-right {
   text-align: right !important;
 }
@@ -90,10 +77,6 @@ ul {
 
     hr {
       background: color($theme, accent-line);
-    }
-
-    .global-brand {
-      background: color($theme, primary);
     }
   }
 }

@@ -1,0 +1,44 @@
+@import 'foundation';
+
+.Container {
+  display: flex;
+  align-items: center;
+}
+
+.Button {
+  background: none;
+  padding: 0;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.Icon {
+  position: relative;
+  top: 3px;
+  display: block;
+  width: 1.25 * $base-font-size;
+}
+
+@mixin ToggleThemeButton($theme) {
+  .Icon-#{$theme} {
+    svg path {
+      fill: color($theme, primary);
+    }
+  }
+  .Button {
+    &:focus,
+    &:hover {
+      .Icon-#{$theme} {
+        svg path {
+          fill: color($theme, text);
+        }
+      }
+    }
+  }
+}
+
+@include ToggleThemeButton(Light);
+@include ToggleThemeButton(Dark);
