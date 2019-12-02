@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {BlogItem, Image, Spacer} from '../../new-UI-Kit';
+import {BlogItem, Breakout, Image, Spacer} from '../../new-UI-Kit';
 import * as styles from './FeaturedItem.module.scss';
 
 interface FeaturedItemProps {
@@ -16,11 +16,13 @@ export const FeaturedItem = ({post, className}: FeaturedItemProps) => {
 
   return (
     // TODO: add star to bottom right corner
-    <div className={classname}>
-      <Spacer size="medium">
-        <Image src={post.heroImage} />
-        <BlogItem post={post} />
-      </Spacer>
-    </div>
+    <Breakout>
+      <div className={classname}>
+        <Spacer size="medium">
+          <Image src={post.heroImage} />
+          <BlogItem post={post} />
+        </Spacer>
+      </div>
+    </Breakout>
   );
 };

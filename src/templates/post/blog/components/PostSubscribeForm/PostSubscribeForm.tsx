@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import {Form} from '../../../../../components';
+import {useTheme} from '../../../../../context/ThemeContext';
+import {Container} from '../../../../../layouts/utils';
+import * as styles from './PostSubscribeForm.module.scss';
 
-interface PostSubscribeFormProps {
-  layoutClassName: string;
-}
+const PostSubscribeForm = () => {
+  const theme = useTheme();
 
-// TODO: 🔥 this component
-const PostSubscribeForm = ({layoutClassName}: PostSubscribeFormProps) => {
   return (
-    <div className="row my-5 my-lg-6">
-      <div className={layoutClassName}>
+    <div className={styles[`PostSubscribeForm-${theme}`]}>
+      <Container>
         <Form />
-      </div>
+      </Container>
     </div>
   );
 };

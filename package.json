@@ -21,9 +21,9 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "16.8.4",
     "@types/react-helmet": "^5.0.8",
+    "@types/react-is": "^16.7.1",
     "@types/react-router": "^5.0.3",
     "@types/react-router-dom": "^4.3.4",
-    "bootstrap-4-grid": "^3.0.0",
     "classnames": "^2.2.6",
     "dotenv": "^8.0.0",
     "eslint-plugin-graphql": "^3.0.3",
@@ -55,6 +55,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-is": "^16.12.0",
     "react-masonry-css": "^1.0.12"
   },
   "devDependencies": {

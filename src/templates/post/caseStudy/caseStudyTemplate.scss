@@ -1,5 +1,5 @@
 @import 'foundation';
-@import '../../../UI-Kit/Header/Header.module.scss';
+@import '../../../old-UI-Kit/Header/Header.module.scss';
 
 .case-study-template {
   line-height: 1.8;
@@ -168,10 +168,6 @@
       }
     }
 
-    .table-of-contents {
-      @include left-border(color($theme, primary));
-    }
-
     .post-body {
       color: color($theme, text);
 
@@ -186,7 +182,6 @@
       }
 
       blockquote {
-        @include left-border(color($theme, primary));
         color: color($theme, text-muted);
       }
 

@@ -1,40 +1,62 @@
-import classnames from 'classnames';
 import * as React from 'react';
 
-import {Attribution, Header, Meta} from '../../../../../new-UI-Kit';
-import {Image} from '../../../../../UI-Kit';
+import {
+  Attribution,
+  Breakout,
+  Header,
+  Meta,
+  Space,
+  Spacer,
+} from '../../../../../new-UI-Kit';
+import {Image} from '../../../../../old-UI-Kit';
 
-interface PostHeaderProps {
-  post: BlogPost | LinkPost;
-  layoutClassName: string;
+interface PostHeroImageProps {
+  image: ContentfulAsset;
+  attribution?: ContentfulAttribution;
 }
 
-const PostHeader: React.FC<PostHeaderProps> = (props: PostHeaderProps) => {
-  const {post, layoutClassName} = props;
-
+const PostHeroImage = ({image, attribution}: PostHeroImageProps) => {
   return (
-    <div className={classnames('row', 'mt-4 mb-2', 'mt-lg-6 mb-lg-4')}>
-      {post.postType === 'Blog' && post.heroImage && (
-        <div className={layoutClassName}>
-          <Image src={post.heroImage} />
-          {post.photoAttribution && (
-            <Attribution attribution={post.photoAttribution} />
-          )}
-        </div>
+    <>
+      <Space size="medium" />
+      <Breakout>
+        <Image src={image} />
+      </Breakout>
+      {attribution && (
+        <>
+          <Space size="tiny" />
+          <Attribution attribution={attribution} />
+        </>
       )}
-
-      <div className={layoutClassName}>
-        <Header rank={1} type="Title" className="mb-0">
-          {post.title}
-        </Header>
-        {/* TODO: Add link header icon */}
-        <Meta
-          timeToRead={post.body.childMarkdownRemark.timeToRead}
-          date={post.date}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 
-export {PostHeader};
+interface PostHeaderProps {
+  post: BlogPost | LinkPost;
+}
+
+export const PostHeader = ({post}: PostHeaderProps) => {
+  return (
+    <Spacer>
+      {post.postType === 'Blog' && post.heroImage && (
+        <PostHeroImage
+          image={post.heroImage}
+          attribution={post.photoAttribution}
+        />
+      )}
+
+      <Space size="large" />
+      <Header rank={1} type="Title">
+        {post.title}
+      </Header>
+
+      <Space size="tiny" />
+      <Meta
+        // TODO: Add link header icon
+        timeToRead={post.body.childMarkdownRemark.timeToRead}
+        date={post.date}
+      />
+    </Spacer>
+  );
+};

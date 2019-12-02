@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {Header, Image} from '../UI-Kit';
+import {Breakout, Header, Image, Space, Spacer} from '../new-UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './about.module.scss';
 
@@ -36,29 +36,24 @@ export default (props: AboutPageProps) => {
       className={classnames(styles.AboutPage, styles[`AboutPage-${theme}`])}
       pageMetadata={pageMetadata}
     >
-      <div className="row mb-5">
-        <div className="col-lg-12">
-          <Header
-            rank={1}
-            type="Headline"
-            className={classnames('my-6 my-lg-8')}
-          >
-            {aboutPage.title}
-          </Header>
-        </div>
-        <div className="col-lg-12">
+      <Spacer>
+        <Space size="huge" />
+        <Header rank={1} type="Display">
+          {aboutPage.title}
+        </Header>
+        <Space size="huge" />
+
+        <Breakout>
           <Image src={aboutPage.featureImage} className={styles.FeatureImage} />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-lg-8 offset-lg-2">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: aboutPage.post.childMarkdownRemark.html,
-            }}
-          />
-        </div>
-      </div>
+        </Breakout>
+
+        <Space size="medium" />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: aboutPage.post.childMarkdownRemark.html,
+          }}
+        />
+      </Spacer>
     </Layout>
   );
 };

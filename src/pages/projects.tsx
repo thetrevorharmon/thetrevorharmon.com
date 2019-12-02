@@ -1,11 +1,10 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {Layout} from '../../layouts';
-import {Header} from '../../new-UI-Kit';
-import {Routes} from '../../utils';
-import {ProjectPreviewTile} from './components';
+import {ProjectPreviewTile} from '../components';
+import {Layout} from '../layouts';
+import {Header, Space, Spacer} from '../new-UI-Kit';
+import {Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {
@@ -31,24 +30,18 @@ export default (props: ProjectsPageProps) => {
 
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="row">
-        <div className="col">
-          <Header
-            rank={1}
-            type="Display"
-            className={classnames('my-6 my-lg-8')}
-          >
-            Projects
-          </Header>
-        </div>
-      </div>
-      <div className="row">
-        {projectNodes.map(({node: project}, index) => (
-          <div className="col-md-6 col-lg-4" key={index}>
-            <ProjectPreviewTile project={project} className="mb-4" />
-          </div>
-        ))}
-      </div>
+      <Spacer>
+        <Space size="huge" />
+        <Header rank={1} type="Display">
+          Projects
+        </Header>
+        <Space size="huge" />
+        <Spacer size="medium">
+          {projectNodes.map(({node: project}, index) => (
+            <ProjectPreviewTile project={project} key={index} />
+          ))}
+        </Spacer>
+      </Spacer>
     </Layout>
   );
 };

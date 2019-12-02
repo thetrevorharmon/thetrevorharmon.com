@@ -1,16 +1,11 @@
 @import 'foundation';
 
 .Navbar {
-  padding: 1rem 0;
+  display: flex;
+  padding: space(small) 0;
   width: 100%;
-  overflow: hidden;
 
   transition: all 0.2s ease-in-out;
-}
-
-.TopElementsWrapper {
-  display: flex;
-  width: 100%;
 }
 
 .Links {

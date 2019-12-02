@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
 
-import {Header, Icon, Link} from '../../UI-Kit';
+import {Header, Icon, Link} from '../../old-UI-Kit';
 
 import {HeaderRank, HeaderType} from '../Header/Header';
 

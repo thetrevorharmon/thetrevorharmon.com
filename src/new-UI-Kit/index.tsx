@@ -1,33 +1,16 @@
-import {Attribution} from './Attribution';
-import {Blockquote} from './Blockquote';
-import {BlogItem} from './BlogItem';
-import {Button} from './Button';
-import {FeaturedItem} from './FeaturedItem';
-import {Footer} from './Footer';
-import {Header} from './Header';
-import {Image} from './Image';
-import {Input} from './Input';
-import {Link} from './Link';
-import {LinkList} from './LinkList';
-import {Meta} from './Meta';
-import {Navbar} from './Navbar';
-import {Spacer} from './Spacer';
-import {TextStyle} from './TextStyle';
-
-export {
-  Attribution,
-  Blockquote,
-  BlogItem,
-  Button,
-  FeaturedItem,
-  Footer,
-  Header,
-  Image,
-  Input,
-  Link,
-  LinkList,
-  Meta,
-  Navbar,
-  Spacer,
-  TextStyle,
-};
+export {Attribution} from './Attribution';
+export {Blockquote} from './Blockquote';
+export {BlogItem} from './BlogItem';
+export {Breakout} from './Breakout';
+export {Button} from './Button';
+export {FeaturedItem} from './FeaturedItem';
+export {Footer} from './Footer';
+export {Header} from './Header';
+export {Image} from './Image';
+export {Input} from './Input';
+export {Link} from './Link';
+export {LinkList} from './LinkList';
+export {Meta} from './Meta';
+export {Navbar} from './Navbar';
+export {Spacer, Space} from './Spacer';
+export {TextStyle} from './TextStyle';

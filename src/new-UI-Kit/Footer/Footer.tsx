@@ -16,7 +16,6 @@ export const Footer = ({className}: FooterProps) => {
   const theme = useTheme();
   const classname = classnames(
     className,
-    'container',
     styles.Footer,
     styles[`Footer-${theme}`],
   );
@@ -50,12 +49,10 @@ export const Footer = ({className}: FooterProps) => {
 
   return (
     <div className={classname}>
-      <div className="row">
-        <TextStyle style="Button">
-          &copy; {new Date().getFullYear()} {title}
-        </TextStyle>
-        {linkMarkup}
-      </div>
+      <TextStyle style="Button">
+        &copy; {new Date().getFullYear()} {title}
+      </TextStyle>
+      {linkMarkup}
     </div>
   );
 };

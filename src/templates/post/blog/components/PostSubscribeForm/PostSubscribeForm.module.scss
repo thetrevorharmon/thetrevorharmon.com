@@ -1,0 +1,10 @@
+@import 'foundation';
+
+@mixin PostSubscribeForm($theme) {
+  .PostSubscribeForm-#{$theme} {
+    background-color: color($theme, caption-bg);
+  }
+}
+
+@include PostSubscribeForm(Light);
+@include PostSubscribeForm(Dark);

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Layout} from '../../../layouts';
 
+import {Container} from '../../../layouts/utils';
+import {Space, Spacer} from '../../../new-UI-Kit';
 import * as styles from './PostTemplate.module.scss';
 
 import {
@@ -37,14 +39,29 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
     url: Routes.blogPost(post.slug),
   };
 
-  const pageLayoutClassName = 'col-lg-7';
-
   return (
-    <Layout className={styles.BlogPostTemplate} pageMetadata={pageMetadata}>
-      <PostHeader post={post} layoutClassName={pageLayoutClassName} />
-      <PostBody post={post} layoutClassName={pageLayoutClassName} />
-      <PostSubscribeForm layoutClassName={pageLayoutClassName} />
-      <PostFooter olderPost={olderPost} newerPost={newerPost} />
+    <Layout
+      className={styles.BlogPostTemplate}
+      pageMetadata={pageMetadata}
+      hasContainer={false}
+    >
+      <Container>
+        <Spacer>
+          <PostHeader post={post} />
+          <Space size="large" />
+        </Spacer>
+        <PostBody post={post} />
+      </Container>
+      <Spacer>
+        <Space size="huge" />
+        <PostSubscribeForm />
+        <Space size="large" />
+      </Spacer>
+      <Container>
+        <Spacer>
+          <PostFooter olderPost={olderPost} newerPost={newerPost} />
+        </Spacer>
+      </Container>
     </Layout>
   );
 };

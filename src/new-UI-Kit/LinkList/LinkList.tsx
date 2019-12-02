@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
@@ -21,11 +22,14 @@ export const LinkList = ({title, data}: LinkListProps) => {
   const theme = useTheme();
   const makePairMarkup = ({link: {href, label}, date}: LinkDatePair) => {
     return (
-      <div className={styles.Pair}>
+      <div className={styles.Pair} key={label}>
         <Link className={styles.Link} href={href}>
           {label}
         </Link>
-        <span className={styles[`Date-${theme}`]}>{date.toDateString()}</span>
+        <span className={classnames([styles.Date, styles[`Date-${theme}`]])}>
+          {/* TODO: fix this when you are getting formatted dates */}
+          {date.toDateString()}
+        </span>
       </div>
     );
   };
