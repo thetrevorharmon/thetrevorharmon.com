@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Layout} from '../../../layouts';
 
 import {useTheme} from '../../../context/ThemeContext';
-import {Header, Image} from '../../../old-UI-Kit';
+import {Header, Image} from '../../../new-UI-Kit';
 import {Routes} from '../../../utils';
 import './caseStudyTemplate.scss';
 
@@ -40,17 +40,17 @@ export default (props: CaseStudyTemplateProps) => {
       pageMetadata={pageMetadata}
     >
       <div className="post-header">
-        <Header rank={1} type="Headline">
+        <Header rank={1} type="Title">
           {caseStudy.title}
         </Header>
-        <Header rank={2} type="Tagline">
+        <Header rank={2} type="Heading">
           {caseStudy.tagline}
         </Header>
         <Image src={caseStudy.featureImage} className="hero-header" />
       </div>
 
       <div className="table-of-contents">
-        <Header rank={3} type="SectionTitle">
+        <Header rank={3} type="Heading">
           Table of Contents
         </Header>
         <div

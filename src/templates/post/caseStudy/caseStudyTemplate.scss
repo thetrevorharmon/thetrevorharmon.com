@@ -1,5 +1,4 @@
 @import 'foundation';
-@import '../../../old-UI-Kit/Header/Header.module.scss';
 
 .case-study-template {
   line-height: 1.8;
@@ -50,21 +49,6 @@
   }
 
   .post-body {
-    h1 {
-      @extend .Header;
-      @extend .Headline;
-    }
-
-    h2 {
-      @extend .Header;
-      @extend .Title;
-    }
-
-    h3 {
-      @extend .Header;
-      @extend .Subtitle;
-    }
-
     h1,
     h2,
     h3,
