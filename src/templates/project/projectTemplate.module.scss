@@ -37,20 +37,6 @@ $grid-gutter-size: 1rem;
     text-decoration: none;
     border-bottom: 1px solid transparent;
   }
-
-  .Description {
-    box-sizing: border-box;
-    margin-bottom: $grid-gutter-size * 2;
-    margin-right: $grid-gutter-size;
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .DescriptionHtml {
-    margin-bottom: 1rem;
-  }
 }
 
 @mixin ProjectTemplate($theme) {
@@ -65,10 +51,6 @@ $grid-gutter-size: 1rem;
       &:hover {
         border-color: color($theme, primary-text);
       }
-    }
-
-    .Description {
-      @include left-border(color($theme, primary));
     }
   }
 }

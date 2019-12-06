@@ -5,7 +5,7 @@ import Masonry from 'react-masonry-css';
 
 import {useTheme} from '../../context/ThemeContext';
 import {Layout} from '../../layouts';
-import {Header, Image} from '../../UI-Kit';
+import {Header, Image, Space, Spacer} from '../../new-UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './projectTemplate.module.scss';
 
@@ -49,11 +49,7 @@ export default (props: TemplateProps) => {
   });
 
   const info = (
-    <div className={styles.Description}>
-      <Header rank={1} type="Title">
-        {project.title}
-      </Header>
-
+    <Spacer size="normal">
       {description && (
         <div
           className={styles.DescriptionHtml}
@@ -61,18 +57,20 @@ export default (props: TemplateProps) => {
         />
       )}
 
-      {project.client && (
-        <p>
-          <strong>Client:</strong> {project.client}
-        </p>
-      )}
+      <Spacer size="tiny">
+        {project.client && (
+          <p>
+            <strong>Client:</strong> {project.client}
+          </p>
+        )}
 
-      {project.projectCompletionDate && (
-        <p>
-          <strong>Project completed:</strong> {project.projectCompletionDate}
-        </p>
-      )}
-    </div>
+        {project.projectCompletionDate && (
+          <p>
+            <strong>Project completed:</strong> {project.projectCompletionDate}
+          </p>
+        )}
+      </Spacer>
+    </Spacer>
   );
 
   const infoAndItems = [info, ...items];
@@ -94,17 +92,20 @@ export default (props: TemplateProps) => {
       )}
       pageMetadata={pageMetadata}
     >
-      <div className="row">
-        <div className="col-sm-12">
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className={styles.Grid}
-            columnClassName={styles.Column}
-          >
-            {infoAndItems}
-          </Masonry>
-        </div>
-      </div>
+      <Spacer>
+        <Space size="large" />
+        <Header rank={1} type="Title">
+          {project.title}
+        </Header>
+        <Space size="medium" />
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className={styles.Grid}
+          columnClassName={styles.Column}
+        >
+          {infoAndItems}
+        </Masonry>
+      </Spacer>
     </Layout>
   );
 };

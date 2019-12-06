@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {useTheme} from '../../../../context/ThemeContext';
+import {Space, Spacer} from '../../../../new-UI-Kit';
 import * as styles from './FormContainer.module.scss';
 
 interface FormContainerProps {
@@ -51,7 +52,11 @@ export const FormContainer = ({children}: FormContainerProps) => {
       ref={formContainerRef}
       style={formContainerStyle}
     >
-      {children}
+      <Spacer>
+        <Space size="large" />
+        {children}
+        <Space size="large" />
+      </Spacer>
     </div>
   );
 };

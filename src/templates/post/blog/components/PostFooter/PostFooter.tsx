@@ -30,17 +30,16 @@ const PostFooter: React.FC<PostFooterProps> = (props: PostFooterProps) => {
     });
   }
 
-  return (
-    <div
-      className={classnames(styles[`PostFooter-${theme}`], styles.PostFooter)}
-    >
-      <div className="row">
-        {data.length > 0 && (
-          <LinkList title="Other things I've written" data={data} />
-        )}
-      </div>
-    </div>
+  const classname = classnames(
+    styles[`PostFooter-${theme}`],
+    styles.PostFooter,
   );
+
+  return data.length > 0 ? (
+    <div className={classname}>
+      <LinkList title="Other things I've written" data={data} />
+    </div>
+  ) : null;
 };
 
 export {PostFooter};

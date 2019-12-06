@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Button, Image} from '../../UI-Kit';
+import {Button, Image} from '../../old-UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './Tile.module.scss';
 

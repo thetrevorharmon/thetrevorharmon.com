@@ -1,13 +1,9 @@
 @import 'foundation';
 
 .FormContainer {
-  padding: space(large) 0;
-
-  // TODO: 🔥 these lines when proper layout is setup
-  max-width: 560px;
-  padding: space(large) space(medium);
-  margin-left: -15px;
-  margin-right: -15px;
+  // TODO: spend some time seeing if we can get around this.
+  // Right now it causes the outline on the input to be cut off.
+  overflow: hidden;
 }
 
 @mixin FormContainer-theme($theme) {

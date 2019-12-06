@@ -2,7 +2,6 @@
 
 .LinkList {
   width: 100%;
-  max-width: 500px; // TODO: remove this when layout utilities exist
 }
 
 .Pair {
@@ -20,13 +19,16 @@
   text-overflow: ellipsis;
 }
 
+.Date {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 @mixin Date($theme) {
   .Date-#{$theme} {
     color: color($theme, text-muted);
-    margin-left: auto;
-    flex-shrink: 0;
   }
 }
 
 @include Date(Light);
-@include Date(dark);
+@include Date(Dark);

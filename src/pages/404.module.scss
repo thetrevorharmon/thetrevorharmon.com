@@ -1,8 +1,13 @@
 @import 'foundation';
 
 .ErrorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
   .Header {
-    font-size: 10rem;
+    font-size: 6rem;
     line-height: 10rem;
     margin: 0;
   }
@@ -10,10 +15,6 @@
 
 @mixin ErrorPage($theme) {
   .ErrorPage-#{$theme} {
-    .Header {
-      color: color($theme, text-bold);
-    }
-
     p {
       color: color($theme, text);
     }

@@ -10,7 +10,7 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `The Trevor Harmon`,
-    tagline: `I’ve been doing design & development work for about ten years. I love building beautiful, usable things.`,
+    tagline: `I write code for Shopify, and (sometimes) write things on my blog.`,
     description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
     feedUrl: `https://thetrevorharmon.com/rss.xml`,

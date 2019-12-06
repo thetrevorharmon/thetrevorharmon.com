@@ -1,82 +1,75 @@
-@import '../../../../../UI-Kit/Header/Header.module.scss';
+@import 'foundation';
+@import 'ui-kit-mixins';
 @import './syntaxHighlighting.scss';
 
-@import 'ui-kit-mixins';
-
 .post-body {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 1.5em 0 0.3em;
+  h2 {
+    margin-top: space(large);
+    margin-bottom: space(small);
   }
 
-  h1,
-  h2,
   h3 {
-    @include mobile-only {
-      margin-top: 1.65em;
-      margin-bottom: 0.5em;
-    }
+    margin-top: space(medium);
+    margin-bottom: space(small);
+  }
+
+  p {
+    margin-top: space(small);
+    margin-bottom: space(small);
   }
 
   img {
-    max-width: 100%;
-    margin: 1rem 0;
+    margin-top: space(little);
+    margin-bottom: space(little);
+    max-width: $container-size + ($breakout-amount * 2);
 
-    @include mobile-only {
-      margin: 0;
+    @include Breakout;
+  }
+
+  ul,
+  ol {
+    margin-left: 0;
+    padding-left: 0;
+
+    counter-reset: list-counter;
+
+    list-style-type: none;
+
+    li {
+      position: relative;
+      padding-left: space(medium);
+      margin-bottom: space(little);
+
+      counter-increment: list-counter;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        content: counter(list-counter) '.';
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        @include text-style-Button;
+      }
     }
   }
 
-  p,
-  .gatsby-highlight {
-    margin: 0.5rem 0 1.5rem;
-  }
-
-  p img {
-    margin-bottom: 0;
-    margin-top: 0.5rem;
+  ul li {
+    &:before {
+      content: '→';
+      font-style: normal;
+    }
   }
 
   blockquote {
-    margin-left: 0;
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
+    @include Breakout;
 
-  .scrollable {
-    margin: 2.5rem 0 3rem;
-    position: relative;
-
-    img {
-      margin: 0;
-    }
-
-    @include mobile-only {
-      overflow: scroll;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-
-      img {
-        max-width: none;
-        min-height: 15rem;
-        max-height: 30rem;
-        margin-bottom: 2rem;
-      }
-
-      &:after {
-        content: 'Scroll →';
-        display: block;
-        position: absolute;
-        bottom: 0;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-    }
+    margin-top: space(medium);
+    margin-bottom: space(medium);
+    padding: $breakout-amount;
   }
 }
 

@@ -1,11 +1,10 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {CaseStudyTile, Header, Link, PostTile, Tile} from '../UI-Kit';
+import {BlogItem, Button, Header, Space, Spacer} from '../new-UI-Kit';
 import {Helpers, Routes} from '../utils';
+import {useSiteData} from '../utils/hooks';
 import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
@@ -14,102 +13,45 @@ interface IndexPageProps {
       siteMetadata: SiteMetadata;
     };
     allContentfulProject: {edges: [{node: Project}]};
-    allContentfulCaseStudy: {edges: [{node: CaseStudy}]};
     allContentfulBlogPost: {edges: [{node: BlogPost}]};
     allContentfulLinkPost: {edges: [{node: LinkPost}]};
   };
 }
 
 export default (props: IndexPageProps) => {
-  const featuredWork: Array<{node: Project}> =
-    props.data.allContentfulProject.edges;
-  const featuredStudies: Array<{node: CaseStudy}> =
-    props.data.allContentfulCaseStudy.edges;
-
   const posts = Helpers.combinePostTypes(
     props.data.allContentfulBlogPost,
     props.data.allContentfulLinkPost,
-  ).slice(0, 3);
+  ).slice(0, 4);
 
-  const theme = useTheme();
+  const {tagline} = useSiteData();
+
+  const titleMarkup = (
+    <Spacer size="little">
+      <Space size="huge" />
+      {/* TODO: Make sure emojis are supported */}
+      <p>Hi there! 👋 I'm</p>
+      <Header rank={1} type="Display">
+        Trevor Harmon
+      </Header>
+      <p>{tagline}</p>
+      <Space size="huge" />
+    </Spacer>
+  );
 
   return (
     <Layout>
-      <div className="row">
-        <div className="col-sm-12 col-md-10 col-lg-8">
-          <div
-            className={classnames(
-              styles.MainHeader,
-              styles[`MainHeader-${theme}`],
-              'my-6 mt-lg-8',
-            )}
-          >
-            <span>Hi, I'm</span>
-            <Header
-              rank={1}
-              type="Headline"
-              className={classnames(styles.Name, 'my-0')}
-            >
-              Trevor Harmon.
-            </Header>
-            <p className="mt-5">{props.data.site.siteMetadata.tagline}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col my-0">
-          Recent Posts
-        </Header>
-      </div>
-      <div className="row">
-        {posts.map((post: BlogPost | LinkPost, index: number) => (
-          <div className="col-sm-6 col-lg-4 mb-4" key={index}>
-            <PostTile post={post} />
-          </div>
-        ))}
-        <div className="col-sm-12">
-          <Link href={Routes.blog()} target="_blank">
-            Read more posts &rarr;
-          </Link>
-        </div>
-      </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col">
-          Projects
-        </Header>
-      </div>
-      <div className="row">
-        {featuredWork.map((item, index) => (
-          <div className="col-md-6 col-lg-4 mb-4" key={index}>
-            <Tile item={item.node} />
-          </div>
-        ))}
-        <div className="col-sm-12">
-          <Link href={Routes.projects()} target="_blank">
-            See more projects &rarr;
-          </Link>
-        </div>
-      </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col my-0">
-          Case Studies
-        </Header>
-      </div>
-      <div className="row">
-        {featuredStudies.map((item, index) => (
-          <div className="col-sm-12 col-lg-8 mb-4" key={index}>
-            <CaseStudyTile item={item.node} />
-          </div>
-        ))}
-        <div className="col-sm-12 col-lg-8">
-          <Link href={Routes.caseStudies()} target="_blank">
-            See more case studies &rarr;
-          </Link>
-        </div>
-      </div>
+      {titleMarkup}
+      <Spacer>
+        {/* TODO: fix this once spacer is better */}
+        <Spacer size="large">
+          {posts.map((post: BlogPost | LinkPost) => (
+            <BlogItem post={post} key={post.title} />
+          ))}
+        </Spacer>
+        <Space size="big" />
+        <Button href={Routes.blog()}>Read more posts &rarr;</Button>
+      </Spacer>
     </Layout>
   );
 };
@@ -128,13 +70,6 @@ export const query = graphql`
       edges {
         node {
           ...ContentfulProjectTile
-        }
-      }
-    }
-    allContentfulCaseStudy(filter: {featureOnHomepage: {eq: true}}) {
-      edges {
-        node {
-          ...ContentfulCaseStudyTile
         }
       }
     }

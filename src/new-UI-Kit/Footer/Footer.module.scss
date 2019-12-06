@@ -1,6 +1,9 @@
 @import 'foundation';
 
 .Footer {
+  display: flex;
+  flex-wrap: wrap;
+
   border-top: 1px solid;
   padding-top: space(medium);
   padding-bottom: space(medium);
@@ -23,13 +26,8 @@
 
 // TODO: revisit when layout utilities are done
 @include mobile-only {
-  .Footer {
-    padding-left: space(small);
-  }
-
   .FooterLinks {
     width: 100%;
-    margin-left: 0;
   }
 }
 
