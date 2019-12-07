@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../../../../context/ThemeContext';
-import {LinkList} from '../../../../../new-UI-Kit';
+import {LinkList} from '../../../../../UI-Kit';
 import {Routes} from '../../../../../utils';
 import * as styles from './PostFooter.module.scss';
 

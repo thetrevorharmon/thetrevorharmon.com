@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Link, Spacer} from '../../../../new-UI-Kit';
+import {Link, Spacer} from '../../../../UI-Kit';
 import * as styles from './FormFooter.module.scss';
 
 interface FormFooterProps {

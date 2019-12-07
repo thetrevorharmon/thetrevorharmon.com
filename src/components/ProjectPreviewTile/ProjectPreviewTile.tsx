@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Header, Image, Link, Meta, Spacer} from '../../new-UI-Kit';
+import {Header, Image, Link, Meta, Spacer} from '../../UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './ProjectPreviewTile.module.scss';
 

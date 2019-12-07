@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Layout} from '../../../layouts';
 
 import {Container} from '../../../layouts/utils';
-import {Space, Spacer} from '../../../new-UI-Kit';
+import {Space, Spacer} from '../../../UI-Kit';
 import * as styles from './PostTemplate.module.scss';
 
 import {

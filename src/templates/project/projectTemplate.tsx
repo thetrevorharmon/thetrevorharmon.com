@@ -5,7 +5,7 @@ import Masonry from 'react-masonry-css';
 
 import {useTheme} from '../../context/ThemeContext';
 import {Layout} from '../../layouts';
-import {Header, Image, Space, Spacer} from '../../new-UI-Kit';
+import {Header, Image, Space, Spacer} from '../../UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './projectTemplate.module.scss';
 

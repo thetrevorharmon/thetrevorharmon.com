@@ -8,7 +8,7 @@ import {
   Meta,
   Space,
   Spacer,
-} from '../../../../../new-UI-Kit';
+} from '../../../../../UI-Kit';
 
 interface PostHeroImageProps {
   image: ContentfulAsset;

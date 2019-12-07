@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../../../context/ThemeContext';
-import {TextStyle} from '../../../../new-UI-Kit';
+import {TextStyle} from '../../../../UI-Kit';
 import * as styles from './FormButton.module.scss';
 import LoadingIcon from './loading.svg';
 

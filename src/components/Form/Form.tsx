@@ -4,7 +4,7 @@ import addToMailchimp, {
 } from 'gatsby-plugin-mailchimp';
 import React, {useEffect, useState} from 'react';
 
-import {Input, Spacer} from '../../new-UI-Kit';
+import {Input, Spacer} from '../../UI-Kit';
 import {ExternalLinks} from '../../utils';
 import {useSiteData} from '../../utils/hooks';
 import {
