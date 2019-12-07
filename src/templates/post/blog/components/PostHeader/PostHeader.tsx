@@ -50,12 +50,11 @@ export const PostHeader = ({post}: PostHeaderProps) => {
       <Header rank={1} type="Title">
         {post.title}
       </Header>
-
       <Space size="tiny" />
       <Meta
-        // TODO: Add link header icon
         timeToRead={post.body.childMarkdownRemark.timeToRead}
         date={post.date}
+        isLinkPost={post.postType === 'Link'}
       />
     </Spacer>
   );

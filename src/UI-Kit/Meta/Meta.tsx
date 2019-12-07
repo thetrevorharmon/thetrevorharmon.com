@@ -2,15 +2,22 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {Icon} from '../../UI-Kit';
 import * as styles from './Meta.module.scss';
 
 interface MetaProps {
-  timeToRead?: string;
-  date?: Date;
   className?: string;
+  date?: Date;
+  isLinkPost?: boolean;
+  timeToRead?: string;
 }
 
-export const Meta = ({timeToRead, date, className}: MetaProps) => {
+export const Meta = ({
+  className,
+  date,
+  isLinkPost = false,
+  timeToRead,
+}: MetaProps) => {
   const theme = useTheme();
   const classname = classnames(className, styles[`Meta-${theme}`]);
 
@@ -19,7 +26,14 @@ export const Meta = ({timeToRead, date, className}: MetaProps) => {
     : undefined;
 
   const meta = [date, timeToReadPhrase].filter(Boolean).join(' / ');
+  const icon = isLinkPost ? (
+    <Icon name="link" size="small" className={styles.Icon} />
+  ) : null;
 
-  // TODO: add support for link posts (add link icon)
-  return meta ? <p className={classname}>{meta}</p> : null;
+  return meta ? (
+    <p className={classname}>
+      {meta}
+      {icon}
+    </p>
+  ) : null;
 };
