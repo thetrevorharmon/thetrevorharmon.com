@@ -26,8 +26,11 @@ export const BlogItem = ({post, className}: BlogItemProps) => {
           {title}
         </Header>
         <Space size="tiny" />
-        {/* TODO: add support for linkpost type (pass link flag) */}
-        <Meta date={date} timeToRead={timeToRead} />
+        <Meta
+          date={date}
+          timeToRead={timeToRead}
+          isLinkPost={post.postType === 'Link'}
+        />
         <Space size="little" />
         <p>
           <TextStyle style="Body">{description || excerpt || ''}</TextStyle>

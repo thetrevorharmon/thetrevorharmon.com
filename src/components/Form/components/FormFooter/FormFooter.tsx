@@ -22,11 +22,17 @@ export const FormFooter = ({children, twitter, rss}: FormFooterProps) => {
         <p>{children}</p>
         <ul>
           <li>
-            {/* TODO: add twitter & rss icons */}
-            <Link href={twitter.link}>{twitter.label}</Link>
+            <Link
+              href={twitter.link}
+              icon={{position: 'leading', name: 'twitter'}}
+            >
+              {twitter.label}
+            </Link>
           </li>
           <li>
-            <Link href={rss.link}>{rss.label}</Link>
+            <Link href={rss.link} icon={{position: 'leading', name: 'rss'}}>
+              {rss.label}
+            </Link>
           </li>
         </ul>
       </Spacer>

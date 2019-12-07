@@ -9,7 +9,7 @@ declare module '*.png' {
 }
 
 declare module '*.svg' {
-  const content: any;
+  const content: React.SVGFactory;
   export = content;
 }
 

@@ -6,6 +6,7 @@ export {Button} from './Button';
 export {FeaturedItem} from './FeaturedItem';
 export {Footer} from './Footer';
 export {Header} from './Header';
+export {Icon, IconName} from './Icon';
 export {Image} from './Image';
 export {Input} from './Input';
 export {Link} from './Link';

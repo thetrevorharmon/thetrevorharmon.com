@@ -12,7 +12,11 @@ interface FeaturedItemProps {
 
 export const FeaturedItem = ({post, className}: FeaturedItemProps) => {
   const theme = useTheme();
-  const classname = classnames([styles[`FeaturedItem-${theme}`], className]);
+  const classname = classnames([
+    styles.FeaturedItem,
+    styles[`FeaturedItem-${theme}`],
+    className,
+  ]);
 
   return (
     // TODO: add star to bottom right corner
@@ -22,6 +26,7 @@ export const FeaturedItem = ({post, className}: FeaturedItemProps) => {
           <Image src={post.heroImage} />
           <BlogItem post={post} />
         </Spacer>
+        <Icon name="star" size="large" className={styles.Icon} />
       </div>
     </Breakout>
   );

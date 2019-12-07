@@ -4,13 +4,20 @@ import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {Icon, IconName} from '../../UI-Kit';
 import * as styles from './Link.module.scss';
+
+interface LinkIconProps {
+  position: 'leading' | 'trailing';
+  name: IconName;
+}
 
 interface LinkProps {
   className?: string;
   href: string;
   target?: string;
   isMuted?: boolean;
+  icon?: LinkIconProps;
   children: React.ReactNode;
 }
 
@@ -19,6 +26,7 @@ export const Link = ({
   target,
   className,
   isMuted,
+  icon,
   children,
 }: LinkProps) => {
   const externalPattern = /^http/;
@@ -32,6 +40,34 @@ export const Link = ({
     isMuted && styles.Muted,
   );
 
+  const getInnerMarkup = () => {
+    if (icon == null) {
+      return children;
+    }
+
+    const iconElement = (
+      <Icon
+        name={icon.name}
+        size="normal"
+        className={classnames([styles.Icon, styles[`Icon-${icon.position}`]])}
+      />
+    );
+
+    return icon.position === 'leading' ? (
+      <>
+        {iconElement}
+        {children}
+      </>
+    ) : (
+      <>
+        {children}
+        {iconElement}
+      </>
+    );
+  };
+
+  const innerMarkup = getInnerMarkup();
+
   return externalLink ? (
     <OutboundLink
       className={classname}
@@ -39,11 +75,11 @@ export const Link = ({
       target={target || '_blank'}
       rel="noreferrer"
     >
-      {children}
+      {innerMarkup}
     </OutboundLink>
   ) : (
     <GatsbyLink className={classname} to={href} target={target || ''}>
-      {children}
+      {innerMarkup}
     </GatsbyLink>
   );
 };

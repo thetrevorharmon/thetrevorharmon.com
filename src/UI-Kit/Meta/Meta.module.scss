@@ -1,5 +1,11 @@
 @import './Meta.mixins.scss';
 
+.Icon {
+  margin-left: space(tiny);
+  position: relative;
+  top: 4px;
+}
+
 @mixin Meta-Theme($theme) {
   .Meta-#{$theme} {
     @include Meta($theme);
