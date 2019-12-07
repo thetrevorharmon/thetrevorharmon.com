@@ -7,7 +7,6 @@ type ContentfulObjectType =
   | 'ContentfulBlogPost'
   | 'ContentfulLinkPost'
   | 'ContentfulProject'
-  | 'ContentfulCaseStudy'
   | 'ContentfulAboutPage';
 
 interface BaseObject {

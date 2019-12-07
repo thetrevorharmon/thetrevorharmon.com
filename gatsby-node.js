@@ -36,10 +36,9 @@ const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
 // It throws an error when it encounters a type that doesn't exist
 const pathTemplateForPostType = (type) => {
   const paths = {
-    ContentfulBlogPost: `./src/templates/post/blog/blogPostTemplate.tsx`,
-    ContentfulLinkPost: `./src/templates/post/blog/linkPostTemplate.tsx`,
-    ContentfulProject: `./src/templates/project/projectTemplate.tsx`,
-    ContentfulCaseStudy: `./src/templates/post/caseStudy/caseStudyTemplate.tsx`,
+    ContentfulBlogPost: `./src/templates/BlogPost.tsx`,
+    ContentfulLinkPost: `./src/templates/LinkPost.tsx`,
+    ContentfulProject: `./src/templates/Project.tsx`,
   };
 
   if (!paths[type]) {
@@ -55,17 +54,6 @@ exports.createPages = ({graphql, actions}) => {
     graphql(`
       {
         allContentfulProject {
-          edges {
-            node {
-              title
-              slug
-              internal {
-                type
-              }
-            }
-          }
-        }
-        allContentfulCaseStudy {
           edges {
             node {
               title
@@ -103,15 +91,6 @@ exports.createPages = ({graphql, actions}) => {
       result.data.allContentfulProject.edges.forEach(({node}) => {
         createPage({
           path: `projects/${node.slug}`,
-          component: path.resolve(pathTemplateForPostType(node.internal.type)),
-          context: {
-            slug: node.slug,
-          },
-        });
-      });
-      result.data.allContentfulCaseStudy.edges.forEach(({node}) => {
-        createPage({
-          path: `case-studies/${node.slug}`,
           component: path.resolve(pathTemplateForPostType(node.internal.type)),
           context: {
             slug: node.slug,

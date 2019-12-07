@@ -6,9 +6,11 @@ import {
   Header,
   Image,
   Meta,
+  MetaProps,
   Space,
   Spacer,
-} from '../../../../../UI-Kit';
+} from '../../../../UI-Kit';
+import {PostHeaderProps} from './types';
 
 interface PostHeroImageProps {
   image: ContentfulAsset;
@@ -32,30 +34,22 @@ const PostHeroImage = ({image, attribution}: PostHeroImageProps) => {
   );
 };
 
-interface PostHeaderProps {
-  post: BlogPost | LinkPost;
-}
-
-export const PostHeader = ({post}: PostHeaderProps) => {
+export const PostHeader = ({
+  title,
+  meta,
+  image,
+  photoAttribution,
+}: PostHeaderProps) => {
   return (
     <Spacer>
-      {post.postType === 'Blog' && post.heroImage && (
-        <PostHeroImage
-          image={post.heroImage}
-          attribution={post.photoAttribution}
-        />
-      )}
-
+      {image && <PostHeroImage image={image} attribution={photoAttribution} />}
       <Space size="large" />
       <Header rank={1} type="Title">
-        {post.title}
+        {title}
       </Header>
       <Space size="tiny" />
-      <Meta
-        timeToRead={post.body.childMarkdownRemark.timeToRead}
-        date={post.date}
-        isLinkPost={post.postType === 'Link'}
-      />
+      <Meta {...meta} />
+      <Space size="large" />
     </Spacer>
   );
 };

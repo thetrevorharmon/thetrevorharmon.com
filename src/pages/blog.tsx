@@ -7,6 +7,7 @@ import {
   BlogItem,
   FeaturedItem,
   Header,
+  Meta,
   Space,
   Spacer,
   TextStyle,
@@ -60,11 +61,49 @@ export default (props: ProjectsPageProps) => {
         <Spacer size="large">
           {posts.map((post, index) => (
             <>
-              {index === 1 ? (
-                // TODO: fix assertion
-                <FeaturedItem post={post as BlogPost} key={index} />
+              {index === 1 && post.postType === 'Blog' ? (
+                // TODO: this kinda sucks. I think that having "blog" specific wrappers might be nice.
+                <FeaturedItem
+                  image={post.heroImage}
+                  title={post.title}
+                  meta={
+                    <Meta
+                      date={post.date}
+                      timeToRead={
+                        post.internal &&
+                        post.body.childMarkdownRemark.timeToRead
+                      }
+                    />
+                  }
+                  linkHref={Routes.blogPost(post.slug)}
+                  description={
+                    post.description ||
+                    post.body.childMarkdownRemark.excerpt ||
+                    ''
+                  }
+                  key={index}
+                />
               ) : (
-                <BlogItem post={post} key={index} />
+                <BlogItem
+                  title={post.title}
+                  meta={
+                    <Meta
+                      date={post.date}
+                      timeToRead={
+                        post.internal &&
+                        post.body.childMarkdownRemark.timeToRead
+                      }
+                      isLinkPost={post.postType === 'Link'}
+                    />
+                  }
+                  linkHref={Routes.blogPost(post.slug)}
+                  description={
+                    post.description ||
+                    post.body.childMarkdownRemark.excerpt ||
+                    ''
+                  }
+                  key={index}
+                />
               )}
             </>
           ))}

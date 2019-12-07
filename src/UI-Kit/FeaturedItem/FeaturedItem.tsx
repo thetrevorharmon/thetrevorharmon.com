@@ -2,15 +2,22 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {BlogItem, Breakout, Image, Spacer} from '../../UI-Kit';
+import {BlogItem, Breakout, Icon, Image, Spacer} from '../../UI-Kit';
+import {BlogItemProps} from '../BlogItem';
 import * as styles from './FeaturedItem.module.scss';
 
-interface FeaturedItemProps {
-  post: BlogPost;
-  className?: string;
+interface FeaturedItemProps extends BlogItemProps {
+  image: ContentfulAsset;
 }
 
-export const FeaturedItem = ({post, className}: FeaturedItemProps) => {
+export const FeaturedItem = ({
+  image,
+  title,
+  meta,
+  linkHref,
+  description,
+  className,
+}: FeaturedItemProps) => {
   const theme = useTheme();
   const classname = classnames([
     styles.FeaturedItem,
@@ -23,8 +30,13 @@ export const FeaturedItem = ({post, className}: FeaturedItemProps) => {
     <Breakout>
       <div className={classname}>
         <Spacer size="medium">
-          <Image src={post.heroImage} />
-          <BlogItem post={post} />
+          <Image src={image} />
+          <BlogItem
+            title={title}
+            meta={meta}
+            linkHref={linkHref}
+            description={description}
+          />
         </Spacer>
         <Icon name="star" size="large" className={styles.Icon} />
       </div>

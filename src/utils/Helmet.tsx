@@ -3,7 +3,7 @@ import {Helmet as ReactHelmet} from 'react-helmet';
 
 import {useTheme} from '../context/ThemeContext';
 import {Helpers, MetaTags} from '../utils';
-import {useSiteData} from '../utils/hooks';
+import {useSiteData} from '../utils';
 
 interface HelmetProps {
   pageMetadata: PageMetadata;
