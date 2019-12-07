@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Header, Spacer, TextStyle} from '../../../../new-UI-Kit';
+import {Header, Spacer, TextStyle} from '../../../../UI-Kit';
 import * as styles from './FormSuccess.module.scss';
 
 interface FormSuccessProps {

@@ -4,11 +4,11 @@ import {
   Attribution,
   Breakout,
   Header,
+  Image,
   Meta,
   Space,
   Spacer,
-} from '../../../../../new-UI-Kit';
-import {Image} from '../../../../../old-UI-Kit';
+} from '../../../../../UI-Kit';
 
 interface PostHeroImageProps {
   image: ContentfulAsset;

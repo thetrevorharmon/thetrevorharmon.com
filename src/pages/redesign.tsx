@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {Header, Space, Spacer} from '../new-UI-Kit';
+import {Header, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './redesign.module.scss';
 

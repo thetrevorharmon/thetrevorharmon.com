@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {BlogItem, Breakout, Image, Spacer} from '../../new-UI-Kit';
+import {BlogItem, Breakout, Image, Spacer} from '../../UI-Kit';
 import * as styles from './FeaturedItem.module.scss';
 
 interface FeaturedItemProps {

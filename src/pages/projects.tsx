@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import {ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
-import {Header, Space, Spacer} from '../new-UI-Kit';
+import {Header, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface ProjectsPageProps {

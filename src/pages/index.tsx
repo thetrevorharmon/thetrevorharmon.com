@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {BlogItem, Button, Header, Space, Spacer} from '../new-UI-Kit';
+import {BlogItem, Button, Header, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 import {useSiteData} from '../utils/hooks';
 import * as styles from './homepage.module.scss';

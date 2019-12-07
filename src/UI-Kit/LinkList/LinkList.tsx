@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Header, Link, Spacer} from '../../new-UI-Kit';
+import {Header, Link, Spacer} from '../../UI-Kit';
 import * as styles from './LinkList.module.scss';
 
 interface LinkDatePair {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Layout} from '../layouts';
 
 import {useTheme} from '../context/ThemeContext';
-import {Header, Link} from '../new-UI-Kit';
+import {Header, Link} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './404.module.scss';
 

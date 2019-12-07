@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Link} from '../../new-UI-Kit';
+import {Link} from '../../UI-Kit';
 import * as styles from './Attribution.module.scss';
 
 interface AttributionProps {

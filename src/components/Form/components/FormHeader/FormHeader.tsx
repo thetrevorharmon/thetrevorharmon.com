@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Header, Spacer, TextStyle} from '../../../../new-UI-Kit';
+import {Header, Spacer, TextStyle} from '../../../../UI-Kit';
 
 interface FormHeaderProps {
   title: string;

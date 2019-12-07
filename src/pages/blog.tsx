@@ -10,7 +10,7 @@ import {
   Space,
   Spacer,
   TextStyle,
-} from '../new-UI-Kit';
+} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {

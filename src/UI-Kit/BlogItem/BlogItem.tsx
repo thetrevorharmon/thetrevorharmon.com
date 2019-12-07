@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Header, Link, Meta, Space, Spacer, TextStyle} from '../../new-UI-Kit';
+import {Header, Link, Meta, Space, Spacer, TextStyle} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 interface BlogItemProps {

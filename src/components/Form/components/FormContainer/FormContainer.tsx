@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {useTheme} from '../../../../context/ThemeContext';
-import {Space, Spacer} from '../../../../new-UI-Kit';
+import {Space, Spacer} from '../../../../UI-Kit';
 import * as styles from './FormContainer.module.scss';
 
 interface FormContainerProps {

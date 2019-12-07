@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../../../../context/ThemeContext';
-import {Attribution, Button, Spacer} from '../../../../../new-UI-Kit';
+import {Attribution, Button, Spacer} from '../../../../../UI-Kit';
 import './PostBody.scss';
 
 interface PostBodyProps {

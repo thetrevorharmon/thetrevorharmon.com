@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {Link, TextStyle} from '../../new-UI-Kit';
+import {Link, TextStyle} from '../../UI-Kit';
 import {ExternalLinks} from '../../utils';
 import {useSiteData} from '../../utils/hooks';
 import * as styles from './Footer.module.scss';
