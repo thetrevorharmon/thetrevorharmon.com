@@ -4,7 +4,7 @@ import * as React from 'react';
 import {Layout} from '../layouts';
 import {BlogItem, Button, Header, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
-import {useSiteData} from '../utils/hooks';
+import {useSiteData} from '../utils';
 import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
@@ -63,23 +63,13 @@ export const query = graphql`
         tagline
       }
     }
-    allContentfulProject(
-      filter: {featureOnHomepage: {eq: true}}
-      sort: {fields: [projectCompletionDate], order: DESC}
-    ) {
-      edges {
-        node {
-          ...ContentfulProjectTile
-        }
-      }
-    }
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 3) {
       edges {
         node {
           title
           slug
           description
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMM YYYY")
           body {
             childMarkdownRemark {
               html
@@ -97,7 +87,7 @@ export const query = graphql`
           title
           slug
           link
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMM YYYY")
           internal {
             type
           }

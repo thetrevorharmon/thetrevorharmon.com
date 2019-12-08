@@ -13,11 +13,26 @@ declare module '*.svg' {
   export = content;
 }
 
+declare module 'react-masonry-css' {
+  import * as React from 'react';
+
+  export interface MasonryProps {
+    breakpointCols?: Object;
+    columnClassName?: string;
+  }
+
+  export default class Masonry extends React.Component<
+    MasonryProps & React.HTMLProps<HTMLElement>,
+    any
+  > {
+    render(): JSX.Element;
+  }
+}
+
 type ContentfulObjectType =
   | 'ContentfulBlogPost'
   | 'ContentfulLinkPost'
   | 'ContentfulProject'
-  | 'ContentfulCaseStudy'
   | 'ContentfulAboutPage';
 
 interface BaseObject {
@@ -55,12 +70,6 @@ interface Project extends ProjectPreview {
     childMarkdownRemark?: MarkdownRemark;
   };
   projectImages: [ContentfulAsset];
-}
-
-interface CaseStudy extends PortfolioItem {
-  tagline: string;
-  tableOfContents: contentfulLongText;
-  post: contentfulLongText;
 }
 
 interface BasicPost extends BaseObject {

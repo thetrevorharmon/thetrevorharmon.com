@@ -1,12 +1,27 @@
 @import 'foundation';
 @import './Link.mixins.scss';
 
+.Link {
+  .Icon {
+    position: relative;
+    top: 4px;
+
+    &-leading {
+      margin-right: space(little);
+    }
+
+    &-trailing {
+      margin-left: space(little);
+    }
+  }
+}
+
 @mixin Link-Theme($theme) {
   .Link-#{$theme} {
     @include Link($theme);
 
     &.Muted {
-      @include Link-Muted($theme);
+      @include Link($theme, text-muted, text);
     }
   }
 }

@@ -1,24 +1,15 @@
 import * as React from 'react';
 
-import {Header, Link, Meta, Space, Spacer, TextStyle} from '../../UI-Kit';
-import {Routes} from '../../utils';
+import {Header, Link, Space, Spacer, TextStyle} from '../../UI-Kit';
+import {BlogItemProps} from './types';
 
-interface BlogItemProps {
-  post: BlogPost | LinkPost;
-  className?: string;
-}
-
-export const BlogItem = ({post, className}: BlogItemProps) => {
-  const {
-    title,
-    body: {
-      childMarkdownRemark: {excerpt, timeToRead},
-    },
-    description,
-    slug,
-    date,
-  } = post;
-
+export const BlogItem = ({
+  title,
+  meta,
+  linkHref,
+  description = '',
+  className,
+}: BlogItemProps) => {
   return (
     <div className={className}>
       <Spacer>
@@ -26,17 +17,13 @@ export const BlogItem = ({post, className}: BlogItemProps) => {
           {title}
         </Header>
         <Space size="tiny" />
-        <Meta
-          date={date}
-          timeToRead={timeToRead}
-          isLinkPost={post.postType === 'Link'}
-        />
+        {meta}
         <Space size="little" />
         <p>
-          <TextStyle style="Body">{description || excerpt || ''}</TextStyle>
+          <TextStyle style="Body">{description}</TextStyle>
         </p>
         <Space size="small" />
-        <Link href={Routes.blogPost(slug)}>Continue Reading →</Link>
+        <Link href={linkHref}>Continue Reading →</Link>
       </Spacer>
     </div>
   );
