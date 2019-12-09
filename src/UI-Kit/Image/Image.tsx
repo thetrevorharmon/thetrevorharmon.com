@@ -31,15 +31,15 @@ interface ContentfulAsset extends BaseObject {
 
 interface ImageProps {
   className?: string;
-  src: ContentfulAsset;
+  src?: ContentfulAsset;
 }
 
 export const Image = ({className, src}: ImageProps) => {
-  return (
+  return src ? (
     <Img
       className={className}
       fluid={src.fluid}
       alt={`${src.title} | ${src.description}`}
     />
-  );
+  ) : null;
 };

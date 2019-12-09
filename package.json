@@ -12,7 +12,8 @@
     "type-check": "tsc --noEmit",
     "lint": "tslint --config tslint.json --project tsconfig.json",
     "clean": "gatsby clean",
-    "pretty": "prettier --write \"**/*.{ts,tsx,js,css,scss}\""
+    "pretty": "prettier --write \"**/*.{ts,tsx,js,css,scss}\"",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "@types/classnames": "^2.2.9",
