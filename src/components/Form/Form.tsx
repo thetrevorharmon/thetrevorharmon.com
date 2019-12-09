@@ -5,8 +5,7 @@ import addToMailchimp, {
 import React, {useEffect, useState} from 'react';
 
 import {Input, Spacer} from '../../UI-Kit';
-import {ExternalLinks} from '../../utils';
-import {useSiteData} from '../../utils';
+import {ExternalLinks, useSiteData} from '../../utils';
 import {
   FormButton,
   FormContainer,

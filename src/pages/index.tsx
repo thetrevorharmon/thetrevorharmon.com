@@ -3,8 +3,7 @@ import * as React from 'react';
 
 import {Layout} from '../layouts';
 import {BlogItem, Button, Header, Space, Spacer} from '../UI-Kit';
-import {Helpers, Routes} from '../utils';
-import {useSiteData} from '../utils';
+import {Helpers, Routes, useSiteData} from '../utils';
 import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
