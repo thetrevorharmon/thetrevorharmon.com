@@ -23,14 +23,7 @@ export const Spacer = ({children, size}: SpacerProps) => {
   const wrapItem = (node: React.ReactNode, index: number) => {
     const className = classnames([styles.Item, size && styles[`Item-${size}`]]);
 
-    // I found this 👇 solution at https://rmolinamir.github.io/typescript-cheatsheet/
-    // I'm not totally confident in it, but I think it works for now
-    const isSpace =
-      React.isValidElement(node) &&
-      typeof node.type === 'function' &&
-      (node.type as React.FunctionComponent).displayName === Space.name;
-
-    return isSpace ? (
+    return isSpace(node) ? (
       <React.Fragment key={index}>{node}</React.Fragment>
     ) : (
       <div className={className} key={index}>
@@ -58,4 +51,25 @@ interface SpaceProps {
 
 export const Space = ({size}: SpaceProps) => {
   return <div className={styles[`Space-${size}`]} />;
+};
+
+const isSpace = (element: React.ReactNode) => {
+  const sizes: Size[] = [
+    'tiny',
+    'little',
+    'small',
+    'normal',
+    'medium',
+    'big',
+    'large',
+    'huge',
+  ];
+
+  return (
+    React.isValidElement(element) &&
+    typeof element.type === 'function' &&
+    !Object.keys(element.props).includes('children') &&
+    Object.keys(element.props).includes('size') &&
+    sizes.includes(element.props.size)
+  );
 };
