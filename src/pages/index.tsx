@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {BlogItem, Button, Header, Space, Spacer} from '../UI-Kit';
+import {BlogItem, Button, Header, Meta, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
 import * as styles from './homepage.module.scss';
 
@@ -42,10 +42,25 @@ export default (props: IndexPageProps) => {
     <Layout>
       {titleMarkup}
       <Spacer>
-        {/* TODO: fix this once spacer is better */}
         <Spacer size="large">
           {posts.map((post: BlogPost | LinkPost) => (
-            <BlogItem post={post} key={post.title} />
+            <BlogItem
+              title={post.title}
+              meta={
+                <Meta
+                  date={post.date}
+                  timeToRead={
+                    post.internal && post.body.childMarkdownRemark.timeToRead
+                  }
+                  isLinkPost={post.postType === 'Link'}
+                />
+              }
+              linkHref={Routes.blogPost(post.slug)}
+              description={
+                post.description || post.body.childMarkdownRemark.excerpt || ''
+              }
+              key={post.title}
+            />
           ))}
         </Spacer>
         <Space size="big" />
