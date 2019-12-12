@@ -1,0 +1,109 @@
+@import 'foundation';
+@import 'ui-kit-mixins';
+
+@mixin BodyStyles {
+  h2 {
+    margin-top: space(large);
+    margin-bottom: space(small);
+  }
+
+  h3 {
+    margin-top: space(medium);
+    margin-bottom: space(small);
+  }
+
+  p {
+    margin-top: space(small);
+    margin-bottom: space(small);
+  }
+
+  img {
+    @include Breakout;
+
+    margin-top: space(little);
+    margin-bottom: space(little);
+    max-width: $container-size + ($breakout-amount * 2);
+
+    @include smaller-than-breakout-width {
+      max-width: 100%;
+    }
+
+    @include on-small-screens {
+      max-width: calc(100% + #{$container-base-padding * 2});
+    }
+  }
+
+  ul,
+  ol {
+    margin-left: 0;
+    padding-left: 0;
+
+    counter-reset: list-counter;
+
+    list-style-type: none;
+
+    li {
+      position: relative;
+      padding-left: space(medium);
+      margin-bottom: space(little);
+
+      counter-increment: list-counter;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        content: counter(list-counter) '.';
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        @include text-style-Button;
+      }
+    }
+  }
+
+  ul li {
+    &:before {
+      content: '→';
+      font-style: normal;
+    }
+  }
+
+  blockquote {
+    @include Breakout;
+
+    margin-top: space(medium);
+    margin-bottom: space(medium);
+    padding: $breakout-amount;
+  }
+}
+
+@mixin BodyStylesTheme($theme) {
+  a {
+    @include Link($theme);
+  }
+
+  color: color($theme, text);
+
+  h1 {
+    @include Header-Title($theme);
+  }
+
+  h2 {
+    @include Header-Heading($theme);
+  }
+
+  h3 {
+    @include Header-Subheading($theme);
+  }
+
+  img {
+    background-color: color($theme, caption-bg);
+  }
+
+  blockquote {
+    @include Blockquote($theme);
+  }
+}

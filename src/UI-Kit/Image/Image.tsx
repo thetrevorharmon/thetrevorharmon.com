@@ -13,7 +13,7 @@ export const Image = ({className, src}: ImageProps) => {
     <Img
       className={className}
       fluid={src.fluid}
-      alt={`${src.title} | ${src.description}`}
+      alt={src.title || src.description}
     />
   ) : null;
 };

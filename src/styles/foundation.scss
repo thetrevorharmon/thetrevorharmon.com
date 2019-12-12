@@ -76,7 +76,7 @@
     @error 'You must pass in a valid space value.';
   }
 
-  $base: $base-font-size;
+  $base: 1rem;
 
   $space: (
     tiny: $base * 1/3,
@@ -98,6 +98,7 @@ $font-stack: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 
 $base-font-size: 15px;
 $container-size: 560px;
+$container-base-padding: $base-font-size + 10px;
 $breakout-amount: $base-font-size * 8/3;
 $input-height: $base-font-size * 3;
 
@@ -106,84 +107,3 @@ $input-height: $base-font-size * 3;
     @content;
   }
 }
-
-// LEGACY START ===========================================================================
-// LEGACY START ===========================================================================
-// LEGACY START ===========================================================================
-// LEGACY START ===========================================================================
-
-$default-sans-serif-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol';
-$sans-serif-font-stack: 'Work Sans', $default-sans-serif-stack;
-
-$text-color-primary: #2a2a2a;
-$text-color-secondary: #7a7a7a;
-$text-color-tertiary: lighten($text-color-secondary, 20%);
-
-$brand-primary: #dd0505;
-
-$spacer: 1rem !default;
-$spacers: () !default;
-$spacers: map-merge(
-  (
-    0: 0,
-    1: (
-      $spacer * 0.25,
-    ),
-    2: (
-      $spacer * 0.5,
-    ),
-    3: $spacer,
-    4: (
-      $spacer * 1.5,
-    ),
-    5: (
-      $spacer * 3,
-    ),
-    6: (
-      $spacer * 4.5,
-    ),
-    7: (
-      $spacer * 6,
-    ),
-    8: (
-      $spacer * 8,
-    ),
-    9: (
-      $spacer * 10,
-    ),
-  ),
-  $spacers
-);
-
-$header-size: (
-  headline: (
-    desktop: 3rem,
-    phone: 2.25rem,
-    desktop-kerning: -2px,
-    phone-kerning: -2px,
-  ),
-  tagline: (
-    desktop: 1.3rem,
-    phone: 1.15rem,
-    kerning: -1px,
-  ),
-  title: (
-    desktop: 1.75rem,
-    phone: 1.75rem,
-    desktop-kerning: -1.5px,
-    phone-kerning: -1px,
-  ),
-  subtitle: (
-    desktop: 1.4rem,
-    phone: 1.4rem,
-    kerning: -1px,
-  ),
-  section-title: (
-    desktop: 1.5rem,
-    phone: 1.25rem,
-    desktop-kerning: 10px,
-    phone-kerning: 4px,
-  ),
-);

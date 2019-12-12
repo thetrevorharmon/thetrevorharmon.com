@@ -6,7 +6,7 @@
   margin-right: auto;
 
   @media screen and (max-width: $container-size + ($base-font-size * 2)) {
-    padding-left: $base-font-size;
-    padding-right: $base-font-size;
+    padding-left: $base-font-size + 10px;
+    padding-right: $base-font-size + 10px;
   }
 }

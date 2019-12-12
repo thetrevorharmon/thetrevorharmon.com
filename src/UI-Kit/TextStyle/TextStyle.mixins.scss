@@ -1,7 +1,15 @@
 @import 'foundation';
 
+@mixin font-size($size, $multiplier: 0.8) {
+  font-size: $size;
+
+  @include on-small-screens {
+    font-size: $size * $multiplier;
+  }
+}
+
 @mixin text-style-Display {
-  font-size: $base-font-size * 3.066666667;
+  @include font-size(3.066666667rem);
   font-weight: 900;
   letter-spacing: -1.5px;
   font-style: italic;
@@ -9,7 +17,7 @@
 }
 
 @mixin text-style-Title {
-  font-size: $base-font-size * 2.4;
+  @include font-size(2.4rem);
   font-weight: 900;
   letter-spacing: -1px;
   font-style: italic;
@@ -17,47 +25,51 @@
 }
 
 @mixin text-style-Blockquote {
-  font-size: $base-font-size * 2;
+  @include font-size(2rem);
   font-weight: 900;
   letter-spacing: -1px;
   font-style: italic;
+
+  @include on-small-screens {
+    font-size: 1.76rem;
+  }
 }
 
 @mixin text-style-Heading {
-  font-size: $base-font-size * 1.866666667;
+  @include font-size(1.866666667rem);
   font-weight: 900;
   letter-spacing: -1px;
   font-style: italic;
 }
 
 @mixin text-style-Subheading {
-  font-size: $base-font-size * 1.6;
+  @include font-size(1.6rem);
   font-weight: 900;
   letter-spacing: -0.5px;
   font-style: italic;
 }
 
 @mixin text-style-Body {
-  font-size: $base-font-size;
+  font-size: 1rem;
 }
 
 @mixin text-style-Label {
-  font-size: $base-font-size;
+  font-size: 1rem;
   font-weight: 900;
 }
 
 @mixin text-style-Meta {
-  font-size: $base-font-size * 0.866666667;
+  font-size: 0.866666667rem;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 @mixin text-style-Caption {
-  font-size: $base-font-size * 0.866666667;
+  font-size: 0.866666667rem;
 }
 
 @mixin text-style-Button {
-  font-size: $base-font-size;
+  font-size: 1rem;
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;

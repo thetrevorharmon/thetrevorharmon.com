@@ -5,8 +5,14 @@
   @include text-style-Blockquote;
   line-height: 1.3;
 
-  $size: space(big);
+  $size: space(big) !default;
   padding: $size $size $size space(large);
+
+  @include on-small-screens {
+    $size: space(normal);
+    padding: $size $size $size space(big);
+  }
+
   position: relative;
 
   color: color($theme, text-bold);
@@ -25,7 +31,7 @@
     font-style: normal;
     margin-right: space(little);
     position: absolute;
-    top: $size + 3px;
+    top: calc($size + 3px);
     left: $size;
   }
 }
