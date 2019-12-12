@@ -37,9 +37,13 @@ export interface ContentfulAsset extends ContentfulBaseObject {
   fluid: FluidObject | FluidObject[];
 }
 
-export function getContentfulAssetSrc(asset: ContentfulAsset) {
-  const fluid = asset.fluid instanceof Array ? asset.fluid[0] : asset.fluid;
-  return fluid.src;
+export function getContentfulAssetSrc(
+  asset?: ContentfulAsset,
+): string | undefined {
+  if (asset) {
+    const fluid = asset.fluid instanceof Array ? asset.fluid[0] : asset.fluid;
+    return fluid.src;
+  }
 }
 
 type ContentfulAttributionType = 'Photo' | 'Article';
