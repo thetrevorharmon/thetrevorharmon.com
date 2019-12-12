@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {LinkPost} from '../types/Post';
+import {LinkPost} from '../types';
 import {Button} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
@@ -44,7 +44,7 @@ export default (props: LinkPostProps) => {
 
   const body = {
     bodyHtml: linkPost.body.childMarkdownRemark.html,
-    children: <Button href={linkPost.link}>View Link</Button>,
+    children: <Button url={linkPost.link}>View Link</Button>,
   };
 
   const footerData = [];

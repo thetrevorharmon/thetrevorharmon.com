@@ -4,8 +4,15 @@ import Masonry from 'react-masonry-css';
 
 import {ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
-import {Project} from '../types/Project';
-import {Breakout, FeaturedItem, Header, Meta, Space, Spacer} from '../UI-Kit';
+import {Project} from '../types';
+import {
+  Breakout,
+  FeaturedPostItem,
+  Header,
+  Meta,
+  Space,
+  Spacer,
+} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './projects.module.scss';
 
@@ -37,23 +44,7 @@ export default (props: ProjectsPageProps) => {
   const featured =
     featuredProject != null ? (
       <>
-        <FeaturedItem
-          image={featuredProject.featureImage}
-          title={featuredProject.title}
-          meta={
-            <Meta
-              date={featuredProject.projectCompletionDate}
-              client={featuredProject.client}
-            />
-          }
-          linkHref={Routes.project(featuredProject.slug)}
-          description={
-            (featuredProject.description &&
-              featuredProject.description.childMarkdownRemark &&
-              featuredProject.description.childMarkdownRemark.excerpt) ||
-            ''
-          }
-        />
+        <FeaturedPostItem post={featuredProject} />
         <Space size="normal" />
       </>
     ) : null;

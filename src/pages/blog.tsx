@@ -3,12 +3,11 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {BlogPost, isBlogPost, isLinkPost, LinkPost} from '../types/Post';
+import {BlogPost, isBlogPost, LinkPost} from '../types';
 import {
-  BlogItem,
-  FeaturedItem,
+  FeaturedPostItem,
   Header,
-  Meta,
+  PostItem,
   Space,
   Spacer,
   TextStyle,
@@ -51,48 +50,9 @@ export default (props: ProjectsPageProps) => {
           {posts.map((post, index) => (
             <>
               {index === 1 && isBlogPost(post) && post.heroImage != null ? (
-                // TODO: this kinda sucks. I think that having "blog" specific wrappers might be nice.
-                <FeaturedItem
-                  image={post.heroImage}
-                  title={post.title}
-                  meta={
-                    <Meta
-                      date={post.date}
-                      timeToRead={
-                        post.internal &&
-                        post.body.childMarkdownRemark.timeToRead
-                      }
-                    />
-                  }
-                  linkHref={Routes.blogPost(post.slug)}
-                  description={
-                    post.description ||
-                    post.body.childMarkdownRemark.excerpt ||
-                    ''
-                  }
-                  key={index}
-                />
+                <FeaturedPostItem post={post} key={post.title} />
               ) : (
-                <BlogItem
-                  title={post.title}
-                  meta={
-                    <Meta
-                      date={post.date}
-                      timeToRead={
-                        post.internal &&
-                        post.body.childMarkdownRemark.timeToRead
-                      }
-                      isLinkPost={isLinkPost(post)}
-                    />
-                  }
-                  linkHref={Routes.blogPost(post.slug)}
-                  description={
-                    post.description ||
-                    post.body.childMarkdownRemark.excerpt ||
-                    ''
-                  }
-                  key={index}
-                />
+                <PostItem post={post} key={index} />
               )}
             </>
           ))}

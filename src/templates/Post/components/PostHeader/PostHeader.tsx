@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  ContentfulAsset,
-  ContentfulAttribution,
-} from '../../../../types/Contentful';
+import {ContentfulAsset, ContentfulAttribution} from '../../../../types';
 import {
   Attribution,
   Breakout,

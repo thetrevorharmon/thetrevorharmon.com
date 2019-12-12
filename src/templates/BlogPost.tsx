@@ -1,10 +1,9 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {getContentfulAssetSrc} from '../types/Contentful';
-import {BlogPost} from '../types/Post';
+import {BlogPost, getContentfulAssetSrc} from '../types';
 import {Attribution, Link, Spacer} from '../UI-Kit';
-import {Routes} from '../utils';
+import {Routes, useSiteData} from '../utils';
 import {Post} from './Post';
 
 interface BasicPost {
@@ -24,17 +23,18 @@ interface BlogPostProps {
 }
 
 export default (props: BlogPostProps) => {
+  const site = useSiteData();
   const blogPost = props.data.allContentfulBlogPost.edges[0].node;
   const {newerPost, olderPost} = props.pageContext;
 
   const metadata = {
     description: blogPost.description
-      ? `${blogPost.description}`
-      : `${blogPost.body.childMarkdownRemark.excerpt}`,
+      ? blogPost.description
+      : blogPost.body.childMarkdownRemark.excerpt,
     image: blogPost.heroImage
       ? getContentfulAssetSrc(blogPost.heroImage)
       : undefined,
-    title: `${blogPost.title}`,
+    title: blogPost.title,
     url: Routes.blogPost(blogPost.slug),
   };
 
@@ -48,6 +48,10 @@ export default (props: BlogPostProps) => {
     title: blogPost.title,
   };
 
+  const twitterUrl = `https://mobile.twitter.com/search?q=${encodeURI(
+    [site.siteUrl, Routes.blogPost(blogPost.slug)].join(''),
+  )}`;
+
   const body = {
     bodyHtml: blogPost.body.childMarkdownRemark.html,
     children: (
@@ -55,7 +59,7 @@ export default (props: BlogPostProps) => {
         {blogPost.sourceAttribution && (
           <Attribution attribution={blogPost.sourceAttribution} />
         )}
-        <Link href="#">Reply to this post on Twitter</Link>
+        <Link url={twitterUrl}>Reply to this post on Twitter</Link>
       </Spacer>
     ),
   };

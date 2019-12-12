@@ -24,35 +24,35 @@ export default () => {
         </Header>
         <p>Here is a paragraph.</p>
         <Spacer size="tiny">
-          <Link href="#" icon={{position: 'leading', name: 'expand'}}>
+          <Link url="#" icon={{position: 'leading', name: 'expand'}}>
             This is a link with a leading expand icon
           </Link>
-          <Link href="#" icon={{position: 'leading', name: 'link'}}>
+          <Link url="#" icon={{position: 'leading', name: 'link'}}>
             This is a link with a leading link icon
           </Link>
-          <Link href="#" icon={{position: 'leading', name: 'rss'}}>
+          <Link url="#" icon={{position: 'leading', name: 'rss'}}>
             This is a link with a leading rss icon
           </Link>
-          <Link href="#" icon={{position: 'leading', name: 'star'}}>
+          <Link url="#" icon={{position: 'leading', name: 'star'}}>
             This is a link with a leading star icon
           </Link>
-          <Link href="#" icon={{position: 'leading', name: 'twitter'}}>
+          <Link url="#" icon={{position: 'leading', name: 'twitter'}}>
             This is a link with a leading twitter icon
           </Link>
           <Space size="huge" />
-          <Link href="#" icon={{position: 'trailing', name: 'expand'}}>
+          <Link url="#" icon={{position: 'trailing', name: 'expand'}}>
             This is a link with a trailing expand icon
           </Link>
-          <Link href="#" icon={{position: 'trailing', name: 'link'}}>
+          <Link url="#" icon={{position: 'trailing', name: 'link'}}>
             This is a link with a trailing link icon
           </Link>
-          <Link href="#" icon={{position: 'trailing', name: 'rss'}}>
+          <Link url="#" icon={{position: 'trailing', name: 'rss'}}>
             This is a link with a trailing rss icon
           </Link>
-          <Link href="#" icon={{position: 'trailing', name: 'star'}}>
+          <Link url="#" icon={{position: 'trailing', name: 'star'}}>
             This is a link with a trailing star icon
           </Link>
-          <Link href="#" icon={{position: 'trailing', name: 'twitter'}} isMuted>
+          <Link url="#" icon={{position: 'trailing', name: 'twitter'}} isMuted>
             This is a link with a leading twitter icon
           </Link>
           <Space size="huge" />

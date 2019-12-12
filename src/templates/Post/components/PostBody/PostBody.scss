@@ -100,14 +100,6 @@
     blockquote {
       @include Blockquote($theme);
     }
-
-    .scrollable {
-      @include mobile-only {
-        &:after {
-          color: color($theme, text-muted);
-        }
-      }
-    }
   }
 }
 

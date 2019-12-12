@@ -2,8 +2,8 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {BlogPost, isLinkPost, LinkPost} from '../types/Post';
-import {BlogItem, Button, Header, Meta, Space, Spacer} from '../UI-Kit';
+import {BlogPost, LinkPost} from '../types';
+import {Button, Header, PostItem, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {
@@ -40,27 +40,11 @@ export default (props: IndexPageProps) => {
       <Spacer>
         <Spacer size="large">
           {posts.map((post: BlogPost | LinkPost) => (
-            <BlogItem
-              title={post.title}
-              meta={
-                <Meta
-                  date={post.date}
-                  timeToRead={
-                    post.internal && post.body.childMarkdownRemark.timeToRead
-                  }
-                  isLinkPost={isLinkPost(post)}
-                />
-              }
-              linkHref={Routes.blogPost(post.slug)}
-              description={
-                post.description || post.body.childMarkdownRemark.excerpt || ''
-              }
-              key={post.title}
-            />
+            <PostItem post={post} key={post.title} />
           ))}
         </Spacer>
         <Space size="big" />
-        <Button href={Routes.blog()}>Read more posts &rarr;</Button>
+        <Button url={Routes.blog()}>Read more posts &rarr;</Button>
       </Spacer>
     </Layout>
   );

@@ -16,7 +16,7 @@ export const PostFooter = ({title, data}: PostFooterProps) => {
   const makePairMarkup = ({link: {href, label}, date}: LinkDatePair) => {
     return (
       <div className={styles.Pair} key={label}>
-        <Link className={styles.Link} href={href}>
+        <Link className={styles.Link} url={href}>
           {label}
         </Link>
         <span className={classnames([styles.Date, styles[`Date-${theme}`]])}>

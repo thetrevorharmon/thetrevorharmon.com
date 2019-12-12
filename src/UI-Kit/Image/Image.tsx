@@ -1,7 +1,7 @@
 import Img from 'gatsby-image';
 import * as React from 'react';
 
-import {ContentfulAsset} from '../../types/Contentful';
+import {ContentfulAsset} from '../../types';
 
 interface ImageProps {
   className?: string;

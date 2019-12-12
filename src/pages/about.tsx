@@ -8,7 +8,7 @@ import {
   ContentfulAsset,
   ContentfulBaseObject,
   ContentfulLongText,
-} from '../types/Contentful';
+} from '../types';
 import {Breakout, Header, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './about.module.scss';

@@ -1,4 +1,8 @@
-import {ContentfulBaseObject, ContentfulAsset} from './Contentful';
+import {
+  ContentfulAsset,
+  ContentfulBaseObject,
+  isContentfulElementOfType,
+} from './Contentful';
 
 export interface ProjectPartial extends ContentfulBaseObject {
   title: string;
@@ -15,4 +19,8 @@ export interface Project extends ProjectPartial {
     childMarkdownRemark?: MarkdownRemark;
   };
   projectImages: ContentfulAsset[];
+}
+
+export function isProject(element: any): element is Project {
+  return isContentfulElementOfType(element, 'ContentfulProject');
 }

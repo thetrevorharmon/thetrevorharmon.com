@@ -38,7 +38,7 @@ export const Footer = ({className}: FooterProps) => {
     <ul className={styles.FooterLinks}>
       {footerLinks.map((link) => (
         <li key={link.display}>
-          <Link href={link.location} target="_blank">
+          <Link url={link.location} target="_blank">
             {link.display}
           </Link>
         </li>
