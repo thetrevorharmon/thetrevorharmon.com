@@ -2,18 +2,14 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
+import {BlogPost, isLinkPost, LinkPost} from '../types/Post';
 import {BlogItem, Button, Header, Meta, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
-import * as styles from './homepage.module.scss';
 
 interface IndexPageProps {
   data: {
-    site: {
-      siteMetadata: SiteMetadata;
-    };
-    allContentfulProject: {edges: [{node: Project}]};
-    allContentfulBlogPost: {edges: [{node: BlogPost}]};
-    allContentfulLinkPost: {edges: [{node: LinkPost}]};
+    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
+    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
   };
 }
 
@@ -52,7 +48,7 @@ export default (props: IndexPageProps) => {
                   timeToRead={
                     post.internal && post.body.childMarkdownRemark.timeToRead
                   }
-                  isLinkPost={post.postType === 'Link'}
+                  isLinkPost={isLinkPost(post)}
                 />
               }
               linkHref={Routes.blogPost(post.slug)}
@@ -72,11 +68,6 @@ export default (props: IndexPageProps) => {
 
 export const query = graphql`
   query indexPageQuery {
-    site {
-      siteMetadata {
-        tagline
-      }
-    }
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 3) {
       edges {
         node {
@@ -92,6 +83,9 @@ export const query = graphql`
             }
           }
           tags
+          internal {
+            type
+          }
         }
       }
     }
@@ -111,6 +105,9 @@ export const query = graphql`
               excerpt(format: PLAIN, pruneLength: 116)
               timeToRead
             }
+          }
+          internal {
+            type
           }
         }
       }

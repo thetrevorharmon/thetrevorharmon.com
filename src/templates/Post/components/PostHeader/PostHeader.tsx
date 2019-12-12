@@ -1,12 +1,15 @@
 import * as React from 'react';
 
 import {
+  ContentfulAsset,
+  ContentfulAttribution,
+} from '../../../../types/Contentful';
+import {
   Attribution,
   Breakout,
   Header,
   Image,
   Meta,
-  MetaProps,
   Space,
   Spacer,
 } from '../../../../UI-Kit';

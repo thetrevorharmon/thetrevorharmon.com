@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {ContentfulAsset} from '../../types/Contentful';
 import {BlogItem, Breakout, Icon, Image, Spacer} from '../../UI-Kit';
 import {BlogItemProps} from '../BlogItem';
 import * as styles from './FeaturedItem.module.scss';
@@ -26,7 +27,6 @@ export const FeaturedItem = ({
   ]);
 
   return (
-    // TODO: add star to bottom right corner
     <Breakout>
       <div className={classname}>
         <Spacer size="medium">

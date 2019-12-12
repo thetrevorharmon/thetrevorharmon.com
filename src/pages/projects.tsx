@@ -4,19 +4,14 @@ import Masonry from 'react-masonry-css';
 
 import {ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
+import {Project} from '../types/Project';
 import {Breakout, FeaturedItem, Header, Meta, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './projects.module.scss';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulProject: {
-      edges: [
-        {
-          node: Project;
-        },
-      ];
-    };
+    allContentfulProject: allContentfulEdgesWithNode<Project>;
   };
 }
 
@@ -110,6 +105,9 @@ export const query = graphql`
             childMarkdownRemark {
               excerpt
             }
+          }
+          internal {
+            type
           }
         }
       }

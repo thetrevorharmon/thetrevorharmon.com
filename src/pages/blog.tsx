@@ -3,6 +3,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
+import {BlogPost, isBlogPost, isLinkPost, LinkPost} from '../types/Post';
 import {
   BlogItem,
   FeaturedItem,
@@ -16,20 +17,8 @@ import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulBlogPost: {
-      edges: [
-        {
-          node: BlogPost;
-        },
-      ];
-    };
-    allContentfulLinkPost: {
-      edges: [
-        {
-          node: LinkPost;
-        },
-      ];
-    };
+    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
+    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
   };
 }
 
@@ -61,7 +50,7 @@ export default (props: ProjectsPageProps) => {
         <Spacer size="large">
           {posts.map((post, index) => (
             <>
-              {index === 1 && post.postType === 'Blog' ? (
+              {index === 1 && isBlogPost(post) && post.heroImage != null ? (
                 // TODO: this kinda sucks. I think that having "blog" specific wrappers might be nice.
                 <FeaturedItem
                   image={post.heroImage}
@@ -93,7 +82,7 @@ export default (props: ProjectsPageProps) => {
                         post.internal &&
                         post.body.childMarkdownRemark.timeToRead
                       }
-                      isLinkPost={post.postType === 'Link'}
+                      isLinkPost={isLinkPost(post)}
                     />
                   }
                   linkHref={Routes.blogPost(post.slug)}
@@ -123,9 +112,6 @@ export const query = graphql`
           slug
           description
           date(formatString: "DD MMM YYYY")
-          internal {
-            type
-          }
           heroImage {
             ...ContentfulAsset_width750
           }
@@ -137,6 +123,9 @@ export const query = graphql`
             }
           }
           tags
+          internal {
+            type
+          }
         }
       }
     }

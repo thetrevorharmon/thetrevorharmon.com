@@ -1,3 +1,5 @@
+import {BlogPost, LinkPost} from '../types/Post';
+
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;
   const hasProtocol = completeProtocol.test(link);
@@ -28,7 +30,6 @@ const combinePostTypes = (
     ...blogPosts.edges.map((edge) => {
       const blogPost: BlogPost = {
         ...(edge.node as BlogPost),
-        postType: 'Blog',
       };
 
       return blogPost;
@@ -37,7 +38,6 @@ const combinePostTypes = (
     ...linkPosts.edges.map((edge) => {
       const linkPost: LinkPost = {
         ...(edge.node as LinkPost),
-        postType: 'Link',
       };
 
       return linkPost;

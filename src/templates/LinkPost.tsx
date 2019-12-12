@@ -1,19 +1,19 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {LinkPost} from '../types/Post';
 import {Button} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
 
+interface BasicPost {
+  title: string;
+  slug: string;
+}
+
 interface LinkPostProps {
   data: {
-    allContentfulLinkPost: {
-      edges: [
-        {
-          node: LinkPost;
-        },
-      ];
-    };
+    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
   };
   pageContext: {
     slug: string;
@@ -23,11 +23,7 @@ interface LinkPostProps {
 }
 
 export default (props: LinkPostProps) => {
-  const linkPost: LinkPost = {
-    ...props.data.allContentfulLinkPost.edges[0].node,
-    postType: 'Link',
-  };
-
+  const linkPost = props.data.allContentfulLinkPost.edges[0].node;
   const {newerPost, olderPost} = props.pageContext;
 
   const metadata = {
@@ -97,6 +93,9 @@ export const query = graphql`
               excerpt
               timeToRead
             }
+          }
+          internal {
+            type
           }
         }
       }
