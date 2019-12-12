@@ -31,7 +31,7 @@ export const Navbar = () => {
     <ul className={styles.Links}>
       {navbarLinks.map((link, index) => (
         <li key={index}>
-          <Link href={link.location}>{link.display}</Link>
+          <Link url={link.location}>{link.display}</Link>
         </li>
       ))}
     </ul>

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {ContentfulAttribution} from '../../types/Contentful';
+import {ContentfulAttribution} from '../../types';
 import {Link} from '../../UI-Kit';
 import * as styles from './Attribution.module.scss';
 
@@ -26,7 +26,7 @@ export const Attribution = ({
   const photoAttribution = (
     <div className={classname}>
       {`${type} by ${author} on `}
-      <Link href={sourceLocation} isMuted>
+      <Link url={sourceLocation} isMuted>
         {sourceName}
       </Link>
       .
@@ -36,7 +36,7 @@ export const Attribution = ({
   const articleAttribution = (
     <span className={classname}>
       This {`${type.toLowerCase()} was originally published on `}
-      <Link href={sourceLocation} isMuted>
+      <Link url={sourceLocation} isMuted>
         {sourceName}
       </Link>
       .

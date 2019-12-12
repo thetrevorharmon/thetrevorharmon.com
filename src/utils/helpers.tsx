@@ -1,4 +1,4 @@
-import {BlogPost, LinkPost} from '../types/Post';
+import {BlogPost, LinkPost} from '../types';
 
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;

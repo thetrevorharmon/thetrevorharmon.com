@@ -1,1 +1,0 @@
-export {FeaturedItem} from './FeaturedItem';

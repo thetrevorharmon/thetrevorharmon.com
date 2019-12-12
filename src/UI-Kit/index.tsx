@@ -1,9 +1,8 @@
 export {Attribution} from './Attribution';
 export {Blockquote} from './Blockquote';
-export {BlogItem} from './BlogItem';
 export {Breakout} from './Breakout';
 export {Button} from './Button';
-export {FeaturedItem} from './FeaturedItem';
+export {FeaturedPostItem} from './FeaturedPostItem';
 export {Footer} from './Footer';
 export {Header} from './Header';
 export {Icon, IconName} from './Icon';
@@ -12,5 +11,6 @@ export {Input} from './Input';
 export {Link} from './Link';
 export {Meta, MetaProps} from './Meta';
 export {Navbar} from './Navbar';
+export {PostItem} from './PostItem';
 export {Spacer, Space} from './Spacer';
 export {TextStyle} from './TextStyle';

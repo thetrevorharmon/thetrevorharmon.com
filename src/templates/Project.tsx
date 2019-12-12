@@ -3,8 +3,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
-import {getContentfulAssetSrc} from '../types/Contentful';
-import {Project} from '../types/Project';
+import {getContentfulAssetSrc, Project} from '../types';
 import {Breakout, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';

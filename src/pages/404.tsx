@@ -18,7 +18,7 @@ export default () => {
       </Header>
       <p>Looks like you still haven't found what you're looking for.</p>
       <p>
-        <Link href={Routes.home()}>Go Home &rarr;</Link>
+        <Link url={Routes.home()}>Go Home &rarr;</Link>
       </p>
     </Layout>
   );

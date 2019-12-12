@@ -24,8 +24,7 @@
   }
 }
 
-// TODO: revisit when layout utilities are done
-@include mobile-only {
+@include on-small-screens {
   .FooterLinks {
     width: 100%;
   }

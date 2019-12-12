@@ -14,7 +14,7 @@ interface LinkIconProps {
 
 interface LinkProps {
   className?: string;
-  href: string;
+  url: string;
   target?: string;
   isMuted?: boolean;
   icon?: LinkIconProps;
@@ -22,15 +22,15 @@ interface LinkProps {
 }
 
 export const Link = ({
-  href,
+  url,
   target,
   className,
   isMuted,
   icon,
   children,
 }: LinkProps) => {
-  const externalPattern = /^http/;
-  const externalLink = externalPattern.test(href);
+  const externalUrlPattern = /^http/;
+  const isExternalUrl = externalUrlPattern.test(url);
 
   const theme = useTheme();
   const classname = classnames(
@@ -68,17 +68,17 @@ export const Link = ({
 
   const innerMarkup = getInnerMarkup();
 
-  return externalLink ? (
+  return isExternalUrl ? (
     <OutboundLink
       className={classname}
-      href={href}
+      href={url}
       target={target || '_blank'}
       rel="noreferrer"
     >
       {innerMarkup}
     </OutboundLink>
   ) : (
-    <GatsbyLink className={classname} to={href} target={target || ''}>
+    <GatsbyLink className={classname} to={url} target={target || ''}>
       {innerMarkup}
     </GatsbyLink>
   );

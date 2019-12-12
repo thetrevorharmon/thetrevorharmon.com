@@ -10,17 +10,17 @@ import * as styles from './Button.module.scss';
 interface ButtonProps {
   className?: string;
   children: React.ReactNode;
-  href?: string;
+  url?: string;
   onClick?(): void;
 }
 
-export const Button = ({className, children, href, onClick}: ButtonProps) => {
-  if (href != null && onClick != null) {
-    throw new Error('Cannot use both the href and onClick props');
+export const Button = ({className, children, url, onClick}: ButtonProps) => {
+  if (url != null && onClick != null) {
+    throw new Error('Cannot use both the url and onClick props');
   }
 
-  if (href == null && onClick == null) {
-    throw new Error('Must use either the href or onClick prop');
+  if (url == null && onClick == null) {
+    throw new Error('Must use either the url or onClick prop');
   }
 
   const buttonText = <TextStyle style="Button">{children}</TextStyle>;
@@ -31,25 +31,25 @@ export const Button = ({className, children, href, onClick}: ButtonProps) => {
     styles[`Button-${theme}`],
   ]);
 
-  const linkMarkup = (linkHref?: string) => {
-    if (linkHref == null) {
+  const linkMarkup = (linkUrl?: string) => {
+    if (linkUrl == null) {
       throw new Error('Href must not be null');
     }
 
-    const externalPattern = /^http/;
-    const externalLink = externalPattern.test(linkHref);
+    const externalUrlPattern = /^http/;
+    const isExternalUrl = externalUrlPattern.test(linkUrl);
 
-    return externalLink ? (
+    return isExternalUrl ? (
       <OutboundLink
         className={classname}
-        href={linkHref}
+        href={linkUrl}
         target={'_blank'}
         rel="noreferrer"
       >
         {buttonText}
       </OutboundLink>
     ) : (
-      <GatsbyLink className={classname} to={linkHref}>
+      <GatsbyLink className={classname} to={linkUrl}>
         {buttonText}
       </GatsbyLink>
     );
@@ -67,5 +67,5 @@ export const Button = ({className, children, href, onClick}: ButtonProps) => {
     );
   };
 
-  return href ? linkMarkup(href) : buttonMarkup(onClick);
+  return url ? linkMarkup(url) : buttonMarkup(onClick);
 };

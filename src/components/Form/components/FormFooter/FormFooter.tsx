@@ -23,14 +23,14 @@ export const FormFooter = ({children, twitter, rss}: FormFooterProps) => {
         <ul>
           <li>
             <Link
-              href={twitter.link}
+              url={twitter.link}
               icon={{position: 'leading', name: 'twitter'}}
             >
               {twitter.label}
             </Link>
           </li>
           <li>
-            <Link href={rss.link} icon={{position: 'leading', name: 'rss'}}>
+            <Link url={rss.link} icon={{position: 'leading', name: 'rss'}}>
               {rss.label}
             </Link>
           </li>

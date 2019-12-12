@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
-import {ProjectPartial} from '../../types/Project';
+import {ProjectPartial} from '../../types';
 import {Header, Image, Link, Meta, Spacer} from '../../UI-Kit';
 import {Routes} from '../../utils';
 import * as styles from './ProjectPreviewTile.module.scss';
@@ -40,7 +40,7 @@ export const ProjectPreviewTile = ({
           {featureImage && <Image src={featureImage} />}
           {textMarkup}
         </Spacer>
-        <Link href={Routes.project(slug)}>See More →</Link>
+        <Link url={Routes.project(slug)}>See More →</Link>
       </Spacer>
     </div>
   );
