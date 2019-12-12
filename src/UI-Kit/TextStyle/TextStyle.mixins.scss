@@ -29,10 +29,6 @@
   font-weight: 900;
   letter-spacing: -1px;
   font-style: italic;
-
-  @include on-small-screens {
-    font-size: 1.76rem;
-  }
 }
 
 @mixin text-style-Heading {

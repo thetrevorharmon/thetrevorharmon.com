@@ -16,7 +16,7 @@
       Dark: lighten(color(Dark, caption-bg), 25%),
     ),
     pre-background: (
-      Light: color(Dark, caption-bg),
+      Light: color(Light, caption-bg),
       Dark: color(Dark, caption-bg),
     ),
     pre-border: (
@@ -25,22 +25,22 @@
     ),
     selection: (
       Light: darken(color(Light, caption-bg), 10%),
-      Dark: lighten(color(Dark, caption-bg), 10%),
+      Dark: lighten(color(Dark, caption-bg), 50%),
     ),
     keyword: (
-      Light: #beaaf9,
+      Light: #a4599d,
       Dark: #beaaf9,
     ),
     string: (
-      Light: #c1e38a,
+      Light: #679d5c,
       Dark: #c1e38a,
     ),
     punctuation: (
-      Light: darken(color(Dark, text), 20%),
+      Light: darken(color(Light, text), 20%),
       Dark: darken(color(Dark, text), 20%),
     ),
     class: (
-      Light: #70cde3,
+      Light: #32888d,
       Dark: #70cde3,
     ),
     comment: (
@@ -48,7 +48,7 @@
       Dark: #999988,
     ),
     function: (
-      Light: #fcd58b,
+      Light: #bb5131,
       Dark: #fcd58b,
     ),
     tag: (
@@ -103,13 +103,13 @@ pre[class*='language-'] {
         border-color: transparent;
       }
 
-      color: lighten(color(Dark, text-bold), 10%);
+      color: lighten(color($theme, text-bold), 10%);
 
-      background-color: code-color(Dark, pre-background);
+      background-color: code-color($theme, pre-background);
 
       &::selection,
       & ::selection {
-        background: code-color(Dark, selection);
+        background: code-color($theme, selection);
       }
     }
   }

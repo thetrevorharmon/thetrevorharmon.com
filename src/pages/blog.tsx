@@ -49,7 +49,7 @@ export default (props: ProjectsPageProps) => {
         <Spacer size="large">
           <FeaturedPostItem post={featuredPost} />
           {posts.map((post) => (
-            <PostItem post={post} key={post.title} />
+            <PostItem post={post} key={post.slug} />
           ))}
         </Spacer>
       </Spacer>

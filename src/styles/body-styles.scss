@@ -22,14 +22,14 @@
 
     margin-top: space(little);
     margin-bottom: space(little);
-    max-width: $container-size + ($breakout-amount * 2);
+    width: $container-size + ($breakout-amount * 2);
 
     @include smaller-than-breakout-width {
-      max-width: 100%;
+      width: 100%;
     }
 
     @include on-small-screens {
-      max-width: calc(100% + #{$container-base-padding * 2});
+      width: calc(100% + #{$container-base-padding * 2});
     }
   }
 
