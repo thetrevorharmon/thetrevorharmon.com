@@ -8,5 +8,8 @@ export const ContentfulAttribution = graphql`
     sourceName
     author
     type
+    internal {
+      type
+    }
   }
 `;

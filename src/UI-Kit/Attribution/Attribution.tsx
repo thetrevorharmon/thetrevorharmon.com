@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
+import {ContentfulAttribution} from '../../types/Contentful';
 import {Link} from '../../UI-Kit';
 import * as styles from './Attribution.module.scss';
 

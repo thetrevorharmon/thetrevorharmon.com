@@ -1,19 +1,20 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {getContentfulAssetSrc} from '../types/Contentful';
+import {BlogPost} from '../types/Post';
 import {Attribution, Link, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
 
+interface BasicPost {
+  title: string;
+  slug: string;
+}
+
 interface BlogPostProps {
   data: {
-    allContentfulBlogPost: {
-      edges: [
-        {
-          node: BlogPost;
-        },
-      ];
-    };
+    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
   };
   pageContext: {
     slug: string;
@@ -23,18 +24,16 @@ interface BlogPostProps {
 }
 
 export default (props: BlogPostProps) => {
-  const blogPost: BlogPost = {
-    ...props.data.allContentfulBlogPost.edges[0].node,
-    postType: 'Blog',
-  };
-
+  const blogPost = props.data.allContentfulBlogPost.edges[0].node;
   const {newerPost, olderPost} = props.pageContext;
 
   const metadata = {
     description: blogPost.description
       ? `${blogPost.description}`
       : `${blogPost.body.childMarkdownRemark.excerpt}`,
-    image: blogPost.heroImage ? blogPost.heroImage.fluid.src : undefined,
+    image: blogPost.heroImage
+      ? getContentfulAssetSrc(blogPost.heroImage)
+      : undefined,
     title: `${blogPost.title}`,
     url: Routes.blogPost(blogPost.slug),
   };
@@ -117,6 +116,9 @@ export const query = graphql`
           }
           photoAttribution {
             ...ContentfulAttribution
+          }
+          internal {
+            type
           }
         }
       }

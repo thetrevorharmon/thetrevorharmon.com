@@ -3,6 +3,8 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
+import {getContentfulAssetSrc} from '../types/Contentful';
+import {Project} from '../types/Project';
 import {Breakout, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
@@ -10,13 +12,7 @@ import * as styles from './Project.module.scss';
 
 interface TemplateProps {
   data: {
-    allContentfulProject: {
-      edges: [
-        {
-          node: Project;
-        },
-      ];
-    };
+    allContentfulProject: allContentfulEdgesWithNode<Project>;
   };
   pageContext: {
     slug: string;
@@ -35,7 +31,7 @@ export default (props: TemplateProps) => {
 
   const metadata: PageMetadata = {
     description: `${description}`,
-    image: project.featureImage && project.featureImage.fluid.src,
+    image: getContentfulAssetSrc(project.featureImage),
     title: project.title,
     url: Routes.project(props.pageContext.slug),
   };
@@ -97,6 +93,9 @@ export const query = graphql`
     allContentfulProject(filter: {slug: {eq: $slug}}) {
       edges {
         node {
+          internal {
+            type
+          }
           title
           client
           projectCompletionDate(formatString: "DD MMM YYYY")

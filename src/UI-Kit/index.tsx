@@ -10,7 +10,6 @@ export {Icon, IconName} from './Icon';
 export {Image} from './Image';
 export {Input} from './Input';
 export {Link} from './Link';
-export {LinkList} from './LinkList';
 export {Meta, MetaProps} from './Meta';
 export {Navbar} from './Navbar';
 export {Spacer, Space} from './Spacer';

@@ -1,3 +1,7 @@
+import {
+  ContentfulAsset,
+  ContentfulAttribution,
+} from '../../../../types/Contentful';
 import {MetaProps} from '../../../../UI-Kit';
 
 export interface PostHeaderProps {

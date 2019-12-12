@@ -8,19 +8,7 @@ import {Header, Icon, Link, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './redesign.module.scss';
 
-interface AboutPageProps {
-  data: {
-    allContentfulAboutPage: {
-      edges: [
-        {
-          node: AboutPageData;
-        },
-      ];
-    };
-  };
-}
-
-export default (props: AboutPageProps) => {
+export default () => {
   const pageMetadata: PageMetadata = {
     description: 'Redesign',
     title: 'Redesign',

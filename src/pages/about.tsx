@@ -4,19 +4,24 @@ import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
+import {
+  ContentfulAsset,
+  ContentfulBaseObject,
+  ContentfulLongText,
+} from '../types/Contentful';
 import {Breakout, Header, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './about.module.scss';
 
+interface AboutPageData extends ContentfulBaseObject {
+  title: string;
+  post: ContentfulLongText;
+  featureImage: ContentfulAsset;
+}
+
 interface AboutPageProps {
   data: {
-    allContentfulAboutPage: {
-      edges: [
-        {
-          node: AboutPageData;
-        },
-      ];
-    };
+    allContentfulAboutPage: allContentfulEdgesWithNode<AboutPageData>;
   };
 }
 
