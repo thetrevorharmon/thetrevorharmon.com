@@ -23,8 +23,8 @@ interface IndexPageProps {
 export default (props: IndexPageProps) => {
   const [featuredPost, posts] = Helpers.combinePostTypes({
     blogPosts: props.data.allContentfulBlogPost.nodes,
-    linkPosts: props.data.allContentfulLinkPost.nodes,
     limit: 4,
+    linkPosts: props.data.allContentfulLinkPost.nodes,
   });
 
   const {tagline} = useSiteData();

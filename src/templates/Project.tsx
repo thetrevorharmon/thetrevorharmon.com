@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
@@ -7,6 +6,7 @@ import {getContentfulAssetSrc, Project} from '../types';
 import {Breakout, Image, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
+import {LinkDatePair} from './Post/components/PostFooter';
 import * as styles from './Project.module.scss';
 
 interface TemplateProps {
@@ -15,11 +15,13 @@ interface TemplateProps {
   };
   pageContext: {
     slug: string;
+    recommendedProjects: LinkDatePair[];
   };
 }
 
 export default (props: TemplateProps) => {
   const project = props.data.contentfulProject;
+  const {recommendedProjects} = props.pageContext;
   const description = project.description.childMarkdownRemark
     ? project.description.childMarkdownRemark.html
     : null;
@@ -63,16 +65,8 @@ export default (props: TemplateProps) => {
   };
 
   const footer = {
-    // TODO: get other things you've worked on actual data
-    data: [
-      {
-        date: new Date(Date.parse('11/02/2019')), // TODO: put actual date here
-        link: {
-          href: Routes.project('sweet-honey-cover-art'),
-          label: '"Sweet Honey" Cover Art',
-        },
-      },
-    ],
+    data: recommendedProjects,
+    getFullLink: Routes.project,
     title: 'Other things I’ve worked on',
   };
 

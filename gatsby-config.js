@@ -7,6 +7,8 @@ require('dotenv').config({
   path: `.env.${environment}`,
 });
 
+const Utils = require('./gatsby-utils');
+
 module.exports = {
   siteMetadata: {
     title: `The Trevor Harmon`,
@@ -100,40 +102,9 @@ module.exports = {
             serialize: ({
               query: {site, allContentfulBlogPost, allContentfulLinkPost},
             }) => {
-              // This combines blog posts and link posts into a single array of posts
-              // First combines and then sorts according to date (newest first)
-              const combinePostTypes = (
-                blogPosts,
-                linkPosts,
-                order = 'desc',
-              ) => {
-                const orderMultiplier = order === 'desc' ? 1 : -1;
-
-                const posts = [
-                  // blog posts
-                  ...blogPosts.edges.map((edge) => edge.node),
-                  // link posts
-                  ...linkPosts.edges.map((edge) => edge.node),
-                ].sort((firstDate, secondDate) => {
-                  const a = new Date(firstDate.date);
-                  const b = new Date(secondDate.date);
-
-                  if (a < b) {
-                    return 1 * orderMultiplier;
-                  }
-                  if (a > b) {
-                    return -1 * orderMultiplier;
-                  }
-
-                  return 0;
-                });
-
-                return posts;
-              };
-
-              const posts = combinePostTypes(
-                allContentfulBlogPost,
-                allContentfulLinkPost,
+              const posts = Utils.combinePostTypes(
+                allContentfulBlogPost.nodes,
+                allContentfulLinkPost.nodes,
               );
 
               return posts.map((post) => {
@@ -160,17 +131,15 @@ module.exports = {
                   limit: 1000,
                   sort: { order: DESC, fields: [date] },
                 ) {
-                  edges {
-                    node {
-                      title
-                      slug
-                      description
-                      date
-                      body {
-                        childMarkdownRemark {
-                          html
-                          excerpt
-                        }
+                  nodes {
+                    title
+                    slug
+                    description
+                    date
+                    body {
+                      childMarkdownRemark {
+                        html
+                        excerpt
                       }
                     }
                   }
@@ -179,18 +148,14 @@ module.exports = {
                   limit: 1000,
                   sort: { order: DESC, fields: [date] },
                 ) {
-                  edges {
-                    node {
-                      title
-                      slug
-                      # add description back in when needed
-                      # description
-                      date
-                      body {
-                        childMarkdownRemark {
-                          html
-                          excerpt
-                        }
+                  nodes {
+                    title
+                    slug
+                    date
+                    body {
+                      childMarkdownRemark {
+                        html
+                        excerpt
                       }
                     }
                   }

@@ -5,6 +5,7 @@ import {BlogPost, getContentfulAssetSrc} from '../types';
 import {Attribution, Link, Spacer} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 import {Post} from './Post';
+import {LinkDatePair} from './Post/components/PostFooter';
 
 interface BasicPost {
   title: string;
@@ -17,15 +18,14 @@ interface BlogPostProps {
   };
   pageContext: {
     slug: string;
-    newerPost?: BasicPost;
-    olderPost?: BasicPost;
+    recommendedPosts: LinkDatePair[];
   };
 }
 
 export default (props: BlogPostProps) => {
   const site = useSiteData();
   const blogPost = props.data.contentfulBlogPost;
-  const {newerPost, olderPost} = props.pageContext;
+  const {recommendedPosts} = props.pageContext;
 
   const metadata = {
     description: blogPost.description
@@ -64,23 +64,9 @@ export default (props: BlogPostProps) => {
     ),
   };
 
-  const footerData = [];
-  if (olderPost) {
-    footerData.push({
-      date: new Date(Date.parse('10/27/2019')), // TODO: put actual date here
-      link: {href: Routes.blogPost(olderPost.slug), label: olderPost.title},
-    });
-  }
-
-  if (newerPost) {
-    footerData.push({
-      date: new Date(Date.parse('11/02/2019')), // TODO: put actual date here
-      link: {href: Routes.blogPost(newerPost.slug), label: newerPost.title},
-    });
-  }
-
   const footer = {
-    data: footerData,
+    data: recommendedPosts,
+    getFullLink: Routes.blogPost,
     title: `Other things I've written`,
   };
 
