@@ -21,12 +21,12 @@ interface AboutPageData extends ContentfulBaseObject {
 
 interface AboutPageProps {
   data: {
-    allContentfulAboutPage: allContentfulEdgesWithNode<AboutPageData>;
+    allContentfulAboutPage: allContentfulNodes<AboutPageData>;
   };
 }
 
 export default (props: AboutPageProps) => {
-  const aboutPage = props.data.allContentfulAboutPage.edges[0].node;
+  const aboutPage = props.data.allContentfulAboutPage.nodes[0];
 
   const pageMetadata: PageMetadata = {
     description: aboutPage.post.childMarkdownRemark.excerpt || '',
@@ -66,21 +66,19 @@ export default (props: AboutPageProps) => {
 export const query = graphql`
   query AboutPageQuery {
     allContentfulAboutPage {
-      edges {
-        node {
-          title
-          featureImage {
-            ...ContentfulAsset_width1200
+      nodes {
+        title
+        featureImage {
+          ...ContentfulAsset_width1200
+        }
+        post {
+          childMarkdownRemark {
+            html
+            excerpt
           }
-          post {
-            childMarkdownRemark {
-              html
-              excerpt
-            }
-            internal {
-              mediaType
-              content
-            }
+          internal {
+            mediaType
+            content
           }
         }
       }

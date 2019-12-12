@@ -39,10 +39,6 @@ interface PageMetadata {
   image?: string;
 }
 
-interface allContentfulEdgesWithNode<T> {
-  edges: [
-    {
-      node: T;
-    },
-  ];
+interface allContentfulNodes<T> {
+  nodes: T[];
 }

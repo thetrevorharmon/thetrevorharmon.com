@@ -3,21 +3,29 @@ import * as React from 'react';
 
 import {Layout} from '../layouts';
 import {BlogPost, LinkPost} from '../types';
-import {Button, Header, PostItem, Space, Spacer} from '../UI-Kit';
+import {
+  Button,
+  FeaturedPostItem,
+  Header,
+  PostItem,
+  Space,
+  Spacer,
+} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {
   data: {
-    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
-    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
+    allContentfulBlogPost: allContentfulNodes<BlogPost>;
+    allContentfulLinkPost: allContentfulNodes<LinkPost>;
   };
 }
 
 export default (props: IndexPageProps) => {
-  const posts = Helpers.combinePostTypes(
-    props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost,
-  ).slice(0, 4);
+  const [featuredPost, posts] = Helpers.combinePostTypes({
+    blogPosts: props.data.allContentfulBlogPost.nodes,
+    linkPosts: props.data.allContentfulLinkPost.nodes,
+    limit: 4,
+  });
 
   const {tagline} = useSiteData();
 
@@ -39,6 +47,7 @@ export default (props: IndexPageProps) => {
       {titleMarkup}
       <Spacer>
         <Spacer size="large">
+          <FeaturedPostItem post={featuredPost} />
           {posts.map((post: BlogPost | LinkPost) => (
             <PostItem post={post} key={post.title} />
           ))}
@@ -52,47 +61,46 @@ export default (props: IndexPageProps) => {
 
 export const query = graphql`
   query indexPageQuery {
-    allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 3) {
-      edges {
-        node {
-          title
-          slug
-          description
-          date(formatString: "DD MMM YYYY")
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
+    allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 5) {
+      nodes {
+        title
+        slug
+        description
+        date(formatString: "DD MMM YYYY")
+        heroImage {
+          ...ContentfulAsset_width750
+        }
+        body {
+          childMarkdownRemark {
+            html
+            excerpt
+            timeToRead
           }
-          tags
-          internal {
-            type
-          }
+        }
+        tags
+        internal {
+          type
         }
       }
     }
-    allContentfulLinkPost(sort: {order: DESC, fields: [date]}, limit: 3) {
-      edges {
-        node {
-          title
-          slug
-          link
-          date(formatString: "DD MMM YYYY")
-          internal {
-            type
+    allContentfulLinkPost(sort: {order: DESC, fields: [date]}, limit: 4) {
+      nodes {
+        title
+        slug
+        link
+        date(formatString: "DD MMM YYYY")
+        internal {
+          type
+        }
+        body {
+          childMarkdownRemark {
+            html
+            excerpt(format: PLAIN, pruneLength: 116)
+            timeToRead
           }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt(format: PLAIN, pruneLength: 116)
-              timeToRead
-            }
-          }
-          internal {
-            type
-          }
+        }
+        internal {
+          type
         }
       }
     }

@@ -13,7 +13,7 @@ interface BasicPost {
 
 interface LinkPostProps {
   data: {
-    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
+    contentfulLinkPost: LinkPost;
   };
   pageContext: {
     slug: string;
@@ -23,7 +23,7 @@ interface LinkPostProps {
 }
 
 export default (props: LinkPostProps) => {
-  const linkPost = props.data.allContentfulLinkPost.edges[0].node;
+  const linkPost = props.data.contentfulLinkPost;
   const {newerPost, olderPost} = props.pageContext;
 
   const metadata = {
@@ -80,24 +80,20 @@ export default (props: LinkPostProps) => {
 
 export const query = graphql`
   query($slug: String!) {
-    allContentfulLinkPost(filter: {slug: {eq: $slug}}) {
-      edges {
-        node {
-          title
-          slug
-          link
-          date(formatString: "DD MMM YYYY")
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-          internal {
-            type
-          }
+    contentfulLinkPost(slug: {eq: $slug}) {
+      title
+      slug
+      link
+      date(formatString: "DD MMM YYYY")
+      body {
+        childMarkdownRemark {
+          html
+          excerpt
+          timeToRead
         }
+      }
+      internal {
+        type
       }
     }
   }

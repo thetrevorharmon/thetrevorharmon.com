@@ -18,7 +18,7 @@ import * as styles from './projects.module.scss';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulProject: allContentfulEdgesWithNode<Project>;
+    allContentfulProject: allContentfulNodes<Project>;
   };
 }
 
@@ -30,15 +30,13 @@ export default (props: ProjectsPageProps) => {
     url: Routes.projects(),
   };
 
-  const projectNodes = props.data.allContentfulProject.edges;
-  let featuredProject;
-  let projects;
+  const projectNodes = props.data.allContentfulProject.nodes;
+  let featuredProject = null;
+  let projects = projectNodes;
 
   if (projectNodes.length > 1) {
-    featuredProject = projectNodes.slice(0, 1)[0].node;
-    projects = projectNodes
-      .slice(1, projectNodes.length - 1)
-      .map(({node: project}) => project);
+    featuredProject = projectNodes.slice(0, 1)[0];
+    projects = projectNodes.slice(1, projectNodes.length - 1);
   }
 
   const featured =
@@ -82,24 +80,22 @@ export default (props: ProjectsPageProps) => {
 export const query = graphql`
   query projectsPageQuery {
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
-      edges {
-        node {
-          title
-          slug
-          featureOnHomepage
-          projectCompletionDate(formatString: "DD MMM YYYY")
-          featureImage {
-            ...ContentfulAsset_width600
+      nodes {
+        title
+        slug
+        featureOnHomepage
+        projectCompletionDate(formatString: "DD MMM YYYY")
+        featureImage {
+          ...ContentfulAsset_width600
+        }
+        description {
+          description
+          childMarkdownRemark {
+            excerpt
           }
-          description {
-            description
-            childMarkdownRemark {
-              excerpt
-            }
-          }
-          internal {
-            type
-          }
+        }
+        internal {
+          type
         }
       }
     }

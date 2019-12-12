@@ -23,22 +23,17 @@ export const ProjectPreviewTile = ({
     className,
   );
 
-  const textMarkup = (
-    <Spacer size="tiny">
-      <Header rank={2} type="Heading">
-        {title}
-      </Header>
-      <Meta date={projectCompletionDate} />
-    </Spacer>
-  );
-
   return (
     <div className={classname}>
       <Spacer size="normal">
         <Spacer size="normal">
-          {/* TODO: fix types */}
           {featureImage && <Image src={featureImage} />}
-          {textMarkup}
+          <Spacer size="tiny">
+            <Header rank={2} type="Heading">
+              {title}
+            </Header>
+            <Meta date={projectCompletionDate} />
+          </Spacer>
         </Spacer>
         <Link url={Routes.project(slug)}>See More →</Link>
       </Spacer>
