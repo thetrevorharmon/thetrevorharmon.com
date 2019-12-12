@@ -13,7 +13,7 @@ interface BasicPost {
 
 interface BlogPostProps {
   data: {
-    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
+    contentfulBlogPost: BlogPost;
   };
   pageContext: {
     slug: string;
@@ -24,7 +24,7 @@ interface BlogPostProps {
 
 export default (props: BlogPostProps) => {
   const site = useSiteData();
-  const blogPost = props.data.allContentfulBlogPost.edges[0].node;
+  const blogPost = props.data.contentfulBlogPost;
   const {newerPost, olderPost} = props.pageContext;
 
   const metadata = {
@@ -97,34 +97,30 @@ export default (props: BlogPostProps) => {
 
 export const query = graphql`
   query($slug: String!) {
-    allContentfulBlogPost(filter: {slug: {eq: $slug}}) {
-      edges {
-        node {
-          heroImage {
-            ...ContentfulAsset_width750
-          }
-          title
-          slug
-          description
-          date(formatString: "DD MMM YYYY")
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-          tags
-          sourceAttribution {
-            ...ContentfulAttribution
-          }
-          photoAttribution {
-            ...ContentfulAttribution
-          }
-          internal {
-            type
-          }
+    contentfulBlogPost(slug: {eq: $slug}) {
+      heroImage {
+        ...ContentfulAsset_width750
+      }
+      title
+      slug
+      description
+      date(formatString: "DD MMM YYYY")
+      body {
+        childMarkdownRemark {
+          html
+          excerpt
+          timeToRead
         }
+      }
+      tags
+      sourceAttribution {
+        ...ContentfulAttribution
+      }
+      photoAttribution {
+        ...ContentfulAttribution
+      }
+      internal {
+        type
       }
     }
   }

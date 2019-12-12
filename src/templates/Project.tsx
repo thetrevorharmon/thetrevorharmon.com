@@ -11,7 +11,7 @@ import * as styles from './Project.module.scss';
 
 interface TemplateProps {
   data: {
-    allContentfulProject: allContentfulEdgesWithNode<Project>;
+    contentfulProject: Project;
   };
   pageContext: {
     slug: string;
@@ -19,7 +19,7 @@ interface TemplateProps {
 }
 
 export default (props: TemplateProps) => {
-  const project = props.data.allContentfulProject.edges[0].node;
+  const project = props.data.contentfulProject;
   const description = project.description.childMarkdownRemark
     ? project.description.childMarkdownRemark.html
     : null;
@@ -89,28 +89,24 @@ export default (props: TemplateProps) => {
 
 export const query = graphql`
   query($slug: String!) {
-    allContentfulProject(filter: {slug: {eq: $slug}}) {
-      edges {
-        node {
-          internal {
-            type
-          }
-          title
-          client
-          projectCompletionDate(formatString: "DD MMM YYYY")
-          description {
-            description
-            childMarkdownRemark {
-              html
-            }
-          }
-          projectImages {
-            ...ContentfulAsset_width600
-          }
-          featureImage {
-            ...ContentfulAsset_width600
-          }
+    contentfulProject(slug: {eq: $slug}) {
+      title
+      client
+      projectCompletionDate(formatString: "DD MMM YYYY")
+      description {
+        description
+        childMarkdownRemark {
+          html
         }
+      }
+      projectImages {
+        ...ContentfulAsset_width600
+      }
+      featureImage {
+        ...ContentfulAsset_width600
+      }
+      internal {
+        type
       }
     }
   }

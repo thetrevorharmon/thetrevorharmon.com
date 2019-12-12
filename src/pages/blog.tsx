@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {BlogPost, isBlogPost, LinkPost} from '../types';
+import {BlogPost, LinkPost} from '../types';
 import {
   FeaturedPostItem,
   Header,
@@ -16,8 +16,8 @@ import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
   data: {
-    allContentfulBlogPost: allContentfulEdgesWithNode<BlogPost>;
-    allContentfulLinkPost: allContentfulEdgesWithNode<LinkPost>;
+    allContentfulBlogPost: allContentfulNodes<BlogPost>;
+    allContentfulLinkPost: allContentfulNodes<LinkPost>;
   };
 }
 
@@ -28,10 +28,10 @@ export default (props: ProjectsPageProps) => {
     url: Routes.blog(),
   };
 
-  const posts = Helpers.combinePostTypes(
-    props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost,
-  );
+  const [featuredPost, posts] = Helpers.combinePostTypes({
+    blogPosts: props.data.allContentfulBlogPost.nodes,
+    linkPosts: props.data.allContentfulLinkPost.nodes,
+  });
 
   return (
     <Layout pageMetadata={pageMetadata}>
@@ -47,14 +47,9 @@ export default (props: ProjectsPageProps) => {
         <Space size="huge" />
 
         <Spacer size="large">
-          {posts.map((post, index) => (
-            <>
-              {index === 1 && isBlogPost(post) && post.heroImage != null ? (
-                <FeaturedPostItem post={post} key={post.title} />
-              ) : (
-                <PostItem post={post} key={index} />
-              )}
-            </>
+          <FeaturedPostItem post={featuredPost} />
+          {posts.map((post) => (
+            <PostItem post={post} key={post.title} />
           ))}
         </Spacer>
       </Spacer>
@@ -62,49 +57,44 @@ export default (props: ProjectsPageProps) => {
   );
 };
 
-// TODO: figure out featured post
 export const query = graphql`
   query blogPageQuery {
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
-      edges {
-        node {
-          title
-          slug
-          description
-          date(formatString: "DD MMM YYYY")
-          heroImage {
-            ...ContentfulAsset_width750
+      nodes {
+        title
+        slug
+        description
+        date(formatString: "DD MMM YYYY")
+        heroImage {
+          ...ContentfulAsset_width750
+        }
+        body {
+          childMarkdownRemark {
+            html
+            excerpt
+            timeToRead
           }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-          tags
-          internal {
-            type
-          }
+        }
+        tags
+        internal {
+          type
         }
       }
     }
     allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
-      edges {
-        node {
-          title
-          slug
-          link
-          date(formatString: "DD MMM YYYY")
-          internal {
-            type
-          }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
+      nodes {
+        title
+        slug
+        link
+        date(formatString: "DD MMM YYYY")
+        internal {
+          type
+        }
+        body {
+          childMarkdownRemark {
+            html
+            excerpt
+            timeToRead
           }
         }
       }
