@@ -4,121 +4,80 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 const path = require(`path`);
-
-// This combines blog posts and link posts into a single array of posts
-// First combines and then sorts according to date (newest first)
-const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
-  const orderMultiplier = order === 'desc' ? 1 : -1;
-
-  const posts = [
-    // blog posts
-    ...blogPosts.edges.map((edge) => edge.node),
-    // link posts
-    ...linkPosts.edges.map((edge) => edge.node),
-  ].sort((firstDate, secondDate) => {
-    const a = new Date(firstDate.date);
-    const b = new Date(secondDate.date);
-
-    if (a < b) {
-      return 1 * orderMultiplier;
-    }
-    if (a > b) {
-      return -1 * orderMultiplier;
-    }
-
-    return 0;
-  });
-
-  return posts;
-};
-
-// Given a type, this returns the location of the template for the type
-// It throws an error when it encounters a type that doesn't exist
-const pathTemplateForPostType = (type) => {
-  const paths = {
-    ContentfulBlogPost: `./src/templates/BlogPost.tsx`,
-    ContentfulLinkPost: `./src/templates/LinkPost.tsx`,
-    ContentfulProject: `./src/templates/Project.tsx`,
-  };
-
-  if (!paths[type]) {
-    throw new Error(`Cannot find template path for type: ${type}`);
-  }
-
-  return paths[type];
-};
+const Utils = require('./gatsby-utils');
 
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allContentfulProject {
-          edges {
-            node {
-              title
-              slug
-              internal {
-                type
-              }
+        allContentfulProject(
+          sort: {order: DESC, fields: [projectCompletionDate]}
+        ) {
+          nodes {
+            title
+            slug
+            projectCompletionDate(formatString: "DD MMM YYYY")
+            internal {
+              type
             }
           }
         }
         allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
-          edges {
-            node {
-              title
-              slug
-              internal {
-                type
-              }
+          nodes {
+            title
+            slug
+            date(formatString: "DD MMM YYYY")
+            internal {
+              type
             }
           }
         }
         allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
-          edges {
-            node {
-              title
-              slug
-              internal {
-                type
-              }
+          nodes {
+            title
+            slug
+            date(formatString: "DD MMM YYYY")
+            internal {
+              type
             }
           }
         }
       }
     `).then((result) => {
-      result.data.allContentfulProject.edges.forEach(({node}) => {
+      result.data.allContentfulProject.nodes.forEach((project, _, projects) => {
+        const recommendedProjects = Utils.getRecommendedItems(
+          project,
+          projects,
+          'projectCompletionDate',
+        );
+
         createPage({
-          path: `projects/${node.slug}`,
-          component: path.resolve(pathTemplateForPostType(node.internal.type)),
+          path: `projects/${project.slug}`,
+          component: path.resolve(
+            Utils.pathTemplateForPostType(project.internal.type),
+          ),
           context: {
-            slug: node.slug,
+            slug: project.slug,
+            recommendedProjects: recommendedProjects,
           },
         });
       });
 
-      const posts = combinePostTypes(
-        result.data.allContentfulBlogPost,
-        result.data.allContentfulLinkPost,
-      );
-
-      posts.forEach((node, index) => {
-        // these give an easy way to figure out which post is considered
-        // the next newer/older post from within a blog post
-
-        // TODO: redo these for 3 random
-        // TODO: pass formatted date as well
-        const newerPost = index > 0 ? posts[index - 1] : null;
-        const olderPost = index < posts.length - 1 ? posts[index + 1] : null;
+      Utils.combinePostTypes(
+        result.data.allContentfulBlogPost.nodes,
+        result.data.allContentfulLinkPost.nodes,
+      ).forEach((post, _, posts) => {
+        const recommendedPosts = Utils.getRecommendedItems(post, posts, 'date');
 
         createPage({
-          path: `blog/${node.slug}`,
-          component: path.resolve(pathTemplateForPostType(node.internal.type)),
+          path: `blog/${post.slug}`,
+          component: path.resolve(
+            Utils.pathTemplateForPostType(post.internal.type),
+          ),
           context: {
-            slug: node.slug,
-            newerPost: newerPost,
-            olderPost: olderPost,
+            slug: post.slug,
+            recommendedPosts: recommendedPosts,
           },
         });
       });

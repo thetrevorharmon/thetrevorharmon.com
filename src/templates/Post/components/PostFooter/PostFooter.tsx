@@ -6,22 +6,21 @@ import {Header, Link, Space, Spacer} from '../../../../UI-Kit';
 import * as styles from './PostFooter.module.scss';
 import {LinkDatePair, PostFooterProps} from './types';
 
-export const PostFooter = ({title, data}: PostFooterProps) => {
+export const PostFooter = ({title, getFullLink, data}: PostFooterProps) => {
   const theme = useTheme();
 
   if (data.length < 1) {
     return null;
   }
 
-  const makePairMarkup = ({link: {href, label}, date}: LinkDatePair) => {
+  const makePairMarkup = ({link: {slug, label}, date}: LinkDatePair) => {
     return (
       <div className={styles.Pair} key={label}>
-        <Link className={styles.Link} url={href}>
+        <Link className={styles.Link} url={getFullLink(slug)}>
           {label}
         </Link>
         <span className={classnames([styles.Date, styles[`Date-${theme}`]])}>
-          {/* TODO: fix this when you are getting formatted dates */}
-          {date.toDateString()}
+          {date}
         </span>
       </div>
     );

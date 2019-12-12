@@ -26,9 +26,11 @@ interface PostItemAttributes {
 
 const getProjectItemAttributes = (project: Project): PostItemAttributes => {
   return {
-    description: project.description.childMarkdownRemark
-      ? project.description.childMarkdownRemark.html
-      : project.description.description,
+    description:
+      project.description.childMarkdownRemark &&
+      project.description.childMarkdownRemark.excerpt
+        ? project.description.childMarkdownRemark.excerpt
+        : project.description.description,
     meta: {client: project.client, date: project.projectCompletionDate},
     title: project.title,
     url: Routes.project(project.slug),

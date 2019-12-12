@@ -5,6 +5,7 @@ import {LinkPost} from '../types';
 import {Button} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
+import {LinkDatePair} from './Post/components/PostFooter';
 
 interface BasicPost {
   title: string;
@@ -17,14 +18,13 @@ interface LinkPostProps {
   };
   pageContext: {
     slug: string;
-    newerPost?: BasicPost;
-    olderPost?: BasicPost;
+    recommendedPosts: LinkDatePair[];
   };
 }
 
 export default (props: LinkPostProps) => {
   const linkPost = props.data.contentfulLinkPost;
-  const {newerPost, olderPost} = props.pageContext;
+  const {recommendedPosts} = props.pageContext;
 
   const metadata = {
     description: linkPost.description
@@ -47,23 +47,9 @@ export default (props: LinkPostProps) => {
     children: <Button url={linkPost.link}>View Link</Button>,
   };
 
-  const footerData = [];
-  if (olderPost) {
-    footerData.push({
-      date: new Date(Date.parse('10/27/2019')), // TODO: put actual date here
-      link: {href: Routes.blogPost(olderPost.slug), label: olderPost.title},
-    });
-  }
-
-  if (newerPost) {
-    footerData.push({
-      date: new Date(Date.parse('11/02/2019')), // TODO: put actual date here
-      link: {href: Routes.blogPost(newerPost.slug), label: newerPost.title},
-    });
-  }
-
   const footer = {
-    data: footerData,
+    data: recommendedPosts,
+    getFullLink: Routes.blogPost,
     title: `Other things I've written`,
   };
 
