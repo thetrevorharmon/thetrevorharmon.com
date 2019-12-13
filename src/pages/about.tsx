@@ -77,8 +77,7 @@ export const query = graphql`
             excerpt
           }
           internal {
-            mediaType
-            content
+            type
           }
         }
       }
