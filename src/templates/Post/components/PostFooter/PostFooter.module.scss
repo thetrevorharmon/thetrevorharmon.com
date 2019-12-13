@@ -7,6 +7,10 @@
 .Pair {
   display: flex;
   width: 100%;
+
+  @include on-small-screens {
+    flex-direction: column;
+  }
 }
 
 .Link {
@@ -17,11 +21,21 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include on-small-screens {
+    margin-right: 0;
+    white-space: pre-wrap;
+    overflow: visible;
+  }
 }
 
 .Date {
   margin-left: auto;
   flex-shrink: 0;
+
+  @include on-small-screens {
+    margin-left: 0;
+  }
 }
 
 @mixin Date($theme) {

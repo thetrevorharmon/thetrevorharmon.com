@@ -3,18 +3,27 @@
 
 .FeaturedPostItem {
   position: relative;
+  padding: space(big);
+
+  @include on-small-screens {
+    padding: $container-base-padding;
+  }
 }
 
 .Icon {
   position: absolute;
   bottom: space(big);
   right: space(big);
+
+  @include on-small-screens {
+    bottom: $container-base-padding;
+    right: $container-base-padding;
+  }
 }
 
 @mixin FeaturedPostItem($theme) {
   .FeaturedPostItem-#{$theme} {
     background-color: color($theme, caption-bg);
-    padding: space(big);
 
     .Icon {
       @include IconColor($theme, primary);

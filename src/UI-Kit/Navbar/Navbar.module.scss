@@ -22,6 +22,10 @@
     &:first-child {
       margin-left: 0;
     }
+
+    @include on-small-screens {
+      margin-left: space(little);
+    }
   }
 }
 

@@ -1,9 +1,12 @@
 @import 'foundation';
 
 .FormContainer {
-  // TODO: spend some time seeing if we can get around this.
-  // Right now it causes the outline on the input to be cut off.
-  overflow: hidden;
+  box-sizing: border-box;
+  padding: space(large) 0;
+
+  @include on-small-screens {
+    padding: space(medium) 0;
+  }
 }
 
 @mixin FormContainer-theme($theme) {

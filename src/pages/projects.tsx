@@ -61,7 +61,7 @@ export default (props: ProjectsPageProps) => {
             <Masonry
               breakpointCols={{
                 default: 2,
-                640: 1,
+                560: 1,
               }}
               className={styles.Grid}
               columnClassName={styles.Column}

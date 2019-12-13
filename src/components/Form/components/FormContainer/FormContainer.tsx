@@ -52,11 +52,7 @@ export const FormContainer = ({children}: FormContainerProps) => {
       ref={formContainerRef}
       style={formContainerStyle}
     >
-      <Spacer>
-        <Space size="large" />
-        {children}
-        <Space size="large" />
-      </Spacer>
+      {children}
     </div>
   );
 };

@@ -1,15 +1,8 @@
-@import 'foundation';
-@import 'ui-kit-mixins';
+@import 'body-styles';
 
 @mixin AboutPage($theme) {
   .AboutPage-#{$theme} {
-    a {
-      @include Link($theme);
-    }
-
-    .FeatureImage {
-      border: 1px solid color($theme, img-border);
-    }
+    @include BodyStylesTheme($theme);
   }
 }
 
