@@ -48,6 +48,8 @@ module.exports = {
       resolve: `gatsby-plugin-favicon`,
       options: {
         logo: './static/favicon.png',
+        background: 'transparent',
+        version: '2.0',
         icons: {
           appleStartup: false,
         },
