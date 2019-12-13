@@ -1,5 +1,4 @@
 import {graphql} from 'gatsby';
-import * as React from 'react';
 
 export const ContentfulLinkPost = graphql`
   fragment ContentfulLinkPost on ContentfulLinkPost {

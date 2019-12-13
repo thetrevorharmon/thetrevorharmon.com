@@ -69,7 +69,7 @@ export const query = graphql`
       nodes {
         title
         featureImage {
-          ...ContentfulAsset_width1200
+          ...ContentfulAsset
         }
         post {
           childMarkdownRemark {

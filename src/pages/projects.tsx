@@ -81,22 +81,8 @@ export const query = graphql`
   query projectsPageQuery {
     allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
       nodes {
-        title
+        ...ContentfulProject
         slug
-        featureOnHomepage
-        projectCompletionDate(formatString: "DD MMM YYYY")
-        featureImage {
-          ...ContentfulAsset_width600
-        }
-        description {
-          description
-          childMarkdownRemark {
-            excerpt
-          }
-        }
-        internal {
-          type
-        }
       }
     }
   }

@@ -84,23 +84,10 @@ export default (props: TemplateProps) => {
 export const query = graphql`
   query($slug: String!) {
     contentfulProject(slug: {eq: $slug}) {
-      title
+      ...ContentfulProject
       client
-      projectCompletionDate(formatString: "DD MMM YYYY")
-      description {
-        description
-        childMarkdownRemark {
-          html
-        }
-      }
       projectImages {
-        ...ContentfulAsset_width600
-      }
-      featureImage {
-        ...ContentfulAsset_width600
-      }
-      internal {
-        type
+        ...ContentfulAsset
       }
     }
   }
