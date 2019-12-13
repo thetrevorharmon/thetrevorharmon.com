@@ -37,8 +37,8 @@ export default (props: LinkPostProps) => {
   const header = {
     meta: {
       date: linkPost.date,
-      timeToRead: linkPost.body.childMarkdownRemark.timeToRead,
       isLinkPost: true,
+      timeToRead: linkPost.body.childMarkdownRemark.timeToRead,
     },
     title: linkPost.title,
   };
