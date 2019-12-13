@@ -30,22 +30,24 @@ const combinePostTypes = ({
 }: CombinePostTypes): [BlogPost, Post[]] => {
   const directionMultiplier = order === 'desc' ? 1 : -1;
 
-  // shift removes the first element from the array for me
-  const featuredPost = blogPosts.shift();
+  const featuredPost = blogPosts.slice(0, 1)[0];
+  const blogPostsMinusFeatured = blogPosts.slice(1, blogPosts.length);
 
-  const posts = [...blogPosts, ...linkPosts].sort((firstPost, secondPost) => {
-    const a = new Date(firstPost.date);
-    const b = new Date(secondPost.date);
+  const posts = [...blogPostsMinusFeatured, ...linkPosts].sort(
+    (firstPost, secondPost) => {
+      const a = new Date(firstPost.date);
+      const b = new Date(secondPost.date);
 
-    if (a < b) {
-      return 1 * directionMultiplier;
-    }
-    if (a > b) {
-      return -1 * directionMultiplier;
-    }
+      if (a < b) {
+        return 1 * directionMultiplier;
+      }
+      if (a > b) {
+        return -1 * directionMultiplier;
+      }
 
-    return 0;
-  });
+      return 0;
+    },
+  );
 
   const postsWithAdjustedLength = limit ? posts.slice(0, limit) : posts;
 
