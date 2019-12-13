@@ -26,10 +26,6 @@ const Navbar: React.FC<{}> = () => {
       location: Routes.projects(),
     },
     {
-      display: 'Case Studies',
-      location: Routes.caseStudies(),
-    },
-    {
       display: 'About',
       location: Routes.about(),
     },

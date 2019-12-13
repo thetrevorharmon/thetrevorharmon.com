@@ -17,7 +17,6 @@ type ContentfulObjectType =
   | 'ContentfulBlogPost'
   | 'ContentfulLinkPost'
   | 'ContentfulProject'
-  | 'ContentfulCaseStudy'
   | 'ContentfulAboutPage';
 
 interface BaseObject {
@@ -55,12 +54,6 @@ interface Project extends PortfolioItem {
   };
   projectCompletionDate?: Date;
   projectImages: [ContentfulAsset];
-}
-
-interface CaseStudy extends PortfolioItem {
-  tagline: string;
-  tableOfContents: contentfulLongText;
-  post: contentfulLongText;
 }
 
 interface BasicPost extends BaseObject {

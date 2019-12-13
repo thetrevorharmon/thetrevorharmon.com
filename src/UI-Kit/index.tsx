@@ -1,5 +1,4 @@
 import Button from './Button';
-import CaseStudyTile from './CaseStudyTile';
 import Footer from './Footer';
 import Header from './Header';
 import Icon from './Icon';
@@ -13,7 +12,6 @@ import Tile from './Tile';
 
 export {
   Button,
-  CaseStudyTile,
   Footer,
   Header,
   Icon,

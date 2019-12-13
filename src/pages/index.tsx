@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {CaseStudyTile, Header, Link, PostTile, Tile} from '../UI-Kit';
+import {Header, Link, PostTile, Tile} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 import * as styles from './homepage.module.scss';
 
@@ -14,7 +14,6 @@ interface IndexPageProps {
       siteMetadata: SiteMetadata;
     };
     allContentfulProject: {edges: [{node: Project}]};
-    allContentfulCaseStudy: {edges: [{node: CaseStudy}]};
     allContentfulBlogPost: {edges: [{node: BlogPost}]};
     allContentfulLinkPost: {edges: [{node: LinkPost}]};
   };
@@ -23,8 +22,6 @@ interface IndexPageProps {
 export default (props: IndexPageProps) => {
   const featuredWork: Array<{node: Project}> =
     props.data.allContentfulProject.edges;
-  const featuredStudies: Array<{node: CaseStudy}> =
-    props.data.allContentfulCaseStudy.edges;
 
   const posts = Helpers.combinePostTypes(
     props.data.allContentfulBlogPost,
@@ -92,24 +89,6 @@ export default (props: IndexPageProps) => {
           </Link>
         </div>
       </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col my-0">
-          Case Studies
-        </Header>
-      </div>
-      <div className="row">
-        {featuredStudies.map((item, index) => (
-          <div className="col-sm-12 col-lg-8 mb-4" key={index}>
-            <CaseStudyTile item={item.node} />
-          </div>
-        ))}
-        <div className="col-sm-12 col-lg-8">
-          <Link href={Routes.caseStudies()} target="_blank">
-            See more case studies &rarr;
-          </Link>
-        </div>
-      </div>
     </Layout>
   );
 };
@@ -128,13 +107,6 @@ export const query = graphql`
       edges {
         node {
           ...ContentfulProjectTile
-        }
-      }
-    }
-    allContentfulCaseStudy(filter: {featureOnHomepage: {eq: true}}) {
-      edges {
-        node {
-          ...ContentfulCaseStudyTile
         }
       }
     }
