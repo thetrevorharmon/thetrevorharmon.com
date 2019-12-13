@@ -4,7 +4,8 @@ import {Helmet} from '../utils';
 import 'normalize.css';
 import '../styles/global.scss';
 
-import {Footer, Navbar, Space, Spacer} from '../UI-Kit';
+import {Footer, Navbar} from '../components';
+import {Space, Spacer} from '../UI-Kit';
 import {Container} from './utils';
 
 interface LayoutProps {

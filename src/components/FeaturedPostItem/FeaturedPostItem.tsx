@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
+import {PostItem} from '../../components';
 import {useTheme} from '../../context/ThemeContext';
 import {BlogPost, isBlogPost, Project} from '../../types';
-import {Breakout, Icon, Image, PostItem, Spacer} from '../../UI-Kit';
+import {Breakout, Icon, Image, Spacer} from '../../UI-Kit';
 import * as styles from './FeaturedPostItem.module.scss';
 
 interface FeaturedPostItemProps {

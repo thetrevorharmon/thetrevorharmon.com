@@ -1,16 +1,10 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {FeaturedPostItem, PostItem} from '../components';
 import {Layout} from '../layouts';
 import {BlogPost, LinkPost} from '../types';
-import {
-  Button,
-  FeaturedPostItem,
-  Header,
-  PostItem,
-  Space,
-  Spacer,
-} from '../UI-Kit';
+import {Button, Header, Space, Spacer} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {

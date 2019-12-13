@@ -2,17 +2,10 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import {ProjectPreviewTile} from '../components';
+import {FeaturedPostItem, ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
 import {Project} from '../types';
-import {
-  Breakout,
-  FeaturedPostItem,
-  Header,
-  Meta,
-  Space,
-  Spacer,
-} from '../UI-Kit';
+import {Breakout, Header, Space, Spacer} from '../UI-Kit';
 import {Routes} from '../utils';
 import * as styles from './projects.module.scss';
 

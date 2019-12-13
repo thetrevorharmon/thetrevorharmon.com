@@ -2,16 +2,10 @@ import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
+import {FeaturedPostItem, PostItem} from '../components';
 import {Layout} from '../layouts';
 import {BlogPost, LinkPost} from '../types';
-import {
-  FeaturedPostItem,
-  Header,
-  PostItem,
-  Space,
-  Spacer,
-  TextStyle,
-} from '../UI-Kit';
+import {Header, Space, Spacer, TextStyle} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
