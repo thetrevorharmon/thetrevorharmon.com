@@ -67,20 +67,7 @@ export default (props: LinkPostProps) => {
 export const query = graphql`
   query($slug: String!) {
     contentfulLinkPost(slug: {eq: $slug}) {
-      title
-      slug
-      link
-      date(formatString: "DD MMM YYYY")
-      body {
-        childMarkdownRemark {
-          html
-          excerpt
-          timeToRead
-        }
-      }
-      internal {
-        type
-      }
+      ...ContentfulLinkPost
     }
   }
 `;

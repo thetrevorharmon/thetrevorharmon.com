@@ -61,42 +61,12 @@ export const query = graphql`
   query blogPageQuery {
     allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
       nodes {
-        title
-        slug
-        description
-        date(formatString: "DD MMM YYYY")
-        heroImage {
-          ...ContentfulAsset_width750
-        }
-        body {
-          childMarkdownRemark {
-            html
-            excerpt
-            timeToRead
-          }
-        }
-        tags
-        internal {
-          type
-        }
+        ...ContentfulBlogPost
       }
     }
     allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
       nodes {
-        title
-        slug
-        link
-        date(formatString: "DD MMM YYYY")
-        internal {
-          type
-        }
-        body {
-          childMarkdownRemark {
-            html
-            excerpt
-            timeToRead
-          }
-        }
+        ...ContentfulLinkPost
       }
     }
   }

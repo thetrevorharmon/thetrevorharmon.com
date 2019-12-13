@@ -84,29 +84,12 @@ export default (props: BlogPostProps) => {
 export const query = graphql`
   query($slug: String!) {
     contentfulBlogPost(slug: {eq: $slug}) {
-      heroImage {
-        ...ContentfulAsset_width750
-      }
-      title
-      slug
-      description
-      date(formatString: "DD MMM YYYY")
-      body {
-        childMarkdownRemark {
-          html
-          excerpt
-          timeToRead
-        }
-      }
-      tags
+      ...ContentfulBlogPost
       sourceAttribution {
         ...ContentfulAttribution
       }
       photoAttribution {
         ...ContentfulAttribution
-      }
-      internal {
-        type
       }
     }
   }
