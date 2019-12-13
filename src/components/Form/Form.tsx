@@ -60,8 +60,6 @@ export const Form = () => {
 
     await addToMailchimp(email, fields)
       .then((data: MailchimpResponse) => {
-        // TODO: it would be nice if this could be MailchimpResult.Success
-        // but that isn't working ATM
         if (data.result === 'success') {
           setFormState(FormState.Submitted);
         } else {

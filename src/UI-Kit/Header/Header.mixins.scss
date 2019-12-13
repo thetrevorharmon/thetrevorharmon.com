@@ -11,6 +11,7 @@
     background: color($theme, primary);
     padding-top: $y-padding;
     padding-bottom: $y-padding;
+    box-decoration-break: clone; // Fixes a firefox-specfic bug
   }
 }
 

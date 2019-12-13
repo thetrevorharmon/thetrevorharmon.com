@@ -1,17 +1,5 @@
 @import 'foundation';
-// TODO: replace this with Inter, maybe somewhere locally (?)
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
-
-body,
-html {
-  font-family: $font-stack;
-  font-size: $base-font-size;
-  line-height: 1.666667;
-
-  @include on-small-screens {
-    font-size: 16px;
-  }
-}
+@import 'fonts';
 
 hr {
   border: 0px solid;

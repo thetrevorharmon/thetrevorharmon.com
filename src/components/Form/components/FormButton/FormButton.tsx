@@ -27,7 +27,12 @@ export const FormButton = ({
   ]);
 
   return (
-    <button className={classname} type="submit" disabled={isDisabled}>
+    <button
+      className={classname}
+      type="submit"
+      disabled={isDisabled}
+      aria-label="Submit Form"
+    >
       {isLoading ? (
         <LoadingIcon />
       ) : (

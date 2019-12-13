@@ -120,7 +120,14 @@ pre[class*='language-'] {
 
 /* Code blocks */
 pre[class*='language-'] {
+  @include Breakout;
+
   padding: space(medium) $breakout-amount;
+
+  @include on-small-screens {
+    padding: space(medium) $container-base-padding;
+  }
+
   margin-top: space(normal);
   margin-bottom: space(normal);
   overflow: auto;
@@ -128,8 +135,6 @@ pre[class*='language-'] {
   code {
     border: none;
   }
-
-  @include Breakout;
 }
 
 /* Inline code */

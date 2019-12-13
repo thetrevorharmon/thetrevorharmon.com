@@ -23,7 +23,11 @@ export const ToggleThemeButton = ({className}: ToggleThemeButtonProps) => {
 
   return (
     <span className={styles.Container}>
-      <button onClick={toggleTheme} className={buttonClassName}>
+      <button
+        onClick={toggleTheme}
+        className={buttonClassName}
+        aria-label="Toggle Theme"
+      >
         <span className={iconClassName}>
           <Icon />
         </span>

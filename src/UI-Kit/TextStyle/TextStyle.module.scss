@@ -2,7 +2,11 @@
 @import 'foundation';
 
 .TextStyle {
-  font-family: $font-stack;
+  font-family: $static-font-stack;
+
+  @include supports-variable-fonts {
+    font-family: $variable-font-stack;
+  }
 }
 
 .TextStyle-Display {

@@ -70,17 +70,16 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          `gatsby-remark-embed-gist`, // for embedding gists
           `gatsby-remark-prismjs`, // for code highlighting
-          // This is commented out because of this issue:
-          // https://github.com/gatsbyjs/gatsby/issues/11867
-          // TODO: follow that ^^ issue and see if a fix is pushed
           // {
+          //   // This plugin was causing me grief previously 👇
+          //   // https://github.com/gatsbyjs/gatsby/issues/11867
           //   resolve: `gatsby-remark-images-contentful`,
           //   options: {
           //     maxWidth: 800,
           //     linkImagesToOriginal: false,
           //     backgroundColor: `transparent`,
+          //     withWebp: true,
           //   },
           // },
         ],

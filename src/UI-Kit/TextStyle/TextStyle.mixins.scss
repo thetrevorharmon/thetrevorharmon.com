@@ -10,39 +10,34 @@
 
 @mixin text-style-Display {
   @include font-size(3.066666667rem);
-  font-weight: 900;
   letter-spacing: -1.5px;
-  font-style: italic;
   text-transform: uppercase;
+  @include font-style-black-italic;
 }
 
 @mixin text-style-Title {
   @include font-size(2.4rem);
-  font-weight: 900;
   letter-spacing: -1px;
-  font-style: italic;
   text-transform: uppercase;
+  @include font-style-black-italic;
 }
 
 @mixin text-style-Blockquote {
   @include font-size(2rem);
-  font-weight: 900;
   letter-spacing: -1px;
-  font-style: italic;
+  @include font-style-black-italic;
 }
 
 @mixin text-style-Heading {
   @include font-size(1.866666667rem);
-  font-weight: 900;
   letter-spacing: -1px;
-  font-style: italic;
+  @include font-style-black-italic;
 }
 
 @mixin text-style-Subheading {
   @include font-size(1.6rem);
-  font-weight: 900;
   letter-spacing: -0.5px;
-  font-style: italic;
+  @include font-style-black-italic;
 }
 
 @mixin text-style-Body {
@@ -66,7 +61,6 @@
 
 @mixin text-style-Button {
   font-size: 1rem;
-  font-weight: 900;
-  font-style: italic;
   text-transform: uppercase;
+  @include font-style-black-italic;
 }
