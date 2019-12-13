@@ -38,6 +38,7 @@ export default (props: LinkPostProps) => {
     meta: {
       date: linkPost.date,
       timeToRead: linkPost.body.childMarkdownRemark.timeToRead,
+      isLinkPost: true,
     },
     title: linkPost.title,
   };
