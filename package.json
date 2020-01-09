@@ -1,8 +1,8 @@
 {
   "name": "the-trevor-harmon",
-  "version": "1.0.0",
-  "description": "The portfolio and personal site of Trevor Harmon",
-  "author": "tdharmon <thetrevorharmon@gmail.com>",
+  "version": "2.0.0",
+  "description": "The blog & portfolio of Trevor Harmon",
+  "author": "thetrevorharmon <thetrevorharmon@gmail.com>",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",

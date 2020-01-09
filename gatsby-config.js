@@ -13,7 +13,7 @@ module.exports = {
   siteMetadata: {
     title: `The Trevor Harmon`,
     tagline: `I write code for Shopify, and (sometimes) write things on my blog.`,
-    description: `This is the portfolio site for all of the design and development work of Trevor Harmon.`,
+    description: `The blog & portfolio of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
     feedUrl: `https://thetrevorharmon.com/rss.xml`,
     mailchimpFallbackUrl: process.env.MAILCHIMP_FORM_FALLBACK_URL,
