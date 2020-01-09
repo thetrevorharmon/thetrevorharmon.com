@@ -1,0 +1,25 @@
+@import 'foundation';
+@import '../Icon/Icon.mixins.scss';
+
+$transition-duration-and-type: 0.1s ease-in-out;
+
+@mixin Link(
+  $theme,
+  $default-color: primary-text,
+  $focus-color: primary-text-focus
+) {
+  color: color($theme, $default-color);
+  text-decoration: underline;
+  transition: color $transition-duration-and-type;
+
+  @include IconColor($theme, $default-color) {
+    transition: fill $transition-duration-and-type;
+  }
+
+  &:hover,
+  &:focus {
+    color: color($theme, $focus-color);
+
+    @include IconColor($theme, $focus-color);
+  }
+}

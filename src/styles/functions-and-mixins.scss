@@ -1,0 +1,144 @@
+@function color($theme, $name) {
+  @if ($theme != 'Light' and $theme != 'Dark') {
+    @error 'You must pass in either light or dark as the theme';
+  }
+
+  $colors: (
+    primary: (
+      Light: #ec4242,
+      Dark: #fa5a5a,
+    ),
+    primary-focus: (
+      Light: #db1616,
+      Dark: #f81f1f,
+    ),
+    primary-text: (
+      Light: #dd0404,
+      Dark: #f95b5b,
+    ),
+    primary-text-focus: (
+      Light: #a10303,
+      Dark: #f72020,
+    ),
+    text: (
+      Light: #444,
+      Dark: #ddd,
+    ),
+    text-bold: (
+      Light: #252525,
+      Dark: #eee,
+    ),
+    text-muted: (
+      Light: #767676,
+      Dark: #b5b5b5,
+    ),
+    caption-bg: (
+      Light: #f0f0f0,
+      Dark: #111111,
+    ),
+    body-bg: (
+      Light: #fff,
+      Dark: #2a2a2a,
+    ),
+    img-border: (
+      Light: #111111,
+      Dark: #f0f0f0,
+    ),
+    accent-line: (
+      Light: #dddddd,
+      Dark: #3f3f3f,
+    ),
+  );
+
+  $selected-color-map: map-get($colors, $name);
+  @return map-get($selected-color-map, $theme);
+}
+
+@function space($size) {
+  @if (
+    $size !=
+      'tiny' and
+      $size !=
+      'little' and
+      $size !=
+      'small' and
+      $size !=
+      'normal' and
+      $size !=
+      'medium' and
+      $size !=
+      'big' and
+      $size !=
+      'large' and
+      $size !=
+      'huge'
+  ) {
+    @error 'You must pass in a valid space value.';
+  }
+
+  $base: 1rem;
+
+  $space: (
+    tiny: $base * 1/3,
+    little: $base * 2/3,
+    small: $base,
+    normal: $base * 4/3,
+    medium: $base * 2,
+    big: $base * 8/3,
+    large: $base * 4,
+    huge: $base * 6,
+  );
+
+  @return map-get($space, $size);
+}
+
+@mixin supports-variable-fonts {
+  @supports (font-variation-settings: normal) {
+    @content;
+  }
+}
+
+@mixin font-style-italic {
+  font-style: italic;
+
+  @include supports-variable-fonts {
+    font-variation-settings: 'slnt' -10;
+    font-style: oblique 10deg;
+  }
+}
+
+@mixin font-style-black-italic {
+  font-style: italic;
+  font-weight: 900;
+
+  @include supports-variable-fonts {
+    font-variation-settings: 'wght' 900, 'slnt' -10;
+    font-style: oblique 10deg;
+  }
+}
+
+@mixin font-style-bold-italic {
+  font-style: italic;
+  font-weight: 700;
+
+  @include supports-variable-fonts {
+    font-variation-settings: 'wght' 700, 'slnt' -10;
+    font-style: oblique 10deg;
+  }
+}
+
+@mixin font-style-bold {
+  font-weight: 700;
+
+  @include supports-variable-fonts {
+    font-variation-settings: 'wght' 700;
+  }
+}
+
+@mixin font-style-normal {
+  font-weight: 400;
+
+  @include supports-variable-fonts {
+    font-variation-settings: 'wght' 400;
+  }
+}

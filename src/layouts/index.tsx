@@ -1,11 +1,12 @@
-import classnames from 'classnames';
 import * as React from 'react';
 import {Helmet} from '../utils';
 
 import 'normalize.css';
 import '../styles/global.scss';
 
-import {Footer, Navbar} from '../UI-Kit';
+import {Footer, Navbar} from '../components';
+import {Space, Spacer} from '../UI-Kit';
+import {Container} from './utils';
 
 interface LayoutProps {
   className?: string;
@@ -16,19 +17,38 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({
   className,
   hasContainer,
-  pageMetadata,
+  pageMetadata = {},
   children,
 }) => {
-  const classname = classnames(hasContainer && 'container', className);
+  const typicalMarkup = (
+    <Container>
+      <Spacer>
+        <Helmet pageMetadata={pageMetadata} />
+        <Navbar />
+        <div className={className}>{children}</div>
+        <Space size="large" />
+        <Footer />
+      </Spacer>
+    </Container>
+  );
 
-  return (
+  const noChildContainerMarkup = (
     <>
-      <Helmet pageMetadata={pageMetadata || {}} />
-      <Navbar />
-      <div className={classname}>{children}</div>
-      <Footer className="mt-5" />
+      <Container>
+        <Helmet pageMetadata={pageMetadata} />
+        <Navbar />
+      </Container>
+      <div className={className}>{children}</div>
+      <Container>
+        <Spacer>
+          <Space size="large" />
+          <Footer />
+        </Spacer>
+      </Container>
     </>
   );
+
+  return hasContainer ? typicalMarkup : noChildContainerMarkup;
 };
 
 Layout.defaultProps = {

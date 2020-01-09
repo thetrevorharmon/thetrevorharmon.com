@@ -1,2 +1,23 @@
-@import '_mixins.scss';
-@import 'variables.scss';
+@import 'functions-and-mixins';
+
+$base-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+  Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+$static-font-face: 'Inter Static';
+$variable-font-face: 'Inter Variable';
+
+$variable-font-stack: $variable-font-face, $base-font-stack;
+$static-font-stack: $static-font-face, $base-font-stack;
+
+$base-font-size: 15px;
+$small-screens-font-size: 16px;
+$container-size: 560px;
+$container-base-padding: $base-font-size + 10px;
+$breakout-amount: $base-font-size * 8/3;
+$input-height: $base-font-size * 3;
+
+@mixin on-small-screens {
+  @media screen and (max-width: $container-size) {
+    @content;
+  }
+}

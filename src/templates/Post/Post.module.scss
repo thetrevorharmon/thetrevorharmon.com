@@ -1,0 +1,10 @@
+@import 'foundation';
+
+@mixin FormContainer($theme) {
+  .FormContainer-#{$theme} {
+    background-color: color($theme, caption-bg);
+  }
+}
+
+@include FormContainer(Light);
+@include FormContainer(Dark);

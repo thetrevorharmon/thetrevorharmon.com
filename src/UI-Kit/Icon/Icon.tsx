@@ -3,47 +3,44 @@ import * as React from 'react';
 
 import {useTheme} from '../../context/ThemeContext';
 import * as styles from './Icon.module.scss';
-import {link, moon, rss, sun, twitter} from './icons';
+import {expand, link, rss, star, twitter} from './icons';
+import {IconName} from './types';
 
 interface IconProps {
   className?: string;
-  href?: string;
-  name: string;
-  noStyling?: boolean;
+  name: IconName;
+  size: 'small' | 'normal' | 'large';
 }
 
 // Disabling object-literal-shorthand because otherwise
 // I can't have a 'dynamic' icon name that works
-
 /* tslint:disable object-literal-shorthand */
-const mapping: {[name: string]: () => any} = {
+const mapping: {[name in IconName]: React.SVGFactory} = {
+  expand: expand,
   link: link,
-  moon: moon,
   rss: rss,
-  sun: sun,
+  star: star,
   twitter: twitter,
 };
 
-const Icon: React.FC<IconProps> = ({className, children, href, name}) => {
-  const theme = useTheme();
-  const classname = classnames(styles.Icon, styles[`Icon-${theme}`], className);
-
-  if (!(`${name}` in mapping)) {
+export const Icon = ({className, name, size}: IconProps) => {
+  if (!(name in mapping)) {
     throw new Error('Icon name not found!');
   }
 
+  const theme = useTheme();
+  const classname = classnames(
+    styles.Icon,
+    styles[`Icon-${theme}`],
+    styles[`Icon-${size}`],
+    className,
+  );
+
   const Tag = mapping[name];
 
-  return Tag ? (
+  return (
     <span className={classname}>
       <Tag />
     </span>
-  ) : null;
+  );
 };
-
-Icon.defaultProps = {
-  href: '',
-  noStyling: false,
-};
-
-export default Icon;

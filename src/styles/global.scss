@@ -1,29 +1,5 @@
-@import './variables.scss';
-
-/////////////////////
-// T H E   G R I D //
-/////////////////////
-
-// This file imports the bootstrap grid, which is included in a NPM
-// This also shows an example of how to make use of the scss included in the NPM:
-// You can declare a variable here and then import the .scss, which will override the variables
-// included in the package.
-//
-// For a list of all the variables, refer to here (it's just the bootstrap variables):
-// https://github.com/m-spyratos/bootstrap-4-grid/blob/master/scss/grid/_variables.scss
-
-// These override the default spacers in the bootstrap utilities
-@import '../../node_modules/bootstrap-4-grid/scss/grid.scss';
-
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
 @import 'foundation';
-
-body,
-html {
-  font-family: $sans-serif-font-stack;
-  font-size: 16px;
-  line-height: 1.5;
-}
+@import 'fonts';
 
 hr {
   border: 0px solid;
@@ -45,42 +21,14 @@ p {
   margin: 0.5rem 0 1rem;
 }
 
-ol,
-ul {
-  // padding-left: 0;
-}
+body {
+  @media (prefers-color-scheme: dark) {
+    background-color: color(Dark, body-bg);
+  }
 
-.global-brand {
-  display: inline-block;
-  height: 4rem;
-  width: 4rem;
-  line-height: 4rem;
-  font-size: 1.25rem;
-
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-}
-
-.text-right {
-  text-align: right !important;
-}
-
-.text-left {
-  text-align: left !important;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.float-left {
-  float: left !important;
-}
-
-.float-right {
-  float: right !important;
+  @media (prefers-color-scheme: light) {
+    background-color: color(Light, body-bg);
+  }
 }
 
 @mixin Body($theme) {
@@ -90,10 +38,6 @@ ul {
 
     hr {
       background: color($theme, accent-line);
-    }
-
-    .global-brand {
-      background: color($theme, primary);
     }
   }
 }

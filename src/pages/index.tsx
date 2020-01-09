@@ -1,151 +1,67 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {useTheme} from '../context/ThemeContext';
+import {FeaturedPostItem, PostItem} from '../components';
 import {Layout} from '../layouts';
-import {Header, Link, PostTile, Tile} from '../UI-Kit';
-import {Helpers, Routes} from '../utils';
-import * as styles from './homepage.module.scss';
+import {BlogPost, LinkPost} from '../types';
+import {Button, Header, Space, Spacer} from '../UI-Kit';
+import {Helpers, Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {
   data: {
-    site: {
-      siteMetadata: SiteMetadata;
-    };
-    allContentfulProject: {edges: [{node: Project}]};
-    allContentfulBlogPost: {edges: [{node: BlogPost}]};
-    allContentfulLinkPost: {edges: [{node: LinkPost}]};
+    allContentfulBlogPost: allContentfulNodes<BlogPost>;
+    allContentfulLinkPost: allContentfulNodes<LinkPost>;
   };
 }
 
 export default (props: IndexPageProps) => {
-  const featuredWork: Array<{node: Project}> =
-    props.data.allContentfulProject.edges;
+  const [featuredPost, posts] = Helpers.combinePostTypes({
+    blogPosts: props.data.allContentfulBlogPost.nodes,
+    limit: 4,
+    linkPosts: props.data.allContentfulLinkPost.nodes,
+  });
 
-  const posts = Helpers.combinePostTypes(
-    props.data.allContentfulBlogPost,
-    props.data.allContentfulLinkPost,
-  ).slice(0, 3);
+  const {tagline} = useSiteData();
 
-  const theme = useTheme();
+  const titleMarkup = (
+    <Spacer size="little">
+      <Space size="huge" />
+      <p>Hi there! 👋 I'm</p>
+      <Header rank={1} type="Display">
+        Trevor Harmon
+      </Header>
+      <p>{tagline}</p>
+      <Space size="huge" />
+    </Spacer>
+  );
 
   return (
     <Layout>
-      <div className="row">
-        <div className="col-sm-12 col-md-10 col-lg-8">
-          <div
-            className={classnames(
-              styles.MainHeader,
-              styles[`MainHeader-${theme}`],
-              'my-6 mt-lg-8',
-            )}
-          >
-            <span>Hi, I'm</span>
-            <Header
-              rank={1}
-              type="Headline"
-              className={classnames(styles.Name, 'my-0')}
-            >
-              Trevor Harmon.
-            </Header>
-            <p className="mt-5">{props.data.site.siteMetadata.tagline}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col my-0">
-          Recent Posts
-        </Header>
-      </div>
-      <div className="row">
-        {posts.map((post: BlogPost | LinkPost, index: number) => (
-          <div className="col-sm-6 col-lg-4 mb-4" key={index}>
-            <PostTile post={post} />
-          </div>
-        ))}
-        <div className="col-sm-12">
-          <Link href={Routes.blog()} target="_blank">
-            Read more posts &rarr;
-          </Link>
-        </div>
-      </div>
-
-      <div className="row mt-6 mb-4">
-        <Header rank={2} type="SectionTitle" className="col">
-          Projects
-        </Header>
-      </div>
-      <div className="row">
-        {featuredWork.map((item, index) => (
-          <div className="col-md-6 col-lg-4 mb-4" key={index}>
-            <Tile item={item.node} />
-          </div>
-        ))}
-        <div className="col-sm-12">
-          <Link href={Routes.projects()} target="_blank">
-            See more projects &rarr;
-          </Link>
-        </div>
-      </div>
+      {titleMarkup}
+      <Spacer>
+        <Spacer size="large">
+          <FeaturedPostItem post={featuredPost} />
+          {posts.map((post: BlogPost | LinkPost) => (
+            <PostItem post={post} key={post.title} />
+          ))}
+        </Spacer>
+        <Space size="big" />
+        <Button url={Routes.blog()}>Read more posts &rarr;</Button>
+      </Spacer>
     </Layout>
   );
 };
 
 export const query = graphql`
   query indexPageQuery {
-    site {
-      siteMetadata {
-        tagline
+    allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 5) {
+      nodes {
+        ...ContentfulBlogPost
       }
     }
-    allContentfulProject(
-      filter: {featureOnHomepage: {eq: true}}
-      sort: {fields: [projectCompletionDate], order: DESC}
-    ) {
-      edges {
-        node {
-          ...ContentfulProjectTile
-        }
-      }
-    }
-    allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 3) {
-      edges {
-        node {
-          title
-          slug
-          description
-          date(formatString: "MMMM DD, YYYY")
-          body {
-            childMarkdownRemark {
-              html
-              excerpt
-              timeToRead
-            }
-          }
-          tags
-        }
-      }
-    }
-    allContentfulLinkPost(sort: {order: DESC, fields: [date]}, limit: 3) {
-      edges {
-        node {
-          title
-          slug
-          link
-          date(formatString: "MMMM DD, YYYY")
-          internal {
-            type
-          }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt(format: PLAIN, pruneLength: 116)
-              timeToRead
-            }
-          }
-        }
+    allContentfulLinkPost(sort: {order: DESC, fields: [date]}, limit: 4) {
+      nodes {
+        ...ContentfulLinkPost
       }
     }
   }

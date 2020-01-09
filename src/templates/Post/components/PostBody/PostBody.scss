@@ -1,0 +1,15 @@
+@import 'body-styles';
+@import './syntaxHighlighting.scss';
+
+.post-body {
+  @include BodyStyles();
+}
+
+@mixin PostBody($theme) {
+  .post-body.#{$theme} {
+    @include BodyStylesTheme($theme);
+  }
+}
+
+@include PostBody(Light);
+@include PostBody(Dark);

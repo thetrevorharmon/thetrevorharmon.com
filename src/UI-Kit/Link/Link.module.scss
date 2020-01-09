@@ -1,50 +1,30 @@
 @import 'foundation';
+@import './Link.mixins.scss';
 
 .Link {
-  text-decoration: none;
+  .Icon {
+    position: relative;
+    top: 4px;
 
-  transition: all 0.1s linear;
-  border-bottom: 1px solid transparent;
+    &-leading {
+      margin-right: space(little);
+    }
+
+    &-trailing {
+      margin-left: space(little);
+    }
+  }
 }
 
-@mixin Link($theme) {
+@mixin Link-Theme($theme) {
   .Link-#{$theme} {
-    color: color($theme, primary-text);
+    @include Link($theme);
 
-    &:hover {
-      border-color: color($theme, primary-text);
+    &.Muted {
+      @include Link($theme, text-muted, text);
     }
   }
 }
 
-@include Link(Light);
-@include Link(Dark);
-
-.Reset {
-  text-decoration: none;
-}
-
-.IconLink {
-  &,
-  &:hover {
-    border: none;
-    text-decoration: none;
-  }
-
-  transition: all 0.2s linear;
-}
-
-@mixin IconLink($theme) {
-  .IconLink-#{$theme} {
-    & svg path {
-      fill: color($theme, primary);
-    }
-
-    &:hover svg path {
-      fill: color($theme, primary-focus);
-    }
-  }
-}
-
-@include IconLink(Light);
-@include IconLink(Dark);
+@include Link-Theme(Light);
+@include Link-Theme(Dark);
