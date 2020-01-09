@@ -1,6 +1,6 @@
 # thetrevorharmon.com
 
-Hi there! 👋 This is my blog & portfolio site. It's built on [Gatsby](https://gatsby.org) and written in Typescript, with the styling done in SASS modules. The data is living in Contentful, a headless CMS, and is pulled at build-time. The site is hosted on Netlify. 💪
+Hi there! 👋 This is the repo for my blog & portfolio site. It's built on [Gatsby](https://gatsby.org) and written in Typescript, with the styling done in SASS modules. The data is living in Contentful, a headless CMS, and is pulled at build-time. The site is hosted on Netlify. 💪
 
 ## Getting Started
 
