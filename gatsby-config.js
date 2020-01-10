@@ -71,17 +71,17 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-prismjs`, // for code highlighting
-          // {
-          //   // This plugin was causing me grief previously 👇
-          //   // https://github.com/gatsbyjs/gatsby/issues/11867
-          //   resolve: `gatsby-remark-images-contentful`,
-          //   options: {
-          //     maxWidth: 800,
-          //     linkImagesToOriginal: false,
-          //     backgroundColor: `transparent`,
-          //     withWebp: true,
-          //   },
-          // },
+          {
+            // This plugin was causing me grief previously 👇
+            // https://github.com/gatsbyjs/gatsby/issues/11867
+            resolve: `gatsby-remark-images-contentful`,
+            options: {
+              maxWidth: 800,
+              linkImagesToOriginal: false,
+              backgroundColor: `transparent`,
+              withWebp: true,
+            },
+          },
         ],
       },
     },

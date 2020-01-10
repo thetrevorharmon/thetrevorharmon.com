@@ -86,3 +86,19 @@ exports.createPages = ({graphql, actions}) => {
     });
   });
 };
+
+// got this from https://spectrum.chat/gatsby-js/general/having-issue-related-to-chunk-commons-mini-css-extract-plugin~0ee9c456-a37e-472a-a1a0-cc36f8ae6033
+// this silences false errors that have to do with import errors with CSS modules
+// see this issue for more info: https://github.com/facebook/create-react-app/issues/5372
+exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
+  if (stage === 'build-javascript') {
+    const config = getConfig();
+    const miniCssExtractPlugin = config.plugins.find(
+      (plugin) => plugin.constructor.name === 'MiniCssExtractPlugin',
+    );
+    if (miniCssExtractPlugin) {
+      miniCssExtractPlugin.options.ignoreOrder = true;
+    }
+    actions.replaceWebpackConfig(config);
+  }
+};
