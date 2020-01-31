@@ -164,7 +164,7 @@ module.exports = {
               }              
             `,
             output: '/rss.xml',
-            title: "Trevor Harmon's Blog RSS Feed",
+            title: "Trevor Harmon's Blog",
           },
         ],
       },
