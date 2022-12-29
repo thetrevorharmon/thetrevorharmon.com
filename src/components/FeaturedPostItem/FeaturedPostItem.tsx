@@ -2,10 +2,8 @@ import classnames from 'classnames';
 import * as React from 'react';
 
 import {PostItem} from '../../components';
-import {useTheme} from '../../context/ThemeContext';
 import {BlogPost, isBlogPost, Project} from '../../types';
-import {Breakout, Icon, Image, Spacer} from '../../UI-Kit';
-import * as styles from './FeaturedPostItem.module.scss';
+import {Breakout, Icon, Image} from '../../UI-Kit';
 
 interface FeaturedPostItemProps {
   post: Project | BlogPost;
@@ -14,21 +12,29 @@ interface FeaturedPostItemProps {
 
 export const FeaturedPostItem = ({post, className}: FeaturedPostItemProps) => {
   const image = isBlogPost(post) ? post.heroImage : post.featureImage;
-  const theme = useTheme();
   const classname = classnames([
-    styles.FeaturedPostItem,
-    styles[`FeaturedPostItem-${theme}`],
+    'bg-caption-bg dark:bg-caption-bg-dark',
+    'relative p-container-base desktop:p-big',
     className,
   ]);
 
   return (
     <Breakout>
       <div className={classname}>
-        <Spacer size="medium">
+        <div className="space-y-medium">
           <Image src={image} />
           <PostItem post={post} />
-        </Spacer>
-        <Icon name="star" size="large" className={styles.Icon} />
+        </div>
+        <Icon
+          name="star"
+          size="large"
+          className={classnames(
+            'absolute',
+            'right-container-base bottom-container-base',
+            'desktop:right-big desktop:bottom-big',
+          )}
+          color="primary"
+        />
       </div>
     </Breakout>
   );

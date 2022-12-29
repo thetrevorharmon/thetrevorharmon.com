@@ -9,9 +9,8 @@ import {
   ContentfulBaseObject,
   ContentfulLongText,
 } from '../types';
-import {Breakout, Header, Image, Space, Spacer} from '../UI-Kit';
+import {Breakout, Header, Image} from '../UI-Kit';
 import {Routes} from '../utils';
-import * as styles from './about.module.scss';
 
 interface AboutPageData extends ContentfulBaseObject {
   title: string;
@@ -37,28 +36,24 @@ export default (props: AboutPageProps) => {
   const theme = useTheme();
 
   return (
-    <Layout
-      className={classnames(styles.AboutPage, styles[`AboutPage-${theme}`])}
-      pageMetadata={pageMetadata}
-    >
-      <Spacer>
-        <Space size="huge" />
+    <Layout className="body-styles" pageMetadata={pageMetadata}>
+      <div className="space-y-huge my-huge">
         <Header rank={1} type="Display">
           {aboutPage.title}
         </Header>
-        <Space size="huge" />
 
-        <Breakout>
-          <Image src={aboutPage.featureImage} className={styles.FeatureImage} />
-        </Breakout>
+        <div className="space-y-medium">
+          <Breakout>
+            <Image src={aboutPage.featureImage} />
+          </Breakout>
 
-        <Space size="medium" />
-        <div
-          dangerouslySetInnerHTML={{
-            __html: aboutPage.post.childMarkdownRemark.html,
-          }}
-        />
-      </Spacer>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: aboutPage.post.childMarkdownRemark.html,
+            }}
+          />
+        </div>
+      </div>
     </Layout>
   );
 };

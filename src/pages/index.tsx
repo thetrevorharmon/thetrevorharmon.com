@@ -4,7 +4,7 @@ import * as React from 'react';
 import {FeaturedPostItem, PostItem} from '../components';
 import {Layout} from '../layouts';
 import {BlogPost, LinkPost} from '../types';
-import {Button, Header, Space, Spacer} from '../UI-Kit';
+import {Button, Header} from '../UI-Kit';
 import {Helpers, Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {
@@ -24,42 +24,39 @@ export default (props: IndexPageProps) => {
   const {tagline} = useSiteData();
 
   const titleMarkup = (
-    <Spacer size="little">
-      <Space size="huge" />
+    <div className="space-y-little">
       <p>Hi there! 👋 I'm</p>
       <Header rank={1} type="Display">
         Trevor Harmon
       </Header>
       <p>{tagline}</p>
-      <Space size="huge" />
-    </Spacer>
+    </div>
   );
 
   return (
     <Layout>
-      {titleMarkup}
-      <Spacer>
-        <Spacer size="large">
-          <FeaturedPostItem post={featuredPost} />
-          {posts.map((post: BlogPost | LinkPost) => (
-            <PostItem post={post} key={post.title} />
-          ))}
-        </Spacer>
-        <Space size="big" />
-        <Button url={Routes.blog()}>Read more posts &rarr;</Button>
-      </Spacer>
+      <div className="my-huge">{titleMarkup}</div>
+      <div className="space-y-big">
+        <FeaturedPostItem post={featuredPost} />
+        {posts.map((post: BlogPost | LinkPost) => (
+          <PostItem post={post} key={post.title} />
+        ))}
+      </div>
+      <Button className="mt-big mb-large" url={Routes.blog()}>
+        Read more posts &rarr;
+      </Button>
     </Layout>
   );
 };
 
 export const query = graphql`
-  query indexPageQuery {
-    allContentfulBlogPost(sort: {order: DESC, fields: [date]}, limit: 5) {
+  query IndexPageQuery {
+    allContentfulBlogPost(sort: {date: DESC}, limit: 5) {
       nodes {
         ...ContentfulBlogPost
       }
     }
-    allContentfulLinkPost(sort: {order: DESC, fields: [date]}, limit: 4) {
+    allContentfulLinkPost(sort: {date: DESC}, limit: 4) {
       nodes {
         ...ContentfulLinkPost
       }

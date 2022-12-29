@@ -1,8 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
-import * as styles from './Header.module.scss';
 import {HeaderRank, HeaderType} from './types';
 
 interface HeaderProps {
@@ -26,14 +24,15 @@ const getTag = (rank: HeaderRank): keyof JSX.IntrinsicElements => {
   return mapping[rank];
 };
 
+const styles = {
+  Display: 'Header-Display',
+  Title: 'Header-Title',
+  Heading: 'Header-Heading',
+  Subheading: 'Header-Subheading',
+};
+
 export const Header = ({rank, type, className, children}: HeaderProps) => {
-  const theme = useTheme();
-  const classname = classnames(
-    styles.Header,
-    styles[`Header-${theme}`],
-    styles[`Header-${type}`],
-    className,
-  );
+  const classname = classnames(styles[type], className);
 
   const Tag = getTag(rank);
   const internalMarkup =

@@ -1,17 +1,11 @@
-import classnames from 'classnames';
 import React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
 import {Link} from '../../UI-Kit';
 import {Routes} from '../../utils';
-import * as styles from './Navbar.module.scss';
 
 import {BrandButton, ToggleThemeButton} from './components';
 
 export const Navbar = () => {
-  const theme = useTheme();
-  const classname = classnames(styles.Navbar, styles[`Navbar-${theme}`]);
-
   const navbarLinks = [
     {
       display: 'Blog',
@@ -28,9 +22,9 @@ export const Navbar = () => {
   ];
 
   const linkMarkup = (
-    <ul className={styles.Links}>
+    <ul className="flex items-center list-style-none m-0 ml-auto p-0">
       {navbarLinks.map((link, index) => (
-        <li key={index}>
+        <li key={index} className="ml-little desktop:ml-small first:ml-0">
           <Link url={link.location}>{link.display}</Link>
         </li>
       ))}
@@ -38,10 +32,10 @@ export const Navbar = () => {
   );
 
   return (
-    <div className={classname}>
+    <div className="flex py-small transition-all duration-200">
       <BrandButton />
       {linkMarkup}
-      <ToggleThemeButton className={styles.ToggleThemeButton} />
+      <ToggleThemeButton className="ml-small" />
     </div>
   );
 };

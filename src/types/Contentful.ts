@@ -1,4 +1,6 @@
-import {FluidObject} from 'gatsby-image';
+import {IGatsbyImageData} from 'gatsby-plugin-image';
+
+// import('gatsby-plugin-image').IGatsbyImageData;
 
 export type ContentfulObjectType =
   | 'ContentfulBlogPost'
@@ -34,15 +36,14 @@ export interface ContentfulAsset extends ContentfulBaseObject {
   id?: string;
   title: string;
   description: string;
-  fluid: FluidObject | FluidObject[];
+  gatsbyImageData: IGatsbyImageData;
 }
 
 export function getContentfulAssetSrc(
   asset?: ContentfulAsset,
 ): string | undefined {
   if (asset) {
-    const fluid = asset.fluid instanceof Array ? asset.fluid[0] : asset.fluid;
-    return fluid.src;
+    return asset.gatsbyImageData.images.fallback?.src;
   }
 }
 

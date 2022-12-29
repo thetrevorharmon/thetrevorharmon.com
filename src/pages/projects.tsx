@@ -5,9 +5,8 @@ import Masonry from 'react-masonry-css';
 import {FeaturedPostItem, ProjectPreviewTile} from '../components';
 import {Layout} from '../layouts';
 import {Project} from '../types';
-import {Breakout, Header, Space, Spacer} from '../UI-Kit';
+import {Breakout, Header} from '../UI-Kit';
 import {Routes} from '../utils';
-import * as styles from './projects.module.scss';
 
 interface ProjectsPageProps {
   data: {
@@ -34,21 +33,18 @@ export default (props: ProjectsPageProps) => {
 
   const featured =
     featuredProject != null ? (
-      <>
-        <FeaturedPostItem post={featuredProject} />
-        <Space size="normal" />
-      </>
+      <FeaturedPostItem post={featuredProject} />
     ) : null;
 
   return (
     <Layout pageMetadata={pageMetadata}>
-      <Spacer>
-        <Space size="huge" />
-        <Header rank={1} type="Display">
-          Projects
-        </Header>
-        <Space size="huge" />
-        {featured}
+      <div className="space-y-small mt-huge mb-large">
+        <div className="space-y-huge">
+          <Header rank={1} type="Display">
+            Projects
+          </Header>
+          {featured}
+        </div>
         {projects && (
           <Breakout>
             <Masonry
@@ -56,8 +52,8 @@ export default (props: ProjectsPageProps) => {
                 default: 2,
                 560: 1,
               }}
-              className={styles.Grid}
-              columnClassName={styles.Column}
+              className="flex -ml-normal w-auto"
+              columnClassName="pl-normal bg-clip-padding [&>div]:mb-normal"
             >
               {projects.map((project, index) => (
                 <ProjectPreviewTile project={project} key={index} />
@@ -65,14 +61,14 @@ export default (props: ProjectsPageProps) => {
             </Masonry>
           </Breakout>
         )}
-      </Spacer>
+      </div>
     </Layout>
   );
 };
 
 export const query = graphql`
   query projectsPageQuery {
-    allContentfulProject(sort: {fields: [projectCompletionDate], order: DESC}) {
+    allContentfulProject(sort: {projectCompletionDate: DESC}) {
       nodes {
         ...ContentfulProject
         slug

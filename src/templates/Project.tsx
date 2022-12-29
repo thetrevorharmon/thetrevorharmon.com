@@ -1,13 +1,11 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {useTheme} from '../context/ThemeContext';
 import {getContentfulAssetSrc, Project} from '../types';
-import {Breakout, Image, Space, Spacer} from '../UI-Kit';
+import {Breakout, Image} from '../UI-Kit';
 import {Routes} from '../utils';
 import {Post} from './Post';
 import {LinkDatePair} from './Post/components/PostFooter';
-import * as styles from './Project.module.scss';
 
 interface TemplateProps {
   data: {
@@ -37,8 +35,6 @@ export default (props: TemplateProps) => {
     url: Routes.project(props.pageContext.slug),
   };
 
-  const theme = useTheme();
-
   const header = {
     meta: {client: project.client, date: project.projectCompletionDate},
     title: project.title,
@@ -49,18 +45,20 @@ export default (props: TemplateProps) => {
       project.description.childMarkdownRemark &&
       project.description.childMarkdownRemark.html,
     children: (
-      <Spacer>
-        <Space size="large" />
-        <Spacer size="medium">
+      <div>
+        <div className="space-y-medium mt-huge">
           {images.map((image, index) => {
             return (
               <Breakout key={index}>
-                <Image className={styles.Image} src={image} />
+                <Image
+                  className="border border-img-border dark:border-img-border-dark"
+                  src={image}
+                />
               </Breakout>
             );
           })}
-        </Spacer>
-      </Spacer>
+        </div>
+      </div>
     ),
   };
 
@@ -71,23 +69,22 @@ export default (props: TemplateProps) => {
   };
 
   return (
-    <Post
-      className={styles[`ProjectTemplate-${theme}`]}
-      metadata={metadata}
-      header={header}
-      body={body}
-      footer={footer}
-    />
+    <Post metadata={metadata} header={header} body={body} footer={footer} />
   );
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query ProjectPageQuery($slug: String!) {
     contentfulProject(slug: {eq: $slug}) {
       ...ContentfulProject
       client
       projectImages {
         ...ContentfulAsset
+      }
+      description {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }

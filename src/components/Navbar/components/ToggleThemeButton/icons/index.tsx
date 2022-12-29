@@ -1,4 +1,4 @@
-import moon from './moon.svg';
-import sun from './sun.svg';
+import Moon from './moon.svg';
+import Sun from './sun.svg';
 
-export {moon, sun};
+export {Moon, Sun};

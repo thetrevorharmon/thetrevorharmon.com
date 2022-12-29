@@ -5,13 +5,13 @@ import 'normalize.css';
 import '../styles/global.scss';
 
 import {Footer, Navbar} from '../components';
-import {Space, Spacer} from '../UI-Kit';
 import {Container} from './utils';
 
 interface LayoutProps {
   className?: string;
   hasContainer?: boolean;
   pageMetadata?: PageMetadata;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -22,13 +22,10 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   const typicalMarkup = (
     <Container>
-      <Spacer>
-        <Helmet pageMetadata={pageMetadata} />
-        <Navbar />
-        <div className={className}>{children}</div>
-        <Space size="large" />
-        <Footer />
-      </Spacer>
+      <Helmet pageMetadata={pageMetadata} />
+      <Navbar />
+      <div className={className}>{children}</div>
+      <Footer />
     </Container>
   );
 
@@ -40,10 +37,7 @@ const Layout: React.FC<LayoutProps> = ({
       </Container>
       <div className={className}>{children}</div>
       <Container>
-        <Spacer>
-          <Space size="large" />
-          <Footer />
-        </Spacer>
+        <Footer />
       </Container>
     </>
   );

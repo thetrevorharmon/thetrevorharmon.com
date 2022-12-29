@@ -1,15 +1,7 @@
 import * as React from 'react';
 
 import {BlogPost, isLinkPost, isProject, LinkPost, Project} from '../../types';
-import {
-  Header,
-  Link,
-  Meta,
-  MetaProps,
-  Space,
-  Spacer,
-  TextStyle,
-} from '../../UI-Kit';
+import {Header, Link, Meta, MetaProps, TextStyle} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 export interface PostItemProps {
@@ -62,19 +54,23 @@ export const PostItem = ({post, className}: PostItemProps) => {
 
   return (
     <div className={className}>
-      <Spacer>
-        <Header rank={2} type="Heading">
-          {title}
-        </Header>
-        <Space size="tiny" />
-        <Meta {...meta} />
-        <Space size="little" />
-        <p>
-          <TextStyle style="Body">{description}</TextStyle>
-        </p>
-        <Space size="small" />
-        <Link url={url}>Continue Reading →</Link>
-      </Spacer>
+      <div className="space-y-normal">
+        <div className="space-y-small">
+          <div className="space-y-tiny">
+            <Header rank={2} type="Heading">
+              {title}
+            </Header>
+            <Meta {...meta} />
+          </div>
+          <p>
+            <TextStyle style="Body">{description}</TextStyle>
+          </p>
+        </div>
+
+        <Link url={url} className="block">
+          Continue Reading →
+        </Link>
+      </div>
     </div>
   );
 };

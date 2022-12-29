@@ -6,8 +6,7 @@ import {
   useTheme,
   useToggleTheme,
 } from '../../../../context/ThemeContext';
-import {moon, sun} from './icons';
-import * as styles from './ToggleThemeButton.module.scss';
+import {Moon, Sun} from './icons';
 
 interface ToggleThemeButtonProps {
   className?: string;
@@ -16,13 +15,27 @@ interface ToggleThemeButtonProps {
 export const ToggleThemeButton = ({className}: ToggleThemeButtonProps) => {
   const theme = useTheme();
   const toggleTheme = useToggleTheme();
-  const buttonClassName = classnames([className, styles.Button]);
-  const iconClassName = classnames([styles.Icon, styles[`Icon-${theme}`]]);
+  const buttonClassName = classnames([
+    className,
+    `bg-none p-0 border-0 hover:cursor-pointer`,
+    // color the icon to the primary color
+    '[&>*>svg>path]:fill-primary dark:[&>*>svg>path]:fill-primary-dark',
+    // set color on hover/focus
+    'hover:[&>*>svg>path]:fill-text hover:dark:[&>*>svg>path]:fill-text-dark',
+    'focus:[&>*>svg>path]:fill-text focus:dark:[&>*>svg>path]:fill-text-dark',
+  ]);
 
-  const Icon = theme === Theme.Dark ? sun : moon;
+  const iconClassName = classnames([
+    'relative',
+    'top-[3px]',
+    'block',
+    'w-[1.25rem]',
+  ]);
+
+  const Icon = theme === Theme.Dark ? Sun : Moon;
 
   return (
-    <span className={styles.Container}>
+    <span className="flex items-center">
       <button
         onClick={toggleTheme}
         className={buttonClassName}

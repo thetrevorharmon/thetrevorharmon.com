@@ -5,7 +5,7 @@ import * as React from 'react';
 import {FeaturedPostItem, PostItem} from '../components';
 import {Layout} from '../layouts';
 import {BlogPost, LinkPost} from '../types';
-import {Header, Space, Spacer, TextStyle} from '../UI-Kit';
+import {Header, TextStyle} from '../UI-Kit';
 import {Helpers, Routes} from '../utils';
 
 interface ProjectsPageProps {
@@ -29,36 +29,35 @@ export default (props: ProjectsPageProps) => {
 
   return (
     <Layout pageMetadata={pageMetadata}>
-      <Spacer>
-        <Space size="huge" />
-        <Header rank={1} type="Display">
-          {pageMetadata.title}
-        </Header>
-        <Space size="small" />
-        <p>
-          <TextStyle style="Body">{pageMetadata.description}</TextStyle>
-        </p>
-        <Space size="huge" />
+      <div className="mt-huge mb-large space-y-huge">
+        <div className="space-y-small">
+          <Header rank={1} type="Display">
+            {pageMetadata.title}
+          </Header>
+          <p>
+            <TextStyle style="Body">{pageMetadata.description}</TextStyle>
+          </p>
+        </div>
 
-        <Spacer size="large">
+        <div className="space-y-large">
           <FeaturedPostItem post={featuredPost} />
           {posts.map((post) => (
             <PostItem post={post} key={post.slug} />
           ))}
-        </Spacer>
-      </Spacer>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export const query = graphql`
   query blogPageQuery {
-    allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
+    allContentfulBlogPost(sort: {date: DESC}) {
       nodes {
         ...ContentfulBlogPost
       }
     }
-    allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
+    allContentfulLinkPost(sort: {date: DESC}) {
       nodes {
         ...ContentfulLinkPost
       }

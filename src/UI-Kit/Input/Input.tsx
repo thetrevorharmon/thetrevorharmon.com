@@ -1,9 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
-import {Spacer, TextStyle} from '../../UI-Kit';
-import * as styles from './Input.module.scss';
+import {TextStyle} from '../../UI-Kit';
 
 interface InputProps {
   label: string;
@@ -24,12 +22,11 @@ export const Input = ({
   isFullWidth = false,
   isValid = true,
 }: InputProps) => {
-  const theme = useTheme();
   const id = `${label}-${name}`.replace(/\s/g, '');
   const inputClassName = classnames([
-    styles[`Input-${theme}`],
-    isFullWidth && styles.FullWidth,
-    !isValid && styles.Invalid,
+    'Input',
+    isFullWidth && 'w-full',
+    !isValid && 'text-primary-text dark:text-primary-text-dark',
   ]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +36,9 @@ export const Input = ({
   };
 
   return (
-    <div className={styles.Container}>
-      <Spacer size="tiny">
-        <label htmlFor={id} className={styles[`Label-${theme}`]}>
+    <div className="flex flex-col">
+      <div className="space-y-tiny">
+        <label htmlFor={id} className="text-text dark:text-text-dark">
           <TextStyle style="Label">{label}</TextStyle>
         </label>
         <input
@@ -53,7 +50,7 @@ export const Input = ({
           value={value}
           onChange={handleChange}
         />
-      </Spacer>
+      </div>
     </div>
   );
 };
