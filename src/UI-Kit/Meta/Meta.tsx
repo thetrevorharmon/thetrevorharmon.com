@@ -1,9 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
 import {Icon} from '../../UI-Kit';
-import * as styles from './Meta.module.scss';
+
 import {MetaProps} from './types';
 
 export const Meta = ({
@@ -13,8 +12,7 @@ export const Meta = ({
   timeToRead,
   client,
 }: MetaProps) => {
-  const theme = useTheme();
-  const classname = classnames(className, styles[`Meta-${theme}`]);
+  const classname = classnames(className, 'Meta');
 
   const timeToReadPhrase = timeToRead
     ? `${Math.floor(+timeToRead)} min read`
@@ -22,7 +20,12 @@ export const Meta = ({
 
   const meta = [date, timeToReadPhrase, client].filter(Boolean).join(' / ');
   const icon = isLinkPost ? (
-    <Icon name="link" size="small" className={styles.Icon} />
+    <Icon
+      name="link"
+      size="small"
+      color="primary"
+      className="top-[3px] ml-tiny relative inline-block"
+    />
   ) : null;
 
   return meta ? (

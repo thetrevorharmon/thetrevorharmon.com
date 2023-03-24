@@ -1,11 +1,9 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
-import {OutboundLink} from 'gatsby-plugin-google-analytics';
+import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
 import {Icon, IconName} from '../../UI-Kit';
-import * as styles from './Link.module.scss';
 
 interface LinkIconProps {
   position: 'leading' | 'trailing';
@@ -32,13 +30,7 @@ export const Link = ({
   const externalUrlPattern = /^http/;
   const isExternalUrl = externalUrlPattern.test(url);
 
-  const theme = useTheme();
-  const classname = classnames(
-    className,
-    styles.Link,
-    styles[`Link-${theme}`],
-    isMuted && styles.Muted,
-  );
+  const classname = classnames(className, 'Link', isMuted && 'Link-Muted');
 
   const getInnerMarkup = () => {
     if (icon == null) {
@@ -49,20 +41,24 @@ export const Link = ({
       <Icon
         name={icon.name}
         size="normal"
-        className={classnames([styles.Icon, styles[`Icon-${icon.position}`]])}
+        color="primary"
+        className={classnames(
+          'relative top-[4px]',
+          icon.position === 'leading' ? 'mr-little' : 'ml-little',
+        )}
       />
     );
 
     return icon.position === 'leading' ? (
-      <>
+      <div className="flex">
         {iconElement}
         {children}
-      </>
+      </div>
     ) : (
-      <>
+      <div className="flex">
         {children}
         {iconElement}
-      </>
+      </div>
     );
   };
 

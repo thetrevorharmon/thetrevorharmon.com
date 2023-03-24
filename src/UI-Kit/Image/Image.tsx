@@ -1,18 +1,19 @@
-import Img from 'gatsby-image';
+import {GatsbyImage, getImage} from 'gatsby-plugin-image';
 import * as React from 'react';
-
-import {ContentfulAsset} from '../../types';
 
 interface ImageProps {
   className?: string;
-  src?: ContentfulAsset;
+  // TODO: get the actual type working here
+  src?: any;
 }
 
 export const Image = ({className, src}: ImageProps) => {
-  return src ? (
-    <Img
+  const image = getImage(src);
+
+  return image ? (
+    <GatsbyImage
       className={className}
-      fluid={src.fluid}
+      image={image}
       alt={src.title || src.description}
     />
   ) : null;

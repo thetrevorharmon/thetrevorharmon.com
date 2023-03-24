@@ -8,7 +8,7 @@ interface HelmetProps {
   pageMetadata: PageMetadata;
 }
 
-const Helmet: React.FC<HelmetProps> = ({children, pageMetadata}) => {
+const Helmet: React.FC<HelmetProps> = ({pageMetadata}) => {
   const page = pageMetadata;
   const site = useSiteData();
 
@@ -48,7 +48,7 @@ const Helmet: React.FC<HelmetProps> = ({children, pageMetadata}) => {
   return (
     <ReactHelmet title={title} meta={meta}>
       <html lang="en" />
-      <body className={theme} />
+      <body className={theme.toLowerCase()} />
     </ReactHelmet>
   );
 };

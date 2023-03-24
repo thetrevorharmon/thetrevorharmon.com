@@ -11,9 +11,7 @@ exports.createPages = ({graphql, actions}) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allContentfulProject(
-          sort: {order: DESC, fields: [projectCompletionDate]}
-        ) {
+        allContentfulProject(sort: {projectCompletionDate: DESC}) {
           nodes {
             title
             slug
@@ -23,7 +21,7 @@ exports.createPages = ({graphql, actions}) => {
             }
           }
         }
-        allContentfulBlogPost(sort: {order: DESC, fields: [date]}) {
+        allContentfulBlogPost(sort: {date: DESC}) {
           nodes {
             title
             slug
@@ -33,7 +31,7 @@ exports.createPages = ({graphql, actions}) => {
             }
           }
         }
-        allContentfulLinkPost(sort: {order: DESC, fields: [date]}) {
+        allContentfulLinkPost(sort: {date: DESC}) {
           nodes {
             title
             slug
@@ -90,15 +88,30 @@ exports.createPages = ({graphql, actions}) => {
 // got this from https://spectrum.chat/gatsby-js/general/having-issue-related-to-chunk-commons-mini-css-extract-plugin~0ee9c456-a37e-472a-a1a0-cc36f8ae6033
 // this silences false errors that have to do with import errors with CSS modules
 // see this issue for more info: https://github.com/facebook/create-react-app/issues/5372
-exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
-  if (stage === 'build-javascript') {
-    const config = getConfig();
-    const miniCssExtractPlugin = config.plugins.find(
-      (plugin) => plugin.constructor.name === 'MiniCssExtractPlugin',
-    );
-    if (miniCssExtractPlugin) {
-      miniCssExtractPlugin.options.ignoreOrder = true;
-    }
-    actions.replaceWebpackConfig(config);
-  }
+// exports.onCreateWebpackConfig = ({stage, actions, getConfig}) => {
+//   if (stage === 'build-javascript') {
+//     const config = getConfig();
+//     const miniCssExtractPlugin = config.plugins.find(
+//       (plugin) => plugin.constructor.name === 'MiniCssExtractPlugin',
+//     );
+//     if (miniCssExtractPlugin) {
+//       miniCssExtractPlugin.options.ignoreOrder = true;
+//     }
+//     actions.replaceWebpackConfig(config);
+//   }
+// };
+
+// Silence the conflicting order warning
+// https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+
+exports.onCreateWebpackConfig = ({actions}) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new FilterWarningsPlugin({
+        exclude:
+          /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
+      }),
+    ],
+  });
 };

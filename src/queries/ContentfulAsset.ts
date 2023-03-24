@@ -4,9 +4,7 @@ export const ContentfulAsset = graphql`
   fragment ContentfulAsset on ContentfulAsset {
     title
     description
-    fluid(maxWidth: 750) {
-      ...GatsbyContentfulFluid_withWebp
-    }
+    gatsbyImageData(layout: FULL_WIDTH)
     internal {
       type
     }

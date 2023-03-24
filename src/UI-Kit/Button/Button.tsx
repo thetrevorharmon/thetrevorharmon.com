@@ -1,11 +1,7 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
-import {OutboundLink} from 'gatsby-plugin-google-analytics';
+import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
-
-import {useTheme} from '../../context/ThemeContext';
-import {TextStyle} from '../TextStyle';
-import * as styles from './Button.module.scss';
 
 interface ButtonProps {
   className?: string;
@@ -23,13 +19,7 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
     throw new Error('Must use either the url or onClick prop');
   }
 
-  const buttonText = <TextStyle style="Button">{children}</TextStyle>;
-  const theme = useTheme();
-  const classname = classnames([
-    className,
-    styles.Button,
-    styles[`Button-${theme}`],
-  ]);
+  const classname = classnames([className, 'Button']);
 
   const linkMarkup = (linkUrl?: string) => {
     if (linkUrl == null) {
@@ -46,11 +36,11 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
         target={'_blank'}
         rel="noreferrer"
       >
-        {buttonText}
+        {children}
       </OutboundLink>
     ) : (
       <GatsbyLink className={classname} to={linkUrl}>
-        {buttonText}
+        {children}
       </GatsbyLink>
     );
   };
@@ -62,7 +52,7 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
 
     return (
       <button className={classname} onClick={clickHandler}>
-        {buttonText}
+        {children}
       </button>
     );
   };

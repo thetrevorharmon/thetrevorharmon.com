@@ -1,15 +1,16 @@
-// to separate development & production variables, refer to:
-// https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/environment-variables.md
-
-let environment =
-  process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development';
-require('dotenv').config({
-  path: `.env.${environment}`,
-});
+import type {GatsbyConfig} from 'gatsby';
+import dotenv from 'dotenv';
 
 const Utils = require('./gatsby-utils');
 
-module.exports = {
+const environment =
+  process.env.ACTIVE_ENV ?? process.env.NODE_ENV ?? 'development';
+
+dotenv.config({
+  path: `.env.${environment}`,
+});
+
+const config: GatsbyConfig = {
   siteMetadata: {
     title: `The Trevor Harmon`,
     tagline: `I write code for Shopify, and (sometimes) write things on my blog.`,
@@ -23,49 +24,25 @@ module.exports = {
       site: '@thetrevorharmon',
     },
   },
+  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
+  // If you use VSCode you can also use the GraphQL plugin
+  // Learn more at: https://gatsby.dev/graphql-typegen
+  graphqlTypegen: true,
   plugins: [
     {
-      resolve: `gatsby-source-contentful`,
+      resolve: 'gatsby-source-contentful',
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
         host:
-          environment === 'development' ? `preview.contentful.com` : undefined,
+          process.env.NODE_ENV === 'development'
+            ? 'preview.contentful.com'
+            : undefined,
       },
     },
-    `gatsby-plugin-typescript`,
-    `gatsby-plugin-tslint`,
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        cssLoaderOptions: {
-          camelCase: false,
-        },
-      },
-    },
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-plugin-favicon`,
-      options: {
-        logo: './static/favicon.png',
-        background: 'transparent',
-        version: '2.0',
-        icons: {
-          appleStartup: false,
-        },
-      },
-    },
-    `gatsby-plugin-react-svg`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-robots-txt`,
-    `gatsby-plugin-sharp`, // for gatsby-image
-    `gatsby-transformer-sharp`, // for gatsby-image,
-    {
-      resolve: 'gatsby-plugin-mailchimp',
-      options: {
-        endpoint: process.env.MAILCHIMP_ACTION_URL,
-      },
-    },
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -86,14 +63,68 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
-        head: true, // Puts tracking script in the head instead of the body
-        anonymize: true,
-        respectDNT: true,
-        cookieDomain: `thetrevorharmon.com`,
+        fonts: [`Inter`, `PT Mono:400`],
+        display: 'swap',
       },
+    },
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [require('tailwindcss')],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: process.env.MAILCHIMP_ACTION_URL,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [process.env.GOOGLE_ANALYTICS_TRACKING_ID],
+        // This object gets passed directly to the gtag config command
+        // This config will be shared across all trackingIds
+        // gtagConfig: {
+        //   optimize_id: 'OPT_CONTAINER_ID',
+        //   anonymize_ip: true,
+        //   cookie_expires: 0,
+        // },
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          // Puts tracking script in the head instead of the body
+          head: false,
+          // Setting this parameter is also optional
+          respectDNT: true,
+          // Avoids sending pageview hits from custom paths
+          // exclude: ['/preview/**', '/do-not-track/me/too/'],
+          // Defaults to https://www.googletagmanager.com
+          origin: 'https://www.thetrevorharmon.com',
+          // Delays processing pageview events on route update (in milliseconds)
+          delayOnRouteUpdate: 0,
+        },
+      },
+    },
+    `gatsby-plugin-react-svg`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        icon: 'src/images/icon.png',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: './src/images/',
+      },
+      __key: 'images',
     },
     {
       resolve: `gatsby-plugin-feed`,
@@ -102,13 +133,19 @@ module.exports = {
           {
             serialize: ({
               query: {site, allContentfulBlogPost, allContentfulLinkPost},
+            }: {
+              query: {
+                site: any;
+                allContentfulBlogPost: any;
+                allContentfulLinkPost: any;
+              };
             }) => {
               const posts = Utils.combinePostTypes(
                 allContentfulBlogPost.nodes,
                 allContentfulLinkPost.nodes,
               );
 
-              return posts.map((post) => {
+              return posts.map((post: any) => {
                 return Object.assign(
                   {},
                   {
@@ -171,3 +208,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;

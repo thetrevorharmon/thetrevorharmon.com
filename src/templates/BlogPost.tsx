@@ -2,15 +2,10 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 
 import {BlogPost, getContentfulAssetSrc} from '../types';
-import {Attribution, Link, Spacer} from '../UI-Kit';
+import {Attribution, Link} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 import {Post} from './Post';
 import {LinkDatePair} from './Post/components/PostFooter';
-
-interface BasicPost {
-  title: string;
-  slug: string;
-}
 
 interface BlogPostProps {
   data: {
@@ -55,12 +50,14 @@ export default (props: BlogPostProps) => {
   const body = {
     bodyHtml: blogPost.body.childMarkdownRemark.html,
     children: (
-      <Spacer size="tiny">
+      <div className="space-y-tiny">
         {blogPost.sourceAttribution && (
           <Attribution attribution={blogPost.sourceAttribution} />
         )}
-        <Link url={twitterUrl}>Reply to this post on Twitter</Link>
-      </Spacer>
+        <Link className="block" url={twitterUrl}>
+          Reply to this post on Twitter
+        </Link>
+      </div>
     ),
   };
 
@@ -82,7 +79,7 @@ export default (props: BlogPostProps) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query BlogPost($slug: String!) {
     contentfulBlogPost(slug: {eq: $slug}) {
       ...ContentfulBlogPost
       sourceAttribution {

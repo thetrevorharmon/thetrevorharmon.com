@@ -9,10 +9,6 @@ export const ContentfulProject = graphql`
     }
     description {
       description
-      childMarkdownRemark {
-        excerpt
-        html
-      }
     }
     internal {
       type

@@ -2,9 +2,7 @@ import * as React from 'react';
 import {Layout} from '../../layouts';
 
 import {Form} from '../../components';
-import {useTheme} from '../../context/ThemeContext';
 import {Container} from '../../layouts/utils';
-import {Space, Spacer} from '../../UI-Kit';
 import {
   PostBody,
   PostBodyProps,
@@ -13,7 +11,6 @@ import {
   PostHeader,
   PostHeaderProps,
 } from './components';
-import * as styles from './Post.module.scss';
 
 interface PostProps {
   metadata: PageMetadata;
@@ -32,18 +29,12 @@ export const Post = ({
   footer,
   hasForm = false,
 }: PostProps) => {
-  const theme = useTheme();
-
   const subscribeForm = hasForm ? (
-    <Spacer>
-      <Space size="huge" />
-      <div className={styles[`FormContainer-${theme}`]}>
-        <Container>
-          <Form />
-        </Container>
-      </div>
-      <Space size="large" />
-    </Spacer>
+    <div className="mt-huge mb-large bg-caption-bg dark:bg-caption-bg-dark">
+      <Container>
+        <Form />
+      </Container>
+    </div>
   ) : null;
 
   return (

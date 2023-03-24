@@ -1,10 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
 import {ContentfulAttribution} from '../../types';
 import {Link} from '../../UI-Kit';
-import * as styles from './Attribution.module.scss';
 
 interface AttributionProps {
   attribution: ContentfulAttribution;
@@ -17,11 +15,12 @@ export const Attribution = ({
     throw new Error('Must provide an author if using a Photo type');
   }
 
-  const theme = useTheme();
-  const classname = classnames(
-    styles[`Attribution-${theme}`],
-    styles[`Attribution-${type}`],
-  );
+  const styles = {
+    Photo: 'Attribution-Photo',
+    Article: 'Attribution-Article',
+  };
+
+  const classname = classnames('Attribution', styles[type]);
 
   const photoAttribution = (
     <div className={classname}>

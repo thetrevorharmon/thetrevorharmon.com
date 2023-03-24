@@ -1,10 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
 import {Link, TextStyle} from '../../UI-Kit';
 import {ExternalLinks, useSiteData} from '../../utils';
-import * as styles from './Footer.module.scss';
 
 interface FooterProps {
   className?: string;
@@ -12,11 +10,11 @@ interface FooterProps {
 
 export const Footer = ({className}: FooterProps) => {
   const {title} = useSiteData();
-  const theme = useTheme();
   const classname = classnames(
     className,
-    styles.Footer,
-    styles[`Footer-${theme}`],
+    'flex flex-wrap',
+    'border-t border-solid border-accent-line dark:border-accent-line-dark',
+    'py-medium',
   );
 
   const footerLinks = [
@@ -35,9 +33,19 @@ export const Footer = ({className}: FooterProps) => {
   ];
 
   const linkMarkup = (
-    <ul className={styles.FooterLinks}>
+    <ul
+      className={classnames(
+        'list-style-none',
+        'p-0',
+        'm-0 ml-auto',
+        'w-full desktop:w-auto',
+      )}
+    >
       {footerLinks.map((link) => (
-        <li key={link.display}>
+        <li
+          key={link.display}
+          className={classnames('inline-block', 'ml-small', 'first:ml-0')}
+        >
           <Link url={link.location} target="_blank">
             {link.display}
           </Link>

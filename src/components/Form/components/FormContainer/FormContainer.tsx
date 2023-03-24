@@ -2,8 +2,6 @@ import classnames from 'classnames';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {useTheme} from '../../../../context/ThemeContext';
-import {Space, Spacer} from '../../../../UI-Kit';
-import * as styles from './FormContainer.module.scss';
 
 interface FormContainerProps {
   children: React.ReactNode;
@@ -41,14 +39,13 @@ export const FormContainer = ({children}: FormContainerProps) => {
         }
       : {};
 
-  const classname = classnames(
-    styles.FormContainer,
-    styles[`FormContainer-${theme}`],
-  );
-
   return (
     <div
-      className={classname}
+      className={classnames(
+        'box-border',
+        'py-medium desktop:py-large',
+        'bg-caption-bg dark:bg-caption-bg-dark',
+      )}
       ref={formContainerRef}
       style={formContainerStyle}
     >

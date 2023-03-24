@@ -66,7 +66,7 @@ export default (props: LinkPostProps) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     contentfulLinkPost(slug: {eq: $slug}) {
       ...ContentfulLinkPost
     }

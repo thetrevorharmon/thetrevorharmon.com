@@ -1,10 +1,11 @@
+import classnames from 'classnames';
 import addToMailchimp, {
   MailchimpResponse,
   MailchimpResult,
 } from 'gatsby-plugin-mailchimp';
 import React, {useEffect, useState} from 'react';
 
-import {Input, Spacer} from '../../UI-Kit';
+import {Input} from '../../UI-Kit';
 import {ExternalLinks, useSiteData} from '../../utils';
 import {
   FormButton,
@@ -13,7 +14,6 @@ import {
   FormHeader,
   FormSuccess,
 } from './components';
-import * as styles from './Form.module.scss';
 import {strings} from './strings';
 import {
   openMailchimpFallback,
@@ -54,10 +54,6 @@ export const Form = () => {
     const fields = splitNameIntoParts(name);
     setFormState(FormState.Loading);
 
-    setTimeout(() => {
-      setFormState(FormState.Submitted);
-    }, 2000);
-
     await addToMailchimp(email, fields)
       .then((data: MailchimpResponse) => {
         if (data.result === 'success') {
@@ -82,9 +78,15 @@ export const Form = () => {
   };
 
   const formMarkup = (
-    <Spacer size="medium">
+    <div className="space-y-medium">
       <FormHeader title={strings.title} tagline={strings.tagline} />
-      <form onSubmit={handleFormSubmit} className={styles.Form}>
+      <form
+        onSubmit={handleFormSubmit}
+        className={classnames(
+          'flex flex-col [&>*]:mb-small last:mb-0',
+          'desktop:grid desktop:grid-cols-form desktop:gap-x-small',
+        )}
+      >
         <Input
           label="Name"
           name="name"
@@ -104,7 +106,7 @@ export const Form = () => {
           isFullWidth
         />
         <FormButton
-          className={styles.SubmitButton}
+          className="self-end"
           isLoading={formState === FormState.Loading}
           isDisabled={
             !isNameValid || !isEmailValid || formState === FormState.Loading
@@ -119,7 +121,7 @@ export const Form = () => {
       >
         {strings.footer}
       </FormFooter>
-    </Spacer>
+    </div>
   );
 
   return (
