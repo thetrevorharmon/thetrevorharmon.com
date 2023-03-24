@@ -1,18 +1,14 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../../../context/ThemeContext';
-import {Spacer} from '../../../../UI-Kit';
-import './PostBody.scss';
+import './syntaxHighlighting.scss';
 import {PostBodyProps} from './types';
 
 export const PostBody = ({bodyHtml, children}: PostBodyProps) => {
-  const theme = useTheme();
-
   return (
-    <Spacer size="medium">
+    <div className="space-y-medium">
       {bodyHtml && (
-        <div className={classnames(['post-body', theme])}>
+        <div className={classnames(['body-styles'])}>
           <div
             dangerouslySetInnerHTML={{
               __html: bodyHtml,
@@ -21,6 +17,6 @@ export const PostBody = ({bodyHtml, children}: PostBodyProps) => {
         </div>
       )}
       {children}
-    </Spacer>
+    </div>
   );
 };

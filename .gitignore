@@ -137,4 +137,5 @@ $RECYCLE.BIN/
 
 ### Gatsby ###
 public
-.cache
+.cache/
+src/gatsby-types.d.ts

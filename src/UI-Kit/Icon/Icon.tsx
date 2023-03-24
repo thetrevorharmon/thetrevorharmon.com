@@ -1,8 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
-import * as styles from './Icon.module.scss';
 import {expand, link, rss, star, twitter} from './icons';
 import {IconName} from './types';
 
@@ -10,6 +8,7 @@ interface IconProps {
   className?: string;
   name: IconName;
   size: 'small' | 'normal' | 'large';
+  color?: 'text' | 'primary';
 }
 
 // Disabling object-literal-shorthand because otherwise
@@ -23,18 +22,23 @@ const mapping: {[name in IconName]: React.SVGFactory} = {
   twitter: twitter,
 };
 
-export const Icon = ({className, name, size}: IconProps) => {
+const sizes = {
+  small: 'Icon-Small',
+  normal: 'Icon-Normal',
+  large: 'Icon-Large',
+};
+
+const colors = {
+  text: 'Icon-Text',
+  primary: 'Icon-Primary',
+};
+
+export const Icon = ({className, name, color = 'text', size}: IconProps) => {
   if (!(name in mapping)) {
     throw new Error('Icon name not found!');
   }
 
-  const theme = useTheme();
-  const classname = classnames(
-    styles.Icon,
-    styles[`Icon-${theme}`],
-    styles[`Icon-${size}`],
-    className,
-  );
+  const classname = classnames('Icon', sizes[size], colors[color], className);
 
   const Tag = mapping[name];
 

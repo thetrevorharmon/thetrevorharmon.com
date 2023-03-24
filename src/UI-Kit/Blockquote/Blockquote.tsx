@@ -1,8 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../context/ThemeContext';
-import * as styles from './Blockquote.module.scss';
+import {Breakout} from '../Breakout';
 
 interface BlockquoteProps {
   children: React.ReactNode;
@@ -10,8 +9,11 @@ interface BlockquoteProps {
 }
 
 export const Blockquote = ({children, className}: BlockquoteProps) => {
-  const theme = useTheme();
-  const classname = classnames(className, styles[`Blockquote-${theme}`]);
+  const classname = classnames(className, 'Blockquote');
 
-  return <blockquote className={classname}>{children}</blockquote>;
+  return (
+    <Breakout>
+      <blockquote className={classname}>{children}</blockquote>
+    </Breakout>
+  );
 };

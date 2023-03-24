@@ -1,66 +1,3 @@
-@import 'foundation';
-@import 'ui-kit-mixins';
-
-@function code-color($theme, $name) {
-  @if ($theme != 'Light' and $theme != 'Dark') {
-    @error 'You must pass in either Light or Dark as the theme';
-  }
-
-  $colors: (
-    code-background: (
-      Light: color(Light, caption-bg),
-      Dark: color(Dark, caption-bg),
-    ),
-    code-border: (
-      Light: darken(color(Light, caption-bg), 15%),
-      Dark: lighten(color(Dark, caption-bg), 25%),
-    ),
-    pre-background: (
-      Light: color(Light, caption-bg),
-      Dark: color(Dark, caption-bg),
-    ),
-    pre-border: (
-      Light: darken(#111, 5%),
-      Dark: darken(#111, 5%),
-    ),
-    selection: (
-      Light: darken(color(Light, caption-bg), 10%),
-      Dark: lighten(color(Dark, caption-bg), 50%),
-    ),
-    keyword: (
-      Light: #a4599d,
-      Dark: #beaaf9,
-    ),
-    string: (
-      Light: #679d5c,
-      Dark: #c1e38a,
-    ),
-    punctuation: (
-      Light: darken(color(Light, text), 20%),
-      Dark: darken(color(Dark, text), 20%),
-    ),
-    class: (
-      Light: #32888d,
-      Dark: #70cde3,
-    ),
-    comment: (
-      Light: #999988,
-      Dark: #999988,
-    ),
-    function: (
-      Light: #bb5131,
-      Dark: #fcd58b,
-    ),
-    tag: (
-      Light: #828eff,
-      Dark: #828eff,
-    ),
-  );
-
-  $selected-color-map: map-get($colors, $name);
-  @return map-get($selected-color-map, $theme);
-}
-
 /**
  * GHColors theme by Avi Aryan (http://aviaryan.in)
  * Inspired by Github syntax coloring
@@ -68,7 +5,8 @@
 
 code[class*='language-'],
 pre[class*='language-'] {
-  // font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  font-family: 'PT Mono', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier New',
+    Courier, monospace;
   direction: ltr;
   text-align: left;
   word-spacing: normal;
@@ -80,60 +18,51 @@ pre[class*='language-'] {
   tab-size: 4;
   hyphens: none;
 
-  white-space: pre;
-  @include on-small-screens {
+  @screen mobile {
     white-space: pre-wrap;
   }
-}
 
-@mixin SyntaxHighlighting($theme) {
-  .#{$theme} {
-    code[class*='language-'] {
-      color: lighten(color($theme, text-bold), 10%);
-
-      background-color: code-color($theme, code-background);
-      border: 1px solid code-color($theme, code-border);
-
-      &::selection,
-      & ::selection {
-        background: code-color($theme, selection);
-      }
-    }
-
-    pre[class*='language-'],
-    pre[class*='language-'] > code[class*='language'] {
-      & > code[class*='language-'] {
-        background-color: transparent;
-        border-color: transparent;
-      }
-
-      color: lighten(color($theme, text-bold), 10%);
-
-      background-color: code-color($theme, pre-background);
-
-      &::selection,
-      & ::selection {
-        background: code-color($theme, selection);
-      }
-    }
+  @screen desktop {
+    white-space: pre;
   }
 }
 
-@include SyntaxHighlighting(Light);
-@include SyntaxHighlighting(Dark);
+code[class*='language-'],
+pre[class*='language-'],
+pre[class*='language-'] > code[class*='language'] {
+  @apply text-[#3b3b3b] dark:text-[#f0f0f0];
+
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+  @apply border border-[#ddd] dark:border-[#555];
+
+  &::selection,
+  & ::selection {
+    @apply bg-[#d8d8d8] dark:bg-[#888888];
+  }
+}
+
+pre[class*='language-'],
+pre[class*='language-'] > code[class*='language'] {
+  & > code[class*='language-'] {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
 
 /* Code blocks */
 pre[class*='language-'] {
-  @include Breakout;
+  @apply Breakout;
 
-  padding: space(medium) $breakout-amount;
+  @apply py-medium my-normal;
 
-  @include on-small-screens {
-    padding: space(medium) $container-base-padding;
+  @screen mobile {
+    @apply px-container-base;
   }
 
-  margin-top: space(normal);
-  margin-bottom: space(normal);
+  @screen desktop {
+    @apply px-breakout;
+  }
+
   overflow: auto;
 
   code {
@@ -153,6 +82,7 @@ pre[class*='language-'] {
   &.doctype,
   &.cdata {
     font-style: italic;
+    @apply text-[#999998];
   }
 
   &.namespace {
@@ -167,124 +97,47 @@ pre[class*='language-'] {
   &.italic {
     font-style: italic;
   }
-}
 
-.Light {
-  .token {
-    &.comment,
-    &.prolog,
-    &.doctype,
-    &.cdata {
-      color: code-color(Light, comment);
-    }
-
-    &.class-name {
-      color: code-color(Light, class);
-    }
-
-    &.string,
-    &.attr-value {
-      color: code-color(Light, string);
-    }
-
-    &.punctuation {
-      color: code-color(Light, punctuation);
-    }
-
-    &.operator {
-      color: code-color(Light, keyword);
-    }
-
-    &.entity,
-    &.url,
-    &.symbol,
-    &.number,
-    &.boolean,
-    &.variable,
-    &.constant,
-    &.property,
-    &.regex,
-    &.inserted {
-      color: code-color(Light, class);
-    }
-
-    &.atrule,
-    &.keyword,
-    &.attr-name,
-    .language-autohotkey &.selector {
-      color: code-color(Light, keyword);
-    }
-
-    &.function,
-    &.deleted,
-    .language-autohotkey &.tag {
-      color: code-color(Light, function);
-    }
-
-    &.tag,
-    &.selector,
-    .language-autohotkey &.keyword {
-      color: code-color(Light, tag);
-    }
+  &.string,
+  &.attr-value {
+    @apply text-[#679d5c] dark:text-[#c1e38a];
   }
-}
 
-.Dark {
-  .token {
-    &.comment,
-    &.prolog,
-    &.doctype,
-    &.cdata {
-      color: code-color(Dark, comment);
-    }
+  &.punctuation {
+    @apply text-[#363636] dark:text-[#b1b1b1];
+  }
 
-    &.class-name {
-      color: code-color(Dark, class);
-    }
+  &.entity,
+  &.url,
+  &.symbol,
+  &.number,
+  &.boolean,
+  &.variable,
+  &.constant,
+  &.property,
+  &.regex,
+  &.inserted,
+  &.class-name {
+    @apply text-[#32888d] dark:text-[#70cde3];
+  }
 
-    &.string,
-    &.attr-value {
-      color: code-color(Dark, string);
-    }
+  &.atrule,
+  &.keyword,
+  &.attr-name,
+  &.operator,
+  .language-autohotkey &.selector {
+    @apply text-[#a4599d] dark:text-[#beaaf9];
+  }
 
-    &.punctuation {
-      color: code-color(Dark, punctuation);
-    }
+  &.function,
+  &.deleted,
+  .language-autohotkey &.tag {
+    @apply text-[#bb5131] dark:text-[#fcd58b];
+  }
 
-    &.operator {
-      color: code-color(Dark, keyword);
-    }
-
-    &.entity,
-    &.url,
-    &.symbol,
-    &.number,
-    &.boolean,
-    &.variable,
-    &.constant,
-    &.property,
-    &.regex,
-    &.inserted {
-      color: code-color(Dark, class);
-    }
-
-    &.atrule,
-    &.keyword,
-    &.attr-name,
-    .language-autohotkey &.selector {
-      color: code-color(Dark, keyword);
-    }
-
-    &.function,
-    &.deleted,
-    .language-autohotkey &.tag {
-      color: code-color(Dark, function);
-    }
-
-    &.tag,
-    &.selector,
-    .language-autohotkey &.keyword {
-      color: code-color(Dark, tag);
-    }
+  &.tag,
+  &.selector,
+  .language-autohotkey &.keyword {
+    @apply text-[#828eff];
   }
 }

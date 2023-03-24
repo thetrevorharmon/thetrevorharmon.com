@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {Header, Spacer, TextStyle} from '../../../../UI-Kit';
-import * as styles from './FormSuccess.module.scss';
+import {Header, TextStyle} from '../../../../UI-Kit';
 
 interface FormSuccessProps {
   name: string;
@@ -14,15 +13,13 @@ export const FormSuccess = ({name}: FormSuccessProps) => {
   };
 
   return (
-    <div className={styles.FormSuccess}>
-      <Spacer size="tiny">
-        <Header rank={3} type="Heading">
-          {strings.heading}
-        </Header>
-        <p>
-          <TextStyle style="Body">{strings.body}</TextStyle>
-        </p>
-      </Spacer>
+    <div className="flex h-full flex-col justify-center text-center space-y-tiny">
+      <Header rank={3} type="Heading">
+        {strings.heading}
+      </Header>
+      <p>
+        <TextStyle style="Body">{strings.body}</TextStyle>
+      </p>
     </div>
   );
 };

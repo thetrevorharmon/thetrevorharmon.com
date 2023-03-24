@@ -1,16 +1,23 @@
-import classnames from 'classnames';
 import * as React from 'react';
-
-import * as styles from './TextStyle.module.scss';
-import {TextStyle as TextStyleOption} from './types';
 
 interface TextStyleProps {
   children: React.ReactNode;
-  style: TextStyleOption;
+  style: TextStyle;
 }
 
-export const TextStyle = ({children, style}: TextStyleProps) => {
-  const classname = classnames(styles.TextStyle, styles[`TextStyle-${style}`]);
+const textStyles: {[key in TextStyle]: string} = {
+  Display: 'Text-Display',
+  Title: 'Text-Title',
+  Blockquote: 'Text-Blockquote',
+  Heading: 'Text-Heading',
+  Subheading: 'Text-Subheading',
+  Body: 'Text-Body',
+  Label: 'Text-Label',
+  Meta: 'Text-Meta',
+  Caption: 'Text-Caption',
+  Button: 'Text-Button',
+};
 
-  return <span className={classname}>{children}</span>;
+export const TextStyle = ({children, style}: TextStyleProps) => {
+  return <span className={textStyles[style]}>{children}</span>;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Header, Spacer, TextStyle} from '../../../../UI-Kit';
+import {Header, TextStyle} from '../../../../UI-Kit';
 
 interface FormHeaderProps {
   title: string;
@@ -9,11 +9,11 @@ interface FormHeaderProps {
 
 export const FormHeader = ({title, tagline}: FormHeaderProps) => {
   return (
-    <Spacer size="tiny">
+    <div className="space-y-tiny">
       <Header rank={3} type="Heading">
         {title}
       </Header>
       <TextStyle style="Body">{tagline}</TextStyle>
-    </Spacer>
+    </div>
   );
 };

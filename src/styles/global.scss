@@ -1,46 +1,134 @@
-@import 'foundation';
-@import 'fonts';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-hr {
-  border: 0px solid;
-  height: 1px;
-}
+@import './typography';
+@import './components';
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  padding: 0;
-  margin: 1em 0 0.3em;
-}
+html {
+  @screen base {
+    font-size: 16px;
+  }
 
-p {
-  padding: 0;
-  margin: 0.5rem 0 1rem;
+  @screen collapsed {
+    font-size: 15px;
+  }
 }
 
 body {
-  @media (prefers-color-scheme: dark) {
-    background-color: color(Dark, body-bg);
+  @media (prefers-color-scheme: light) {
+    background-color: theme('colors.body-bg');
   }
 
-  @media (prefers-color-scheme: light) {
-    background-color: color(Light, body-bg);
+  @media (prefers-color-scheme: dark) {
+    background-color: theme('colors.body-bg-dark');
   }
 }
 
-@mixin Body($theme) {
-  body.#{$theme} {
-    color: color($theme, text);
-    background-color: color($theme, body-bg);
+body.light {
+  color: theme('colors.text');
+  background-color: theme('colors.body-bg');
+}
 
-    hr {
-      background: color($theme, accent-line);
+body.dark {
+  color: theme('colors.text-dark');
+  background-color: theme('colors.body-bg-dark');
+}
+
+.body-styles {
+  @apply text-text dark:text-text-dark;
+
+  a {
+    @apply Link;
+  }
+
+  a.Muted {
+    @apply Link-Muted;
+  }
+
+  img {
+    @apply bg-caption-bg dark:bg-caption-bg-dark;
+  }
+
+  h2,
+  h3 {
+    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
+  }
+
+  h2 {
+    @apply mt-large mb-small;
+    @apply Text-Heading;
+  }
+
+  h3 {
+    @apply mt-medium mb-small;
+    @apply Text-Subheading;
+  }
+
+  p {
+    @apply my-small;
+  }
+
+  img {
+    margin-top: theme('space.little');
+    margin-bottom: theme('space.little');
+
+    /* 0px */
+    @screen base {
+      width: calc(100% + 50px);
+    }
+
+    /* ~560px */
+    @screen collapsed {
+      width: 100%;
+    }
+
+    /* ~640px */
+    @screen expanded {
+      width: theme('screens.expanded');
     }
   }
-}
 
-@include Body(Light);
-@include Body(Dark);
+  ul,
+  ol {
+    margin-left: 0;
+    padding-left: 0;
+
+    counter-reset: list-counter;
+
+    list-style-type: none;
+
+    li {
+      position: relative;
+      padding-left: theme('space.medium');
+      margin-bottom: theme('space.little');
+
+      counter-increment: list-counter;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        content: counter(list-counter) '.';
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        @apply uppercase font-black italic;
+      }
+    }
+  }
+
+  ul li {
+    &:before {
+      content: '→';
+      font-style: normal;
+    }
+  }
+
+  blockquote {
+    @apply Blockquote;
+    @apply Breakout;
+  }
+}

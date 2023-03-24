@@ -8,5 +8,4 @@ export {Image} from './Image';
 export {Input} from './Input';
 export {Link} from './Link';
 export {Meta, MetaProps} from './Meta';
-export {Spacer, Space} from './Spacer';
 export {TextStyle} from './TextStyle';

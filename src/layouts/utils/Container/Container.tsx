@@ -1,11 +1,13 @@
 import React from 'react';
 
-import * as styles from './Container.module.scss';
-
 interface ContainerProps {
   children: React.ReactNode;
 }
 
 export const Container = ({children}: ContainerProps) => {
-  return <div className={styles.Container}>{children}</div>;
+  return (
+    <div className="px-container-base min-[590px]:px-0 max-w-container mx-auto">
+      {children}
+    </div>
+  );
 };

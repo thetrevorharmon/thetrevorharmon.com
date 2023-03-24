@@ -1,25 +1,34 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {useTheme} from '../../../../context/ThemeContext';
-import {Header, Link, Space, Spacer} from '../../../../UI-Kit';
-import * as styles from './PostFooter.module.scss';
+import {Header, Link} from '../../../../UI-Kit';
 import {LinkDatePair, PostFooterProps} from './types';
 
 export const PostFooter = ({title, getFullLink, data}: PostFooterProps) => {
-  const theme = useTheme();
-
   if (data.length < 1) {
     return null;
   }
 
   const makePairMarkup = ({link: {slug, label}, date}: LinkDatePair) => {
     return (
-      <div className={styles.Pair} key={label}>
-        <Link className={styles.Link} url={getFullLink(slug)}>
+      <div className="flex flex-col desktop:flex-row w-full" key={label}>
+        <Link
+          className={classnames(
+            'mr-0 desktop:mr-normal',
+            'whitespace-pre-wrap desktop:whitespace-nowrap',
+            'overflow-hidden text-ellipsis',
+            'box-border max-w-full',
+          )}
+          url={getFullLink(slug)}
+        >
           {label}
         </Link>
-        <span className={classnames([styles.Date, styles[`Date-${theme}`]])}>
+        <span
+          className={classnames(
+            'ml-0 desktop:ml-auto shrink-0',
+            'text-text-muted dark:text-text-muted-dark',
+          )}
+        >
           {date}
         </span>
       </div>
@@ -29,15 +38,11 @@ export const PostFooter = ({title, getFullLink, data}: PostFooterProps) => {
   const markup = data.map(makePairMarkup);
 
   return (
-    <div className={styles.PostFooter}>
-      <Spacer>
-        <Space size="large" />
-        <Header rank={2} type="Heading">
-          {title}
-        </Header>
-        <Space size="small" />
-        <Spacer size="little">{markup}</Spacer>
-      </Spacer>
+    <div className="space-y-small my-large w-full">
+      <Header rank={2} type="Heading">
+        {title}
+      </Header>
+      <div className="space-y-small">{markup}</div>
     </div>
   );
 };

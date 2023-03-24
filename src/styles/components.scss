@@ -1,0 +1,167 @@
+@layer components {
+  .Link {
+    @apply underline;
+    @apply transition duration-100;
+
+    //// Normal
+    // text color
+    @apply text-primary-text dark:text-primary-text-dark;
+    @apply hover:text-primary-text-focus hover:dark:text-primary-text-focus-dark;
+    @apply focus:text-primary-text-focus focus:dark:text-primary-text-focus;
+
+    // icon fill color
+    @apply fill-primary-text dark:fill-primary-text-dark;
+    @apply hover:fill-primary-text-focus hover:dark:fill-primary-text-focus-dark;
+    @apply focus:fill-primary-text-focus focus:dark:fill-primary-text-focus;
+  }
+
+  .Link-Muted {
+    // text color
+    @apply text-text-muted dark:text-text-muted-dark;
+    @apply hover:text-text hover:dark:text-text-dark;
+    @apply focus:text-text focus:dark:text-text;
+
+    // icon fill color
+    @apply fill-text-muted dark:fill-text-muted-dark;
+    @apply hover:fill-text hover:dark:fill-text-dark;
+    @apply focus:fill-text focus:dark:fill-text;
+  }
+
+  .Icon {
+    @apply h-auto w-auto;
+  }
+
+  .Icon-Text {
+    @apply [&>svg]:fill-text dark:[&>svg]:fill-text-dark;
+    @apply [&>svg>*>path]:fill-text dark:[&>svg>*>path]:fill-text-dark;
+    @apply [&>svg>*>polygon]:fill-text dark:[&>svg>*>polygon]:fill-text-dark;
+  }
+
+  .Icon-Primary {
+    @apply [&>svg]:fill-primary dark:[&>svg]:fill-primary-dark;
+    @apply [&>svg>*>path]:fill-primary dark:[&>svg>*>path]:fill-primary-dark;
+    @apply [&>svg>*>polygon]:fill-primary dark:[&>svg>*>polygon]:fill-primary-dark;
+  }
+
+  .Icon-Small {
+    @apply max-h-[14px];
+    @apply max-w-[14px];
+    @apply [&>svg]:max-h-[14px];
+    @apply [&>svg]:max-w-[14px];
+  }
+
+  .Icon-Normal {
+    @apply max-h-[17px];
+    @apply max-w-[17px];
+    @apply [&>svg]:max-h-[17px];
+    @apply [&>svg]:max-w-[17px];
+  }
+
+  .Icon-Large {
+    @apply max-h-[25px];
+    @apply max-w-[25px];
+    @apply [&>svg]:max-h-[25px];
+    @apply [&>svg]:max-w-[25px];
+  }
+
+  .Button {
+    @apply Text-Button;
+
+    @apply bg-primary dark:bg-primary-dark;
+    @apply text-white;
+    @apply inline-block py-small px-normal leading-[1];
+
+    @apply focus:bg-primary-focus focus:dark:bg-primary-focus-dark;
+    @apply hover:bg-primary-focus hover:dark:bg-primary-focus-dark;
+
+    @apply transition duration-200;
+
+    // remove underlines when using this with an <a />
+    @apply no-underline;
+
+    // remove default <button /> styling
+    @apply border-0 border-none bg-none hover:cursor-pointer;
+  }
+
+  .Breakout {
+    @apply -mx-container-base;
+    @apply desktop:mx-0;
+    @apply expanded:-mx-breakout;
+  }
+
+  .Blockquote {
+    @apply Text-Blockquote;
+
+    @apply -tracking-[0.5px] font-black italic;
+
+    @apply pt-normal pr-normal pb-normal pl-big;
+    @apply desktop:pt-big desktop:pr-big desktop:pb-big desktop:pl-large;
+
+    @apply relative leading-[1.5];
+
+    @apply text-text-bold dark:text-text-bold-dark;
+    @apply bg-caption-bg dark:bg-caption-bg-dark;
+
+    > * {
+      @apply p-0 m-0;
+    }
+
+    &::before {
+      content: '';
+
+      @apply h-[10px] w-[14px];
+
+      @apply bg-quote dark:bg-quote-dark;
+      @apply bg-center bg-no-repeat;
+
+      @apply text-primary mr-little;
+
+      @apply absolute;
+
+      @apply top-[1.9rem] left-[1.1rem];
+      @apply desktop:top-[3.3rem] desktop:left-[2.3rem];
+    }
+  }
+
+  .Attribution {
+    @apply text-text-muted dark:text-text-dark;
+  }
+
+  .Attribution-Photo {
+    @apply Text-Caption;
+    @apply mt-tiny text-center;
+  }
+
+  .Attribution-Article {
+    @apply Text-Body;
+    @apply italic;
+  }
+
+  .Meta {
+    @apply Text-Meta;
+
+    @apply block;
+    @apply text-text-muted dark:text-text-muted-dark;
+    @apply fill-text-muted dark:fill-text-muted-dark;
+  }
+
+  .Input {
+    @apply appearance-none;
+    @apply border;
+    @apply border-text-muted dark:border-text-muted-dark;
+
+    @apply rounded-none;
+
+    @apply text-text dark:text-text-dark;
+
+    @apply bg-body-bg dark:bg-body-bg-dark;
+
+    @apply placeholder:text-text-muted dark:placeholder:text-text-muted-dark;
+    @apply focus:border-text-bold dark:focus:border-text-bold-dark;
+
+    @apply px-normal;
+
+    @apply leading-[45px] h-[45px];
+    @apply box-border;
+  }
+}
