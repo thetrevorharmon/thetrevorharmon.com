@@ -5,6 +5,10 @@
 @import './typography';
 @import './components';
 
+@supports (font-variation-settings: normal) {
+  @import '~@fontsource/inter/variable-full.css';
+}
+
 html {
   @screen base {
     font-size: 16px;
