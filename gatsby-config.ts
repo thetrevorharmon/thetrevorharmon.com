@@ -63,13 +63,6 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [`Inter`, `PT Mono:400`],
-        display: 'swap',
-      },
-    },
-    {
       resolve: `gatsby-plugin-sass`,
       options: {
         postCssPlugins: [require('tailwindcss')],
