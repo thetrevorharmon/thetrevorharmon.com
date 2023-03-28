@@ -1,6 +1,6 @@
 export interface MetaProps {
   className?: string;
-  date?: Date;
+  date?: Date | string;
   isLinkPost?: boolean;
   timeToRead?: string;
   client?: string;
