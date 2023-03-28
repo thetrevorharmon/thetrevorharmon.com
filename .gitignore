@@ -139,3 +139,4 @@ $RECYCLE.BIN/
 public
 .cache/
 src/gatsby-types.d.ts
+.schema-type-definitions
