@@ -120,10 +120,12 @@ exports.createPages = ({graphql, actions}) => {
           .split('/')
           .slice(-1)
           .pop()
-          .split('.mdx')[0];
+          .split(/\.mdx?/)[0];
 
         if (fileName !== node.slug) {
-          throw new Error('Slug and file name must match');
+          throw new Error(
+            `Slug and file name must match\n${fileName}\n${slug}`,
+          );
         }
 
         const articlePath = path.resolve(`./src/templates/Article.tsx`);
