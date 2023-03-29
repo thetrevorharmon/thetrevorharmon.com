@@ -76,6 +76,10 @@ const config: GatsbyConfig = {
               withWebp: true,
             },
           },
+          `gatsby-remark-prismjs`,
+          // this is to handle inline gifs
+          // https://github.com/gatsbyjs/gatsby/issues/7317#issuecomment-412984851
+          `gatsby-remark-copy-linked-files`,
         ],
       },
     },
