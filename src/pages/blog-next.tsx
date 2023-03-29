@@ -1,15 +1,13 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedPostItem, PostItem} from '../components';
+import {FeaturedMdxItem, PostMdxItem} from '../components';
 import {Layout} from '../layouts';
-import {BlogPost, LinkPost} from '../types';
-import {Header, Link, Meta, TextStyle} from '../UI-Kit';
-import {Helpers, Routes} from '../utils';
+import {Header, TextStyle} from '../UI-Kit';
+import {Routes} from '../utils';
 
 interface Props {
-  data: Queries.blogNextPageQueryQuery;
+  data: Queries.BlogPageNextQuery;
 }
 
 export default ({data}: Props) => {
@@ -19,7 +17,7 @@ export default ({data}: Props) => {
     url: Routes.blog(),
   };
 
-  const posts = data.allMdx.nodes;
+  const [featuredPost, ...posts] = data.allMdx.nodes;
 
   return (
     <Layout pageMetadata={pageMetadata}>
@@ -34,29 +32,12 @@ export default ({data}: Props) => {
         </div>
 
         <div className="space-y-large">
-          {/* <FeaturedPostItem post={featuredPost} /> */}
-          {posts.map((post) => (
-            <div className="space-y-normal">
-              <div className="space-y-small">
-                <div className="space-y-tiny">
-                  <Header rank={2} type="Heading">
-                    {post.title}
-                  </Header>
-                  <Meta
-                    date={post.date ?? ''}
-                    timeToRead={String(post.timeToRead?.minutes ?? '')}
-                  />
-                </div>
-                <p>
-                  <TextStyle style="Body">{post.description}</TextStyle>
-                </p>
-              </div>
-
-              <Link url={Routes.blogPostNext(post.slug!)} className="block">
-                Continue Reading →
-              </Link>
-            </div>
-          ))}
+          <FeaturedMdxItem node={featuredPost} />
+          {posts.map(
+            (post: Queries.BlogPageNextQuery['allMdx']['nodes'][number]) => (
+              <PostMdxItem node={post} />
+            ),
+          )}
         </div>
       </div>
     </Layout>
@@ -64,12 +45,10 @@ export default ({data}: Props) => {
 };
 
 export const query = graphql`
-  query blogNextPageQuery {
-    allMdx(sort: {date: DESC}, filter: {type: {ne: "Project"}}) {
+  query BlogPageNext {
+    allMdx(sort: {date: DESC}, filter: {type: {eq: "Post"}}) {
       nodes {
-        timeToRead {
-          minutes
-        }
+        timeToRead
         slug
         title
         description
@@ -77,7 +56,9 @@ export const query = graphql`
         date(formatString: "DD MMM YYYY")
         image {
           source {
-            id
+            childImageSharp {
+              gatsbyImageData(width: 800)
+            }
           }
           alt
           attribution {

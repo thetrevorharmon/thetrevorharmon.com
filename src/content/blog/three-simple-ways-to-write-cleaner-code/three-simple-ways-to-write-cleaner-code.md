@@ -2,6 +2,7 @@
 title: Three Simple Ways to Write Cleaner Code
 slug: three-simple-ways-to-write-cleaner-code
 date: 2019-04-23T09:49-07:00
+type: Post
 description: >-
   Three practices you can start today that will make your code more readable now
   and easier to understand in the future.
@@ -14,7 +15,7 @@ image:
     sourceUrl: https://unsplash.com/photos/FCHlYvR5gJI
 ---
 
-I've been reviewing a lot of code lately and have seen some good and not-so-good practices. There is code that works, and then there is code that works  _and_ reads well. Here are three easy ways to write cleaner, more readable code.
+I've been reviewing a lot of code lately and have seen some good and not-so-good practices. There is code that works, and then there is code that works _and_ reads well. Here are three easy ways to write cleaner, more readable code.
 
 ## 1. Learn and Follow Conventions
 
@@ -24,7 +25,7 @@ Never mix case unless there is absolutely no other choice. Mixing case makes the
 
 In addition to language conventions, follow codebase conventions. There are cases where previous developers have made deliberate decisions about naming things. For example:
 
-- You're working on an API client that grabs data and displays it. The client is written in Javascript (typically camel cased) but the data from the API is  exclusively `snake_cased`. You might make the conscious choice to use snake casing with data that comes back from the API for consistency.
+- You're working on an API client that grabs data and displays it. The client is written in Javascript (typically camel cased) but the data from the API is exclusively `snake_cased`. You might make the conscious choice to use snake casing with data that comes back from the API for consistency.
 - You're working on a marketing site for a large company. You might choose to follow the [BEM naming conventions][4] in order to provide a stronger convention in your CSS (BEM includes underscores in classnames instead of just dashes).
 
 ## 2. Use Whitespace
@@ -32,7 +33,11 @@ In addition to language conventions, follow codebase conventions. There are case
 Many languages let you be liberal with whitespace (even whitespace delimited languages like Python). Before making a pull request, look at your code and see if a little spacing could make it easier to read. For example, the code that renders my "TH" top left link:
 
 ```typescript
-<Button href={Routes.home()} className={classnames(styles.Brand, 'global-brand')} noStyling={true}>
+<Button
+  href={Routes.home()}
+  className={classnames(styles.Brand, 'global-brand')}
+  noStyling={true}
+>
   TH
 </Button>
 ```
@@ -42,10 +47,7 @@ I wouldn't say that code is bad, but depending on how wide your editor is, it co
 ```typescript
 <Button
   href={Routes.home()}
-  className={classnames(
-    styles.Brand,
-    'global-brand',
-  )}
+  className={classnames(styles.Brand, 'global-brand')}
   noStyling={true}
 >
   TH

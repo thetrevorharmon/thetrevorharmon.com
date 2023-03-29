@@ -2,6 +2,7 @@
 title: Email signup forms with Gatsby and Mailchimp
 slug: email-signup-forms-with-gatsby-and-mailchimp
 date: 2019-07-24T10:36-07:00
+type: Post
 description: A simple tutorial, some sample code, and–you guessed it–a signup form.
 image:
   source: ./A-row-of-six-mailboxes-in-front-of-a-bush.jpg
@@ -12,9 +13,9 @@ image:
     sourceUrl: https://unsplash.com/photos/fb7yNPbT0l8
 ---
 
-If you're using Gatsby to power your blog, chances are that you need an easy way for others to sign up for your posts. While some choose to offer their content through RSS or Twitter, one of the most reliable ways to make sure that your content gets in front of the eyes of your audience is by building an email list. Thanks to [benjaminhoffman][2] (and other contributors), setting up an email list signup within Gatsby is a breeze. In the article, I'll walk you step by step (and provide sample code!) to creating a Mailchimp signup form for Gatsby. 
+If you're using Gatsby to power your blog, chances are that you need an easy way for others to sign up for your posts. While some choose to offer their content through RSS or Twitter, one of the most reliable ways to make sure that your content gets in front of the eyes of your audience is by building an email list. Thanks to [benjaminhoffman][2] (and other contributors), setting up an email list signup within Gatsby is a breeze. In the article, I'll walk you step by step (and provide sample code!) to creating a Mailchimp signup form for Gatsby.
 
-*Note: this article assumes that you've already [signed up for a Mailchimp account][3]. If you haven't, you should go do that and come back to this.*
+_Note: this article assumes that you've already [signed up for a Mailchimp account][3]. If you haven't, you should go do that and come back to this._
 
 ## Find your Mailchimp form action
 
@@ -76,11 +77,10 @@ In your gatsby-config file, add the plugin with your Mailchimp endpoint. The str
 In order to have a functional signup form, we need a component! I've written a simple one for you to start with. Here's the code:
 
 ```javascript
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import * as styles from './EmailListForm.module.scss';
 
 const EmailListForm: React.FunctionComponent<{}> = () => {
-
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,7 +120,7 @@ It looks a little plain. Let's add some CSS to make it look more interesting:
 .EmailListForm {
   display: flex;
   flex-direction: column;
-  
+
   background: #f2f2f2;
   color: #2a2a2a;
 
@@ -150,19 +150,19 @@ It looks a little plain. Let's add some CSS to make it look more interesting:
 
   button {
     display: inline-block;
-    
+
     border: none;
     background-image: none;
-    background-color: #DD0505;
+    background-color: #dd0505;
     color: white;
 
     letter-spacing: 1px;
     transition: all 0.1s linear;
-    
+
     &:hover {
       cursor: pointer;
-      background: darken(#DD0505, 15%);
-    }    
+      background: darken(#dd0505, 15%);
+    }
   }
 }
 ```
@@ -187,10 +187,13 @@ declare module 'gatsby-plugin-mailchimp' {
   }
 
   export interface MailchimpFields {
-    [key: string]: string
+    [key: string]: string;
   }
 
-  function addToMailchimp(email: String, listFields?: MailchimpFields): Promise<MailchimpResponse>;
+  function addToMailchimp(
+    email: String,
+    listFields?: MailchimpFields,
+  ): Promise<MailchimpResponse>;
   export default addToMailchimp;
 }
 ```
@@ -206,18 +209,18 @@ import addToMailchimp from 'gatsby-plugin-mailchimp';
 And you're off to the races! Let's add `addToMailchimp` to our form submission handler:
 
 ```javascript
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    addToMailchimp(email)
-      .then((data) => {
-        alert(data.result);
-      })
-      .catch((error: Error) => {
-        // Errors in here are client side
-        // Mailchimp always returns a 200
-      });
-  };
+  addToMailchimp(email)
+    .then((data) => {
+      alert(data.result);
+    })
+    .catch((error: Error) => {
+      // Errors in here are client side
+      // Mailchimp always returns a 200
+    });
+};
 ```
 
 In this example, `addToMailchimp` returns a promise that you need to handle. It will only ever enter the `catch` of the promise if you don't reach Mailchimp at all. If you reach Mailchimp but encounter an error, they'll return a 200 and it's up to you to look inside of `data.result` to see if it was a success or failure.

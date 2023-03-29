@@ -2,6 +2,7 @@
 title: Sell things fast with Gatsby and Shopify
 slug: sell-things-fast-with-gatsby-and-shopify
 date: 2020-04-23T11:50-07:00
+type: Post
 description: A starting guide to building a lightning-fast Shopify store on Gatsby. ⚡
 image:
   source: ./Trevor-Harmon-speaking-to-a-group-of-people-at-Gatsby-Days-LA.jpg
@@ -95,13 +96,13 @@ If you were to model our simplified iPhone 11 Pro within Shopify it would look l
 
 - Product: iPhone 11 Pro
 - Options:
-	- Size: Normal, Max
-	- Color: Silver, Gold
+  - Size: Normal, Max
+  - Color: Silver, Gold
 - Variants:
-	- Normal Sized Silver iPhone 11 Pro
-	- Normal Sized Gold iPhone 11 Pro
-	- Max Sized Silver iPhone 11 Pro
-	- Max Sized Gold iPhone 11 Pro
+  - Normal Sized Silver iPhone 11 Pro
+  - Normal Sized Gold iPhone 11 Pro
+  - Max Sized Silver iPhone 11 Pro
+  - Max Sized Gold iPhone 11 Pro
 
 This model is important to understand because when interacting with products on an online store, _you are interacting with variants_. When you add an item to a cart, you are adding _a particular variant_ of that product to the cart, not the product itself. Inventory is associated with a variant, not a product.
 
@@ -188,9 +189,9 @@ You can see the computed title that describes all of the selected options, as we
 
 At this point, we're ready to start building our store in Gatsby. Gatsby has [an excellent article][17] on getting things working with Shopify, so I won't cover what's there in too much detail. At a high level:
 
-  - As we've seen, `gatsby-source-shopify` works just like every other source plugin
-  - You can pull in product data using Gatsby's StaticQuery or by using a page query
-  - You can get a list of products and generate pages based on those products
+- As we've seen, `gatsby-source-shopify` works just like every other source plugin
+- You can pull in product data using Gatsby's StaticQuery or by using a page query
+- You can get a list of products and generate pages based on those products
 
 If you want to explore an example of some of these concepts, check out the [index page][18] of the site I built for this talk.
 
@@ -202,11 +203,11 @@ After setting up my source plugin and getting the data into my Gatsby site, I've
 
 We've set up a store on Gatsby and we're getting data in, but how about getting data "out" and communicating with Shopify's servers? That's where the Shopify-provided [shopify-buy][20] plugin comes in. Shopify-buy is a javascript library that facilitates the connection between the Gatsby store and Shopify, and makes it easy to get a managed cart set up. Here are the most important functions that the plugin offers (for our use case):
 
-  - `buildClient`: This sets up the client object that connects to Shopify.
-  - `addLineItems`: This adds items to the cart by using the variant id.
-  - `removeLineItems`: This removes items from the cart.
-  - `fetch`: This fetches an existing checkout, to let you persist the cart for a user between visits.
-  - `checkout.webUrl`: This provides the url to the currently managed cart, and is where you send users when they want to checkout and complete their purchase.
+- `buildClient`: This sets up the client object that connects to Shopify.
+- `addLineItems`: This adds items to the cart by using the variant id.
+- `removeLineItems`: This removes items from the cart.
+- `fetch`: This fetches an existing checkout, to let you persist the cart for a user between visits.
+- `checkout.webUrl`: This provides the url to the currently managed cart, and is where you send users when they want to checkout and complete their purchase.
 
 The best way to manage the shopify-buy client object is by creating it once and sharing it throughout the application. I chose to do this with React Context, but you could do it with redux or other state managers. The React Context code that I wrote to manage the shopify-buy client is [on Github][21]. Here's what I'm doing in that file:
 
@@ -235,7 +236,6 @@ Now go sell things fast with Gatsby and Shopify!
 _P.S. This post is an adaptation of a talk I gave at Gatsby Days LA. You can see that talk on Gatsby's [YouTube channel][1]. If you came here looking for the slides for my talk, they're [on Google Slides][2]._
 
 _P.P.S. While I was buildling this, I realized that this was more complicated than I though it should be. **I'm releasing something soon** that will make this process much easier–follow me [on Twitter][25] or subscribe to my blog to find out about that when it comes out!_
-
 
 [1]: https://www.youtube.com/watch?v=tUtuGAFOjYI
 [2]: https://docs.google.com/presentation/d/e/2PACX-1vRW2cq1SarLP41OS5cCTIz9WKDLEUNftOCVnOlb7LLph1m0Bm_Eirs_8PLeVBbmW89Xk3NXXcBjMkKZ/pub?start=false&loop=false&delayms=3000

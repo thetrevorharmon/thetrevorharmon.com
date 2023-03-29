@@ -2,6 +2,7 @@
 title: 'Code IRL: Javascript closures'
 slug: code-irl-javascript-closures
 date: 2019-05-01T10:55-07:00
+type: Post
 description: A real world example of how to use Javascript closures to write better code.
 image:
   source: ./A-roll-of-raffle-tickets.jpg
@@ -19,11 +20,11 @@ Sometimes it's hard to find a real world example for certain code concepts. Here
 As a starter, a Javascript closure is a function that returns another function. The returned function can reference variables from the parent function, even if those variables are considered out of scope. As an example, look at this little function:
 
 ```javascript
-const makeAdder = function(startingNumber) {
-	return function(number) {
-		return number + startingNumber;
-	}
-}
+const makeAdder = function (startingNumber) {
+  return function (number) {
+    return number + startingNumber;
+  };
+};
 
 const myAdder = makeAdder(10);
 console.log(myAdder(2));
@@ -44,7 +45,7 @@ _If you want to read more on closures, [W3 Schools][1] and [MDN docs][2] both ha
 
 ## Filtering Tickets
 
-I was recently doing some array manipulation and needed to do some complex filtering. I had two arrays with tickets, and each ticket had an `id` and a  `number` property (representing different data). I needed a way to filter my `oldTickets` array to only include tickets found in my `newTickets` array. I chose to use the built in [Array .filter method][3] and iterate over the two arrays.
+I was recently doing some array manipulation and needed to do some complex filtering. I had two arrays with tickets, and each ticket had an `id` and a `number` property (representing different data). I needed a way to filter my `oldTickets` array to only include tickets found in my `newTickets` array. I chose to use the built in [Array .filter method][3] and iterate over the two arrays.
 
 _Note: I realize that the big O here is n², which is pretty inefficient. For what I was working on, that was ok._
 
@@ -52,24 +53,24 @@ Here's the starting code that I wrote in order to filter my arrays (included are
 
 ```javascript
 const oldTickets = [
-	{ id: 1, number: "2"},
-	{ id: 2, number: "3"}
+  {id: 1, number: '2'},
+  {id: 2, number: '3'},
 ];
 
-const newTickets = [
-	{ id: 1, number: "2"}
-];
+const newTickets = [{id: 1, number: '2'}];
 
 const tickets = oldTickets.filter((oldTicket) => {
-	const isOldTicketFound = newTickets.find((newTicket) => {
-		return oldTicket.id === newTicket.id && oldTicket.number === newTicket.number;	
-	});
-	
-	return isOldTicketFound;
+  const isOldTicketFound = newTickets.find((newTicket) => {
+    return (
+      oldTicket.id === newTicket.id && oldTicket.number === newTicket.number
+    );
+  });
+
+  return isOldTicketFound;
 });
 ```
 
-The `.filter` method expects a boolean to know if it should keep the current item or discard it. The `.find` method  looks in the `newTickets` array, checks if the current `oldTicket` is found, and returns `true` or `false` accordingly.
+The `.filter` method expects a boolean to know if it should keep the current item or discard it. The `.find` method looks in the `newTickets` array, checks if the current `oldTicket` is found, and returns `true` or `false` accordingly.
 
 _Note: both `.filter` and `.find` iterate over the tickets, which is where `oldTicket` and `newTicket` come from._
 
@@ -82,9 +83,11 @@ I started off by writing my closure function:
 ```javascript
 const makeTicketEqualityChecker = (oldTicket) => {
   return (newTicket) => {
-    return oldTicket.id === newTicket.id && oldTicket.number === newTicket.number;
-  }
-}
+    return (
+      oldTicket.id === newTicket.id && oldTicket.number === newTicket.number
+    );
+  };
+};
 ```
 
 This function takes in an argument of `oldTicket` and then returns a function. The inner function references `oldTicket` from the outer function, so it retains the original `oldTicket` argument for executing later.
@@ -95,15 +98,17 @@ After writing that closure, I could make use of it in my original filter functio
 
 ```javascript
 const tickets = oldTickets.filter((oldTicket) => {
-	const isEqualToOldTicket = makeTicketEqualityChecker(oldTicket);
+  const isEqualToOldTicket = makeTicketEqualityChecker(oldTicket);
 
-	const isOldTicketFound = newTickets.find((newTicket) => isEqualToOldTicket(newTicket));
-	
-	return isOldTicketFound;
+  const isOldTicketFound = newTickets.find((newTicket) =>
+    isEqualToOldTicket(newTicket),
+  );
+
+  return isOldTicketFound;
 });
 ```
 
-On line 2 I assign the return function of `ticketEqualityFactory` to  `isEqualToOldTicket`. By this point I've enclosed the value of `oldTicket` inside of `isEqualToOldTicket`. When I call `isEqualToOldTicket` in my `.find` function, it takes in the value of `newTicket`, compares it against the "saved" value of `oldTicket`, and returns if they are equal or not.
+On line 2 I assign the return function of `ticketEqualityFactory` to `isEqualToOldTicket`. By this point I've enclosed the value of `oldTicket` inside of `isEqualToOldTicket`. When I call `isEqualToOldTicket` in my `.find` function, it takes in the value of `newTicket`, compares it against the "saved" value of `oldTicket`, and returns if they are equal or not.
 
 [1]: https://www.w3schools.com/js/js_function_closures.asp
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures

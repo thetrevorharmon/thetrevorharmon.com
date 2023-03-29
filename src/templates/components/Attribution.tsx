@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from '../../UI-Kit';
 
 interface AttributionProps {
-  mdx: Queries.ArticleQuery['mdx'];
+  mdx: Mdx;
 }
 
 export const Attribution = ({mdx}: AttributionProps) => {

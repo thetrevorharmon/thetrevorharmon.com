@@ -80,6 +80,8 @@ const config: GatsbyConfig = {
           // this is to handle inline gifs
           // https://github.com/gatsbyjs/gatsby/issues/7317#issuecomment-412984851
           `gatsby-remark-copy-linked-files`,
+          // This unwraps the images and removes exterior dom elements like
+          // extra <span>s and <p>s
         ],
       },
     },
