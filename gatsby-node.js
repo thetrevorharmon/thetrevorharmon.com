@@ -49,6 +49,8 @@ exports.createPages = ({graphql, actions}) => {
             description
             link
             date
+            type
+            client
             image {
               source {
                 id
@@ -68,34 +70,34 @@ exports.createPages = ({graphql, actions}) => {
       }
     `).then((result) => {
       result.data.allMdx.nodes.forEach((node) => {
-        function enforceFields(node) {
-          const name = node.internal.contentFilePath;
+        const name = node.internal.contentFilePath;
 
-          class MissingFieldsError extends Error {
-            constructor(message) {
-              super(`${message}\n\n${name}`);
-            }
+        class NodeError extends Error {
+          constructor(message) {
+            super(`${message}\n\n${name}`);
           }
+        }
 
+        function enforcePostFields(node) {
           if (node.title == null || node.title == '') {
-            throw new MissingFieldsError(`Must include title`);
+            throw new NodeError(`Must include title`);
           }
 
           if (node.slug == null) {
-            throw new MissingFieldsError(`Must include slug`);
+            throw new NodeError(`Must include slug`);
           }
 
           if (node.description == null && node.link == null) {
-            throw new MissingFieldsError(`Must include description or link`);
+            throw new NodeError(`Must include description or link`);
           }
 
           if (node.date == null) {
-            throw new MissingFieldsError(`Must include date`);
+            throw new NodeError(`Must include date`);
           }
 
           if (node.image != null) {
             if (node.image.source == null || node.image.alt == null) {
-              throw new MissingFieldsError(
+              throw new NodeError(
                 `Must include source, alt if an image is passed`,
               );
             }
@@ -106,7 +108,7 @@ exports.createPages = ({graphql, actions}) => {
                 node.image.attribution.sourceName == null ||
                 node.image.attribution.sourceUrl == null
               ) {
-                throw new MissingFieldsError(
+                throw new NodeError(
                   `Must include author, sourceName, sourceUrl if an image attribution is passed`,
                 );
               }
@@ -114,7 +116,33 @@ exports.createPages = ({graphql, actions}) => {
           }
         }
 
-        enforceFields(node);
+        function enforceProjectFields(node) {
+          if (node.title == null || node.title == '') {
+            throw new NodeError(`Must include title`);
+          }
+
+          if (node.slug == null) {
+            throw new NodeError(`Must include slug`);
+          }
+
+          if (node.date == null) {
+            throw new NodeError(`Must include date`);
+          }
+
+          if (node.client == null) {
+            throw new NodeError(`Must include client`);
+          }
+
+          if (node.type !== 'Project') {
+            throw new NodeError(`Must format type to be exactly Project`);
+          }
+        }
+
+        if (node.type && node.type.toLowerCase() === 'project') {
+          enforceProjectFields(node);
+        } else {
+          enforcePostFields(node);
+        }
 
         const fileName = node.internal.contentFilePath
           .split('/')
@@ -216,6 +244,9 @@ exports.createSchemaCustomization = ({actions}) => {
       link: String @proxy(from: "frontmatter.link")
       date: Date @dateformat @proxy(from: "frontmatter.date")
       image: MdxFrontmatterImage @proxy(from: "frontmatter.image")
+
+      client: String @proxy(from: "frontmatter.client")
+      type: String @proxy(from: "frontmatter.type")
     }
   `);
 };

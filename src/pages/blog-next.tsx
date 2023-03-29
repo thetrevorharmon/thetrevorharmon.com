@@ -65,7 +65,7 @@ export default ({data}: Props) => {
 
 export const query = graphql`
   query blogNextPageQuery {
-    allMdx(sort: {date: DESC}) {
+    allMdx(sort: {date: DESC}, filter: {type: {ne: "Project"}}) {
       nodes {
         timeToRead {
           minutes
