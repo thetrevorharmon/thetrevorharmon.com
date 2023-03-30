@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const FeaturedMdxItem = ({node, className}: Props) => {
+export const FeaturedTile = ({node, className}: Props) => {
   const classname = classnames([
     'bg-caption-bg dark:bg-caption-bg-dark',
     'relative p-container-base desktop:p-big',
