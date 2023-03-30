@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Button, Header, Link, MetaNext} from '../UI-Kit';
+import {Button, Header, Link, Meta} from '../UI-Kit';
 import {FeaturedImage} from './components';
 import {Routes, useSiteData} from '../utils';
 
@@ -63,7 +63,7 @@ function Article({
         <Header rank={1} type="Title">
           {mdx.title}
         </Header>
-        <MetaNext
+        <Meta
           date={mdx.date}
           timeToRead={mdx.timeToRead}
           isLinkPost={mdx.link != null}

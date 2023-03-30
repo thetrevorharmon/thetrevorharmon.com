@@ -1,11 +1,30 @@
 import * as React from 'react';
 
+const headerStyles = [
+  'Display',
+  'Title',
+  'Blockquote',
+  'Heading',
+  'Subheading',
+] as const;
+
+const textStyles = [
+  ...headerStyles,
+  'Body',
+  'Label',
+  'Meta',
+  'Caption',
+  'Button',
+] as const;
+
+type TextStyle = (typeof textStyles)[number];
+
 interface TextStyleProps {
   children: React.ReactNode;
   style: TextStyle;
 }
 
-const textStyles: {[key in TextStyle]: string} = {
+const textStylesMap: {[key in TextStyle]: string} = {
   Display: 'Text-Display',
   Title: 'Text-Title',
   Blockquote: 'Text-Blockquote',
@@ -19,5 +38,5 @@ const textStyles: {[key in TextStyle]: string} = {
 };
 
 export const TextStyle = ({children, style}: TextStyleProps) => {
-  return <span className={textStyles[style]}>{children}</span>;
+  return <span className={textStylesMap[style]}>{children}</span>;
 };

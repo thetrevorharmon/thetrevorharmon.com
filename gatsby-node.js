@@ -12,36 +12,6 @@ exports.createPages = ({graphql, actions}) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allContentfulProject(sort: {projectCompletionDate: DESC}) {
-          nodes {
-            title
-            slug
-            projectCompletionDate(formatString: "DD MMM YYYY")
-            internal {
-              type
-            }
-          }
-        }
-        allContentfulBlogPost(sort: {date: DESC}) {
-          nodes {
-            title
-            slug
-            date(formatString: "DD MMM YYYY")
-            internal {
-              type
-            }
-          }
-        }
-        allContentfulLinkPost(sort: {date: DESC}) {
-          nodes {
-            title
-            slug
-            date(formatString: "DD MMM YYYY")
-            internal {
-              type
-            }
-          }
-        }
         allMdx {
           nodes {
             slug
@@ -156,11 +126,11 @@ exports.createPages = ({graphql, actions}) => {
         const articlePath =
           node.type === 'Post'
             ? path.resolve(`./src/templates/Article.tsx`)
-            : path.resolve(`./src/templates/ProjectNext.tsx`);
+            : path.resolve(`./src/templates/Project.tsx`);
         const contentPath = node.internal.contentFilePath;
         const component = `${articlePath}?__contentFilePath=${contentPath}`;
 
-        const pathPrefix = node.type === 'Post' ? 'blog-next' : 'projects-next';
+        const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
 
         const recommendedNodes = Utils.getRecommendedItems(
           node,
@@ -175,43 +145,6 @@ exports.createPages = ({graphql, actions}) => {
             recommendedReading: recommendedNodes,
           },
           component: component,
-        });
-      });
-
-      result.data.allContentfulProject.nodes.forEach((project, _, projects) => {
-        const recommendedProjects = Utils.getRecommendedItems(
-          project,
-          projects,
-          'projectCompletionDate',
-        );
-
-        createPage({
-          path: `projects/${project.slug}`,
-          component: path.resolve(
-            Utils.pathTemplateForPostType(project.internal.type),
-          ),
-          context: {
-            slug: project.slug,
-            recommendedProjects: recommendedProjects,
-          },
-        });
-      });
-
-      Utils.combinePostTypes(
-        result.data.allContentfulBlogPost.nodes,
-        result.data.allContentfulLinkPost.nodes,
-      ).forEach((post, _, posts) => {
-        const recommendedPosts = Utils.getRecommendedItems(post, posts, 'date');
-
-        createPage({
-          path: `blog/${post.slug}`,
-          component: path.resolve(
-            Utils.pathTemplateForPostType(post.internal.type),
-          ),
-          context: {
-            slug: post.slug,
-            recommendedPosts: recommendedPosts,
-          },
         });
       });
 

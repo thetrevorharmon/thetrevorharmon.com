@@ -1,5 +1,5 @@
 import React from 'react';
-import {Breakout, ImageNext} from '../../UI-Kit';
+import {Breakout, Image} from '../../UI-Kit';
 import {Attribution} from './Attribution';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function FeaturedImage({mdx}: Props) {
-  const image = <ImageNext src={mdx?.image} />;
+  const image = <Image src={mdx?.image} />;
 
   if (image == null) {
     return null;
