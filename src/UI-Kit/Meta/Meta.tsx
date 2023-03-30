@@ -11,26 +11,18 @@ export interface MetaProps {
   client?: string | null;
 }
 
-function getTimeToRead(timeToRead?: number | null) {
-  if (timeToRead == null) {
-    return null;
-  }
-
-  return timeToRead < 1 ? `1 min read` : `${Math.floor(+timeToRead)} min read`;
-}
-
 export const Meta = ({
   className,
   date,
   isLinkPost = false,
-  timeToRead,
+  timeToRead: timeToReadMinutes,
   client,
 }: MetaProps) => {
   const classname = classnames(className, 'Meta');
 
-  const meta = [date, getTimeToRead(timeToRead), client]
-    .filter(Boolean)
-    .join(' / ');
+  const timeToRead = timeToReadMinutes ? `${timeToReadMinutes} min read` : null;
+
+  const meta = [date, timeToRead, client].filter(Boolean).join(' / ');
   const icon = isLinkPost ? (
     <Icon
       name="link"
