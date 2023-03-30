@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import {PostMdxItem} from '../PostMdxItem';
+import {PostTile} from '../PostTile';
 import {Breakout, Icon, Image} from '../../UI-Kit';
 
 interface Props {
@@ -21,7 +21,7 @@ export const FeaturedTile = ({node, className}: Props) => {
       <div className={classname}>
         <div className="space-y-medium">
           <Image src={node.image} />
-          <PostMdxItem node={node} />
+          <PostTile node={node} />
         </div>
         <Icon
           name="star"

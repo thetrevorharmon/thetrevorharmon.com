@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostMdxItem} from '../components';
+import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Button, Header} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
@@ -35,7 +35,7 @@ export default ({data}: IndexPageProps) => {
       <div className="space-y-big">
         <FeaturedTile node={featuredPost} />
         {posts.map((post: Mdx) => (
-          <PostMdxItem node={post} />
+          <PostTile node={post} />
         ))}
       </div>
       <Button className="mt-big mb-large" url={Routes.blog()}>
