@@ -32,14 +32,7 @@ const config: GatsbyConfig = {
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          `gatsby-remark-prismjs`, // for code highlighting
-        ],
-      },
-    },
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {

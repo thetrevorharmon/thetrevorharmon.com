@@ -123,12 +123,9 @@ exports.createPages = ({graphql, actions}) => {
 
         enforceNodeFields(node);
 
-        const articlePath =
-          node.type === 'Post'
-            ? path.resolve(`./src/templates/Article.tsx`)
-            : path.resolve(`./src/templates/Project.tsx`);
+        const componentPath = path.resolve(`./src/templates/${node.type}.tsx`);
         const contentPath = node.internal.contentFilePath;
-        const component = `${articlePath}?__contentFilePath=${contentPath}`;
+        const component = `${componentPath}?__contentFilePath=${contentPath}`;
 
         const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
 
