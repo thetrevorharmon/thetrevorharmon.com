@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Header, Link, MetaNext, TextStyle} from '../../UI-Kit';
+import {Header, Link, Meta, TextStyle} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 export interface Props {
@@ -12,8 +12,7 @@ export const PostMdxItem = ({node}: Props) => {
   const buttonText =
     node?.type === 'Project' ? 'See More →' : 'Continue Reading →';
 
-  const route =
-    node?.type === 'Project' ? Routes.projectNext : Routes.blogPostNext;
+  const route = node?.type === 'Project' ? Routes.project : Routes.blogPost;
 
   return (
     <div className="space-y-normal">
@@ -22,7 +21,7 @@ export const PostMdxItem = ({node}: Props) => {
           <Header rank={2} type="Heading">
             {node.title}
           </Header>
-          <MetaNext date={node.date} timeToRead={node.timeToRead} />
+          <Meta date={node.date} timeToRead={node.timeToRead} />
         </div>
         <p>
           <TextStyle style="Body">{node.description}</TextStyle>

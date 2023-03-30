@@ -1,31 +1,23 @@
-import classnames from 'classnames';
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedPostItem, PostItem} from '../components';
+import {FeaturedMdxItem, PostMdxItem} from '../components';
 import {Layout} from '../layouts';
-import {BlogPost, LinkPost} from '../types';
 import {Header, TextStyle} from '../UI-Kit';
-import {Helpers, Routes} from '../utils';
+import {Routes} from '../utils';
 
-interface ProjectsPageProps {
-  data: {
-    allContentfulBlogPost: allContentfulNodes<BlogPost>;
-    allContentfulLinkPost: allContentfulNodes<LinkPost>;
-  };
+interface Props {
+  data: Queries.BlogPageQuery;
 }
 
-export default (props: ProjectsPageProps) => {
+export default ({data}: Props) => {
   const pageMetadata: PageMetadata = {
     description: `A collection of my thoughts, typically related to code or design.`,
     title: 'Blog',
     url: Routes.blog(),
   };
 
-  const [featuredPost, posts] = Helpers.combinePostTypes({
-    blogPosts: props.data.allContentfulBlogPost.nodes,
-    linkPosts: props.data.allContentfulLinkPost.nodes,
-  });
+  const [featuredPost, ...posts] = data.allMdx.nodes;
 
   return (
     <Layout pageMetadata={pageMetadata}>
@@ -40,10 +32,12 @@ export default (props: ProjectsPageProps) => {
         </div>
 
         <div className="space-y-large">
-          <FeaturedPostItem post={featuredPost} />
-          {posts.map((post) => (
-            <PostItem post={post} key={post.slug} />
-          ))}
+          <FeaturedMdxItem node={featuredPost} />
+          {posts.map(
+            (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
+              <PostMdxItem node={post} />
+            ),
+          )}
         </div>
       </div>
     </Layout>
@@ -51,15 +45,34 @@ export default (props: ProjectsPageProps) => {
 };
 
 export const query = graphql`
-  query blogPageQuery {
-    allContentfulBlogPost(sort: {date: DESC}) {
+  query BlogPage {
+    allMdx(
+      sort: {date: DESC}
+      filter: {type: {eq: "Post"}, status: {eq: null}}
+    ) {
       nodes {
-        ...ContentfulBlogPost
-      }
-    }
-    allContentfulLinkPost(sort: {date: DESC}) {
-      nodes {
-        ...ContentfulLinkPost
+        timeToRead
+        slug
+        title
+        description
+        link
+        date(formatString: "DD MMM YYYY")
+        image {
+          source {
+            childImageSharp {
+              gatsbyImageData(width: 800)
+            }
+          }
+          alt
+          attribution {
+            author
+            sourceName
+            sourceUrl
+          }
+        }
+        internal {
+          contentFilePath
+        }
       }
     }
   }

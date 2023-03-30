@@ -1,1 +1,0 @@
-export {FeaturedPostItem} from './FeaturedPostItem';

@@ -1,9 +1,23 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Icon} from '../../UI-Kit';
+import {Icon} from '../Icon';
 
-import {MetaProps} from './types';
+export interface MetaProps {
+  className?: string;
+  date?: string | null;
+  isLinkPost?: boolean;
+  timeToRead?: number | null;
+  client?: string | null;
+}
+
+function getTimeToRead(timeToRead?: number | null) {
+  if (timeToRead == null) {
+    return null;
+  }
+
+  return timeToRead < 1 ? `1 min read` : `${Math.floor(+timeToRead)} min read`;
+}
 
 export const Meta = ({
   className,
@@ -14,11 +28,9 @@ export const Meta = ({
 }: MetaProps) => {
   const classname = classnames(className, 'Meta');
 
-  const timeToReadPhrase = timeToRead
-    ? `${Math.floor(+timeToRead)} min read`
-    : undefined;
-
-  const meta = [date, timeToReadPhrase, client].filter(Boolean).join(' / ');
+  const meta = [date, getTimeToRead(timeToRead), client]
+    .filter(Boolean)
+    .join(' / ');
   const icon = isLinkPost ? (
     <Icon
       name="link"

@@ -1,20 +1,28 @@
-import {GatsbyImage, getImage} from 'gatsby-plugin-image';
-import * as React from 'react';
+import {GatsbyImage} from 'gatsby-plugin-image';
+import React from 'react';
 
-interface ImageProps {
-  className?: string;
-  // TODO: get the actual type working here
-  src?: any;
+export function Image({src}: {src: Mdx['image']}) {
+  if (
+    src == null ||
+    src.source == null ||
+    src.source.childImageSharp == null ||
+    src.source.childImageSharp.gatsbyImageData == null
+  ) {
+    return null;
+  }
+
+  const {
+    source: {
+      childImageSharp: {gatsbyImageData},
+    },
+    alt,
+  } = src;
+
+  if (alt == null) {
+    throw new Error(
+      'You must provide alt text for the featured image with the `alt` key',
+    );
+  }
+
+  return <GatsbyImage image={gatsbyImageData} alt={alt} />;
 }
-
-export const Image = ({className, src}: ImageProps) => {
-  const image = getImage(src);
-
-  return image ? (
-    <GatsbyImage
-      className={className}
-      image={image}
-      alt={src.title || src.description}
-    />
-  ) : null;
-};

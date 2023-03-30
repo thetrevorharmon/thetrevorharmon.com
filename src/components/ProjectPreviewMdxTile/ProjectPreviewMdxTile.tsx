@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Header, ImageNext, Link, MetaNext} from '../../UI-Kit';
+import {Header, Image, Link, Meta} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 interface ProjectPreviewTileProps {
@@ -24,15 +24,15 @@ export const ProjectPreviewMdxTile = ({
   return (
     <div className={classname}>
       <div className="space-y-normal">
-        {image && <ImageNext src={image} />}
+        {image && <Image src={image} />}
         <div className="space-y-tiny">
           <Header rank={2} type="Heading">
             {title}
           </Header>
-          <MetaNext date={date} />
+          <Meta date={date} />
         </div>
       </div>
-      <Link url={Routes.projectNext(slug!)}>See More →</Link>
+      <Link url={Routes.project(slug!)}>See More →</Link>
     </div>
   );
 };

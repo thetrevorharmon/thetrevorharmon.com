@@ -1,91 +1,79 @@
 import {graphql} from 'gatsby';
-import * as React from 'react';
+import React from 'react';
+import {PostLayout} from '../layouts';
+import {MDXProvider} from '@mdx-js/react';
+import {Header, Meta} from '../UI-Kit';
+import {Routes, useSiteData} from '../utils';
 
-import {getContentfulAssetSrc, Project} from '../types';
-import {Breakout, Image} from '../UI-Kit';
-import {Routes} from '../utils';
-import {Post} from './Post';
-import {LinkDatePair} from './Post/components/PostFooter';
-
-interface TemplateProps {
-  data: {
-    contentfulProject: Project;
-  };
+interface Props {
+  children: React.ReactNode;
   pageContext: {
     slug: string;
-    recommendedProjects: LinkDatePair[];
+    recommendedReading: RecommendedReading[];
   };
+  data: Queries.ProjectQuery;
 }
 
-export default (props: TemplateProps) => {
-  const project = props.data.contentfulProject;
-  const {recommendedProjects} = props.pageContext;
-  const description = project.description.childMarkdownRemark
-    ? project.description.childMarkdownRemark.html
-    : null;
+function ProjectNext({
+  children,
+  data,
+  pageContext: {slug, recommendedReading},
+}: Props) {
+  const site = useSiteData();
+  const {mdx} = data;
 
-  const images = project.projectImages
-    ? [project.featureImage, ...project.projectImages]
-    : [project.featureImage];
+  if (mdx == null || mdx?.body == null) {
+    return null;
+  }
 
-  const metadata: PageMetadata = {
-    description: `${description}`,
-    image: getContentfulAssetSrc(project.featureImage),
-    title: project.title,
-    url: Routes.project(props.pageContext.slug),
-  };
+  const imageSrc =
+    mdx.image?.source?.childImageSharp?.gatsbyImageData.images.fallback?.src;
 
-  const header = {
-    meta: {client: project.client, date: project.projectCompletionDate},
-    title: project.title,
-  };
-
-  const body = {
-    bodyHtml:
-      project.description.childMarkdownRemark &&
-      project.description.childMarkdownRemark.html,
-    children: (
-      <div>
-        <div className="space-y-medium mt-huge">
-          {images.map((image, index) => {
-            return (
-              <Breakout key={index}>
-                <Image
-                  className="border border-img-border dark:border-img-border-dark"
-                  src={image}
-                />
-              </Breakout>
-            );
-          })}
-        </div>
-      </div>
-    ),
-  };
-
-  const footer = {
-    data: recommendedProjects,
-    getFullLink: Routes.project,
-    title: 'Other things I’ve worked on',
+  const metadata = {
+    image: imageSrc ? `${site.siteUrl}${imageSrc}` : undefined,
+    title: mdx.title!,
+    url: Routes.blogPost(slug),
   };
 
   return (
-    <Post metadata={metadata} header={header} body={body} footer={footer} />
+    <PostLayout
+      pageMetadata={metadata}
+      type="Project"
+      recommendedReading={recommendedReading}
+    >
+      <div className="space-y-tiny">
+        <Header rank={1} type="Title">
+          {mdx.title}
+        </Header>
+        <Meta date={mdx.date} client={mdx.client} />
+      </div>
+      <div className="space-y-medium">
+        <div className="body-styles projects">
+          <MDXProvider>{children}</MDXProvider>
+        </div>
+      </div>
+    </PostLayout>
   );
-};
+}
 
 export const query = graphql`
-  query ProjectPageQuery($slug: String!) {
-    contentfulProject(slug: {eq: $slug}) {
-      ...ContentfulProject
+  query Project($slug: String!) {
+    mdx(slug: {eq: $slug}) {
+      body
+      title
+      slug
       client
-      projectImages {
-        ...ContentfulAsset
-      }
-      description {
-        childMarkdownRemark {
-          html
+      date(formatString: "DD MMM YYYY")
+      image {
+        source {
+          childImageSharp {
+            gatsbyImageData(width: 800)
+          }
         }
+        alt
       }
     }
   }
 `;
+
+export default ProjectNext;
