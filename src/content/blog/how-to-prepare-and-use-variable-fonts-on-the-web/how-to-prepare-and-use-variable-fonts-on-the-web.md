@@ -2,6 +2,7 @@
 title: How to prepare and use variable fonts on the web
 slug: how-to-prepare-and-use-variable-fonts-on-the-web
 date: 2020-01-27T14:40-07:00
+type: Post
 description: A primer on subsetting, formatting, and CSS font features.
 image:
   source: >-
@@ -15,7 +16,7 @@ image:
     sourceUrl: https://unsplash.com/photos/zw07kVDaHPw
 ---
 
-When I [redesigned my blog][1], I decided to move away from using [Work Sans][2] and instead go with a newish font called [Inter][3], a lovely typeface by [Rasmus Andersson][4]. Inter isn't on Google fonts like Work Sans is, and I knew that if I wanted to use Inter, I would need to do a bit more legwork. In this article, I'll walk you through the legwork I had to do to prepare and use the variable font variant of Inter, and how I was able to use only a *single* 43KB font file for every variation and weight!
+When I [redesigned my blog][1], I decided to move away from using [Work Sans][2] and instead go with a newish font called [Inter][3], a lovely typeface by [Rasmus Andersson][4]. Inter isn't on Google fonts like Work Sans is, and I knew that if I wanted to use Inter, I would need to do a bit more legwork. In this article, I'll walk you through the legwork I had to do to prepare and use the variable font variant of Inter, and how I was able to use only a _single_ 43KB font file for every variation and weight!
 
 ## A brief introduction to variable fonts
 
@@ -23,7 +24,7 @@ When I [redesigned my blog][1], I decided to move away from using [Work Sans][2]
 
 > A variable font can contain a font’s entire glyph set, or individual glyphs with up to 64,000 axes of variation, including weight, width, slant, and, in some cases, specific styles, such as Condensed, Bold, etc.
 
-To put it simple–you only have a single file for *all* font variations instead of a file *per* variation. When you're using custom fonts on the web, this means fewer files and faster load times.
+To put it simple–you only have a single file for _all_ font variations instead of a file _per_ variation. When you're using custom fonts on the web, this means fewer files and faster load times.
 
 Variable font support in the browser is fairly new–[Can I use][8] shows that browsers started supporting variable fonts in 2018. In practical usage, if you want to display a custom font, you'll probably want to make sure to include "legacy" non-variable fonts as a fallback.
 
@@ -81,8 +82,8 @@ Because not all browers support variable fonts, I'm also including a "static" (n
 ```scss
 @font-face {
   font-family: 'Inter Static', sans-serif;
-  src: url('../fonts/Inter-BlackItalic-subset.woff2') format('woff2'),
-    url('../fonts/Inter-BlackItalic-subset.woff') format('woff');
+  src: url('../fonts/Inter-BlackItalic-subset.woff2') format('woff2'), url('../fonts/Inter-BlackItalic-subset.woff')
+      format('woff');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -111,13 +112,13 @@ font-variation-settings: 'wght' 700, 'ital' 1;
 
 ### A note about italics
 
-Something that I found particularly confusing when using Inter as a variable font was getting italics to behave consistently between browsers.  With some variable fonts (including Inter), you can define a slant value:
+Something that I found particularly confusing when using Inter as a variable font was getting italics to behave consistently between browsers. With some variable fonts (including Inter), you can define a slant value:
 
 ```scss
 font-variation-settings: 'slnt' -10;
 ```
 
-This renders the font *slanted* like an italic font. Unfortuantely, browser's don't yet agree on how exactly to render the font: some will approach this in an additive way (so `font-style: italic` plus `'slnt' -10`  results in a VERY slanted font), while others only will pick one. 
+This renders the font _slanted_ like an italic font. Unfortuantely, browser's don't yet agree on how exactly to render the font: some will approach this in an additive way (so `font-style: italic` plus `'slnt' -10` results in a VERY slanted font), while others only will pick one.
 
 Initially I tried to set the `font-style` to `normal` on any element that used the variable font (to avoid the additive "superslant" behavior), but that has unintended side effects. While I was trying to solve this, I came across the `font-style` value of `oblique` on [MDN][11]:
 
@@ -152,7 +153,7 @@ I want to have conditional CSS for variable fonts, so I can wrap declarations in
 
 ```scss
 @supports (font-variation-settings: normal) {
-	/* CSS goes here */
+  /* CSS goes here */
 }
 ```
 
@@ -161,11 +162,11 @@ Here's an example of how I use it to handle italics between the two fonts:
 ```css
 em,
 i {
-	font-style: italic;
-	
+  font-style: italic;
+
   @supports (font-variation-settings: normal) {
     font-variation-settings: 'slnt' -10;
-    font-style: oblique 10deg;  	
+    font-style: oblique 10deg;
   }
 }
 ```
@@ -187,8 +188,8 @@ After working through all of the challenges I faced, my final code looks somethi
 
 @font-face {
   font-family: 'Inter Static';
-  src: url('../fonts/Inter-subset.woff2') format('woff2'),
-    url('../fonts/Inter-subset.woff') format('woff');
+  src: url('../fonts/Inter-subset.woff2') format('woff2'), url('../fonts/Inter-subset.woff')
+      format('woff');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -204,18 +205,18 @@ html {
 
 em,
 i {
-	font-style: italic;
-	
+  font-style: italic;
+
   @supports (font-variation-settings: normal) {
     font-variation-settings: 'slnt' -10;
-    font-style: oblique 10deg;  	
+    font-style: oblique 10deg;
   }
 }
 
 b,
 strong {
-	font-weight: bold;
-	
+  font-weight: bold;
+
   @supports (font-variation-settings: normal) {
     font-variation-settings: 'wght' 700;
   }

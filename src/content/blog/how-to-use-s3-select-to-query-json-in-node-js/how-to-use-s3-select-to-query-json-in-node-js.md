@@ -2,6 +2,7 @@
 title: How to use S3 select to query JSON in Node.js
 slug: how-to-use-s3-select-to-query-json-in-node-js
 date: 2019-06-05T09:55-07:00
+type: Post
 description: >-
   A simple example to get you started on querying JSON data out of S3 (with
   sample code!).
@@ -16,7 +17,7 @@ image:
 
 About a year ago, AWS publicly released S3 Select, a service that lets you query data in S3 with SQL-style queries. They [announced support][1] for a Javascript SDK in July 2018, and provided an example of how to query CSV data. I recently wanted to use S3 Select, but I was querying JSON. Here's an example of how to use S3 select in Node.js to query JSON data.
 
-*Note: If you are unfamiliar with AWS, you might run across terms or instructions in the first step that are unfamliar to you. I won't go into depth with the initial instructions, but there are many AWS-related resources that can help you understand. I would recommend looking at those before this article.*
+_Note: If you are unfamiliar with AWS, you might run across terms or instructions in the first step that are unfamliar to you. I won't go into depth with the initial instructions, but there are many AWS-related resources that can help you understand. I would recommend looking at those before this article._
 
 ## Initial Setup
 
@@ -56,7 +57,7 @@ The data that I'll be querying against is from the Star Wars API (I grabbed the 
 }
 ```
 
-I took that data and stored it in an S3 bucket, and then created a lambda with the most recent version of Node.js as the lambda runtime. I also created an IAM role to give that lambda `GET` access to S3. 
+I took that data and stored it in an S3 bucket, and then created a lambda with the most recent version of Node.js as the lambda runtime. I also created an IAM role to give that lambda `GET` access to S3.
 
 ## Writing the Query
 
@@ -75,7 +76,6 @@ Running that query produces a list of planets:
 ![A screenshot of a successful query using S3 select inside of the AWS console](./A-screenshot-of-a-successful-query-using-S3-select-inside-of-the-AWS-console.png)
 
 The syntax is a bit strange, the `[*]` means something like "give me everything that is within this specific array".
-
 
 ## Initial Setup Code
 
@@ -102,14 +102,14 @@ exports.handler = async (_, context) => {
       InputSerialization: {
         JSON: {
           Type: 'DOCUMENT',
-        }
+        },
       },
       OutputSerialization: {
         JSON: {
-          RecordDelimiter: ','
-        }
-      }
-    }
+          RecordDelimiter: ',',
+        },
+      },
+    };
 
     // 4
     const data = await getDataUsingS3Select(params);
@@ -120,13 +120,13 @@ exports.handler = async (_, context) => {
   }
 };
 ```
+
 About the code:
 
 1. The S3 Select query that we're going to run against the data.
 2. The bucket and key of the file we're querying.
 3. The parameters that we're going to use to query; I was able to glean this information from the original S3 select [announcement post][1] and from the [docs][3].
 4. A soon-to-be-written function that does the work and returns the data.
-
 
 ## 3. Data Function
 
@@ -137,7 +137,9 @@ const getDataUsingS3Select = async (params) => {
   // 1
   return new Promise((resolve, reject) => {
     S3.selectObjectContent(params, (err, data) => {
-      if (err) { reject(err); }
+      if (err) {
+        reject(err);
+      }
 
       if (!data) {
         reject('Empty data object');
@@ -145,43 +147,47 @@ const getDataUsingS3Select = async (params) => {
 
       // This will be an array of bytes of data, to be converted
       // to a buffer
-      const records = []
+      const records = [];
 
       // This is a stream of events
       data.Payload.on('data', (event) => {
-        // There are multiple events in the eventStream, but all we 
-        // care about are Records events. If the event is a Records 
+        // There are multiple events in the eventStream, but all we
+        // care about are Records events. If the event is a Records
         // event, there is data inside it
         if (event.Records) {
           records.push(event.Records.Payload);
         }
       })
-      .on('error', (err) => {
-        reject(err);
-      })
-      .on('end', () => {
-        // Convert the array of bytes into a buffer, and then
-        // convert that to a string
-        let planetString = Buffer.concat(records).toString('utf8');
+        .on('error', (err) => {
+          reject(err);
+        })
+        .on('end', () => {
+          // Convert the array of bytes into a buffer, and then
+          // convert that to a string
+          let planetString = Buffer.concat(records).toString('utf8');
 
-        // 2
-        // remove any trailing commas
-        planetString = planetString.replace(/\,$/, '');
+          // 2
+          // remove any trailing commas
+          planetString = planetString.replace(/\,$/, '');
 
-        // 3
-        // Add into JSON 'array'
-        planetString = `[${planetString}]`;
+          // 3
+          // Add into JSON 'array'
+          planetString = `[${planetString}]`;
 
-        try {
-          const planetData = JSON.parse(planetString);
-          resolve(planetData);
-        } catch (e) {
-          reject(new Error(`Unable to convert S3 data to JSON object. S3 Select Query: ${params.Expression}`));
-        }
-      });
+          try {
+            const planetData = JSON.parse(planetString);
+            resolve(planetData);
+          } catch (e) {
+            reject(
+              new Error(
+                `Unable to convert S3 data to JSON object. S3 Select Query: ${params.Expression}`,
+              ),
+            );
+          }
+        });
     });
-  })
-}
+  });
+};
 ```
 
 In addition to the comments in the code itself, here are some particular things to be aware of:
@@ -190,13 +196,14 @@ In addition to the comments in the code itself, here are some particular things 
 2. Once the data is received, converted to a buffer and then to a string, I remove any trailing commas. This is because when the data comes back from S3 select, it looks like `{}, {}, {},`. Throwing `JSON.parse()` at that fails when it encounters the trailing comma.
 3. In addition to removing the trailing comma, I need to "wrap" the objects in an array, so `JSON.parse()` comes back with an array of objects.
 
-At certain points while trying to get this function  working, I ran into the following error:
+At certain points while trying to get this function working, I ran into the following error:
 
 ```bash
 TypeError: Cannot read property 'Payload' of null
 ```
 
 If you run into this error, I would recommend that you:
+
 1. Double check your S3 Select query by using the S3 console
 2. Double check permissions on your bucket and lambda–make sure that your lambda has `GET` permissions on your bucket.
 
@@ -206,12 +213,9 @@ If you've made it this far, it's time to run your lambda! When I run my lambda, 
 
 ![A screenshot of a successful lambda call using S3 Select to query Star Wars data](./A-screenshot-of-a-successful-lambda-call-using-S3-Select-to-query-Star-Wars-data.png)
 
-
 ## Conclusion
 
-A final version of the code is on this [Github gist](https://gist.github.com/thetrevorharmon/6b831875cde98e5dc7f7458f6112b061). Hopefully by this point you have a basic, working example of getting JSON data out of S3 by using Node.js. I found this significantly easier than trying to use a managed service like Athena or manually parsing through S3 files  to find the data I want. S3 Select makes getting JSON data out of S3 less painful while also making it more targeted. 
-
-
+A final version of the code is on this [Github gist](https://gist.github.com/thetrevorharmon/6b831875cde98e5dc7f7458f6112b061). Hopefully by this point you have a basic, working example of getting JSON data out of S3 by using Node.js. I found this significantly easier than trying to use a managed service like Athena or manually parsing through S3 files to find the data I want. S3 Select makes getting JSON data out of S3 less painful while also making it more targeted.
 
 [1]: https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/
 [2]: https://swapi.co/api/planets/

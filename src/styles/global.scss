@@ -135,4 +135,33 @@ body.dark {
     @apply Blockquote;
     @apply Breakout;
   }
+
+  &.projects {
+    .gatsby-resp-image-wrapper {
+      // These are the styles for @Breakout
+      // I had to inline them here because @Breakout #{!important} didn't work
+      // and these conflict with some default gatsby styling that I can't
+      // seem to remove
+
+      @apply -mx-container-base #{!important};
+      @apply desktop:mx-0 #{!important};
+      @apply expanded:-mx-breakout #{!important};
+
+      @apply border border-img-border dark:border-img-border-dark;
+    }
+
+    span:first-of-type {
+      @apply mt-huge block;
+    }
+
+    span + span {
+      @apply mt-medium block;
+    }
+
+    span span.gatsby-resp-image-wrapper,
+    span.gatsby-resp-image-wrapper,
+    span.gatsby-resp-image-background-image {
+      @apply mt-0;
+    }
+  }
 }

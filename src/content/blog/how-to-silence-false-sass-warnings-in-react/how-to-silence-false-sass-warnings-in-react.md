@@ -2,6 +2,7 @@
 title: How to silence false SASS warnings in React
 slug: how-to-silence-false-sass-warnings-in-react
 date: 2018-11-27T12:17-08:00
+type: Post
 description: >-
   Typescript on React can sometimes think that your SASS is missing. Here’s the
   actual problem, and how to fix it.
@@ -37,7 +38,7 @@ This step is pretty straightforward — just add a file named `tsconfig.json
 
 If you decide to have Typescript automatically generate one, just make sure you set the `jsx` option to `react`.
 
-*Random tidbit: you can actually fix this error with a blank `tsconfig` file. While that’s an option, I think it makes sense to populate it with actual values, so you don’t have some random blank file hanging around. You also then have more control over how your Typescript is compiling.*
+_Random tidbit: you can actually fix this error with a blank `tsconfig` file. While that’s an option, I think it makes sense to populate it with actual values, so you don’t have some random blank file hanging around. You also then have more control over how your Typescript is compiling._
 
 ## 2. Add type definitions for your .scss files
 

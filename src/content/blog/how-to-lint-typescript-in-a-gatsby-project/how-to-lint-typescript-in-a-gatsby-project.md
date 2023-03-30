@@ -2,6 +2,7 @@
 title: How to lint Typescript in a Gatsby project
 slug: how-to-lint-typescript-in-a-gatsby-project
 date: 2018-11-06T15:33-08:00
+type: Post
 description: Linting Typescript is simple to set up in Gatsby with the help of a plugin.
 image:
   source: ./MacBook-with-Code.jpg
@@ -15,11 +16,11 @@ image:
 
 I wanted to set up linting in a Gatsby project I was working on, but there weren’t any great resources for linting Typescript. I wrote a plugin to make it easy– here’s how to set it up.
 
-*Disclaimer: I use yarn in all of my sample commands, but you can easily switch it out for NPM and it’ll work.*
+_Disclaimer: I use yarn in all of my sample commands, but you can easily switch it out for NPM and it’ll work._
 
 ## 1. Install the plugin & dependencies
 
-The plugin (`gatsby-plugin-tslint`) is available through NPM, so you can use either yarn or node to install it. Visit the [plugin’s github page](https://github.com/tdharmon/gatbsy-plugin-tslint "Gatsby TSLint Plugin GitHub page") to learn more about it, if you’d like.
+The plugin (`gatsby-plugin-tslint`) is available through NPM, so you can use either yarn or node to install it. Visit the [plugin’s github page](https://github.com/tdharmon/gatbsy-plugin-tslint 'Gatsby TSLint Plugin GitHub page') to learn more about it, if you’d like.
 
 You’ll also need to install `tslint-loader` and `tslint` as a dependency. Both can be installed as dev dependencies.
 
@@ -31,7 +32,7 @@ yarn add --dev gatsby-plugin-tslint tslint-loader tslint
 
 ## 2. Add the lint plugin to your gatsby-config.js file
 
-Add the line `gatsby-plugin-tslint` to the plugins section of your config file. If you don’t have a config file yet, you can find good documentation about it on [gatsbyjs.org](https://www.gatsbyjs.org/docs/gatsby-config/ "Documentation about Gatsby config files").
+Add the line `gatsby-plugin-tslint` to the plugins section of your config file. If you don’t have a config file yet, you can find good documentation about it on [gatsbyjs.org](https://www.gatsbyjs.org/docs/gatsby-config/ 'Documentation about Gatsby config files').
 
 ## 3. Generate a TSLint file
 
@@ -75,4 +76,5 @@ If you made it this far, run `gatsby develop` (or `yarn start`). If everything w
 ![How to lint Typescript in a Gatsby project: Console](./How-to-lint-Typescript-in-a-Gatsby-project-Console.png)
 
 ## 5. You’re done!
+
 Happy linting!

@@ -4,3 +4,6 @@ export {Form} from './Form';
 export {Navbar} from './Navbar';
 export {PostItem} from './PostItem';
 export {ProjectPreviewTile} from './ProjectPreviewTile';
+export {PostMdxItem} from './PostMdxItem';
+export {FeaturedMdxItem} from './FeaturedMdxItem';
+export {ProjectPreviewMdxTile} from './ProjectPreviewMdxTile';

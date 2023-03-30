@@ -2,6 +2,7 @@
 title: Introducing 2.0 in 2020
 slug: introducing-2-0-in-2020
 date: 2020-01-09T10:54-08:00
+type: Post
 description: The next version of thetrevorharmon.com
 image:
   source: ./Sillhouette-of-a-Man-Jumping-near-a-Mountain.jpg
@@ -22,7 +23,7 @@ By July 2019, I could no longer ignore that itch and started in on a redesign. I
 
 I plan to go into greater detail on my design and development process in future posts, but here are some high level points about this redesign:
 
-- The entire process took about 6 months. The first half was spent exploring and deciding what I wanted,  with most of the work happening in the second half.
+- The entire process took about 6 months. The first half was spent exploring and deciding what I wanted, with most of the work happening in the second half.
 - The [pull request][4] to implement the redesign includes 4,533 new lines of code and removes 3,607 lines. It was almost a complete rewrite of my site.
 - Not included in the previous statistic is the addition of [dark mode][5] to the site that happened in November 2019. That was 1,433 new lines with 768 lines removed. That was a foundational piece that I decided to release separately.
 - I made the conscious effort to care more about accessibility as part of this redesign. As a self-taught web developer, accessibility unfortunately tends to be later on the list of things to learn (and I'm finally further down the list). With this redesign, I improved the [Lighthouse][6] accessibility score from 89 to 97. I'm not "done" with accessibility, but moving in the right direction.

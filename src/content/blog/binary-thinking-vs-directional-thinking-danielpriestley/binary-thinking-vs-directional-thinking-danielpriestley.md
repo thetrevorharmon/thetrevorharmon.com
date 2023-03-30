@@ -2,6 +2,7 @@
 title: Binary Thinking vs Directional Thinking - @DanielPriestley
 slug: binary-thinking-vs-directional-thinking-danielpriestley
 date: 2019-10-24T13:05-07:00
+type: Post
 link: http://www.keypersonofinfluence.com/binary-thinking-vs-directional-thinking/
 ---
 

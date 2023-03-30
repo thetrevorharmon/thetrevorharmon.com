@@ -42,3 +42,29 @@ interface PageMetadata {
 interface allContentfulNodes<T> {
   nodes: T[];
 }
+
+type Mdx = {
+  readonly client?: string | null;
+  readonly link?: string | null;
+  readonly timeToRead?: number | null;
+  readonly description?: string | null;
+  readonly body?: string | null;
+  readonly title?: string | null;
+  readonly type?: string | null;
+  readonly slug?: string | null;
+  readonly date?: string | null;
+  readonly excerpt?: string | null;
+  readonly image?: {
+    readonly alt?: string | null;
+    readonly source?: {
+      readonly childImageSharp: {
+        readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData;
+      } | null;
+    } | null;
+    readonly attribution?: {
+      readonly author: string | null;
+      readonly sourceName: string | null;
+      readonly sourceUrl: string | null;
+    } | null;
+  } | null;
+};
