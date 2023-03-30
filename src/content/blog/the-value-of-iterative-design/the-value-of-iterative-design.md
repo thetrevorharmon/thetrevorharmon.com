@@ -2,6 +2,7 @@
 title: The value of iterative design
 slug: the-value-of-iterative-design
 date: 2019-03-13T15:00-07:00
+type: Post
 description: >-
   My six attempts to design "Sweet Honey" taught me that iterating on creative
   work can be difficult, but produces better results in the end.
@@ -63,6 +64,7 @@ Shortly after the vintage television cover, I designed this as part of a series 
 The band had a positive response to this cover, but I felt like the design wasn't opinionated enough stylistically.
 
 <a name="principles"></a>
+
 ## Finding Guiding Principles
 
 After the fourth iteration, I knew that there was a better design out there, but I hadn't found it yet. I decided to examine the successes and failures of each design. I also examined the song itself and how it was recorded. I came away from that study with three guiding principles:

@@ -2,6 +2,7 @@
 title: Introducing Gatsby Theme Shopify Manager
 slug: introducing-gatsby-theme-shopify-manager
 date: 2020-05-20T09:11-07:00
+type: Post
 description: The easiest way to build a Shopify store on Gatsby.
 image:
   source: >-

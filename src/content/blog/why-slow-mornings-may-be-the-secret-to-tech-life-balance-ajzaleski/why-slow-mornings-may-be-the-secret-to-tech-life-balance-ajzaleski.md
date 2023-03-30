@@ -2,6 +2,7 @@
 title: Why Slow Mornings May Be the Secret to Tech-Life Balance - @ajzaleski
 slug: why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski
 date: 2019-09-22T23:08-04:00
+type: Post
 link: https://t.co/iuCK0FuHLG?amp=1
 ---
 

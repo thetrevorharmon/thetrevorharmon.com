@@ -2,8 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {Layout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Button, Header, Link, MetaNext} from '../UI-Kit';
-import {FeaturedImage} from './components';
+import {Header, MetaNext} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 
 interface Props {
@@ -11,10 +10,10 @@ interface Props {
   pageContext: {
     slug: string;
   };
-  data: Queries.ArticleQuery;
+  data: Queries.ProjectNextQuery;
 }
 
-function Article({children, data, pageContext: {slug}}: Props) {
+function ProjectNext({children, data, pageContext: {slug}}: Props) {
   const site = useSiteData();
   const {mdx} = data;
 
@@ -26,45 +25,24 @@ function Article({children, data, pageContext: {slug}}: Props) {
     mdx.image?.source?.childImageSharp?.gatsbyImageData.images.fallback?.src;
 
   const metadata = {
-    description: mdx.description ?? undefined,
     image: imageSrc ? `${site.siteUrl}${imageSrc}` : undefined,
     title: mdx.title!,
     url: Routes.blogPost(slug),
   };
 
-  const twitterUrl = `https://mobile.twitter.com/search?q=${encodeURI(
-    [site.siteUrl, Routes.blogPost(slug)].join(''),
-  )}&src=typed_query&f=top`;
-
-  const twitterLink = (
-    <Link className="block" url={twitterUrl}>
-      Reply to this post on Twitter
-    </Link>
-  );
-
-  const linkPostButton = mdx.link ? (
-    <Button url={mdx.link}>View Link</Button>
-  ) : null;
-
   return (
     <Layout pageMetadata={metadata}>
       <div className="space-y-large my-large">
-        <FeaturedImage mdx={mdx} />
         <div className="space-y-tiny">
           <Header rank={1} type="Title">
             {mdx.title}
           </Header>
-          <MetaNext
-            date={mdx.date}
-            timeToRead={mdx.timeToRead}
-            isLinkPost={mdx.link != null}
-          />
+          <MetaNext date={mdx.date} client={mdx.client} />
         </div>
         <div className="space-y-medium">
-          <div className="body-styles">
+          <div className="body-styles projects">
             <MDXProvider>{children}</MDXProvider>
           </div>
-          {linkPostButton ? linkPostButton : twitterLink}
         </div>
       </div>
     </Layout>
@@ -72,13 +50,12 @@ function Article({children, data, pageContext: {slug}}: Props) {
 }
 
 export const query = graphql`
-  query Article($slug: String!) {
+  query ProjectNext($slug: String!) {
     mdx(slug: {eq: $slug}) {
       body
       title
       slug
-      description
-      link
+      client
       date(formatString: "DD MMM YYYY")
       image {
         source {
@@ -87,15 +64,9 @@ export const query = graphql`
           }
         }
         alt
-        attribution {
-          author
-          sourceName
-          sourceUrl
-        }
       }
-      timeToRead
     }
   }
 `;
 
-export default Article;
+export default ProjectNext;

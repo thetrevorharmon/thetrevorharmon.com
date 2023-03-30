@@ -132,16 +132,20 @@ exports.createPages = ({graphql, actions}) => {
           if (node.client == null) {
             throw new NodeError(`Must include client`);
           }
-
-          if (node.type !== 'Project') {
-            throw new NodeError(`Must format type to be exactly Project`);
-          }
         }
 
-        if (node.type && node.type.toLowerCase() === 'project') {
+        if (node.type == null) {
+          throw new NodeError('Must include a type');
+        }
+
+        if (node.type === 'Project') {
           enforceProjectFields(node);
-        } else {
+        } else if (node.type === 'Post') {
           enforcePostFields(node);
+        } else {
+          throw new Error(
+            `Encountered ${node.type} as the node type–must include one of the following types (case sensistive): Post, Project`,
+          );
         }
 
         const fileName = node.internal.contentFilePath
@@ -156,12 +160,17 @@ exports.createPages = ({graphql, actions}) => {
           );
         }
 
-        const articlePath = path.resolve(`./src/templates/Article.tsx`);
+        const articlePath =
+          node.type === 'Post'
+            ? path.resolve(`./src/templates/Article.tsx`)
+            : path.resolve(`./src/templates/ProjectNext.tsx`);
         const contentPath = node.internal.contentFilePath;
         const component = `${articlePath}?__contentFilePath=${contentPath}`;
 
+        const pathPrefix = node.type === 'Post' ? 'blog-next' : 'projects-next';
+
         createPage({
-          path: `blog-next/${node.slug}`,
+          path: `${pathPrefix}/${node.slug}`,
           context: {
             slug: node.slug,
           },
@@ -236,7 +245,7 @@ exports.createSchemaCustomization = ({actions}) => {
   // on the mdx node
   createTypes(`
     type Mdx implements Node {
-      timeToRead: MdxFieldsTimeToRead @proxy(from: "fields.timeToRead")
+      timeToRead: Float @proxy(from: "fields.timeToRead.minutes")
 
       title: String @proxy(from: "frontmatter.title")
       description: String @proxy(from: "frontmatter.description")
