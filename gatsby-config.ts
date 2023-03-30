@@ -17,7 +17,6 @@ const config: GatsbyConfig = {
     description: `The blog & portfolio of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
     feedUrl: `https://thetrevorharmon.com/rss.xml`,
-    mailchimpFallbackUrl: process.env.MAILCHIMP_FORM_FALLBACK_URL,
     author: 'Trevor Harmon',
     twitter: {
       author: '@thetrevorharmon',
@@ -72,12 +71,6 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-sass`,
       options: {
         postCssPlugins: [require('tailwindcss')],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-mailchimp',
-      options: {
-        endpoint: process.env.MAILCHIMP_ACTION_URL,
       },
     },
     {

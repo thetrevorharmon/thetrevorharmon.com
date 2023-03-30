@@ -3,7 +3,7 @@ import {Header, Link} from '../../UI-Kit';
 import {ExternalLinks, useSiteData} from '../../utils';
 
 export function FollowCallout() {
-  const {feedUrl, mailchimpFallbackUrl} = useSiteData();
+  const {feedUrl} = useSiteData();
 
   return (
     <div className="py-large space-y-normal">
@@ -31,7 +31,7 @@ export function FollowCallout() {
         </li>
         <li>
           <Link
-            url={mailchimpFallbackUrl!}
+            url={ExternalLinks.mailchimpSignupForm()}
             icon={{position: 'leading', name: 'email'}}
           >
             Get my emails
