@@ -4,6 +4,7 @@
 
 @import './typography';
 @import './components';
+@import './syntaxHighlighting';
 
 @supports (font-variation-settings: normal) {
   @import '~@fontsource/inter/variable-full.css';

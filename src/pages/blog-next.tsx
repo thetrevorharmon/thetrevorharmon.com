@@ -46,7 +46,10 @@ export default ({data}: Props) => {
 
 export const query = graphql`
   query BlogPageNext {
-    allMdx(sort: {date: DESC}, filter: {type: {eq: "Post"}}) {
+    allMdx(
+      sort: {date: DESC}
+      filter: {type: {eq: "Post"}, status: {eq: null}}
+    ) {
       nodes {
         timeToRead
         slug

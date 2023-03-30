@@ -51,6 +51,7 @@ type Mdx = {
   readonly body?: string | null;
   readonly title?: string | null;
   readonly type?: 'Post' | 'Project' | null;
+  readonly status?: 'Archived' | 'Draft' | null;
   readonly slug?: string | null;
   readonly date?: string | null;
   readonly excerpt?: string | null;
