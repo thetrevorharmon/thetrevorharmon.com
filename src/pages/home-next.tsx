@@ -47,7 +47,11 @@ export default ({data}: IndexPageProps) => {
 
 export const query = graphql`
   query IndexPage {
-    allMdx(sort: {date: DESC}, filter: {type: {eq: "Post"}}, limit: 5) {
+    allMdx(
+      sort: {date: DESC}
+      filter: {type: {eq: "Post"}, status: {eq: null}}
+      limit: 5
+    ) {
       nodes {
         timeToRead
         slug

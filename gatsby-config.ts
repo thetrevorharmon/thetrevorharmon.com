@@ -80,8 +80,6 @@ const config: GatsbyConfig = {
           // this is to handle inline gifs
           // https://github.com/gatsbyjs/gatsby/issues/7317#issuecomment-412984851
           `gatsby-remark-copy-linked-files`,
-          // This unwraps the images and removes exterior dom elements like
-          // extra <span>s and <p>s
         ],
       },
     },
@@ -162,69 +160,42 @@ const config: GatsbyConfig = {
         feeds: [
           {
             serialize: ({
-              query: {site, allContentfulBlogPost, allContentfulLinkPost},
+              query: {site, allMdx},
             }: {
               query: {
-                site: any;
-                allContentfulBlogPost: any;
-                allContentfulLinkPost: any;
+                site: {
+                  siteMetadata: SiteMetadata;
+                };
+                allMdx: {
+                  nodes: Mdx[];
+                };
               };
             }) => {
-              const posts = Utils.combinePostTypes(
-                allContentfulBlogPost.nodes,
-                allContentfulLinkPost.nodes,
-              );
-
-              return posts.map((post: any) => {
-                return Object.assign(
-                  {},
-                  {
-                    title: post.title,
-                    description: post.description
-                      ? post.description
-                      : post.body.childMarkdownRemark.excerpt,
-                    date: post.date,
-                    url: site.siteMetadata.siteUrl + '/blog/' + post.slug,
-                    guid: site.siteMetadata.siteUrl + '/blog/' + post.slug,
-                    custom_elements: [
-                      {'content:encoded': post.body.childMarkdownRemark.html},
-                    ],
-                  },
-                );
-              });
+              return allMdx.nodes.map((node: Mdx) => ({
+                title: node.title,
+                description: node.description ? node.description : node.excerpt,
+                date: node.date,
+                url: site.siteMetadata.siteUrl + '/blog/' + node.slug,
+                guid: site.siteMetadata.siteUrl + '/blog/' + node.slug,
+                custom_elements: [{'content:encoded': node.excerpt}],
+              }));
             },
             query: `
-              {
-                allContentfulBlogPost(
-                  limit: 1000,
-                  sort: { order: DESC, fields: [date] },
-                ) {
+              query RssFeed {
+                  allMdx(
+                    sort: {date: DESC}
+                    filter: {type: {eq: "Post"}, status: {eq: null}}
+                    limit: 1000
+                  ) {
                   nodes {
-                    title
                     slug
+                    title
                     description
-                    date
-                    body {
-                      childMarkdownRemark {
-                        html
-                        excerpt
-                      }
-                    }
-                  }
-                }
-                allContentfulLinkPost(
-                  limit: 1000,
-                  sort: { order: DESC, fields: [date] },
-                ) {
-                  nodes {
-                    title
-                    slug
-                    date
-                    body {
-                      childMarkdownRemark {
-                        html
-                        excerpt
-                      }
+                    excerpt
+                    link
+                    date(formatString: "DD MMM YYYY")
+                    internal {
+                      contentFilePath
                     }
                   }
                 }

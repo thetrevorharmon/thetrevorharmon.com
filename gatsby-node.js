@@ -78,7 +78,27 @@ exports.createPages = ({graphql, actions}) => {
           }
         }
 
-        function enforcePostFields(node) {
+        function enforceNodeFields(node) {
+          const fileName = node.internal.contentFilePath
+            .split('/')
+            .slice(-1)
+            .pop()
+            .split(/\.mdx?/)[0];
+
+          if (fileName !== node.slug) {
+            throw new NodeError(`Slug and file name must match`);
+          }
+
+          if (node.type == null) {
+            throw new NodeError('Must include a type');
+          }
+
+          if (!['Project', 'Post'].includes(node.type)) {
+            throw new NodeError(
+              `Encountered ${node.type} as the node type–must include one of the following types (case sensistive): Post, Project`,
+            );
+          }
+
           if (node.title == null || node.title == '') {
             throw new NodeError(`Must include title`);
           }
@@ -87,78 +107,51 @@ exports.createPages = ({graphql, actions}) => {
             throw new NodeError(`Must include slug`);
           }
 
-          if (node.description == null && node.link == null) {
-            throw new NodeError(`Must include description or link`);
-          }
-
           if (node.date == null) {
             throw new NodeError(`Must include date`);
           }
 
-          if (node.image != null) {
-            if (node.image.source == null || node.image.alt == null) {
-              throw new NodeError(
-                `Must include source, alt if an image is passed`,
-              );
-            }
+          if (
+            node.image != null &&
+            (node.image.source == null || node.image.alt == null)
+          ) {
+            throw new NodeError(
+              `Must include source, alt if an image is passed`,
+            );
+          }
 
-            if (node.image.attribution != null) {
-              if (
-                node.image.attribution.author == null ||
-                node.image.attribution.sourceName == null ||
-                node.image.attribution.sourceUrl == null
-              ) {
-                throw new NodeError(
-                  `Must include author, sourceName, sourceUrl if an image attribution is passed`,
-                );
-              }
+          if (node.type === 'Post') {
+            enforcePostFields(node);
+          } else {
+            enforceProjectFields(node);
+          }
+        }
+
+        function enforcePostFields(node) {
+          if (node.description == null && node.link == null) {
+            throw new NodeError(`Must include description or link`);
+          }
+
+          if (node.image != null && node.image.attribution != null) {
+            if (
+              node.image.attribution.author == null ||
+              node.image.attribution.sourceName == null ||
+              node.image.attribution.sourceUrl == null
+            ) {
+              throw new NodeError(
+                `Must include author, sourceName, sourceUrl if an image attribution is passed`,
+              );
             }
           }
         }
 
         function enforceProjectFields(node) {
-          if (node.title == null || node.title == '') {
-            throw new NodeError(`Must include title`);
-          }
-
-          if (node.slug == null) {
-            throw new NodeError(`Must include slug`);
-          }
-
-          if (node.date == null) {
-            throw new NodeError(`Must include date`);
-          }
-
           if (node.client == null) {
             throw new NodeError(`Must include client`);
           }
         }
 
-        if (node.type == null) {
-          throw new NodeError('Must include a type');
-        }
-
-        if (node.type === 'Project') {
-          enforceProjectFields(node);
-        } else if (node.type === 'Post') {
-          enforcePostFields(node);
-        } else {
-          throw new Error(
-            `Encountered ${node.type} as the node type–must include one of the following types (case sensistive): Post, Project`,
-          );
-        }
-
-        const fileName = node.internal.contentFilePath
-          .split('/')
-          .slice(-1)
-          .pop()
-          .split(/\.mdx?/)[0];
-
-        if (fileName !== node.slug) {
-          throw new Error(
-            `Slug and file name must match\n${fileName}\n${slug}`,
-          );
-        }
+        enforceNodeFields(node);
 
         const articlePath =
           node.type === 'Post'
@@ -258,6 +251,7 @@ exports.createSchemaCustomization = ({actions}) => {
       description: String @proxy(from: "frontmatter.description")
       slug: String @proxy(from: "frontmatter.slug")
       link: String @proxy(from: "frontmatter.link")
+      status: String @proxy(from: "frontmatter.status")
       date: Date @dateformat @proxy(from: "frontmatter.date")
       image: MdxFrontmatterImage @proxy(from: "frontmatter.image")
 
