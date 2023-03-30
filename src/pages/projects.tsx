@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import {FeaturedMdxItem, ProjectPreviewMdxTile} from '../components';
+import {FeaturedMdxItem, ProjectTile} from '../components';
 import {Layout} from '../layouts';
 import {Breakout, Header} from '../UI-Kit';
 import {Routes} from '../utils';
@@ -41,7 +41,7 @@ export default ({data}: ProjectsPageProps) => {
               columnClassName="pl-normal bg-clip-padding [&>div]:mb-normal"
             >
               {projects.map((project) => (
-                <ProjectPreviewMdxTile project={project} key={project.slug!} />
+                <ProjectTile project={project} key={project.slug!} />
               ))}
             </Masonry>
           </Breakout>

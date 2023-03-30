@@ -132,7 +132,6 @@ exports.createPages = ({graphql, actions}) => {
         const recommendedNodes = Utils.getRecommendedItems(
           node,
           nodes.filter((currentNode) => currentNode.type === node.type),
-          'date',
         );
 
         createPage({
