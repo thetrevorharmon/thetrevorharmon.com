@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedMdxItem, PostMdxItem} from '../components';
+import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Header, TextStyle} from '../UI-Kit';
 import {Routes} from '../utils';
@@ -32,10 +32,10 @@ export default ({data}: Props) => {
         </div>
 
         <div className="space-y-large">
-          <FeaturedMdxItem node={featuredPost} />
+          <FeaturedTile node={featuredPost} />
           {posts.map(
             (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
-              <PostMdxItem node={post} />
+              <PostTile node={post} />
             ),
           )}
         </div>
