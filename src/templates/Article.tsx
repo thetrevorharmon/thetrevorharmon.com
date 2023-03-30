@@ -1,6 +1,6 @@
 import {graphql} from 'gatsby';
 import React from 'react';
-import {Layout} from '../layouts';
+import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
 import {Button, Header, Link, MetaNext} from '../UI-Kit';
 import {FeaturedImage} from './components';
@@ -10,11 +10,16 @@ interface Props {
   children: React.ReactNode;
   pageContext: {
     slug: string;
+    recommendedReading: RecommendedReading[];
   };
   data: Queries.ArticleQuery;
 }
 
-function Article({children, data, pageContext: {slug}}: Props) {
+function Article({
+  children,
+  data,
+  pageContext: {slug, recommendedReading},
+}: Props) {
   const site = useSiteData();
   const {mdx} = data;
 
@@ -47,27 +52,30 @@ function Article({children, data, pageContext: {slug}}: Props) {
   ) : null;
 
   return (
-    <Layout pageMetadata={metadata}>
-      <div className="space-y-large my-large">
-        <FeaturedImage mdx={mdx} />
-        <div className="space-y-tiny">
-          <Header rank={1} type="Title">
-            {mdx.title}
-          </Header>
-          <MetaNext
-            date={mdx.date}
-            timeToRead={mdx.timeToRead}
-            isLinkPost={mdx.link != null}
-          />
-        </div>
-        <div className="space-y-medium">
-          <div className="body-styles">
-            <MDXProvider>{children}</MDXProvider>
-          </div>
-          {linkPostButton ? linkPostButton : twitterLink}
-        </div>
+    <PostLayout
+      pageMetadata={metadata}
+      recommendedReading={recommendedReading}
+      type="Post"
+      hasSignupForm
+    >
+      <FeaturedImage mdx={mdx} />
+      <div className="space-y-tiny">
+        <Header rank={1} type="Title">
+          {mdx.title}
+        </Header>
+        <MetaNext
+          date={mdx.date}
+          timeToRead={mdx.timeToRead}
+          isLinkPost={mdx.link != null}
+        />
       </div>
-    </Layout>
+      <div className="space-y-medium">
+        <div className="body-styles">
+          <MDXProvider>{children}</MDXProvider>
+        </div>
+        {linkPostButton ? linkPostButton : twitterLink}
+      </div>
+    </PostLayout>
   );
 }
 

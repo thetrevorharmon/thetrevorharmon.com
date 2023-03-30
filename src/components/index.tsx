@@ -7,3 +7,4 @@ export {ProjectPreviewTile} from './ProjectPreviewTile';
 export {PostMdxItem} from './PostMdxItem';
 export {FeaturedMdxItem} from './FeaturedMdxItem';
 export {ProjectPreviewMdxTile} from './ProjectPreviewMdxTile';
+export {ReadingList} from './ReadingList';

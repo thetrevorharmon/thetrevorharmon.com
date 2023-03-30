@@ -50,7 +50,7 @@ type Mdx = {
   readonly description?: string | null;
   readonly body?: string | null;
   readonly title?: string | null;
-  readonly type?: string | null;
+  readonly type?: 'Post' | 'Project' | null;
   readonly slug?: string | null;
   readonly date?: string | null;
   readonly excerpt?: string | null;
@@ -68,3 +68,11 @@ type Mdx = {
     } | null;
   } | null;
 };
+
+interface RecommendedReading {
+  link: {
+    slug: string;
+    label: string;
+  };
+  date: string;
+}
