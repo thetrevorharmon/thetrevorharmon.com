@@ -1,37 +1,3 @@
-const combinePostTypes = (blogPosts, linkPosts, order = 'desc') => {
-  const orderMultiplier = order === 'desc' ? 1 : -1;
-
-  const posts = [...blogPosts, ...linkPosts].sort((firstPost, secondPost) => {
-    const a = new Date(firstPost.date);
-    const b = new Date(secondPost.date);
-
-    if (a < b) {
-      return 1 * orderMultiplier;
-    }
-    if (a > b) {
-      return -1 * orderMultiplier;
-    }
-
-    return 0;
-  });
-
-  return posts;
-};
-
-const pathTemplateForPostType = (type) => {
-  const paths = {
-    ContentfulBlogPost: `./src/templates/BlogPost.tsx`,
-    ContentfulLinkPost: `./src/templates/LinkPost.tsx`,
-    ContentfulProject: `./src/templates/Project.tsx`,
-  };
-
-  if (!paths[type]) {
-    throw new Error(`Cannot find template path for type: ${type}`);
-  }
-
-  return paths[type];
-};
-
 // Found this at https://gomakethings.com/how-to-shuffle-an-array-with-vanilla-js/
 const shuffle = (array) => {
   var currentIndex = array.length;
@@ -91,7 +57,5 @@ const getRecommendedItems = (item, items, dateAccessor) => {
 };
 
 module.exports = {
-  combinePostTypes: combinePostTypes,
-  pathTemplateForPostType: pathTemplateForPostType,
-  getRecommendedItems: getRecommendedItems,
+  getRecommendedItems,
 };

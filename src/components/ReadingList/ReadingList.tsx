@@ -17,7 +17,7 @@ export function ReadingList({type, recommendedReading}: Props) {
     type === 'Post'
       ? `Other things I've written`
       : 'Other things I’ve worked on';
-  const route = type === 'Post' ? Routes.blogPostNext : Routes.projectNext;
+  const route = type === 'Post' ? Routes.blogPost : Routes.project;
 
   const makePairMarkup = ({link: {slug, label}, date}: RecommendedReading) => {
     return (

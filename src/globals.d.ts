@@ -39,10 +39,6 @@ interface PageMetadata {
   image?: string;
 }
 
-interface allContentfulNodes<T> {
-  nodes: T[];
-}
-
 type Mdx = {
   readonly client?: string | null;
   readonly link?: string | null;

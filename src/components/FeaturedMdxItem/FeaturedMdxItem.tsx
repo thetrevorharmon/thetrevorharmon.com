@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {PostMdxItem} from '../PostMdxItem';
-import {Breakout, Icon, ImageNext} from '../../UI-Kit';
+import {Breakout, Icon, Image} from '../../UI-Kit';
 
 interface Props {
   node: Mdx;
@@ -20,7 +20,7 @@ export const FeaturedMdxItem = ({node, className}: Props) => {
     <Breakout>
       <div className={classname}>
         <div className="space-y-medium">
-          <ImageNext src={node.image} />
+          <Image src={node.image} />
           <PostMdxItem node={node} />
         </div>
         <Icon
