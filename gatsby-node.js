@@ -5,7 +5,7 @@
  */
 const path = require(`path`);
 const readingTime = require(`reading-time`);
-const Utils = require('./gatsby-utils');
+const {buildReadingList, validateNode} = require('./gatsby-utils');
 
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
@@ -40,88 +40,7 @@ exports.createPages = ({graphql, actions}) => {
       }
     `).then((result) => {
       result.data.allMdx.nodes.forEach((node, _, nodes) => {
-        const name = node.internal.contentFilePath;
-
-        class NodeError extends Error {
-          constructor(message) {
-            super(`${message}\n\n${name}`);
-          }
-        }
-
-        function enforceNodeFields(node) {
-          const fileName = node.internal.contentFilePath
-            .split('/')
-            .slice(-1)
-            .pop()
-            .split(/\.mdx?/)[0];
-
-          if (fileName !== node.slug) {
-            throw new NodeError(`Slug and file name must match`);
-          }
-
-          if (node.type == null) {
-            throw new NodeError('Must include a type');
-          }
-
-          if (!['Project', 'Post'].includes(node.type)) {
-            throw new NodeError(
-              `Encountered ${node.type} as the node type–must include one of the following types (case sensistive): Post, Project`,
-            );
-          }
-
-          if (node.title == null || node.title == '') {
-            throw new NodeError(`Must include title`);
-          }
-
-          if (node.slug == null) {
-            throw new NodeError(`Must include slug`);
-          }
-
-          if (node.date == null) {
-            throw new NodeError(`Must include date`);
-          }
-
-          if (
-            node.image != null &&
-            (node.image.source == null || node.image.alt == null)
-          ) {
-            throw new NodeError(
-              `Must include source, alt if an image is passed`,
-            );
-          }
-
-          if (node.type === 'Post') {
-            enforcePostFields(node);
-          } else {
-            enforceProjectFields(node);
-          }
-        }
-
-        function enforcePostFields(node) {
-          if (node.description == null && node.link == null) {
-            throw new NodeError(`Must include description or link`);
-          }
-
-          if (node.image != null && node.image.attribution != null) {
-            if (
-              node.image.attribution.author == null ||
-              node.image.attribution.sourceName == null ||
-              node.image.attribution.sourceUrl == null
-            ) {
-              throw new NodeError(
-                `Must include author, sourceName, sourceUrl if an image attribution is passed`,
-              );
-            }
-          }
-        }
-
-        function enforceProjectFields(node) {
-          if (node.client == null) {
-            throw new NodeError(`Must include client`);
-          }
-        }
-
-        enforceNodeFields(node);
+        validateNode(node);
 
         const componentPath = path.resolve(`./src/templates/${node.type}.tsx`);
         const contentPath = node.internal.contentFilePath;
@@ -129,7 +48,7 @@ exports.createPages = ({graphql, actions}) => {
 
         const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
 
-        const recommendedNodes = Utils.getRecommendedItems(
+        const recommendedReading = buildReadingList(
           node,
           nodes.filter((currentNode) => currentNode.type === node.type),
         );
@@ -138,7 +57,7 @@ exports.createPages = ({graphql, actions}) => {
           path: `${pathPrefix}/${node.slug}`,
           context: {
             slug: node.slug,
-            recommendedReading: recommendedNodes,
+            recommendedReading: recommendedReading,
           },
           component: component,
         });
@@ -152,10 +71,14 @@ exports.createPages = ({graphql, actions}) => {
 exports.onCreateNode = ({node, actions}) => {
   const {createNodeField} = actions;
   if (node.internal.type === `Mdx`) {
+    const rawTimeToRead = readingTime(node.body).minutes;
+    const roundedTimeToRead = Math.ceil(rawTimeToRead);
+    const timeToRead = roundedTimeToRead === 0 ? 1 : roundedTimeToRead;
+
     createNodeField({
       node,
       name: `timeToRead`,
-      value: readingTime(node.body),
+      value: timeToRead,
     });
   }
 };
@@ -174,7 +97,7 @@ exports.createSchemaCustomization = ({actions}) => {
   // on the mdx node
   createTypes(`
     type Mdx implements Node {
-      timeToRead: Float @proxy(from: "fields.timeToRead.minutes")
+      timeToRead: Float @proxy(from: "fields.timeToRead")
 
       title: String @proxy(from: "frontmatter.title")
       description: String @proxy(from: "frontmatter.description")

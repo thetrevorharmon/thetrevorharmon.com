@@ -13,12 +13,6 @@ declare module '*.svg' {
   export = content;
 }
 
-interface MarkdownRemark {
-  html: string;
-  excerpt?: string;
-  timeToRead?: string;
-}
-
 interface SiteMetadata {
   title: string;
   description: string;
