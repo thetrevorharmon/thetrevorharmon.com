@@ -1,1 +1,0 @@
-export {FeaturedMdxItem} from './FeaturedMdxItem';

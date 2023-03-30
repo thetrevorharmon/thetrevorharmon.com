@@ -4,15 +4,12 @@ import * as React from 'react';
 import {Header, Image, Link, Meta} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
-interface ProjectPreviewTileProps {
+interface Props {
   project: Mdx;
   className?: string;
 }
 
-export const ProjectPreviewMdxTile = ({
-  project,
-  className,
-}: ProjectPreviewTileProps) => {
+export const ProjectTile = ({project, className}: Props) => {
   const {title, slug, image, date} = project;
   const classname = classnames(
     'p-normal bg-caption-bg dark:bg-caption-bg-dark',

@@ -8,7 +8,7 @@ export interface Props {
   className?: string;
 }
 
-export const PostMdxItem = ({node}: Props) => {
+export const PostTile = ({node}: Props) => {
   const buttonText =
     node?.type === 'Project' ? 'See More →' : 'Continue Reading →';
 

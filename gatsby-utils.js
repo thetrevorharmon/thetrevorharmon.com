@@ -35,7 +35,7 @@ const chooseRandomElements = (original, list, numberOfElements = 3) => {
   return chosenElements;
 };
 
-const getRecommendedItems = (item, items, dateAccessor) => {
+const getRecommendedItems = (item, items) => {
   const pickedItems = chooseRandomElements(item, items);
   const preparedItems = pickedItems
     .map((item) => ({
@@ -43,7 +43,7 @@ const getRecommendedItems = (item, items, dateAccessor) => {
         slug: item.slug,
         label: item.title,
       },
-      date: item[dateAccessor],
+      date: item['date'],
     }))
     .sort((firstPair, secondPair) => {
       if (new Date(firstPair.date) > new Date(secondPair.date)) {
