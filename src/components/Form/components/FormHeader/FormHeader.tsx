@@ -13,7 +13,9 @@ export const FormHeader = ({title, tagline}: FormHeaderProps) => {
       <Header rank={3} type="Heading">
         {title}
       </Header>
-      <TextStyle style="Body">{tagline}</TextStyle>
+      <div>
+        <TextStyle style="Body">{tagline}</TextStyle>
+      </div>
     </div>
   );
 };

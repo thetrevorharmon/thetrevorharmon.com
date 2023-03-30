@@ -48,7 +48,7 @@ exports.createPages = ({graphql, actions}) => {
             title
             description
             link
-            date
+            date(formatString: "DD MMM YYYY")
             type
             client
             image {
@@ -69,7 +69,7 @@ exports.createPages = ({graphql, actions}) => {
         }
       }
     `).then((result) => {
-      result.data.allMdx.nodes.forEach((node) => {
+      result.data.allMdx.nodes.forEach((node, _, nodes) => {
         const name = node.internal.contentFilePath;
 
         class NodeError extends Error {
@@ -169,10 +169,17 @@ exports.createPages = ({graphql, actions}) => {
 
         const pathPrefix = node.type === 'Post' ? 'blog-next' : 'projects-next';
 
+        const recommendedNodes = Utils.getRecommendedItems(
+          node,
+          nodes.filter((currentNode) => currentNode.type === node.type),
+          'date',
+        );
+
         createPage({
           path: `${pathPrefix}/${node.slug}`,
           context: {
             slug: node.slug,
+            recommendedReading: recommendedNodes,
           },
           component: component,
         });

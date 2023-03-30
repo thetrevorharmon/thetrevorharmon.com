@@ -1,6 +1,6 @@
 import {graphql} from 'gatsby';
 import React from 'react';
-import {Layout} from '../layouts';
+import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
 import {Header, MetaNext} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
@@ -9,11 +9,16 @@ interface Props {
   children: React.ReactNode;
   pageContext: {
     slug: string;
+    recommendedReading: RecommendedReading[];
   };
   data: Queries.ProjectNextQuery;
 }
 
-function ProjectNext({children, data, pageContext: {slug}}: Props) {
+function ProjectNext({
+  children,
+  data,
+  pageContext: {slug, recommendedReading},
+}: Props) {
   const site = useSiteData();
   const {mdx} = data;
 
@@ -31,21 +36,23 @@ function ProjectNext({children, data, pageContext: {slug}}: Props) {
   };
 
   return (
-    <Layout pageMetadata={metadata}>
-      <div className="space-y-large my-large">
-        <div className="space-y-tiny">
-          <Header rank={1} type="Title">
-            {mdx.title}
-          </Header>
-          <MetaNext date={mdx.date} client={mdx.client} />
-        </div>
-        <div className="space-y-medium">
-          <div className="body-styles projects">
-            <MDXProvider>{children}</MDXProvider>
-          </div>
+    <PostLayout
+      pageMetadata={metadata}
+      type="Project"
+      recommendedReading={recommendedReading}
+    >
+      <div className="space-y-tiny">
+        <Header rank={1} type="Title">
+          {mdx.title}
+        </Header>
+        <MetaNext date={mdx.date} client={mdx.client} />
+      </div>
+      <div className="space-y-medium">
+        <div className="body-styles projects">
+          <MDXProvider>{children}</MDXProvider>
         </div>
       </div>
-    </Layout>
+    </PostLayout>
   );
 }
 
