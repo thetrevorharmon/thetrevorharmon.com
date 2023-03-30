@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {expand, link, rss, star, twitter} from './icons';
+import {expand, link, rss, star, twitter, email} from './icons';
 import {IconName} from './types';
 
 interface IconProps {
@@ -20,6 +20,7 @@ const mapping: {[name in IconName]: React.SVGFactory} = {
   rss: rss,
   star: star,
   twitter: twitter,
+  email: email,
 };
 
 const sizes = {

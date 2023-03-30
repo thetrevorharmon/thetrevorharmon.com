@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import 'normalize.css';
 import '../styles/global.scss';
 
-import {Footer, Form, ReadingList, Navbar} from '../components';
+import {Footer, ReadingList, Navbar, FollowCallout} from '../components';
 import {Container} from './utils';
 
 interface Props extends LayoutProps {
@@ -34,7 +34,7 @@ export function PostLayout({
       {hasSignupForm && (
         <div className="mt-huge mb-large bg-caption-bg dark:bg-caption-bg-dark">
           <Container>
-            <Form />
+            <FollowCallout />
           </Container>
         </div>
       )}
