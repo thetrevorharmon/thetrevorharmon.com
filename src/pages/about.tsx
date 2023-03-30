@@ -1,81 +1,73 @@
-import classnames from 'classnames';
-import {graphql} from 'gatsby';
+import {graphql, useStaticQuery} from 'gatsby';
+import {GatsbyImage} from 'gatsby-plugin-image';
 import * as React from 'react';
 
-import {useTheme} from '../context/ThemeContext';
 import {Layout} from '../layouts';
-import {
-  ContentfulAsset,
-  ContentfulBaseObject,
-  ContentfulLongText,
-} from '../types';
-import {Breakout, Header, Image} from '../UI-Kit';
-import {Routes} from '../utils';
+import {Breakout, Header, Link} from '../UI-Kit';
+import {ExternalLinks, Routes} from '../utils';
 
-interface AboutPageData extends ContentfulBaseObject {
-  title: string;
-  post: ContentfulLongText;
-  featureImage: ContentfulAsset;
-}
+function AboutPage() {
+  const data = useStaticQuery<Queries.AboutPageImageQuery>(graphql`
+    query AboutPageImage {
+      file(name: {eq: "about-page-image"}) {
+        childImageSharp {
+          gatsbyImageData(width: 700)
+        }
+      }
+    }
+  `);
 
-interface AboutPageProps {
-  data: {
-    allContentfulAboutPage: allContentfulNodes<AboutPageData>;
-  };
-}
-
-export default (props: AboutPageProps) => {
-  const aboutPage = props.data.allContentfulAboutPage.nodes[0];
+  if (
+    data.file == null ||
+    data.file.childImageSharp == null ||
+    data.file.childImageSharp.gatsbyImageData == null
+  ) {
+    return null;
+  }
 
   const pageMetadata: PageMetadata = {
-    description: aboutPage.post.childMarkdownRemark.excerpt || '',
     title: 'About',
     url: Routes.about(),
   };
-
-  const theme = useTheme();
 
   return (
     <Layout className="body-styles" pageMetadata={pageMetadata}>
       <div className="space-y-huge my-huge">
         <Header rank={1} type="Display">
-          {aboutPage.title}
+          About
         </Header>
 
         <div className="space-y-medium">
           <Breakout>
-            <Image src={aboutPage.featureImage} />
+            <GatsbyImage
+              image={data.file.childImageSharp.gatsbyImageData}
+              alt="Trevor Harmon walking through a group of trees"
+            />
           </Breakout>
 
-          <div
-            dangerouslySetInnerHTML={{
-              __html: aboutPage.post.childMarkdownRemark.html,
-            }}
-          />
+          <>
+            <p>Hi there! Welcome to my little space on the internet.</p>
+            <p>
+              First off, introductions. My name is Trevor Harmon and I love to
+              build things. I've been designing and developing since CSS2 was a
+              thing.
+            </p>
+            <p>
+              I've worked on a variety of projects and have done everything from
+              design to full-stack development. The thing I enjoy the most (and
+              that people tend to say I'm good at) is front-end development. I
+              currently write front-end code for Shopify.
+            </p>
+            <p>
+              If you like my work, or just want to say hello, feel free to reach
+              out <Link url={ExternalLinks.twitter()}>on Twitter</Link>.
+            </p>
+            <p>–Trevor</p>
+          </>
         </div>
       </div>
     </Layout>
   );
-};
+}
 
-export const query = graphql`
-  query AboutPageQuery {
-    allContentfulAboutPage {
-      nodes {
-        title
-        featureImage {
-          ...ContentfulAsset
-        }
-        post {
-          childMarkdownRemark {
-            html
-            excerpt
-          }
-          internal {
-            type
-          }
-        }
-      }
-    }
-  }
-`;
+export default AboutPage;

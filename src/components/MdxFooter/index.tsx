@@ -1,0 +1,1 @@
+export {MdxFooter} from './MdxFooter';
