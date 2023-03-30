@@ -20,7 +20,6 @@ export const useSiteData = (): SiteMetadata => {
             author
             site
           }
-          mailchimpFallbackUrl
         }
       }
     }

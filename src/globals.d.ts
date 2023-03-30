@@ -23,7 +23,6 @@ interface SiteMetadata {
     author: string;
     site: string;
   };
-  mailchimpFallbackUrl?: string;
 }
 
 interface PageMetadata {
