@@ -4,8 +4,7 @@ import {zephyr} from './extensions';
 import {EditorView} from '@codemirror/view';
 import {Breakout} from '../../../../UI-Kit';
 
-const INITIAL_CODE = `
-/*
+const INITIAL_CODE = `/*
   Welcome to Zephyr!
 
   This is a little toy language to show how to connect
@@ -25,8 +24,7 @@ const myFirstVariable = 1000;
 // And \`let\` works for variable assignments, too:
 let anotherVariable = 'This is another variable!';
 
-// That's it. Edit this code to try it out!
-`;
+// That's it. Edit this code to try it out!`;
 
 export function CodeEditor() {
   const [value, setValue] = useState(INITIAL_CODE);
