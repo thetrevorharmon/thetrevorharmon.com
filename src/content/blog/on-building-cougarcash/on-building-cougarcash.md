@@ -3,6 +3,7 @@ title: On Building CougarCash
 slug: on-building-cougarcash
 date: 2015-09-08T12:00-08:00
 type: Post
+status: Published
 description: How I created an app that transferred money in less than 20 seconds.
 image:
   source: ./man-holding-cougarcash.png

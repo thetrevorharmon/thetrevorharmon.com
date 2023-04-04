@@ -4,6 +4,7 @@ slug: juneau-print-design
 date: '2017-05-12'
 client: Michael Barrow & the Tourists
 type: Project
+status: Published
 image:
   source: ./Juneau-Album-Cover.jpg
   alt: '"Juneau" Album Cover'

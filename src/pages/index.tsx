@@ -49,7 +49,7 @@ export const query = graphql`
   query IndexPage {
     allMdx(
       sort: {date: DESC}
-      filter: {type: {eq: "Post"}, status: {eq: null}}
+      filter: {type: {eq: "Post"}, status: {eq: "Published"}}
       limit: 5
     ) {
       nodes {

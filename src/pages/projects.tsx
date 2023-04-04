@@ -53,7 +53,10 @@ export default ({data}: ProjectsPageProps) => {
 
 export const query = graphql`
   query ProjectsPage {
-    allMdx(sort: {date: DESC}, filter: {type: {eq: "Project"}}) {
+    allMdx(
+      sort: {date: DESC}
+      filter: {type: {eq: "Project"}, status: {eq: "Published"}}
+    ) {
       nodes {
         slug
         title

@@ -3,6 +3,7 @@ title: Email signup forms with Gatsby and Mailchimp
 slug: email-signup-forms-with-gatsby-and-mailchimp
 date: 2019-07-24T10:36-07:00
 type: Post
+status: Published
 description: A simple tutorial, some sample code, and–you guessed it–a signup form.
 image:
   source: ./A-row-of-six-mailboxes-in-front-of-a-bush.jpg

@@ -3,6 +3,7 @@ title: Introducing 2.0 in 2020
 slug: introducing-2-0-in-2020
 date: 2020-01-09T10:54-08:00
 type: Post
+status: Published
 description: The next version of thetrevorharmon.com
 image:
   source: ./Sillhouette-of-a-Man-Jumping-near-a-Mountain.jpg

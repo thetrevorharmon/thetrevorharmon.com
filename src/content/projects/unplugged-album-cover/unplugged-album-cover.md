@@ -4,6 +4,7 @@ slug: unplugged-album-cover
 date: '2014-10-10'
 client: Jefferson & York
 type: Project
+status: Published
 image:
   source: ./Unplugged-Album-Art.png
   alt: Unplugged Album Art
