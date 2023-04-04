@@ -18,6 +18,7 @@ exports.createPages = ({graphql, actions}) => {
             title
             description
             link
+            status
             date(formatString: "DD MMM YYYY")
             type
             client

@@ -3,6 +3,7 @@ title: How to silence false SASS warnings in React
 slug: how-to-silence-false-sass-warnings-in-react
 date: 2018-11-27T12:17-08:00
 type: Post
+status: Published
 description: >-
   Typescript on React can sometimes think that your SASS is missing. Here’s the
   actual problem, and how to fix it.

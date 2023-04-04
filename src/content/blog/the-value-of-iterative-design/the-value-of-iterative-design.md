@@ -3,6 +3,7 @@ title: The value of iterative design
 slug: the-value-of-iterative-design
 date: 2019-03-13T15:00-07:00
 type: Post
+status: Published
 description: >-
   My six attempts to design "Sweet Honey" taught me that iterating on creative
   work can be difficult, but produces better results in the end.

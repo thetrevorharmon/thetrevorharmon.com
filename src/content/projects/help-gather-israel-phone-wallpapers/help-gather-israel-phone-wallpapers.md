@@ -4,6 +4,7 @@ slug: help-gather-israel-phone-wallpapers
 date: '2021-01-31'
 client: Church
 type: Project
+status: Published
 image:
   source: ./Photo-iPhone-Wallpaper---Help-Gather-Israel---Forest.png
   alt: 'Photo: iPhone Wallpaper - Help Gather Israel - Forest'

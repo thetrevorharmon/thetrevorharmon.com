@@ -21,7 +21,11 @@ export const PostTile = ({node}: Props) => {
           <Header rank={2} type="Heading">
             {node.title}
           </Header>
-          <Meta date={node.date} timeToRead={node.timeToRead} />
+          <Meta
+            date={node.date}
+            timeToRead={node.timeToRead}
+            isLinkPost={node.link != null}
+          />
         </div>
         <p>
           <TextStyle style="Body">{node.description}</TextStyle>

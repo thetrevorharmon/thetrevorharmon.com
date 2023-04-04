@@ -4,6 +4,7 @@ slug: concert-flyers
 date: '2018-03-24'
 client: Michael Barrow & the Tourists
 type: Project
+status: Published
 image:
   source: ./MBT---Rexburg-show.jpg
   alt: MB&T - Rexburg show

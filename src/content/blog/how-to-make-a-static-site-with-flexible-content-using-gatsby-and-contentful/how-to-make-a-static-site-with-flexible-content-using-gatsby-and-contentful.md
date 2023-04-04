@@ -3,6 +3,7 @@ title: How to make a static site with flexible content (using Gatsby & Contentfu
 slug: how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful
 date: 2018-09-10T13:48-08:00
 type: Post
+status: Published
 description: >-
   I recently redesigned my portfolio site with Gatsby, and Contentful as a
   headless CMS made it dead simple to manage content. Here’s how.
@@ -144,7 +145,7 @@ If you see `Starting to fetch data from Contentful` and `Updated entries 3`, tha
 
 When you bring content in from Contentful, you can query the content with a graphQL query. We’re going to bring in our list of movies and display them pretty.
 
-_Brief aside: Gatsby has a nice graphQL helper viewer that you can access at [http://localhost:8000/\_\_\_graphQL](http://localhost:8000/___graphQL 'Local GraphQL browser'). It’s really useful for validating graphQL queries quickly, without having to look in your browser and figure out what’s wrong._
+\_Brief aside: Gatsby has a nice graphQL helper viewer that you can access at [http://localhost:8000/\_\_\_graphQL](http://localhost:8000/___graphQL 'Local GraphQL browser'). It’s really useful for validating graphQL queries quickly, without having to look in your browser and figure out what’s wrong.\_
 
 We’re going to first just get our feet wet by displaying a basic unordered list of movies. GraphQL’s approach is that you only bring in the information you want, so our query would look like this:
 
