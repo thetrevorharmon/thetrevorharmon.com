@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 import {EditorView} from '@codemirror/view';
+import {Breakout} from '../../../../UI-Kit';
 
 const INITIAL_CODE = `
 /*
@@ -66,31 +67,33 @@ export function CodeEditor() {
   });
 
   return (
-    <ReactCodeEditor
-      value={value}
-      extensions={[zephyr, theme]}
-      onChange={setValue}
-      indentWithTab={false}
-      basicSetup={{
-        foldGutter: false,
-        lineNumbers: true,
-        highlightActiveLineGutter: true,
-        dropCursor: false,
-        allowMultipleSelections: false,
-        indentOnInput: false,
-        bracketMatching: false,
-        closeBrackets: false,
-        autocompletion: false,
-        rectangularSelection: false,
-        crosshairCursor: false,
-        highlightActiveLine: true,
-        highlightSelectionMatches: false,
-        closeBracketsKeymap: false,
-        searchKeymap: false,
-        foldKeymap: false,
-        completionKeymap: false,
-        lintKeymap: false,
-      }}
-    />
+    <Breakout className="my-medium">
+      <ReactCodeEditor
+        value={value}
+        extensions={[zephyr, theme]}
+        onChange={setValue}
+        indentWithTab={false}
+        basicSetup={{
+          foldGutter: false,
+          lineNumbers: true,
+          highlightActiveLineGutter: true,
+          dropCursor: false,
+          allowMultipleSelections: false,
+          indentOnInput: false,
+          bracketMatching: false,
+          closeBrackets: false,
+          autocompletion: false,
+          rectangularSelection: false,
+          crosshairCursor: false,
+          highlightActiveLine: true,
+          highlightSelectionMatches: false,
+          closeBracketsKeymap: false,
+          searchKeymap: false,
+          foldKeymap: false,
+          completionKeymap: false,
+          lintKeymap: false,
+        }}
+      />
+    </Breakout>
   );
 }

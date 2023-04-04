@@ -3,7 +3,7 @@ import React from 'react';
 
 interface Props {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }
 
 export const Breakout = ({children, className}: Props) => {
