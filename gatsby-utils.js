@@ -28,6 +28,16 @@ const validateNode = (node) => {
       );
     }
 
+    if (node.status == null) {
+      throw new NodeError('Must include a status');
+    }
+
+    if (!['Archived', 'Published', 'Draft'].includes(node.status)) {
+      throw new NodeError(
+        `Encountered ${node.status} as the node status–must include one of the following types (case sensistive): Archived, Published, Draft`,
+      );
+    }
+
     if (node.title == null || node.title == '') {
       throw new NodeError(`Must include title`);
     }
