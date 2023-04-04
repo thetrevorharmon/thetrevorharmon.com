@@ -148,7 +148,7 @@ const config: GatsbyConfig = {
               query RssFeed {
                   allMdx(
                     sort: {date: DESC}
-                    filter: {type: {eq: "Post"}, status: {eq: null}}
+                    filter: {type: {eq: "Post"}, status: {eq: "Published"}}
                     limit: 1000
                   ) {
                   nodes {

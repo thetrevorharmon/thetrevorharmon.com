@@ -48,7 +48,7 @@ export const query = graphql`
   query BlogPage {
     allMdx(
       sort: {date: DESC}
-      filter: {type: {eq: "Post"}, status: {eq: null}}
+      filter: {type: {eq: "Post"}, status: {eq: "Published"}}
     ) {
       nodes {
         timeToRead
