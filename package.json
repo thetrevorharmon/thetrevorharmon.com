@@ -15,9 +15,18 @@
     "pretty": "prettier --write \"**/*.{ts,tsx,js,css,scss}\""
   },
   "dependencies": {
+    "@codemirror/language": "^6.6.0",
+    "@codemirror/view": "^6.9.3",
     "@fontsource/inter": "^4.5.15",
+    "@lezer/common": "^1.0.2",
+    "@lezer/highlight": "^1.1.4",
     "@mdx-js/react": "^2.3.0",
     "@types/react-is": "^17.0.3",
+    "@uiw/react-codemirror": "^4.19.11",
+    "antlr4ts": "^0.5.0-alpha.4",
+    "assert": "^2.0.0",
+    "babel-plugin-prismjs": "^2.1.0",
+    "buffer": "^6.0.3",
     "classnames": "^2.3.2",
     "dotenv": "^16.0.3",
     "gatsby": "^5.3.3",
@@ -50,6 +59,7 @@
     "react-masonry-css": "^1.0.16",
     "reading-time": "^1.5.0",
     "sass": "^1.57.1",
+    "util": "^0.12.5",
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "devDependencies": {
