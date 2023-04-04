@@ -4,6 +4,7 @@ slug: hey-hey-hey-album-art
 date: '2018-08-10'
 client: Michael Barrow & the Tourists
 type: Project
+status: Published
 image:
   source: ./Hey-Hey-Hey-Remix-Album-Art.jpg
   alt: Hey Hey Hey Remix Album Art

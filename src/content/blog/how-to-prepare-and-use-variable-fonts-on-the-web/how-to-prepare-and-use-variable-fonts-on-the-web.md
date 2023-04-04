@@ -3,6 +3,7 @@ title: How to prepare and use variable fonts on the web
 slug: how-to-prepare-and-use-variable-fonts-on-the-web
 date: 2020-01-27T14:40-07:00
 type: Post
+status: Published
 description: A primer on subsetting, formatting, and CSS font features.
 image:
   source: >-

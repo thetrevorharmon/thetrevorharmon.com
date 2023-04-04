@@ -3,6 +3,7 @@ title: What I learned from a failed startup
 slug: what-I-learned-from-a-failed-startup
 date: 2019-01-29T15:05-08:00
 type: Post
+status: Published
 description: >-
   Four lessons I learned from working as an engineer for a startup that ran out
   of cash and went bankrupt.

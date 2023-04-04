@@ -4,6 +4,7 @@ slug: santa-barbara-sessions-album-cover
 date: '2018-03-23'
 client: Michael Barrow & the Tourists
 type: Project
+status: Published
 image:
   source: ./Santa-Barbara-Session-Album-Cover.jpg
   alt: Santa Barbara Session Album Cover
