@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
-import {Breakout} from '../../../../UI-Kit';
+import {Breakout} from '../../../../../UI-Kit';
 
 import './CodeEditor.scss';
 
