@@ -76,11 +76,15 @@ module.exports = {
     './src/UI-Kit/**/*.{js,jsx,ts,tsx}',
     './src/utils/**/*.{js,jsx,ts,tsx}',
     './src/layouts/**/*.{js,jsx,ts,tsx}',
+    './src/content/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     fontFamily: {
       sans: [
         "'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+      ],
+      mono: [
+        "'Fira Mono', 'PT Mono', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace",
       ],
     },
     extend: {

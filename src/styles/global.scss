@@ -10,6 +10,8 @@
   @import '~@fontsource/inter/variable-full.css';
 }
 
+@import '~@fontsource/fira-mono/400.css';
+
 html {
   @screen base {
     font-size: 16px;
@@ -28,6 +30,39 @@ body {
   @media (prefers-color-scheme: dark) {
     background-color: theme('colors.body-bg-dark');
   }
+}
+
+div::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+  @apply rounded-md;
+}
+
+div::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track {
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+  @apply rounded-md;
+}
+
+div::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+  @apply rounded-lg outline-none m-[1px];
+  @apply bg-[#d0d0d0] dark:bg-[#555];
+}
+
+div::-webkit-scrollbar-track:vertical,
+pre::-webkit-scrollbar-track:vertical,
+div::-webkit-scrollbar-track:horizontal,
+pre::-webkit-scrollbar-track:horizontal {
+  @apply rounded-md;
+}
+
+div::-webkit-scrollbar-corner,
+pre::-webkit-scrollbar-corner {
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+  @apply rounded-md;
 }
 
 body.light {

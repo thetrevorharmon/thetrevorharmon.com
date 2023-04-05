@@ -128,3 +128,17 @@ exports.onCreateWebpackConfig = ({actions}) => {
     ],
   });
 };
+
+// This is so I can use ANTLR in Gatsby
+// These are polyfills for Node APIs that are no longer included by default
+exports.onCreateWebpackConfig = ({actions}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      fallback: {
+        assert: require.resolve('assert'),
+        buffer: require.resolve('buffer'),
+        util: require.resolve('util'),
+      },
+    },
+  });
+};
