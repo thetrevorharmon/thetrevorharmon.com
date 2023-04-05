@@ -5,15 +5,16 @@
 
 code[class*='language-'],
 pre[class*='language-'] {
-  font-family: 'PT Mono', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier New',
-    Courier, monospace;
+  @apply font-mono;
+
   direction: ltr;
   text-align: left;
   word-spacing: normal;
   word-break: normal;
   font-size: 0.95em;
   line-height: 1.2em;
-  border-radius: 3px;
+
+  @apply rounded-md;
 
   tab-size: 4;
   hyphens: none;
@@ -25,6 +26,11 @@ pre[class*='language-'] {
   @screen desktop {
     white-space: pre;
   }
+}
+
+pre[class*='language-'] {
+  max-height: 600px;
+  overflow: auto;
 }
 
 code[class*='language-'],
