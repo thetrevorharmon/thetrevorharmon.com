@@ -29,6 +29,12 @@ pre[class*='language-'] {
   }
 }
 
+pre[class*='language-'] {
+  max-height: 600px;
+  overflow: scroll;
+  overflow-x: scroll;
+}
+
 code[class*='language-'],
 pre[class*='language-'],
 pre[class*='language-'] > code[class*='language'] {

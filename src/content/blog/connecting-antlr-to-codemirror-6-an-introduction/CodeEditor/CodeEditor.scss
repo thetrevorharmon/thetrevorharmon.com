@@ -60,7 +60,5 @@
   .cm-activeLineGutter,
   .cm-activeLine {
     @apply bg-[#e2e2e2] dark:bg-[#2f2f2f];
-
-    @apply caret-red-500;
   }
 }
