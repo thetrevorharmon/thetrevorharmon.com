@@ -76,6 +76,7 @@ module.exports = {
     './src/UI-Kit/**/*.{js,jsx,ts,tsx}',
     './src/utils/**/*.{js,jsx,ts,tsx}',
     './src/layouts/**/*.{js,jsx,ts,tsx}',
+    './src/content/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     fontFamily: {
