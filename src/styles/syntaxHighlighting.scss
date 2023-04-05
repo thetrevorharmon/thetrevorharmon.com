@@ -15,7 +15,6 @@ pre[class*='language-'] {
   line-height: 1.2em;
 
   @apply rounded-md;
-  @apply overflow-hidden;
 
   tab-size: 4;
   hyphens: none;
@@ -31,8 +30,7 @@ pre[class*='language-'] {
 
 pre[class*='language-'] {
   max-height: 600px;
-  overflow: scroll;
-  overflow-x: scroll;
+  overflow: auto;
 }
 
 code[class*='language-'],
