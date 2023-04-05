@@ -172,6 +172,24 @@ body.dark {
     @apply Breakout;
   }
 
+  > img {
+    max-width: none;
+  }
+
+  .gatsby-resp-image-wrapper,
+  > img {
+    // These are the styles for @Breakout
+    // I had to inline them here because @Breakout #{!important} didn't work
+    // and these conflict with some default gatsby styling that I can't
+    // seem to remove
+
+    @apply -mx-container-base #{!important};
+    @apply desktop:mx-0 #{!important};
+    @apply expanded:-mx-breakout #{!important};
+
+    @apply my-medium;
+  }
+
   &.projects {
     .gatsby-resp-image-wrapper {
       // These are the styles for @Breakout
