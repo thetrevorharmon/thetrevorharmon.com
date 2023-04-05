@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 
@@ -7,17 +7,25 @@ import {Breakout} from '../../UI-Kit';
 
 interface Props {
   initialValue?: string;
+  updateValue?: (value: string) => void;
 }
 
-export function CodeEditor({initialValue}: Props) {
+export function CodeEditor({initialValue, updateValue}: Props) {
   const [value, setValue] = useState(initialValue ?? '');
+
+  const handleOnChange = useCallback((value: string) => {
+    setValue(value);
+    if (updateValue) {
+      updateValue(value);
+    }
+  }, []);
 
   return (
     <Breakout className="my-medium CodeEditor">
       <ReactCodeEditor
         value={value}
         extensions={[zephyr]}
-        onChange={setValue}
+        onChange={handleOnChange}
         indentWithTab={false}
         basicSetup={{
           foldGutter: false,
