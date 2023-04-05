@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import {PostTile} from '../components';
 import {Layout} from '../layouts';
-import {Header, TextStyle} from '../UI-Kit';
+import {Header} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface Props {
