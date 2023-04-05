@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.CodeEditor {
+  .cm-editor {
+    @apply bg-caption-bg dark:bg-caption-bg-dark;
+  }
+}

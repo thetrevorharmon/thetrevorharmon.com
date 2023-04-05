@@ -4,6 +4,9 @@ import {zephyr} from './extensions';
 import {EditorView} from '@codemirror/view';
 import {Breakout} from '../../../../UI-Kit';
 
+import './CodeEditor.scss';
+import { useTheme } from '../../../../context/ThemeContext';
+
 const INITIAL_CODE = `/*
   Welcome to Zephyr!
 
@@ -28,48 +31,15 @@ let anotherVariable = 'This is another variable!';
 
 export function CodeEditor() {
   const [value, setValue] = useState(INITIAL_CODE);
-
-  const theme = EditorView.theme({
-    // '&': {
-    //   border: `1px solid ${tailwindConfig.theme.colors.slate['500']}`,
-    //   borderRadius: tailwindConfig.theme.borderRadius.md,
-    //   overflow: 'hidden',
-    // },
-    // '&.cm-focused': {
-    //   outline: 'none',
-    //   borderColor: tailwindConfig.theme.colors.slate['900'],
-    // },
-    // '.cm-scroller': {
-    //   fontFamily: tailwindConfig.theme.fontFamily.mono.join(', '),
-    //   fontSize: tailwindConfig.theme.fontSize.sm[0],
-    // },
-    // '.cm-gutter.cm-lineNumbers': {},
-    // '.cm-gutters': {
-    //   color: tailwindConfig.theme.colors.slate['500'],
-    //   borderColor: tailwindConfig.theme.colors.slate['500'],
-    //   backgroundColor: tailwindConfig.theme.colors.slate['200'],
-    // },
-    // '.cm-activeLine': {
-    //   backgroundColor: tailwindConfig.theme.colors.slate['100'],
-    // },
-    // '.cm-lineNumbers .cm-gutterElement': {
-    //   padding: `0 ${tailwindConfig.theme.margin['2']} 0 ${tailwindConfig.theme.margin['2']}`,
-    // },
-    // '.cm-activeLineGutter': {
-    //   backgroundColor: 'transparent',
-    // },
-    // '.cm-gutterElement.cm-activeLineGutter': {
-    //   color: tailwindConfig.theme.colors.blue['900'],
-    //   fontWeight: '800',
-    // },
-  });
+  const isDarkMode = useTheme() === 'Dark';
 
   return (
-    <Breakout className="my-medium">
+    <Breakout className="my-medium CodeEditor">
       <ReactCodeEditor
         value={value}
-        extensions={[zephyr, theme]}
+        extensions={[zephyr]}
         onChange={setValue}
+        theme={isDarkMode ? 'dark' : 'light'}
         indentWithTab={false}
         basicSetup={{
           foldGutter: false,
