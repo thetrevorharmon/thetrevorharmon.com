@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
-import {EditorView} from '@codemirror/view';
 import {Breakout} from '../../../../UI-Kit';
 
 import './CodeEditor.scss';
-import { useTheme } from '../../../../context/ThemeContext';
 
-const INITIAL_CODE = `/*
+const INITIAL_CODE = `
+/*
   Welcome to Zephyr!
 
   This is a little toy language to show how to connect
@@ -27,11 +26,11 @@ const myFirstVariable = 1000;
 // And \`let\` works for variable assignments, too:
 let anotherVariable = 'This is another variable!';
 
-// That's it. Edit this code to try it out!`;
+// That's it. Edit this code to try it out!
+`;
 
 export function CodeEditor() {
   const [value, setValue] = useState(INITIAL_CODE);
-  const isDarkMode = useTheme() === 'Dark';
 
   return (
     <Breakout className="my-medium CodeEditor">
@@ -39,7 +38,6 @@ export function CodeEditor() {
         value={value}
         extensions={[zephyr]}
         onChange={setValue}
-        theme={isDarkMode ? 'dark' : 'light'}
         indentWithTab={false}
         basicSetup={{
           foldGutter: false,

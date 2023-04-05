@@ -17,6 +17,7 @@
   "dependencies": {
     "@codemirror/language": "^6.6.0",
     "@codemirror/view": "^6.9.3",
+    "@fontsource/fira-mono": "^4.5.10",
     "@fontsource/inter": "^4.5.15",
     "@lezer/common": "^1.0.2",
     "@lezer/highlight": "^1.1.4",

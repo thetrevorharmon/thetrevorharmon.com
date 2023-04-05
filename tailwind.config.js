@@ -83,6 +83,9 @@ module.exports = {
       sans: [
         "'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
       ],
+      mono: [
+        "'Fira Mono', 'PT Mono', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace",
+      ],
     },
     extend: {
       spacing: {
