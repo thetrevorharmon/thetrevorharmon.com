@@ -1,0 +1,422 @@
+---
+title: 'Connecting ANTLR to CodeMirror 6: Building a Language Server'
+slug: connecting-antlr-to-codemirror-6-building-a-language-server
+date: 2023-05-17
+type: Post
+status: Draft
+description: Build an ANTLR language server
+---
+
+In the previous article in this series, I gave a high level overview of CodeMirror 6, Lezer, ANTLR, and introduced my little toy language “Zephyr”. In this article, we’ll build a small ANTLR-based language server that we can use to connect to CodeMirror 6.
+
+_Note: because CodeMirror 6 is a javascript-based framework, all of the code I’ll share will be in typescript, including any ANTLR-generated code._
+
+## The Zephyr grammar
+
+In order to generate an ANTLR language server, you first need grammar files. Let’s use the Zephyr grammar as our example. In ANTLR, it expects grammar definitions for both a lexer and a parser. Here’s the lexer:
+
+```g4
+lexer grammar ZephyrLexer;
+
+CONST : 'const' ;
+LET : 'let' ;
+
+ASSIGN: '=' ;
+SEMICOLON: ';' ;
+
+BLOCK_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
+LINE_COMMENT: '//' ~[\r\n\u2028\u2029]* -> channel(HIDDEN);
+
+NUMBER : [0-9]+ ;
+STRING: '\'' .*? '\'';
+IDENTIFIER: [a-zA-Z]+ ;
+WHITESPACE: [ \t\n\r\f]+ -> skip ;
+```
+
+And the parser:
+
+```g4
+parser grammar ZephyrParser;
+
+program : statement* ;
+
+statement : keyword identifier assign expression terminator ;
+
+expression : NUMBER | IDENTIFIER | STRING;
+
+keyword: CONST | LET ;
+
+identifier: IDENTIFIER;
+assign: ASSIGN;
+terminator: SEMICOLON;
+```
+
+You’ll see that the grammar is very limited, and only supports a few features:
+
+- Variable assignment with `let` and `const`
+- Line and block comments
+- Strings and numbers in assignments
+
+I kept this list of features intentionally small so it would be easier to have a comprehensive grasp of the language.
+
+## Generating ANTLR files
+
+Now that we have Zephyr’s lexer and parser defined, we can use ANTLR to generate parser and lexer files based off the grammar definition. ANTLR has a handful of runtimes, but we’ll be using the javascript version to build files for us. Additionally, there is an excellent `antlr4ts` package that we can use to generate both a language server and the associated types. First we need to download our packages:
+
+```
+yarn add antlr4 antlr4-c3 antlr4ts
+```
+
+With our packages installed, we can use `antlr4ts` to generate some language server files. You can generate those files with a command that looks like this:
+
+```
+antlr4ts ZephyrLexer.g4 -visitor ZephyrParser.g4 -o src/antlr -Xexact-output-dir
+```
+
+The `-o src/antlr` argument defines the output directory, and the `-Xexact-output-dir` tells `antlr4ts` to use the exact directory I’m passing in (instead of creating a directory inside that directory).
+
+If all went well, you should see some newly generated files in your `src/antlr` directory–as an example, here is what `ZephyrLexer` looks like:
+
+```typescript
+// Generated from grammar/ZephyrLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+
+import {ATN} from 'antlr4ts/atn/ATN';
+import {ATNDeserializer} from 'antlr4ts/atn/ATNDeserializer';
+import {CharStream} from 'antlr4ts/CharStream';
+import {Lexer} from 'antlr4ts/Lexer';
+import {LexerATNSimulator} from 'antlr4ts/atn/LexerATNSimulator';
+import {NotNull} from 'antlr4ts/Decorators';
+import {Override} from 'antlr4ts/Decorators';
+import {RuleContext} from 'antlr4ts/RuleContext';
+import {Vocabulary} from 'antlr4ts/Vocabulary';
+import {VocabularyImpl} from 'antlr4ts/VocabularyImpl';
+
+import * as Utils from 'antlr4ts/misc/Utils';
+
+export class ZephyrLexer extends Lexer {
+  public static readonly CONST = 1;
+  public static readonly LET = 2;
+  public static readonly ASSIGN = 3;
+  public static readonly SEMICOLON = 4;
+  public static readonly BLOCK_COMMENT = 5;
+  public static readonly LINE_COMMENT = 6;
+  public static readonly NUMBER = 7;
+  public static readonly STRING = 8;
+  public static readonly IDENTIFIER = 9;
+  public static readonly WHITESPACE = 10;
+
+  // tslint:disable:no-trailing-whitespace
+  public static readonly channelNames: string[] = [
+    'DEFAULT_TOKEN_CHANNEL',
+    'HIDDEN',
+  ];
+
+  // tslint:disable:no-trailing-whitespace
+  public static readonly modeNames: string[] = ['DEFAULT_MODE'];
+
+  public static readonly ruleNames: string[] = [
+    'CONST',
+    'LET',
+    'ASSIGN',
+    'SEMICOLON',
+    'BLOCK_COMMENT',
+    'LINE_COMMENT',
+    'NUMBER',
+    'STRING',
+    'IDENTIFIER',
+    'WHITESPACE',
+  ];
+
+  private static readonly _LITERAL_NAMES: Array<string | undefined> = [
+    undefined,
+    "'const'",
+    "'let'",
+    "'='",
+    "';'",
+  ];
+  private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
+    undefined,
+    'CONST',
+    'LET',
+    'ASSIGN',
+    'SEMICOLON',
+    'BLOCK_COMMENT',
+    'LINE_COMMENT',
+    'NUMBER',
+    'STRING',
+    'IDENTIFIER',
+    'WHITESPACE',
+  ];
+  public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(
+    ZephyrLexer._LITERAL_NAMES,
+    ZephyrLexer._SYMBOLIC_NAMES,
+    [],
+  );
+
+  // @Override
+  // @NotNull
+  public get vocabulary(): Vocabulary {
+    return ZephyrLexer.VOCABULARY;
+  }
+  // tslint:enable:no-trailing-whitespace
+
+  constructor(input: CharStream) {
+    super(input);
+    this._interp = new LexerATNSimulator(ZephyrLexer._ATN, this);
+  }
+
+  // @Override
+  public get grammarFileName(): string {
+    return 'ZephyrLexer.g4';
+  }
+
+  // @Override
+  public get ruleNames(): string[] {
+    return ZephyrLexer.ruleNames;
+  }
+
+  // @Override
+  public get serializedATN(): string {
+    return ZephyrLexer._serializedATN;
+  }
+
+  // @Override
+  public get channelNames(): string[] {
+    return ZephyrLexer.channelNames;
+  }
+
+  // @Override
+  public get modeNames(): string[] {
+    return ZephyrLexer.modeNames;
+  }
+
+  public static readonly _serializedATN: string =
+    '\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x02\fX\b\x01\x04' +
+    '\x02\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04' +
+    '\x07\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x03\x02\x03\x02\x03' +
+    '\x02\x03\x02\x03\x02\x03\x02\x03\x03\x03\x03\x03\x03\x03\x03\x03\x04\x03' +
+    '\x04\x03\x05\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x07\x06*\n\x06\f' +
+    '\x06\x0E\x06-\v\x06\x03\x06\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07\x03' +
+    '\x07\x03\x07\x03\x07\x07\x078\n\x07\f\x07\x0E\x07;\v\x07\x03\x07\x03\x07' +
+    '\x03\b\x06\b@\n\b\r\b\x0E\bA\x03\t\x03\t\x07\tF\n\t\f\t\x0E\tI\v\t\x03' +
+    '\t\x03\t\x03\n\x06\nN\n\n\r\n\x0E\nO\x03\v\x06\vS\n\v\r\v\x0E\vT\x03\v' +
+    '\x03\v\x04+G\x02\x02\f\x03\x02\x03\x05\x02\x04\x07\x02\x05\t\x02\x06\v' +
+    '\x02\x07\r\x02\b\x0F\x02\t\x11\x02\n\x13\x02\v\x15\x02\f\x03\x02\x06\x05' +
+    '\x02\f\f\x0F\x0F\u202A\u202B\x03\x022;\x04\x02C\\c|\x05\x02\v\f\x0E\x0F' +
+    '""\x02]\x02\x03\x03\x02\x02\x02\x02\x05\x03\x02\x02\x02\x02\x07\x03' +
+    '\x02\x02\x02\x02\t\x03\x02\x02\x02\x02\v\x03\x02\x02\x02\x02\r\x03\x02' +
+    '\x02\x02\x02\x0F\x03\x02\x02\x02\x02\x11\x03\x02\x02\x02\x02\x13\x03\x02' +
+    '\x02\x02\x02\x15\x03\x02\x02\x02\x03\x17\x03\x02\x02\x02\x05\x1D\x03\x02' +
+    '\x02\x02\x07!\x03\x02\x02\x02\t#\x03\x02\x02\x02\v%\x03\x02\x02\x02\r' +
+    '3\x03\x02\x02\x02\x0F?\x03\x02\x02\x02\x11C\x03\x02\x02\x02\x13M\x03\x02' +
+    '\x02\x02\x15R\x03\x02\x02\x02\x17\x18\x07e\x02\x02\x18\x19\x07q\x02\x02' +
+    '\x19\x1A\x07p\x02\x02\x1A\x1B\x07u\x02\x02\x1B\x1C\x07v\x02\x02\x1C\x04' +
+    '\x03\x02\x02\x02\x1D\x1E\x07n\x02\x02\x1E\x1F\x07g\x02\x02\x1F \x07v\x02' +
+    '\x02 \x06\x03\x02\x02\x02!"\x07?\x02\x02"\b\x03\x02\x02\x02#$\x07=\x02' +
+    "\x02$\n\x03\x02\x02\x02%&\x071\x02\x02&'\x07,\x02\x02'+\x03\x02\x02" +
+    '\x02(*\v\x02\x02\x02)(\x03\x02\x02\x02*-\x03\x02\x02\x02+,\x03\x02\x02' +
+    '\x02+)\x03\x02\x02\x02,.\x03\x02\x02\x02-+\x03\x02\x02\x02./\x07,\x02' +
+    '\x02/0\x071\x02\x0201\x03\x02\x02\x0212\b\x06\x02\x022\f\x03\x02\x02\x02' +
+    '34\x071\x02\x0245\x071\x02\x0259\x03\x02\x02\x0268\n\x02\x02\x0276\x03' +
+    '\x02\x02\x028;\x03\x02\x02\x0297\x03\x02\x02\x029:\x03\x02\x02\x02:<\x03' +
+    '\x02\x02\x02;9\x03\x02\x02\x02<=\b\x07\x02\x02=\x0E\x03\x02\x02\x02>@' +
+    '\t\x03\x02\x02?>\x03\x02\x02\x02@A\x03\x02\x02\x02A?\x03\x02\x02\x02A' +
+    'B\x03\x02\x02\x02B\x10\x03\x02\x02\x02CG\x07)\x02\x02DF\v\x02\x02\x02' +
+    'ED\x03\x02\x02\x02FI\x03\x02\x02\x02GH\x03\x02\x02\x02GE\x03\x02\x02\x02' +
+    'HJ\x03\x02\x02\x02IG\x03\x02\x02\x02JK\x07)\x02\x02K\x12\x03\x02\x02\x02' +
+    'LN\t\x04\x02\x02ML\x03\x02\x02\x02NO\x03\x02\x02\x02OM\x03\x02\x02\x02' +
+    'OP\x03\x02\x02\x02P\x14\x03\x02\x02\x02QS\t\x05\x02\x02RQ\x03\x02\x02' +
+    '\x02ST\x03\x02\x02\x02TR\x03\x02\x02\x02TU\x03\x02\x02\x02UV\x03\x02\x02' +
+    '\x02VW\b\v\x03\x02W\x16\x03\x02\x02\x02\t\x02+9AGOT\x04\x02\x03\x02\b' +
+    '\x02\x02';
+  public static __ATN: ATN;
+  public static get _ATN(): ATN {
+    if (!ZephyrLexer.__ATN) {
+      ZephyrLexer.__ATN = new ATNDeserializer().deserialize(
+        Utils.toCharArray(ZephyrLexer._serializedATN),
+      );
+    }
+
+    return ZephyrLexer.__ATN;
+  }
+}
+```
+
+You can view all of the generated files [on GitHub](https://github.com/thetrevorharmon/zephyr-demo/tree/main/src/language/build) if you want to double check that the command is working (or to just download the files straight up if you don’t want to bother generating them yourself).
+
+_Note: depending on what you are using to build & run this code, you may encounter an issue with missing polyfills; the ANTLR generated files rely on Node.js’s `assert`, `buffer`, and `util`. You may need to provide your own fallback modules ([example](https://github.com/thetrevorharmon/zephyr-demo/blob/a70867d8d7ba13f751f2db5f81f07fcdc0d4c343/gatsby-node.js#L5))._
+
+## Building the language server
+
+Now that we have a parser and lexer generated for us, we can build a language server! As a starting point, we’ll define all of the token types that the language server supports:
+
+```typescript
+const supportedTokens = [
+  'const',
+  'let',
+  'semicolon',
+  'assign',
+  'blockComment',
+  'lineComment',
+  'number',
+  'string',
+  'identifier',
+  'unknown',
+] as const;
+
+export type Token = (typeof supportedTokens)[number];
+```
+
+After setting up these types, we’ll set up a mapping between the Lexer’s types and our typescript types:
+
+```typescript
+import {ZephyrLexer} from './antlr/ZephyrLexer';
+
+const lexerTokenToTokenLookup: {[key: number]: Token} = {
+  [ZephyrLexer.CONST]: 'const',
+  [ZephyrLexer.LET]: 'let',
+  [ZephyrLexer.SEMICOLON]: 'semicolon',
+  [ZephyrLexer.ASSIGN]: 'assign',
+  [ZephyrLexer.BLOCK_COMMENT]: 'blockComment',
+  [ZephyrLexer.LINE_COMMENT]: 'lineComment',
+  [ZephyrLexer.NUMBER]: 'number',
+  [ZephyrLexer.STRING]: 'string',
+  [ZephyrLexer.IDENTIFIER]: 'identifier',
+};
+```
+
+For the keys of this lookup, I’m using static members of the `ZephyrLexer` class. These are generated as part of the grammar–if your grammar changes, these members will change as well. These members are assigned to a specific number, but I find that it’s easier to understand what is happening when I assign them to string types instead.
+
+Now that we have a type mapping created, we can build a little tiny language server:
+
+```typescript
+export class LanguageServer {
+  // 1
+  public getTokenStream(value: string) {
+    // 2
+    const chars = CharStreams.fromString(value);
+    const lexer = new ZephyrLexer(chars);
+
+    // 3
+    const tokenStream = new CommonTokenStream(lexer);
+
+    // 4
+    tokenStream.fill();
+
+    // 5
+    return tokenStream.getTokens();
+  }
+
+  // 6
+  public getTokenTypeForIndex(tokenIndex: number): Token {
+    if (tokenIndex in lexerTokenToTokenLookup) {
+      return lexerTokenToTokenLookup[tokenIndex];
+    }
+
+    return 'unknown';
+  }
+}
+```
+
+Here’s what’s happening in this code:
+
+1. We define the `getTokenStream` method, which takes in a string (eventually, the document).
+2. From that value, we construct a `CharStream` and build a lexer.
+3. From the lexer we can derive a token stream. By default, the token stream is empty.
+4. Because the token stream is empty, we need to trigger `.fill()` on it.
+5. We return the `getTokens()` value off of the token stream, which returns the tokens themselves instead of the entire stream object.
+6. The `getTokenTypeForIndex` is defined and will be used to take the token type (which is found in the token stream) and get the string type for that particular token.
+
+Let’s put it all together:
+
+```typescript
+import {CharStreams, CommonTokenStream} from 'antlr4ts';
+import {ZephyrLexer} from './antlr/ZephyrLexer';
+
+const supportedTokens = [
+  'const',
+  'let',
+  'semicolon',
+  'assign',
+  'blockComment',
+  'lineComment',
+  'number',
+  'string',
+  'identifier',
+  'unknown',
+] as const;
+
+export type Token = (typeof supportedTokens)[number];
+
+const lexerTokenToTokenLookup: {[key: number]: Token} = {
+  [ZephyrLexer.CONST]: 'const',
+  [ZephyrLexer.LET]: 'let',
+  [ZephyrLexer.SEMICOLON]: 'semicolon',
+  [ZephyrLexer.ASSIGN]: 'assign',
+  [ZephyrLexer.BLOCK_COMMENT]: 'blockComment',
+  [ZephyrLexer.LINE_COMMENT]: 'lineComment',
+  [ZephyrLexer.NUMBER]: 'number',
+  [ZephyrLexer.STRING]: 'string',
+  [ZephyrLexer.IDENTIFIER]: 'identifier',
+};
+
+export class LanguageServer {
+  public getTokenStream(value: string) {
+    const chars = CharStreams.fromString(value);
+    const lexer = new ZephyrLexer(chars);
+    const tokenStream = new CommonTokenStream(lexer);
+
+    tokenStream.fill();
+
+    return tokenStream.getTokens();
+  }
+
+  public getTokenTypeForIndex(tokenIndex: number): Token {
+    if (tokenIndex in lexerTokenToTokenLookup) {
+      return lexerTokenToTokenLookup[tokenIndex];
+    }
+
+    return 'unknown';
+  }
+}
+```
+
+## Our first token stream
+
+Now that we have a working language server, let's tokenize a stream of text! We'll tokenize the statement `const tokens = 'are great!';`.
+
+```typescript
+const languageServer = new LanguageServer();
+const tokens = languageServer
+  .getTokenStream(`const tokens = 'are great!';`)
+  .map((token) => ({
+    index: token.tokenIndex,
+    range: [token.startIndex, token.stopIndex],
+    type: languageServer.getTokenTypeForIndex(token.type),
+  }));
+
+console.log(tokens);
+```
+
+I'm doing a _little_ bit of work to transform the tokens into something a bit more readable. After tokenizing this statement, the output looks a little something like this:
+
+```typescript
+[
+  {index: 0, range: [0, 4], type: 'const'},
+  {index: 1, range: [6, 11], type: 'identifier'},
+  {index: 2, range: [13, 13], type: 'assign'},
+  {index: 3, range: [15, 26], type: 'string'},
+  {index: 4, range: [27, 27], type: 'semicolon'},
+  {index: 5, range: [28, 27], type: 'unknown'},
+];
+```
+
+Want to take this for a spin? Type in the code editor below–the tokens underneath the code editor update as you type!
+
+import {CodeEditorWithTokens} from './CodeEditorWithTokens';
+
+<CodeEditorWithTokens initialValue={`\nconst tokens = 'are great!';\n`} />
+
+## What's next
+
+Now that we have a functional language server, it's time to take a deep dive into how to connect this language server to CodeMirror 6. The next article in this series will do just that–but if you can't wait till then, feel free to [explore the code yourself](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr-lang/ParserAdapter.ts).
