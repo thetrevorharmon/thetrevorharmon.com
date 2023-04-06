@@ -1,43 +1,31 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
-import {Breakout} from '../../../../../UI-Kit';
 
 import './CodeEditor.scss';
+import {Breakout} from '../../UI-Kit';
 
-const INITIAL_CODE = `
-/*
-  Welcome to Zephyr!
+interface Props {
+  initialValue?: string;
+  updateValue?: (value: string) => void;
+}
 
-  This is a little toy language to show how to connect
-  an ANTLR language server to CodeMirror 6.
+export function CodeEditor({initialValue, updateValue}: Props) {
+  const [value, setValue] = useState(initialValue ?? '');
 
-  • It supports variable assignment & comments.
-  • Semicolons are required at the end of statements.
-  • Only numbers and strings can be assigned to variables.
-
-  Here's a block comment!
-*/
-// It also supports line comments, if you prefer those.
-
-// You can do variable assignments with \`const\`:
-const myFirstVariable = 1000;
-
-// And \`let\` works for variable assignments, too:
-let anotherVariable = 'This is another variable!';
-
-// That's it. Edit this code to try it out!
-`;
-
-export function CodeEditor() {
-  const [value, setValue] = useState(INITIAL_CODE);
+  const handleOnChange = useCallback((value: string) => {
+    setValue(value);
+    if (updateValue) {
+      updateValue(value);
+    }
+  }, []);
 
   return (
     <Breakout className="my-medium CodeEditor">
       <ReactCodeEditor
         value={value}
         extensions={[zephyr]}
-        onChange={setValue}
+        onChange={handleOnChange}
         indentWithTab={false}
         basicSetup={{
           foldGutter: false,
