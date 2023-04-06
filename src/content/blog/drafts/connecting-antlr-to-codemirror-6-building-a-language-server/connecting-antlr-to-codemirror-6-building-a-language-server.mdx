@@ -411,8 +411,12 @@ I'm doing a _little_ bit of work to transform the tokens into something a bit mo
 ];
 ```
 
-Want to take this for a spin? Type in the code editor and watch the output change!
+Want to take this for a spin? Type in the code editor below–the tokens underneath the code editor update as you type!
 
 import {CodeEditorWithTokens} from './CodeEditorWithTokens';
 
 <CodeEditorWithTokens initialValue={`\nconst tokens = 'are great!';\n`} />
+
+## What's next
+
+Now that we have a functional language server, it's time to take a deep dive into how to connect this language server to CodeMirror 6. The next article in this series will do just that–but if you can't wait till then, feel free to [explore the code yourself](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr-lang/ParserAdapter.ts).
