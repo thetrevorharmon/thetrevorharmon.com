@@ -1,8 +1,8 @@
 import { NodeSet, NodeType } from "@lezer/common";
 import { styleTags, tags } from "@lezer/highlight";
-import { ZephyrToken } from "./types";
+import { Token } from "./language";
 
-export const zephyrTokenToNodeType: { [key in ZephyrToken]: NodeType } = {
+export const tokenToNodeType: { [key in Token | "topNode"]: NodeType } = {
   topNode: NodeType.define({ id: 0, name: "topNode" }),
   const: NodeType.define({ id: 1, name: "const" }),
   let: NodeType.define({ id: 2, name: "let" }),
@@ -17,7 +17,7 @@ export const zephyrTokenToNodeType: { [key in ZephyrToken]: NodeType } = {
 };
 
 export const parserAdapterNodeSet = new NodeSet(
-  Object.values(zephyrTokenToNodeType)
+  Object.values(tokenToNodeType)
 ).extend(
   styleTags({
     const: tags.keyword,

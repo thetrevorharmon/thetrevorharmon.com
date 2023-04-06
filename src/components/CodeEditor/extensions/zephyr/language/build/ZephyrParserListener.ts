@@ -1,4 +1,4 @@
-// Generated from grammar/ZephyrParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from src/extensions/zephyr/language/grammar/ZephyrParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";

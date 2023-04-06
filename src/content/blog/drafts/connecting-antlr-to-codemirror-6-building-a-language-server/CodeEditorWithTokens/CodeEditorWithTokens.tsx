@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {CodeEditor} from '../../../../../components/CodeEditor';
-import {Zephyr} from '../../../../../components/CodeEditor/language';
+import {LanguageServer} from '../../../../../components/CodeEditor/extensions';
 import {Breakout} from '../../../../../UI-Kit';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export function CodeEditorWithTokens({initialValue}: Props) {
   const [value, setValue] = useState(initialValue ?? '');
 
-  const languageServer = useMemo(() => new Zephyr(), []);
+  const languageServer = useMemo(() => new LanguageServer(), []);
   const tokens = languageServer.getTokenStream(value).map((token) => ({
     text:
       token.type === -1
