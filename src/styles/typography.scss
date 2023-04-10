@@ -92,7 +92,7 @@
     @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
   }
 
-  .h1-base {
+  .h1-common {
     @apply uppercase;
     @apply font-black;
     @apply italic;
@@ -106,8 +106,8 @@
     @apply [&>span]:box-decoration-clone;
   }
 
-  .h1-page {
-    @apply h1-base;
+  .h1-featured {
+    @apply h1-common;
 
     @apply text-[2.45333334rem] desktop:text-[3.06666667rem];
     @apply -tracking-[1px] desktop:-tracking-[1.5px];
@@ -121,7 +121,7 @@
   }
 
   .h1 {
-    @apply h1-base;
+    @apply h1-common;
 
     @apply text-[1.92rem] desktop:text-[2.4rem];
     @apply -tracking-[0.5px] desktop:-tracking-[1px];

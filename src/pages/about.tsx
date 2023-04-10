@@ -33,7 +33,7 @@ function AboutPage() {
   return (
     <Layout className="body-styles" pageMetadata={pageMetadata}>
       <div className="space-y-huge my-huge">
-        <h1 className='page'>
+        <h1 className='featured'>
           <span>About</span>
         </h1>
 

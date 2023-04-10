@@ -23,7 +23,7 @@ export default ({data}: Props) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="mt-huge mb-large space-y-huge">
         <div className="space-y-small">
-          <h1 className='page'>
+          <h1 className='featured'>
             <span>{pageMetadata.title}</span>
           </h1>
           <p>
