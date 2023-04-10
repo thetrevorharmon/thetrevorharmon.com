@@ -23,9 +23,7 @@ export const ProjectTile = ({project, className}: Props) => {
       <div className="space-y-normal">
         {image && <Image src={image} />}
         <div className="space-y-tiny">
-          <h2>
-            {title}
-          </h2>
+          <h2>{title}</h2>
           <Meta date={date} />
         </div>
       </div>

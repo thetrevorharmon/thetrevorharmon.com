@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import {Link} from 'gatsby';
 import React from 'react';
 
-import {TextStyle} from '../../../../UI-Kit';
 import {Routes} from '../../../../utils';
 
 export const BrandButton = () => {
@@ -17,9 +16,12 @@ export const BrandButton = () => {
         'text-white',
         'bg-primary dark:bg-primary-dark',
         'hover:bg-primary-focus dark:hover:bg-primary-focus-dark',
+        'text-[1.92rem] desktop:text-[2.4rem]',
+        '-tracking-[0.5px] desktop:-tracking-[1px]',
+        'uppercase font-black italic',
       )}
     >
-      <TextStyle style="Title">TH.</TextStyle>
+      TH.
     </Link>
   );
 };

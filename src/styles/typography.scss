@@ -1,5 +1,5 @@
 @layer components {
-  .Text-Display {
+  /* .Text-Display {
     @apply text-[2.45333334rem] desktop:text-[3.06666667rem];
     @apply uppercase;
     @apply font-black;
@@ -13,7 +13,7 @@
     @apply font-black;
     @apply italic;
     @apply -tracking-[0.5px] desktop:-tracking-[1px];
-  }
+  } */
 
   .Text-Blockquote {
     @apply text-[1.44rem] desktop:text-[1.6rem];
@@ -55,7 +55,7 @@
     @apply uppercase font-black italic;
   }
 
-  .Header-Display {
+  /* .Header-Display {
     @apply Text-Display;
 
     @apply [&>span]:shadow-header-display [&>span]:dark:shadow-header-display-dark;
@@ -67,8 +67,8 @@
     @apply [&>span]:box-decoration-clone;
     @apply text-white;
     @apply leading-[1.2];
-  }
-
+  } */
+  /* 
   .Header-Title {
     @apply Text-Title;
 
@@ -90,7 +90,7 @@
     @apply Text-Subheading;
 
     @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
-  }
+  } */
 
   .h1-common {
     @apply uppercase;

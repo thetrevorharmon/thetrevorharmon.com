@@ -22,7 +22,7 @@ export default ({data}: IndexPageProps) => {
   const titleMarkup = (
     <div className="space-y-little">
       <p>Hi there! 👋 I'm</p>
-      <h1 className='featured'>
+      <h1 className="featured">
         <span>Trevor Harmon</span>
       </h1>
       <p>{tagline}</p>
@@ -35,7 +35,7 @@ export default ({data}: IndexPageProps) => {
       <div className="space-y-big">
         <FeaturedTile node={featuredPost} />
         {posts.map((post: Mdx) => (
-          <PostTile node={post} />
+          <PostTile node={post} key={post.slug!} />
         ))}
       </div>
       <Button className="mt-big mb-large" url={Routes.blog()}>

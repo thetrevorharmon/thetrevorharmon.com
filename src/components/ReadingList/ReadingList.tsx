@@ -49,9 +49,7 @@ export function ReadingList({type, recommendedReading}: Props) {
 
   return (
     <div className="space-y-small my-large w-full">
-      <h2>
-        {title}
-      </h2>
+      <h2>{title}</h2>
       <div className="space-y-small">{markup}</div>
     </div>
   );

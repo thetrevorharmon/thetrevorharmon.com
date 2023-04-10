@@ -23,11 +23,11 @@ export default ({data}: Props) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="mt-huge mb-large space-y-huge">
         <div className="space-y-small">
-          <h1 className='featured'>
+          <h1 className="featured">
             <span>{pageMetadata.title}</span>
           </h1>
           <p>
-            <TextStyle style="Body">{pageMetadata.description}</TextStyle>
+            {pageMetadata.description}
           </p>
         </div>
 

@@ -76,32 +76,34 @@ body.dark {
   background-color: theme('colors.body-bg-dark');
 }
 
-body {
-  h1 {
-    @apply h1;
-  }
+h1 {
+  @apply h1;
+}
 
-  h1.featured {
-    @apply h1-featured;
-  }
+h1.featured {
+  @apply h1-featured;
+}
 
-  h2 {
-    @apply h2;
-  }
+h2 {
+  @apply h2;
+}
 
-  h3 {
-    @apply h3;
-  }
+h3 {
+  @apply h3;
+}
 
-  h4 {
-    @apply h4;
-  }
+h4 {
+  @apply h4;
+}
 
-  h5 {
-    @apply font-bold;
-    @apply italic;
-    @apply text-text-bold dark:text-text-bold-dark;
-  }
+h5 {
+  @apply font-bold;
+  @apply italic;
+  @apply text-text-bold dark:text-text-bold-dark;
+}
+
+blockquote {
+  @apply Blockquote;
 }
 
 .body-styles {
@@ -197,7 +199,6 @@ body {
   }
 
   blockquote {
-    @apply Blockquote;
     @apply Breakout;
   }
 

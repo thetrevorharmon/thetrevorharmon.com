@@ -25,7 +25,7 @@ export default ({data}: ProjectsPageProps) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="space-y-small mt-huge mb-large">
         <div className="space-y-huge">
-          <h1 className='featured'>
+          <h1 className="featured">
             <span>Projects</span>
           </h1>
           <FeaturedTile node={featuredProject} />

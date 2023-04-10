@@ -8,16 +8,12 @@ export default () => {
     <Layout>
       <div className="my-huge">
         <h1 className="page">
-          <span>
-            {`<h1.page>: this is a page level header`}
-          </span>
+          <span>{`<h1.page>: this is a page level header`}</span>
         </h1>
         <br />
         <br />
         <h1>
-          <span>
-            {`<h1>: this is a post level header`}
-          </span>
+          <span>{`<h1>: this is a post level header`}</span>
         </h1>
         <br />
         <br />

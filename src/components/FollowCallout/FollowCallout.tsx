@@ -8,9 +8,7 @@ export function FollowCallout() {
   return (
     <div className="py-large space-y-normal">
       <div className="space-y-tiny">
-        <h2>
-          Want to read more?
-        </h2>
+        <h2>Want to read more?</h2>
         <div>
           <p>Get my posts in your feed of choice. Opt-out any time.</p>
         </div>
