@@ -18,7 +18,14 @@ export const Meta = ({
   timeToRead: timeToReadMinutes,
   client,
 }: MetaProps) => {
-  const classname = classnames(className, 'Meta');
+  const classname = classnames(
+    className,
+    'text-[0.86666667rem]',
+    'uppercase tracking-[3px]',
+    'block',
+    'text-text-muted dark:text-text-muted-dark',
+    'fill-text-muted dark:fill-text-muted-dark',
+  );
 
   const timeToRead = timeToReadMinutes ? `${timeToReadMinutes} min read` : null;
 

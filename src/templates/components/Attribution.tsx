@@ -27,7 +27,11 @@ export const Attribution = ({mdx}: AttributionProps) => {
     },
   } = mdx;
 
-  const classname = classnames('Attribution Attribution-Photo');
+  const classname = classnames(
+    'text-text-muted dark:text-text-dark',
+    'text-[0.86666667rem]',
+    'mt-tiny text-center',
+  );
 
   return (
     <div className={classname}>

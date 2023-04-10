@@ -1,0 +1,36 @@
+.Icon {
+  @apply h-auto w-auto;
+}
+
+.Icon-Text {
+  @apply [&>svg]:fill-text dark:[&>svg]:fill-text-dark;
+  @apply [&>svg>*>path]:fill-text dark:[&>svg>*>path]:fill-text-dark;
+  @apply [&>svg>*>polygon]:fill-text dark:[&>svg>*>polygon]:fill-text-dark;
+}
+
+.Icon-Primary {
+  @apply [&>svg]:fill-primary dark:[&>svg]:fill-primary-dark;
+  @apply [&>svg>*>path]:fill-primary dark:[&>svg>*>path]:fill-primary-dark;
+  @apply [&>svg>*>polygon]:fill-primary dark:[&>svg>*>polygon]:fill-primary-dark;
+}
+
+.Icon-Small {
+  @apply max-h-[14px];
+  @apply max-w-[14px];
+  @apply [&>svg]:max-h-[14px];
+  @apply [&>svg]:max-w-[14px];
+}
+
+.Icon-Normal {
+  @apply max-h-[17px];
+  @apply max-w-[17px];
+  @apply [&>svg]:max-h-[17px];
+  @apply [&>svg]:max-w-[17px];
+}
+
+.Icon-Large {
+  @apply max-h-[25px];
+  @apply max-w-[25px];
+  @apply [&>svg]:max-h-[25px];
+  @apply [&>svg]:max-w-[25px];
+}

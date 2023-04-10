@@ -26,9 +26,7 @@ export default ({data}: Props) => {
           <h1 className="featured">
             <span>{pageMetadata.title}</span>
           </h1>
-          <p>
-            {pageMetadata.description}
-          </p>
+          <p>{pageMetadata.description}</p>
         </div>
 
         <div className="space-y-large">

@@ -32,12 +32,12 @@ function AboutPage() {
 
   return (
     <Layout className="body-styles" pageMetadata={pageMetadata}>
-      <div className="space-y-huge my-huge">
+      <div className="my-huge">
         <h1 className="featured">
           <span>About</span>
         </h1>
 
-        <div className="space-y-medium">
+        <div>
           <Breakout>
             <GatsbyImage
               image={data.file.childImageSharp.gatsbyImageData}
@@ -45,7 +45,7 @@ function AboutPage() {
             />
           </Breakout>
 
-          <>
+          <div className='mt-medium'>
             <p>Hi there! Welcome to my little space on the internet.</p>
             <p>
               First off, introductions. My name is Trevor Harmon and I love to
@@ -63,7 +63,7 @@ function AboutPage() {
               out <Link url={ExternalLinks.twitter()}>on Twitter</Link>.
             </p>
             <p>–Trevor</p>
-          </>
+          </div>
         </div>
       </div>
     </Layout>

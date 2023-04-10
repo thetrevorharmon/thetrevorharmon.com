@@ -25,9 +25,7 @@ export const PostTile = ({node}: Props) => {
             isLinkPost={node.link != null}
           />
         </div>
-        <p>
-          {node.description}
-        </p>
+        <p>{node.description}</p>
       </div>
 
       <Link url={route(node.slug!)} className="block">

@@ -76,6 +76,34 @@ body.dark {
   background-color: theme('colors.body-bg-dark');
 }
 
+a {
+  @apply underline;
+  @apply transition duration-100;
+
+  //// Normal
+  // text color
+  @apply text-primary-text dark:text-primary-text-dark;
+  @apply hover:text-primary-text-focus hover:dark:text-primary-text-focus-dark;
+  @apply focus:text-primary-text-focus focus:dark:text-primary-text-focus;
+
+  // icon fill color
+  @apply fill-primary-text dark:fill-primary-text-dark;
+  @apply hover:fill-primary-text-focus hover:dark:fill-primary-text-focus-dark;
+  @apply focus:fill-primary-text-focus focus:dark:fill-primary-text-focus;
+}
+
+a.muted {
+  // text color
+  @apply text-text-muted dark:text-text-muted-dark;
+  @apply hover:text-text hover:dark:text-text-dark;
+  @apply focus:text-text focus:dark:text-text;
+
+  // icon fill color
+  @apply fill-text-muted dark:fill-text-muted-dark;
+  @apply hover:fill-text hover:dark:fill-text-dark;
+  @apply focus:fill-text focus:dark:fill-text;
+}
+
 h1 {
   @apply h1;
 }
@@ -104,19 +132,10 @@ h5 {
 
 blockquote {
   @apply Blockquote;
+  @apply Breakout;
 }
 
 .body-styles {
-  @apply text-text dark:text-text-dark;
-
-  a {
-    @apply Link;
-  }
-
-  a.Muted {
-    @apply Link-Muted;
-  }
-
   img {
     @apply bg-caption-bg dark:bg-caption-bg-dark;
   }
@@ -196,10 +215,6 @@ blockquote {
       content: '→';
       font-style: normal;
     }
-  }
-
-  blockquote {
-    @apply Breakout;
   }
 
   > img {
