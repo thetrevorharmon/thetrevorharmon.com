@@ -1,7 +1,6 @@
 export {Blockquote} from './Blockquote';
 export {Breakout} from './Breakout';
 export {Button} from './Button';
-export {Header} from './Header';
 export {Icon, IconName} from './Icon';
 export {Input} from './Input';
 export {Link} from './Link';
