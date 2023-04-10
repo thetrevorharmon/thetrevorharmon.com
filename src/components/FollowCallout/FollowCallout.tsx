@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header, Link} from '../../UI-Kit';
+import {Link} from '../../UI-Kit';
 import {ExternalLinks, useSiteData} from '../../utils';
 
 export function FollowCallout() {
@@ -8,9 +8,9 @@ export function FollowCallout() {
   return (
     <div className="py-large space-y-normal">
       <div className="space-y-tiny">
-        <Header rank={2} type="Heading">
+        <h2>
           Want to read more?
-        </Header>
+        </h2>
         <div>
           <p>Get my posts in your feed of choice. Opt-out any time.</p>
         </div>

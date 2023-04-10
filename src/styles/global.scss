@@ -119,19 +119,19 @@ body {
     @apply bg-caption-bg dark:bg-caption-bg-dark;
   }
 
-  h2,
+  /* h2,
   h3 {
     @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
-  }
+  } */
 
   h2 {
     @apply mt-large mb-small;
-    @apply Text-Heading;
+    /* @apply Text-Heading; */
   }
 
   h3 {
     @apply mt-medium mb-small;
-    @apply Text-Subheading;
+    /* @apply Text-Subheading; */
   }
 
   p {

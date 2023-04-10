@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Header, Image, Link, Meta} from '../../UI-Kit';
+import {Image, Link, Meta} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 interface Props {
@@ -23,9 +23,9 @@ export const ProjectTile = ({project, className}: Props) => {
       <div className="space-y-normal">
         {image && <Image src={image} />}
         <div className="space-y-tiny">
-          <Header rank={2} type="Heading">
+          <h2>
             {title}
-          </Header>
+          </h2>
           <Meta date={date} />
         </div>
       </div>

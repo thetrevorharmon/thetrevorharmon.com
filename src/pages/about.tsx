@@ -3,7 +3,7 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Breakout, Header, Link} from '../UI-Kit';
+import {Breakout, Link} from '../UI-Kit';
 import {ExternalLinks, Routes} from '../utils';
 
 function AboutPage() {
@@ -33,9 +33,9 @@ function AboutPage() {
   return (
     <Layout className="body-styles" pageMetadata={pageMetadata}>
       <div className="space-y-huge my-huge">
-        <Header rank={1} type="Display">
-          About
-        </Header>
+        <h1 className='page'>
+          <span>About</span>
+        </h1>
 
         <div className="space-y-medium">
           <Breakout>

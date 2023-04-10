@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import {PostTile} from '../components';
 import {Layout} from '../layouts';
-import {Header} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface Props {
@@ -21,9 +20,9 @@ export default ({data}: Props) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="mt-huge mb-large space-y-huge">
         <div className="space-y-small">
-          <Header rank={1} type="Display">
-            Drafts
-          </Header>
+          <h1 className='page'>
+            <span>Drafts</span>
+          </h1>
         </div>
 
         <div className="space-y-large">

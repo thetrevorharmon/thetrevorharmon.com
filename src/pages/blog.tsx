@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
-import {Header, TextStyle} from '../UI-Kit';
+import {TextStyle} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface Props {
@@ -23,9 +23,9 @@ export default ({data}: Props) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="mt-huge mb-large space-y-huge">
         <div className="space-y-small">
-          <Header rank={1} type="Display">
-            {pageMetadata.title}
-          </Header>
+          <h1 className='page'>
+            <span>{pageMetadata.title}</span>
+          </h1>
           <p>
             <TextStyle style="Body">{pageMetadata.description}</TextStyle>
           </p>
