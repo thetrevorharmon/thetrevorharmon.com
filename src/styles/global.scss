@@ -76,6 +76,34 @@ body.dark {
   background-color: theme('colors.body-bg-dark');
 }
 
+body {
+  h1 {
+    @apply h1;
+  }
+
+  h1.page {
+    @apply h1-page;
+  }
+
+  h2 {
+    @apply h2;
+  }
+
+  h3 {
+    @apply h3;
+  }
+
+  h4 {
+    @apply h4;
+  }
+
+  h5 {
+    @apply font-bold;
+    @apply italic;
+    @apply text-text-bold dark:text-text-bold-dark;
+  }
+}
+
 .body-styles {
   @apply text-text dark:text-text-dark;
 

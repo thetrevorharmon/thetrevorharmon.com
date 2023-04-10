@@ -1,7 +1,7 @@
-import { Parser, Tree, Input, PartialParse, TreeFragment } from "@lezer/common";
-import { Token } from "antlr4ts";
-import { LanguageServer } from "./language";
-import { parserAdapterNodeSet, tokenToNodeType } from "./constants";
+import {Parser, Tree, Input, PartialParse, TreeFragment} from '@lezer/common';
+import {Token} from 'antlr4ts';
+import {LanguageServer} from './language';
+import {parserAdapterNodeSet, tokenToNodeType} from './constants';
 
 const DEFAULT_NODE_GROUP_SIZE = 4;
 
@@ -67,7 +67,7 @@ export class ParserAdapter extends Parser {
   createParse(
     input: Input,
     fragments: readonly TreeFragment[],
-    ranges: readonly { from: number; to: number }[]
+    ranges: readonly {from: number; to: number}[],
   ): PartialParse {
     return this.startParse(input, fragments, ranges);
   }
@@ -75,10 +75,10 @@ export class ParserAdapter extends Parser {
   startParse(
     input: string | Input,
     _0?: readonly TreeFragment[] | undefined,
-    _1?: readonly { from: number; to: number }[] | undefined
+    _1?: readonly {from: number; to: number}[] | undefined,
   ): PartialParse {
     const document =
-      typeof input === "string" ? input : input.read(0, input.length);
+      typeof input === 'string' ? input : input.read(0, input.length);
 
     const tree = this.buildTree(document);
 

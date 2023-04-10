@@ -40,10 +40,7 @@ export default ({data}: Props) => {
 
 export const query = graphql`
   query DraftsPage {
-    allMdx(
-      sort: {date: DESC}
-      filter: {status: {eq: "Draft"}}
-    ) {
+    allMdx(sort: {date: DESC}, filter: {status: {eq: "Draft"}}) {
       nodes {
         timeToRead
         slug
