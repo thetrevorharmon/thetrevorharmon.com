@@ -1,94 +1,65 @@
 @layer components {
-  .Text-Display {
+  .h1-common {
+    @apply uppercase;
+    @apply font-black;
+    @apply italic;
+
+    @apply text-white;
+
+    // background on internal span
+    @apply [&>span]:bg-primary [&>span]:dark:bg-primary-dark;
+
+    // sets the box decoration to behave as if it's one continuous fragment
+    @apply [&>span]:box-decoration-clone;
+  }
+
+  .h1-featured {
+    @apply h1-common;
+
     @apply text-[2.45333334rem] desktop:text-[3.06666667rem];
-    @apply uppercase;
-    @apply font-black;
-    @apply italic;
     @apply -tracking-[1px] desktop:-tracking-[1.5px];
+
+    @apply [&>span]:shadow-header-display [&>span]:dark:shadow-header-display-dark;
+
+    // spacing around edges of span
+    @apply pl-[10px] [&>span]:pt-[4px] [&>span]:pb-[4px];
+
+    @apply leading-[1.2];
   }
 
-  .Text-Title {
+  .h1 {
+    @apply h1-common;
+
     @apply text-[1.92rem] desktop:text-[2.4rem];
-    @apply uppercase;
-    @apply font-black;
-    @apply italic;
     @apply -tracking-[0.5px] desktop:-tracking-[1px];
+
+    @apply [&>span]:shadow-header-title [&>span]:dark:shadow-header-title-dark;
+    @apply pl-[7px] [&>span]:pt-[2px] [&>span]:pb-[2px];
+    @apply leading-[1.4];
   }
 
-  .Text-Blockquote {
-    @apply text-[1.44rem] desktop:text-[1.6rem];
-    @apply -tracking-[0.5px];
-    @apply font-black italic;
-  }
-
-  .Text-Heading {
+  .h2 {
     @apply text-[1.49333333rem] desktop:text-[1.8666666667rem];
     @apply -tracking-[0.5px] desktop:-tracking-[1px];
     @apply font-black;
     @apply italic;
+
+    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
   }
 
-  .Text-Subheading {
+  .h3 {
     @apply text-[1.28rem] desktop:text-[1.6rem];
     @apply -tracking-[0.5px] font-black italic;
-  }
 
-  .Text-Body {
-    @apply text-[1rem];
-  }
-
-  .Text-Label {
-    @apply text-[1rem];
-  }
-
-  .Text-Meta {
-    @apply text-[0.86666667rem];
-    @apply uppercase tracking-[3px];
-  }
-
-  .Text-Caption {
-    @apply text-[0.86666667rem];
-  }
-
-  .Text-Button {
-    @apply text-[1rem];
-    @apply uppercase font-black italic;
-  }
-
-  .Header-Display {
-    @apply Text-Display;
-
-    @apply [&>span]:shadow-header-display [&>span]:dark:shadow-header-display-dark;
-    // background on internal span
-    @apply [&>span]:bg-primary [&>span]:dark:bg-primary-dark;
-    // spacing around edges of span
-    @apply pl-[10px] [&>span]:pt-[4px] [&>span]:pb-[4px];
-    // sets the box decoration to behave as if it's one continuous fragment
-    @apply [&>span]:box-decoration-clone;
-    @apply text-white;
     @apply leading-[1.2];
+    @apply text-text-bold dark:text-text-bold-dark;
   }
 
-  .Header-Title {
-    @apply Text-Title;
+  .h4 {
+    @apply text-[1.18rem] desktop:text-[1.4rem];
+    @apply -tracking-[0.2px] font-black italic;
 
-    @apply [&>span]:shadow-header-title [&>span]:dark:shadow-header-title-dark;
-    @apply [&>span]:bg-primary [&>span]:dark:bg-primary-dark;
-    @apply pl-[7px] [&>span]:pt-[2px] [&>span]:pb-[2px];
-    @apply [&>span]:box-decoration-clone;
-    @apply text-white;
-    @apply leading-[1.4];
-  }
-
-  .Header-Heading {
-    @apply Text-Heading;
-
-    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
-  }
-
-  .Header-Subheading {
-    @apply Text-Subheading;
-
-    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
+    @apply leading-[1.1];
+    @apply text-text-bold dark:text-text-bold-dark;
   }
 }

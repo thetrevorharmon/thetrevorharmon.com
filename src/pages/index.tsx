@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
-import {Button, Header} from '../UI-Kit';
+import {Button} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {
@@ -22,9 +22,9 @@ export default ({data}: IndexPageProps) => {
   const titleMarkup = (
     <div className="space-y-little">
       <p>Hi there! 👋 I'm</p>
-      <Header rank={1} type="Display">
-        Trevor Harmon
-      </Header>
+      <h1 className="featured">
+        <span>Trevor Harmon</span>
+      </h1>
       <p>{tagline}</p>
     </div>
   );
@@ -35,7 +35,7 @@ export default ({data}: IndexPageProps) => {
       <div className="space-y-big">
         <FeaturedTile node={featuredPost} />
         {posts.map((post: Mdx) => (
-          <PostTile node={post} />
+          <PostTile node={post} key={post.slug!} />
         ))}
       </div>
       <Button className="mt-big mb-large" url={Routes.blog()}>

@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Button, Header, Link, Meta} from '../UI-Kit';
+import {Button, Link, Meta} from '../UI-Kit';
 import {FeaturedImage} from './components';
 import {Routes, useSiteData} from '../utils';
 
@@ -60,9 +60,9 @@ function Article({
     >
       <FeaturedImage mdx={mdx} />
       <div className="space-y-tiny">
-        <Header rank={1} type="Title">
-          {mdx.title}
-        </Header>
+        <h1>
+          <span>{mdx.title}</span>
+        </h1>
         <Meta
           date={mdx.date}
           timeToRead={mdx.timeToRead}

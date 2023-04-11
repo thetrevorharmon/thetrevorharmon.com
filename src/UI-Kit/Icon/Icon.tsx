@@ -4,6 +4,8 @@ import * as React from 'react';
 import {expand, link, rss, star, twitter, email} from './icons';
 import {IconName} from './types';
 
+import './Icon.scss';
+
 interface IconProps {
   className?: string;
   name: IconName;

@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Header, Meta} from '../UI-Kit';
+import {Meta} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 
 interface Props {
@@ -42,9 +42,9 @@ function ProjectNext({
       recommendedReading={recommendedReading}
     >
       <div className="space-y-tiny">
-        <Header rank={1} type="Title">
-          {mdx.title}
-        </Header>
+        <h1>
+          <span>{mdx.title}</span>
+        </h1>
         <Meta date={mdx.date} client={mdx.client} />
       </div>
       <div className="space-y-medium">

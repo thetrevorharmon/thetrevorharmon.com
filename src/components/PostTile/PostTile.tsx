@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Header, Link, Meta, TextStyle} from '../../UI-Kit';
+import {Link, Meta} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 export interface Props {
@@ -18,18 +18,14 @@ export const PostTile = ({node}: Props) => {
     <div className="space-y-normal">
       <div className="space-y-small">
         <div className="space-y-tiny">
-          <Header rank={2} type="Heading">
-            {node.title}
-          </Header>
+          <h2>{node.title}</h2>
           <Meta
             date={node.date}
             timeToRead={node.timeToRead}
             isLinkPost={node.link != null}
           />
         </div>
-        <p>
-          <TextStyle style="Body">{node.description}</TextStyle>
-        </p>
+        <p>{node.description}</p>
       </div>
 
       <Link url={route(node.slug!)} className="block">

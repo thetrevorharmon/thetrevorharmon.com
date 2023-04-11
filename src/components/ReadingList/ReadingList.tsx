@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import {Header, Link} from '../../UI-Kit';
+import {Link} from '../../UI-Kit';
 import {Routes} from '../../utils';
 
 export interface Props {
@@ -49,9 +49,7 @@ export function ReadingList({type, recommendedReading}: Props) {
 
   return (
     <div className="space-y-small my-large w-full">
-      <Header rank={2} type="Heading">
-        {title}
-      </Header>
+      <h2>{title}</h2>
       <div className="space-y-small">{markup}</div>
     </div>
   );

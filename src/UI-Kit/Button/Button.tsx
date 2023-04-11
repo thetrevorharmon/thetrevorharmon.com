@@ -19,7 +19,26 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
     throw new Error('Must use either the url or onClick prop');
   }
 
-  const classname = classnames([className, 'Button']);
+  const classname = classnames([
+    className,
+    'text-[1rem]',
+    'uppercase font-black italic',
+
+    'bg-primary dark:bg-primary-dark',
+    'text-white',
+    'inline-block py-small px-normal leading-[1]',
+
+    'focus:bg-primary-focus focus:dark:bg-primary-focus-dark',
+    'hover:bg-primary-focus hover:dark:bg-primary-focus-dark',
+
+    'transition duration-200',
+
+    // remove underlines when using this with an <a />
+    'no-underline',
+
+    // remove default <button /> styling
+    'border-0 border-none bg-none hover:cursor-pointer',
+  ]);
 
   const linkMarkup = (linkUrl?: string) => {
     if (linkUrl == null) {

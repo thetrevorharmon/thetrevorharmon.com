@@ -30,7 +30,7 @@ export const Link = ({
   const externalUrlPattern = /^http/;
   const isExternalUrl = externalUrlPattern.test(url);
 
-  const classname = classnames(className, 'Link', isMuted && 'Link-Muted');
+  const classname = classnames(className, isMuted && 'muted');
 
   const getInnerMarkup = () => {
     if (icon == null) {
