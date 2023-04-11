@@ -3,7 +3,7 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Breakout, Link} from '../UI-Kit';
+import {Link} from '../UI-Kit';
 import {ExternalLinks, Routes} from '../utils';
 
 function AboutPage() {
@@ -38,14 +38,14 @@ function AboutPage() {
         </h1>
 
         <div>
-          <Breakout>
+          <div className="Breakout">
             <GatsbyImage
               image={data.file.childImageSharp.gatsbyImageData}
               alt="Trevor Harmon walking through a group of trees"
             />
-          </Breakout>
+          </div>
 
-          <div className='mt-medium'>
+          <div className="mt-medium">
             <p>Hi there! Welcome to my little space on the internet.</p>
             <p>
               First off, introductions. My name is Trevor Harmon and I love to

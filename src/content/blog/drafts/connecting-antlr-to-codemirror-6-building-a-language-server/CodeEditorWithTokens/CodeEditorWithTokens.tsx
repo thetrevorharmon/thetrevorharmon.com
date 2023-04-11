@@ -1,7 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {CodeEditor} from '../../../../../components/CodeEditor';
 import {LanguageServer} from '../../../../../components/CodeEditor/extensions';
-import {Breakout} from '../../../../../UI-Kit';
 
 interface Props {
   initialValue?: string;
@@ -51,12 +50,12 @@ export function CodeEditorWithTokens({initialValue}: Props) {
   return (
     <>
       <CodeEditor initialValue={value} updateValue={setValue} />
-      <Breakout className="bg-caption-bg dark:bg-caption-bg-dark rounded-md overflow-hidden border border-[#ddd] dark:border-[#555] text-[0.95rem] max-h-[300px] overflow-y-auto">
+      <div className="Breakout bg-caption-bg dark:bg-caption-bg-dark rounded-md overflow-hidden border border-[#ddd] dark:border-[#555] text-[0.95rem] max-h-[300px] overflow-y-auto">
         <table className="w-full font-mono ">
           <thead>{tableHeaderMarkup}</thead>
           <tbody>{tableBodyMarkup}</tbody>
         </table>
-      </Breakout>
+      </div>
     </>
   );
 }

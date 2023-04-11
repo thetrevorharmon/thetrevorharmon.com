@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {PostTile} from '../PostTile';
-import {Breakout, Icon, Image} from '../../UI-Kit';
+import {Icon, Image} from '../../UI-Kit';
 
 interface Props {
   node: Mdx;
@@ -17,7 +17,7 @@ export const FeaturedTile = ({node, className}: Props) => {
   ]);
 
   return (
-    <Breakout>
+    <div className="Breakout">
       <div className={classname}>
         <div className="space-y-medium">
           <Image src={node.image} />
@@ -34,6 +34,6 @@ export const FeaturedTile = ({node, className}: Props) => {
           color="primary"
         />
       </div>
-    </Breakout>
+    </div>
   );
 };
