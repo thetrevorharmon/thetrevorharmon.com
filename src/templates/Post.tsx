@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Button, Link, Meta} from '../UI-Kit';
+import {Link, Meta, Button} from '../components';
 import {FeaturedImage} from './components';
 import {Routes, useSiteData} from '../utils';
 

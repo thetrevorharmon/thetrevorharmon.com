@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from '../../UI-Kit';
+import {Link} from '../../components';
 import {ExternalLinks, useSiteData} from '../../utils';
 
 export function FollowCallout() {

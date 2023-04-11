@@ -25,7 +25,8 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
     'uppercase font-black italic',
 
     'bg-primary dark:bg-primary-dark',
-    'text-white',
+    'text-white focus:text-white hover:text-white',
+    'dark:text-white dark:focus:text-white dark:hover:text-white',
     'inline-block py-small px-normal leading-[1]',
 
     'focus:bg-primary-focus focus:dark:bg-primary-focus-dark',

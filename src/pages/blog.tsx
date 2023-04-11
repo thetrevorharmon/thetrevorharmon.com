@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
-import {TextStyle} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface Props {

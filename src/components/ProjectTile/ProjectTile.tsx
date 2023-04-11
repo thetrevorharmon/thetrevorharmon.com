@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Image, Link, Meta} from '../../UI-Kit';
+import {Image, Link, Meta} from '../../components';
 import {Routes} from '../../utils';
 
 interface Props {
