@@ -3,7 +3,6 @@ import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 
 import './CodeEditor.scss';
-import {Breakout} from '../../UI-Kit';
 
 interface Props {
   initialValue?: string;
@@ -21,7 +20,7 @@ export function CodeEditor({initialValue, updateValue}: Props) {
   }, []);
 
   return (
-    <Breakout className="my-medium CodeEditor">
+    <div className="Breakout my-medium CodeEditor">
       <ReactCodeEditor
         value={value}
         extensions={[zephyr]}
@@ -48,6 +47,6 @@ export function CodeEditor({initialValue, updateValue}: Props) {
           lintKeymap: false,
         }}
       />
-    </Breakout>
+    </div>
   );
 }

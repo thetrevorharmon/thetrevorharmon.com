@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @import './typography';
-@import './components';
 @import './syntaxHighlighting';
 
 @supports (font-variation-settings: normal) {
@@ -12,6 +11,14 @@
 
 @import '~@fontsource/fira-mono/400.css';
 @import '~@fontsource/fira-mono/700.css';
+
+@layer components {
+  .Breakout {
+    @apply -mx-container-base;
+    @apply desktop:mx-0;
+    @apply expanded:-mx-breakout;
+  }
+}
 
 html {
   @screen base {
@@ -76,34 +83,109 @@ body.dark {
   background-color: theme('colors.body-bg-dark');
 }
 
+a {
+  @apply underline;
+  @apply transition duration-100;
+
+  //// Normal
+  // text color
+  @apply text-primary-text dark:text-primary-text-dark;
+  @apply hover:text-primary-text-focus hover:dark:text-primary-text-focus-dark;
+  @apply focus:text-primary-text-focus focus:dark:text-primary-text-focus;
+
+  // icon fill color
+  @apply fill-primary-text dark:fill-primary-text-dark;
+  @apply hover:fill-primary-text-focus hover:dark:fill-primary-text-focus-dark;
+  @apply focus:fill-primary-text-focus focus:dark:fill-primary-text-focus;
+}
+
+a.muted {
+  // text color
+  @apply text-text-muted dark:text-text-muted-dark;
+  @apply hover:text-text hover:dark:text-text-dark;
+  @apply focus:text-text focus:dark:text-text;
+
+  // icon fill color
+  @apply fill-text-muted dark:fill-text-muted-dark;
+  @apply hover:fill-text hover:dark:fill-text-dark;
+  @apply focus:fill-text focus:dark:fill-text;
+}
+
+h1 {
+  @apply h1;
+}
+
+h1.featured {
+  @apply h1-featured;
+}
+
+h2 {
+  @apply h2;
+}
+
+h3 {
+  @apply h3;
+}
+
+h4 {
+  @apply h4;
+}
+
+h5 {
+  @apply font-bold;
+  @apply italic;
+  @apply text-text-bold dark:text-text-bold-dark;
+}
+
+blockquote {
+  @apply Breakout;
+
+  @apply text-[1.44rem] desktop:text-[1.6rem];
+  @apply -tracking-[0.5px];
+  @apply font-black italic;
+
+  @apply -tracking-[0.5px] font-black italic;
+
+  @apply pt-normal pr-normal pb-normal pl-big;
+  @apply desktop:pt-big desktop:pr-big desktop:pb-big desktop:pl-large;
+
+  @apply relative leading-[1.5];
+
+  @apply text-text-bold dark:text-text-bold-dark;
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+
+  > * {
+    @apply p-0 m-0;
+  }
+
+  &::before {
+    content: '';
+
+    @apply h-[10px] w-[14px];
+
+    @apply bg-quote dark:bg-quote-dark;
+    @apply bg-center bg-no-repeat;
+
+    @apply text-primary mr-little;
+
+    @apply absolute;
+
+    @apply top-[1.9rem] left-[1.1rem];
+    @apply desktop:top-[3.3rem] desktop:left-[2.3rem];
+  }
+}
+
 .body-styles {
-  @apply text-text dark:text-text-dark;
-
-  a {
-    @apply Link;
-  }
-
-  a.Muted {
-    @apply Link-Muted;
-  }
-
   img {
     @apply bg-caption-bg dark:bg-caption-bg-dark;
   }
 
-  h2,
-  h3 {
-    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
-  }
-
   h2 {
     @apply mt-large mb-small;
-    @apply Text-Heading;
   }
 
   h3 {
     @apply mt-medium mb-small;
-    @apply Text-Subheading;
   }
 
   p {
@@ -166,11 +248,6 @@ body.dark {
       content: '→';
       font-style: normal;
     }
-  }
-
-  blockquote {
-    @apply Blockquote;
-    @apply Breakout;
   }
 
   > img {

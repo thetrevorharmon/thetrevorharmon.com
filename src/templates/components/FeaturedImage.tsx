@@ -1,5 +1,5 @@
 import React from 'react';
-import {Breakout, Image} from '../../UI-Kit';
+import {Image} from '../../UI-Kit';
 import {Attribution} from './Attribution';
 
 interface Props {
@@ -13,7 +13,7 @@ export function FeaturedImage({mdx}: Props) {
     return null;
   }
 
-  const imageMarkup = <Breakout>{image}</Breakout>;
+  const imageMarkup = <div className="Breakout">{image}</div>;
 
   const attribution = <Attribution mdx={mdx} />;
 

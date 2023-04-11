@@ -4,7 +4,6 @@ import Masonry from 'react-masonry-css';
 
 import {FeaturedTile, ProjectTile} from '../components';
 import {Layout} from '../layouts';
-import {Breakout, Header} from '../UI-Kit';
 import {Routes} from '../utils';
 
 interface ProjectsPageProps {
@@ -25,13 +24,13 @@ export default ({data}: ProjectsPageProps) => {
     <Layout pageMetadata={pageMetadata}>
       <div className="space-y-small mt-huge mb-large">
         <div className="space-y-huge">
-          <Header rank={1} type="Display">
-            Projects
-          </Header>
+          <h1 className="featured">
+            <span>Projects</span>
+          </h1>
           <FeaturedTile node={featuredProject} />
         </div>
         {projects && (
-          <Breakout>
+          <div className="Breakout">
             <Masonry
               breakpointCols={{
                 default: 2,
@@ -44,7 +43,7 @@ export default ({data}: ProjectsPageProps) => {
                 <ProjectTile project={project} key={project.slug!} />
               ))}
             </Masonry>
-          </Breakout>
+          </div>
         )}
       </div>
     </Layout>
