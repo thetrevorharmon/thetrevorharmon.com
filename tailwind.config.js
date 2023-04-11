@@ -73,7 +73,6 @@ module.exports = {
     './src/pages/**/*.{js,jsx,ts,tsx}',
     './src/components/**/*.{js,jsx,ts,tsx}',
     './src/templates/**/*.{js,jsx,ts,tsx}',
-    './src/UI-Kit/**/*.{js,jsx,ts,tsx}',
     './src/utils/**/*.{js,jsx,ts,tsx}',
     './src/layouts/**/*.{js,jsx,ts,tsx}',
     './src/content/**/*.{js,jsx,ts,tsx}',

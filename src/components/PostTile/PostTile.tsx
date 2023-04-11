@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Link, Meta} from '../../UI-Kit';
+import {Link, Meta} from '../../components';
 import {Routes} from '../../utils';
 
 export interface Props {

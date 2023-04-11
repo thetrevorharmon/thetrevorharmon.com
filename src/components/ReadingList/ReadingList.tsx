@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import {Link} from '../../UI-Kit';
+import {Link} from '../../components';
 import {Routes} from '../../utils';
 
 export interface Props {

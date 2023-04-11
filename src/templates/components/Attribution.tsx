@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import {Link} from '../../UI-Kit';
+import {Link} from '../../components';
 
 interface AttributionProps {
   mdx: Mdx;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Link} from '../../UI-Kit';
+import {Link} from '../Link';
 import {Routes} from '../../utils';
 
 import {BrandButton, ToggleThemeButton} from './components';

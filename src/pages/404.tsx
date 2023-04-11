@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import {Layout} from '../layouts';
 
-import {Link} from '../UI-Kit';
+import {Link} from '../components';
 import {Routes} from '../utils';
 
 export default () => {

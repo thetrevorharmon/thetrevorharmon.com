@@ -3,7 +3,7 @@ import {Link as GatsbyLink} from 'gatsby';
 import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 
-import {Icon, IconName} from '../../UI-Kit';
+import {Icon, IconName} from '../../components';
 
 interface LinkIconProps {
   position: 'leading' | 'trailing';

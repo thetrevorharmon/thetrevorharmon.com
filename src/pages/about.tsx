@@ -3,7 +3,7 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import * as React from 'react';
 
 import {Layout} from '../layouts';
-import {Link} from '../UI-Kit';
+import {Link} from '../components';
 import {ExternalLinks, Routes} from '../utils';
 
 function AboutPage() {
