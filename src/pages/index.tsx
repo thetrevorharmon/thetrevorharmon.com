@@ -1,9 +1,8 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostTile} from '../components';
+import {FeaturedTile, PostTile, Button} from '../components';
 import {Layout} from '../layouts';
-import {Button} from '../UI-Kit';
 import {Routes, useSiteData} from '../utils';
 
 interface IndexPageProps {

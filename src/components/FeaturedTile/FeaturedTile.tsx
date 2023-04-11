@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import {PostTile} from '../PostTile';
-import {Icon, Image} from '../../UI-Kit';
+import {Icon, Image} from '../../components';
 
 interface Props {
   node: Mdx;

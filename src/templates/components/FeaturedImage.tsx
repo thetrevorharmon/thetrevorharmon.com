@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image} from '../../UI-Kit';
+import {Image} from '../../components';
 import {Attribution} from './Attribution';
 
 interface Props {

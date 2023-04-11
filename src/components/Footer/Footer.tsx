@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Link, TextStyle} from '../../UI-Kit';
+import {Link, TextStyle} from '../../components';
 import {ExternalLinks, useSiteData} from '../../utils';
 
 interface FooterProps {
