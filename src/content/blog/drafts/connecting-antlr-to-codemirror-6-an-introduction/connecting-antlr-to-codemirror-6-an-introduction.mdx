@@ -7,6 +7,10 @@ status: Draft
 description: How to connect ANTLR to CodeMirror
 ---
 
+import {ConnectingAntlrToCodeMirrorTableOfContents} from '../../components';
+
+<ConnectingAntlrToCodeMirrorTableOfContents entryIndex={0} />
+
 For the past 18 months, I’ve been working on [ShopifyQL Notebooks][1], a data exploration tool offered by Shopify. The tool enables Shopify merchants to query their data in a [Jupiter-esque notebook][2] using [ShopifyQL][3], a SQLish language that was developed in-house. One of the biggest challenges in creating ShopifyQL Notebooks was building a functional code editor with all of the bells and whistles you’d expect from a world class editor.
 
 In July 2022, it was my job to figure out how to get [CodeMirror][6] and ShopifyQL’s language server to talk. At the time, there was very little written about connecting CodeMirror with ANTLR (ShopifyQL’s parser & lexer engine)–only [this article][4] provided any direction for me. After working and staring at this for months, I’m finally on the other side of this journey. Here’s the guide I wish I had when I was tasked with connecting an ANTLR-powered language server with CodeMirror 6.

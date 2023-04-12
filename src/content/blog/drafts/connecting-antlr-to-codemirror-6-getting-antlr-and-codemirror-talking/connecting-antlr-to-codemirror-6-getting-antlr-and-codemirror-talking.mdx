@@ -7,40 +7,32 @@ status: Draft
 description: Connect ANTLR to CodeMirror via a ParseAdapter
 ---
 
-In the previous article in this series, I described how to create a language server for my toy language “Zephyr” using the ANTLR framework. In this article, we’ll connect that language server to CodeMirror 6.
+import {ConnectingAntlrToCodeMirrorTableOfContents} from '../../components';
 
-_Note: Unsure what ANTLR, Zephyr, or CodeMirror 6 are? Here’s the first article in the series describing each of these concepts._
+<ConnectingAntlrToCodeMirrorTableOfContents entryIndex={2} />
 
-- We now have a functioning language server which can take in a zephyr document and return a stream of tokens for that document
-- We need to transform those tokens into something that codemirror understands
+In "Building a Language Server", I described how to create a language server for Zephyr using the ANTLR framework. We created a functioning language server that can take in a document of Zephyr code and return a stream of tokens. Next, we’ll connect that language server to CodeMirror 6 by taking that token stream and turning it into a Lezer parse tree.
 
-At a high level, we will need to:
+We'll take the following steps to make that happen:
 
-1. Tokenize the document
-2. Transform those tokens into NodeTypes
+1. Tokenize the document (done ✅)
+2. Transform the tokens into NodeTypes
 3. Place those nodeTypes into a buffer
 4. Build a tree from the buffer
 
-We’ve already covered the first point in the previous article in this document; we’ll cover the rest in this article.
+We’ve already covered the first point in the previous article in this document–we’ll cover the rest in this article.
 
 ## What are NodeTypes?
 
-- CodeMirror’s parsing engine Lezer manages a parse tree of the document
-- It describes each node of that tree using the NodeType class
-- A NodeType is not a node directly, but a description of the Node.
-- A nodeType contains (at minimum) an id, but often also contains a name.
+CodeMirror's parsing engine Lezer manages a parse tree representation of the document for CodeMirror. A Lezer parse tree is made up of a collection of nodes, and Lezer represents those nodes with the [NodeType](https://lezer.codemirror.net/docs/ref/#common.NodeType) class. It isn't a node directly, but a typed description of the Node. A NodeType contains an id at minimum, but often also contains a name.
 
 The docs state:
 
 > Different node types with the same name within a node set should play the same semantic role.
 
-- A NodeSet is a collection of NodeTypes
-- We pass Lezer a NodeSet when we want to construct a tree
-- It uses the nodeset as a lookup table when we pass a NodeType id to Lezer
-- Before we can construct a tree, we need to create a mapping between our tokens and NodeTypes
-- I have found it’s easiest to simply use the same names between the token names and the NodeType names. Let’s go ahead and set up that mapping (here are the supported tokens, for reference).
+NodeTypes are statically created and then reused throughout the tree when the tree is built. When all of the NodeTypes are created, we create a [NodeSet](https://lezer.codemirror.net/docs/ref/#common.NodeSet) to represent all of the NodeTypes. Lezer uses a NodeSet as a lookup table–when we build a tree and use NodeType ids to describe the nodes, Lezer looks up the id in the NodeSet.
 
-We have defined these types of tokens previously:
+Before we can construct a tree, we need to create a mapping between our language server's token types and Lezer NodeTypes. I have found it’s easiest to simply use the same names between the token types and the NodeTypes. Let’s go ahead and set up that mapping. We have defined these token types previously:
 
 ```typescript
 const supportedTokens = [
@@ -59,7 +51,7 @@ const supportedTokens = [
 export type Token = (typeof supportedTokens)[number];
 ```
 
-Let’s now define nodeTypes that map to Token type:
+Let’s now define NodeTypes that map to those tokens:
 
 ```typescript
 import {NodeType} from '@lezer/common';
@@ -79,8 +71,9 @@ export const tokenToNodeType: {[key in Token | 'topNode']: NodeType} = {
 };
 ```
 
-- You may notice that there is one extra type we have added called topNode. This node type is a special type that is used explicitly as the top of the tree that Lezer will build for us. It doesn’t hold any semantic meaning but is the node we connect everything to, in order to have the tree have a single entrypoint
-- Once we have a mapping between our tokens and NodeTypes, we can use that to build a NodeSet as well
+This mapping defines a NodeType for each of the token types, with each one possessing a unique id. These ids can be any number, they don't necessarily need to start at 0.
+
+You may notice that there is one extra type we have added called `topNode`. This node type is a special type what we use to tell Lezer that this node defines the top of the parse tree. It doesn’t hold any semantic meaning but is the node we connect everything to, in order to have the tree have a single entrypoint. Once we have a mapping between our tokens and NodeTypes, we can use that to build a NodeSet as well:
 
 ```typescript
 import {NodeSet} from '@lezer/common';
@@ -88,8 +81,7 @@ import {NodeSet} from '@lezer/common';
 export const parserAdapterNodeSet = new NodeSet(Object.values(tokenToNodeType));
 ```
 
-- I’ve found it useful to manage the NodeTypes this way because it becomes straightforward to add a new NodeType–simply add an entry to the tokenToNodeType map
-- Now that we have NodeTypes in a NodeSet setup, we can look at building the connecting piece between the Language Server and Lezer’s Parser
+I’ve found it useful to manage the NodeTypes this way because it becomes straightforward to add a new NodeType–simply add an entry to `tokenToNodeType`. Now that we have NodeTypes in a NodeSet, we can look at building the connecting piece between the Language Server and Lezer’s Parser.
 
 ## Creating a Parser Adapter
 
@@ -274,8 +266,8 @@ createParse(
 
 startParse(
   input: string | Input,
-  \_0?: readonly TreeFragment[] | undefined,
-  \_1?: readonly { from: number; to: number }[] | undefined
+  _0?: readonly TreeFragment[] | undefined,
+  _1?: readonly { from: number; to: number }[] | undefined
 ): PartialParse {
   // 2
   const document =
@@ -304,10 +296,10 @@ Here’s what’s happening in this code:
 If we put all of this together, we end up with the following ParserAdapter:
 
 ```ts
-import { Parser, Tree, Input, PartialParse, TreeFragment } from "@lezer/common";
-import { Token } from "antlr4ts";
-import { LanguageServer } from "./language";
-import { parserAdapterNodeSet, tokenToNodeType } from "./constants";
+import {Parser, Tree, Input, PartialParse, TreeFragment} from '@lezer/common';
+import {Token} from 'antlr4ts';
+import {LanguageServer} from './language';
+import {parserAdapterNodeSet, tokenToNodeType} from './constants';
 
 const DEFAULT_NODE_GROUP_SIZE = 4;
 
@@ -369,18 +361,18 @@ export class ParserAdapter extends Parser {
   createParse(
     input: Input,
     fragments: readonly TreeFragment[],
-    ranges: readonly { from: number; to: number }[]
+    ranges: readonly {from: number; to: number}[],
   ): PartialParse {
     return this.startParse(input, fragments, ranges);
   }
 
   startParse(
     input: string | Input,
-    \_0?: readonly TreeFragment[] | undefined,
-    \_1?: readonly { from: number; to: number }[] | undefined
+    _0?: readonly TreeFragment[] | undefined,
+    _1?: readonly {from: number; to: number}[] | undefined,
   ): PartialParse {
     const document =
-      typeof input === "string" ? input : input.read(0, input.length);
+      typeof input === 'string' ? input : input.read(0, input.length);
 
     const tree = this.buildTree(document);
 

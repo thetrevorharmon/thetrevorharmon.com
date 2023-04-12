@@ -11,3 +11,4 @@ export {Link} from './Link';
 export {Meta} from './Meta';
 export {Image} from './Image';
 export {Container} from './Container';
+export {TableOfContents} from './TableOfContents';

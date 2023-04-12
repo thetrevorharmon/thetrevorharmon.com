@@ -7,6 +7,10 @@ status: Draft
 description: Build an ANTLR language server
 ---
 
+import {ConnectingAntlrToCodeMirrorTableOfContents} from '../../components';
+
+<ConnectingAntlrToCodeMirrorTableOfContents entryIndex={1} />
+
 In the previous article in this series, I gave a high level overview of CodeMirror 6, Lezer, ANTLR, and introduced my little toy language “Zephyr”. In this article, we’ll build a small ANTLR-based language server that we can use to connect to CodeMirror 6.
 
 _Note: because CodeMirror 6 is a javascript-based framework, all of the code I’ll share will be in typescript, including any ANTLR-generated code._
