@@ -3,6 +3,9 @@ import {Helmet} from '../utils';
 
 import {Footer, Navbar, Container} from '../components';
 
+import 'normalize.css';
+import '../styles/global.scss';
+
 interface LayoutProps {
   className?: string;
   hasContainer?: boolean;

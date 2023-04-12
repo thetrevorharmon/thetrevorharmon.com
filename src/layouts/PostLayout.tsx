@@ -10,6 +10,9 @@ import {
   Container,
 } from '../components';
 
+import 'normalize.css';
+import '../styles/global.scss';
+
 interface Props extends LayoutProps {
   recommendedReading: RecommendedReading[];
   type: 'Post' | 'Project';
