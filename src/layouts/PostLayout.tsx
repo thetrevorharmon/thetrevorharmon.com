@@ -2,11 +2,13 @@ import * as React from 'react';
 import {Helmet} from '../utils';
 import classnames from 'classnames';
 
-import 'normalize.css';
-import '../styles/global.scss';
-
-import {Footer, ReadingList, Navbar, FollowCallout} from '../components';
-import {Container} from './utils';
+import {
+  Footer,
+  ReadingList,
+  Navbar,
+  FollowCallout,
+  Container,
+} from '../components';
 
 interface Props extends LayoutProps {
   recommendedReading: RecommendedReading[];
