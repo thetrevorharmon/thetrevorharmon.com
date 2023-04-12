@@ -17,7 +17,7 @@
   .h1-featured {
     @apply h1-common;
 
-    @apply text-[2.45333334rem] desktop:text-[3.06666667rem];
+    @apply text-[2.45333334rem] desktop:text-[3.26666667rem];
     /* @apply -tracking-[1px] desktop:-tracking-[1.5px]; */
 
     /* @apply [&>span]:shadow-header-display [&>span]:dark:shadow-header-display-dark; */
@@ -31,7 +31,7 @@
   .h1 {
     @apply h1-common;
 
-    @apply text-[1.92rem] desktop:text-[2.4rem];
+    @apply text-[1.92rem] desktop:text-[2.6rem];
     /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
 
     /* @apply [&>span]:shadow-header-title [&>span]:dark:shadow-header-title-dark; */
@@ -41,7 +41,7 @@
 
   .h2 {
     @apply font-display;
-    @apply text-[1.49333333rem] desktop:text-[1.8666666667rem];
+    @apply text-[1.49333333rem] desktop:text-[2.0666666667rem];
     /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
     @apply font-black;
     /* @apply italic; */
@@ -51,7 +51,7 @@
 
   .h3 {
     @apply font-display;
-    @apply text-[1.28rem] desktop:text-[1.6rem];
+    @apply text-[1.28rem] desktop:text-[1.8rem];
     /* @apply -tracking-[0.5px]; */
     @apply font-black;
     /* @apply italic; */
@@ -62,9 +62,9 @@
 
   .h4 {
     @apply font-display;
-    @apply text-[1.18rem] desktop:text-[1.4rem];
+    @apply text-[1.18rem] desktop:text-[1.55rem];
     /* @apply -tracking-[0.2px]; */
-    @apply  italic;
+    @apply italic;
     @apply font-black;
 
     @apply leading-[1.1];
