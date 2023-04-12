@@ -36,7 +36,7 @@ html {
 }
 
 body {
-  @apply font-serif;
+  @apply font-sans;
 
   @media (prefers-color-scheme: light) {
     background-color: theme('colors.body-bg');
