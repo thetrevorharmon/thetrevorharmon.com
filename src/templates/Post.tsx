@@ -60,7 +60,7 @@ function Article({
     >
       <div className="bg-caption-bg dark:bg-caption-bg-dark">
         <Container>
-          <div className="space-y-big py-large">
+          <div className="space-y-large py-large">
             <FeaturedImage mdx={mdx} />
             <div className="space-y-tiny">
               <h1>
