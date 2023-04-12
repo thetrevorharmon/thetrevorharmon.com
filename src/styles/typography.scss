@@ -2,11 +2,11 @@
   .h1-common {
     /* @apply uppercase; */
     @apply font-display;
-    @apply font-black;
+    /* @apply font-black; */
     /* @apply italic; */
 
-    @apply text-text-bold dark:text-text-bold-dark;
-
+    /* @apply text-text-bold dark:text-text-bold-dark; */
+    @apply text-black  dark:text-white;
     // background on internal span
     /* @apply [&>span]:bg-primary [&>span]:dark:bg-primary-dark; */
 
@@ -43,7 +43,7 @@
     @apply font-display;
     @apply text-[1.49333333rem] desktop:text-[2.0666666667rem];
     /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
-    @apply font-black;
+    /* @apply font-black; */
     /* @apply italic; */
 
     @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
@@ -51,21 +51,21 @@
 
   .h3 {
     @apply font-display;
-    @apply text-[1.28rem] desktop:text-[1.8rem];
+    @apply text-[1.28rem] desktop:text-[1.5rem];
     /* @apply -tracking-[0.5px]; */
-    @apply font-black;
+    /* @apply font-black; */
     /* @apply italic; */
 
     @apply leading-[1.2];
-    @apply text-text-bold dark:text-text-bold-dark;
+    @apply text-text dark:text-text-dark;
   }
 
   .h4 {
     @apply font-display;
-    @apply text-[1.18rem] desktop:text-[1.55rem];
+    @apply text-[1.18rem] desktop:text-[1.25rem];
     /* @apply -tracking-[0.2px]; */
-    @apply italic;
-    @apply font-black;
+    /* @apply italic; */
+    /* @apply font-black; */
 
     @apply leading-[1.1];
     @apply text-text-bold dark:text-text-bold-dark;

@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Link, Meta, Button} from '../components';
+import {Link, Meta, Button, Container} from '../components';
 import {FeaturedImage} from './components';
 import {Routes, useSiteData} from '../utils';
 
@@ -58,23 +58,31 @@ function Article({
       type="Post"
       hasSignupForm
     >
-      <FeaturedImage mdx={mdx} />
-      <div className="space-y-tiny">
-        <h1>
-          <span>{mdx.title}</span>
-        </h1>
-        <Meta
-          date={mdx.date}
-          timeToRead={mdx.timeToRead}
-          isLinkPost={mdx.link != null}
-        />
+      <div className="bg-caption-bg dark:bg-caption-bg-dark">
+        <Container>
+          <div className="space-y-big py-large">
+            <FeaturedImage mdx={mdx} />
+            <div className="space-y-tiny">
+              <h1>
+                <span>{mdx.title}</span>
+              </h1>
+              <Meta
+                date={mdx.date}
+                timeToRead={mdx.timeToRead}
+                isLinkPost={mdx.link != null}
+              />
+            </div>
+          </div>
+        </Container>
       </div>
-      <div className="space-y-medium">
-        <div className="body-styles">
-          <MDXProvider>{children}</MDXProvider>
+      <Container>
+        <div className="space-y-medium">
+          <div className="body-styles">
+            <MDXProvider>{children}</MDXProvider>
+          </div>
+          {linkPostButton ? linkPostButton : twitterLink}
         </div>
-        {linkPostButton ? linkPostButton : twitterLink}
-      </div>
+      </Container>
     </PostLayout>
   );
 }
