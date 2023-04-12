@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {Helmet} from '../utils';
 
+import {Footer, Navbar, Container} from '../components';
+
 import 'normalize.css';
 import '../styles/global.scss';
-
-import {Footer, Navbar} from '../components';
-import {Container} from './utils';
 
 interface LayoutProps {
   className?: string;
