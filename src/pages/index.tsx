@@ -19,7 +19,7 @@ export default ({data}: IndexPageProps) => {
   const {tagline} = useSiteData();
 
   const titleMarkup = (
-    <div className="space-y-little">
+    <div className="space-y-tiny">
       <p>Hi there! 👋 I'm</p>
       <h1 className="featured">
         <span>Trevor Harmon</span>

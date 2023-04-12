@@ -20,10 +20,11 @@ export const BrandButton = () => {
         'focus:bg-primary-focus dark:focus:bg-primary-focus-dark',
         'text-[1.92rem] desktop:text-[2.4rem]',
         '-tracking-[0.5px] desktop:-tracking-[1px]',
-        'uppercase font-black italic',
+        'font-display',
+        'rounded-xl'
       )}
     >
-      TH.
+      th.
     </Link>
   );
 };

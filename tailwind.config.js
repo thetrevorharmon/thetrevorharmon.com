@@ -2,25 +2,27 @@
 
 const containerSize = '560px';
 
+const defaultColors = require('tailwindcss/colors');
+
 const colors = {
   primary: {
     label: 'primary',
-    light: '#ec4242',
+    light: defaultColors['green']['800'],
     dark: '#fa5a5a',
   },
   primaryFocus: {
     label: 'primary-focus',
-    light: '#db1616',
+    light: defaultColors['green']['900'],
     dark: '#f81f1f',
   },
   primaryText: {
     label: 'primary-text',
-    light: '#dd0404',
+    light: defaultColors['green']['800'],
     dark: '#f95b5b',
   },
   primaryTextFocus: {
     label: 'primary-text-focus',
-    light: '#a10303',
+    light: defaultColors['green']['700'],
     dark: '#f72020',
   },
   text: {
@@ -79,6 +81,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
+      display: ['Gloock', 'Source Serif Pro', 'serif'],
+      serif: ['Source Serif Pro', 'serif'],
       sans: [
         "'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
       ],

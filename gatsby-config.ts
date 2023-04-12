@@ -120,6 +120,19 @@ const config: GatsbyConfig = {
       __key: 'images',
     },
     {
+      resolve: `gatsby-omni-font-loader`,
+      options: {
+        enableListener: true,
+        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        web: [
+          {
+            name: `Gloock`,
+            file: `https://fonts.googleapis.com/css2?family=Gloock:wght@400&display=swap`,
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-feed`,
       options: {
         feeds: [

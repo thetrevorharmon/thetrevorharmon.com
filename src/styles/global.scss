@@ -12,6 +12,11 @@
 @import '~@fontsource/fira-mono/400.css';
 @import '~@fontsource/fira-mono/700.css';
 
+@import '~@fontsource/source-serif-pro/400.css';
+@import '~@fontsource/source-serif-pro/400-italic.css';
+@import '~@fontsource/source-serif-pro/700.css';
+@import '~@fontsource/source-serif-pro/700-italic.css';
+
 @layer components {
   .Breakout {
     @apply -mx-container-base;
@@ -21,16 +26,18 @@
 }
 
 html {
-  @screen base {
+  /* @screen base {
     font-size: 16px;
   }
 
   @screen collapsed {
     font-size: 15px;
-  }
+  } */
 }
 
 body {
+  @apply font-serif;
+
   @media (prefers-color-scheme: light) {
     background-color: theme('colors.body-bg');
   }
