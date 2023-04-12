@@ -1,5 +1,13 @@
 {
   "files.associations": {
     "*.scss": "postcss"
+  },
+  "[mdx]": {
+    "diffEditor.wordWrap": "on",
+    "editor.wordWrap": "on"
+  },
+  "[markdown]": {
+    "diffEditor.wordWrap": "on",
+    "editor.wordWrap": "on"
   }
 }
