@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {PostTile} from '../components';
+import {Link, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Routes} from '../utils';
 
@@ -25,10 +25,15 @@ export default ({data}: Props) => {
           </h1>
         </div>
 
-        <div className="space-y-large">
+        <div className="space-y-normal">
           {data.allMdx.nodes.map(
             (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
-              <PostTile node={post} />
+              <div key={post.slug!}>
+                <Link url={Routes.blogPost(post.slug!)}>{post.title}</Link>
+                <div className="text-text-muted dark:text-text-muted-dark">
+                  {post.date}
+                </div>
+              </div>
             ),
           )}
         </div>

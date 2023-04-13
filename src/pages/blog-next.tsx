@@ -66,7 +66,7 @@ export default ({data}: Props) => {
                         : undefined;
 
                       return (
-                        <div key={post.slug!} className="justify-between">
+                        <div key={post.slug!}>
                           <div>
                             <Link url={Routes.blogPost(post.slug!)} {...icon}>
                               {post.title}
