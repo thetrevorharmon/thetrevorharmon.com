@@ -59,7 +59,7 @@ export default ({data}: Props) => {
                       return (
                         <div key={post.slug!} className="justify-between">
                           <div>
-                            <Link url={Routes.blogPost(post.slug!)}>
+                            <Link url={Routes.blogPost(post.slug!)} className='text-lg'>
                               {post.title}
                             </Link>
                             {post.link ? ' 🔗' : ''}
