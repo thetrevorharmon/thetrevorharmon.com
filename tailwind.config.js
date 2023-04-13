@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const containerSize = '660px';
+const containerSize = '620px';
 
 const defaultColors = require('tailwindcss/colors');
 
@@ -111,9 +111,9 @@ module.exports = {
         // collapsed vs expanded
         base: '0px',
         collapsed: containerSize,
-        expanded: '740px',
+        expanded: '700px',
         // This is specifically for
-        containerWithPadding: '690px',
+        containerWithPadding: '650px',
       },
       width: {
         container: containerSize,
