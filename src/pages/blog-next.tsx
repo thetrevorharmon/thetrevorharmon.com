@@ -49,17 +49,26 @@ export default ({data}: Props) => {
 
         <div className="space-y-large">
           <FeaturedTile node={featuredPost} />
-          <div className="space-y-large">
+          <div className="space-y-huge">
             {orderedPostsByYear.map(([year, posts]) => {
               return (
-                <div className="space-y-normal">
-                  <h3>{year}</h3>
-                  <div className="space-y-little">
+                <div className="space-y-normal" key={year}>
+                  <h2>{year}</h2>
+                  <div className="space-y-normal">
                     {posts.map((post) => {
-                      return <div>
-                        <Link url={Routes.blogPost(post.slug!)} className='block'>{post.title}</Link>
-                        <span>{post.date}</span>
-                        </div>;
+                      return (
+                        <div key={post.slug!} className="justify-between">
+                          <div>
+                            <Link url={Routes.blogPost(post.slug!)}>
+                              {post.title}
+                            </Link>
+                            {post.link ? ' 🔗' : ''}
+                          </div>
+                          <div className="text-text-muted dark:text-text-muted-dark">
+                            {post.date}
+                          </div>
+                        </div>
+                      );
                     })}
                   </div>
                 </div>
