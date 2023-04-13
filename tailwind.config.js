@@ -7,22 +7,22 @@ const defaultColors = require('tailwindcss/colors');
 const colors = {
   primary: {
     label: 'primary',
-    light: defaultColors['green']['800'],
+    light: '#ec4242',
     dark: '#fa5a5a',
   },
   primaryFocus: {
     label: 'primary-focus',
-    light: defaultColors['green']['900'],
+    light: '#db1616',
     dark: '#f81f1f',
   },
   primaryText: {
     label: 'primary-text',
-    light: defaultColors['green']['800'],
+    light: '#dd0404',
     dark: '#f95b5b',
   },
   primaryTextFocus: {
     label: 'primary-text-focus',
-    light: defaultColors['green']['700'],
+    light: '#a10303',
     dark: '#f72020',
   },
   text: {
