@@ -21,7 +21,7 @@ export const BrandButton = () => {
         'text-[1.92rem] desktop:text-[2.4rem]',
         '-tracking-[0.5px] desktop:-tracking-[1px]',
         'font-display',
-        'rounded-xl'
+        'rounded-xl',
       )}
     >
       th.
