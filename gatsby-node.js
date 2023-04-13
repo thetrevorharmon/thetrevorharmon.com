@@ -51,7 +51,7 @@ exports.createPages = ({graphql, actions}) => {
 
         const recommendedReading = buildReadingList(
           node,
-          nodes.filter((currentNode) => currentNode.type === node.type),
+          nodes.filter((currentNode) => currentNode.type === node.type && currentNode.status === 'Published'),
         );
 
         createPage({
