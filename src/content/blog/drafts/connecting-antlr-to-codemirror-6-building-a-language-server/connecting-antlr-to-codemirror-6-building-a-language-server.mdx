@@ -1,23 +1,178 @@
 ---
 title: 'Connecting ANTLR to CodeMirror 6: Building a Language Server'
 slug: connecting-antlr-to-codemirror-6-building-a-language-server
-date: 2023-05-17
+date: 2023-05-10
 type: Post
 status: Draft
-description: Build an ANTLR language server
+description: How to connect ANTLR to CodeMirror
 ---
 
-import {ConnectingAntlrToCodeMirrorTableOfContents} from '../../components';
+For the past 18 months, I’ve been working on [ShopifyQL Notebooks](https://apps.shopify.com/shopifyql-notebooks), a data exploration tool offered by Shopify. The tool enables Shopify merchants to query their data in a [Jupiter-esque notebook](https://jupyter.org/) using [ShopifyQL](https://shopify.dev/docs/api/shopifyql/shopifyql-reference), a SQLish language that was developed in-house. One of the biggest challenges in creating ShopifyQL Notebooks was building a functional code editor with all of the bells and whistles you’d expect from a world class editor.
 
-<ConnectingAntlrToCodeMirrorTableOfContents entryIndex={1} />
+In July 2022, it was my job to figure out how to get [CodeMirror](https://codemirror.net/) and ShopifyQL’s language server to talk. At the time, there was very little written about connecting CodeMirror with ANTLR (ShopifyQL’s parser & lexer engine)–only [this article](https://www.sumologic.com/blog/building-autocomplete-antlr-codemirror/) provided any direction for me. After working and staring at this for months, I’m finally on the other side of this journey. Here’s the guide I wish I had when I was tasked with connecting an ANTLR-powered language server with CodeMirror 6.
 
-In the previous article in this series, I gave a high level overview of CodeMirror 6, Lezer, ANTLR, and introduced my little toy language “Zephyr”. In this article, we’ll build a small ANTLR-based language server that we can use to connect to CodeMirror 6.
+This article is the first of a two-part series. In this article, I'll cover:
 
-_Note: because CodeMirror 6 is a javascript-based framework, all of the code I’ll share will be in typescript, including any ANTLR-generated code._
+- Background information about Lezer and ANTLR
+- Zephyr, my toy language that will be used as an example throughout the code
+- Generating parser and lexer utilities from the Zephyr ANTLR grammar
+- Writing a simple language server to sit on top of the ANTLR-generated utilities
 
-## The Zephyr grammar
+## Lezer: CodeMirror’s parser generator
 
-In order to generate an ANTLR language server, you first need grammar files. Let’s use the Zephyr grammar as our example. In ANTLR, it expects grammar definitions for both a lexer and a parser. Here’s the lexer:
+[CodeMirror](https://codemirror.net/) is a "a code editor component for the web". The CodeMirror package concerns itself with only core code editor functionality, and the rest of the functionality is provided through extensions and other packages. Language concerns like generating parse trees are provided by a package called [Lezer](https://lezer.codemirror.net/) (written by [Marijn Haverbeke](https://marijnhaverbeke.nl/), the author of both Lezer and CodeMirror). Lezer says it is “a very decent parser generator, especially well suited for use in code editors.” Lezer takes in a grammar file and then exports extensions that CodeMirror uses to create parse trees. Those parse trees are then used by CodeMirror to provide various features like syntax highlighting, linting, tooltips, etc.
+
+The primary way to use Lezer is to use its grammar engine. For example, here is JSON defined as a Lezer grammar ([source](https://github.com/lezer-parser/json/blob/main/src/json.grammar)):
+
+```
+@top JsonText { value }
+
+value { True | False | Null | Number | String | Object | Array }
+
+String { string }
+Object { "{" list<Property>? "}" }
+Array  { "[" list<value>? "]" }
+
+Property { PropertyName ":" value }
+PropertyName { string }
+
+
+@tokens {
+  True  { "true" }
+  False { "false" }
+  Null  { "null" }
+
+  Number { '-'? int frac? exp?  }
+  int  { '0' | $[1-9] @digit* }
+  frac { '.' @digit+ }
+  exp  { $[eE] $[+\-]? @digit+ }
+
+  string { '"' char* '"' }
+  char { $[\u{20}\u{21}\u{23}-\u{5b}\u{5d}-\u{10ffff}] | "\\" esc }
+  esc  { $["\\\/bfnrt] | "u" hex hex hex hex }
+  hex  { $[0-9a-fA-F] }
+
+  whitespace { $[ \n\r\t] }
+
+  "{" "}" "[" "]"
+}
+
+@skip { whitespace }
+list<item> { item ("," item)* }
+
+@external propSource jsonHighlighting from "./highlight"
+
+@detectDelim
+```
+
+The file defines the grammar for JSON, you can see at the bottom of the file it references the syntax highlighting definition:
+
+```
+@external propSource jsonHighlighting from "./highlight"
+```
+
+Lezer reads the grammar files as well the referenced `./highlight` file and generates a parser based on those files. The extension (parser) is then passed to CodeMirror, and CodeMirror can now read and parse JSON.
+
+However, there are cases where writing a Lezer grammar doesn’t make sense. For example, if you have already written a grammar and it powers more than just a front end code editor experience, it may be more favorable to connect an existing language server to CodeMirror instead of maintaining two separate implementations. I found myself in such a case when working on the editor for ShopiyQL, which has a grammar in ANTLR.
+
+## What is ANTLR?
+
+From the [ANTLR website](https://www.antlr.org/):
+
+> ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing, executing, or translating structured text or binary files. It's widely used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.
+
+Much like Lezer, ANTLR is used to generate a parser based off of a grammar file. Unlike Lezer, ANTLR has applications far beyond CodeMirror. The grammar files that it uses are similar, but not quite the same. Here’s the ANTLR-style grammar for JSON ([source](https://github.com/antlr/grammars-v4/blob/master/json/JSON.g4)):
+
+```g4
+grammar JSON;
+
+json
+   : value EOF
+   ;
+
+obj
+   : '{' pair (',' pair)* '}'
+   | '{' '}'
+   ;
+
+pair
+   : STRING ':' value
+   ;
+
+arr
+   : '[' value (',' value)* ']'
+   | '[' ']'
+   ;
+
+value
+   : STRING
+   | NUMBER
+   | obj
+   | arr
+   | 'true'
+   | 'false'
+   | 'null'
+   ;
+
+
+STRING
+   : '"' (ESC | SAFECODEPOINT)* '"'
+   ;
+
+
+fragment ESC
+   : '\\' (["\\/bfnrt] | UNICODE)
+   ;
+
+
+fragment UNICODE
+   : 'u' HEX HEX HEX HEX
+   ;
+
+
+fragment HEX
+   : [0-9a-fA-F]
+   ;
+
+
+fragment SAFECODEPOINT
+   : ~ ["\\\u0000-\u001F]
+   ;
+
+
+NUMBER
+   : '-'? INT ('.' [0-9] +)? EXP?
+   ;
+
+
+fragment INT
+   : '0' | [1-9] [0-9]*
+   ;
+
+// no leading zeros
+
+fragment EXP
+   : [Ee] [+\-]? INT
+   ;
+
+// \- since - means "range" inside [...]
+
+WS
+   : [ \t\n\r] + -> skip
+   ;
+```
+
+ANTLR can generate parsers in many languages. For example, the ANTLR grammar for ShopifyQL is used to generate parsers in both Go and Typescript. However, there isn’t any out-of-the-box compatibility between an ANTLR parser and CodeMirror/Lezer.
+
+## The Zephyr Language
+
+In order to demonstrate how to get CodeMirror and ANTLR connected, I decided it would be easiest to write a tiny language to use as an example.
+
+Introducing: Zephyr. Why “Zephyr”? I asked ChatGPT to make up a name for this little language and it said:
+
+> How about “Zephyr”? It suggests a fresh, light, and airy language that can help developers build software quickly and easily. It also sounds distinct and memorable, which can help it stand out in a crowded programming language landscape.
+
+I wrote this language in an ANTLR grammar as a language heavily inspired by Javascript. Here’s the lexer:
 
 ```g4
 lexer grammar ZephyrLexer;
@@ -65,7 +220,7 @@ I kept this list of features intentionally small so it would be easier to have a
 
 ## Generating ANTLR files
 
-Now that we have Zephyr’s lexer and parser defined, we can use ANTLR to generate parser and lexer files based off the grammar definition. ANTLR has a handful of runtimes, but we’ll be using the javascript version to build files for us. Additionally, there is an excellent `antlr4ts` package that we can use to generate both a language server and the associated types. First we need to download our packages:
+We can use ANTLR to generate parser and lexer files based off the Zephyr grammar definition. ANTLR has a handful of runtimes; we’ll be using the javascript version to build files for us. There is an excellent [`antlr4ts`](https://github.com/tunnelvisionlabs/antlr4ts) package that we can use to generate both a language server and the associated types. First we need to download our packages:
 
 ```
 yarn add antlr4 antlr4-c3 antlr4ts
@@ -252,7 +407,7 @@ _Note: depending on what you are using to build & run this code, you may encount
 
 ## Building the language server
 
-Now that we have a parser and lexer generated for us, we can build a language server! As a starting point, we’ll define all of the token types that the language server supports:
+Now that we have a parser and lexer generated for us, we can build a simple language server! As a starting point, we’ll define all of the token types that the language server supports:
 
 ```typescript
 const supportedTokens = [
@@ -324,11 +479,11 @@ export class LanguageServer {
 
 Here’s what’s happening in this code:
 
-1. We define the `getTokenStream` method, which takes in a string (eventually, the document).
+1. We define the `getTokenStream` method, which takes in a string.
 2. From that value, we construct a `CharStream` and build a lexer.
 3. From the lexer we can derive a token stream. By default, the token stream is empty.
 4. Because the token stream is empty, we need to trigger `.fill()` on it.
-5. We return the `getTokens()` value off of the token stream, which returns the tokens themselves instead of the entire stream object.
+5. We return the result of `getTokens()`, which returns the tokens themselves instead of the entire stream object.
 6. The `getTokenTypeForIndex` is defined and will be used to take the token type (which is found in the token stream) and get the string type for that particular token.
 
 Let’s put it all together:
@@ -398,11 +553,9 @@ const tokens = languageServer
     range: [token.startIndex, token.stopIndex],
     type: languageServer.getTokenTypeForIndex(token.type),
   }));
-
-console.log(tokens);
 ```
 
-I'm doing a _little_ bit of work to transform the tokens into something a bit more readable. After tokenizing this statement, the output looks a little something like this:
+I'm doing a _little_ bit of work to transform the tokens into something a bit more readable. After tokenizing this statement, the value for `tokens` looks something like this:
 
 ```typescript
 [
@@ -415,7 +568,7 @@ I'm doing a _little_ bit of work to transform the tokens into something a bit mo
 ];
 ```
 
-Want to take this for a spin? Type in the code editor below–the tokens underneath the code editor update as you type!
+This tokenizer can help us read a document of Zephyr code and make sense of it. As a practial example, try typing in the code editor below–it makes use of this very language server to do the syntax highlighting. Watch the list of tokens under the editor update as you type!
 
 import {CodeEditorWithTokens} from './CodeEditorWithTokens';
 
@@ -423,4 +576,4 @@ import {CodeEditorWithTokens} from './CodeEditorWithTokens';
 
 ## What's next
 
-Now that we have a functional language server, it's time to take a deep dive into how to connect this language server to CodeMirror 6. The next article in this series will do just that–but if you can't wait till then, feel free to [explore the code yourself](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr-lang/ParserAdapter.ts).
+Now that we have a functional language server, it's time to take a deep dive into how to connect this language server to CodeMirror 6. The second part of this series will cover connecting the language server to CodeMirror and takes a deep dive into all of the context surrounding that effort. In the meantime, feel free to explore the [full Zephyr demo site](https://zephyr-demo.netlify.app/) along with the [source code](https://github.com/thetrevorharmon/zephyr-demo) (I would recommend checking out the [`ParserAdapter` class](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr/ParserAdapter.ts) if you are really wanting to dig deeper).

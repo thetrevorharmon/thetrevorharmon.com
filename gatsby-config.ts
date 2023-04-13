@@ -50,6 +50,7 @@ const config: GatsbyConfig = {
           // this is to handle inline gifs
           // https://github.com/gatsbyjs/gatsby/issues/7317#issuecomment-412984851
           `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-external-links`,
         ],
       },
     },

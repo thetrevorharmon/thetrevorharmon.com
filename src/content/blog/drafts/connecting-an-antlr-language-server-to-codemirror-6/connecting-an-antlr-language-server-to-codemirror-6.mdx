@@ -1,0 +1,540 @@
+---
+title: 'Connecting ANTLR to CodeMirror 6: Connecting a Language Server'
+slug: connecting-an-antlr-language-server-to-codemirror-6
+date: 2023-05-24
+type: Post
+status: Draft
+description: Connect ANTLR to CodeMirror via a ParseAdapter
+---
+
+_Note: this article is the second of a two part series. The previous article covers topics like Lezer, ANTLR, a toy language called Zephyr, and how to make an ANTLR-based language server. If you're unfamiliar with those topics, you may want to start with the first article._
+
+In "Building a Language Server", I described how to create a language server for Zephyr using the ANTLR framework. We created a functioning language server that can take in a document of Zephyr code and return a stream of tokens. Next, we’ll connect that language server to CodeMirror 6 by taking that token stream and turning it into a Lezer parse tree.
+
+At a high level, we need to take the following steps to make that happen:
+
+1. Tokenize the document (done ✅)
+2. Transform the Zephyr tokens into Lezer NodeTypes
+3. Place those node types into a formatted buffer
+4. Build a tree from the buffer
+
+We covered the first step in the previous article–we’ll cover the rest in this one.
+
+## What are NodeTypes?
+
+CodeMirror relies on Lezer, its parsing engine, to manage a parse tree representation of the document. A Lezer parse tree is made up of a collection of nodes, and Lezer represents those nodes with the [`NodeType`](https://lezer.codemirror.net/docs/ref/#common.NodeType) class. It isn't a node directly, but a typed description of a node. A node type includes an id at minimum, and often also includes a name.
+
+The docs state:
+
+> Different node types with the same name within a node set should play the same semantic role.
+
+Node types are statically created and then reused throughout the tree when the tree is built. Throughout the tree, we use the node type's id to reference the type of a particular node. We provide Lezer information about what node types exist by passing it a [`NodeSet`](https://lezer.codemirror.net/docs/ref/#common.NodeSet), a specific kind of set that includes node types. Lezer uses the node set as a lookup table when it needs to lookup a node type by id.
+
+Before we can construct a tree, we need to create a mapping between our language server's token types and Lezer node types. I have found it’s easiest to simply use the same names between the token types and the node types. Let’s go ahead and set up that mapping. We have defined these token types previously:
+
+```typescript
+const supportedTokens = [
+  'const',
+  'let',
+  'semicolon',
+  'assign',
+  'blockComment',
+  'lineComment',
+  'number',
+  'string',
+  'identifier',
+  'unknown',
+] as const;
+
+export type Token = (typeof supportedTokens)[number];
+```
+
+Let’s now define NodeTypes that map to those tokens:
+
+```typescript
+import {NodeType} from '@lezer/common';
+
+export const tokenToNodeType: {[key in Token | 'topNode']: NodeType} = {
+  topNode: NodeType.define({id: 0, name: 'topNode', top: true}),
+  const: NodeType.define({id: 1, name: 'const'}),
+  let: NodeType.define({id: 2, name: 'let'}),
+  semicolon: NodeType.define({id: 3, name: 'semicolon'}),
+  assign: NodeType.define({id: 4, name: 'assign'}),
+  number: NodeType.define({id: 5, name: 'number'}),
+  string: NodeType.define({id: 6, name: 'string'}),
+  identifier: NodeType.define({id: 7, name: 'identifier'}),
+  unknown: NodeType.define({id: 8, name: 'unknown'}),
+  blockComment: NodeType.define({id: 9, name: 'blockComment'}),
+  lineComment: NodeType.define({id: 10, name: 'lineComment'}),
+};
+```
+
+This mapping defines a NodeType for each of the token types, with each one possessing a unique id. These ids can be any number, they don't necessarily need to start at 0.
+
+You may notice that there is one extra type we have added called `topNode` with `top: true` passed to the call to `NodeType`. Lezer requires us to provide a tree with a single node as the entrypoint–all other nodes should connect to this node. The top node performs this function (it doesn't hold any semantic meaning for the code). Since we have a mapping between our tokens and node types, we can also build a node set:
+
+```typescript
+import {NodeSet} from '@lezer/common';
+
+export const parserAdapterNodeSet = new NodeSet(Object.values(tokenToNodeType));
+```
+
+I’ve found it useful to manage the node types this way because it becomes straightforward to add a new node type–simply add an entry to `tokenToNodeType`. Now that we have node types in a node set, we can look at building the connecting piece between the language server and Lezer’s Parser.
+
+## Creating a Parser Adapter
+
+Lezer has a abstract [Parser class](https://lezer.codemirror.net/docs/ref/#common.Parser) that we can utilize to connect our language server to Lezer. The class defines functions that Lezer will call to generate a parse tree. We are required to implement `createParse`, and we will also implement the `startParse` function. We can treat these functions as "hooks" where we provide our own implementation that reads the document and generates a tree based off of our own language server. Let’s first start by declaring an adapter class and subclassing Lezer's `Parser` class:
+
+```typescript
+import {Parser} from '@lezer/common';
+import {LanguageServer} from './language';
+import {tokenToNodeType} from './constants';
+
+export class ParserAdapter extends Parser {
+  private languageServer = new LanguageServer();
+
+  private getNodeTypeIdForTokenIndex(index: number) {
+    const tokenType = this.languageServer.getTokenTypeForIndex(index);
+    return tokenToNodeType[tokenType].id;
+  }
+}
+```
+
+This code instantiates a new language server and creates a private method that makes it easy to derive the node type from a token’s index. We’ll use this later when constructing the tree.
+
+## Lezer Trees & Buffers
+
+Before implementing the rest of our parser adapter, let’s take a closer look at Lezer's parse tree. Lezer’s [`Tree` class](https://lezer.codemirror.net/docs/ref/#common.Tree) has a static [build method](https://lezer.codemirror.net/docs/ref/#common.Tree^build) that we can use to build our own tree. We can provide it with either a [`BufferCursor`](https://lezer.codemirror.net/docs/ref/#common.BufferCursor) or just [an array of integers](https://lezer.codemirror.net/docs/ref/#common.Tree^build^data.buffer) that correspond to the shape of the a. When we provide it with a buffer of integers, Lezer reads the buffer in groups of 4 integers, where each group of four integers corresponds to a single node. Here’s what each position in the group means:
+
+1. The node type id for the node. This id must be part of the node set we will (eventually) pass to `Tree.build()`.
+2. The start offset of the node from the top of the document.
+3. The end offset of the node from the top of the document.
+4. The number of positions taken up by this node in the buffer array. The smallest value this can be is four, which corresponds to the integers for the node type, start offset, end offset, and the size. When this node is a parent other nodes, this number reflects the total number of positions in the buffer array that both the parent and children nodes take up.
+
+As a practical example, let’s say that we have two token Zephyr query:
+
+```javascript
+const hello
+```
+
+If we were to construct a tree for this query, we would need:
+
+1. A node for `const`
+1. A node for `hello`
+1. A top node that acts as the parent for the previous two nodes
+
+The buffer for this query might look like:
+
+```typescript
+// each node follows the grouping
+// id, start, end, size
+const buffer = [
+  // const
+  2, 0, 5, 4,
+  // hello
+  3, 6, 11, 4,
+  // top node
+  1, 0, 11, 12,
+];
+```
+
+The start and end offsets for the first two tokens correspond to the position of that node relative to the top of the document, and each has the typical size of 4. However, the top node has a start offset of 0 and an end offset of 11. As the parent of both of the previous nodes, it needs to encompass both of those nodes’ offsets. Additionally, the size of the top node is 12–4 for the first node, 4 for the second node, and 4 for itself (making 12 in total).
+
+In order to build a tree in our `ParserAdapter` class, we’ll need to create a buffer that describes the tree. We can use the tokens that come back from the language server as the basis for this buffer, since it has most of the pieces we need. Let’s add a helper method to our class to transform the token stream into a buffer that Lezer can understand:
+
+```typescript
+const DEFAULT_NODE_GROUP_SIZE = 4;
+
+private createBufferFromTokens(tokens: Token[]) {
+  const buffer = [];
+
+  // 1
+  tokens.forEach((token) => {
+    const nodeTypeId = this.getNodeTypeIdForTokenType(token.type);
+    const startOffset = token.startIndex;
+    // 2
+    const endOffset = token.stopIndex + 1;
+
+    buffer.push(
+      nodeTypeId,
+      startOffset,
+      endOffset,
+      // 3
+      DEFAULT_NODE_GROUP_SIZE,
+    );
+  });
+
+  const topNodeId = tokenToNodeType.topNode.id;
+  const startOffset = tokens[0].startIndex;
+  const endOffset = tokens[tokens.length - 1].stopIndex;
+  // 4
+  const topNodeSize =
+    tokens.length * DEFAULT_NODE_GROUP_SIZE + DEFAULT_NODE_GROUP_SIZE;
+
+  buffer.push(topNodeId, startOffset, endOffset, topNodeSize);
+
+  return buffer;
+}
+```
+
+Here’s what’s happening in this function:
+
+1. We’re iterating over each token and pushing it into the buffer.
+2. We add one to the end offset because of the way offsets are computed between ANTLR and Lezer. ANTLR’s `stopIndex` refers to the index of the last character of the word; Lezer expects the end offset to be fully inclusive of the word (and so the offset should refer to the character just past the word).
+3. `DEFAULT_NODE_GROUP_SIZE` is a named constant to make the code a little less ✨ magic-number-y ✨.
+4. We compute the top node size based on the number of children (`tokens.length * DEFAULT_NODE_GROUP_SIZE`) plus the size of the top node itself.
+
+[The docs](https://lezer.codemirror.net/docs/ref/#common.Tree^build) specify that a node buffer must be in postfix order–children come before parents, and children are ordered by offsets. If you have offsets out of order, Lezer won’t generate the tree properly and will throw an error.
+
+```typescript
+// this won't work
+const invalidBuffer = [
+  [nodeId, 0, 4, size],
+  [nodeId, 8, 12, size],
+  [nodeId, 5, 6, size],
+  [parentId, 0, 12, size],
+];
+
+// this works
+const validBuffer = [
+  [nodeId, 0, 4, size],
+  [nodeId, 5, 6, size],
+  [nodeId, 8, 12, size],
+  [parentId, 0, 12, size],
+];
+```
+
+The Zephyr language server returns the tokens in the order they appear in the document, which means that we can always assume that they are in the correct order.
+
+## Building a Tree
+
+Now that we have constructed a buffer, let’s build a parse tree! We’ll add a helper method for generating a tree:
+
+```typescript
+private buildTree(document: string) {
+  // 1
+  const tokens = this.languageServer.getTokenStream(document);
+
+  // 2
+  if (tokens.length < 1) {
+    return Tree.build({
+      buffer: [
+        tokenToNodeType.topNode.id,
+        0,
+        document.length,
+        DEFAULT_NODE_GROUP_SIZE,
+      ],
+      nodeSet: parserAdapterNodeSet,
+      topID: tokenToNodeType.topNode.id,
+    });
+  }
+
+  // 3
+  const buffer = this.createBufferFromTokens(tokens);
+
+  // 4
+  return Tree.build({
+    buffer: buffer,
+    nodeSet: parserAdapterNodeSet,
+    topID: tokenToNodeType.topNode.id,
+  });
+}
+```
+
+What’s happening in this code:
+
+1. We first get a list of tokens in the document from the language server.
+2. If the language server returns an empty list, we can build a “dummy” tree with only a single node (a top node) in it. This ensures that we still return a tree and prevents Lezer from throwing an error.
+3. If we have tokens, we generate a buffer from that token stream.
+4. From there, we build our tree! Notice that we need to pass in the node set we constructed earlier, as well as the id of the top node. If either of those are omitted or incorrect, the tree won’t build properly.
+
+## Completing the adapter
+
+With our helper methods written, we are ready to finish the our parser adapter by implementing the required methods. We need to implement both `startParse` and `createParse`–`createParse` is used for the initial creation of the tree, and `startParse` is used when the code is edited. The code for these functions looks like this:
+
+```typescript
+// 1
+createParse(
+  input: Input,
+  fragments: readonly TreeFragment[],
+  ranges: readonly { from: number; to: number }[]
+): PartialParse {
+  return this.startParse(input, fragments, ranges);
+}
+
+startParse(
+  input: string | Input,
+  _0?: readonly TreeFragment[] | undefined,
+  _1?: readonly { from: number; to: number }[] | undefined
+): PartialParse {
+  // 2
+  const document =
+    typeof input === "string" ? input : input.read(0, input.length);
+
+  // 3
+  const tree = this.buildTree(document);
+
+  // 4
+  return {
+    stoppedAt: input.length,
+    parsedPos: input.length,
+    stopAt: (_) => {},
+    advance: () => tree,
+  };
+}
+```
+
+Here’s what’s happening in this code:
+
+1. Instead of maintaining a separate implementation for `createParse`, I’ve opted to simply forward calls to that function to `startParse`.
+2. For the `input` in this parse function, Lezer uses both an [`Input`](https://lezer.codemirror.net/docs/ref/#common.Input) type and a simple string type–we need to do a little bit of unwrapping of this type to get at the document.
+3. We use the document to generate a tree.
+4. We return an object that conforms to the expected return shape. While Lezer supports incremental parsing, this implementation doesn’t consider incremental parsing, which is why certain parts of this return object are not very meaningful.
+
+If we put all of this together, we end up with the following `ParserAdapter`:
+
+```ts
+import {Parser, Tree, Input, PartialParse, TreeFragment} from '@lezer/common';
+import {Token} from 'antlr4ts';
+import {LanguageServer} from './language';
+import {parserAdapterNodeSet, tokenToNodeType} from './constants';
+
+const DEFAULT_NODE_GROUP_SIZE = 4;
+
+export class ParserAdapter extends Parser {
+  private languageServer = new LanguageServer();
+
+  private getNodeTypeIdForTokenType(index: number) {
+    const tokenType = this.languageServer.getTokenTypeForIndex(index);
+    return tokenToNodeType[tokenType].id;
+  }
+
+  private createBufferFromTokens(tokens: Token[]) {
+    const buffer = [];
+
+    tokens.forEach((token) => {
+      const nodeTypeId = this.getNodeTypeIdForTokenType(token.type);
+      const startOffset = token.startIndex;
+      const endOffset = token.stopIndex + 1;
+
+      buffer.push(nodeTypeId, startOffset, endOffset, DEFAULT_NODE_GROUP_SIZE);
+    });
+
+    const topNodeId = tokenToNodeType.topNode.id;
+    const startOffset = tokens[0].startIndex;
+    const endOffest = tokens[tokens.length - 1].stopIndex;
+    const topNodeSize =
+      tokens.length * DEFAULT_NODE_GROUP_SIZE + DEFAULT_NODE_GROUP_SIZE;
+
+    buffer.push(topNodeId, startOffset, endOffest, topNodeSize);
+
+    return buffer;
+  }
+
+  private buildTree(document: string) {
+    const tokens = this.languageServer.getTokenStream(document);
+
+    if (tokens.length < 1) {
+      return Tree.build({
+        buffer: [
+          tokenToNodeType.topNode.id,
+          0,
+          document.length,
+          DEFAULT_NODE_GROUP_SIZE,
+        ],
+        nodeSet: parserAdapterNodeSet,
+        topID: tokenToNodeType.topNode.id,
+      });
+    }
+
+    const buffer = this.createBufferFromTokens(tokens);
+
+    return Tree.build({
+      buffer: buffer,
+      nodeSet: parserAdapterNodeSet,
+      topID: tokenToNodeType.topNode.id,
+    });
+  }
+
+  createParse(
+    input: Input,
+    fragments: readonly TreeFragment[],
+    ranges: readonly {from: number; to: number}[],
+  ): PartialParse {
+    return this.startParse(input, fragments, ranges);
+  }
+
+  startParse(
+    input: string | Input,
+    _0?: readonly TreeFragment[] | undefined,
+    _1?: readonly {from: number; to: number}[] | undefined,
+  ): PartialParse {
+    const document =
+      typeof input === 'string' ? input : input.read(0, input.length);
+
+    const tree = this.buildTree(document);
+
+    return {
+      stoppedAt: input.length,
+      parsedPos: input.length,
+      stopAt: (_) => {},
+      advance: () => tree,
+    };
+  }
+}
+```
+
+Since we have a finished parser adapter, we now need to connect that to CodeMirror by using the CodeMirror-provided `Language` classes.
+
+## Language and LanguageSupport
+
+CodeMirror uses the [`Language`](https://codemirror.net/docs/ref/#language.Language) class to describe a code language–it includes a lezer parser, language data, the language's name, and any additional extensions associated with the language. Language data describes features of the language in a way that CodeMirror understands, and if done correctly, will provide certain code editing features "for free" (since the features are generic enough that CodeMirror has a pattern around the particular feature). For example, you can describe the way the language denotes comments or what kind of brackets it uses.
+
+In addition to the `Language` class, CodeMirror also has a `LanguageSupport` class. [The docs](https://codemirror.net/docs/ref/#language.LanguageSupport) explain the function of this class:
+
+> This class bundles a language with an optional set of supporting extensions. Language packages are encouraged to export a function that optionally takes a configuration object and returns a LanguageSupport instance, as the main way for client code to use the package.
+
+In order to connect our parser adapter to CodeMirror, we can use the `Language` class inside of a `LanguageSupport` class. Here's an example of what this might look like:
+
+```tsx
+// 1
+const parserAdapter = new ParserAdapter();
+
+// 2
+const language = new Language(Facet.define(), parserAdapter, [], 'Zephyr');
+// 3
+const zephyr = new LanguageSupport(language, []);
+```
+
+Here's what's happening in this code:
+
+1. We first create a new instance of `ParserAdapter`, which will be used to generate the parse tree
+2. We create a new language. The first argument is an empty `Facet` (we'll cover why this is necessary in the Language Data section) and the second argument is our parser adapter. We're passing an empty array for the `extraExtensions` argument, and passing the name `Zephyr` so that the language has a name.
+3. We create a new language support using our newly-minted language object! We're passing an empty array for the `support` extensions argument for now.
+
+If we pass the `zephyr` (langauge support) object as an extension within CodeMirror, CodeMirror will then be able to parse our own language.
+
+## Syntax highlighting
+
+Even though CodeMirror may understand the language, it still doesn't have proper support for syntax highlighting. We can use the [`syntaxHighlighting`](https://codemirror.net/docs/ref/#language.syntaxHighlighting) function that CodeMirror provides to do most of the work for us–but we do need to tell CodeMirror a little bit more about our language to make that work.
+
+Lezer contains a [highlight module](https://lezer.codemirror.net/docs/ref/#highlight) that connects a node with style information by using the [`Tag`](https://lezer.codemirror.net/docs/ref/#highlight.Tag) class. The docs describe the class as:
+
+> Highlighting tags are markers that denote a highlighting category. They are [associated](https://lezer.codemirror.net/docs/ref/#highlight.styleTags) with parts of a syntax tree by a language mode, and then mapped to an actual CSS style by a [highlighter](https://lezer.codemirror.net/docs/ref/#highlight.styleTags).
+
+In order for CodeMirror's `syntaxHighlighting` function to work properly, we need to provide a mapping between Lezer's tags and our node types. The mapping between node types and language tokens that we constructed previously looks like this:
+
+```tsx
+const tokenToNodeType: {[key in Token | 'topNode']: NodeType} = {
+  topNode: NodeType.define({id: 0, name: 'topNode', top: true}),
+  const: NodeType.define({id: 1, name: 'const'}),
+  let: NodeType.define({id: 2, name: 'let'}),
+  semicolon: NodeType.define({id: 3, name: 'semicolon'}),
+  assign: NodeType.define({id: 4, name: 'assign'}),
+  number: NodeType.define({id: 5, name: 'number'}),
+  string: NodeType.define({id: 6, name: 'string'}),
+  identifier: NodeType.define({id: 7, name: 'identifier'}),
+  unknown: NodeType.define({id: 8, name: 'unknown'}),
+  blockComment: NodeType.define({id: 9, name: 'blockComment'}),
+  lineComment: NodeType.define({id: 10, name: 'lineComment'}),
+};
+
+const parserAdapterNodeSet = new NodeSet(Object.values(tokenToNodeType));
+```
+
+We need to use two methods to map these node types to Lezer tags:
+
+1. `NodeSet.extend`: this method appends data to each of our node types
+2. `styleTags`: this method creates a key/value mapping between a node type's name and the particular style tag we want to associate with this node type
+
+Here's an example of what this code might look like:
+
+```tsx
+const parserAdapterNodeSet = new NodeSet(Object.values(tokenToNodeType)).extend(
+  styleTags({
+    const: tags.keyword,
+    let: tags.keyword,
+    assign: tags.operator,
+    number: tags.number,
+    string: tags.string,
+    identifier: tags.variableName,
+    blockComment: tags.comment,
+    lineComment: tags.comment,
+  }),
+);
+```
+
+Notice that you can call `.extend` in the same statement after you've initialized the node set. Also, the keys I'm passing in to `styleTags` are the names of each of the node types found in `tokenToNodeType`. These `tags` are used to describe the semantic purpose of the nodes to lezer's highlight module–they are _not_ the CSS classnames themselves.
+
+Now that we have a mapping between the highlight tags and the node types, we can provide syntax highlighting that describes our language:
+
+```tsx
+const syntaxHighlight = syntaxHighlighting(
+  HighlightStyle.define([
+    {tag: tags.comment, class: 'text-slate'},
+    {tag: tags.keyword, class: 'text-fuchsia'},
+    {tag: tags.variableName, class: 'text-blue'},
+    {tag: tags.string, class: 'text-lime'},
+    {tag: tags.number, class: 'text-violet'},
+    {tag: tags.operator, class: 'text-orange'},
+  ]),
+);
+```
+
+The `class` prop here describes the value that is used for the CSS classname in the markup. Note that we aren't using the names of our node types anymore, but instead we are using the `tags` object as the key. Because syntax highlighting is associated with tags and not directly with a language's node types, it becomes portable between editors. This enables you to use highlighting from [other sources](https://github.com/craftzdog/cm6-themes/blob/e696f1241d42e2823388f9759ece4f1f149a7c90/packages/material-dark/src/index.ts#L117).
+
+We can provide this syntax highlighting extension as part of our language via the `support` array in the `LanguageSupport` class:
+
+```tsx
+const zephyr = new LanguageSupport(language, [syntaxHighlight]);
+```
+
+This will automatically provide this extension alongside our language in any place we pass the `zephyr` extension. We now have both parsing _and_ coloring for our language! 🎉
+
+## Adding Language Data
+
+In order to tell CodeMirror more about our language, we can pass language data when we create our language. [The docs](https://codemirror.net/docs/ref/#:~:text=literal%20dollar%20sign.-,languageDataAt,-%3CT%3E) give the following examples of language data:
+
+- `commentTokens` for specifying comment syntax
+- `autocomplete` for providing language-specific completion sources
+- `wordChars` for adding characters that should be considered part of words in this language
+- `closeBrackets` controls bracket closing behavior
+
+Typically we might pass in language data via the first argument of the `Language` class (the `data` argument). However, since we are maintaining our own node set, [we need to take a different approach](https://discuss.codemirror.net/t/language-data-not-being-recognized-on-custom-language/6310/1). We should instead provide language data via the top node's [props](https://lezer.codemirror.net/docs/ref/#common.NodeType^define^spec.props) argument. This is why we passed an empty facet to our call to `Language` earlier–any data passed there will be unused.
+
+CodeMirror gives us two functions–[`languageDataProp`](https://codemirror.net/docs/ref/#language.languageDataProp) and [`defineLanguageFacet`](https://codemirror.net/docs/ref/#language.defineLanguageFacet)–to make this part easy. We can update the top node in our `tokenToNodeType` object to include language data:
+
+```tsx
+topNode: NodeType.define({
+  id: 0,
+  name: 'topNode',
+  top: true,
+  props: [
+    [
+      languageDataProp,
+      defineLanguageFacet({
+        commentTokens: {
+          block: {open: '/*', close: '*/'},
+          line: '//'
+        },
+        closeBrackets: ["'"],
+      }),
+    ],
+  ],
+}),
+```
+
+Providing this data to CodeMirror will give us editor features for "free"–for example, the `commentTokens` make it so that the default [toggle comment command](https://codemirror.net/docs/ref/#commands.defaultKeymap) works with our language!
+
+## Considerations
+
+This implementation isn’t perfect and has a couple of drawbacks:
+
+1. It doesn’t support incremental parsing. Instead of trying to parse only part of the document, this implementation basically throws away the old tree and creates a new one on every keystroke. This might be acceptable in documents that will only ever be very small, but if the document is 10000 lines long, performance will suffer.
+2. It lacks a complete picture of the semantic structure. We are relying on the default token stream that comes out of ANTLR, and that token stream doesn’t provide us with a description of the semantic structure of the code–for example, we don’t know when a statement starts and stops. The token stream only provides us with information contained in the lexer, and doesn’t have a knowledge of what’s in the ANTLR parser. Ideally, a tree would be assembled in a way that includes this information.
+
+While these issues are solvable, I’ve opted not to solve them as part of this example and instead have kept this example as simple as possible to demonstrate how to connect a language server to Lezer.
+
+## Conclusion
+
+This how you do it. Yay.

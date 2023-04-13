@@ -1,1 +1,0 @@
-export {ConnectingAntlrToCodeMirrorTableOfContents} from './ConnectingAntlrToCodeMirrorTableOfContents';
