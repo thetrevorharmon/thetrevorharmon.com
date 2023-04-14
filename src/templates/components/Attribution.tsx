@@ -31,6 +31,7 @@ export const Attribution = ({mdx}: AttributionProps) => {
     'text-text-muted dark:text-text-dark',
     'text-[0.86666667rem]',
     'mt-tiny text-center',
+    'text-xs',
   );
 
   return (

@@ -11,28 +11,22 @@ interface Props {
 
 export const FeaturedTile = ({node, className}: Props) => {
   const classname = classnames([
-    'bg-caption-bg dark:bg-caption-bg-dark',
-    'relative p-container-base desktop:p-big',
+    // 'bg-caption-bg dark:bg-caption-bg-dark',
+    'overflow-hidden',
+    'bg-gradient-to-r from-caption-bg-dark via-caption-bg-dark to-caption-bg-dark/50',
+    'relative px-container-base desktop:px-big py-large',
     className,
   ]);
 
   return (
-    <div className="Breakout">
+    <div className="Breakout relative rounded-md overflow-hidden shadow-md">
+      <div className="absolute -right-[20%] h-100 top-0 bottom-0 max-h-full">
+        <Image src={node.image} />
+      </div>
       <div className={classname}>
         <div className="space-y-medium">
-          <Image src={node.image} />
           <PostTile node={node} />
         </div>
-        <Icon
-          name="star"
-          size="large"
-          className={classnames(
-            'absolute',
-            'right-container-base bottom-container-base',
-            'desktop:right-big desktop:bottom-big',
-          )}
-          color="primary"
-        />
       </div>
     </div>
   );

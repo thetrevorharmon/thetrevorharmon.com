@@ -14,16 +14,16 @@ export function FeaturedImage({mdx}: Props) {
   }
 
   const imageMarkup = (
-    <div className="Breakout shadow-[0_1px_6px_rgba(0,0,0,0.5)] rounded-md overflow-hidden">
+    <div className="Breakout shadow-sm rounded-md overflow-hidden">
       {image}
     </div>
   );
 
   const attribution = <Attribution mdx={mdx} />;
 
-  // if (attribution == null) {
+  if (attribution == null) {
   return imageMarkup;
-  // }
+  }
 
   return (
     <div className="space-y-tiny">

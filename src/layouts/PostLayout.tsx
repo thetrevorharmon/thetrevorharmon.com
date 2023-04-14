@@ -29,13 +29,13 @@ export function PostLayout({
 }: Props) {
   return (
     <>
-      <div className="bg-caption-bg  dark:bg-caption-bg-dark">
-        <Container>
-          <Helmet pageMetadata={pageMetadata} />
-          <Navbar />
-        </Container>
-      </div>
-      <div className={classnames('space-y-large', className)}>{children}</div>
+      <Container>
+        <Helmet pageMetadata={pageMetadata} />
+        <Navbar />
+        <div className={classnames('space-y-large my-large', className)}>
+          {children}
+        </div>
+      </Container>
       {hasSignupForm && (
         <div className="mt-huge mb-large bg-caption-bg dark:bg-caption-bg-dark">
           <Container>

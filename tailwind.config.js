@@ -131,6 +131,8 @@ module.exports = {
       backgroundImage: {
         quote: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14px' height='10px' viewBox='0 0 14 10' version='1.1'%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cpath d='M12.9270073,0 L10.8321168,5.24509804 L14,5.24509804 L14,10 L7.86861314,10 L7.86861314,5.68627451 L10.5255474,0 L12.9270073,0 Z M0,10 L0,5.68627451 L2.65693431,0 L5.05839416,0 L2.96350365,5.24509804 L6.08029197,5.24509804 L6.08029197,10 L0,10 Z' id='“' fill='%23EC4242' fill-rule='nonzero'/%3E%3C/g%3E%3C/svg%3E")`,
         'quote-dark': `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='14px' height='10px' viewBox='0 0 14 10' version='1.1'%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cpath d='M12.9270073,0 L10.8321168,5.24509804 L14,5.24509804 L14,10 L7.86861314,10 L7.86861314,5.68627451 L10.5255474,0 L12.9270073,0 Z M0,10 L0,5.68627451 L2.65693431,0 L5.05839416,0 L2.96350365,5.24509804 L6.08029197,5.24509804 L6.08029197,10 L0,10 Z' id='“' fill='%23FA5A5A' fill-rule='nonzero'/%3E%3C/g%3E%3C/svg%3E")`,
+        'caption-bg-gradient': `linear-gradient(90deg, ${colors.captionBg.light} 45%, rgba(0,0,0,0) 100%)`,
+        'caption-bg-gradient-dark': `linear-gradient(90deg, ${colors.captionBg.dark} 45%, rgba(0,0,0,0) 100%)`
       },
       gridTemplateColumns: {
         // name input | email input | button

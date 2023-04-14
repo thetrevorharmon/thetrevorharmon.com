@@ -16,6 +16,7 @@ export default ({data}: Props) => {
     url: Routes.blog(),
   };
 
+  
   const [featuredPost, ...posts] = data.allMdx.nodes;
 
   const postsByYear = posts.reduce<{[key: number]: Mdx[]}>((years, post) => {
@@ -111,7 +112,7 @@ export const query = graphql`
         image {
           source {
             childImageSharp {
-              gatsbyImageData(width: 800)
+              gatsbyImageData(height: 420)
             }
           }
           alt
