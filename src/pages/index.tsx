@@ -46,7 +46,7 @@ export default ({data}: IndexPageProps) => {
           ))}
         </div>
       </div>
-      <Button className="mt-big mb-large" url={Routes.blog()}>
+      <Button className="mt-large mb-large" url={Routes.blog()}>
         Read more posts &rarr;
       </Button>
     </Layout>
