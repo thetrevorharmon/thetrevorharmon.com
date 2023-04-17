@@ -82,18 +82,8 @@ module.exports = {
   theme: {
     fontFamily: {
       display: [
-        // 'Lustria',
-        // 'Azeret Mono',
         // 'Gloock',
-        // 'DM Serif Display',
-        // 'Playfair Display',
-        // 'Shrikhand',
-        // 'Syne',
-        // 'Metropolis',
         'YoungSerif',
-        // 'Calistoga',
-        'Inter',
-        'Source Serif Pro',
         'serif',
       ],
       serif: ['Source Serif Pro', 'serif'],
