@@ -20,9 +20,8 @@ export default ({data}: IndexPageProps) => {
 
   const titleMarkup = (
     <div className="space-y-tiny">
-      <p>Hi there! 👋 I'm</p>
       <h1 className="featured">
-        <span>Trevor Harmon</span>
+        <span>Hi, I'm Trevor. 👋</span>
       </h1>
       <p>{tagline}</p>
     </div>
