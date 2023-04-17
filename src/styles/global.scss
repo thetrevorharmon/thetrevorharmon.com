@@ -9,7 +9,7 @@
   @import '~@fontsource/inter/variable-full.css';
 }
 
-@import './fonts/YoungSerif/stylesheet.css';
+@import './stylesheet.scss';
 
 @layer components {
   .Breakout {
@@ -40,6 +40,8 @@ body {
   @media (prefers-color-scheme: dark) {
     background-color: theme('colors.body-bg-dark');
   }
+
+  font-variant-numeric: lining-nums;
 }
 
 div::-webkit-scrollbar,

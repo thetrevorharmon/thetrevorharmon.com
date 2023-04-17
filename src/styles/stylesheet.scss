@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'YoungSerif';
+  src: url('/fonts/YoungSerif-Regular.eot');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'YoungSerif';
+  src: url('/fonts/YoungSerif-Regular.woff2') format('woff2'),
+    url('/fonts/YoungSerif-Regular.ttf') format('truetype'),
+    url('/fonts/YoungSerif-Regular.svg#YoungSerif-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
