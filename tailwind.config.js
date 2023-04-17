@@ -81,7 +81,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['Gloock', 'Source Serif Pro', 'serif'],
+      display: ['Calistoga','Gloock', 'Source Serif Pro', 'serif'],
       serif: ['Source Serif Pro', 'serif'],
       sans: [
         "'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
