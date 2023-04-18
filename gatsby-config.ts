@@ -140,30 +140,6 @@ const config: GatsbyConfig = {
             name: 'Figtree',
             file: `https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap`,
           },
-          {
-            name: 'Fraunces',
-            file: `https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,700&display=swap`,
-          },
-          {
-            name: 'Poppins',
-            file: `https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap`,
-          },
-          {
-            name: 'Zilla Slab',
-            file: `https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap`,
-          },
-          {
-            name: 'Lexend',
-            file: `https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap`,
-          },
-          {
-            name: 'Epilogue',
-            file: `https://fonts.googleapis.com/css2?family=Epilogue:wght@700&display=swap`,
-          },
-          {
-            name: 'Barlow Semi Condensed',
-            file: `https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap`,
-          },
         ],
       },
     },

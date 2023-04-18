@@ -83,18 +83,12 @@ module.exports = {
     fontFamily: {
       display: [
         // 'Gloock',
-        // 'Epilogue',
-        // 'Fraunces',
         'Montagu Slab',
-        // 'Figtree',
         // 'YoungSerif',
         'serif',
       ],
       serif: ['Source Serif Pro', 'serif'],
       sans: [
-        // 'Barlow Semi Condensed',
-        // 'Lexend',
-        // 'Poppins',
         'Figtree',
         "'InterVariable'",
         "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
