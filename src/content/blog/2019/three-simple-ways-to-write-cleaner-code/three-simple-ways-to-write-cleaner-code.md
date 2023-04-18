@@ -34,11 +34,7 @@ In addition to language conventions, follow codebase conventions. There are case
 Many languages let you be liberal with whitespace (even whitespace delimited languages like Python). Before making a pull request, look at your code and see if a little spacing could make it easier to read. For example, the code that renders my "TH" top left link:
 
 ```typescript
-<Button
-  href={Routes.home()}
-  className={classnames(styles.Brand, 'global-brand')}
-  noStyling={true}
->
+<Button href={Routes.home()} className={classnames(styles.Brand, 'global-brand')} noStyling={true}>
   TH
 </Button>
 ```
