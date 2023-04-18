@@ -9,6 +9,11 @@
   @import '~@fontsource/inter/variable-full.css';
 }
 
+@import '~@fontsource/source-serif-pro/400.css';
+@import '~@fontsource/source-serif-pro/400-italic.css';
+@import '~@fontsource/source-serif-pro/700.css';
+@import '~@fontsource/source-serif-pro/700-italic.css';
+
 @import './stylesheet.scss';
 
 @layer components {
@@ -30,7 +35,7 @@ html {
 }
 
 body {
-  @apply font-sans;
+  @apply font-serif;
   @apply transition-colors;
 
   @media (prefers-color-scheme: light) {
