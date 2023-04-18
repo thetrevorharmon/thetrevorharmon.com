@@ -133,10 +133,6 @@ const config: GatsbyConfig = {
             file: `https://fonts.googleapis.com/css2?family=Gloock:wght@400&display=swap`,
           },
           {
-            name: 'Montagu Slab',
-            file: `https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@700&display=swap`,
-          },
-          {
             name: 'Figtree',
             file: `https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap`,
           },

@@ -1193,6 +1193,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/lustria/-/lustria-4.5.11.tgz#3742374df093da94ffe65cb65a94ccc6432134b0"
   integrity sha512-n9nekjlmPQe+Wk/HmepkDAeVNkxxpviKsWSZefImvS9j5mkYqiDUqbMjx59n6Eq23pAWVdAx/CHuU0ouFV9C6w==
 
+"@fontsource/montagu-slab@^4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/montagu-slab/-/montagu-slab-4.5.12.tgz#d856c267187d4f984a1260b129d8c5a7782c1a8a"
+  integrity sha512-I0CgNOFG47vSegAJxQ461+W46XW7p+a2/+kl6SyziGU/aaRTPkoM1gohqPJRE6xcCluWOrsBGL2Zp4y7iuoseg==
+
 "@fontsource/playfair-display@^4.5.13":
   version "4.5.13"
   resolved "https://registry.yarnpkg.com/@fontsource/playfair-display/-/playfair-display-4.5.13.tgz#6024a7edaf4e492eeb2e57467a5a44eed00ad924"
