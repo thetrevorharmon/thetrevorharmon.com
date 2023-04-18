@@ -23,17 +23,17 @@ export const BrandButton = () => {
         'focus:bg-primary dark:focus:bg-primary-dark',
         'text-[1.92rem] desktop:text-[2.4rem]',
         '-tracking-[0.5px] desktop:-tracking-[1px]',
-        'font-sans',
-        'font-black',
+        'font-display',
+        // 'font-black',
         'uppercase',
-        'italic',
+        // 'italic',
         'border-2',
         'border-stone-300 dark:border-stone-600',
         'hover:border-primary dark:hover:border-primary-dark',
         'focus:border-primary dark:focus:border-primary-dark',
         'rounded-xl',
         'focus:outline-none',
-        'transition-colors'
+        'transition-colors',
       )}
     >
       th.

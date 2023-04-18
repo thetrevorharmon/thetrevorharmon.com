@@ -144,11 +144,10 @@ h5 {
 blockquote {
   @apply Breakout;
 
-  @apply text-[1.44rem] desktop:text-[1.6rem];
+  @apply text-[1.2rem] desktop:text-[1.4rem];
   @apply -tracking-[0.5px];
-  @apply font-black italic;
-
-  @apply -tracking-[0.5px] font-black italic;
+  @apply font-black;
+  @apply italic;
 
   @apply pt-normal pr-normal pb-normal pl-big;
   @apply desktop:pt-big desktop:pr-big desktop:pb-big desktop:pl-large;

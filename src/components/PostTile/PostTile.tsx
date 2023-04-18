@@ -18,18 +18,21 @@ export const PostTile = ({node}: Props) => {
     <div className="space-y-normal">
       <div className="space-y-small">
         <div className="space-y-tiny">
-          <h2 className='text-text-bold-dark'>{node.title}</h2>
+          <h2 className="text-text-bold-dark">{node.title}</h2>
           <Meta
             date={node.date}
             timeToRead={node.timeToRead}
             isLinkPost={node.link != null}
-            className='text-text-muted-dark'
+            className="text-text-muted-dark"
           />
         </div>
-        <p className='text-text-dark'>{node.description}</p>
+        <p className="text-text-dark">{node.description}</p>
       </div>
 
-      <Link url={route(node.slug!)} className="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark">
+      <Link
+        url={route(node.slug!)}
+        className="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark"
+      >
         {buttonText}
       </Link>
     </div>
