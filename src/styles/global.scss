@@ -149,6 +149,7 @@ h5 {
 
 blockquote {
   @apply Breakout;
+  @apply rounded-md;
 
   @apply text-[1.2rem] desktop:text-[1.4rem];
   @apply -tracking-[0.5px];
@@ -185,9 +186,6 @@ blockquote {
 }
 
 .body-styles {
-  img {
-    @apply bg-caption-bg dark:bg-caption-bg-dark;
-  }
 
   h2 {
     @apply mt-large mb-small;
@@ -207,6 +205,11 @@ blockquote {
 
     @apply max-w-full;
     @apply w-full;
+
+    @apply bg-caption-bg dark:bg-caption-bg-dark;
+    @apply rounded-md;
+
+    
 
     /* 0px */
     /* @screen base {
@@ -276,7 +279,9 @@ blockquote {
     /* @apply -mx-container-base #{!important};
     @apply desktop:mx-0 #{!important};
     @apply expanded:-mx-breakout #{!important}; */
-
+    @apply rounded-md overflow-hidden;
+    @apply isolate;
+    @apply shadow-md dark:shadow-none;
     @apply my-medium;
   }
 

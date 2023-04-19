@@ -32,7 +32,7 @@ export function PostLayout({
       <Container>
         <Helmet pageMetadata={pageMetadata} />
         <Navbar />
-        <div className={classnames('space-y-big my-large', className)}>
+        <div className={classnames('my-large', className)}>
           {children}
         </div>
       </Container>

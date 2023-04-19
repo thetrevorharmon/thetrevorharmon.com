@@ -59,7 +59,7 @@ function Article({
       hasSignupForm
     >
       <FeaturedImage mdx={mdx} />
-      <div className="space-y-tiny">
+      <div className="space-y-tiny mt-large mb-big">
         <h1>
           <span>{mdx.title}</span>
         </h1>
