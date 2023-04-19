@@ -20,6 +20,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
     "@codemirror/language": "^6.6.0",
     "@codemirror/view": "^6.9.3",
+    "@fontsource/jetbrains-mono": "^4.5.12",
     "@fontsource/montagu-slab": "^4.5.12",
     "@fontsource/source-serif-pro": "^4.5.9",
     "@lezer/common": "^1.0.2",
