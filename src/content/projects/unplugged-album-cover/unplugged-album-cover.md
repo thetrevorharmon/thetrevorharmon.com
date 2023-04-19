@@ -1,5 +1,5 @@
 ---
-title: '"Unplugged" Album Cover'
+title: '“Unplugged” Album Cover'
 slug: unplugged-album-cover
 date: '2014-10-10'
 client: Jefferson & York

@@ -1,5 +1,5 @@
 ---
-title: '"Never Stop" Cover art'
+title: '“Never Stop” Cover art'
 slug: never-stop-cover-art
 date: '2019-05-01'
 client: Michael Barrow & The Tourists

@@ -1,5 +1,5 @@
 ---
-title: '"The Backyard EP" Album Cover'
+title: '“The Backyard EP” Album Cover'
 slug: the-backyard-ep-album-cover
 date: '2015-12-15'
 client: Jefferson & York

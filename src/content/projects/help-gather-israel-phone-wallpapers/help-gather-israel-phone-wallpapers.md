@@ -1,5 +1,5 @@
 ---
-title: '"Help Gather Israel" Phone Wallpapers'
+title: '“Help Gather Israel” Phone Wallpapers'
 slug: help-gather-israel-phone-wallpapers
 date: '2021-01-31'
 client: Church

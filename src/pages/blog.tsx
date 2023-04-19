@@ -45,9 +45,9 @@ export default ({data}: Props) => {
           <p>{pageMetadata.description}</p>
         </div>
 
-        <div className="space-y-huge">
+        <div>
           <FeaturedTile node={featuredPost} />
-          <div className="space-y-large">
+          <div className="space-y-large mt-large">
             {orderedPostsByYear.map(([year, posts]) => {
               return (
                 <div className="space-y-normal" key={year}>
