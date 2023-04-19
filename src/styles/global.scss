@@ -20,19 +20,21 @@
 
 @layer components {
   .Breakout {
-    @apply bg-transparent;
-    /* @apply -mx-little; */
+    @screen md {
+      @apply -mx-breakout;
+    }
+  }
+
+  .BreakoutWithPadding {
+    @screen md {
+      @apply -mx-breakout;
+      @apply px-breakout;
+    }
   }
 }
 
 html {
-  @screen base {
-    font-size: 17px;
-  }
-
-  @screen collapsed {
-    font-size: 18px;
-  }
+  font-size: 17px;
 }
 
 body {
@@ -148,7 +150,7 @@ h5 {
 }
 
 blockquote {
-  @apply Breakout;
+  @apply BreakoutWithPadding;
   @apply rounded-md;
 
   @apply text-[1.2rem] desktop:text-[1.4rem];
@@ -186,7 +188,6 @@ blockquote {
 }
 
 .body-styles {
-
   h2 {
     @apply mt-large mb-small;
   }
@@ -203,28 +204,10 @@ blockquote {
     margin-top: theme('space.little');
     margin-bottom: theme('space.little');
 
-    @apply max-w-full;
     @apply w-full;
 
     @apply bg-caption-bg dark:bg-caption-bg-dark;
     @apply rounded-md;
-
-    
-
-    /* 0px */
-    /* @screen base {
-      width: calc(100% + 50px);
-    }
-
-    /* ~560px */
-    /* @screen collapsed {
-      width: 100%;
-    } */
-
-    /* ~640px */
-    /* @screen expanded {
-      width: theme('screens.expanded');
-    } */
   }
 
   ul,
@@ -265,20 +248,12 @@ blockquote {
     }
   }
 
-  > img {
+  /* > img {
     max-width: none;
-  }
+  } */
 
   .gatsby-resp-image-wrapper,
   > img {
-    // These are the styles for @Breakout
-    // I had to inline them here because @Breakout #{!important} didn't work
-    // and these conflict with some default gatsby styling that I can't
-    // seem to remove
-
-    /* @apply -mx-container-base #{!important};
-    @apply desktop:mx-0 #{!important};
-    @apply expanded:-mx-breakout #{!important}; */
     @apply rounded-md overflow-hidden;
     @apply isolate;
     @apply shadow-md dark:shadow-none;
@@ -287,15 +262,6 @@ blockquote {
 
   &.projects {
     .gatsby-resp-image-wrapper {
-      // These are the styles for @Breakout
-      // I had to inline them here because @Breakout #{!important} didn't work
-      // and these conflict with some default gatsby styling that I can't
-      // seem to remove
-
-      /* @apply -mx-container-base #{!important};
-      @apply desktop:mx-0 #{!important};
-      @apply expanded:-mx-breakout #{!important}; */
-
       @apply border border-img-border dark:border-img-border-dark;
     }
 

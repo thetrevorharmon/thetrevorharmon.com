@@ -5,5 +5,5 @@ interface ContainerProps {
 }
 
 export const Container = ({children}: ContainerProps) => {
-  return <div className="px-normal">{children}</div>;
+  return <div className="px-normal max-w-container mx-auto">{children}</div>;
 };

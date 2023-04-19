@@ -7,41 +7,32 @@
   }
 
   .h1-featured {
-    @apply text-[2.4rem] desktop:text-[3.26666667rem];
+    @apply text-[2.4rem] sm:text-[3.26666667rem];
     @apply text-black  dark:text-white;
     @apply leading-[1.2];
   }
 
   .h1 {
-    @apply text-[1.65rem] desktop:text-[2.6rem];
+    @apply text-[1.65rem] sm:text-[2.3rem];
     @apply leading-[1.2];
     @apply text-black  dark:text-white;
   }
 
   .h2 {
-    @apply text-[1.4rem] desktop:text-[2.0rem];
-    /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
-    /* @apply font-black; */
-    /* @apply italic; */
+    @apply text-[1.4rem] sm:text-[1.7rem];
 
     @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
   }
 
   .h3 {
-    @apply text-[1.25rem] desktop:text-[1.5rem];
-    /* @apply -tracking-[0.5px]; */
-    /* @apply font-black; */
-    /* @apply italic; */
+    @apply text-[1.25rem] sm:text-[1.35rem];
 
     @apply leading-[1.2];
     @apply text-text dark:text-text-dark;
   }
 
   .h4 {
-    @apply text-[1.15rem] desktop:text-[1.25rem];
-    /* @apply -tracking-[0.2px]; */
-    /* @apply italic; */
-    /* @apply font-black; */
+    @apply text-[1.15rem] sm:text-[1.25rem];
 
     @apply leading-[1.1];
     @apply text-text-bold dark:text-text-bold-dark;

@@ -3,10 +3,9 @@
  * Inspired by Github syntax coloring
  */
 
- @import '~@fontsource/jetbrains-mono/400.css';
- @import '~@fontsource/jetbrains-mono/400-italic.css';
- @import '~@fontsource/jetbrains-mono/700.css';
- 
+@import '~@fontsource/jetbrains-mono/400.css';
+@import '~@fontsource/jetbrains-mono/400-italic.css';
+@import '~@fontsource/jetbrains-mono/700.css';
 
 code[class*='language-'],
 pre[class*='language-'] {
@@ -62,17 +61,9 @@ pre[class*='language-'] > code[class*='language'] {
 
 /* Code blocks */
 pre[class*='language-'] {
-  @apply Breakout;
+  @apply BreakoutWithPadding;
 
   @apply py-medium my-normal;
-
-  @screen mobile {
-    @apply px-container-base;
-  }
-
-  @screen desktop {
-    @apply px-breakout;
-  }
 
   overflow: auto;
 
