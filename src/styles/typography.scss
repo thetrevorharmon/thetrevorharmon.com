@@ -1,47 +1,25 @@
 @layer components {
-  .h1-common {
-    /* @apply uppercase; */
+  .h1,
+  .h2,
+  .h3,
+  .h4 {
     @apply font-display;
-    /* @apply font-black; */
-    /* @apply italic; */
-
-    /* @apply text-text-bold dark:text-text-bold-dark; */
-    @apply text-black  dark:text-white;
-    // background on internal span
-    /* @apply [&>span]:bg-primary [&>span]:dark:bg-primary-dark; */
-
-    // sets the box decoration to behave as if it's one continuous fragment
-    /* @apply [&>span]:box-decoration-clone; */
   }
 
   .h1-featured {
-    @apply h1-common;
-
-    @apply text-[2.45333334rem] desktop:text-[3.26666667rem];
-    /* @apply -tracking-[1px] desktop:-tracking-[1.5px]; */
-
-    /* @apply [&>span]:shadow-header-display [&>span]:dark:shadow-header-display-dark; */
-
-    // spacing around edges of span
-    /* @apply pl-[10px] [&>span]:pt-[4px] [&>span]:pb-[4px]; */
-
+    @apply text-[2.4rem] desktop:text-[3.26666667rem];
+    @apply text-black  dark:text-white;
     @apply leading-[1.2];
   }
 
   .h1 {
-    @apply h1-common;
-
-    @apply text-[1.92rem] desktop:text-[2.6rem];
-    /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
-
-    /* @apply [&>span]:shadow-header-title [&>span]:dark:shadow-header-title-dark; */
-    /* @apply pl-[7px] [&>span]:pt-[2px] [&>span]:pb-[2px]; */
+    @apply text-[1.8rem] desktop:text-[2.6rem];
     @apply leading-[1.2];
+    @apply text-black  dark:text-white;
   }
 
   .h2 {
-    @apply font-display;
-    @apply text-[1.49333333rem] desktop:text-[2.0666666667rem];
+    @apply text-[1.4rem] desktop:text-[2.0rem];
     /* @apply -tracking-[0.5px] desktop:-tracking-[1px]; */
     /* @apply font-black; */
     /* @apply italic; */
@@ -50,8 +28,7 @@
   }
 
   .h3 {
-    @apply font-display;
-    @apply text-[1.28rem] desktop:text-[1.5rem];
+    @apply text-[1.25rem] desktop:text-[1.5rem];
     /* @apply -tracking-[0.5px]; */
     /* @apply font-black; */
     /* @apply italic; */
@@ -61,8 +38,7 @@
   }
 
   .h4 {
-    @apply font-display;
-    @apply text-[1.18rem] desktop:text-[1.25rem];
+    @apply text-[1.15rem] desktop:text-[1.25rem];
     /* @apply -tracking-[0.2px]; */
     /* @apply italic; */
     /* @apply font-black; */

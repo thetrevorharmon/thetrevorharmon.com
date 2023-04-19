@@ -27,7 +27,7 @@ export const ToggleThemeButton = ({className}: ToggleThemeButtonProps) => {
 
   const iconClassName = classnames([
     'relative',
-    'top-[3px]',
+    'top-[1px]',
     'block',
     'w-[1.25rem]',
   ]);

@@ -10,7 +10,7 @@ export const BrandButton = () => {
       to={Routes.home()}
       className={classnames(
         'inline-block',
-        'px-[9px] py-[6px]',
+        'pt-[7px] pr-[9px] pb-[6px] pl-[10px]',
         'leading-none',
         'no-underline',
         'text-primary dark:text-primary-dark',
@@ -21,14 +21,12 @@ export const BrandButton = () => {
         'text-[1.6rem] desktop:text-[2rem]',
         '-tracking-[0.5px] desktop:-tracking-[1px]',
         'font-display',
-        // 'font-black',
         'uppercase',
-        // 'italic',
         'border-2',
         'border-stone-300 dark:border-stone-600',
         'hover:border-primary dark:hover:border-primary-dark',
         'focus:border-primary dark:focus:border-primary-dark',
-        'rounded-xl',
+        'rounded-lg',
         'focus:outline-none',
         'transition-colors',
       )}

@@ -20,15 +20,14 @@
 
 @layer components {
   .Breakout {
-    @apply -mx-container-base;
-    @apply desktop:mx-0;
-    @apply expanded:-mx-breakout;
+    @apply bg-transparent;
+    @apply -mx-little;
   }
 }
 
 html {
   @screen base {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   @screen collapsed {
@@ -271,9 +270,9 @@ blockquote {
     // and these conflict with some default gatsby styling that I can't
     // seem to remove
 
-    @apply -mx-container-base #{!important};
+    /* @apply -mx-container-base #{!important};
     @apply desktop:mx-0 #{!important};
-    @apply expanded:-mx-breakout #{!important};
+    @apply expanded:-mx-breakout #{!important}; */
 
     @apply my-medium;
   }
@@ -285,9 +284,9 @@ blockquote {
       // and these conflict with some default gatsby styling that I can't
       // seem to remove
 
-      @apply -mx-container-base #{!important};
+      /* @apply -mx-container-base #{!important};
       @apply desktop:mx-0 #{!important};
-      @apply expanded:-mx-breakout #{!important};
+      @apply expanded:-mx-breakout #{!important}; */
 
       @apply border border-img-border dark:border-img-border-dark;
     }

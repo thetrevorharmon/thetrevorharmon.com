@@ -18,18 +18,16 @@ export default ({data}: IndexPageProps) => {
 
   const {tagline} = useSiteData();
 
-  const titleMarkup = (
-    <div className="space-y-tiny">
-      <h1 className="featured">
-        <span>Hi, I'm Trevor.{'\u00A0'}👋</span>
-      </h1>
-      <p>{tagline}</p>
-    </div>
-  );
-
   return (
     <Layout>
-      <div className="my-huge">{titleMarkup}</div>
+      <div className="my-large">
+        <div className="space-y-tiny">
+          <h1 className="featured">
+            <span>Hi, I'm Trevor.{'\u00A0'}👋</span>
+          </h1>
+          <p>{tagline}</p>
+        </div>
+      </div>
       <div className="space-y-big">
         <FeaturedTile node={featuredPost} />
         <div className="space-y-normal">
