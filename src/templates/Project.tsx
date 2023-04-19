@@ -47,10 +47,9 @@ function ProjectNext({
         </h1>
         <Meta date={mdx.date} client={mdx.client} />
       </div>
-      <div className="space-y-medium">
-        <div className="body-styles projects">
-          <MDXProvider>{children}</MDXProvider>
-        </div>
+
+      <div className="body-styles projects mt-medium md:mt-large">
+        <MDXProvider>{children}</MDXProvider>
       </div>
     </PostLayout>
   );

@@ -271,7 +271,8 @@ blockquote {
     }
 
     span:first-of-type {
-      @apply mt-huge block;
+      @apply block;
+      @apply mt-big md:mt-large;
     }
 
     span + span {
