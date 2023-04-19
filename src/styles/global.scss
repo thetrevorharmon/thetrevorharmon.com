@@ -14,6 +14,7 @@
 @import '~@fontsource/source-serif-pro/700.css';
 @import '~@fontsource/source-serif-pro/700-italic.css';
 
+@import '~@fontsource/montagu-slab/500.css';
 @import '~@fontsource/montagu-slab/700.css';
 
 @import './stylesheet.scss';
@@ -153,13 +154,13 @@ blockquote {
   @apply BreakoutWithPadding;
   @apply rounded-md;
 
-  @apply text-[1.2rem] md:text-[1.4rem];
+  @apply text-[1.2rem] md:text-[1.3rem];
   @apply -tracking-[0.5px];
   @apply font-black;
   @apply italic;
 
   @apply pt-normal pr-normal pb-normal pl-big;
-  @apply md:pt-big md:pr-big md:pb-big md:pl-large;
+  @apply md:pt-medium md:pr-medium md:pb-medium md:pl-large;
 
   @apply relative leading-[1.5];
 
@@ -171,19 +172,21 @@ blockquote {
   }
 
   &::before {
-    content: '';
+    content: '“';
 
-    @apply h-[10px] w-[14px];
-
-    @apply bg-quote dark:bg-quote-dark;
-    @apply bg-center bg-no-repeat;
+    @apply font-display;
+    @apply not-italic;
 
     @apply text-primary mr-little;
 
     @apply absolute;
 
-    @apply top-[1.9rem] left-[1.1rem];
-    @apply md:top-[3.3rem] md:left-[2.3rem];
+    @apply text-[1.7rem];
+    @apply top-[2rem] left-[1rem];
+
+    @screen md {
+      @apply top-[2.8rem] left-breakout -ml-[3px];
+    }
   }
 }
 
@@ -197,7 +200,8 @@ blockquote {
   }
 
   p {
-    @apply my-small;
+    @apply my-normal;
+    @apply leading-[1.6];
   }
 
   img {
@@ -236,21 +240,18 @@ blockquote {
         left: 0;
         top: 0;
 
-        @apply uppercase font-black italic;
+        @apply font-display;
       }
     }
   }
 
   ul li {
     &:before {
-      content: '→';
+      content: '*';
       font-style: normal;
+      line-height: 1.8;
     }
   }
-
-  /* > img {
-    max-width: none;
-  } */
 
   .gatsby-resp-image-wrapper,
   > img {

@@ -3,6 +3,7 @@
 const containerSize = '36rem';
 
 const defaultColors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const colors = {
   primary: {
@@ -28,7 +29,7 @@ const colors = {
   text: {
     label: 'text',
     light: defaultColors['stone']['600'],
-    dark: defaultColors['stone']['400'],
+    dark: defaultColors['stone']['300'],
   },
   textBold: {
     label: 'text-bold',
@@ -44,6 +45,11 @@ const colors = {
     label: 'caption-bg',
     light: defaultColors['stone']['200'],
     dark: defaultColors['stone']['800'],
+  },
+  captionBorder: {
+    label: 'caption-border',
+    light: defaultColors['stone']['300'],
+    dark: defaultColors['stone']['700'],
   },
   bodyBg: {
     label: 'body-bg',
@@ -81,16 +87,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['Montagu Slab', 'serif'],
-      serif: ['Source Serif Pro', 'serif'],
-      sans: [
-        // 'Figtree',
-        "'InterVariable'",
-        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-      ],
-      mono: [
-        "'JetBrains Mono', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace",
-      ],
+      display: ['Montagu Slab', ...defaultTheme.fontFamily.serif],
+      serif: ['Source Serif Pro', ...defaultTheme.fontFamily.serif],
+      mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
     },
     extend: {
       spacing: {
@@ -112,15 +111,7 @@ module.exports = {
         container: containerSize,
       },
       colors: tailwindColors,
-      boxShadow: {
-        'header-display': `14px 0 0 ${colors.primary.light}, -10px 0 0 ${colors.primary.light}`,
-        'header-display-dark': `14px 0 0 ${colors.primary.dark}, -10px 0 0 ${colors.primary.dark}`,
-        'header-title': `9.8px 0 0 ${colors.primary.light}, -7px 0 0 ${colors.primary.light}`,
-        'header-title-dark': `9.8px 0 0 ${colors.primary.dark}, -7px 0 0 ${colors.primary.dark}`,
-      },
       backgroundImage: {
-        quote: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14px' height='10px' viewBox='0 0 14 10' version='1.1'%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cpath d='M12.9270073,0 L10.8321168,5.24509804 L14,5.24509804 L14,10 L7.86861314,10 L7.86861314,5.68627451 L10.5255474,0 L12.9270073,0 Z M0,10 L0,5.68627451 L2.65693431,0 L5.05839416,0 L2.96350365,5.24509804 L6.08029197,5.24509804 L6.08029197,10 L0,10 Z' id='“' fill='%23EC4242' fill-rule='nonzero'/%3E%3C/g%3E%3C/svg%3E")`,
-        'quote-dark': `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='14px' height='10px' viewBox='0 0 14 10' version='1.1'%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cpath d='M12.9270073,0 L10.8321168,5.24509804 L14,5.24509804 L14,10 L7.86861314,10 L7.86861314,5.68627451 L10.5255474,0 L12.9270073,0 Z M0,10 L0,5.68627451 L2.65693431,0 L5.05839416,0 L2.96350365,5.24509804 L6.08029197,5.24509804 L6.08029197,10 L0,10 Z' id='“' fill='%23FA5A5A' fill-rule='nonzero'/%3E%3C/g%3E%3C/svg%3E")`,
         'caption-bg-gradient': `linear-gradient(90deg, ${colors.captionBg.light} 45%, rgba(0,0,0,0) 100%)`,
         'caption-bg-gradient-dark': `linear-gradient(90deg, ${colors.captionBg.dark} 45%, rgba(0,0,0,0) 100%)`,
       },

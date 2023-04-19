@@ -20,7 +20,7 @@ export const BrandButton = () => {
         'focus:bg-primary dark:focus:bg-primary-dark',
         'text-[1.6rem] md:text-[2rem]',
         '-tracking-[0.5px] md:-tracking-[1px]',
-        'font-display',
+        'font-display font-bold',
         'uppercase',
         'border-2',
         'border-stone-300 dark:border-stone-600',

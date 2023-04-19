@@ -41,7 +41,7 @@ pre[class*='language-'] > code[class*='language'] {
   @apply text-[#3b3b3b] dark:text-[#f0f0f0];
 
   @apply bg-caption-bg dark:bg-caption-bg-dark;
-  @apply border border-[#ddd] dark:border-[#555];
+  @apply border border-caption-border dark:border-caption-border-dark;
 
   &::selection,
   & ::selection {
