@@ -21,7 +21,7 @@
 @layer components {
   .Breakout {
     @apply bg-transparent;
-    @apply -mx-little;
+    /* @apply -mx-little; */
   }
 }
 
@@ -205,20 +205,23 @@ blockquote {
     margin-top: theme('space.little');
     margin-bottom: theme('space.little');
 
+    @apply max-w-full;
+    @apply w-full;
+
     /* 0px */
-    @screen base {
+    /* @screen base {
       width: calc(100% + 50px);
     }
 
     /* ~560px */
-    @screen collapsed {
+    /* @screen collapsed {
       width: 100%;
-    }
+    } */
 
     /* ~640px */
-    @screen expanded {
+    /* @screen expanded {
       width: theme('screens.expanded');
-    }
+    } */
   }
 
   ul,

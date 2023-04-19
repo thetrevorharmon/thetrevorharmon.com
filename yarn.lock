@@ -1183,6 +1183,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.15.tgz#eed1873d68755d3b52d6fcfcfa3493118430a512"
   integrity sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==
 
+"@fontsource/jetbrains-mono@^4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.12.tgz#d965dca932f0ecf5379013f4dff3aec7b817b91b"
+  integrity sha512-LJF1ala1/u+wXZmESFqIk08FA9yGX4/uAAleCHmXUMgEjvNAYFHUQQ7eK5hQQoBOwh99cU5suTrqYqEkgzwzPA==
+
 "@fontsource/lexend@^4.5.15":
   version "4.5.15"
   resolved "https://registry.yarnpkg.com/@fontsource/lexend/-/lexend-4.5.15.tgz#ee033b850224d05b665d6661bf8d32c950f166bb"
@@ -1203,6 +1208,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/playfair-display/-/playfair-display-4.5.13.tgz#6024a7edaf4e492eeb2e57467a5a44eed00ad924"
   integrity sha512-41yD3XW8jATcZO8E2U6Xe9MIaogPdjrGkC4ixNzAIdrR3BvLxXpeHU2xw3rwIq8aHhFUYwLnE6Lq+BWSTZZH9w==
 
+"@fontsource/pt-mono@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-4.5.11.tgz#5f2db9d4184571507b46499ce5a77bba68d5477e"
+  integrity sha512-WS5IuinkjjzMHSpevPdAle99NCVfodZsIzF1oX21zRaoWvqW0fsFzoKgJ0qpx9xXWHIOdkyJLn1xB7iCkCD7+Q==
+
 "@fontsource/shrikhand@^4.5.9":
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/shrikhand/-/shrikhand-4.5.9.tgz#598b6fac5dbb1e356858bdc0850f7112b55fb193"
@@ -1212,6 +1222,11 @@
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/source-serif-pro/-/source-serif-pro-4.5.9.tgz#fbeacd0bb6d2860df6baa662e9827adfe3da13f4"
   integrity sha512-VgDvUvd3An3v9HtKgYk9TJuhB/4ZXw4huv/uqTXO4gES7CUbqGcf6tSb69TwG6o5AZzEVt6jnN7FN18OaO5J9A==
+
+"@fontsource/space-mono@^4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/space-mono/-/space-mono-4.5.12.tgz#091de8547d7e871e28bd16c4883d2bb50e9fd8ea"
+  integrity sha512-/ljrJgSIB/C0jUCn07r/V/KpkdHF9bnK2fD0raGSVkgQjFqQ6Q3LndVeBiUCJlIi6ROh7rHDkpFzn+nNmRgRlQ==
 
 "@fontsource/syne@^4.5.13":
   version "4.5.13"

@@ -35,21 +35,19 @@ export default ({data}: Props) => {
     },
   );
 
-  console.log(orderedPostsByYear);
-
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="mt-huge mb-large space-y-huge">
-        <div className="space-y-small">
+      <div className="mt-large mb-large space-y-large">
+        <div className="space-y-tiny">
           <h1 className="featured">
             <span>{pageMetadata.title}</span>
           </h1>
           <p>{pageMetadata.description}</p>
         </div>
 
-        <div className="space-y-large">
+        <div className="space-y-huge">
           <FeaturedTile node={featuredPost} />
-          <div className="space-y-huge">
+          <div className="space-y-large">
             {orderedPostsByYear.map(([year, posts]) => {
               return (
                 <div className="space-y-normal" key={year}>
