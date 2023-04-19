@@ -147,3 +147,16 @@ pre[class*='language-'] {
     @apply text-[#828eff];
   }
 }
+
+a code {
+  @apply underline;
+}
+
+a {
+  &:hover,
+  &:focus {
+    code {
+      @apply text-primary-text dark:text-primary-text-dark;
+    }
+  }
+}
