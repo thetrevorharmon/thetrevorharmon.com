@@ -1,9 +1,9 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostTile, Button, Link} from '../components';
+import {FeaturedTile, Button, Link} from '../components';
 import {Layout} from '../layouts';
-import {Routes, useSiteData} from '../utils';
+import {Routes, nbps, useSiteData} from '../utils';
 
 interface IndexPageProps {
   data: Queries.IndexPageQuery;
@@ -23,7 +23,7 @@ export default ({data}: IndexPageProps) => {
       <div className="my-large md:my-huge">
         <div className="space-y-tiny">
           <h1 className="featured">
-            <span>Hi, I'm Trevor.{'\u00A0'}👋</span>
+            <span>Hi, I'm Trevor.{nbps}👋</span>
           </h1>
           <p>{tagline}</p>
         </div>

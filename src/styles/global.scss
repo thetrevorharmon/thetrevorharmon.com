@@ -36,6 +36,7 @@
 
 html {
   font-size: 17px;
+  @apply font-serif;
 }
 
 body {
@@ -214,6 +215,10 @@ blockquote {
     @apply rounded-md;
   }
 
+  blockquote {
+    @apply my-medium;
+  }
+
   ul,
   ol {
     margin-left: 0;
@@ -257,7 +262,6 @@ blockquote {
   > img {
     @apply rounded-md overflow-hidden;
     @apply isolate;
-    @apply shadow-md dark:shadow-none;
     @apply my-medium;
   }
 

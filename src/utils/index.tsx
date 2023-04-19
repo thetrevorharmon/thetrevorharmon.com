@@ -5,3 +5,4 @@ import {MetaTags} from './OpenGraphMeta';
 import {ExternalLinks, Routes} from './routes';
 
 export {ExternalLinks, Helmet, Helpers, MetaTags, Routes, useSiteData};
+export {nbps} from './constants';
