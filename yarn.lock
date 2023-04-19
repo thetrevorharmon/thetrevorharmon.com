@@ -1148,100 +1148,15 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/alice@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/alice/-/alice-4.5.10.tgz#d2fe51aaf4098e627371e43c62010c7ccaac1fc5"
-  integrity sha512-MJveFvHGyrCvbfjLuNCy7/Zu1YpNLRegQcAnScx8b9eDqYpTUOqzkok8VMoo0xH0m8eI7299wMme0Y054yKICg==
-
-"@fontsource/azeret-mono@^4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/azeret-mono/-/azeret-mono-4.5.12.tgz#e1fb5120cace92d2c21d1303cf49914c16500fb1"
-  integrity sha512-oW/PQUqREdv7wsM2KWSPR+jeg1obZoofiNzARsIuiEBbCjFd0/V8eg47D6pc4Rl9OcKeiTRfOlONuN8IIaar3A==
-
-"@fontsource/calistoga@^4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/calistoga/-/calistoga-4.5.11.tgz#f4dbd7c446559610d55069f62b3147fef9869126"
-  integrity sha512-h8Anj+KrPQ2h26CMP/yWU+71zECjRBHoS/uqAgi82ja8UtPvLge3iH9ah7ZPOGHalgr+uxmlAPade88N+U3lVA==
-
-"@fontsource/crimson-text@^4.5.5":
-  version "4.5.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/crimson-text/-/crimson-text-4.5.5.tgz#fd8d30312125f1b1a03a543542ee1e511881b50e"
-  integrity sha512-xmkpTXSGgNsT6sJDRVQ/2EgwY49XaPgE0yx+4US5hEkSau+G6SEk1CSPVWkr/6vSxrVNselTYjb8g7+5VGpnEQ==
-
-"@fontsource/dm-serif-display@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/dm-serif-display/-/dm-serif-display-4.5.10.tgz#10f5528756b267dd26fcb5fd01db1b21a7a5838f"
-  integrity sha512-YK21qvUvwRx/Z10rzxNM5cLIkNg8R17wWPqA9+sNS8uTLrIX7WfC8OMTMOJLwrNRu9EDVB1gVUso0LayJPRCOw==
-
-"@fontsource/fira-mono@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/fira-mono/-/fira-mono-4.5.10.tgz#443be4b2b4fc6e685b88431fcfdaf8d5f5639bbf"
-  integrity sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==
-
-"@fontsource/inter@^4.5.15":
-  version "4.5.15"
-  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.15.tgz#eed1873d68755d3b52d6fcfcfa3493118430a512"
-  integrity sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==
-
-"@fontsource/jetbrains-mono@^4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.12.tgz#d965dca932f0ecf5379013f4dff3aec7b817b91b"
-  integrity sha512-LJF1ala1/u+wXZmESFqIk08FA9yGX4/uAAleCHmXUMgEjvNAYFHUQQ7eK5hQQoBOwh99cU5suTrqYqEkgzwzPA==
-
-"@fontsource/lexend@^4.5.15":
-  version "4.5.15"
-  resolved "https://registry.yarnpkg.com/@fontsource/lexend/-/lexend-4.5.15.tgz#ee033b850224d05b665d6661bf8d32c950f166bb"
-  integrity sha512-6edLmDmte8pJWtQ1NIahcJq0iWlf6b0/JLwkd7WbDQ3C5tZWnxjvbP4RSklMv4MPzGjpuYuYnc+QANbjUws1oA==
-
-"@fontsource/lustria@^4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/lustria/-/lustria-4.5.11.tgz#3742374df093da94ffe65cb65a94ccc6432134b0"
-  integrity sha512-n9nekjlmPQe+Wk/HmepkDAeVNkxxpviKsWSZefImvS9j5mkYqiDUqbMjx59n6Eq23pAWVdAx/CHuU0ouFV9C6w==
-
 "@fontsource/montagu-slab@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@fontsource/montagu-slab/-/montagu-slab-4.5.12.tgz#d856c267187d4f984a1260b129d8c5a7782c1a8a"
   integrity sha512-I0CgNOFG47vSegAJxQ461+W46XW7p+a2/+kl6SyziGU/aaRTPkoM1gohqPJRE6xcCluWOrsBGL2Zp4y7iuoseg==
 
-"@fontsource/playfair-display@^4.5.13":
-  version "4.5.13"
-  resolved "https://registry.yarnpkg.com/@fontsource/playfair-display/-/playfair-display-4.5.13.tgz#6024a7edaf4e492eeb2e57467a5a44eed00ad924"
-  integrity sha512-41yD3XW8jATcZO8E2U6Xe9MIaogPdjrGkC4ixNzAIdrR3BvLxXpeHU2xw3rwIq8aHhFUYwLnE6Lq+BWSTZZH9w==
-
-"@fontsource/pt-mono@^4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-4.5.11.tgz#5f2db9d4184571507b46499ce5a77bba68d5477e"
-  integrity sha512-WS5IuinkjjzMHSpevPdAle99NCVfodZsIzF1oX21zRaoWvqW0fsFzoKgJ0qpx9xXWHIOdkyJLn1xB7iCkCD7+Q==
-
-"@fontsource/shrikhand@^4.5.9":
-  version "4.5.9"
-  resolved "https://registry.yarnpkg.com/@fontsource/shrikhand/-/shrikhand-4.5.9.tgz#598b6fac5dbb1e356858bdc0850f7112b55fb193"
-  integrity sha512-xJfObisLz7N/JEug5C5Rlwt6iOFqTLjVfL9Va/jIP4tvRL7h9YFQRwiD96cnswfGPGWSB54jdpWILi02BWPKJQ==
-
 "@fontsource/source-serif-pro@^4.5.9":
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/source-serif-pro/-/source-serif-pro-4.5.9.tgz#fbeacd0bb6d2860df6baa662e9827adfe3da13f4"
   integrity sha512-VgDvUvd3An3v9HtKgYk9TJuhB/4ZXw4huv/uqTXO4gES7CUbqGcf6tSb69TwG6o5AZzEVt6jnN7FN18OaO5J9A==
-
-"@fontsource/space-mono@^4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/space-mono/-/space-mono-4.5.12.tgz#091de8547d7e871e28bd16c4883d2bb50e9fd8ea"
-  integrity sha512-/ljrJgSIB/C0jUCn07r/V/KpkdHF9bnK2fD0raGSVkgQjFqQ6Q3LndVeBiUCJlIi6ROh7rHDkpFzn+nNmRgRlQ==
-
-"@fontsource/syne@^4.5.13":
-  version "4.5.13"
-  resolved "https://registry.yarnpkg.com/@fontsource/syne/-/syne-4.5.13.tgz#b5fdca8476190c06451f580376222fd8e03cc76d"
-  integrity sha512-wZQJ3rf/CkE5PQLQYOfoDGXCp1t6yyA0VTcgElyLHcSNiUGrvNUylCk9SjDan0xCGnnJ4lpwZP1iNorbBgBpRQ==
-
-"@fontsource/unbounded@^4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/unbounded/-/unbounded-4.5.1.tgz#8d563ef7aa76e748fae53da6c6bdcea61bb44d6c"
-  integrity sha512-IDC84Vp89QMe8IYqYufViSJ7jdBjA+yaaqb3b5d1pSc0oJFG5DAQksxIGf1U7cheSB2JDE/aFRztuT5H6/WMmQ==
-
-"@fontsource/yeseva-one@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/yeseva-one/-/yeseva-one-4.5.10.tgz#b7cd2dac86e946476840b249a4ecd5c7fa9fe2ec"
-  integrity sha512-W+cylFcTAS5bqtQA/tg5jecOLcA4fl82AbxItToJFReei4fq7GoHCBLgLohMQxr4rXvTe4zBmPIWd0jy8Ceorw==
 
 "@gatsbyjs/parcel-namer-relative-to-cwd@^2.8.0":
   version "2.8.0"
@@ -5836,11 +5751,6 @@ gatsby-link@^5.8.0:
     "@types/reach__router" "^1.3.10"
     gatsby-page-utils "^3.8.0"
     prop-types "^15.8.1"
-
-gatsby-omni-font-loader@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-omni-font-loader/-/gatsby-omni-font-loader-2.0.2.tgz#821961da51fd163ea6f93ad5fecd174f7612715d"
-  integrity sha512-Bp6truuUwbDRHWtL+u/lUvMsAT5ipO45LNJgqNdOzTUGw3GB7dw8k4RHDtpxwFTgacdk25kH8aOYfh460jJYCQ==
 
 gatsby-page-utils@^3.8.0:
   version "3.8.0"
