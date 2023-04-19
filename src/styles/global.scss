@@ -254,7 +254,9 @@ blockquote {
     &:before {
       content: '*';
       font-style: normal;
+      font-weight: bold;
       line-height: 1.8;
+      padding-left: 6px;
     }
   }
 
