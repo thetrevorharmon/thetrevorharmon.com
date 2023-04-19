@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const containerSize = '620px';
+const containerSize = '36rem';
 
 const defaultColors = require('tailwindcss/colors');
 
@@ -103,12 +103,7 @@ module.exports = {
         large: '4rem',
         huge: '6rem',
         breakout: '2.66666667rem',
-        container: '36rem',
-      },
-      screens: {
-        // this exists to make the code clearer when I use it alongside desktop:
-        mobile: '0px',
-        desktop: containerSize,
+        container: containerSize,
       },
       width: {
         container: containerSize,

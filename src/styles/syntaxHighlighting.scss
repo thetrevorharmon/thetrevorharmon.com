@@ -23,11 +23,9 @@ pre[class*='language-'] {
   tab-size: 4;
   hyphens: none;
 
-  @screen mobile {
-    white-space: pre-wrap;
-  }
+  white-space: pre-wrap;
 
-  @screen desktop {
+  @screen md {
     white-space: pre;
   }
 }

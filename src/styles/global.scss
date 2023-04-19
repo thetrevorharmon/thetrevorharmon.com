@@ -153,13 +153,13 @@ blockquote {
   @apply BreakoutWithPadding;
   @apply rounded-md;
 
-  @apply text-[1.2rem] desktop:text-[1.4rem];
+  @apply text-[1.2rem] md:text-[1.4rem];
   @apply -tracking-[0.5px];
   @apply font-black;
   @apply italic;
 
   @apply pt-normal pr-normal pb-normal pl-big;
-  @apply desktop:pt-big desktop:pr-big desktop:pb-big desktop:pl-large;
+  @apply md:pt-big md:pr-big md:pb-big md:pl-large;
 
   @apply relative leading-[1.5];
 
@@ -183,17 +183,17 @@ blockquote {
     @apply absolute;
 
     @apply top-[1.9rem] left-[1.1rem];
-    @apply desktop:top-[3.3rem] desktop:left-[2.3rem];
+    @apply md:top-[3.3rem] md:left-[2.3rem];
   }
 }
 
 .body-styles {
   h2 {
-    @apply mt-large mb-small;
+    @apply mt-big mb-small;
   }
 
   h3 {
-    @apply mt-big mb-small;
+    @apply mt-medium mb-small;
   }
 
   p {

@@ -21,11 +21,11 @@ export function ReadingList({type, recommendedReading}: Props) {
 
   const makePairMarkup = ({link: {slug, label}, date}: RecommendedReading) => {
     return (
-      <div className="flex flex-col desktop:flex-row w-full" key={label}>
+      <div className="flex flex-col md:flex-row w-full" key={label}>
         <Link
           className={classnames(
-            'mr-0 desktop:mr-normal',
-            'whitespace-pre-wrap desktop:whitespace-nowrap',
+            'mr-0 md:mr-normal',
+            'whitespace-pre-wrap md:whitespace-nowrap',
             'overflow-hidden text-ellipsis',
             'box-border max-w-full',
           )}
@@ -35,7 +35,7 @@ export function ReadingList({type, recommendedReading}: Props) {
         </Link>
         <span
           className={classnames(
-            'ml-0 desktop:ml-auto shrink-0',
+            'ml-0 md:ml-auto shrink-0',
             'text-text-muted dark:text-text-muted-dark',
           )}
         >

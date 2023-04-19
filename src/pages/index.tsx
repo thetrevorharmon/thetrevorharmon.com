@@ -20,7 +20,7 @@ export default ({data}: IndexPageProps) => {
 
   return (
     <Layout>
-      <div className="my-large">
+      <div className="my-large md:my-huge">
         <div className="space-y-tiny">
           <h1 className="featured">
             <span>Hi, I'm Trevor.{'\u00A0'}👋</span>
