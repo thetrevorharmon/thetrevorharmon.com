@@ -1,5 +1,5 @@
 ---
-title: '"Santa Barbara Sessions" Album Cover'
+title: '“Santa Barbara Sessions” Album Cover'
 slug: santa-barbara-sessions-album-cover
 date: '2018-03-23'
 client: Michael Barrow & the Tourists

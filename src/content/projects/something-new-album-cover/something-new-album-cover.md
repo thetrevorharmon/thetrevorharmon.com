@@ -1,5 +1,5 @@
 ---
-title: '"Something New" Album Cover'
+title: '“Something New” Album Cover'
 slug: something-new-album-cover
 date: '2019-12-06'
 client: Michael Barrow & the Tourists

@@ -4,6 +4,7 @@ import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 
 import {Icon, IconName} from '../../components';
+import {nbps} from '../../utils';
 
 interface LinkIconProps {
   position: 'leading' | 'trailing';
@@ -44,21 +45,25 @@ export const Link = ({
         color="primary"
         className={classnames(
           'relative top-[4px]',
-          icon.position === 'leading' ? 'mr-little' : 'ml-little',
+          icon.position === 'leading' ? 'mr-little' : 'ml-tiny',
+          'inline-block',
         )}
       />
     );
 
     return icon.position === 'leading' ? (
-      <div className="flex">
+      <>
         {iconElement}
         {children}
-      </div>
+      </>
     ) : (
-      <div className="flex">
+      <>
         {children}
-        {iconElement}
-      </div>
+        <span className="inline whitespace-nowrap">
+          {nbps}
+          {iconElement}
+        </span>
+      </>
     );
   };
 

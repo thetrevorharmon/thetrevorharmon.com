@@ -10,20 +10,28 @@ export const BrandButton = () => {
       to={Routes.home()}
       className={classnames(
         'inline-block',
-        'p-tiny',
+        'pt-[7px] pr-[9px] pb-[6px] pl-[10px]',
         'leading-none',
         'no-underline',
-        'text-white hover:text-white active:text-white focus:text-white',
-        'dark:text-white dark:hover:text-white dark:active:text-white dark:focus:text-white',
-        'bg-primary dark:bg-primary-dark',
-        'hover:bg-primary-focus dark:hover:bg-primary-focus-dark',
-        'focus:bg-primary-focus dark:focus:bg-primary-focus-dark',
-        'text-[1.92rem] desktop:text-[2.4rem]',
-        '-tracking-[0.5px] desktop:-tracking-[1px]',
-        'uppercase font-black italic',
+        'text-primary dark:text-primary-dark',
+        'hover:text-white focus:text-white',
+        'dark:hover:text-white dark:focus:text-white',
+        'hover:bg-primary dark:hover:bg-primary-dark',
+        'focus:bg-primary dark:focus:bg-primary-dark',
+        'text-[1.6rem] md:text-[2rem]',
+        '-tracking-[0.5px] md:-tracking-[1px]',
+        'font-display font-bold',
+        'uppercase',
+        'border-2',
+        'border-stone-300 dark:border-stone-600',
+        'hover:border-primary dark:hover:border-primary-dark',
+        'focus:border-primary dark:focus:border-primary-dark',
+        'rounded-lg',
+        'focus:outline-none',
+        'transition-colors',
       )}
     >
-      TH.
+      th.
     </Link>
   );
 };

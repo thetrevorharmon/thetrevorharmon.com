@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostTile} from '../components';
+import {FeaturedTile, Link, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Routes} from '../utils';
 
@@ -18,23 +18,69 @@ export default ({data}: Props) => {
 
   const [featuredPost, ...posts] = data.allMdx.nodes;
 
+  const postsByYear = posts.reduce<{[key: number]: Mdx[]}>((years, post) => {
+    const postYear = new Date(post.date!).getFullYear();
+    if (years[postYear] == null) {
+      years[postYear] = [];
+    }
+
+    years[postYear].push(post);
+
+    return years;
+  }, {});
+
+  const orderedPostsByYear = Object.entries(postsByYear).sort(
+    ([firstYear], [secondYear]) => {
+      return Number(secondYear) - Number(firstYear);
+    },
+  );
+
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="mt-huge mb-large space-y-huge">
-        <div className="space-y-small">
+      <div className="my-large md:my-huge space-y-large md:space-y-huge">
+        <div className="space-y-tiny">
           <h1 className="featured">
             <span>{pageMetadata.title}</span>
           </h1>
           <p>{pageMetadata.description}</p>
         </div>
 
-        <div className="space-y-large">
+        <div>
           <FeaturedTile node={featuredPost} />
-          {posts.map(
-            (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
-              <PostTile node={post} />
-            ),
-          )}
+          <div className="space-y-large mt-large">
+            {orderedPostsByYear.map(([year, posts]) => {
+              return (
+                <div className="space-y-normal" key={year}>
+                  <h2>{year}</h2>
+                  <div className="space-y-normal">
+                    {posts.map((post) => {
+                      const icon = post.link
+                        ? {
+                            icon: {
+                              position: 'trailing' as const,
+                              name: 'link' as const,
+                            },
+                          }
+                        : undefined;
+
+                      return (
+                        <div key={post.slug!}>
+                          <div>
+                            <Link url={Routes.blogPost(post.slug!)} {...icon}>
+                              {post.title}
+                            </Link>
+                          </div>
+                          <div className="text-text-muted dark:text-text-muted-dark">
+                            {post.date}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Layout>
@@ -57,7 +103,7 @@ export const query = graphql`
         image {
           source {
             childImageSharp {
-              gatsbyImageData(width: 800)
+              gatsbyImageData(height: 420)
             }
           }
           alt

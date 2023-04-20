@@ -24,7 +24,7 @@ export const Navbar = () => {
   const linkMarkup = (
     <ul className="flex items-center list-style-none m-0 ml-auto p-0">
       {navbarLinks.map((link, index) => (
-        <li key={index} className="ml-little desktop:ml-small first:ml-0">
+        <li key={index} className="ml-little md:ml-small first:ml-0">
           <Link url={link.location}>{link.display}</Link>
         </li>
       ))}

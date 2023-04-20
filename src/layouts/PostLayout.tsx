@@ -32,12 +32,12 @@ export function PostLayout({
       <Container>
         <Helmet pageMetadata={pageMetadata} />
         <Navbar />
-        <div className={classnames('space-y-large my-large', className)}>
+        <div className={classnames('my-large', className)}>
           {children}
         </div>
       </Container>
       {hasSignupForm && (
-        <div className="mt-huge mb-large bg-caption-bg dark:bg-caption-bg-dark">
+        <div className="mt-large mb-big bg-caption-bg dark:bg-caption-bg-dark">
           <Container>
             <FollowCallout />
           </Container>

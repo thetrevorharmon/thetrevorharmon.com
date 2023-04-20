@@ -28,9 +28,10 @@ export const Attribution = ({mdx}: AttributionProps) => {
   } = mdx;
 
   const classname = classnames(
-    'text-text-muted dark:text-text-dark',
+    'text-text-muted dark:text-text-muted-dark',
     'text-[0.86666667rem]',
     'mt-tiny text-center',
+    'text-xs',
   );
 
   return (

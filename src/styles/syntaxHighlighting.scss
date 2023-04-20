@@ -11,7 +11,7 @@ pre[class*='language-'] {
   text-align: left;
   word-spacing: normal;
   word-break: normal;
-  font-size: 0.95em;
+  font-size: 0.9em;
   line-height: 1.2em;
 
   @apply rounded-md;
@@ -19,11 +19,9 @@ pre[class*='language-'] {
   tab-size: 4;
   hyphens: none;
 
-  @screen mobile {
-    white-space: pre-wrap;
-  }
+  white-space: pre-wrap;
 
-  @screen desktop {
+  @screen md {
     white-space: pre;
   }
 }
@@ -39,7 +37,7 @@ pre[class*='language-'] > code[class*='language'] {
   @apply text-[#3b3b3b] dark:text-[#f0f0f0];
 
   @apply bg-caption-bg dark:bg-caption-bg-dark;
-  @apply border border-[#ddd] dark:border-[#555];
+  @apply border border-caption-border dark:border-caption-border-dark;
 
   &::selection,
   & ::selection {
@@ -57,17 +55,9 @@ pre[class*='language-'] > code[class*='language'] {
 
 /* Code blocks */
 pre[class*='language-'] {
-  @apply Breakout;
+  @apply BreakoutWithPadding;
 
-  @apply py-medium my-normal;
-
-  @screen mobile {
-    @apply px-container-base;
-  }
-
-  @screen desktop {
-    @apply px-breakout;
-  }
+  @apply py-medium my-medium;
 
   overflow: auto;
 

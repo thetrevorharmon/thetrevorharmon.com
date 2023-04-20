@@ -2,35 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './typography';
 @import './syntaxHighlighting';
 
-@supports (font-variation-settings: normal) {
-  @import '~@fontsource/inter/variable-full.css';
-}
+@import '~@fontsource/source-serif-pro/400.css';
+@import '~@fontsource/source-serif-pro/400-italic.css';
+@import '~@fontsource/source-serif-pro/700.css';
+@import '~@fontsource/source-serif-pro/700-italic.css';
 
-@import '~@fontsource/fira-mono/400.css';
-@import '~@fontsource/fira-mono/700.css';
+@import '~@fontsource/montagu-slab/500.css';
+@import '~@fontsource/montagu-slab/700.css';
+
+@import '~@fontsource/jetbrains-mono/400.css';
+@import '~@fontsource/jetbrains-mono/400-italic.css';
+@import '~@fontsource/jetbrains-mono/700.css';
 
 @layer components {
   .Breakout {
-    @apply -mx-container-base;
-    @apply desktop:mx-0;
-    @apply expanded:-mx-breakout;
+    @screen md {
+      @apply -mx-breakout;
+    }
+  }
+
+  .BreakoutWithPadding {
+    @screen md {
+      @apply -mx-breakout;
+      @apply px-breakout;
+    }
+  }
+
+  .h1,
+  .h2,
+  .h3,
+  .h4 {
+    @apply font-display;
+    @apply font-bold;
+  }
+
+  .h1-featured {
+    @apply text-[2.4rem] sm:text-[3.26666667rem];
+    @apply text-black  dark:text-white;
+    @apply leading-[1.2];
+  }
+
+  .h1 {
+    @apply text-[1.65rem] sm:text-[2.3rem];
+    @apply leading-[1.2];
+    @apply text-black  dark:text-white;
+  }
+
+  .h2 {
+    @apply text-[1.4rem] sm:text-[1.7rem];
+
+    @apply leading-[1.2] text-text-bold dark:text-text-bold-dark;
+  }
+
+  .h3 {
+    @apply text-[1.25rem] sm:text-[1.35rem];
+
+    @apply leading-[1.2];
+    @apply text-text dark:text-text-dark;
+  }
+
+  .h4 {
+    @apply text-[1.15rem] sm:text-[1.25rem];
+
+    @apply leading-[1.1];
+    @apply text-text-bold dark:text-text-bold-dark;
   }
 }
 
 html {
-  @screen base {
-    font-size: 16px;
-  }
-
-  @screen collapsed {
-    font-size: 15px;
-  }
+  font-size: 17px;
+  @apply font-serif;
 }
 
 body {
+  @apply font-serif;
+  @apply transition-colors;
+
   @media (prefers-color-scheme: light) {
     background-color: theme('colors.body-bg');
   }
@@ -38,6 +87,8 @@ body {
   @media (prefers-color-scheme: dark) {
     background-color: theme('colors.body-bg-dark');
   }
+
+  font-variant-numeric: lining-nums;
 }
 
 div::-webkit-scrollbar,
@@ -138,16 +189,16 @@ h5 {
 }
 
 blockquote {
-  @apply Breakout;
+  @apply BreakoutWithPadding;
+  @apply rounded-md;
 
-  @apply text-[1.44rem] desktop:text-[1.6rem];
+  @apply text-[1.2rem] md:text-[1.3rem];
   @apply -tracking-[0.5px];
-  @apply font-black italic;
-
-  @apply -tracking-[0.5px] font-black italic;
+  @apply font-black;
+  @apply italic;
 
   @apply pt-normal pr-normal pb-normal pl-big;
-  @apply desktop:pt-big desktop:pr-big desktop:pb-big desktop:pl-large;
+  @apply md:pt-medium md:pr-medium md:pb-medium md:pl-large;
 
   @apply relative leading-[1.5];
 
@@ -159,27 +210,25 @@ blockquote {
   }
 
   &::before {
-    content: '';
+    content: '“';
 
-    @apply h-[10px] w-[14px];
-
-    @apply bg-quote dark:bg-quote-dark;
-    @apply bg-center bg-no-repeat;
+    @apply font-display;
+    @apply not-italic;
 
     @apply text-primary mr-little;
 
     @apply absolute;
 
-    @apply top-[1.9rem] left-[1.1rem];
-    @apply desktop:top-[3.3rem] desktop:left-[2.3rem];
+    @apply text-[1.7rem];
+    @apply top-[2rem] left-[1rem];
+
+    @screen md {
+      @apply top-[3.1rem] left-breakout -ml-[3px];
+    }
   }
 }
 
 .body-styles {
-  img {
-    @apply bg-caption-bg dark:bg-caption-bg-dark;
-  }
-
   h2 {
     @apply mt-large mb-small;
   }
@@ -189,27 +238,22 @@ blockquote {
   }
 
   p {
-    @apply my-small;
+    @apply my-normal;
+    @apply leading-[1.6];
   }
 
   img {
     margin-top: theme('space.little');
     margin-bottom: theme('space.little');
 
-    /* 0px */
-    @screen base {
-      width: calc(100% + 50px);
-    }
+    @apply w-full;
 
-    /* ~560px */
-    @screen collapsed {
-      width: 100%;
-    }
+    @apply bg-caption-bg dark:bg-caption-bg-dark;
+    @apply rounded-md;
+  }
 
-    /* ~640px */
-    @screen expanded {
-      width: theme('screens.expanded');
-    }
+  blockquote {
+    @apply my-medium;
   }
 
   ul,
@@ -238,52 +282,36 @@ blockquote {
         left: 0;
         top: 0;
 
-        @apply uppercase font-black italic;
+        @apply font-display;
       }
     }
   }
 
   ul li {
     &:before {
-      content: '→';
+      content: '*';
       font-style: normal;
+      font-weight: bold;
+      line-height: 1.8;
+      padding-left: 6px;
     }
-  }
-
-  > img {
-    max-width: none;
   }
 
   .gatsby-resp-image-wrapper,
   > img {
-    // These are the styles for @Breakout
-    // I had to inline them here because @Breakout #{!important} didn't work
-    // and these conflict with some default gatsby styling that I can't
-    // seem to remove
-
-    @apply -mx-container-base #{!important};
-    @apply desktop:mx-0 #{!important};
-    @apply expanded:-mx-breakout #{!important};
-
+    @apply rounded-md overflow-hidden;
+    @apply isolate;
     @apply my-medium;
   }
 
   &.projects {
     .gatsby-resp-image-wrapper {
-      // These are the styles for @Breakout
-      // I had to inline them here because @Breakout #{!important} didn't work
-      // and these conflict with some default gatsby styling that I can't
-      // seem to remove
-
-      @apply -mx-container-base #{!important};
-      @apply desktop:mx-0 #{!important};
-      @apply expanded:-mx-breakout #{!important};
-
       @apply border border-img-border dark:border-img-border-dark;
     }
 
     span:first-of-type {
-      @apply mt-huge block;
+      @apply block;
+      @apply mt-big md:mt-large;
     }
 
     span + span {

@@ -1148,15 +1148,20 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/fira-mono@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/fira-mono/-/fira-mono-4.5.10.tgz#443be4b2b4fc6e685b88431fcfdaf8d5f5639bbf"
-  integrity sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==
+"@fontsource/jetbrains-mono@^4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.12.tgz#d965dca932f0ecf5379013f4dff3aec7b817b91b"
+  integrity sha512-LJF1ala1/u+wXZmESFqIk08FA9yGX4/uAAleCHmXUMgEjvNAYFHUQQ7eK5hQQoBOwh99cU5suTrqYqEkgzwzPA==
 
-"@fontsource/inter@^4.5.15":
-  version "4.5.15"
-  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.15.tgz#eed1873d68755d3b52d6fcfcfa3493118430a512"
-  integrity sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==
+"@fontsource/montagu-slab@^4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/montagu-slab/-/montagu-slab-4.5.12.tgz#d856c267187d4f984a1260b129d8c5a7782c1a8a"
+  integrity sha512-I0CgNOFG47vSegAJxQ461+W46XW7p+a2/+kl6SyziGU/aaRTPkoM1gohqPJRE6xcCluWOrsBGL2Zp4y7iuoseg==
+
+"@fontsource/source-serif-pro@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/source-serif-pro/-/source-serif-pro-4.5.9.tgz#fbeacd0bb6d2860df6baa662e9827adfe3da13f4"
+  integrity sha512-VgDvUvd3An3v9HtKgYk9TJuhB/4ZXw4huv/uqTXO4gES7CUbqGcf6tSb69TwG6o5AZzEVt6jnN7FN18OaO5J9A==
 
 "@gatsbyjs/parcel-namer-relative-to-cwd@^2.8.0":
   version "2.8.0"
