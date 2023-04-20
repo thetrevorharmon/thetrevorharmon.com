@@ -1,8 +1,6 @@
 import type {GatsbyConfig} from 'gatsby';
 import dotenv from 'dotenv';
 
-const Utils = require('./gatsby-utils');
-
 const environment =
   process.env.ACTIVE_ENV ?? process.env.NODE_ENV ?? 'development';
 

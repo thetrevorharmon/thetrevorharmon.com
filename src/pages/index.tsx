@@ -1,9 +1,9 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostTile, Button} from '../components';
+import {FeaturedTile, Button, Link} from '../components';
 import {Layout} from '../layouts';
-import {Routes, useSiteData} from '../utils';
+import {Routes, nbps, useSiteData} from '../utils';
 
 interface IndexPageProps {
   data: Queries.IndexPageQuery;
@@ -18,26 +18,32 @@ export default ({data}: IndexPageProps) => {
 
   const {tagline} = useSiteData();
 
-  const titleMarkup = (
-    <div className="space-y-little">
-      <p>Hi there! 👋 I'm</p>
-      <h1 className="featured">
-        <span>Trevor Harmon</span>
-      </h1>
-      <p>{tagline}</p>
-    </div>
-  );
-
   return (
     <Layout>
-      <div className="my-huge">{titleMarkup}</div>
+      <div className="my-large md:my-huge">
+        <div className="space-y-tiny">
+          <h1 className="featured">
+            <span>Hi, I'm Trevor.{nbps}👋</span>
+          </h1>
+          <p>{tagline}</p>
+        </div>
+      </div>
       <div className="space-y-big">
         <FeaturedTile node={featuredPost} />
-        {posts.map((post: Mdx) => (
-          <PostTile node={post} key={post.slug!} />
-        ))}
+        <div className="space-y-normal">
+          {posts.map((post: Mdx) => (
+            <div key={post.slug!}>
+              <div>
+                <Link url={Routes.blogPost(post.slug!)}>{post.title}</Link>
+              </div>
+              <div className="text-text-muted dark:text-text-muted-dark">
+                {post.date}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <Button className="mt-big mb-large" url={Routes.blog()}>
+      <Button className="mt-large mb-large" url={Routes.blog()}>
         Read more posts &rarr;
       </Button>
     </Layout>
@@ -61,7 +67,7 @@ export const query = graphql`
         image {
           source {
             childImageSharp {
-              gatsbyImageData(width: 800)
+              gatsbyImageData(height: 420)
             }
           }
           alt

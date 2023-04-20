@@ -6,7 +6,7 @@ export function FollowCallout() {
   const {feedUrl} = useSiteData();
 
   return (
-    <div className="py-large space-y-normal">
+    <div className="py-big space-y-normal">
       <div className="space-y-tiny">
         <h2>Want to read more?</h2>
         <div>

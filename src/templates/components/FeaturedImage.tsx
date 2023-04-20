@@ -13,7 +13,9 @@ export function FeaturedImage({mdx}: Props) {
     return null;
   }
 
-  const imageMarkup = <div className="Breakout">{image}</div>;
+  const imageMarkup = (
+    <div className="Breakout shadow-sm rounded-md overflow-hidden">{image}</div>
+  );
 
   const attribution = <Attribution mdx={mdx} />;
 
@@ -22,7 +24,7 @@ export function FeaturedImage({mdx}: Props) {
   }
 
   return (
-    <div className="space-y-tiny">
+    <div className="space-y-little">
       {imageMarkup}
       {attribution}
     </div>

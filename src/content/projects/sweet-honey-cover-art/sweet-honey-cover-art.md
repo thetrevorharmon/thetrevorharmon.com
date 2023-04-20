@@ -1,5 +1,5 @@
 ---
-title: '"Sweet Honey" Cover Art'
+title: '“Sweet Honey” Cover Art'
 slug: sweet-honey-cover-art
 date: '2019-02-01'
 client: Michael Barrow & the Tourists

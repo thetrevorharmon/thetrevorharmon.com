@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 
-import {FeaturedTile, ProjectTile} from '../components';
+import {ProjectTile} from '../components';
 import {Layout} from '../layouts';
 import {Routes} from '../utils';
 
@@ -18,18 +18,13 @@ export default ({data}: ProjectsPageProps) => {
     url: Routes.projects(),
   };
 
-  const [featuredProject, ...projects] = data.allMdx.nodes;
-
   return (
     <Layout pageMetadata={pageMetadata}>
-      <div className="space-y-small mt-huge mb-large">
-        <div className="space-y-huge">
-          <h1 className="featured">
-            <span>Projects</span>
-          </h1>
-          <FeaturedTile node={featuredProject} />
-        </div>
-        {projects && (
+      <div className="space-y-huge mt-huge mb-large">
+        <h1 className="featured">
+          <span>Projects</span>
+        </h1>
+        {data.allMdx.nodes && (
           <div className="Breakout">
             <Masonry
               breakpointCols={{
@@ -39,7 +34,7 @@ export default ({data}: ProjectsPageProps) => {
               className="flex -ml-normal w-auto"
               columnClassName="pl-normal bg-clip-padding [&>div]:mb-normal"
             >
-              {projects.map((project) => (
+              {data.allMdx.nodes.map((project) => (
                 <ProjectTile project={project} key={project.slug!} />
               ))}
             </Masonry>

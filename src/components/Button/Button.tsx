@@ -22,15 +22,20 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
   const classname = classnames([
     className,
     'text-[1rem]',
-    'uppercase font-black italic',
 
-    'bg-primary dark:bg-primary-dark',
-    'text-white focus:text-white hover:text-white',
-    'dark:text-white dark:focus:text-white dark:hover:text-white',
+    'border border-solid',
+    'border-primary shadow-md',
+    'dark:border-primary-dark dark:shadow-none',
+    'font-display',
+
+    'text-primary focus:text-white hover:text-white',
+    'dark:text-primary-dark dark:focus:text-white dark:hover:text-white',
+
     'inline-block py-small px-normal leading-[1]',
+    'rounded-md',
 
-    'focus:bg-primary-focus focus:dark:bg-primary-focus-dark',
-    'hover:bg-primary-focus hover:dark:bg-primary-focus-dark',
+    'focus:bg-primary focus:dark:bg-primary-dark',
+    'hover:bg-primary hover:dark:bg-primary-dark',
 
     'transition duration-200',
 
@@ -38,7 +43,7 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
     'no-underline',
 
     // remove default <button /> styling
-    'border-0 border-none bg-none hover:cursor-pointer',
+    'bg-none hover:cursor-pointer',
   ]);
 
   const linkMarkup = (linkUrl?: string) => {

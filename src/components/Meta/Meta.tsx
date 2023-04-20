@@ -29,7 +29,7 @@ export const Meta = ({
 
   const timeToRead = timeToReadMinutes ? `${timeToReadMinutes} min read` : null;
 
-  const meta = [date, timeToRead, client].filter(Boolean).join(' / ');
+  const meta = [date, timeToRead, client].filter(Boolean).join(' • ');
   const icon = isLinkPost ? (
     <Icon
       name="link"

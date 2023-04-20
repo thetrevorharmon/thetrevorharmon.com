@@ -38,7 +38,7 @@ export const Footer = ({className}: FooterProps) => {
         'list-style-none',
         'p-0',
         'm-0 ml-auto',
-        'w-full desktop:w-auto',
+        'w-full md:w-auto',
       )}
     >
       {footerLinks.map((link) => (

@@ -1,5 +1,5 @@
 ---
-title: '"Juneau" Print Design'
+title: '“Juneau” Print Design'
 slug: juneau-print-design
 date: '2017-05-12'
 client: Michael Barrow & the Tourists

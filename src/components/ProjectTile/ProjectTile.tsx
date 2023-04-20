@@ -15,6 +15,7 @@ export const ProjectTile = ({project, className}: Props) => {
     'p-normal bg-caption-bg dark:bg-caption-bg-dark',
     'flex flex-col',
     'space-y-normal',
+    'rounded-md',
     className,
   );
 

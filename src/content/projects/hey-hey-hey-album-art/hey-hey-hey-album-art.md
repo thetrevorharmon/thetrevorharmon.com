@@ -1,5 +1,5 @@
 ---
-title: '"Hey Hey Hey" Album Art'
+title: '“Hey Hey Hey” Album Art'
 slug: hey-hey-hey-album-art
 date: '2018-08-10'
 client: Michael Barrow & the Tourists
