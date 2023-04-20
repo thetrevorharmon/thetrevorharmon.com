@@ -111,10 +111,6 @@ module.exports = {
         container: containerSize,
       },
       colors: tailwindColors,
-      backgroundImage: {
-        'caption-bg-gradient': `linear-gradient(90deg, ${colors.captionBg.light} 45%, rgba(0,0,0,0) 100%)`,
-        'caption-bg-gradient-dark': `linear-gradient(90deg, ${colors.captionBg.dark} 45%, rgba(0,0,0,0) 100%)`,
-      },
     },
   },
   plugins: [],

@@ -24,7 +24,7 @@ export function FeaturedImage({mdx}: Props) {
   }
 
   return (
-    <div className="space-y-tiny">
+    <div className="space-y-little">
       {imageMarkup}
       {attribution}
     </div>
