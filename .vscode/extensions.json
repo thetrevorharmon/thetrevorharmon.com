@@ -1,5 +1,11 @@
 {
     "recommendations": [
-        "csstools.postcss"
+        "csstools.postcss",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.sublime-keybindings",
+        "unifiedjs.vscode-mdx",
+        "graphql.vscode-graphql-syntax",
+        "compulim.compulim-vscode-closetag"
     ]
 }
