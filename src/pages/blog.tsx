@@ -81,11 +81,6 @@ export default ({data}: Props) => {
               );
             })}
           </div>
-          {/* {posts.map(
-            (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
-              <PostTile node={post} />
-            ),
-          )} */}
         </div>
       </div>
     </Layout>
