@@ -22,7 +22,7 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
   const classname = classnames([
     className,
     'text-[1rem]',
-    // 'uppercase font-black italic',
+
     'border border-solid',
     'border-primary shadow-md',
     'dark:border-primary-dark dark:shadow-none',
