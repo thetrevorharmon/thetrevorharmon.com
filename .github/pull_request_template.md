@@ -5,7 +5,7 @@ This PR:
 -
 -
 
-### Does this resolve an open issue?
+### Does this relate to an open issue?
 
 <!-- Yes | No -->
 
