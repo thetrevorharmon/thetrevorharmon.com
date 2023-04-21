@@ -68,7 +68,7 @@
 }
 
 html {
-  font-size: 17px;
+  @apply text-[17px];
   @apply font-serif;
 }
 
@@ -76,21 +76,19 @@ body {
   @apply font-serif;
   @apply transition-colors;
 
+  // These are to prevent a flash of the opposite background when the device prefers a certain colors for the background
   @media (prefers-color-scheme: light) {
-    background-color: theme('colors.body-bg');
+    @apply bg-body-bg;
   }
 
   @media (prefers-color-scheme: dark) {
-    background-color: theme('colors.body-bg-dark');
+    @apply bg-body-bg-dark;
   }
-
-  font-variant-numeric: lining-nums;
 }
 
 div::-webkit-scrollbar,
 pre::-webkit-scrollbar {
-  width: 0.5em;
-  height: 0.5em;
+  @apply w-[0.5em] h-[0.5em];
   @apply bg-caption-bg dark:bg-caption-bg-dark;
   @apply rounded-md;
 }
@@ -121,13 +119,11 @@ pre::-webkit-scrollbar-corner {
 }
 
 body.light {
-  color: theme('colors.text');
-  background-color: theme('colors.body-bg');
+  @apply text-text bg-body-bg;
 }
 
 body.dark {
-  color: theme('colors.text-dark');
-  background-color: theme('colors.body-bg-dark');
+  @apply text-text-dark bg-body-bg-dark;
 }
 
 a {
@@ -206,7 +202,7 @@ blockquote {
   }
 
   &::before {
-    content: '“';
+    @apply content-['“'];
 
     @apply font-display;
     @apply not-italic;
@@ -239,8 +235,7 @@ blockquote {
   }
 
   img {
-    margin-top: theme('space.little');
-    margin-bottom: theme('space.little');
+    @apply my-little;
 
     @apply w-full;
 
@@ -254,43 +249,42 @@ blockquote {
 
   ul,
   ol {
-    margin-left: 0;
-    padding-left: 0;
-
-    counter-reset: list-counter;
-
-    list-style-type: none;
+    @apply ml-0 pl-0;
+    @apply list-none;
 
     li {
-      position: relative;
-      padding-left: theme('space.medium');
-      margin-bottom: theme('space.little');
-
-      counter-increment: list-counter;
+      @apply relative;
+      @apply pl-medium mb-little;
 
       &:last-child {
-        margin-bottom: 0;
+        @apply mb-0;
       }
 
       &:before {
-        content: counter(list-counter) '.';
-        position: absolute;
-        left: 0;
-        top: 0;
+        @apply absolute;
+        @apply left-0 top-0;
 
         @apply font-display;
       }
     }
+
+    // no tailwind support for counter resetting
+    counter-reset: list-counter;
+
+    li {
+      counter-increment: list-counter;
+
+      &:before {
+        content: counter(list-counter) '.';
+      }
+    }
   }
 
-  ul li {
-    &:before {
-      content: '*';
-      font-style: normal;
-      font-weight: bold;
-      line-height: 1.8;
-      padding-left: 6px;
-    }
+  ul li:before {
+    @apply content-['*'];
+    @apply font-bold;
+    @apply leading-[1.8];
+    @apply pl-[6px];
   }
 
   .gatsby-resp-image-wrapper,
