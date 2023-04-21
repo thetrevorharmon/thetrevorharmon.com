@@ -53,29 +53,9 @@ export default ({data}: Props) => {
                 <div className="space-y-normal" key={year}>
                   <h2>{year}</h2>
                   <div className="space-y-normal">
-                    {posts.map((post) => {
-                      const icon = post.link
-                        ? {
-                            icon: {
-                              position: 'trailing' as const,
-                              name: 'link' as const,
-                            },
-                          }
-                        : undefined;
-
-                      return (
-                        <div key={post.slug!}>
-                          <div>
-                            <Link url={Routes.blogPost(post.slug!)} {...icon}>
-                              {post.title}
-                            </Link>
-                          </div>
-                          <div className="text-text-muted dark:text-text-muted-dark">
-                            {post.date}
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {posts.map((node) => (
+                      <PostTile node={node} key={node.slug!} />
+                    ))}
                   </div>
                 </div>
               );

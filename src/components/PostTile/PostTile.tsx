@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Link, Meta} from '../../components';
+import {Link} from '../../components';
 import {Routes} from '../../utils';
 
 export interface Props {
@@ -9,26 +9,28 @@ export interface Props {
 }
 
 export const PostTile = ({node}: Props) => {
-  const buttonText =
-    node?.type === 'Project' ? 'See More →' : 'Continue Reading →';
-
-  const route = node?.type === 'Project' ? Routes.project : Routes.blogPost;
+  if (node.slug == null) {
+    return null;
+  }
 
   return (
-    <div className="space-y-normal">
-      <div className="space-y-small">
-        <div className="space-y-tiny">
-          <h2 className="text-text-bold-dark">{node.title}</h2>
-        </div>
-        <p className="text-text-dark">{node.description}</p>
-      </div>
-
+    <div>
       <Link
-        url={route(node.slug!)}
-        className="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark"
+        url={Routes.blogPost(node.slug)}
+        icon={
+          node.link
+            ? {
+                position: 'trailing',
+                name: 'link',
+              }
+            : undefined
+        }
       >
-        {buttonText}
+        {node.title}
       </Link>
+      <div className="text-text-muted dark:text-text-muted-dark">
+        {node.date}
+      </div>
     </div>
   );
 };
