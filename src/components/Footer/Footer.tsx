@@ -56,8 +56,8 @@ export const Footer = ({className}: FooterProps) => {
 
   return (
     <div className={classname}>
-      <div className="uppercase font-black italic">
-        &copy; {new Date().getFullYear()} {title}
+      <div className="font-display font-bold text-text-bold dark:text-text-bold-dark">
+        &copy; {new Date().getFullYear()} Trevor Harmon
       </div>
       {linkMarkup}
     </div>
