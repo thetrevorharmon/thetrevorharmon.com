@@ -59,6 +59,16 @@ And here's an empty one as a starting point:
         sourceUrl:
     ---
 
+### Using the helper script
+
+The `create-blog-post` script exists to make it easy to create a new post with just a single command. If you run:
+
+```bash
+yarn create-blog-post --title "<title goes here>"
+```
+
+It will create a new folder and file in `/drafts` with the appropriate `slug` and frontmatter for you.
+
 ## Project
 
 | Name           | Required? | Description                                                                                                               |
