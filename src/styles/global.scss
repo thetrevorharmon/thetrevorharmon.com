@@ -18,16 +18,12 @@
 
 @layer components {
   .Breakout {
-    @screen md {
-      @apply -mx-breakout;
-    }
+    @apply md:-mx-breakout;
   }
 
   .BreakoutWithPadding {
-    @screen md {
-      @apply -mx-breakout;
-      @apply px-breakout;
-    }
+    @apply px-normal md:px-breakout;
+    @apply md:-mx-breakout;
   }
 
   .h1,
