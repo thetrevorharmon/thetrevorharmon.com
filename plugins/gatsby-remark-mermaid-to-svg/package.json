@@ -1,0 +1,16 @@
+{
+  "name": "gatsby-remark-mermaid-to-svg",
+  "version": "1.0.0",
+  "description": "Convert mermaid to svg",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build script setup\""
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "author": "Trevor Harmon <thetrevorharmon@gmail.com>",
+  "license": "MIT"
+}
