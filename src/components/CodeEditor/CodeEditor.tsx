@@ -1,15 +1,24 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useMemo} from 'react';
+import {Extension} from '@codemirror/state';
 import ReactCodeEditor from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
+import {javascript} from '@codemirror/lang-javascript';
 
 import './CodeEditor.scss';
 
 interface Props {
   initialValue?: string;
   updateValue?: (value: string) => void;
+  language?: 'zephyr' | 'javascript';
+  extensions?: Extension[];
 }
 
-export function CodeEditor({initialValue, updateValue}: Props) {
+export function CodeEditor({
+  initialValue,
+  updateValue,
+  language,
+  extensions = [],
+}: Props) {
   const [value, setValue] = useState(initialValue ?? '');
 
   const handleOnChange = useCallback((value: string) => {
@@ -17,13 +26,26 @@ export function CodeEditor({initialValue, updateValue}: Props) {
     if (updateValue) {
       updateValue(value);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const memoizedExtensions = useMemo(() => {
+    if (language === 'zephyr') {
+      return [zephyr, ...extensions];
+    }
+
+    if (language === 'javascript') {
+      return [javascript(), ...extensions];
+    }
+
+    return [...extensions];
+  }, [language, extensions]);
+
   return (
-    <div className="Breakout my-medium CodeEditor">
+    <div className="CodeEditor">
       <ReactCodeEditor
         value={value}
-        extensions={[zephyr]}
+        extensions={memoizedExtensions}
         onChange={handleOnChange}
         indentWithTab={false}
         basicSetup={{

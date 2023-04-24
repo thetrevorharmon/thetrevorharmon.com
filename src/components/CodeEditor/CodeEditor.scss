@@ -7,7 +7,7 @@
   @apply rounded-md;
   @apply overflow-hidden;
   @apply font-mono;
-  font-size: 0.95em;
+  @apply text-[0.85rem];
 
   .cm-cursor {
     @apply border-l-text-bold dark:border-l-text-bold-dark;
@@ -60,5 +60,19 @@
   .cm-selectionBackground,
   ::selection {
     @apply bg-red-100 dark:bg-red-900;
+  }
+
+  .cm-tooltip-hover {
+    @apply bg-stone-100 dark:bg-stone-700;
+    @apply border-stone-300;
+    @apply rounded-md overflow-hidden;
+  }
+
+  ul.cm-tooltip-lint li:before {
+    @apply hidden;
+  }
+
+  .cm-diagnostic-warning {
+    @apply border-l-orange-500;
   }
 }

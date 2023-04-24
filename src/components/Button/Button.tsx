@@ -7,10 +7,17 @@ interface ButtonProps {
   className?: string;
   children: React.ReactNode;
   url?: string;
+  size?: 'small' | 'regular';
   onClick?(): void;
 }
 
-export const Button = ({className, children, url, onClick}: ButtonProps) => {
+export const Button = ({
+  className,
+  children,
+  url,
+  onClick,
+  size = 'regular',
+}: ButtonProps) => {
   if (url != null && onClick != null) {
     throw new Error('Cannot use both the url and onClick props');
   }
@@ -31,8 +38,10 @@ export const Button = ({className, children, url, onClick}: ButtonProps) => {
     'text-primary focus:text-white hover:text-white',
     'dark:text-primary-dark dark:focus:text-white dark:hover:text-white',
 
-    'inline-block py-small px-normal leading-[1]',
-    'rounded-md',
+    'inline-block rounded-md',
+
+    size === 'regular' && 'py-small px-normal leading-[1]',
+    size === 'small' && 'py-[0.5rem] px-[0.75rem] leading-[1] text-sm',
 
     'focus:bg-primary focus:dark:bg-primary-dark',
     'hover:bg-primary hover:dark:bg-primary-dark',
