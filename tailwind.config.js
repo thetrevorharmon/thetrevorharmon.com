@@ -70,7 +70,7 @@ const colors = {
 
 const tailwindColors = {};
 
-Object.values(colors).map(({label, light, dark}) => {
+Object.values(colors).forEach(({label, light, dark}) => {
   tailwindColors[label] = light;
   tailwindColors[`${label}-dark`] = dark;
 });
@@ -84,6 +84,7 @@ module.exports = {
     './src/utils/**/*.{js,jsx,ts,tsx}',
     './src/layouts/**/*.{js,jsx,ts,tsx}',
     './src/content/**/*.{js,jsx,ts,tsx}',
+    './plugins/**/*.{js,mjs,ts,tsx}',
   ],
   theme: {
     fontFamily: {
