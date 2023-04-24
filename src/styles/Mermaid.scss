@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Mermaid {
+  @apply p-normal md:p-medium;
+  @apply BreakoutWithPadding;
+  @apply rounded-md;
+  @apply bg-caption-bg dark:bg-caption-bg-dark;
+
+  > svg {
+    margin: 0 auto;
+  }
+
+  .error-icon {
+    fill: hsl(220.5882352941, 100%, 98.3333333333%);
+  }
+  .error-text {
+    fill: rgb(8.5000000002, 5.7500000001, 0);
+    stroke: rgb(8.5000000002, 5.7500000001, 0);
+  }
+  .edge-thickness-normal {
+    stroke-width: 2px;
+  }
+  .edge-thickness-thick {
+    stroke-width: 3.5px;
+  }
+  .edge-pattern-solid {
+    stroke-dasharray: 0;
+  }
+  .edge-pattern-dashed {
+    stroke-dasharray: 3;
+  }
+  .edge-pattern-dotted {
+    stroke-dasharray: 2;
+  }
+  .marker {
+    fill: #0b0b0b;
+    stroke: #0b0b0b;
+  }
+  .marker.cross {
+    stroke: #0b0b0b;
+  }
+  svg {
+    @apply font-mono;
+    font-size: 14px;
+  }
+  .cluster-label text {
+    fill: rgb(8.5000000002, 5.7500000001, 0);
+  }
+  .cluster-label span,
+  p {
+    color: rgb(8.5000000002, 5.7500000001, 0);
+  }
+  .label text,
+  span,
+  p {
+    @apply text-white;
+  }
+  .node rect,
+  .node circle,
+  .node ellipse,
+  .node polygon,
+  .node path {
+    @apply fill-blue-500;
+    @apply stroke-blue-700;
+    stroke-width: 1px;
+  }
+  .flowchart-label text {
+    text-anchor: middle;
+  }
+  .node .label {
+    text-align: center;
+  }
+  .node.clickable {
+    cursor: pointer;
+  }
+  .arrowheadPath {
+    fill: undefined;
+  }
+  .edgePath .path {
+    @apply stroke-red-500;
+    stroke-width: 2px;
+  }
+  .arrowMarkerPath {
+    @apply fill-stone-500;
+    @apply stroke-stone-500;
+  }
+  .flowchart-link {
+    @apply stroke-stone-500;
+    fill: none;
+  }
+  .edgeLabel {
+    background-color: hsl(-79.4117647059, 100%, 93.3333333333%);
+    text-align: center;
+  }
+  .edgeLabel rect {
+    opacity: 0.5;
+    background-color: hsl(-79.4117647059, 100%, 93.3333333333%);
+    fill: hsl(-79.4117647059, 100%, 93.3333333333%);
+  }
+  .cluster rect {
+    @apply fill-stone-50;
+    @apply stroke-stone-300;
+    stroke-width: 1px;
+  }
+  .cluster text {
+    fill: rgb(8.5000000002, 5.7500000001, 0);
+  }
+  .cluster span,
+  p {
+    color: rgb(8.5000000002, 5.7500000001, 0);
+  }
+  div.mermaidTooltip {
+    position: absolute;
+    text-align: center;
+    max-width: 200px;
+    padding: 2px;
+    font-family: Source Serif Pro, ui-serif, Georgia, Cambria, 'Times New Roman',
+      Times, serif;
+    font-size: 12px;
+    background: hsl(220.5882352941, 100%, 98.3333333333%);
+    border: 1px solid undefined;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 100;
+  }
+  .flowchartTitleText {
+    text-anchor: middle;
+    font-size: 18px;
+    fill: #333;
+  }
+}

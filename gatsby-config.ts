@@ -44,6 +44,17 @@ const config: GatsbyConfig = {
               withWebp: true,
             },
           },
+          {
+            resolve: `gatsby-remark-mermaid-to-svg`,
+            options: {
+              mermaidOptions: {
+                themeVariables: {
+                  fontFamily:
+                    'JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                },
+              },
+            },
+          },
           `gatsby-remark-prismjs`,
           // this is to handle inline gifs
           // https://github.com/gatsbyjs/gatsby/issues/7317#issuecomment-412984851
