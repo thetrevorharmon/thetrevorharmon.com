@@ -49,7 +49,11 @@ export function CodeEditorWithTokens({initialValue}: Props) {
 
   return (
     <>
-      <CodeEditor initialValue={value} updateValue={setValue} />
+      <CodeEditor
+        initialValue={value}
+        updateValue={setValue}
+        language="zephyr"
+      />
       <div className="Breakout bg-caption-bg dark:bg-caption-bg-dark rounded-md overflow-hidden border border-[#ddd] dark:border-[#555] text-[0.95rem] max-h-[300px] overflow-y-auto">
         <table className="w-full font-mono ">
           <thead>{tableHeaderMarkup}</thead>

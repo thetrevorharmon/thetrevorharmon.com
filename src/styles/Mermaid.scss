@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 .Mermaid {
-  @apply p-normal md:p-medium;
   @apply BreakoutWithPadding;
+
+  @apply p-normal md:p-medium;
+  @apply my-medium;
+
   @apply rounded-md;
   @apply bg-caption-bg dark:bg-caption-bg-dark;
+  @apply border border-caption-border dark:border-caption-border-dark;
 
   > svg {
     margin: 0 auto;
