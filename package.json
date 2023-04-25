@@ -7,7 +7,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "start-broadcast": "gatsby develop -H 0.0.0.0",
+    "broadcast": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -57,6 +57,7 @@
     "gatsby-plugin-sass": "^6.3.1",
     "gatsby-plugin-sharp": "^5.8.1",
     "gatsby-plugin-sitemap": "^6.3.1",
+    "gatsby-remark-autolink-headers": "^6.9.0",
     "gatsby-remark-copy-linked-files": "^6.8.0",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^7.8.0",

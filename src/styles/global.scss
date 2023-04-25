@@ -162,6 +162,18 @@ a.muted {
   @apply focus:fill-text focus:dark:fill-text;
 }
 
+a.anchor.before {
+  h2 & {
+    @apply top-[0.55rem] -left-[0.35rem];
+  }
+
+  h3 & {
+    @apply top-[0.3rem] -left-[0.3rem];
+  }
+
+  @apply hidden md:block;
+}
+
 h1 {
   @apply h1;
 }
@@ -235,6 +247,40 @@ blockquote {
 
   h3 {
     @apply mt-medium mb-small;
+  }
+
+  .header-link {
+    @apply hidden md:block;
+
+    @apply text-text-muted dark:text-text-muted;
+    @apply opacity-50;
+    @apply no-underline;
+
+    svg {
+      @apply mr-tiny relative visible;
+    }
+
+    &:hover,
+    &:focus {
+      @apply opacity-100;
+      @apply text-primary-text dark:text-primary-text-dark;
+    }
+  }
+
+  h2 .header-link svg {
+    @apply top-[8px];
+    @apply h-[18px] w-[18px];
+  }
+
+  h3 .header-link svg {
+    @apply top-[6px];
+    @apply h-[16px] w-[16px];
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply hidden;
   }
 
   p {
