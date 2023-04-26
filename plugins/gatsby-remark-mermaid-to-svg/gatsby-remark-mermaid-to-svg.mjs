@@ -2,6 +2,7 @@ import fs from 'fs';
 import {execSync} from 'child_process';
 import {v4 as uuidv4} from 'uuid';
 import {visit} from 'unist-util-visit';
+import crypto from 'crypto';
 
 const defaultOptions = {
   wrapperClassName: 'Mermaid',
@@ -18,22 +19,38 @@ const defaultOptions = {
   },
 };
 
-export function gatsbyRemarkMermaidToSvg({markdownAST}, pluginOptions) {
+export async function gatsbyRemarkMermaidToSvg(
+  {markdownAST, markdownNode, cache},
+  pluginOptions,
+) {
   const options = Object.assign({}, defaultOptions, pluginOptions);
 
-  visit(markdownAST, 'code', (node) => {
+  visit(markdownAST, 'code', async (node) => {
     if (node && node.lang === 'mermaid') {
-      try {
-        const svg = generateSVGFromMermaid(node.value, options);
+      const nodeKey = getNodeKey(node, markdownNode);
+      const cachedValue = await cache.get(nodeKey);
 
-        node.type = 'html';
-        node.lang = undefined;
-        node.value = `<div class=${options.wrapperClassName}>${svg}</div>`;
-      } catch {
-        console.error(
-          'Could not convert mermaid to svg with value:',
-          node.value,
-        );
+      let svg = node.value;
+
+      if (cachedValue) {
+        svg = JSON.parse(cachedValue).svg;
+      } else {
+        try {
+          svg = generateSVGFromMermaid(node.value, options);
+        } catch {
+          console.error(
+            'Could not convert mermaid to svg with value:',
+            node.value,
+          );
+        }
+      }
+
+      node.type = 'html';
+      node.lang = undefined;
+      node.value = `<div class=${options.wrapperClassName}>${svg}</div>`;
+
+      if (svg && svg !== node.value) {
+        await cache.set(nodeKey, JSON.stringify({svg}));
       }
     }
   });
@@ -82,4 +99,12 @@ function generateSVGFromMermaid(mermaidText, options) {
   }
 
   return svgString;
+}
+
+function getNodeKey(node, markdownNode) {
+  const contentHash = crypto
+    .createHash('sha256')
+    .update(node.value)
+    .digest('hex');
+  return `${markdownNode.frontmatter.slug}__Mermaid__${contentHash}`;
 }
