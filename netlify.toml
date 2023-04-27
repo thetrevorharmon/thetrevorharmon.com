@@ -10,9 +10,6 @@ environment = {GOOGLE_ANALYTICS_TRACKING_ID = "UA-54294401-2", SASS_PATH = "src/
 publish = "public/"
 
 [[plugins]]
-package = "netlify-plugin-debug-cache"
-
-[[plugins]]
 package = "@netlify/plugin-gatsby"
 
 [[plugins]]
