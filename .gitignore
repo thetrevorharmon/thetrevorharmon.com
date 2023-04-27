@@ -138,5 +138,6 @@ $RECYCLE.BIN/
 ### Gatsby ###
 public
 .cache/
+.cache-puppeteer/
 src/gatsby-types.d.ts
 .schema-type-definitions

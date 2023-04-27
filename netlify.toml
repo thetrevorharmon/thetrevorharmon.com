@@ -1,0 +1,21 @@
+[build]
+command = "yarn build"
+publish = "public/"
+[dev]
+command = "yarn develop"
+
+[context.production]
+command = "yarn build"
+environment = {GOOGLE_ANALYTICS_TRACKING_ID = "UA-54294401-2", SASS_PATH = "src/styles/", NODE_PATH = "./"}
+publish = "public/"
+
+[[plugins]]
+package = "netlify-plugin-debug-cache"
+
+[[plugins]]
+package = "@netlify/plugin-gatsby"
+
+[[plugins]]
+package = "netlify-plugin-cache"
+[plugins.inputs]
+paths = [".cache", "public", ".cache-puppeteer"]

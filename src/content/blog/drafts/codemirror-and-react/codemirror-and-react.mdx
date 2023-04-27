@@ -122,7 +122,7 @@ flowchart TD
 a("Click Button \n(DOM Event)")
 a --> b(React determines\nif state should\nchange)
 b --> c(Update state)
-c --> d(Perform side\neffects)
+c --> d(Perform side \n effects)
 d --> e(Update DOM)
 e --> a
 ```
@@ -163,7 +163,7 @@ flowchart TD
     e --> f(Update React state)
 ```
 
-We'll first create a simple state field that counts the number of `backspce` commands:
+We'll first create a simple state field that counts the number of `backspace` commands:
 
 ```ts
 const deleteCountStateField = StateField.define<number>({

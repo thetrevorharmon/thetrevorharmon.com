@@ -6,6 +6,7 @@
         "ms-vscode.sublime-keybindings",
         "unifiedjs.vscode-mdx",
         "graphql.vscode-graphql-syntax",
-        "compulim.compulim-vscode-closetag"
+        "compulim.compulim-vscode-closetag",
+        "be5invis.toml"
     ]
 }
