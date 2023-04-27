@@ -15,6 +15,6 @@ That's it!
 
 ## Hosting
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c6ab75d8-c5c5-4237-9ae8-c2320b3e7cac/deploy-status)](https://app.netlify.com/sites/thetrevorharmon/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/38e3f6ce-6719-49f4-b18a-0528ed0a971a/deploy-status)](https://app.netlify.com/sites/thetrevorharmon/deploys)
 
 This site has a continuous deployment set up with Netlify. Any time there is a change to master, Netlify will automatically redeploy the site (usually takes <7 minutes).
