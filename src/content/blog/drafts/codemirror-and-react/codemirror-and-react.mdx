@@ -7,9 +7,16 @@ status: Draft
 description: ''
 ---
 
+import {Callout} from './Callout';
+
 Over the past 10 months, I've been working with the [CodeMirror](https://codemirror.net/) framework to write and integrate a custom code editor into a React app. Coming from a React background, CodeMirror presented some unique challenges. I've spend many hours staring at [the docs](https://codemirror.net/docs/) and going in circles over how to get React and CodeMirror to play nicely. This article is meant to be a primer for any developers who are going to integrate CodeMirror into React–it contains many of the lessons I've learned and will hopefully act as a springboard to writing your own CodeMirror-powered editor.
 
-_Note: this isn't meant to replace reading the docs but is a high level guide to a few things you need to know about CodeMirror and React. I would still highly recommend the docs, starting with the [system guide](https://codemirror.net/docs/guide/)._
+<Callout>
+  This isn't meant to replace reading the docs but is a high level guide to a
+  few things you need to know about CodeMirror and React. I would still highly
+  recommend the docs, starting with the [system
+  guide](https://codemirror.net/docs/guide/).
+</Callout>
 
 ## Getting an initial editor working within React
 
@@ -83,6 +90,15 @@ React CodeMirror does a bunch of things but I'll call out just a few:
 - It also includes a `useCodeMirror` hook instead of a React component in case you decide to go with a hooks-based approach instead of a component-based approach
 
 This barely scratches the surface for how you can customize React Codemirror–I would recommend reading [the React CodeMirror docs](https://uiwjs.github.io/react-codemirror/) to get started.
+
+<Callout>
+  I have noticed that React CodeMirror's react component tends to have problems
+  with re-renders. I'm not sure if the root of this problem lies in the way the
+  component is set up or if it's a CodeMirror problem. The solution is to reach
+  for memoization more than you think you need. For example, even passing in an
+  anonymous object to `basicOptions` will cause a re-render (something that
+  wouldn't typically be a problem with a normal React component).
+</Callout>
 
 ## CodeMirror lifecycle
 
@@ -284,7 +300,7 @@ By this point, we have successfully added bi-directional state syncing between R
 
 ### Updating an extension based on React state
 
-There are times where we need a React state value to update a value inside of a CodeMirror extension. For example, imagine that we were working on a javascript editor and we wanted to use a button to control if the editor should show or hide lint information. Our `linter()` function takes in a boolean and, based on the boolean, shows or hides the lint information:
+There are times where we need a React state value to update a value inside of a CodeMirror extension. For example, imagine that we were working on a javascript editor and we wanted to use a button to control if the editor should show or hide lint information. Our `linter()` function takes in a boolean and, based on the boolean, shows or hides the lint information (this linter comes from the [lint example](https://codemirror.net/examples/lint/) on the CodeMirror site):
 
 ```tsx
 function makeLinter(shouldLint: boolean) {
@@ -314,7 +330,7 @@ function makeLinter(shouldLint: boolean) {
 }
 ```
 
-This linter comes from the [lint example](https://codemirror.net/examples/lint/) on the CodeMirror site. In React, we might approach that problem like this:
+In React, we might approach this problem with memoization:
 
 ```tsx
 const linter = useMemo(() => linting(shouldLint), [shouldLint]);
@@ -396,14 +412,23 @@ const lintExtension = useExtensionWithDependency(
 );
 ```
 
-To put it all together–here's an example of a code editor that uses all of these patterns that you can play with:
+### Putting it all together
+
+Here's an example of a code editor that uses all of these patterns I've described. Feel free to view the source code on GitHub to see how everything connects.
 
 import {ReactCodeMirrorSyncStateExample} from './ReactCodeMirrorSyncStateExample';
 
 <ReactCodeMirrorSyncStateExample />
 
-## Final thoughts
+## Conclusion
 
-- memoize everything
-- as much as possible, make codemirror the source of truth
-- going the opposite way is difficult (but not impossible)
+In summary:
+
+- [React CodeMirror](https://uiwjs.github.io/react-codemirror/) is a great package that takes care of a lot of the "boilerplate" of connecting CodeMirror to React.
+- Reach for memoization more than you would normally to prevent re-renders in CodeMirror.
+- CodeMirror doesn't support side effects through its normal lifecycle like React does.
+- Use a state field + `updateListener` to track and sync state from CodeMirror to React.
+- Use a state effect to sync React state to CodeMirror.
+- Use a compartment to make extensions update when React state changes.
+
+When all else fails–read the [docs](https://codemirror.net/docs/ref)!
