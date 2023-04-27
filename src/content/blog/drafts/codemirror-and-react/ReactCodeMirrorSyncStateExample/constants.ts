@@ -1,10 +1,12 @@
 /* eslint-disable no-useless-escape */
-export const INITIAL_VALUE = `// This is a little javascript editor.
+export const INITIAL_VALUE = `
+// This is a little javascript editor.
 // Try deleting some of the text with backspace–
 // You should see the counter increase!
 
 const syncingState = 'very cool';
-const forbiddenRegex = /^\d+(\.\d*)?$/;`;
+const forbiddenRegex = /^\d+(\.\d*)?$/;
+`;
 
 export const BASIC_SETUP = {
   foldGutter: false,

@@ -66,13 +66,10 @@ function makeLinter(shouldLint: boolean) {
 }
 
 export function useExtensionWithDependency(
-  // 1
   view: EditorView | null,
-  // 2
   extensionFactory: () => Extension,
   deps: any[],
 ) {
-  // 3
   const compartment = useMemo(() => new Compartment(), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const extension = useMemo(() => compartment.of(extensionFactory()), []);
@@ -83,7 +80,6 @@ export function useExtensionWithDependency(
         effects: compartment.reconfigure(extensionFactory()),
       });
     }
-    // 4
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
@@ -92,6 +88,7 @@ export function useExtensionWithDependency(
 
 export function ReactCodeMirrorSyncStateExample() {
   const codeEditorRef = useRef<ReactCodeMirrorRef | null>(null);
+
   const [deleteCount, setDeleteCount] = useState<{
     count: number;
     updatedBy: 'react' | 'codemirror';
