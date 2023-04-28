@@ -2,7 +2,7 @@ import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
-import {Link, Meta, Button} from '../components';
+import {Link, Meta, Button, Callout} from '../components';
 import {FeaturedImage} from './components';
 import {Routes, SEO, useSiteData} from '../utils';
 import { getImageSrc } from '../utils/helpers';
@@ -15,6 +15,8 @@ interface Props {
   };
   data: Queries.ArticleQuery;
 }
+
+const shortcodes = {Callout};
 
 function Article({
   children,
@@ -60,7 +62,7 @@ function Article({
       </div>
       <div className="space-y-medium">
         <div className="body-styles">
-          <MDXProvider>{children}</MDXProvider>
+          <MDXProvider components={shortcodes}>{children}</MDXProvider>
         </div>
         {linkPostButton ? linkPostButton : twitterLink}
       </div>
