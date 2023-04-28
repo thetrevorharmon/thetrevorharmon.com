@@ -150,3 +150,12 @@ a {
     }
   }
 }
+
+.gatsby-highlight-code-line {
+  @apply block;
+  @apply -mx-normal pl-[calc(theme(space.normal)_-_3px)] pr-normal;
+
+  @apply md:-mx-breakout md:pl-[calc(theme(space.breakout)_-_4px)] md:pr-breakout;
+
+  @apply border-l-[3px] md:border-l-[4px] border-lime-500 ;
+}
