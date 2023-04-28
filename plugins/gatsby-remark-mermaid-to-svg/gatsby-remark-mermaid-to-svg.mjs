@@ -26,7 +26,16 @@ export async function gatsbyRemarkMermaidToSvg(
   const options = Object.assign({}, defaultOptions, pluginOptions);
 
   visit(markdownAST, 'code', async (node) => {
-    if (node && node.lang === 'mermaid') {
+    if (node == null) {
+      return;
+    }
+
+    if (node.lang === 'mermaid-code') {
+      node.lang = 'mermaid';
+      return
+    }
+
+    if (node.lang === 'mermaid') {
       const nodeKey = getNodeKey(node, markdownNode);
       const cachedValue = await cache.get(nodeKey);
 
