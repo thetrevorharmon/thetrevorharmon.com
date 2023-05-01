@@ -17,16 +17,16 @@ export function FeaturedImage({mdx}: Props) {
     <div className="Breakout shadow-sm rounded-md overflow-hidden">{image}</div>
   );
 
-  const attribution = <Attribution mdx={mdx} />;
+  const caption = mdx.image?.title ?? <Attribution mdx={mdx} /> ?? null;
 
-  if (attribution == null) {
+  if (caption == null) {
     return imageMarkup;
   }
 
   return (
     <div className="space-y-little">
       {imageMarkup}
-      {attribution}
+      <div className="Caption">{caption}</div>
     </div>
   );
 }
