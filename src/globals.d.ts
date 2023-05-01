@@ -45,6 +45,7 @@ type Mdx = {
   readonly date?: string | null;
   readonly excerpt?: string | null;
   readonly image?: {
+    readonly title?: string | null;
     readonly alt?: string | null;
     readonly source?: {
       readonly childImageSharp: {

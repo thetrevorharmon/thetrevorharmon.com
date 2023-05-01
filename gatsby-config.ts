@@ -43,6 +43,7 @@ const config: GatsbyConfig = {
               linkImagesToOriginal: false,
               backgroundColor: `transparent`,
               withWebp: true,
+              showCaptions: ['title'],
             },
           },
           {

@@ -12,9 +12,12 @@ image:
 
 Speed is the most important factor in converting patrons to buyers online. According to a [study by Akamai][3], a 100ms delay causes conversion to drop 7%. If that's additive, a 1 second delay would cause a site to lose 51.6% of its customers!
 
-If speed is the most important thing in e-commerce, then Gatsby is your best friend in building an e-commerce site. Gatsby's performance has been [written][4] [about][5] [already][6], but for me it comes down to this (photo courtesy of [Grant Glidewell][24]):
+If speed is the most important thing in e-commerce, then Gatsby is your best friend in building an e-commerce site. Gatsby's performance has been [written][4] [about][5] [already][6], but for me it comes down to this:
 
+<div className="[&>img]:my-0 my-medium">
 ![A Google Lighthouse audit report with a perfect score, showing fireworks exploding around the scores](./A-Google-Lighthouse-audit-report-with-a-perfect-score-showing-fireworks-exploding-around-the-scores.gif)
+<span class="Caption mt-little block">Photo courtesy of [Grant Glidewell][24].</span>
+</div>
 
 Out of the box, Gatsby's [lighthouse][7] score shows just how performant it is ⚡. But Gatsby won't do _all_ the e-commerce work for you–that's where Shopify comes in. I might be [biased][8], but I think Shopify is the best e-commerce platform to build on. If you're wondering why, here are just a few (of the many!) reasons:
 
@@ -26,9 +29,9 @@ Building an e-commerce store with Shopify and Gatsby lets you control the entire
 
 ## Building our first Gatsby-powered store
 
-Let's imagine that our good friend Derek wants our help in building an online store. He's a goose farmer, and makes goose down jackets. Here's him with his geese (photo courtesy of [Jill Laurie Goodman][12]):
+Let's imagine that our good friend Derek wants our help in building an online store. He's a goose farmer, and makes goose down jackets. Here's him with his geese:
 
-![A man holding a bucket surrounded on either side by geese in a field](./A-man-holding-a-bucket-surrounded-on-either-side-by-geese-in-a-field.jpg)
+![A man holding a bucket surrounded on either side by geese in a field](./A-man-holding-a-bucket-surrounded-on-either-side-by-geese-in-a-field.jpg 'Photo courtesy of Jill Laurie Goodman.')
 
 He wants to set up his own brand of down jackets called "Only Down", and he's asked that we help with the website. Here are the steps we'll take to do that:
 
