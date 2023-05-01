@@ -66,6 +66,13 @@
     @apply leading-[1.1];
     @apply text-text-bold dark:text-text-bold-dark;
   }
+
+  .Caption {
+    @apply text-text-muted dark:text-text-muted-dark;
+    @apply text-[0.86666667rem];
+    @apply mt-tiny text-center;
+    @apply text-sm;
+  }
 }
 
 html {
@@ -293,6 +300,25 @@ blockquote {
     @apply rounded-md overflow-hidden;
     @apply isolate;
     @apply my-medium;
+  }
+
+  .TwoUp {
+    .gatsby-resp-image-wrapper,
+    > img {
+      @apply my-0;
+    }
+  }
+
+  .gatsby-resp-image-figure {
+    @apply my-medium;
+
+    .gatsby-resp-image-wrapper {
+      @apply mt-0 mb-little;
+    }
+
+    .gatsby-resp-image-figcaption {
+      @apply Caption;
+    }
   }
 
   &.projects {

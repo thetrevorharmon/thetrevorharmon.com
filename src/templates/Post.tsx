@@ -95,6 +95,7 @@ export const query = graphql`
           }
         }
         alt
+        title
         attribution {
           author
           sourceName

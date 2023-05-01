@@ -38,7 +38,7 @@ const validateNode = (node) => {
       );
     }
 
-    if (node.title == null || node.title == '') {
+    if (node.title == null || node.title === '') {
       throw new NodeError(`Must include title`);
     }
 

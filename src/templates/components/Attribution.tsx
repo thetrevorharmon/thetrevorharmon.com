@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import React from 'react';
 
 import {Link} from '../../components';
@@ -27,20 +26,13 @@ export const Attribution = ({mdx}: AttributionProps) => {
     },
   } = mdx;
 
-  const classname = classnames(
-    'text-text-muted dark:text-text-muted-dark',
-    'text-[0.86666667rem]',
-    'mt-tiny text-center',
-    'text-xs',
-  );
-
   return (
-    <div className={classname}>
+    <>
       {`Photo by ${author} on `}
       <Link url={sourceUrl} isMuted>
         {sourceName}
       </Link>
       .
-    </div>
+    </>
   );
 };
