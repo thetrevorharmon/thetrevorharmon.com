@@ -5,7 +5,7 @@ import {MDXProvider} from '@mdx-js/react';
 import {Link, Meta, Button, Callout} from '../components';
 import {FeaturedImage} from './components';
 import {Routes, SEO, useSiteData} from '../utils';
-import { getImageSrc } from '../utils/helpers';
+import {getImageSrc} from '../utils/helpers';
 
 interface Props {
   children: React.ReactNode;
@@ -99,7 +99,6 @@ export const query = graphql`
   }
 `;
 
-
 export function Head({data}: {data: Queries.ArticleQuery}) {
   const {siteUrl} = useSiteData();
 
@@ -107,7 +106,7 @@ export function Head({data}: {data: Queries.ArticleQuery}) {
     title: data.mdx!.title!,
     description: data.mdx?.description ?? undefined,
     url: Routes.blogPost(data.mdx?.slug!),
-    image: getImageSrc(data.mdx, siteUrl)
+    image: getImageSrc(data.mdx, siteUrl),
   };
 
   return <SEO {...props} noIndex={data.mdx?.status !== 'Published'} />;

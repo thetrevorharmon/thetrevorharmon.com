@@ -4,7 +4,7 @@ import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
 import {Meta} from '../components';
 import {Routes, SEO, useSiteData} from '../utils';
-import { getImageSrc } from '../utils/helpers';
+import {getImageSrc} from '../utils/helpers';
 
 interface Props {
   children: React.ReactNode;
@@ -20,16 +20,12 @@ function ProjectNext({
   data: {mdx},
   pageContext: {recommendedReading},
 }: Props) {
-
   if (mdx == null || mdx?.body == null) {
     return null;
   }
 
   return (
-    <PostLayout
-      type="Project"
-      recommendedReading={recommendedReading}
-    >
+    <PostLayout type="Project" recommendedReading={recommendedReading}>
       <div className="space-y-tiny">
         <h1>
           <span>{mdx.title}</span>
@@ -70,7 +66,7 @@ export function Head({data}: {data: Queries.ProjectQuery}) {
   const props = {
     title: data.mdx!.title!,
     url: Routes.project(data.mdx?.slug!),
-    image: getImageSrc(data.mdx, siteUrl)
+    image: getImageSrc(data.mdx, siteUrl),
   };
 
   return <SEO {...props} />;

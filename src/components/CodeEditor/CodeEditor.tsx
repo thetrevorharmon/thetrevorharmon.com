@@ -5,6 +5,7 @@ import {zephyr} from './extensions';
 import {javascript} from '@codemirror/lang-javascript';
 
 import './CodeEditor.scss';
+import {useTheme} from '../../context/ThemeContext';
 
 interface Props {
   initialValue?: string;
@@ -19,6 +20,7 @@ export function CodeEditor({
   language,
   extensions = [],
 }: Props) {
+  const theme = useTheme();
   const [value, setValue] = useState(initialValue ?? '');
 
   const handleOnChange = useCallback((value: string) => {
@@ -45,6 +47,7 @@ export function CodeEditor({
     <div className="CodeEditor">
       <ReactCodeEditor
         value={value}
+        theme={theme === 'Light' ? 'light' : 'dark'}
         extensions={memoizedExtensions}
         onChange={handleOnChange}
         indentWithTab={false}
