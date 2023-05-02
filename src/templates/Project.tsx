@@ -3,7 +3,8 @@ import React from 'react';
 import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
 import {Meta} from '../components';
-import {Routes, useSiteData} from '../utils';
+import {Routes, SEO, useSiteData} from '../utils';
+import { getImageSrc } from '../utils/helpers';
 
 interface Props {
   children: React.ReactNode;
@@ -16,28 +17,16 @@ interface Props {
 
 function ProjectNext({
   children,
-  data,
-  pageContext: {slug, recommendedReading},
+  data: {mdx},
+  pageContext: {recommendedReading},
 }: Props) {
-  const site = useSiteData();
-  const {mdx} = data;
 
   if (mdx == null || mdx?.body == null) {
     return null;
   }
 
-  const imageSrc =
-    mdx.image?.source?.childImageSharp?.gatsbyImageData.images.fallback?.src;
-
-  const metadata = {
-    image: imageSrc ? `${site.siteUrl}${imageSrc}` : undefined,
-    title: mdx.title!,
-    url: Routes.blogPost(slug),
-  };
-
   return (
     <PostLayout
-      pageMetadata={metadata}
       type="Project"
       recommendedReading={recommendedReading}
     >
@@ -74,5 +63,17 @@ export const query = graphql`
     }
   }
 `;
+
+export function Head({data}: {data: Queries.ProjectQuery}) {
+  const {siteUrl} = useSiteData();
+
+  const props = {
+    title: data.mdx!.title!,
+    url: Routes.project(data.mdx?.slug!),
+    image: getImageSrc(data.mdx, siteUrl)
+  };
+
+  return <SEO {...props} />;
+}
 
 export default ProjectNext;

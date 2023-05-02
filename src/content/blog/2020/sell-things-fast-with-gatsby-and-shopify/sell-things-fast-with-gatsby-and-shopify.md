@@ -16,7 +16,7 @@ If speed is the most important thing in e-commerce, then Gatsby is your best fri
 
 <div className="[&>img]:my-0 my-medium">
 ![A Google Lighthouse audit report with a perfect score, showing fireworks exploding around the scores](./A-Google-Lighthouse-audit-report-with-a-perfect-score-showing-fireworks-exploding-around-the-scores.gif)
-<span class="Caption mt-little block">Photo courtesy of [Grant Glidewell][24].</span>
+<span className="Caption mt-little block">Photo courtesy of [Grant Glidewell][24].</span>
 </div>
 
 Out of the box, Gatsby's [lighthouse][7] score shows just how performant it is ⚡. But Gatsby won't do _all_ the e-commerce work for you–that's where Shopify comes in. I might be [biased][8], but I think Shopify is the best e-commerce platform to build on. If you're wondering why, here are just a few (of the many!) reasons:

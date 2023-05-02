@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import {Layout} from '../layouts';
 import {Link} from '../components';
-import {ExternalLinks, Routes} from '../utils';
+import {ExternalLinks, Routes, SEO} from '../utils';
 
 function AboutPage() {
   const data = useStaticQuery<Queries.AboutPageImageQuery>(graphql`
@@ -25,13 +25,8 @@ function AboutPage() {
     return null;
   }
 
-  const pageMetadata: PageMetadata = {
-    title: 'About',
-    url: Routes.about(),
-  };
-
   return (
-    <Layout className="body-styles" pageMetadata={pageMetadata}>
+    <Layout className="body-styles">
       <div className="space-y-huge my-huge">
         <h1 className="featured">
           <span>About</span>
@@ -71,3 +66,7 @@ function AboutPage() {
 }
 
 export default AboutPage;
+
+export function Head() {
+  return <SEO title="About" url={Routes.about()} />;
+}

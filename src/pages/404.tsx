@@ -3,9 +3,9 @@ import * as React from 'react';
 import {Layout} from '../layouts';
 
 import {Link} from '../components';
-import {Routes} from '../utils';
+import {Routes, SEO} from '../utils';
 
-export default () => {
+function NotFoundPage() {
   return (
     <Layout
       className={classnames(
@@ -24,4 +24,10 @@ export default () => {
       </p>
     </Layout>
   );
-};
+}
+
+export default NotFoundPage;
+
+export function Head() {
+  return <SEO title="404" />;
+}

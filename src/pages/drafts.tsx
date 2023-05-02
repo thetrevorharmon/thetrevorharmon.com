@@ -1,23 +1,18 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {Link, PostTile} from '../components';
+import {Link} from '../components';
 import {Layout} from '../layouts';
 import {Routes} from '../utils';
+import {SEO} from '../utils/SEO';
 
 interface Props {
   data: Queries.DraftsPageQuery;
 }
 
-export default ({data}: Props) => {
-  const pageMetadata: PageMetadata = {
-    description: `Drafts`,
-    title: 'Blog',
-    url: Routes.blog(),
-  };
-
+function DraftsPage({data}: Props) {
   return (
-    <Layout pageMetadata={pageMetadata}>
+    <Layout>
       <div className="mt-huge mb-large space-y-huge">
         <div className="space-y-small">
           <h1 className="featured">
@@ -40,7 +35,7 @@ export default ({data}: Props) => {
       </div>
     </Layout>
   );
-};
+}
 
 export const query = graphql`
   query DraftsPage {
@@ -72,3 +67,9 @@ export const query = graphql`
     }
   }
 `;
+
+export function Head() {
+  return <SEO title="Drafts" url={Routes.drafts()} noIndex />;
+}
+
+export default DraftsPage;

@@ -1,21 +1,21 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, Link, PostTile} from '../components';
+import {FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
-import {Routes} from '../utils';
+import {Routes, SEO} from '../utils';
 
 interface Props {
   data: Queries.BlogPageQuery;
 }
 
-export default ({data}: Props) => {
-  const pageMetadata: PageMetadata = {
-    description: `A collection of my thoughts, typically related to code or design.`,
-    title: 'Blog',
-    url: Routes.blog(),
-  };
+const meta = {
+  title: 'Blog',
+  description:
+    'A collection of my thoughts, typically related to code or design.',
+};
 
+function BlogPage({data}: Props) {
   const [featuredPost, ...posts] = data.allMdx.nodes;
 
   const postsByYear = posts.reduce<{[key: number]: Mdx[]}>((years, post) => {
@@ -36,13 +36,13 @@ export default ({data}: Props) => {
   );
 
   return (
-    <Layout pageMetadata={pageMetadata}>
+    <Layout>
       <div className="my-large md:my-huge space-y-large md:space-y-huge">
         <div className="space-y-tiny">
           <h1 className="featured">
-            <span>{pageMetadata.title}</span>
+            <span>{meta.title}</span>
           </h1>
-          <p>{pageMetadata.description}</p>
+          <p>{meta.description}</p>
         </div>
 
         <div>
@@ -65,7 +65,7 @@ export default ({data}: Props) => {
       </div>
     </Layout>
   );
-};
+}
 
 export const query = graphql`
   query BlogPage {
@@ -100,3 +100,15 @@ export const query = graphql`
     }
   }
 `;
+
+export default BlogPage;
+
+export function Head() {
+  return (
+    <SEO
+      title={meta.title}
+      description={meta.description}
+      url={Routes.blog()}
+    />
+  );
+}

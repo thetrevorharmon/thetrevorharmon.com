@@ -19,10 +19,7 @@ interface SiteMetadata {
   tagline: string;
   siteUrl: string;
   feedUrl: string;
-  twitter: {
-    author: string;
-    site: string;
-  };
+  twitterHandle: string;
 }
 
 interface PageMetadata {
@@ -39,8 +36,8 @@ type Mdx = {
   readonly description?: string | null;
   readonly body?: string | null;
   readonly title?: string | null;
-  readonly type?: 'Post' | 'Project' | null;
-  readonly status?: 'Archived' | 'Draft' | null;
+  readonly type?: string | null;
+  readonly status?: string | null;
   readonly slug?: string | null;
   readonly date?: string | null;
   readonly excerpt?: string | null;

@@ -16,10 +16,7 @@ const config: GatsbyConfig = {
     siteUrl: `https://thetrevorharmon.com`,
     feedUrl: `https://thetrevorharmon.com/rss.xml`,
     author: 'Trevor Harmon',
-    twitter: {
-      author: '@thetrevorharmon',
-      site: '@thetrevorharmon',
-    },
+    twitterHandle: '@thetrevorharmon',
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -115,7 +112,6 @@ const config: GatsbyConfig = {
     `gatsby-plugin-react-svg`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

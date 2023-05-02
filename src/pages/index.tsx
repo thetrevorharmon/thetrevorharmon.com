@@ -4,19 +4,20 @@ import * as React from 'react';
 import {FeaturedTile, Button, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Routes, nbps, useSiteData} from '../utils';
+import {SEO} from '../utils/SEO';
 
 interface IndexPageProps {
   data: Queries.IndexPageQuery;
 }
 
-export default ({data}: IndexPageProps) => {
+function IndexPage({data}: IndexPageProps) {
+  const {tagline} = useSiteData();
+
   if (data.allMdx.nodes.length < 1) {
     return null;
   }
 
   const [featuredPost, ...posts] = data.allMdx.nodes;
-
-  const {tagline} = useSiteData();
 
   return (
     <Layout>
@@ -41,7 +42,7 @@ export default ({data}: IndexPageProps) => {
       </Button>
     </Layout>
   );
-};
+}
 
 export const query = graphql`
   query IndexPage {
@@ -77,3 +78,9 @@ export const query = graphql`
     }
   }
 `;
+
+export default IndexPage;
+
+export function Head() {
+  return <SEO />;
+}

@@ -16,10 +16,7 @@ export const useSiteData = (): SiteMetadata => {
           tagline
           siteUrl
           feedUrl
-          twitter {
-            author
-            site
-          }
+          twitterHandle
         }
       }
     }
