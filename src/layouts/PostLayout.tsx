@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Helmet} from '../utils';
 import classnames from 'classnames';
 
 import {
@@ -21,7 +20,6 @@ interface Props extends LayoutProps {
 
 export function PostLayout({
   className,
-  pageMetadata = {},
   recommendedReading,
   hasSignupForm = false,
   type,
@@ -30,7 +28,6 @@ export function PostLayout({
   return (
     <>
       <Container>
-        <Helmet pageMetadata={pageMetadata} />
         <Navbar />
         <div className={classnames('my-large', className)}>{children}</div>
       </Container>

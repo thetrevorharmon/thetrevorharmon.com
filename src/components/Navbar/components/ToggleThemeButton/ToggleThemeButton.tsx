@@ -5,6 +5,7 @@ import {
   Theme,
   useTheme,
   useToggleTheme,
+  useUpdateTheme,
 } from '../../../../context/ThemeContext';
 import {Moon, Sun} from './icons';
 
@@ -13,6 +14,8 @@ interface ToggleThemeButtonProps {
 }
 
 export const ToggleThemeButton = ({className}: ToggleThemeButtonProps) => {
+  useUpdateTheme();
+
   const theme = useTheme();
   const toggleTheme = useToggleTheme();
   const buttonClassName = classnames([
