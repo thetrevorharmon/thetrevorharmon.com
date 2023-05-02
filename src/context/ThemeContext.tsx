@@ -74,4 +74,23 @@ const useTheme = () => {
   return theme;
 };
 
-export {ThemeProvider, useToggleTheme, useTheme};
+const useUpdateTheme = () => {
+  const {theme} = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (document == null) {
+      return;
+    }
+
+    const body = document.querySelector('body');
+
+    if (body == null) {
+      return;
+    }
+
+    body.classList.remove('light', 'dark');
+    body.classList.add(theme.toLowerCase());
+  }, [theme]);
+};
+
+export {ThemeProvider, useToggleTheme, useTheme, useUpdateTheme};

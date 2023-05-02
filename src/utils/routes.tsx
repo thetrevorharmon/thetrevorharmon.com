@@ -14,6 +14,7 @@ const Routes: LinkInterface = {
   about: () => '/about',
   blog: () => '/blog',
   blogPost: (name: string = '') => `/blog/${name}`,
+  drafts: () => '/drafts',
   home: () => '/',
   project: (name: string = '') => `/projects/${name}`,
   projects: () => '/projects',

@@ -4,7 +4,8 @@ import {PostLayout} from '../layouts';
 import {MDXProvider} from '@mdx-js/react';
 import {Link, Meta, Button} from '../components';
 import {FeaturedImage} from './components';
-import {Routes, useSiteData} from '../utils';
+import {Routes, SEO, useSiteData} from '../utils';
+import { getImageSrc } from '../utils/helpers';
 
 interface Props {
   children: React.ReactNode;
@@ -17,25 +18,14 @@ interface Props {
 
 function Article({
   children,
-  data,
+  data: {mdx},
   pageContext: {slug, recommendedReading},
 }: Props) {
   const site = useSiteData();
-  const {mdx} = data;
 
   if (mdx == null || mdx?.body == null) {
     return null;
   }
-
-  const imageSrc =
-    mdx.image?.source?.childImageSharp?.gatsbyImageData.images.fallback?.src;
-
-  const metadata = {
-    description: mdx.description ?? undefined,
-    image: imageSrc ? `${site.siteUrl}${imageSrc}` : undefined,
-    title: mdx.title!,
-    url: Routes.blogPost(slug),
-  };
 
   const twitterUrl = `https://mobile.twitter.com/search?q=${encodeURI(
     [site.siteUrl, Routes.blogPost(slug)].join(''),
@@ -53,7 +43,6 @@ function Article({
 
   return (
     <PostLayout
-      pageMetadata={metadata}
       recommendedReading={recommendedReading}
       type="Post"
       hasSignupForm
@@ -87,6 +76,7 @@ export const query = graphql`
       slug
       description
       link
+      status
       date(formatString: "DD MMM YYYY")
       image {
         source {
@@ -106,5 +96,19 @@ export const query = graphql`
     }
   }
 `;
+
+
+export function Head({data}: {data: Queries.ArticleQuery}) {
+  const {siteUrl} = useSiteData();
+
+  const props = {
+    title: data.mdx!.title!,
+    description: data.mdx?.description ?? undefined,
+    url: Routes.blogPost(data.mdx?.slug!),
+    image: getImageSrc(data.mdx, siteUrl)
+  };
+
+  return <SEO {...props} noIndex={data.mdx?.status !== 'Published'} />;
+}
 
 export default Article;

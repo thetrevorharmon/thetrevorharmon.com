@@ -4,22 +4,15 @@ import Masonry from 'react-masonry-css';
 
 import {ProjectTile} from '../components';
 import {Layout} from '../layouts';
-import {Routes} from '../utils';
+import {Routes, SEO} from '../utils';
 
 interface ProjectsPageProps {
   data: Queries.ProjectsPageQuery;
 }
 
-export default ({data}: ProjectsPageProps) => {
-  const pageMetadata: PageMetadata = {
-    description: `These projects represent some, but not all, of the design and
-      development work I've done for the past 5 (or so) years.`,
-    title: 'Projects',
-    url: Routes.projects(),
-  };
-
+function ProjectsPage({data}: ProjectsPageProps) {
   return (
-    <Layout pageMetadata={pageMetadata}>
+    <Layout>
       <div className="space-y-huge mt-huge mb-large">
         <h1 className="featured">
           <span>Projects</span>
@@ -43,7 +36,7 @@ export default ({data}: ProjectsPageProps) => {
       </div>
     </Layout>
   );
-};
+}
 
 export const query = graphql`
   query ProjectsPage {
@@ -72,3 +65,15 @@ export const query = graphql`
     }
   }
 `;
+
+export function Head() {
+  return (
+    <SEO
+      title="Projects"
+      description="These projects represent some, but not all, of the design and development work I've done for the past 5 (or so) years."
+      url={Routes.projects()}
+    />
+  );
+}
+
+export default ProjectsPage;
