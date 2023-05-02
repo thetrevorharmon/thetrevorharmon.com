@@ -95,8 +95,8 @@
     fill: none;
   }
   .edgeLabel {
-    background-color: hsl(-79.4117647059, 100%, 93.3333333333%);
-    text-align: center;
+    @apply bg-stone-500;
+    @apply text-center;
   }
   .edgeLabel rect {
     opacity: 0.5;

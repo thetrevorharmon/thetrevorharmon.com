@@ -1,0 +1,349 @@
+---
+title: 'Learning CodeMirror'
+date: 2023-05-02
+slug: 'learning-codemirror'
+type: Post
+status: Draft
+description: ''
+---
+
+In July 2022, I was tasked with integrating [CodeMirror](https://codemirror.net/), a “code editor component for the web”, into [ShopifyQL Notebooks](https://shopify.engineering/building-commerce-data-models-with-shopifyql). I had never used CodeMirror before, much less worked with implementing code editors, and I found learning about CodeMirror an uphill battle. The library was more complex than I anticipated, and there were many times that I came away from reading the docs scratching my head. After spending many months staring at [the docs](https://codemirror.net/docs/) and [discussion board](https://discuss.codemirror.net/), I have a clearer picture of how CodeMirror works. My goal with this article is to explain certain core concepts and give commentary in addition to the many [examples](https://codemirror.net/examples/) that already exist on the CodeMirror site.
+
+<Callout>
+  This article is not meant to replace reading the docs, but rather give a
+  different take on various concepts taught there. Make sure you [give those a
+  read](https://codemirror.net/docs/), too.
+</Callout>
+
+## Lifecycle
+
+CodeMirror is organized into:
+
+1. Core functionality
+2. Added functionality through extensions
+
+Rather than trying to bundle all of the editor concerns into a single, massive package, it enables the developer to pick and choose the functionality they want. Within the core functionality, there are two key pieces:
+
+1. `EditorView`
+2. `EditorState`
+
+The `EditorView` manages the connection to the DOM, and handles any DOM events that occur within the editor–typing, focusing, clicking, re-rendering DOM elements, etc.
+
+As we have learned from libraries like jQuery, using the DOM for state management is slow and painful to manage. CodeMirror (like many other libraries) has abstracted the editor's state into a separate place called `EditorState`. While the `view` is concerned about what the DOM looks like, the `state` is primarily concerned about what the _document_ looks like (while also managing the state of the rest of the editor).
+
+In order to keep updates to the state very fast, updates to the editor state are pure–they do not produce side effects. A view may produce a side effect as a result of the change in state, but the state is very focused with re-computing changes to the state.
+
+The typical lifecyle for an update within CodeMirror looks like this (this is from the **State and Updates** section of the [system guide](https://codemirror.net/docs/guide/)):
+
+```mermaid
+flowchart TD
+
+a(DOM event)
+a --> b(Transaction)
+b --> c(Create new\nstate)
+c --> d(Update view)
+d --> a
+```
+
+A transaction defines a change to the state. For example, updating the text of an editor would trigger a transaction with a list of changes. The state takes in those changes, makes changes to the internal document, and produces a new state. The view then takes that state and updates the DOM with the changes.
+
+## Extensions
+
+Functionality beyond the "core" functionality lives inside of extensions. `Extension` is a bit of a catch-all term within CodeMirror, and I think of them as “ways I can add other functionality to an editor”. CodeMirror offers a lot of functionality through extensions–here is a brief list of some of the things it can do:
+
+- [Language](https://codemirror.net/docs/ref/#language.Language) support
+- [Keyboard shortcuts](https://codemirror.net/docs/ref/#commands)
+- [Autocomplete](https://codemirror.net/docs/ref/#autocomplete)
+- [Linting](https://codemirror.net/docs/ref/#lint)
+
+This really only scratches the surface, but is meant to highlight the wide range of possible extensions that CodeMirror provides. I would recommend looking at the [reference guide](https://codemirror.net/docs/ref/) to see all of the extensions that CodeMirror offers.
+
+## CodeMirror primitives
+
+Many of the extensions offered by CodeMirror are "pre-built"–internally they take CodeMirror primitives and create an extension with a single configuration point. However, there are times when you need to craft your own for custom functionality. Some primitives you will most likely encounter are:
+
+- Facet
+- StateField
+- ViewPlugin
+- Decoration
+
+### Facet
+
+[The docs](https://codemirror.net/docs/ref/#state.Facet) describe a facet as:
+
+> A facet is a labeled value that is associated with an editor state. It takes inputs from any number of extensions, and combines those into a single output value.
+
+I imagine a CodeMirror facet sort of like adding a value to a javascript object. Let's say that we represent the editor state as a simple object (the state doesn't actually look like this):
+
+```js
+const state = {
+  document: `const hello = 'world';`,
+  selection: {anchor: 0, head: 0},
+};
+```
+
+Now we want to add a property to our state called `tabSize`. This will be the default tab size for an editor. In this example, we can simply add a new member to the object:
+
+```js
+const state = {
+  document: `const hello = 'world';`,
+  selection: {anchor: 0, head: 0},
+  tabSize: 4, // highlight-line
+};
+```
+
+We have a default tab size of 4, but what if we had two editors each with its own tab size? We would need a way to handle the concept of a default value with the option for clients to override it. We could take an approach where we write a function with default values that are configurable:
+
+```js
+// highlight-next-line
+const state = (tabSize = 4) => {
+  return {
+    document: `const hello = 'world';`,
+    selection: {anchor: 0, head: 0},
+    tabSize, // highlight-line
+  };
+}; // highlight-line
+```
+
+However, this approach wouldn't scale very well as our needs become more complex. Additionally, it requires us to add every possible option to our editor state object, which means that even if our editor is very basic, it has to contain all of the functionality of a very complex editor.
+
+CodeMirror's solution to this problem is the [`Facet`](https://codemirror.net/docs/ref/#state.Facet) class–it gives you a named value (like a member of a class) but also provides ways to take multiple inputs and produce a single output.
+
+The simplest way to use a facet is to use its `of` method which takes a value and returns an extension that passes that value to the editor state. For example, if you want to set the tab size or set the editor to read only, you can use facets that are static methods on the `EditorState` class:
+
+```ts
+const tabSize = EditorState.tabSize.of(4);
+const readOnly = EditorState.readOnly.of(true);
+```
+
+If you pass these to an instance of `EditorState`, you can read them with the [`state.facet()`](https://codemirror.net/docs/ref/#state.EditorState.facet) method:
+
+```ts
+const tabSizeValue = state.facet(EditorState.tabSize);
+const readOnlyValue = state.facet(EditorState.readOnly);
+```
+
+CodeMirror uses facets in multiple ways to provide extensibility. As shown before, they can be as trivial as a configuration value like `tabSize`. Other facets provide "hooks" into CodeMirror's internal workings. For example, if you wanted to set up a function that logged a message to the console every time the editor changed focused, you could use the view [`updateListener`](https://codemirror.net/docs/ref/#view.EditorView^updateListener) facet:
+
+```ts
+const focusStateLogger = EditorView.updateListener.of(
+  (viewUpdate: ViewUpdate) => {
+    if (!viewUpdate.focusChanged) {
+      return;
+    }
+
+    console.log(
+      `The user ${
+        viewUpdate.view.hasFocus ? 'is' : 'is not'
+      } focusing on the editor`,
+    );
+  },
+);
+```
+
+There are even other ways to use a facet. Some return classes that display DOM elements, like [`showTooltip`](https://codemirror.net/docs/ref/#view.showTooltip) or [`showPanel`](https://codemirror.net/docs/ref/#view.showPanel). You use these functions in a similar way as the other functions, with the `of` method:
+
+```ts
+const panel = showPanel.of((view) => {
+  const dom = document.createElement('div');
+  const tabSize = view.state.facet(EditorState.tabSize);
+  dom.textContent = `This is my bottom panel. Tab size is ${tabSize}.`;
+
+  return {dom};
+});
+```
+
+Let's say that you want to have a custom configuration value (like `editorName`) that you provide through a facet. To set up an use the facet, the code might look like this:
+
+```ts
+const nameFacet = Facet.define<string>();
+const nameExtension = nameFacet.of('My Cool Editor');
+const nameValue = state.facet(nameFacet);
+```
+
+You first define a facet (without a value), then create an extension from a value, and then you can read it out of the state with `state.facet()`.
+
+To put this all together, here's an editor with a `tabSize` facet, a panel that uses the `showPanel` facet, our custom name facet, and a focus logger that uses the `updateListener` facet (open your dev tools to see the logs when you focus and blur on the editor):
+
+import {FacetExample} from './FacetExample';
+
+<FacetExample />
+
+If you have value that you need to track that is static or fits into the limits of the [facet's API](https://codemirror.net/docs/ref/#state.Facet^define^config), a facet may be the right choice. However, if you have a value that tracks some kind of state, you may be better off with a state field.
+
+### StateField
+
+[The docs](https://codemirror.net/docs/ref/#state.StateField) describe a state field as:
+
+> Fields can store additional information in an editor state, and keep it in sync with the rest of the state.
+
+State fields are computed every time the state goes through an update cycle, and each time the state field has an opportunity to recompute and provide a new value. The two main ingredients of a state field are:
+
+1. `create`: this receives the current value of the editor state and returns the initial value of the state field.
+2. `update`: this receives the current value of the state field and the current transaction of an update cycle. It uses those to compute the new value for the state field.
+
+Let's write a very simple state field to illustrate how these pieces fit together. Our state field will keep a running count of the number of times the document has changed in an editor.
+
+```ts
+import {StateField} from '@codemirror/state';
+
+const changeCounterStateField = StateField.define<number>({
+  create: (state) => {
+    return 0;
+  },
+  update: (currentValue, transaction) => {
+    let newValue = currentValue;
+
+    if (transaction.docChanged) {
+      newValue += 1;
+    }
+
+    return newValue;
+  },
+});
+```
+
+For the initial state, we don't need to compute a value from the state, and we simply return 0. During the update cycle, we can use the [`docChanged`](https://codemirror.net/docs/ref/#state.Transaction.docChanged) property on the transaction to conditionally add one to the value.
+
+There are times when we want a state field to track a change emitted by some other field or extension. For that, we can use a [`StateEffect`](https://codemirror.net/docs/ref/#state.StateEffect). The docs explain:
+
+> They are often useful to model changes to custom state fields, when those changes aren't implicit in document or selection changes.
+
+State effects are a way to wrap and pass a value between primitives. Because it requires you to create a class instance before using it to wrap a value, it enables a very clear way to identify a given value. Let's imagine that we want to update our state field to also increase the counter by a value in a state effect. We first need to create the state effect:
+
+```ts
+import {StateEffect} from '@codemirror/state';
+
+const updateCounterStateEffect = StateEffect<number>.define();
+```
+
+With this code, we have described that instances of `updateCounterStateEffect` will contain a number inside of them.
+
+But wait–we actually didn't define a state effect–we defined a [`StateEffectType`](https://codemirror.net/docs/ref/#state.StateEffectType)! This is because the state effect type is the _descriptor_ of the value, whereas a state effect contains the _actual value_ itself. There is a cyclical relationship between `StateEffect.define()` and `StateEffectType.of()`:
+
+```mermaid
+flowchart LR
+  a(StateEffect)
+  b(StateEffectType)
+
+  a -- "define()" --> b
+  b -- "of()" --> a
+```
+
+Let's update our example and actually create a state effect:
+
+```ts
+import {StateEffect} from '@codemirror/state';
+
+const updateCounterStateEffectType = StateEffect<number>.define();
+const incrementCounterByFiveStateEffect = updateCounterStateEffectType.of(5);
+```
+
+With this code, we have created a state effect that increments our counter by 5. Now that we can dispatch this state effect to update our counter, we need to update the state field to accept new values from this effect:
+
+```ts
+import {StateField} from '@codemirror/state';
+
+const changeCounterStateField = StateField.define<number>({
+  create: (state) => {
+    return 0;
+  },
+  update: (currentValue, transaction) => {
+    let newValue = currentValue;
+
+    if (transaction.docChanged) {
+      newValue += 1;
+    }
+
+    // highlight-start
+    for (const effect of transaction.effects) {
+      if (effect.is(updateCounterStateEffectType)) {
+        newValue += effect.value;
+      }
+    }
+    // highlight-end
+
+    return newValue;
+  },
+});
+```
+
+Each transaction contains an array of effects, and we can loop through them looking for our value. When the call to `effect.is()` returns true, the type for `effect.value` is automatically determined for us to be of type `number` (and therefore compatible with the `+=` operation).
+
+In addition to tracking custom state field, a state can provide information to the view to know how to render the value in the state field. Let's say we want to display the count in the bottom-right corner of the editor. We can utilize the [`provide`](https://codemirror.net/docs/ref/#state.StateField^define^config.provide) argument to return an extension that recieves the value from the state field and that we can use to render a piece of DOM.
+
+Let's first make a small helper function to create the DOM element with the correct text:
+
+```ts
+function createCounterPanel(value: number) {
+  return () => {
+    const dom = document.createElement('div');
+    dom.textContent = `Current count is ${value}`;
+
+    return {dom};
+  };
+}
+```
+
+This receives the value of the counter (which in our case is a number) and returns a function that creates the DOM element. It needs to a return a function to conform to the [`PanelConstructor`](https://codemirror.net/docs/ref/#view.PanelConstructor) spec, which is how we're going to create this element. Now we can update our state field to provide this as an extension:
+
+```tsx
+const changeCounterStateField = StateField.define<number>({
+  create: () => {
+    return 0;
+  },
+  update: (currentValue, transaction) => {
+    let newValue = currentValue;
+
+    if (transaction.docChanged) {
+      newValue += 1;
+    }
+
+    for (const effect of transaction.effects) {
+      if (effect.is(updateCounterStateEffectType)) {
+        newValue += effect.value;
+      }
+    }
+
+    return newValue;
+  },
+  provide: (value) => showPanel.from(value, createCounterPanel), // highlight-line
+});
+```
+
+The `provide` function passes the field's value and expects an `Extension` in return. Here we're using the [`showPanel`](https://codemirror.net/docs/ref/#view.showPanel) facet to return an extension that takes the value and creates a panel with the desired content. You can see a working example of this below:
+
+import {StateFieldExample} from './StateFieldExample';
+
+<StateFieldExample />
+
+As a final example, let's make a new state field that consumes a state effect that CodeMirror exports. Imagine that we want to keep a running list of all of the linter errors (called `Diagnostic`) in our editor. We can make use of the [`setDiagnosticsEffect`](https://codemirror.net/docs/ref/#lint.setDiagnosticsEffect) state effect type that CodeMirror exposes to us. The code to track the diagnostics would look like this:
+
+```ts
+import {setDiagnosticsEffect, Diagnostic} from '@codemirror/lint';
+
+const diagnosticsStateField = StateField.define<Diagnostic[]>({
+  create: () => [],
+  update: (currentDiagnostics, transaction) => {
+    let diagnostics = currentDiagnostics;
+
+    for (const effect in transaction.effects) {
+      if (effect.is(setDiagnosticsEffect)) {
+        diagnostics = effect.value;
+      }
+    }
+
+    return diagnostics;
+  },
+});
+```
+
+### ViewPlugin
+
+Let's return to our counter example. Let's imagine that we want to draw the current count of the counter somewhere on the editor. The way we can do that is with a [`ViewPlugin`](https://codemirror.net/docs/ref/#view.ViewPlugin). The docs define a view plugin as:
+
+> View plugins associate stateful values with a view. They can influence the way the content is drawn, and are notified of things that happen in the view.
+
+View plugins can do a bunch of things for us. I need some filler text here or else I'll be bothered by the way this looks. Cool cool.
+
+### What is a decoration plugin

@@ -75,4 +75,13 @@
   .cm-diagnostic-warning {
     @apply border-l-orange-500;
   }
+
+  .cm-panels.cm-panels-bottom {
+    @apply border-t border-caption-border dark:border-caption-border-dark;
+    @apply px-small py-little;
+  }
+
+  .cm-panels {
+    @apply bg-stone-100 dark:bg-stone-700;
+  }
 }
