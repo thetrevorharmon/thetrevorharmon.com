@@ -1,5 +1,5 @@
-import { getSrc } from "gatsby-plugin-image";
-import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import {getSrc} from 'gatsby-plugin-image';
+import {FileNode} from 'gatsby-plugin-image/dist/src/components/hooks';
 
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;
@@ -31,6 +31,6 @@ const getImageSrc = (node: Mdx | null, siteUrl?: string) => {
   }
 
   return `${siteUrl}${src}`;
-}
+};
 
 export {checkHttp, getImageSrc};
