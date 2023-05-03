@@ -31,11 +31,7 @@ export const ThemePicker = ({className}: Props) => {
     'focus:text-primary-text-focus focus:dark:text-primary-text-focus-dark',
   ]);
 
-  const iconClassName = classnames([
-    'relative',
-    'block',
-    'w-[1.25rem]',
-  ]);
+  const iconClassName = classnames(['relative', 'block', 'w-[1.25rem]']);
 
   const menuItemClassName = classnames([
     'flex items-center w-full',

@@ -84,4 +84,8 @@
   .cm-panels {
     @apply bg-stone-100 dark:bg-stone-700;
   }
+
+  .cm-widgetBuffer {
+    height: 0;
+  }
 }

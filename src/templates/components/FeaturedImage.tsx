@@ -14,7 +14,9 @@ export function FeaturedImage({mdx}: Props) {
   }
 
   const imageMarkup = (
-    <div className="Breakout shadow-sm rounded-md overflow-hidden isolate">{image}</div>
+    <div className="Breakout shadow-sm rounded-md overflow-hidden isolate">
+      {image}
+    </div>
   );
 
   const caption = mdx.image?.title ?? <Attribution mdx={mdx} /> ?? null;
