@@ -15,7 +15,7 @@ In July 2022, I was tasked with integrating [CodeMirror](https://codemirror.net/
   read](https://codemirror.net/docs/), too.
 </Callout>
 
-## Lifecycle
+## Structure & lifecycle
 
 CodeMirror is organized into:
 
@@ -338,12 +338,181 @@ const diagnosticsStateField = StateField.define<Diagnostic[]>({
 });
 ```
 
+### Decoration
+
+CodeMirror's `EditorView` class manages and updates the DOM as the `EditorState` changes. There are times when you may want to manipulate the DOM in some way, but because the view manages it, any changes you may manually make will be discarded when a state update cycle occurs and new version of the DOM is created.
+
+CodeMirror's answer to this problem is the `Decoration` class, which enables you to manipulate the DOM in various ways. There are four types of decorations that CodeMirror offers:
+
+1. [Mark decorations](https://codemirror.net/docs/ref/#view.Decoration^mark): These enable you to modify a range of content (like adding a classname). For example, CodeMirror uses mark decorations to provide syntax highlighting.
+2. [Widget decorations](https://codemirror.net/docs/ref/#view.Decoration%5Ewidget): These enable you to display a DOM element at a specific position.
+3. [Replace decorations](https://codemirror.net/docs/ref/#view.Decoration^replace): These decorations act on a range of content and can replace a the range with a widget or they can hide (but not remove) the range.
+4. [Line decorations](https://codemirror.net/docs/ref/#view.Decoration^line): Similar to mark decorations, these enable you to modify content, but it modifies things on a line basis.
+
+The `EditorView` class has a static facet called [`decorations`](https://codemirror.net/docs/ref/#view.EditorView^decorations) that enable us to provide decorations to the view.
+
+Let's make a simple widget decoration. Our decoration will display the midpoint of the editor (as a value) and will be positioned at the midpoint as well. We first need to implement the [`WidgetType`](https://codemirror.net/docs/ref/#view.WidgetType) class:
+
+```tsx
+class MidpointWidget extends WidgetType {
+  toDOM(view: EditorView) {
+    const midpoint = Math.floor(view.state.doc.length / 2);
+
+    const dom = document.createElement('span');
+    dom.textContent = `${midpoint}`;
+    dom.className = 'midpoint-widget';
+
+    return dom;
+  }
+}
+```
+
+This widget is very simple–it determines the midpoint based on the state a creates a little `<span>` with the right styling and content. In order to provide this widget to CodeMirror, we can use a state field. Our state field type will be [`DecorationSet`](https://codemirror.net/docs/ref/#view.DecorationSet)–even though we'll only have a single item in our set, using this as our type enables us to take advantage of the [`decorations`](https://codemirror.net/docs/ref/#view.EditorView^decorations) facet. Before we write that state field, let's write a helper method that can take in a midpoint and return a decoration set with our widget in it:
+
+```tsx
+function getMidpointWidgetDecorationSet(midpoint: number) {
+  const widget = new MidpointWidget();
+
+  return Decoration.set([
+    Decoration.widget({
+      widget,
+    }).range(midpoint),
+  ]);
+}
+```
+
+We call [`Decoration.widget`](https://codemirror.net/docs/ref/#view.Decoration^widget) in order to convert our widget into a decoration. From there, we call `range` on it–range describes the range of text that this widget is associated with. All decorations must be ranged in order to be properly displayed within the editor.
+
+Now that we have a widget and a helper method, we can write our state field:
+
+```tsx
+const midpointWidgetStateField = StateField.define<DecorationSet>({
+  create(state: EditorState) {
+    const midpoint = Math.floor(state.doc.length / 2);
+
+    return getMidpointWidgetDecorationSet(midpoint);
+  },
+  update(currentDecorations, transaction) {
+    if (transaction.docChanged) {
+      const midpoint = Math.floor(transaction.newDoc.length / 2);
+
+      return getMidpointWidgetDecorationSet(midpoint);
+    }
+
+    return currentDecorations;
+  },
+  provide: (f) => EditorView.decorations.from(f),
+});
+```
+
+Because the range fundamentally changes every time the document is edited (the midpoint is not based off an offset but instead based on the document length), we re-create the widget any time the document changes. Here's a working example of our midpoint widget:
+
+import {MarkDecorationExample} from './MarkDecorationExample';
+
+<MarkDecorationExample />
+
+This really only scratches the surface of what you can do with decorations–if you want to learn more, the [CodeMirror Decoration Example](https://codemirror.net/examples/decoration/) page is a great place to start.
+
 ### ViewPlugin
 
-Let's return to our counter example. Let's imagine that we want to draw the current count of the counter somewhere on the editor. The way we can do that is with a [`ViewPlugin`](https://codemirror.net/docs/ref/#view.ViewPlugin). The docs define a view plugin as:
+The docs define a view plugin as:
 
 > View plugins associate stateful values with a view. They can influence the way the content is drawn, and are notified of things that happen in the view.
 
-View plugins can do a bunch of things for us. I need some filler text here or else I'll be bothered by the way this looks. Cool cool.
+Let's revisit our midpoint example. What if, instead of a widget that displays inline, we want our midpoint to display in the bottom right corner of the editor. Additionally, we only want our midpoint to display when someone is actively using the editor, but have it go away when they remove their focus from the editor.
 
-### What is a decoration plugin
+A view plugin enables us to draw additional content in the editor in a way that isn't tied to a specific range. It receives updates when the view is redrawn which allows a developer to determine how the view plugin should be re-drawn/updated.
+
+You can create a view plugin in two ways:
+
+1. [`ViewPlugin.define`](https://codemirror.net/docs/ref/#view.ViewPlugin^define): this is a "function style" way of creating a view plugin. You pass it a `create` function which receives the view and returns the plugin value (which can be `void`).
+2. [`ViewPlugin.fromClass`](https://codemirror.net/docs/ref/#view.ViewPlugin^fromClass): this is a "class style" way of creating a view plugin. You pass it a class which implements the `create` method.
+
+With our updated midpoint view plugin, we'll create the DOM element once and keep a reference to the element so that we can update it as the view changes. Since we need to keep a reference to the element, we can use the class style and save the element as one of the members of the class. Let's implememnt the `create` method of our plugin:
+
+```ts
+const midpointViewPlugin = ViewPlugin.fromClass(
+  class {
+    private widget: HTMLElement;
+
+    constructor(view: EditorView) {
+      // 1
+      const div = document.createElement('div');
+
+      // 2
+      this.widget = view.dom.appendChild(div);
+
+      // 3
+      this.widget.classList.add('midpoint-widget');
+      if (!view.hasFocus) {
+        this.widget.classList.add('hidden');
+      }
+
+      // 4
+      const midpoint = Math.floor(view.state.doc.length / 2);
+      this.widget.textContent = `${midpoint}`;
+    }
+  },
+);
+```
+
+This create method does the following:
+
+1. Creates a new element.
+2. Uses the [`view.dom`](https://codemirror.net/docs/ref/#view.EditorView.dom) property to access the underlying HTML element and appends our new element to the dom. It also assigns the reference to that element to our private `widget` property.
+3. Adds the class `midpoint-widget`, which will handle styling and positioning, and conditionally adds the class `hidden` if the editor is not in focus.
+4. Sets the text of the widget to the midpoint of the document.
+
+We will also add an update and destroy method to handle changes to the editor:
+
+```ts
+const midpointViewPlugin = ViewPlugin.fromClass(
+  class {
+    private widget: HTMLElement;
+
+    constructor(view: EditorView) {
+      const div = document.createElement('div');
+
+      this.widget = view.dom.appendChild(div);
+
+      this.widget.classList.add('midpoint-widget');
+      if (!view.hasFocus) {
+        this.widget.classList.add('hidden');
+      }
+
+      const midpoint = Math.floor(view.state.doc.length / 2);
+      this.widget.textContent = `${midpoint}`;
+    }
+
+    // highlight-start
+    update(update: ViewUpdate) {
+      if (update.docChanged) {
+        this.widget.textContent = `${Math.floor(update.state.doc.length / 2)}`;
+      }
+
+      if (!update.focusChanged) {
+        return;
+      }
+
+      if (update.view.hasFocus) {
+        this.widget.classList.remove('hidden');
+      } else {
+        this.widget.classList.add('hidden');
+      }
+    }
+    // highlight-end
+
+    // highlight-start
+    destroy() {
+      this.widget.remove();
+    }
+    // highlight-end
+  },
+);
+```
+
+Our update function updates the text every time the document changes with a new value for the midpoint. It also shows and hides the widget based on if the user is focusing on the editor when the focus changes.
+
+import {ViewPluginExample} from './ViewPluginExample';
+
+<ViewPluginExample />
