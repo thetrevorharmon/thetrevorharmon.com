@@ -167,7 +167,7 @@ export function ReactCodeMirrorSyncStateExample() {
           extensions={extensions}
           indentWithTab={false}
           basicSetup={BASIC_SETUP}
-          theme={theme === 'Dark' ? 'dark' : 'light'}
+          theme={theme}
         />
       </div>
     </div>

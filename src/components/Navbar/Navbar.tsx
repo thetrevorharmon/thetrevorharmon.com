@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from '../Link';
 import {Routes} from '../../utils';
 
-import {BrandButton, ToggleThemeButton} from './components';
+import {BrandButton, ThemePicker} from './components';
 
 export const Navbar = () => {
   const navbarLinks = [
@@ -35,7 +35,7 @@ export const Navbar = () => {
     <div className="flex py-small transition-all duration-200">
       <BrandButton />
       {linkMarkup}
-      <ToggleThemeButton className="ml-small" />
+      <ThemePicker className="ml-small" />
     </div>
   );
 };
