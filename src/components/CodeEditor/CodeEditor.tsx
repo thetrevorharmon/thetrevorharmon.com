@@ -47,7 +47,7 @@ export function CodeEditor({
     <div className="CodeEditor">
       <ReactCodeEditor
         value={value}
-        theme={theme === 'Light' ? 'light' : 'dark'}
+        theme={theme}
         extensions={memoizedExtensions}
         onChange={handleOnChange}
         indentWithTab={false}

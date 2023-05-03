@@ -12,7 +12,7 @@ This PR:
 ### Checklist before merge
 
 - [ ] I have prefixed the name of the pull request with an emoji.
-- [ ] I have run `yarn build` locally to ensure that it builds correctly OR I have verified it builds with a deploy preview.
+- [ ] I have run `yarn tophat` locally to ensure that it builds correctly OR I have verified it builds with a deploy preview.
 
 <!--
 

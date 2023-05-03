@@ -1,8 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {expand, link, rss, star, twitter, email} from './icons';
-import {IconName} from './types';
+import {link, rss, twitter, email} from './icons';
 
 import './Icon.scss';
 
@@ -13,14 +12,14 @@ interface IconProps {
   color?: 'text' | 'primary';
 }
 
+export type IconName = 'link' | 'rss' | 'twitter' | 'email';
+
 // Disabling object-literal-shorthand because otherwise
 // I can't have a 'dynamic' icon name that works
 /* tslint:disable object-literal-shorthand */
 const mapping: {[name in IconName]: React.SVGFactory} = {
-  expand: expand,
   link: link,
   rss: rss,
-  star: star,
   twitter: twitter,
   email: email,
 };
