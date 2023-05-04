@@ -43,30 +43,43 @@ function getSystemTheme(): Theme {
     : 'light';
 }
 
+function getSavedTheme(): ThemeState | null {
+  const rawSavedTheme = localStorage.getItem('theme');
+
+  if (rawSavedTheme == null) {
+    return null;
+  }
+
+  try {
+    const savedTheme = JSON.parse(rawSavedTheme);
+
+    if (!isThemeState(savedTheme)) {
+      return null;
+    }
+
+    if (savedTheme.followSystem) {
+      return {
+        theme: getSystemTheme(),
+        followSystem: true,
+      };
+    } else {
+      return savedTheme;
+    }
+  } catch {
+    return null;
+  }
+}
+
 export const ThemeProvider = ({children}: Props) => {
   const [themeState, setThemeState] = useState<ThemeState>(() => {
-    const defaultSetting = {
+    const defaultTheme = {
       theme: getSystemTheme(),
       followSystem: true,
     };
 
-    const rawSavedTheme = localStorage.getItem('theme');
+    const savedTheme = getSavedTheme();
 
-    if (rawSavedTheme == null) {
-      return defaultSetting;
-    }
-
-    try {
-      const savedTheme = JSON.parse(rawSavedTheme);
-
-      if (isThemeState(savedTheme)) {
-        return savedTheme;
-      }
-    } catch {
-      return defaultSetting;
-    }
-
-    return defaultSetting;
+    return savedTheme ?? defaultTheme;
   });
 
   useEffect(() => {
