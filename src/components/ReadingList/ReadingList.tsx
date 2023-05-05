@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import * as React from 'react';
 import {Link} from '../../components';
 import {Routes} from '../../utils';
@@ -13,34 +12,18 @@ export function ReadingList({type, recommendedReading}: Props) {
     return null;
   }
 
-  const title =
-    type === 'Post'
-      ? `Other things I've written`
-      : 'Other things I’ve worked on';
+  const title = type === 'Post' ? `Want to keep reading?` : 'Want to see more?';
+  const description = `If you enjoyed this ${
+    type === 'Post' ? 'article' : 'design'
+  }, you might enjoy one of these:`;
+
   const route = type === 'Post' ? Routes.blogPost : Routes.project;
 
   const makePairMarkup = ({link: {slug, label}, date}: RecommendedReading) => {
     return (
-      <div className="flex flex-col md:flex-row w-full" key={label}>
-        <Link
-          className={classnames(
-            'mr-0 md:mr-normal',
-            'whitespace-pre-wrap md:whitespace-nowrap',
-            'overflow-hidden text-ellipsis',
-            'box-border max-w-full',
-          )}
-          url={route(slug)}
-        >
-          {label}
-        </Link>
-        <span
-          className={classnames(
-            'ml-0 md:ml-auto shrink-0',
-            'text-text-muted dark:text-text-muted-dark',
-          )}
-        >
-          {date}
-        </span>
+      <div className="" key={label}>
+        <Link url={route(slug)}>{label}</Link>
+        <div className="text-text-muted dark:text-text-muted-dark">{date}</div>
       </div>
     );
   };
@@ -48,8 +31,13 @@ export function ReadingList({type, recommendedReading}: Props) {
   const markup = recommendedReading.map(makePairMarkup);
 
   return (
-    <div className="space-y-small my-large w-full">
-      <h2>{title}</h2>
+    <div className="space-y-medium w-full">
+      <div className="space-y-tiny">
+        <h2>{title}</h2>
+        <div>
+          <p>{description}</p>
+        </div>
+      </div>
       <div className="space-y-small">{markup}</div>
     </div>
   );

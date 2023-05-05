@@ -1,21 +1,15 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {Link} from '../../components';
-import {ExternalLinks, useSiteData} from '../../utils';
+import {Container, Link} from '../../components';
+import {ExternalLinks} from '../../utils';
 
 interface FooterProps {
   className?: string;
 }
 
 export const Footer = ({className}: FooterProps) => {
-  const {title} = useSiteData();
-  const classname = classnames(
-    className,
-    'flex flex-wrap',
-    'border-t border-solid border-accent-line dark:border-accent-line-dark',
-    'py-medium',
-  );
+  const classname = classnames(className, 'flex flex-wrap', 'py-medium');
 
   const footerLinks = [
     {
@@ -25,10 +19,6 @@ export const Footer = ({className}: FooterProps) => {
     {
       display: 'Github',
       location: ExternalLinks.github(),
-    },
-    {
-      display: 'LinkedIn',
-      location: ExternalLinks.linkedIn(),
     },
   ];
 
@@ -55,11 +45,15 @@ export const Footer = ({className}: FooterProps) => {
   );
 
   return (
-    <div className={classname}>
-      <div className="font-display font-bold text-text-bold dark:text-text-bold-dark">
-        &copy; {new Date().getFullYear()} Trevor Harmon
-      </div>
-      {linkMarkup}
+    <div className="border-t border-solid border-accent-line dark:border-accent-line-dark">
+      <Container>
+        <div className={classname}>
+          <div className="font-display font-bold text-text-bold dark:text-text-bold-dark">
+            &copy; {new Date().getFullYear()} Trevor Harmon
+          </div>
+          {linkMarkup}
+        </div>
+      </Container>
     </div>
   );
 };

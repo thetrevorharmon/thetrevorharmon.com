@@ -57,10 +57,8 @@ export const Link = ({
         {children}
       </>
     ) : (
-      <span className='no-underline inline-block'>
-        <span className='underline inline'>
-        {children}
-        </span>
+      <span className="no-underline inline-block">
+        <span className="underline inline">{children}</span>
         <span className="inline whitespace-nowrap no-underline">
           {nbps}
           {iconElement}
