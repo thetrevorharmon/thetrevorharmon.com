@@ -7,22 +7,18 @@ status: Draft
 description: ''
 ---
 
-In July 2022, I was tasked with integrating [CodeMirror](https://codemirror.net/), a “code editor component for the web”, into [ShopifyQL Notebooks](https://shopify.engineering/building-commerce-data-models-with-shopifyql). I had never used CodeMirror before, much less worked with implementing code editors, and I found learning about CodeMirror an uphill battle. The library was more complex than I anticipated, and there were many times that I came away from reading the docs scratching my head. After spending many months staring at [the docs](https://codemirror.net/docs/) and [discussion board](https://discuss.codemirror.net/), I have a clearer picture of how CodeMirror works. My goal with this article is to explain certain core concepts and give commentary in addition to the many [examples](https://codemirror.net/examples/) that already exist on the CodeMirror site.
+In July 2022, I was tasked with integrating [CodeMirror](https://codemirror.net/), a “code editor component for the web”, into [ShopifyQL Notebooks](https://shopify.engineering/building-commerce-data-models-with-shopifyql). Learning the ins and outs of the library was more complex than I anticipated, and there were many times that I came away from reading the docs scratching my head. After spending many months staring at [the documentation](https://codemirror.net/docs/) and [discussion board](https://discuss.codemirror.net/), I feel like I've emerged on the other side of a long journey of learning CodeMirror with a clearer picture of the core concepts. My goal with this article is to explain those concepts and provide commentary in addition to the many [examples](https://codemirror.net/examples/) that already exist on the CodeMirror site.
 
 <Callout>
   This article is not meant to replace reading the docs, but rather give a
   different take on various concepts taught there. Make sure you [give those a
-  read](https://codemirror.net/docs/), too.
+  read](https://codemirror.net/docs/), too. Might be best to start with the
+  [system guide](https://codemirror.net/docs/guide/).
 </Callout>
 
 ## Structure & lifecycle
 
-CodeMirror is organized into:
-
-1. Core functionality
-2. Added functionality through extensions
-
-Rather than trying to bundle all of the editor concerns into a single, massive package, it enables the developer to pick and choose the functionality they want. Within the core functionality, there are two key pieces:
+Rather than trying to bundle all of the editor concerns into a single, massive package, CodeMirror has an intentional divide between (1) core capabilities and (2) added functionality through extensions. This separation enables the developer to pick and choose the functionality they want. Within the core functionality, there are two key classes:
 
 1. `EditorView`
 2. `EditorState`
@@ -31,9 +27,9 @@ The `EditorView` manages the connection to the DOM, and handles any DOM events t
 
 As we have learned from libraries like jQuery, using the DOM for state management is slow and painful to manage. CodeMirror (like many other libraries) has abstracted the editor's state into a separate place called `EditorState`. While the `view` is concerned about what the DOM looks like, the `state` is primarily concerned about what the _document_ looks like (while also managing the state of the rest of the editor).
 
-In order to keep updates to the state very fast, updates to the editor state are pure–they do not produce side effects. A view may produce a side effect as a result of the change in state, but the state is very focused with re-computing changes to the state.
+In order to keep updates to the state very fast, the editor state only performs pure updates (updates that do not produce side effects). A view may produce a side effect as a result of the change in state, but the state focuses exclusively on re-computing changes to the state based off of inputs and nothing else.
 
-The typical lifecyle for an update within CodeMirror looks like this (this is from the **State and Updates** section of the [system guide](https://codemirror.net/docs/guide/)):
+The typical lifecyle for an update within CodeMirror looks like this (this diagram is from the **State and Updates** section of the [system guide](https://codemirror.net/docs/guide/)):
 
 ```mermaid
 flowchart TD
@@ -49,18 +45,18 @@ A transaction defines a change to the state. For example, updating the text of a
 
 ## Extensions
 
-Functionality beyond the "core" functionality lives inside of extensions. `Extension` is a bit of a catch-all term within CodeMirror, and I think of them as “ways I can add other functionality to an editor”. CodeMirror offers a lot of functionality through extensions–here is a brief list of some of the things it can do:
+Functionality beyond the core capability lives inside of extensions. [`Extension`](https://codemirror.net/docs/ref/#state.Extension) is a bit of a catch-all term within CodeMirror, and I think of them as “ways I can add other functionality to an editor”. CodeMirror offers a breadth of functionality through extensions–here's a brief list of some of the things it can do:
 
 - [Language](https://codemirror.net/docs/ref/#language.Language) support
 - [Keyboard shortcuts](https://codemirror.net/docs/ref/#commands)
 - [Autocomplete](https://codemirror.net/docs/ref/#autocomplete)
 - [Linting](https://codemirror.net/docs/ref/#lint)
 
-This really only scratches the surface, but is meant to highlight the wide range of possible extensions that CodeMirror provides. I would recommend looking at the [reference guide](https://codemirror.net/docs/ref/) to see all of the extensions that CodeMirror offers.
+This list really only scratches the surface but highlights the wide range of possible features that CodeMirror provides. I would recommend looking at the [reference guide](https://codemirror.net/docs/ref/) to see all of the extensions that CodeMirror offers.
 
 ## CodeMirror primitives
 
-Many of the extensions offered by CodeMirror are "pre-built"–internally they take CodeMirror primitives and create an extension with a single configuration point. However, there are times when you need to craft your own for custom functionality. Some primitives you will most likely encounter are:
+Many of the extensions offered by CodeMirror are "pre-built"–internally, they take CodeMirror primitives and create an extension with a single configuration point. However, there are times when you need to craft your own for custom functionality. The primitives you will most likely encounter are:
 
 - Facet
 - StateField
@@ -73,7 +69,7 @@ Many of the extensions offered by CodeMirror are "pre-built"–internally they t
 
 > A facet is a labeled value that is associated with an editor state. It takes inputs from any number of extensions, and combines those into a single output value.
 
-I imagine a CodeMirror facet sort of like adding a value to a javascript object. Let's say that we represent the editor state as a simple object (the state doesn't actually look like this):
+I imagine a CodeMirror facet sort of like adding a value to a javascript object. Let's say that we represent the editor state as a simple object (the actual state doesn't look like this):
 
 ```js
 const state = {
@@ -105,11 +101,11 @@ const state = (tabSize = 4) => {
 }; // highlight-line
 ```
 
-However, this approach wouldn't scale very well as our needs become more complex. Additionally, it requires us to add every possible option to our editor state object, which means that even if our editor is very basic, it has to contain all of the functionality of a very complex editor.
+However, this approach doesn't scale as our needs become more complex. It requires us to add every possible option to our editor state object, which means that even if our editor is very basic, it still contains all of the functionality of a very complex editor.
 
 CodeMirror's solution to this problem is the [`Facet`](https://codemirror.net/docs/ref/#state.Facet) class–it gives you a named value (like a member of a class) but also provides ways to take multiple inputs and produce a single output.
 
-The simplest way to use a facet is to use its `of` method which takes a value and returns an extension that passes that value to the editor state. For example, if you want to set the tab size or set the editor to read only, you can use facets that are static methods on the `EditorState` class:
+The simplest way to use a facet is to use its `of` method which takes a value and returns an extension. The extension internally holds the given value and passes it to the editor state. For example, if you want to set the tab size or set the editor to read only, you can use facets that are static methods on the `EditorState` class:
 
 ```ts
 const tabSize = EditorState.tabSize.of(4);
@@ -123,7 +119,7 @@ const tabSizeValue = state.facet(EditorState.tabSize);
 const readOnlyValue = state.facet(EditorState.readOnly);
 ```
 
-CodeMirror uses facets in multiple ways to provide extensibility. As shown before, they can be as trivial as a configuration value like `tabSize`. Other facets provide "hooks" into CodeMirror's internal workings. For example, if you wanted to set up a function that logged a message to the console every time the editor changed focused, you could use the view [`updateListener`](https://codemirror.net/docs/ref/#view.EditorView^updateListener) facet:
+CodeMirror uses facets in multiple ways to provide extensibility. As shown before, they can be as simple as a configuration value like `tabSize`. Other facets provide "hooks" into CodeMirror's internal workings. For example, if you wanted to set up a function that logged a message to the console every time the editor changed focused, you could use the view [`updateListener`](https://codemirror.net/docs/ref/#view.EditorView^updateListener) facet:
 
 ```ts
 const focusStateLogger = EditorView.updateListener.of(
@@ -161,7 +157,7 @@ const nameExtension = nameFacet.of('My Cool Editor');
 const nameValue = state.facet(nameFacet);
 ```
 
-You first define a facet (without a value), then create an extension from a value, and then you can read it out of the state with `state.facet()`.
+You first define a facet (without a value), then create an extension from that instance with a value, and then you can read the value out of state with `state.facet()`.
 
 To put this all together, here's an editor with a `tabSize` facet, a panel that uses the `showPanel` facet, our custom name facet, and a focus logger that uses the `updateListener` facet (open your dev tools to see the logs when you focus and blur on the editor):
 
@@ -169,15 +165,22 @@ import {FacetExample} from './FacetExample';
 
 <FacetExample />
 
-If you have value that you need to track that is static or fits into the limits of the [facet's API](https://codemirror.net/docs/ref/#state.Facet^define^config), a facet may be the right choice. However, if you have a value that tracks some kind of state, you may be better off with a state field.
+Facets cover a wide range of functionality within CodeMirror, but I have observed that there tends to be two types of facets (illustrated by the exmaples above):
+
+1. Facets provided by CodeMirror. These range from simple configuration values to listeners to DOM manipulation.
+2. Facets created by a developer provided to CodeMirror. These are not limited to configurable values, but are usually the best tool for that type of data.
+
+If you have a value that you need to track that is static or fits into the limits of the [facet's API](https://codemirror.net/docs/ref/#state.Facet^define^config), a facet may be the right choice. However, if you have a dynamic value that tracks some kind of state, you may be better off with a state field.
 
 ### StateField
 
-[The docs](https://codemirror.net/docs/ref/#state.StateField) describe a state field as:
+[The docs](https://codemirror.net/docs/ref/#state.StateField) describe the capabilities of a state field:
 
 > Fields can store additional information in an editor state, and keep it in sync with the rest of the state.
 
-State fields are computed every time the state goes through an update cycle, and each time the state field has an opportunity to recompute and provide a new value. The two main ingredients of a state field are:
+State fields are computed every time the state goes through an update cycle, and each time the state field has an opportunity to recompute and provide a new value.
+
+The two main ingredients of a state field are:
 
 1. `create`: this receives the current value of the editor state and returns the initial value of the state field.
 2. `update`: this receives the current value of the state field and the current transaction of an update cycle. It uses those to compute the new value for the state field.
@@ -268,14 +271,14 @@ const changeCounterStateField = StateField.define<number>({
 });
 ```
 
-Each transaction contains an array of effects, and we can loop through them looking for our value. When the call to `effect.is()` returns true, the type for `effect.value` is automatically determined for us to be of type `number` (and therefore compatible with the `+=` operation).
+Each transaction contains an array of effects, and we can loop through them looking for our value. When the call to `effect.is()` returns true, the type for `effect.value` is inferred to be of type `number` (and therefore compatible with the `+=` operation).
 
-In addition to tracking custom state field, a state can provide information to the view to know how to render the value in the state field. Let's say we want to display the count in the bottom-right corner of the editor. We can utilize the [`provide`](https://codemirror.net/docs/ref/#state.StateField^define^config.provide) argument to return an extension that recieves the value from the state field and that we can use to render a piece of DOM.
+In addition to tracking custom state, a state field can provide information to the view to know how to render the value contained in the state field. Let's say we want to display the count in a panel beneath the editor. We can utilize the state field's [`provide`](https://codemirror.net/docs/ref/#state.StateField^define^config.provide) argument to return an extension that recieves the value from the state field and renders the value in a panel.
 
-Let's first make a small helper function to create the DOM element with the correct text:
+Let's first make a small helper function to create the DOM element with the correct content:
 
 ```ts
-function createCounterPanel(value: number) {
+function createCounterPanel(value: number): PanelConstructor {
   return () => {
     const dom = document.createElement('div');
     dom.textContent = `Current count is ${value}`;
@@ -307,17 +310,18 @@ const changeCounterStateField = StateField.define<number>({
 
     return newValue;
   },
-  provide: (value) => showPanel.from(value, createCounterPanel), // highlight-line
+  // highlight-next-line
+  provide: (value) => showPanel.from(value, createCounterPanel),
 });
 ```
 
-The `provide` function passes the field's value and expects an `Extension` in return. Here we're using the [`showPanel`](https://codemirror.net/docs/ref/#view.showPanel) facet to return an extension that takes the value and creates a panel with the desired content. You can see a working example of this below:
+We're using the [`showPanel`](https://codemirror.net/docs/ref/#view.showPanel) facet to return an extension that takes the value and creates a panel with the desired content. You can see a working example of this below:
 
 import {StateFieldExample} from './StateFieldExample';
 
 <StateFieldExample />
 
-As a final example, let's make a new state field that consumes a state effect that CodeMirror exports. Imagine that we want to keep a running list of all of the linter errors (called `Diagnostic`) in our editor. We can make use of the [`setDiagnosticsEffect`](https://codemirror.net/docs/ref/#lint.setDiagnosticsEffect) state effect type that CodeMirror exposes to us. The code to track the diagnostics would look like this:
+As a final example, let's make a new state field that consumes a state effect that CodeMirror exports. Imagine that we want to keep a running list of all of the linter errors (of type `Diagnostic`) in our editor. We can make use of the [`setDiagnosticsEffect`](https://codemirror.net/docs/ref/#lint.setDiagnosticsEffect) state effect type that CodeMirror exposes to us. The code to track the diagnostics would look like this:
 
 ```ts
 import {setDiagnosticsEffect, Diagnostic} from '@codemirror/lint';
@@ -340,11 +344,11 @@ const diagnosticsStateField = StateField.define<Diagnostic[]>({
 
 ### Decoration
 
-CodeMirror's `EditorView` class manages and updates the DOM as the `EditorState` changes. There are times when you may want to manipulate the DOM in some way, but because the view manages it, any changes you may manually make will be discarded when a state update cycle occurs and new version of the DOM is created.
+CodeMirror's `EditorView` class manages and updates the DOM as the state changes. There are times when you may want to manipulate the DOM in some way, but because the view manages it, any changes you make manually0 will be discarded when a state update cycle occurs and new version of the DOM is rendered.
 
-CodeMirror's answer to this problem is the `Decoration` class, which enables you to manipulate the DOM in various ways. There are four types of decorations that CodeMirror offers:
+One of CodeMirror's answers to this problem is the `Decoration` class, which enables you to manipulate the DOM in harmony with the view. There are four types of decorations that CodeMirror offers:
 
-1. [Mark decorations](https://codemirror.net/docs/ref/#view.Decoration^mark): These enable you to modify a range of content (like adding a classname). For example, CodeMirror uses mark decorations to provide syntax highlighting.
+1. [Mark decorations](https://codemirror.net/docs/ref/#view.Decoration^mark): These enable you to modify a range of content (like adding a classname). CodeMirror uses mark decorations to provide syntax highlighting.
 2. [Widget decorations](https://codemirror.net/docs/ref/#view.Decoration%5Ewidget): These enable you to display a DOM element at a specific position.
 3. [Replace decorations](https://codemirror.net/docs/ref/#view.Decoration^replace): These decorations act on a range of content and can replace a the range with a widget or they can hide (but not remove) the range.
 4. [Line decorations](https://codemirror.net/docs/ref/#view.Decoration^line): Similar to mark decorations, these enable you to modify content, but it modifies things on a line basis.

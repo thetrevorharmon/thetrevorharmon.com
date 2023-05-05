@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 
 import {CodeEditor} from '../../../../../components/CodeEditor';
 import {StateField} from '@codemirror/state';
-import {showPanel} from '@codemirror/view';
+import {PanelConstructor, showPanel} from '@codemirror/view';
 
 const INITIAL_VALUE = `
 
@@ -11,7 +11,7 @@ const hello = 'world';
 
 `;
 
-function createCounterPanel(value: number) {
+function createCounterPanel(value: number): PanelConstructor {
   return () => {
     const dom = document.createElement('div');
     dom.textContent = `Current count is ${value}`;
