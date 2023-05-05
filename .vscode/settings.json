@@ -4,10 +4,12 @@
   },
   "[mdx]": {
     "diffEditor.wordWrap": "on",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
   },
   "[markdown]": {
     "diffEditor.wordWrap": "on",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
   }
 }
