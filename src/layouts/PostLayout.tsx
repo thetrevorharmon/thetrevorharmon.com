@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classnames from 'classnames';
 
 import {
   Footer,
@@ -27,21 +26,13 @@ export function PostLayout({
 }: Props) {
   return (
     <>
-      <Container>
+      <Container className="space-y-large mb-large">
         <Navbar />
-        <div className={classnames('my-large', className)}>{children}</div>
-      </Container>
-      {hasSignupForm && (
-        <div className="mt-large mb-big bg-caption-bg dark:bg-caption-bg-dark">
-          <Container>
-            <FollowCallout />
-          </Container>
-        </div>
-      )}
-      <Container>
+        <div className={className}>{children}</div>
+        {hasSignupForm && <FollowCallout />}
         <ReadingList recommendedReading={recommendedReading} type={type} />
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }

@@ -7,36 +7,19 @@ import '../styles/global.scss';
 
 interface LayoutProps {
   className?: string;
-  hasContainer?: boolean;
   children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({className, hasContainer, children}) => {
-  const typicalMarkup = (
-    <Container>
-      <Navbar />
-      <div className={className}>{children}</div>
-      <Footer />
-    </Container>
-  );
-
-  const noChildContainerMarkup = (
+const Layout: React.FC<LayoutProps> = ({className, children}) => {
+  return (
     <>
       <Container>
         <Navbar />
+        <div className={className}>{children}</div>
       </Container>
-      <div className={className}>{children}</div>
-      <Container>
-        <Footer />
-      </Container>
+      <Footer />
     </>
   );
-
-  return hasContainer ? typicalMarkup : noChildContainerMarkup;
-};
-
-Layout.defaultProps = {
-  hasContainer: true,
 };
 
 export {Layout};
