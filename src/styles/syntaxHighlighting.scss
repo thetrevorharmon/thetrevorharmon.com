@@ -158,4 +158,6 @@ a {
   @apply md:-mx-breakout md:pl-[calc(theme(space.breakout)_-_4px)] md:pr-breakout;
 
   @apply border-l-[3px] md:border-l-[4px] border-lime-500;
+
+  @apply leading-[1.2em] min-h-[1.2em];
 }

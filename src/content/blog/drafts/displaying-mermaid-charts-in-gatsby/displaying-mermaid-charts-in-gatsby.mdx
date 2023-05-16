@@ -7,11 +7,11 @@ status: Draft
 description: ''
 ---
 
-I like diagrams. I find they do a great job explaining my thought processes and giving a better understanding to what are often abstract systems. The problem I have with most diagrams and diagramming tools is that diagrams often have a short shelf-life. Making changes to diagrams is cumbersome because it requires access to tooling that is often gated by logins and licenses. It's also hard to describe differences between two different diagrams with a tool like git when the diagrams are stored as files, not text.
+I like diagrams. I find they do a great job explaining my thought processes and giving a better understanding to what are often abstract systems. The problem I have with most diagrams (and diagramming tools() is that they often have a short shelf-life. Diagrams are often stored as flat files (e.g. a `.jpg`) and when the diagram becomes out of date, it becomes a chore to find the original, uncompressed file to edit it. The tooling is often gated by logins and licenses. It's also hard to describe differences between two different diagrams with a tool like git since the diagrams aren't stored as text.
 
 In February 2022, GitHub [added support for diagrams with Mermaid](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/), a markdown-inspired diagramming and charting tool. GitHub's support of [Mermaid](https://mermaid.js.org/) introduced me to the tool, and I was thrilled when I discovered it–it solves the problem of needing a separate tool and is supported in a tool I already use on a regular basis. My coworkers can tell you that for a few months afterwards, I was _constantly_ making Mermaid diagrams (maybe simply because I could).
 
-I've wanted to start using diagrams in my writing on my blog, which means I needed to add Mermaid support to my blog. However, I found that the existing tooling was a bit lacking and didn't suit my needs. I decided to roll up my sleeves and build support for it with a local plugin. In this article, I'll detail exactly how to build a plugin that transforms Mermaid syntax like this:
+I've wanted to start using diagrams in my writing on my blog, which meant I needed to add Mermaid support to my blog. However, I found that the existing tooling was a bit lacking and didn't suit my needs. I decided to roll up my sleeves and build support for it with my own plugin. In this article, I'll detail exactly how to build a plugin that transforms Mermaid syntax like this:
 
 ```mermaid-code
 flowchart TD
@@ -93,7 +93,7 @@ By following the right directory structure, I can add it to my config file with 
 
 As a starting point, I created a basic function that wraps the mermaid-cli:
 
-```ts
+```js
 import fs from 'fs';
 import {execSync} from 'child_process';
 import {v4 as uuid} from 'uuid';
@@ -135,7 +135,7 @@ This function:
 
 Now that we have a function that can take in mermaid text and get back SVG, we need to write the plugin function. This will crawl the document and when it encounters a mermaid block, render it to an SVG. That function looks like this:
 
-```ts
+```js
 import {visit} from 'unist-util-visit';
 
 export function gatsbyRemarkMermaidToSvg({markdownAST}) {
@@ -188,7 +188,7 @@ Some details about this code:
 
 Now that we have a working plugin, let's add a little extensibility. Right now, we are stuck with the base Mermaid theme and font. We also can't customize anything about the markup. Let's add a few options to our function:
 
-```ts
+```js
 // 1
 // highlight-start
 const defaultOptions = {
@@ -243,7 +243,7 @@ I made the following changes:
 
 Now that we have options in our plugin, we can pass them through to our svg generator function:
 
-```ts
+```js
 function generateSVGFromMermaid(mermaidText, options) { // highlight-line
   const tempFilename = `${uuidv4()}.mmd`;
 
@@ -301,18 +301,13 @@ Some details of this code:
 
 ## Caching the generated svgs
 
-- Caching really wasn't on my radar initially
-- As I started to work on an article that had a few diagrams in it, I noticed it took while to update the live preview
-- The slow updates became noticable and I couldnt tolerate the performance hit 
-- Fortunately Gatbsy makes interacting with the cache really straightforward with a plugin since it's one of the arguments that is passed to the plugin
+Once I had this initial implementation working and my mermaid charts were rendered, I thought I was done. However, as I started to write an article that contained a few diagrams, I found that the live preview performed poorly. I started to notice how slow the update cycle was and working on the article felt sluggish. I figured that caching was the solution to my problem, and fortunately Gatsby makes interacting with the cache very straightforward–it's one of the arguments that is passed to a plugin!
 
-- I needed a way to create a unique id for a specific markdown block
-- By default, markdown code blocks don't have any kind of unique identifier that I could tap into
-- I felt that the best way to create a unique id was to create a hash of the content and use that hash as the id
-- i could use the id as a cache key—if the diagram had changed, the hash would change and it would trigger the generation of a new svg
-- the downside of this approach is that it creates orphaned svgs in the cache. i felt this was an acceptable tradeoff because clearing the cache is easy
+In order to cache a mermaid block, I needed a way to create a unique id for each mermaid block, as there is no "default" unique id for a markdown code block. The solution I arrived at was to hash the content of the block and use the hash as the cache key. If the diagram remains the same, the hash stays the same and is fetched from the cache. If it changes, the hash changes and a chart is generated and then cached.
 
-when the plugin loads, it takes the following flow
+The downside of this approach is that it creates orphaned svgs in the cache (since I don't keep a running list of all of the mermaid blocks). I think this is an acceptable tradeoff since clearing the cache is easy and fairly quick.
+
+Here's the logical flow I wanted to implement:
 
 ```mermaid
 
@@ -333,3 +328,95 @@ flowchart TD
   e --> f
   f --> g
 ```
+
+In order to implement this logical flow into our plugin, we first need a helper function to generate our cache key:
+
+```js
+function getNodeKey(node, markdownNode) {
+  const contentHash = crypto
+    .createHash('sha256')
+    .update(node.value)
+    .digest('hex');
+  return `${markdownNode.frontmatter.slug}__Mermaid__${contentHash}`;
+}
+```
+
+I'm using the node.js `crypto` module to perform the hash. The two arguments are named similarly but are distinct–the `node` describes the node of the markdown syntax tree that we walk, whereas `markdownNode` describes the Mdx object generated by `gatsby-plugin-mdx`. I don't love that they are so similarly named, but `markdownNode` is named by Gatsby and I figured it made sense to go with their naming conventions.
+
+Now that we have a helper function, our plugin can change to support caching:
+
+```js
+export async function gatsbyRemarkMermaidToSvg(
+  {markdownAST, markdownNode, cache}, // highlight-line
+  pluginOptions,
+) {
+  const options = Object.assign({}, defaultOptions, pluginOptions);
+
+  visit(markdownAST, 'code', async (node) => {
+    if (node == null) {
+      return;
+    }
+
+    if (node.lang === 'mermaid-code') {
+      node.lang = 'mermaid';
+      return
+    }
+
+    if (node.lang === 'mermaid') {
+      // highlight-start
+      // 1
+      const nodeKey = getNodeKey(node, markdownNode);
+      // 2
+      const cachedValue = await cache.get(nodeKey);
+
+      let svg = node.value;
+
+      // 3
+      if (cachedValue) {
+        svg = JSON.parse(cachedValue).svg;
+      } else {
+        try {
+          svg = generateSVGFromMermaid(node.value, options);
+        } catch {
+          console.error(
+            'Could not convert mermaid to svg with value:',
+            node.value,
+          );
+        }
+      }
+
+      node.type = 'html';
+      node.lang = undefined;
+      node.value = `<div class=${options.wrapperClassName}>${svg}</div>`;
+
+      // 4
+      if (svg && svg !== node.value) {
+        await cache.set(nodeKey, JSON.stringify({svg}));
+      }
+      // highlight-end
+    }
+  });
+
+  return markdownAST;
+}
+```
+
+As mentioned before, Gatsby makes interacting with the cache really easy. In this updated code, we:
+
+1. Get a cache key using the helper from earlier
+2. Look to see if a cached svg exists for this node
+3. Either assign the cached value or generate a new value
+4. Save the value into the cache to use later
+
+With this addition, our mermaid charts are now cached! 💾
+
+```mermaid
+flowchart LR
+  a(Make chart)
+  b(Save to cache)
+  a --> b --> a
+```
+
+## Conclusion
+
+I found making a local plugin in Gatsby to be very straightforward–the fact you can simply conform to a directory structure and then be off to the races is `:chefs-kiss:`. If you've made it this far and you're looking for a simple copy+paste, feel free to check out the [plugin code on GitHub](https://github.com/thetrevorharmon/thetrevorharmon.com/blob/main/plugins/gatsby-remark-mermaid-to-svg/gatsby-remark-mermaid-to-svg.mjs).
