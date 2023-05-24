@@ -33,7 +33,13 @@ function IndexPage({data}: IndexPageProps) {
         <FeaturedTile node={featuredPost} />
         <div className="space-y-normal">
           {posts.map((node: Mdx) => (
-            <PostTile node={node} key={node.slug!} />
+            <PostTile
+              key={node.slug!}
+              slug={node.slug}
+              title={node.title}
+              date={node.date}
+              isLinkPost={node.link != null}
+            />
           ))}
         </div>
       </div>

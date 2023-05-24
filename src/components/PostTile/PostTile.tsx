@@ -4,21 +4,33 @@ import {Link} from '../../components';
 import {Routes} from '../../utils';
 
 export interface Props {
-  node: Mdx;
+  slug?: string | null;
+  title?: string | null;
+  date?: string | null;
+  type?: string;
+  isLinkPost?: boolean;
   className?: string;
 }
 
-export const PostTile = ({node}: Props) => {
-  if (node.slug == null) {
+export const PostTile = ({
+  slug,
+  title,
+  date,
+  isLinkPost,
+  type = 'Post',
+}: Props) => {
+  if (slug == null) {
     return null;
   }
+
+  const route = type === 'Post' ? Routes.blogPost : Routes.project;
 
   return (
     <div>
       <Link
-        url={Routes.blogPost(node.slug)}
+        url={route(slug)}
         icon={
-          node.link
+          isLinkPost
             ? {
                 position: 'trailing',
                 name: 'link',
@@ -26,11 +38,9 @@ export const PostTile = ({node}: Props) => {
             : undefined
         }
       >
-        {node.title}
+        {title}
       </Link>
-      <div className="text-text-muted dark:text-text-muted-dark">
-        {node.date}
-      </div>
+      <div className="text-text-muted dark:text-text-muted-dark">{date}</div>
     </div>
   );
 };

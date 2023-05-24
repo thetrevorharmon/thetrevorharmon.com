@@ -54,7 +54,13 @@ function BlogPage({data}: Props) {
                   <h2>{year}</h2>
                   <div className="space-y-normal">
                     {posts.map((node) => (
-                      <PostTile node={node} key={node.slug!} />
+                      <PostTile
+                        key={node.slug!}
+                        title={node.title}
+                        slug={node.slug}
+                        isLinkPost={node.link != null}
+                        date={node.date}
+                      />
                     ))}
                   </div>
                 </div>
