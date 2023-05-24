@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Link} from '../../components';
-import {Routes} from '../../utils';
+import {PostTile} from '../../components';
 
 export interface Props {
   recommendedReading: RecommendedReading[];
@@ -17,18 +16,18 @@ export function ReadingList({type, recommendedReading}: Props) {
     type === 'Post' ? 'article' : 'design'
   }, you might enjoy one of these:`;
 
-  const route = type === 'Post' ? Routes.blogPost : Routes.project;
-
-  const makePairMarkup = ({link: {slug, label}, date}: RecommendedReading) => {
-    return (
-      <div className="" key={label}>
-        <Link url={route(slug)}>{label}</Link>
-        <div className="text-text-muted dark:text-text-muted-dark">{date}</div>
-      </div>
-    );
-  };
-
-  const markup = recommendedReading.map(makePairMarkup);
+  const markup = recommendedReading.map(
+    ({slug, label, date, isLinkPost}: RecommendedReading) => (
+      <PostTile
+        key={slug}
+        title={label}
+        slug={slug}
+        date={date}
+        type={type}
+        isLinkPost={isLinkPost}
+      />
+    ),
+  );
 
   return (
     <div className="space-y-medium w-full">

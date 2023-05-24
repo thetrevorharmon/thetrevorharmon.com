@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import {PostTile} from '../PostTile';
-import {Icon, Image} from '../../components';
+import {Image} from '../../components';
 
-import {Link, Meta} from '../../components';
+import {Link} from '../../components';
 import {Routes} from '../../utils';
 
 interface Props {

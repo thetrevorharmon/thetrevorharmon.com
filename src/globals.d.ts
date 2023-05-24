@@ -58,9 +58,8 @@ type Mdx = {
 };
 
 interface RecommendedReading {
-  link: {
-    slug: string;
-    label: string;
-  };
+  slug: string;
+  label: string;
   date: string;
+  isLinkPost: boolean;
 }

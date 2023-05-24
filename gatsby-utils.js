@@ -1,3 +1,5 @@
+const sampleSize = require('lodash.samplesize');
+
 const validateNode = (node) => {
   const name = node.internal.contentFilePath;
 
@@ -91,62 +93,24 @@ const validateNode = (node) => {
   enforceNodeFields(node);
 };
 
-// Found this at https://gomakethings.com/how-to-shuffle-an-array-with-vanilla-js/
-const shuffle = (array) => {
-  var currentIndex = array.length;
-  var temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-};
-
-const chooseRandomElements = (original, list, numberOfElements = 3) => {
-  // slice it so it passes by copy, not be reference
-  const shuffledList = shuffle(list.slice());
-  const chosenElements = [];
-  shuffledList.forEach((element) => {
-    if (
-      chosenElements.length >= numberOfElements ||
-      element.slug === original.slug
-    ) {
-      return;
-    }
-    chosenElements.push(element);
-  });
-
-  return chosenElements;
-};
-
-const buildReadingList = (item, items) => {
-  const pickedItems = chooseRandomElements(item, items);
-  const preparedItems = pickedItems
-    .map((item) => ({
-      link: {
-        slug: item.slug,
-        label: item.title,
-      },
-      date: item['date'],
+const buildReadingList = (nodes) => {
+  const pickedNodes = sampleSize(nodes, 3);
+  const preparedNodes = pickedNodes
+    .map((node) => ({
+      slug: node.slug,
+      label: node.title,
+      isLinkPost: node.link != null,
+      date: node.date,
     }))
-    .sort((firstPair, secondPair) => {
-      if (new Date(firstPair.date) > new Date(secondPair.date)) {
+    .sort((firstNode, secondNode) => {
+      if (new Date(firstNode.date) > new Date(secondNode.date)) {
         return -1;
       } else {
         return 1;
       }
     });
 
-  return preparedItems;
+  return preparedNodes;
 };
 
 module.exports = {
