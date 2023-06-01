@@ -71,6 +71,10 @@ const validateNode = (node) => {
       throw new NodeError(`Must include description or link`);
     }
 
+    if (node.description && node.description.length > 155) {
+      throw new NodeError(`Description must be 155 characters or shorter`);
+    }
+
     if (node.image != null && node.image.attribution != null) {
       if (
         node.image.attribution.author == null ||
