@@ -1,13 +1,15 @@
 ---
 title: 'Connecting ANTLR to CodeMirror 6: Connecting a Language Server'
-slug: connecting-an-antlr-language-server-to-codemirror-6
+slug: connecting-antlr-to-code-mirror-6-connecting-a-language-server
 date: 2023-05-24
 type: Post
 status: Draft
 description: Connect ANTLR to CodeMirror via a ParseAdapter
 ---
 
-_Note: this article is the second of a two part series. The previous article covers topics like Lezer, ANTLR, a toy language called Zephyr, and how to make an ANTLR-based language server. If you're unfamiliar with those topics, you may want to start with the first article._
+<Callout>
+This article is the second of a two part series. The previous article covers topics like Lezer, ANTLR, a toy language called Zephyr, and how to make an ANTLR-based language server. If you're unfamiliar with those topics, you may want to start with the first article.
+</Callout>
 
 In "Building a Language Server", I described how to create a language server for Zephyr using the ANTLR framework. We created a functioning language server that can take in a document of Zephyr code and return a stream of tokens. Next, we’ll connect that language server to CodeMirror 6 by taking that token stream and turning it into a Lezer parse tree.
 
