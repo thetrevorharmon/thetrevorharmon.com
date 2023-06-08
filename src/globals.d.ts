@@ -16,7 +16,6 @@ declare module '*.svg' {
 interface SiteMetadata {
   title: string;
   description: string;
-  tagline: string;
   siteUrl: string;
   feedUrl: string;
   twitterHandle: string;

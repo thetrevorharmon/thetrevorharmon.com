@@ -13,7 +13,6 @@ export const useSiteData = (): SiteMetadata => {
         siteMetadata {
           title
           description
-          tagline
           siteUrl
           feedUrl
           twitterHandle

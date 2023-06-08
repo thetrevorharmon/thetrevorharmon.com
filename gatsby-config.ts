@@ -11,7 +11,6 @@ dotenv.config({
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `The Trevor Harmon`,
-    tagline: `I write code for Shopify, and (sometimes) write things on my blog.`,
     description: `The blog & portfolio of Trevor Harmon.`,
     siteUrl: `https://thetrevorharmon.com`,
     feedUrl: `https://thetrevorharmon.com/rss.xml`,
