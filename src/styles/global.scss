@@ -73,6 +73,11 @@
     @apply mt-tiny text-center;
     @apply text-sm;
   }
+
+  .text-fill-transparent {
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
 }
 
 html {
@@ -186,6 +191,15 @@ h1.featured {
   @apply h1-featured;
 }
 
+h1.main {
+  @apply drop-shadow-[2px_3px_0px_theme(colors.primary)];
+  @apply md:drop-shadow-[4px_4px_0px_theme(colors.primary)];
+  @apply bg-stone-50 text-stone-50;
+  @apply bg-gradient-to-br from-stone-50 to-stone-300;
+  @apply bg-clip-text text-fill-transparent;
+  @apply text-white text-[2.4rem] min-[550px]:text-[3rem]  sm:text-[3.4rem] md:text-[4rem] leading-[1];
+}
+
 h2 {
   @apply h2;
 }
@@ -202,6 +216,39 @@ h5 {
   @apply font-bold;
   @apply italic;
   @apply text-text-bold dark:text-text-bold-dark;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-20deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  75% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wave-button {
+  @apply transition-[filter,opacity];
+  @apply text-base sm:text-lg md:text-2xl;
+  @apply grayscale-[80%] hover:grayscale-0;
+  @apply opacity-70 hover:opacity-100;
+}
+
+.wave-button:hover {
+  animation: wave 600ms linear;
 }
 
 blockquote {
