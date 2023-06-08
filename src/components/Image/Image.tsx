@@ -1,7 +1,12 @@
 import {GatsbyImage} from 'gatsby-plugin-image';
 import React from 'react';
 
-export function Image({src}: {src: Mdx['image']}) {
+interface Props {
+  src: Mdx['image'] | {source: ImageFile; alt: string};
+  className?: string;
+}
+
+export function Image({src, className}: Props) {
   if (
     src == null ||
     src.source == null ||
@@ -24,5 +29,7 @@ export function Image({src}: {src: Mdx['image']}) {
     );
   }
 
-  return <GatsbyImage image={gatsbyImageData} alt={alt} />;
+  return (
+    <GatsbyImage image={gatsbyImageData} alt={alt} className={className} />
+  );
 }
