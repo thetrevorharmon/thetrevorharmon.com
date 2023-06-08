@@ -29,6 +29,12 @@ interface PageMetadata {
   image?: string;
 }
 
+type ImageFile = {
+  readonly childImageSharp: {
+    readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData;
+  } | null;
+} | null;
+
 type Mdx = {
   readonly client?: string | null;
   readonly link?: string | null;
@@ -44,11 +50,7 @@ type Mdx = {
   readonly image?: {
     readonly title?: string | null;
     readonly alt?: string | null;
-    readonly source?: {
-      readonly childImageSharp: {
-        readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData;
-      } | null;
-    } | null;
+    readonly source?: ImageFile;
     readonly attribution?: {
       readonly author: string | null;
       readonly sourceName: string | null;
