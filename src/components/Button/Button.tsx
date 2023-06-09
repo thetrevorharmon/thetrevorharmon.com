@@ -43,6 +43,7 @@ export const Button = ({
     size === 'regular' && 'py-small px-normal leading-[1]',
     size === 'small' && 'py-[0.5rem] px-[0.75rem] leading-[1] text-sm',
 
+    'bg-body-bg dark:bg-body-bg-dark',
     'focus:bg-primary focus:dark:bg-primary-dark',
     'hover:bg-primary hover:dark:bg-primary-dark',
 

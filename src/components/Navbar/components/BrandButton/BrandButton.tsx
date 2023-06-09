@@ -13,6 +13,7 @@ export const BrandButton = () => {
         'pt-[7px] pr-[9px] pb-[6px] pl-[10px]',
         'leading-none',
         'no-underline',
+        'bg-body-bg dark:bg-body-bg-dark',
         'text-primary dark:text-primary-dark',
         'hover:text-white focus:text-white',
         'dark:hover:text-white dark:focus:text-white',
