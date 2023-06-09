@@ -128,10 +128,14 @@ pre::-webkit-scrollbar-corner {
 
 body.light {
   @apply text-text bg-body-bg;
+  background-image: url('../images/noise.png');
+  background-repeat: repeat;
 }
 
 body.dark {
   @apply text-text-dark bg-body-bg-dark;
+  background-image: url('../images/dark-noise.png');
+  background-repeat: repeat;
 }
 
 a {

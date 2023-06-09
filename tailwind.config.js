@@ -54,7 +54,7 @@ const colors = {
   bodyBg: {
     label: 'body-bg',
     light: defaultColors['stone']['50'],
-    dark: defaultColors['stone']['900'],
+    dark: defaultColors['stone']['800'],
   },
   imgBorder: {
     label: 'img-border',
