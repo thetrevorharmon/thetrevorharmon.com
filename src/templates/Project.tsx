@@ -1,8 +1,7 @@
 import {graphql} from 'gatsby';
 import React from 'react';
 import {PostLayout} from '../layouts';
-import {MDXProvider} from '@mdx-js/react';
-import {Meta} from '../components';
+import {Meta, MdxProvider} from '../components';
 import {Routes, SEO, useSiteData} from '../utils';
 import {getImageSrc} from '../utils/helpers';
 
@@ -34,7 +33,7 @@ function ProjectNext({
       </div>
 
       <div className="body-styles projects mt-medium md:mt-large">
-        <MDXProvider>{children}</MDXProvider>
+        <MdxProvider>{children}</MdxProvider>
       </div>
     </PostLayout>
   );
