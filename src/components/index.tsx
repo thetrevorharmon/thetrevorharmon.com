@@ -14,3 +14,4 @@ export {Image} from './Image';
 export {Container} from './Container';
 export {TwoUp} from './TwoUp';
 export {Callout} from './Callout';
+export {MdxProvider} from './MdxProvider';
