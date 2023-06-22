@@ -5,11 +5,23 @@
   "[mdx]": {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 80
+    "editor.wordWrapColumn": 80,
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    }
   },
   "[markdown]": {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 80
-  }
+    "editor.wordWrapColumn": 80,
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    }
+  },
+  "editor.tabSize": 2
 }
+
