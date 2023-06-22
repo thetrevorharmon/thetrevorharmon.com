@@ -22,6 +22,38 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: './src/images/',
+      },
+      __key: 'images',
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/src/content/blog`,
+      },
+      __key: 'blog',
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `projects`,
+        path: `${__dirname}/src/content/projects`,
+      },
+      __key: 'projects',
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/content/pages`,
+      },
+      __key: 'pages',
+    },
     'gatsby-plugin-netlify',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
@@ -50,6 +82,7 @@ const config: GatsbyConfig = {
               // bundling is set up.
               icon: `<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" width="24" height="24"><defs><style>.cls-6374f8d9b67f094e4896c620-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}</style></defs><path class="cls-6374f8d9b67f094e4896c620-1" d="M9.14,7.23A4.76,4.76,0,0,1,13,5.32h4.78a4.77,4.77,0,1,1,0,9.54H13a4.77,4.77,0,0,1-4.67-3.81"></path><path class="cls-6374f8d9b67f094e4896c620-1" d="M15.72,13a4.77,4.77,0,0,0-4.67-3.81H6.27a4.77,4.77,0,0,0,0,9.54h4.78a4.76,4.76,0,0,0,3.37-1.39,3.57,3.57,0,0,0,.44-.52"></path></svg>`,
               className: `header-link`,
+              elements: ['h2', 'h3', 'h4', 'h5'],
             },
           },
           {
@@ -69,20 +102,6 @@ const config: GatsbyConfig = {
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-external-links`,
         ],
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/content/blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `projects`,
-        path: `${__dirname}/src/content/projects`,
       },
     },
     {
@@ -126,14 +145,6 @@ const config: GatsbyConfig = {
       options: {
         icon: 'src/images/favicon.png',
       },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: './src/images/',
-      },
-      __key: 'images',
     },
     {
       resolve: `gatsby-plugin-feed`,
