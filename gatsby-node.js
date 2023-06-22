@@ -47,23 +47,33 @@ exports.createPages = ({graphql, actions}) => {
         const contentPath = node.internal.contentFilePath;
         const component = `${componentPath}?__contentFilePath=${contentPath}`;
 
-        const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
+        function getPath(node) {
+          if (node.type === 'Page') {
+            return `${node.slug}`;
+          }
+          const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
 
-        const recommendedReading = buildReadingList(
-          nodes
-            .filter(function excludeUnpublishedNodes(currentNode) {
-              return (
-                currentNode.type === node.type &&
-                currentNode.status === 'Published'
+          return `${pathPrefix}/${node.slug}`;
+        }
+
+        const recommendedReading =
+          node.type === 'Page'
+            ? []
+            : buildReadingList(
+                nodes
+                  .filter(function excludeUnpublishedNodes(currentNode) {
+                    return (
+                      currentNode.type === node.type &&
+                      currentNode.status === 'Published'
+                    );
+                  })
+                  .filter(function excludeCurrentNode(currentNode) {
+                    return currentNode.slug !== node.slug;
+                  }),
               );
-            })
-            .filter(function excludeCurrentNode(currentNode) {
-              return currentNode.slug !== node.slug;
-            }),
-        );
 
         createPage({
-          path: `${pathPrefix}/${node.slug}`,
+          path: getPath(node),
           context: {
             slug: node.slug,
             recommendedReading: recommendedReading,

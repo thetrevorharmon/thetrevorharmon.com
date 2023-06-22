@@ -10,6 +10,7 @@ const ExternalLinks: LinkInterface = {
 };
 
 const Routes: LinkInterface = {
+  page: (name: string = '') => `/${name}`,
   about: () => '/about',
   blog: () => '/blog',
   blogPost: (name: string = '') => `/blog/${name}`,

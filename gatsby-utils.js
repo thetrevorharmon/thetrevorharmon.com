@@ -2,7 +2,7 @@ const sampleSize = require('lodash.samplesize');
 const ObjectShape = require('object-shape-validator').default;
 
 const STATUSES = ['Archived', 'Published', 'Draft'];
-const TYPES = ['Post', 'Project'];
+const TYPES = ['Post', 'Project', 'Page'];
 
 const validateNode = (node) => {
   const name = node.internal.contentFilePath;
