@@ -1,4 +1,8 @@
 const sampleSize = require('lodash.samplesize');
+const ObjectShape = require('object-shape-validator').default;
+
+const STATUSES = ['Archived', 'Published', 'Draft'];
+const TYPES = ['Post', 'Project'];
 
 const validateNode = (node) => {
   const name = node.internal.contentFilePath;
@@ -9,6 +13,10 @@ const validateNode = (node) => {
     }
   }
 
+  function throwError(error) {
+    throw new NodeError(error);
+  }
+
   function enforceNodeFields(node) {
     const fileName = node.internal.contentFilePath
       .split('/')
@@ -16,81 +24,69 @@ const validateNode = (node) => {
       .pop()
       .split(/\.mdx?/)[0];
 
-    if (fileName !== node.slug) {
-      throw new NodeError(`Slug and file name must match`);
+    const basicNodeShape = new ObjectShape({
+      title: (value) => (value != null && value !== '') || 'Must include title',
+      type: (value) =>
+        TYPES.includes(value) ||
+        `Must include type.\nPossible values: ${TYPES.join(', ')}`,
+      slug: (value) => value === fileName || `Slug and file name must match`,
+    });
+
+    basicNodeShape.validate(node).forEach(throwError);
+
+    if (node.image) {
+      const imageShape = new ObjectShape({
+        source: (value) =>
+          value != null || 'Must include source if image is passed',
+        alt: (value) => value != null || 'Must include alt if image is passed',
+      });
+
+      imageShape.validate(node.image).forEach(throwError);
     }
 
-    if (node.type == null) {
-      throw new NodeError('Must include a type');
+    if (node.image && node.image.attribution) {
+      const imageAttributionShape = new ObjectShape({
+        author: (value) =>
+          (value != null && value !== '') ||
+          'Must include author if image attribution is passed',
+        sourceName: (value) =>
+          (value != null && value !== '') ||
+          'Must include sourceName if image attribution is passed',
+        sourceUrl: (value) =>
+          (value != null && value !== '') ||
+          'Must include sourceUrl if image attribution is passed',
+      });
+
+      imageAttributionShape
+        .validate(node.image.attribution)
+        .forEach(throwError);
     }
 
-    if (!['Project', 'Post'].includes(node.type)) {
-      throw new NodeError(
-        `Encountered ${node.type} as the node type–must include one of the following types (case sensistive): Post, Project`,
-      );
-    }
+    if (['Post', 'Project'].includes(node.type)) {
+      const postOrProjectNodeShape = new ObjectShape({
+        date: (value) => value != null || value !== '' || 'Must include date',
+        status: (value) =>
+          STATUSES.includes(value) ||
+          `Must include status.\nPossible values: ${STATUSES.join(', ')}`,
+      });
 
-    if (node.status == null) {
-      throw new NodeError('Must include a status');
-    }
-
-    if (!['Archived', 'Published', 'Draft'].includes(node.status)) {
-      throw new NodeError(
-        `Encountered ${node.status} as the node status–must include one of the following types (case sensistive): Archived, Published, Draft`,
-      );
-    }
-
-    if (node.title == null || node.title === '') {
-      throw new NodeError(`Must include title`);
-    }
-
-    if (node.slug == null) {
-      throw new NodeError(`Must include slug`);
-    }
-
-    if (node.date == null) {
-      throw new NodeError(`Must include date`);
-    }
-
-    if (
-      node.image != null &&
-      (node.image.source == null || node.image.alt == null)
-    ) {
-      throw new NodeError(`Must include source, alt if an image is passed`);
+      postOrProjectNodeShape.validate(node).forEach(throwError);
     }
 
     if (node.type === 'Post') {
-      enforcePostFields(node);
-    } else {
-      enforceProjectFields(node);
-    }
-  }
+      if (node.description == null && node.link == null) {
+        throw new NodeError(`Must include description or link`);
+      }
 
-  function enforcePostFields(node) {
-    if (node.description == null && node.link == null) {
-      throw new NodeError(`Must include description or link`);
-    }
-
-    if (node.description && node.description.length > 155) {
-      throw new NodeError(`Description must be 155 characters or shorter`);
-    }
-
-    if (node.image != null && node.image.attribution != null) {
-      if (
-        node.image.attribution.author == null ||
-        node.image.attribution.sourceName == null ||
-        node.image.attribution.sourceUrl == null
-      ) {
-        throw new NodeError(
-          `Must include author, sourceName, sourceUrl if an image attribution is passed`,
-        );
+      if (node.description && node.description.length > 155) {
+        throw new NodeError(`Description must be 155 characters or shorter`);
       }
     }
-  }
 
-  function enforceProjectFields(node) {
-    if (node.client == null) {
-      throw new NodeError(`Must include client`);
+    if (node.type === 'Project') {
+      if (node.client == null) {
+        throw new NodeError(`Must include client`);
+      }
     }
   }
 
