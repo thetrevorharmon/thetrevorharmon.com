@@ -1,5 +1,11 @@
-import type {GatsbyConfig} from 'gatsby';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import tailwindCss from 'tailwindcss';
+import remarkGfm from 'remark-gfm';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const environment =
   process.env.ACTIVE_ENV ?? process.env.NODE_ENV ?? 'development';
@@ -8,7 +14,7 @@ dotenv.config({
   path: `.env.${environment}`,
 });
 
-const config: GatsbyConfig = {
+const config = {
   siteMetadata: {
     title: `The Trevor Harmon`,
     description: `The blog & portfolio of Trevor Harmon.`,
@@ -63,6 +69,12 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        mdxOptions: {
+          // remarkGfm adds support for github flavored markdown
+          // to MDX. Footnotes, tables, tasklists, etc are all
+          // supported by remarkGfm.
+          remarkPlugins: [remarkGfm],
+        },
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -107,7 +119,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        postCssPlugins: [require('tailwindcss')],
+        postCssPlugins: [tailwindCss],
       },
     },
     {
@@ -153,17 +165,8 @@ const config: GatsbyConfig = {
           {
             serialize: ({
               query: {site, allMdx},
-            }: {
-              query: {
-                site: {
-                  siteMetadata: SiteMetadata;
-                };
-                allMdx: {
-                  nodes: Mdx[];
-                };
-              };
             }) => {
-              return allMdx.nodes.map((node: Mdx) => ({
+              return allMdx.nodes.map((node) => ({
                 title: node.title,
                 description: node.description ? node.description : node.excerpt,
                 date: node.date,
