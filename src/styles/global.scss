@@ -443,4 +443,9 @@ blockquote {
       @apply mt-0;
     }
   }
+
+  a.data-footnote-backref {
+    @apply no-underline;
+    @apply relative top-[3px];
+  }
 }
