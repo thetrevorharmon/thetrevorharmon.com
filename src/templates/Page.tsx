@@ -23,14 +23,12 @@ function Page({children, data: {mdx}, pageContext: {slug}}: Props) {
     <PageLayout>
       <div className="space-y-large my-huge">
         <div className="space-y-huge">
-          <h1 className="featured">
-            {mdx.title}
-          </h1>
-        <FeaturedImage mdx={mdx} />
+          <h1 className="featured">{mdx.title}</h1>
+          <FeaturedImage mdx={mdx} />
         </div>
-      <div className="body-styles">
-        <MdxProvider>{children}</MdxProvider>
-      </div>
+        <div className="body-styles">
+          <MdxProvider>{children}</MdxProvider>
+        </div>
       </div>
     </PageLayout>
   );
