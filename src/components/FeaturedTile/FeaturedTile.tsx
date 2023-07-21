@@ -14,8 +14,8 @@ interface Props {
 export const FeaturedTile = ({node, className}: Props) => {
   const classname = classnames([
     'overflow-hidden relative rounded-md',
-    'bg-gradient-to-r from-caption-bg-dark via-caption-bg-dark to-caption-bg-dark/50',
-    'py-medium md:py-big',
+    'bg-gradient-to-r from-caption-bg-dark to-caption-bg-dark/10',
+    'py-medium md:py-large',
     'px-normal sm:px-medium md:px-breakout',
     className,
   ]);
@@ -27,7 +27,7 @@ export const FeaturedTile = ({node, className}: Props) => {
 
   return (
     <div className="Breakout relative rounded-md overflow-hidden shadow-md dark:shadow-none isolate">
-      <div className="absolute -right-[60%] sm:-right-[50%] md:-right-[30%] h-100 top-0 bottom-0 max-h-full">
+      <div className="absolute -left-[20%] -right-[20%] sm:left-0 sm:right-0 top-[0%] sm:-top-[15%] md:-top-[25%] h-100 bottom-0 max-h-full">
         <Image src={node.image} />
       </div>
       <div className={classname}>
