@@ -1,10 +1,10 @@
 ---
 title: 'Displaying Mermaid charts in Gatsby'
-date: 2023-04-28
+date: 2023-08-24
 slug: 'displaying-mermaid-charts-in-gatsby'
 type: Post
-status: Draft
-description: ''
+status: Published
+description: I like mermaid charts. But I didn't like any of the mermaid plugins for Gatsby. So I wrote one.
 image:
   source: ./two-people-facing-an-art-exhibit-of-a-difficult-to-follow-diagram-connecting-various-blocks-of-text.jpg
   alt: Two people facing an art exhibit of a difficult to follow diagram connecting various blocks of text
@@ -59,16 +59,14 @@ I started playing around with mermaid-cli and initially tried the [node style](h
 ```js
 import {run} from '@mermaid-js/mermaid-cli';
 
-await run(
-  'input.mmd',
-  'output.svg',
-);
+await run('input.mmd', 'output.svg');
 ```
 
 I couldn't seem to get this approach to work–it kept complaining about the file path. I moved on to the [local node module](https://github.com/mermaid-js/mermaid-cli#install-locally) approach:
 
 ```bash
 yarn add @mermaid-js/mermaid-cli
+
 ./node_modules/.bin/mmdc -i input.mmd -o output.svg
 ```
 
@@ -91,7 +89,10 @@ Now that I had succesfully used mermaid-cli, I wanted to integrate it with my bu
 By following this directory structure, I can add the plugin to my config file with just the name and Gatsby will automatically pick up the local plugin and..._plug it in_ 😏...to my build process!
 
 <Callout>
-  You'll notice that I chose to make a local plugin instead of a community plugin. I don't want the burden of maintaining a plugin for the community when I only need it for my blog. However, if you're passionate about this, please take this work and make it into a community plugin!
+  You'll notice that I chose to make a local plugin instead of a community
+  plugin. I don't want the burden of maintaining a plugin for the community when
+  I only need it for my blog. However, if you're passionate about this, please
+  take this work and make it into a community plugin!
 </Callout>
 
 Now that I have the correct directory structure in place, we can start by creating a basic function that wraps mermaid-cli:
@@ -209,7 +210,10 @@ const defaultOptions = {
 // highlight-end
 
 // 2
-export function gatsbyRemarkMermaidToSvg({markdownAST}, pluginOptions) { // highlight-line
+// highlight-start
+export function gatsbyRemarkMermaidToSvg({markdownAST}, pluginOptions) {
+  // highlight-end
+
   // 3
   const options = Object.assign({}, defaultOptions, pluginOptions); // highlight-line
 
@@ -245,7 +249,9 @@ I made the following changes:
 Now that we've added plugin options, we can pass them through to our svg generator function:
 
 ```js
-function generateSVGFromMermaid(mermaidText, options) { // highlight-line
+// highlight-start
+function generateSVGFromMermaid(mermaidText, options) {
+  // highlight-end
   const tempFilename = `${uuidv4()}.mmd`;
 
   // 1
@@ -313,7 +319,7 @@ Here's the logical flow I wanted to implement:
 ```mermaid
 
 flowchart TD
-  a(Enter Mermaid node) 
+  a(Enter Mermaid node)
   b(Create hash of\nmarkup to use\nas a key)
   c{Is there\na value in\nthe cache?}
   d(Generate\na new svg)
@@ -360,7 +366,7 @@ export async function gatsbyRemarkMermaidToSvg(
 
     if (node.lang === 'mermaid-code') {
       node.lang = 'mermaid';
-      return
+      return;
     }
 
     if (node.lang === 'mermaid') {
@@ -420,4 +426,4 @@ flowchart LR
 
 ## Conclusion
 
-I found making a local plugin in Gatsby to be very straightforward–the fact you can simply conform to a directory structure and then be off to the races is `:chefs-kiss:`. If you've made it this far and you're looking for a simple copy+paste, feel free to check out the [plugin code on GitHub](https://github.com/thetrevorharmon/thetrevorharmon.com/blob/main/plugins/gatsby-remark-mermaid-to-svg/gatsby-remark-mermaid-to-svg.mjs).
+I found making a local plugin in Gatsby to be very straightforward–the fact you can simply conform to a directory structure and then be off to the races is `:chefs-kiss:`. If you've made it this far and you're looking for a simple copy+paste, feel free to check out the [plugin code on GitHub](https://github.com/thetrevorharmon/thetrevorharmon.com/blob/45c3fe18da97e79f8fb2c875218512116af22b51/plugins/gatsby-remark-mermaid-to-svg/gatsby-remark-mermaid-to-svg.mjs).
