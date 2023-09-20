@@ -14,7 +14,7 @@ interface Props {
 export const FeaturedTile = ({node, className}: Props) => {
   const classname = classnames([
     'overflow-hidden relative rounded-md',
-    'bg-gradient-to-r from-caption-bg-dark to-caption-bg-dark/10',
+    'bg-gradient-to-r from-caption-bg-dark to-caption-bg-dark/50',
     'py-medium md:py-large',
     'px-normal sm:px-medium md:px-breakout',
     className,
