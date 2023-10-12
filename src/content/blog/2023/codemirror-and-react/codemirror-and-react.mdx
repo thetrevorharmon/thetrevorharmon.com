@@ -1,10 +1,10 @@
 ---
 title: 'CodeMirror and React'
-date: 2023-04-24
+date: 2023-10-24
 slug: 'codemirror-and-react'
 type: Post
-status: Draft
-description: ''
+status: Published
+description: 'A few things you need to know when integrating CodeMirror 6 with React.'
 image:
   source: ./a-hand-reaching-out-and-almost-touching-a-mirror.jpg
   alt: a hand reaching out and almost touching a mirror
@@ -14,13 +14,14 @@ image:
     sourceUrl: https://unsplash.com/photos/OwR9cyMNe4c
 ---
 
-Over the past 10 months, I've been working with the [CodeMirror](https://codemirror.net/) framework to write and integrate a custom code editor into a React app. Coming from a React background, CodeMirror presented some unique challenges. I've spend many hours staring at [the docs](https://codemirror.net/docs/) and going in circles over how to get React and CodeMirror to play nicely. This article is meant to be a primer for any developers who are going to integrate CodeMirror into React–it contains many of the lessons I've learned and will hopefully act as a springboard to writing your own CodeMirror-powered editor.
+Over the past 10 months, I've been working with the [CodeMirror](https://codemirror.net/) framework to write and integrate a custom code editor into a React app. Coming from a React background, CodeMirror presented some unique challenges. I've spend many hours staring at the CodeMirror [docs](https://codemirror.net/docs/) and going in circles over how to get React and CodeMirror to play nicely. This article is meant to be a primer for developers who are going to integrate CodeMirror into React–it contains many of the lessons I've learned and will hopefully act as a springboard to writing your own CodeMirror-powered editor.
 
 <Callout>
-  This isn't meant to replace reading the docs but is a high level guide to a
+  This isn't meant to replace reading the docs, but is meant to be a guide to a
   few things you need to know about CodeMirror and React. I would still highly
   recommend the docs, starting with the [system
-  guide](https://codemirror.net/docs/guide/).
+  guide](https://codemirror.net/docs/guide/). It might also be useful to learn
+  about <Link url="/blog/learning-codemirror">CodeMirror primitives</Link>.
 </Callout>
 
 ## Getting an initial editor working within React
@@ -144,7 +145,14 @@ c --> d(Update view)
 d --> a
 ```
 
-At first glance, this looks pretty similar–but notice the absence of the `perform side effects` block. This is one of the key parts of the CodeMirror lifecycle: **you cannot perform a side effect during the CodeMirror state update lifecyle**. The transaction ➡️ new state flow is like a React reducer in that it's a pure function (no side effects). There are CodeMirror APIs that enable to you watch a value and perform side effect based on what you observe, but you cannot perform one while the editor is doing its update loop.
+At first glance, this looks pretty similar–but notice the absence of the `perform side effects` block. This is one of the key parts of the CodeMirror lifecycle: **you cannot perform a side effect during the CodeMirror state update lifecyle**. The `transaction` ➡️ `new state` flow is like a React reducer in that it's a pure function (no side effects). There are CodeMirror APIs that enable to you watch a value and perform side effect based on what you observe, but you cannot perform one while the editor is doing its update loop.
+
+<Callout>
+  I realize that React doesn't **really** let you perform side effects during
+  the render cycle either, that they happen after state is updated. I'm creating
+  a distinction here because working with side effects in React **feels** more
+  intuitive than CodeMirror (because of the way that the `useEffect` API works).
+</Callout>
 
 ## Managing state between React and Codemirror
 
@@ -226,7 +234,7 @@ update(value, transaction) {
 }
 ```
 
-However, there are times when multiple transactions are scheduled during an update cycle, and the state field may produce a new value more than once during the state update cycle. By using the `updateListener` pattern, we can wait until the new state is settled and reduce unnecessary React re-renders.
+However, there are times when multiple transactions are scheduled during an update cycle, and the state field may produce a new value more than once during the state update cycle. By using the `updateListener` pattern, we can wait until the new state is settled and reduce unnecessary React render cycles.
 
 ### Syncing React state with CodeMirror state
 
@@ -236,10 +244,10 @@ When syncing React state with CodeMirror, we have to be careful to make sure tha
 
 In order to update CodeMirror's state when React's state changes, we need to:
 
-1. Create a named state effect
-2. Update our state field to watch for that state effect and unwrap the value when it encounters the state effect
-3. Start watching changes to the React state with a `useEffect`
-4. When the React state changes, update CodeMirror's state by starting a new transaction with `view.dispatch`
+1. Create a named state effect.
+2. Update our state field to watch for that state effect and unwrap the value when it encounters the state effect.
+3. Start watching changes to the React state with a `useEffect`.
+4. When the React state changes, update CodeMirror's state by starting a new transaction with `view.dispatch`.
 
 We'll start with creating a new, named state effect:
 
@@ -367,9 +375,9 @@ useEffect(() => {
 Here's an explanation of what is happening in this block of code:
 
 1. We first create a new empty compartment–an empty box.
-2. Next we call `compartment.of()` and pass in our extension. This places the newly-created extension into the "box" and returns it. Techincally we are returning our extension inside of the container of `compartment`, but CodeMirror looks at the contents of the box.
+2. Next we call `compartment.of()` and pass in our extension. This places the newly-created extension into the "box" and returns it. Technically we are returning our extension inside of the container of `compartment`, but CodeMirror looks at the contents of the box.
 3. When we detect a change to our react state, we call [`view.dispatch`](https://codemirror.net/docs/ref/#view.EditorViewConfig.dispatch). Much like a reducer's `dispatch` function, the `view.dispatch` function is how we initiate a change in the state lifecycle.
-4. When we call `compartment.reconfigure()`, it will return a [`StateEffect`](https://codemirror.net/docs/ref/#state.StateEffect) that essentially tells CodeMirror "please replace the contents of the box with these new contents". We pass in a call to the linter function we created earlie. Finally, that state effect is passed to `view.dispatch` via the `effects` key of the object.
+4. When we call `compartment.reconfigure()`, it will return a [`StateEffect`](https://codemirror.net/docs/ref/#state.StateEffect) that essentially tells CodeMirror "please replace the contents of the box with these new contents". We pass in a call to the linter function we created earlier. Finally, that state effect is passed to `view.dispatch` via the `effects` key of the object.
 
 Since we're looking at this in the context of React–what if we wanted to create a generic hook to manage this for us? Here's what that would look like:
 
@@ -419,7 +427,7 @@ const lintExtension = useExtensionWithDependency(
 
 ### Putting it all together
 
-Here's an example of a code editor that uses all of these patterns I've described. Feel free to view the source code on GitHub to see how everything connects.
+Here's an example of a code editor that uses all of these patterns I've described. Feel free to [view the source code](https://github.com/thetrevorharmon/thetrevorharmon.com/blob/main/src/content/blog/2023/codemirror-and-react/ReactCodeMirrorSyncStateExample/ReactCodeMirrorSyncStateExample.tsx) on GitHub to see how everything connects.
 
 import {ReactCodeMirrorSyncStateExample} from './ReactCodeMirrorSyncStateExample';
 
@@ -430,9 +438,9 @@ import {ReactCodeMirrorSyncStateExample} from './ReactCodeMirrorSyncStateExample
 In summary:
 
 - [React CodeMirror](https://uiwjs.github.io/react-codemirror/) is a great package that takes care of a lot of the "boilerplate" of connecting CodeMirror to React.
-- Reach for memoization more than you would normally to prevent re-renders in CodeMirror.
-- CodeMirror doesn't support side effects through its normal lifecycle like React does.
-- Use a state field + `updateListener` to track and sync state from CodeMirror to React.
+- Reach for memoization more than you would normally to prevent unnecessary renders in CodeMirror.
+- CodeMirror doesn't support side effects during its state lifecycle.
+- Use a state field and update listener to track and sync state from CodeMirror to React.
 - Use a state effect to sync React state to CodeMirror.
 - Use a compartment to make extensions update when React state changes.
 
