@@ -27,7 +27,7 @@ export const FeaturedTile = ({node, className}: Props) => {
 
   return (
     <div className="Breakout relative rounded-md overflow-hidden shadow-md dark:shadow-none isolate">
-      <div className="absolute -left-[20%] -right-[20%] sm:left-0 sm:right-0 -top-[10%] sm:-top-[15%] h-100 bottom-0 max-h-full">
+      <div className="absolute -left-[20%] -right-[20%] sm:left-0 sm:right-0  h-100 bottom-0 max-h-full">
         <Image src={node.image} />
       </div>
       <div className={classname}>
