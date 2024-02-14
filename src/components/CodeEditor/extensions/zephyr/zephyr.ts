@@ -1,16 +1,14 @@
-import {
-  Language,
-  LanguageSupport,
-  defineLanguageFacet,
-} from '@codemirror/language';
+import {Language, LanguageSupport} from '@codemirror/language';
 import {syntaxHighlight} from './highlight';
 import {ParserAdapter} from './ParserAdapter';
+import {Facet} from '@codemirror/state';
 
 const parserAdapter = new ParserAdapter();
-const facet = defineLanguageFacet({
-  commentTokens: {block: {open: '/*', close: '*/'}},
-});
-
-const zephyrLanguage = new Language(facet, parserAdapter, [], 'Zephyr');
+const zephyrLanguage = new Language(
+  Facet.define(),
+  parserAdapter,
+  [],
+  'Zephyr',
+);
 
 export const zephyr = new LanguageSupport(zephyrLanguage, [syntaxHighlight]);
