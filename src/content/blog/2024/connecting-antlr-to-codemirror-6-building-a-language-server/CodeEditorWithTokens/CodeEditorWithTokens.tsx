@@ -27,7 +27,7 @@ export function CodeEditorWithTokens({initialValue}: Props) {
     <tr>
       {headers.map((header) => (
         <th
-          className={`${cellClasses} bg-[#dedede] dark:bg-[#2f2f2f] border-b border-[#ddd] dark:border-[#555]`}
+          className={`${cellClasses} bg-stone-50 dark:bg-[#2f2f2f] border-b border-[#ccc] dark:border-[#555]`}
         >
           {header}
         </th>
@@ -39,7 +39,7 @@ export function CodeEditorWithTokens({initialValue}: Props) {
     const values = Object.values(token);
 
     return (
-      <tr className="even:bg-[#e2e2e2] even:dark:bg-[#202020]">
+      <tr className="even:bg-stone-100 even:dark:bg-[#202020]">
         {values.map((value) => (
           <td className={`${cellClasses}`}>{value}</td>
         ))}
@@ -48,18 +48,18 @@ export function CodeEditorWithTokens({initialValue}: Props) {
   });
 
   return (
-    <>
+    <div className="Breakout">
       <CodeEditor
         initialValue={value}
         updateValue={setValue}
         language="zephyr"
       />
-      <div className="Breakout bg-caption-bg dark:bg-caption-bg-dark rounded-md overflow-hidden border border-[#ddd] dark:border-[#555] text-[0.95rem] max-h-[300px] overflow-y-auto">
+      <div className="mt-normal bg-caption-bg dark:bg-caption-bg-dark rounded-md overflow-hidden border border-[#ddd] dark:border-[#555] text-[0.85rem] max-h-[300px] overflow-y-auto">
         <table className="w-full font-mono ">
           <thead>{tableHeaderMarkup}</thead>
           <tbody>{tableBodyMarkup}</tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
