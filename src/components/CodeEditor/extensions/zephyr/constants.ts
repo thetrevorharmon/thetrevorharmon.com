@@ -1,9 +1,23 @@
 import {NodeSet, NodeType} from '@lezer/common';
 import {styleTags, tags} from '@lezer/highlight';
 import {Token} from './language';
+import {defineLanguageFacet, languageDataProp} from '@codemirror/language';
 
-export const tokenToNodeType: {[key in Token | 'topNode']: NodeType} = {
-  topNode: NodeType.define({id: 0, name: 'topNode'}),
+export const tokenToNodeType: {[key in Token | 'document']: NodeType} = {
+  document: NodeType.define({
+    id: 0,
+    name: 'document',
+    top: true,
+    props: [
+      [
+        languageDataProp,
+        defineLanguageFacet({
+          commentTokens: {block: {open: '/*', close: '*/'}, line: '//'},
+          closeBrackets: {brackets: ["'"]},
+        }),
+      ],
+    ],
+  }),
   const: NodeType.define({id: 1, name: 'const'}),
   let: NodeType.define({id: 2, name: 'let'}),
   semicolon: NodeType.define({id: 3, name: 'semicolon'}),

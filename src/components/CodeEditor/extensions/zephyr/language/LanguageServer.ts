@@ -14,7 +14,7 @@ const supportedTokens = [
   'unknown',
 ] as const;
 
-type Token = (typeof supportedTokens)[number];
+export type Token = (typeof supportedTokens)[number];
 
 const lexerTokenToTokenType: {[key: number]: Token} = {
   [ZephyrLexer.CONST]: 'const',
@@ -28,9 +28,7 @@ const lexerTokenToTokenType: {[key: number]: Token} = {
   [ZephyrLexer.IDENTIFIER]: 'identifier',
 };
 
-class LanguageServer {
-  constructor() {}
-
+export class LanguageServer {
   public getTokenStream(value: string) {
     const chars = CharStreams.fromString(value);
     const lexer = new ZephyrLexer(chars);
@@ -49,5 +47,3 @@ class LanguageServer {
     return 'unknown';
   }
 }
-
-export {Token, LanguageServer};
