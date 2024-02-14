@@ -14,7 +14,7 @@ image:
     sourceUrl: https://unsplash.com/photos/91AQt9p4Mo8
 ---
 
-For the past 18 months, I’ve been working on [ShopifyQL Notebooks](https://apps.shopify.com/shopifyql-notebooks), a data exploration tool offered by Shopify. The tool enables Shopify merchants to query their data in a [Jupiter-esque notebook](https://jupyter.org/) using [ShopifyQL](https://shopify.dev/docs/api/shopifyql/shopifyql-reference), a SQLish language that was developed in-house. One of the biggest challenges in creating ShopifyQL Notebooks was building a functional code editor with all of the bells and whistles you’d expect from a world class editor.
+For the past couple of years, I’ve worked on [ShopifyQL Notebooks](https://apps.shopify.com/shopifyql-notebooks), a data exploration tool offered by Shopify. The tool enables Shopify merchants to query their data in a [Jupiter-esque notebook](https://jupyter.org/) using [ShopifyQL](https://shopify.dev/docs/api/shopifyql/shopifyql-reference), a SQLish language that was developed in-house. One of the biggest challenges in creating ShopifyQL Notebooks was building a functional code editor with all of the bells and whistles you’d expect from a world class editor.
 
 In July 2022, it was my job to figure out how to get [CodeMirror](https://codemirror.net/) and ShopifyQL’s language server to talk. At the time, there was very little written about connecting CodeMirror with ANTLR (ShopifyQL’s parser & lexer engine)–only [this article](https://www.sumologic.com/blog/building-autocomplete-antlr-codemirror/) provided any direction for me. After working and staring at this for months, I’m finally on the other side of this journey. Here’s the guide I wish I had when I was tasked with connecting an ANTLR-powered language server with CodeMirror 6.
 
@@ -27,7 +27,7 @@ This article is the first of a two-part series. In this article, I'll cover:
 
 ## Lezer: CodeMirror’s parser generator
 
-[CodeMirror](https://codemirror.net/) is a "a code editor component for the web". The CodeMirror package concerns itself with only core code editor functionality, and the rest of the functionality is provided through extensions and other packages. Language concerns like generating parse trees are provided by a package called [Lezer](https://lezer.codemirror.net/) (written by [Marijn Haverbeke](https://marijnhaverbeke.nl/), the author of both Lezer and CodeMirror). Lezer says it is “a very decent parser generator, especially well suited for use in code editors.” Lezer takes in a grammar file and then exports extensions that CodeMirror uses to create parse trees. Those parse trees are then used by CodeMirror to provide various features like syntax highlighting, linting, tooltips, etc.
+[CodeMirror](https://codemirror.net/) is a "a code editor component for the web". The CodeMirror package concerns itself with only core code editor functionality, and the rest of the functionality is provided through extensions and other packages. Language concerns like generating parse trees are provided by a package called [Lezer](https://lezer.codemirror.net/) (written by [Marijn Haverbeke](https://marijnhaverbeke.nl/), the author of both Lezer and CodeMirror). Lezer is “a very decent parser generator, especially well suited for use in code editors.” Lezer takes in a grammar file and then exports extensions that CodeMirror uses to create parse trees. Those parse trees are then used by CodeMirror to provide various features like syntax highlighting, linting, tooltips, etc.
 
 The primary way to use Lezer is to use its grammar engine. For example, here is JSON defined as a Lezer grammar ([source](https://github.com/lezer-parser/json/blob/main/src/json.grammar)):
 
@@ -78,9 +78,9 @@ The file defines the grammar for JSON, you can see at the bottom of the file it 
 @external propSource jsonHighlighting from "./highlight"
 ```
 
-Lezer reads the grammar files as well the referenced `./highlight` file and generates a parser based on those files. The extension (parser) is then passed to CodeMirror, and CodeMirror can now read and parse JSON.
+Lezer reads the grammar files as well the referenced `./highlight` file and generates a parser based on those files. The extension (parser) is then passed to CodeMirror, which enables CodeMirror to read and parse JSON.
 
-However, there are cases where writing a Lezer grammar doesn’t make sense. For example, if you have already written a grammar and it powers more than just a front end code editor experience, it may be more favorable to connect an existing language server to CodeMirror instead of maintaining two separate implementations. I found myself in such a case when working on the editor for ShopiyQL, which has a grammar in ANTLR.
+What if you already have a grammar written using a different syntax (instead of Lezer)? What if you have a language server already powering features in your application? I found myself in such a case when working on the editor for ShopiyQL, which has a grammar written in ANTLR.
 
 ## What is ANTLR?
 
@@ -171,11 +171,11 @@ WS
 
 ANTLR can generate parsers in many languages. For example, the ANTLR grammar for ShopifyQL is used to generate parsers in both Go and Typescript. However, there isn’t any out-of-the-box compatibility between an ANTLR parser and CodeMirror/Lezer.
 
-## The Zephyr Language
+## The Zephyr language
 
-In order to demonstrate how to get CodeMirror and ANTLR connected, I decided it would be easiest to write a tiny language to use as an example.
+In order to demonstrate how to get CodeMirror and ANTLR connected, I decided it would be easiest to write a tiny language to use as an example. Introducing: Zephyr!
 
-Introducing: Zephyr. Why “Zephyr”? I asked ChatGPT to make up a name for this little language and it said:
+Why “Zephyr”? I asked ChatGPT to make up a name for this little language and it said:
 
 > How about “Zephyr”? It suggests a fresh, light, and airy language that can help developers build software quickly and easily. It also sounds distinct and memorable, which can help it stand out in a crowded programming language landscape.
 
@@ -227,7 +227,7 @@ I kept this list of features intentionally small so it would be easier to have a
 
 ## Generating ANTLR files
 
-We can use ANTLR to generate parser and lexer files based off the Zephyr grammar definition. ANTLR has a handful of runtimes; we’ll be using the javascript version to build files for us. There is an excellent [`antlr4ts`](https://github.com/tunnelvisionlabs/antlr4ts) package that we can use to generate both a language server and the associated types. First we need to download our packages:
+We can use ANTLR to generate parser and lexer files based off the Zephyr grammar definition. ANTLR has a handful of runtimes; we’ll be using the typescript version to build files for us. There is an excellent [`antlr4ts`](https://github.com/tunnelvisionlabs/antlr4ts) package that we can use to generate both a language server and the associated types. First we need to download our packages:
 
 ```
 yarn add antlr4 antlr4-c3 antlr4ts
@@ -408,9 +408,11 @@ export class ZephyrLexer extends Lexer {
 }
 ```
 
-You can view all of the generated files [on GitHub](https://github.com/thetrevorharmon/zephyr-demo/tree/main/src/language/build) if you want to double check that the command is working (or to just download the files straight up if you don’t want to bother generating them yourself).
+You can view all of the generated files [on GitHub](https://github.com/thetrevorharmon/zephyr-demo/tree/main/src/extensions/zephyr/language/build) if you want to double check that the command is working (or to just download the files straight up if you don’t want to bother generating them yourself).
 
-_Note: depending on what you are using to build & run this code, you may encounter an issue with missing polyfills; the ANTLR generated files rely on Node.js’s `assert`, `buffer`, and `util`. You may need to provide your own fallback modules ([example](https://github.com/thetrevorharmon/zephyr-demo/blob/a70867d8d7ba13f751f2db5f81f07fcdc0d4c343/gatsby-node.js#L5))._
+<Callout>
+Depending on what you are using to build & run this code, you may encounter an issue with missing polyfills; the ANTLR generated files rely on Node.js’s `assert`, `buffer`, and `util`. You may need to provide your own fallback modules ([example](https://github.com/thetrevorharmon/zephyr-demo/blob/a70867d8d7ba13f751f2db5f81f07fcdc0d4c343/gatsby-node.js#L5)).
+</Callout>
 
 ## Building the language server
 
@@ -583,4 +585,4 @@ import {CodeEditorWithTokens} from './CodeEditorWithTokens';
 
 ## What's next
 
-Now that we have a functional language server, it's time to take a deep dive into how to connect this language server to CodeMirror 6. The second part of this series will cover connecting the language server to CodeMirror and takes a deep dive into all of the context surrounding that effort. In the meantime, feel free to explore the [full Zephyr demo site](https://zephyr-demo.netlify.app/) along with the [source code](https://github.com/thetrevorharmon/zephyr-demo) (I would recommend checking out the [`ParserAdapter` class](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr/ParserAdapter.ts) if you are really wanting to dig deeper).
+The second part of this series will take a deep dive into the effort required to connect our newly-minted language server to CodeMirror 6. In the meantime, feel free to explore the [full Zephyr demo site](https://zephyr-demo.netlify.app/) along with the [source code](https://github.com/thetrevorharmon/zephyr-demo) (I would recommend checking out the [`ParserAdapter` class](https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr/ParserAdapter.ts) if you are really wanting to dig deeper).
