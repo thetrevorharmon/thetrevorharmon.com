@@ -3,8 +3,8 @@ title: 'Connecting ANTLR to CodeMirror 6: Connecting a Language Server'
 slug: connecting-antlr-to-code-mirror-6-connecting-a-language-server
 date: 2024-02-16
 type: Post
-status: Draft
-description: How to connect an ANTLR language server to CodeMirror 6
+status: Published
+description: Connecting my Zephyr language server to CodeMirror.
 image:
   alt: bridge between two buildings in Berlin
   source: bridge-between-two-buildings-in-Berlin.jpg
@@ -292,7 +292,7 @@ Here’s what’s happening in this code:
 3. We use the document to generate a tree.
 4. We return an object that conforms to the expected return shape. While Lezer supports incremental parsing, this implementation doesn’t consider incremental parsing, which is why certain parts of this return object are not very meaningful.
 
-If we put all of this together, we end up with the following `ParserAdapter`:
+If we put all of this together, we end up with the following code:
 
 ```ts
 import {Parser, Tree, Input, PartialParse, TreeFragment} from '@lezer/common';
