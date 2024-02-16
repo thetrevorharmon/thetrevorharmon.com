@@ -104,16 +104,21 @@
     fill: hsl(-79.4117647059, 100%, 93.3333333333%);
   }
   .cluster rect {
-    @apply fill-stone-50;
-    @apply stroke-stone-300;
+    @apply fill-stone-50 dark:fill-stone-900;
+    @apply stroke-stone-300 dark:stroke-stone-700;
     stroke-width: 1px;
+
+    // rx and ry are for rounded corners
+    // 0.375rem is rounded-lg
+    rx: 0.5rem;
+    ry: 0.5rem;
   }
   .cluster text {
     fill: rgb(8.5000000002, 5.7500000001, 0);
   }
   .cluster span,
   p {
-    color: rgb(8.5000000002, 5.7500000001, 0);
+    @apply text-stone-800 dark:text-stone-200;
   }
   div.mermaidTooltip {
     position: absolute;
