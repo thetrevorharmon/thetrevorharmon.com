@@ -9,6 +9,7 @@ interface ButtonProps {
   url?: string;
   size?: 'small' | 'regular';
   onClick?(): void;
+  disabled?: boolean;
 }
 
 export const Button = ({
@@ -17,6 +18,7 @@ export const Button = ({
   url,
   onClick,
   size = 'regular',
+  disabled = false,
 }: ButtonProps) => {
   if (url != null && onClick != null) {
     throw new Error('Cannot use both the url and onClick props');
@@ -24,6 +26,10 @@ export const Button = ({
 
   if (url == null && onClick == null) {
     throw new Error('Must use either the url or onClick prop');
+  }
+
+  if (url != null && disabled) {
+    throw new Error('Cannot use disabled on links');
   }
 
   const classname = classnames([
@@ -35,8 +41,9 @@ export const Button = ({
     'dark:border-primary-dark dark:shadow-none',
     'font-display',
 
-    'text-primary focus:text-white hover:text-white',
-    'dark:text-primary-dark dark:focus:text-white dark:hover:text-white',
+    !disabled && 'text-primary focus:text-white hover:text-white',
+    !disabled &&
+      'dark:text-primary-dark dark:focus:text-white dark:hover:text-white',
 
     'inline-block rounded-md',
 
@@ -44,8 +51,9 @@ export const Button = ({
     size === 'small' && 'py-[0.5rem] px-[0.75rem] leading-[1] text-sm',
 
     'bg-body-bg dark:bg-body-bg-dark',
-    'focus:bg-primary focus:dark:bg-primary-dark',
-    'hover:bg-primary hover:dark:bg-primary-dark',
+
+    !disabled && 'focus:bg-primary focus:dark:bg-primary-dark',
+    !disabled && 'hover:bg-primary hover:dark:bg-primary-dark',
 
     'transition duration-200',
 
@@ -53,7 +61,16 @@ export const Button = ({
     'no-underline',
 
     // remove default <button /> styling
-    'bg-none hover:cursor-pointer',
+    'bg-none',
+
+    // cursor specific to state
+    !disabled && 'hover:cursor-pointer',
+    disabled && 'hover:cursor-not-allowed',
+
+    // disabled states
+    disabled && 'border-stone-500 dark:border-stone-500',
+    disabled && 'text-stone-500 dark:text-stone-500',
+    disabled && 'hover:text-stone-500 hover:dark:text-stone-500',
   ]);
 
   const linkMarkup = (linkUrl?: string) => {
@@ -86,7 +103,7 @@ export const Button = ({
     }
 
     return (
-      <button className={classname} onClick={clickHandler}>
+      <button className={classname} onClick={clickHandler} disabled={disabled}>
         {children}
       </button>
     );
