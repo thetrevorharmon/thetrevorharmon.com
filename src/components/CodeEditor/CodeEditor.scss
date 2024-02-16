@@ -89,3 +89,8 @@
     height: 0;
   }
 }
+
+.CodeEditor.HasFooter {
+  @apply rounded-none;
+  @apply rounded-t-md;
+}
