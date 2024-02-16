@@ -1,77 +1,90 @@
-import React, {useCallback, useState, useMemo} from 'react';
+import React, {useCallback, useState, useMemo, forwardRef} from 'react';
 import {Extension} from '@codemirror/state';
-import ReactCodeEditor from '@uiw/react-codemirror';
+import ReactCodeEditor, {ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 import {javascript} from '@codemirror/lang-javascript';
 
 import './CodeEditor.scss';
 import {useTheme} from '../../context/ThemeContext';
+import {sql} from '@codemirror/lang-sql';
+import classNames from 'classnames';
 
 interface Props {
   initialValue?: string;
   updateValue?: (value: string) => void;
-  language?: 'zephyr' | 'javascript';
+  language?: 'zephyr' | 'javascript' | 'sql';
   extensions?: Extension[];
+  hasFooter?: boolean;
 }
 
-export function CodeEditor({
-  initialValue,
-  updateValue,
-  language,
-  extensions = [],
-}: Props) {
-  const theme = useTheme();
-  const [value, setValue] = useState(initialValue ?? '');
+export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
+  (props, ref) => {
+    const {
+      initialValue,
+      updateValue,
+      language,
+      extensions = [],
+      hasFooter = false,
+    } = props;
 
-  const handleOnChange = useCallback((value: string) => {
-    setValue(value);
-    if (updateValue) {
-      updateValue(value);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const theme = useTheme();
+    const [value, setValue] = useState(initialValue ?? '');
 
-  const memoizedExtensions = useMemo(() => {
-    if (language === 'zephyr') {
-      return [zephyr, ...extensions];
-    }
+    const handleOnChange = useCallback((value: string) => {
+      setValue(value);
+      if (updateValue) {
+        updateValue(value);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    if (language === 'javascript') {
-      return [javascript(), ...extensions];
-    }
+    const memoizedExtensions = useMemo(() => {
+      switch (language) {
+        case 'zephyr':
+          return [zephyr, ...extensions];
 
-    return [...extensions];
-  }, [language, extensions]);
+        case 'javascript':
+          return [javascript(), ...extensions];
 
-  return (
-    <div className="CodeEditor">
-      <ReactCodeEditor
-        value={value}
-        theme={theme}
-        extensions={memoizedExtensions}
-        onChange={handleOnChange}
-        indentWithTab={false}
-        basicSetup={{
-          foldGutter: false,
-          lineNumbers: true,
-          highlightActiveLineGutter: true,
-          dropCursor: false,
-          allowMultipleSelections: false,
-          indentOnInput: false,
-          bracketMatching: false,
-          closeBrackets: false,
-          autocompletion: false,
-          rectangularSelection: false,
-          crosshairCursor: false,
-          highlightActiveLine: true,
-          highlightSelectionMatches: false,
-          closeBracketsKeymap: false,
-          searchKeymap: false,
-          foldKeymap: false,
-          completionKeymap: false,
-          lintKeymap: false,
-        }}
-      />
-    </div>
-  );
-}
+        case 'sql':
+          return [sql(), ...extensions];
+
+        default:
+          return [...extensions];
+      }
+    }, [language, extensions]);
+
+    return (
+      <div className={classNames('CodeEditor', hasFooter && 'HasFooter')}>
+        <ReactCodeEditor
+          ref={ref}
+          value={value}
+          theme={theme}
+          extensions={memoizedExtensions}
+          onChange={handleOnChange}
+          indentWithTab={false}
+          basicSetup={{
+            foldGutter: false,
+            lineNumbers: true,
+            highlightActiveLineGutter: true,
+            dropCursor: false,
+            allowMultipleSelections: false,
+            indentOnInput: false,
+            bracketMatching: false,
+            closeBrackets: false,
+            autocompletion: false,
+            rectangularSelection: false,
+            crosshairCursor: false,
+            highlightActiveLine: true,
+            highlightSelectionMatches: false,
+            closeBracketsKeymap: false,
+            searchKeymap: false,
+            foldKeymap: false,
+            completionKeymap: false,
+            lintKeymap: false,
+          }}
+        />
+      </div>
+    );
+  },
+);
