@@ -1,1 +1,11 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" width="24" height="24"><defs><style>.cls-6374f8d9b67f094e4896c653-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}</style></defs><polyline class="cls-6374f8d9b67f094e4896c653-1" points="18.68 6.97 22.5 10.09 22.5 22.5 1.5 22.5 1.5 10.09 5.32 6.97"></polyline><polyline class="cls-6374f8d9b67f094e4896c653-1" points="1.5 11.04 12 18.68 22.5 11.04"></polyline><polyline class="cls-6374f8d9b67f094e4896c653-1" points="5.32 13.91 5.32 1.5 18.68 1.5 18.68 13.91"></polyline><line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="5.32" x2="15.82" y2="5.32"></line><line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="9.14" x2="15.82" y2="9.14"></line><line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="12.95" x2="15.82" y2="12.95"></line></svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" width="24" height="24">
+   <defs>
+      <style>.cls-6374f8d9b67f094e4896c653-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}</style>
+   </defs>
+   <polyline class="cls-6374f8d9b67f094e4896c653-1" points="18.68 6.97 22.5 10.09 22.5 22.5 1.5 22.5 1.5 10.09 5.32 6.97"></polyline>
+   <polyline class="cls-6374f8d9b67f094e4896c653-1" points="1.5 11.04 12 18.68 22.5 11.04"></polyline>
+   <polyline class="cls-6374f8d9b67f094e4896c653-1" points="5.32 13.91 5.32 1.5 18.68 1.5 18.68 13.91"></polyline>
+   <line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="5.32" x2="15.82" y2="5.32"></line>
+   <line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="9.14" x2="15.82" y2="9.14"></line>
+   <line class="cls-6374f8d9b67f094e4896c653-1" x1="8.18" y1="12.95" x2="15.82" y2="12.95"></line>
+</svg>
