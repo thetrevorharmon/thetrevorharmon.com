@@ -34,7 +34,6 @@ export const Meta = ({
     <Icon
       name="link"
       size="small"
-      color="primary"
       className="top-[3px] ml-tiny relative inline-block"
     />
   ) : null;

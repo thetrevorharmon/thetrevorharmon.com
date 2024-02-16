@@ -42,7 +42,6 @@ export const Link = ({
       <Icon
         name={icon.name}
         size="normal"
-        color="primary"
         className={classnames(
           'relative top-[4px]',
           icon.position === 'leading' ? 'mr-little' : 'ml-tiny',

@@ -1,28 +1,35 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import {link, rss, twitter, email} from './icons';
+import link from './icons/link.svg';
+import rss from './icons/rss.svg';
+import twitter from './icons/twitter.svg';
+import email from './icons/email.svg';
+import x from './icons/x.svg';
+import play from './icons/play.svg';
+import loading from './icons/loading.svg';
+import circle from './icons/circle.svg';
 
 import './Icon.scss';
+
+const mapping = {
+  link,
+  rss,
+  twitter,
+  email,
+  x,
+  play,
+  loading,
+  circle,
+};
+
+export type IconName = keyof typeof mapping;
 
 interface IconProps {
   className?: string;
   name: IconName;
   size: 'small' | 'normal' | 'large';
-  color?: 'text' | 'primary';
 }
-
-export type IconName = 'link' | 'rss' | 'twitter' | 'email';
-
-// Disabling object-literal-shorthand because otherwise
-// I can't have a 'dynamic' icon name that works
-/* tslint:disable object-literal-shorthand */
-const mapping: {[name in IconName]: React.SVGFactory} = {
-  link: link,
-  rss: rss,
-  twitter: twitter,
-  email: email,
-};
 
 const sizes = {
   small: 'Icon-Small',
@@ -30,17 +37,17 @@ const sizes = {
   large: 'Icon-Large',
 };
 
-const colors = {
-  text: 'Icon-Text',
-  primary: 'Icon-Primary',
-};
+// const colors = {
+//   text: 'Icon-Text',
+//   primary: 'Icon-Primary',
+// };
 
-export const Icon = ({className, name, color = 'text', size}: IconProps) => {
+export const Icon = ({className, name, size}: IconProps) => {
   if (!(name in mapping)) {
     throw new Error('Icon name not found!');
   }
 
-  const classname = classnames('Icon', sizes[size], colors[color], className);
+  const classname = classnames('Icon', sizes[size], className);
 
   const Tag = mapping[name];
 
