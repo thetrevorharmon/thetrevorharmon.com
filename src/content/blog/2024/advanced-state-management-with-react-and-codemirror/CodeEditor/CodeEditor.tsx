@@ -139,8 +139,8 @@ export function CodeEditor() {
   });
 
   return (
-    <div className="Breakout">
-      <div className="bg-stone-400 dark:bg-caption-bg-dark p-breakout rounded-md">
+    <div className="">
+      <div className="bg-stone-500 dark:bg-caption-bg-dark py-normal md:py-medium BreakoutWithPadding rounded-md">
         <div className="font-mono flex justify-between items-center">
           <span className="uppercase tracking-widest text-xs font-bold text-stone-50">
             SQL Terminal 3000
