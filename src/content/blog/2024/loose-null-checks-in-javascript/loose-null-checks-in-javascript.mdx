@@ -1,0 +1,86 @@
+---
+title: "Loose null checks in JavaScript"
+date: 2024-06-03
+slug: "loose-null-checks-in-javascript"
+type: Post
+status: Published
+description: "Strict equality checks in JavaScript always make sense–except for null."
+image:
+  alt: a mug of tea sitting next to a pile of herbs
+  source: ./a-mug-of-tea-sitting-next-to-a-pile-of-herbs.jpg
+  attribution:
+    author: Kelly Sikkema
+    sourceName: Unsplash
+    sourceUrl: https://unsplash.com/photos/black-ceramic-mug-9r1tsx5BvSQ
+---
+
+<Callout>**tl;dr:** `value == null` is an easy way to capture both `null` and `undefined` in a equality check, and it's the one clear case that a loose equality check is better than a strict equality check.</Callout>
+
+By default, I always use strict equality checks when writing JavaScript. There are plenty of articles and StackOverflow answers explaining why you should use strict equality (`===`) instead of loose equality (`==`). For just about every case, I agree that strict equality checks are the way to go–except when working with null values.
+
+## Two ways to express null
+
+One of the quirks of JavaScript is that there are two ways to express a null or "nothing" value–`null` and `undefined`. Though similar, these two values aren't exactly the same:
+
+- `undefined` indicates that there was nothing set or returned by a function. If you declare a variable without setting it to a value (e.g. `let myVariable;`), by default it has a value of `undefined`. I have observed that JavaScript _mostly_ uses `undefined` in functions as the "none" value (though, in true JavaScript fashion, there are exceptions to this, like in the [`exec()` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec) of the regular expression object).
+- `null` indicates the intentional absence of a value. For example, in a getter function, you might return `null` if the value is not found.
+
+I have often seen these two used interchangably, despite them not being _quite_ the same. My rule of thumb is to use `null` as much as possible, because it is a clearer (but not perfect) indication that the code returning the `null` was written by a human.
+
+## Handling both values with one check
+
+Since both of these values exist in JavaScript, we need to accomodate each one in conditionals. Sometimes in the name of "always doing strict checks", I will see the following code:
+
+```ts
+if (value === undefined || value === null) {
+  // ...
+}
+```
+
+This code is totally correct! But there is a simpler, more elegant way:
+
+```ts
+if (value == null) {
+  // ...
+}
+```
+
+This works because both `null` and `undefined` are [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), and are equivalent to each other in a loose check–you can see this for yourself if you run the following in the browser console:
+
+```ts
+console.log(null == undefined);
+```
+
+That logs out `true`! [The MDN docs on `null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/null#difference_between_null_and_undefined) give a complete explanation of how `null` and `undefined` resolve in various types of checks.
+
+I find that using a loose `null` check everywhere lets me care less about "which kind of null value is it" and simply check if it is one of the possible null values.
+
+## Practical example
+
+This is really useful in TypeScript when mixing `null` with optional parameters. Imagine you have a `Button` function that optionally takes in an `Icon`. The `icon` prop also accepts `null` so that the consumer can pass in `null` as well:
+
+```ts
+interface ButtonProps {
+  title: string;
+  icon?: Icon | null;
+}
+```
+
+In this example, the loose equality check comes in handy:
+
+```tsx
+function Button({title, icon}: ButtonProps) {
+  if (icon == null) {
+    return <button>{title}</button>;
+  }
+
+  return (
+    <button>
+      {icon}
+      {title}
+    </button>
+  );
+}
+```
+
+Loose null checks are simpler, easy to read, are a bit more elegant than checking `null` and `undefined` separately.
