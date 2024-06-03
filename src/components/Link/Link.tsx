@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
-import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 
 import {Icon, IconName} from '../../components';
@@ -69,14 +68,14 @@ export const Link = ({
   const innerMarkup = getInnerMarkup();
 
   return isExternalUrl ? (
-    <OutboundLink
+    <a
       className={classname}
       href={url}
       target={target || '_blank'}
       rel="noreferrer"
     >
       {innerMarkup}
-    </OutboundLink>
+    </a>
   ) : (
     <GatsbyLink className={classname} to={url} target={target || ''}>
       {innerMarkup}
