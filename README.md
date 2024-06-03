@@ -4,12 +4,10 @@ Hi there! 👋 This is the repo for my blog & portfolio site. It's built on [Gat
 
 ## Getting Started
 
-Getting started with this repo is fairly straightforward:
+Getting started with this repo is easy:
 
-1. Go to Google Analytics to find all the necessary pieces for your .env file.
-2. Create two .env files: `.env.development` and `.env.production`. You can refer to `.env.sample` to know what you need to find.
-3. Run `yarn install`.
-4. Run `yarn start`.
+1. `yarn install`.
+1. `yarn start`.
 
 That's it!
 
