@@ -15,13 +15,21 @@ program
 
     const slug = slugify(title, {lower: true});
 
-    const folderPath = path.join(
+    const draftsPath = path.join(
       __dirname,
       '..',
       'src',
       'content',
       'blog',
       'drafts',
+    );
+
+    if (!fs.existsSync(draftsPath)) {
+      fs.mkdirSync(draftsPath);
+    }
+
+    const folderPath = path.join(
+      draftsPath,
       slug,
     );
 
