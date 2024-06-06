@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
-import {OutboundLink} from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 
 interface ButtonProps {
@@ -82,14 +81,14 @@ export const Button = ({
     const isExternalUrl = externalUrlPattern.test(linkUrl);
 
     return isExternalUrl ? (
-      <OutboundLink
+      <a
         className={classname}
         href={linkUrl}
         target={'_blank'}
         rel="noreferrer"
       >
         {children}
-      </OutboundLink>
+      </a>
     ) : (
       <GatsbyLink className={classname} to={linkUrl}>
         {children}

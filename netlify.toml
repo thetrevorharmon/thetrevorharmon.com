@@ -6,7 +6,6 @@ command = "yarn develop"
 
 [context.production]
 command = "yarn build"
-environment = {GOOGLE_ANALYTICS_TRACKING_ID = "UA-54294401-2", SASS_PATH = "src/styles/", NODE_PATH = "./"}
 publish = "public/"
 
 [[plugins]]
