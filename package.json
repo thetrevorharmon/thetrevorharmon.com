@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "pretty": "prettier --write \"**/*.{ts,tsx,js,css,scss}\"",
     "create-blog-post": "node ./scripts/create-blog-post.js",
+    "remove-mermaid-svgs": "node ./scripts/remove-mermaid-svgs.js",
     "tophat": "gatsby clean && gatsby build && gatsby serve"
   },
   "dependencies": {

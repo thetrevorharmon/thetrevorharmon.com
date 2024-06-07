@@ -19,10 +19,12 @@ const defaultOptions = {
   },
 };
 
-export async function gatsbyRemarkMermaidToSvg(
-  {markdownAST, markdownNode, cache},
-  pluginOptions,
-) {
+export async function gatsbyRemarkMermaidToSvg(args, pluginOptions) {
+  const {markdownAST, markdownNode, getNode} = args;
+
+  const articlePath = getNode(markdownNode.parent).relativeDirectory;
+  const svgDirectory = `./src/content/blog/${articlePath}/diagrams`;
+
   const options = Object.assign({}, defaultOptions, pluginOptions);
 
   visit(markdownAST, 'code', async (node) => {
@@ -32,20 +34,33 @@ export async function gatsbyRemarkMermaidToSvg(
 
     if (node.lang === 'mermaid-code') {
       node.lang = 'mermaid';
-      return
+      return;
     }
 
     if (node.lang === 'mermaid') {
-      const nodeKey = getNodeKey(node, markdownNode);
-      const cachedValue = await cache.get(nodeKey);
+      const nodeKey = getNodeKey(node.value);
+
+      const svgFilePath = `${svgDirectory}/${nodeKey}.svg`;
 
       let svg = node.value;
 
-      if (cachedValue) {
-        svg = JSON.parse(cachedValue).svg;
+      if (fs.existsSync(svgFilePath)) {
+        svg = fs.readFileSync(svgFilePath);
+      } else if (process.env.NODE_ENV !== 'development') {
+        throw new Error(
+          `Unable to find mermaid chart at path ${svgFilePath}.\nYou need to generate the chart in develop mode, commit it to main, and try again.`,
+        );
       } else {
         try {
           svg = generateSVGFromMermaid(node.value, options);
+
+          if (!fs.existsSync(svgDirectory)) {
+            fs.mkdirSync(svgDirectory);
+          }
+
+          fs.writeFileSync(svgFilePath, svg);
+
+          console.log(`Wrote SVG file to ${svgFilePath}`);
         } catch {
           console.error(
             'Could not convert mermaid to svg with value:',
@@ -57,10 +72,6 @@ export async function gatsbyRemarkMermaidToSvg(
       node.type = 'html';
       node.lang = undefined;
       node.value = `<div class=${options.wrapperClassName}>${svg}</div>`;
-
-      if (svg && svg !== node.value) {
-        await cache.set(nodeKey, JSON.stringify({svg}));
-      }
     }
   });
 
@@ -110,10 +121,7 @@ function generateSVGFromMermaid(mermaidText, options) {
   return svgString;
 }
 
-function getNodeKey(node, markdownNode) {
-  const contentHash = crypto
-    .createHash('sha256')
-    .update(node.value)
-    .digest('hex');
-  return `${markdownNode.frontmatter.slug}__Mermaid__${contentHash}`;
+function getNodeKey(value) {
+  const contentHash = crypto.createHash('sha256').update(value).digest('hex');
+  return `mermaid__${contentHash}`;
 }
