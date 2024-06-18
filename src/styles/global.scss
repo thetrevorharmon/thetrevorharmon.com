@@ -192,12 +192,9 @@ h1.featured {
 }
 
 h1.main {
-  @apply drop-shadow-[2px_3px_0px_theme(colors.primary)];
-  @apply md:drop-shadow-[4px_4px_0px_theme(colors.primary)];
-  @apply bg-stone-50 text-stone-50;
-  @apply bg-gradient-to-br from-stone-50 to-stone-300;
-  @apply bg-clip-text text-fill-transparent;
-  @apply text-white text-[2.4rem] min-[550px]:text-[3rem]  sm:text-[3.4rem] md:text-[4rem] leading-[1];
+  @apply h1-featured;
+  @apply text-[2rem] sm:text-[3.26666667rem];
+  @apply text-text-bold dark:text-text-bold-dark;
 }
 
 h2 {

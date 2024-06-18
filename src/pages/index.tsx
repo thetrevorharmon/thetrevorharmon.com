@@ -1,5 +1,5 @@
 import {graphql} from 'gatsby';
-import React, {useState} from 'react';
+import React from 'react';
 
 import {FeaturedTile, Button, PostTile, Link, Image} from '../components';
 import {Layout} from '../layouts';
@@ -10,27 +10,7 @@ interface IndexPageProps {
   data: Queries.IndexPageQuery;
 }
 
-const GREETINGS = ['Hi!', 'Hello!', 'Hi-ya!', 'Howdy!', 'Hey!'];
-function getRandomGreeting() {
-  const index = Math.floor(Math.random() * GREETINGS.length);
-  return GREETINGS[index];
-}
-
 function IndexPage({data}: IndexPageProps) {
-  const [greeting, setGreeting] = useState(getRandomGreeting());
-
-  function randomGreeting() {
-    setGreeting((currentGreeting) => {
-      let newGreeting = '';
-
-      do {
-        newGreeting = getRandomGreeting();
-      } while (newGreeting === currentGreeting);
-
-      return newGreeting;
-    });
-  }
-
   if (data.allMdx.nodes.length < 1) {
     return null;
   }
@@ -41,24 +21,14 @@ function IndexPage({data}: IndexPageProps) {
     <Layout>
       <div className="my-large md:my-large">
         <div className="space-y-large">
-          <div className="Breakout relative rounded-lg sm:rounded-2xl overflow-hidden">
-            <div className="overflow-hidden rounded-lg sm:rounded-2xl">
-              <Image src={{source: data.heroImage, alt: 'Trevor Harmon'}} />
+          <div className="Breakout flex flex-row items-center space-x-normal md:justify-center">
+            <div className="overflow-hidden rounded-full w-16 md:w-24 border border-stone-700 dark:border-stone-400">
+              <Image src={{source: data.avatarImage, alt: 'Trevor Harmon'}} />
             </div>
-            <div className="absolute grid top-0 left-0 bottom-0 right-0 items-center text-white">
-              <h1 className="mx-auto main">
-                <span>
-                  {greeting}
-                  <br />
-                  I'm Trevor.
-                </span>
-              </h1>
-            </div>
-            <div className="absolute bottom-tiny right-little sm:bottom-little sm:right-normal md:bottom-normal md:right-medium">
-              <button onClick={randomGreeting} className={'wave-button'}>
-                👋
-              </button>
-            </div>
+            <h1 className="main">
+              Hi! <br className="block sm:hidden" />
+              I'm Trevor 👋
+            </h1>
           </div>
           <div className="space-y-normal text-md">
             <p>Welcome to my little space on the internet! About me:</p>
@@ -160,9 +130,9 @@ export const query = graphql`
         }
       }
     }
-    heroImage: file(name: {eq: "index-hero"}) {
+    avatarImage: file(name: {eq: "avatar"}) {
       childImageSharp {
-        gatsbyImageData(width: 800)
+        gatsbyImageData(width: 400)
       }
     }
   }

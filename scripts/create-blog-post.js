@@ -28,10 +28,7 @@ program
       fs.mkdirSync(draftsPath);
     }
 
-    const folderPath = path.join(
-      draftsPath,
-      slug,
-    );
+    const folderPath = path.join(draftsPath, slug);
 
     const filePath = path.join(folderPath, `${slug}.mdx`);
 
