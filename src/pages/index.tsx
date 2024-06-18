@@ -71,7 +71,7 @@ function IndexPage({data}: IndexPageProps) {
                 <Link url="https://www.shopify.com/">Shopify</Link>. I've worked
                 on the{' '}
                 <Link url="https://www.shopify.com/analytics">analytics</Link>{' '}
-                team (called Optimize) for almost 4 years.
+                team (called Optimize) for almost 5 years.
               </p>
               <span>🎸</span>
               <p>
