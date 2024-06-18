@@ -1,5 +1,5 @@
 import {graphql} from 'gatsby';
-import React, {useState} from 'react';
+import React from 'react';
 
 import {FeaturedTile, Button, PostTile, Link, Image} from '../components';
 import {Layout} from '../layouts';
@@ -11,26 +11,28 @@ interface IndexPageProps {
 }
 
 const GREETINGS = ['Hi!', 'Hello!', 'Hi-ya!', 'Howdy!', 'Hey!'];
-function getRandomGreeting() {
+
+function replaceGreeting() {
+  const greetingSpan = document.getElementById('greeting');
+
+  if (greetingSpan == null) {
+    return;
+  }
+
+  const currentGreeting = greetingSpan.innerText;
+
   const index = Math.floor(Math.random() * GREETINGS.length);
-  return GREETINGS[index];
+  const newGreeting = GREETINGS[index];
+
+  if (newGreeting === currentGreeting) {
+    replaceGreeting();
+    return;
+  }
+
+  greetingSpan.innerText = newGreeting;
 }
 
 function IndexPage({data}: IndexPageProps) {
-  const [greeting, setGreeting] = useState(getRandomGreeting());
-
-  function randomGreeting() {
-    setGreeting((currentGreeting) => {
-      let newGreeting = '';
-
-      do {
-        newGreeting = getRandomGreeting();
-      } while (newGreeting === currentGreeting);
-
-      return newGreeting;
-    });
-  }
-
   if (data.allMdx.nodes.length < 1) {
     return null;
   }
@@ -48,14 +50,14 @@ function IndexPage({data}: IndexPageProps) {
             <div className="absolute grid top-0 left-0 bottom-0 right-0 items-center text-white">
               <h1 className="mx-auto main">
                 <span>
-                  {greeting}
+                  <span id="greeting">Hi!</span>
                   <br />
                   I'm Trevor.
                 </span>
               </h1>
             </div>
             <div className="absolute bottom-tiny right-little sm:bottom-little sm:right-normal md:bottom-normal md:right-medium">
-              <button onClick={randomGreeting} className={'wave-button'}>
+              <button onClick={replaceGreeting} className={'wave-button'}>
                 👋
               </button>
             </div>
