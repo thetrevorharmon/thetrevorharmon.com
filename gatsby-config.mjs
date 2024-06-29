@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
 import tailwindCss from 'tailwindcss';
-import remarkGfm from 'remark-gfm';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -64,17 +63,17 @@ const config = {
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        footnotes: true,
+        gfm: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
-        mdxOptions: {
-          // remarkGfm adds support for github flavored markdown
-          // to MDX. Footnotes, tables, tasklists, etc are all
-          // supported by remarkGfm.
-          remarkPlugins: [remarkGfm],
-        },
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -136,16 +135,14 @@ const config = {
       options: {
         feeds: [
           {
-            serialize: ({
-              query: { site, allMdx },
-            }) => {
+            serialize: ({query: {site, allMdx}}) => {
               return allMdx.nodes.map((node) => ({
                 title: node.title,
                 description: node.description ? node.description : node.excerpt,
                 date: node.date,
                 url: site.siteMetadata.siteUrl + '/blog/' + node.slug,
                 guid: site.siteMetadata.siteUrl + '/blog/' + node.slug,
-                custom_elements: [{ 'content:encoded': node.excerpt }],
+                custom_elements: [{'content:encoded': node.excerpt}],
               }));
             },
             query: `
