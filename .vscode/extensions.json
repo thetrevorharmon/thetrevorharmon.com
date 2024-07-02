@@ -1,13 +1,13 @@
 {
-    "recommendations": [
-        "csstools.postcss",
-        "bradlc.vscode-tailwindcss",
-        "esbenp.prettier-vscode",
-        "ms-vscode.sublime-keybindings",
-        "unifiedjs.vscode-mdx",
-        "graphql.vscode-graphql-syntax",
-        "compulim.compulim-vscode-closetag",
-        "be5invis.toml",
-        "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
-    ]
+  "recommendations": [
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "ms-vscode.sublime-keybindings",
+    "unifiedjs.vscode-mdx",
+    "graphql.vscode-graphql-syntax",
+    "compulim.compulim-vscode-closetag",
+    "be5invis.toml",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+  ]
 }
