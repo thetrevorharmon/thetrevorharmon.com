@@ -1,30 +1,30 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Gatsby develop",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_modules/.bin/gatsby",
-            "args": ["develop"],
-            "runtimeArgs": ["--inspect-brk"],
-            "console": "integratedTerminal",
-        },
-        {
-            "name": "Gatsby build",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_modules/.bin/gatsby",
-            "args": ["build"],
-            "runtimeArgs": ["--inspect-brk"],
-            "console": "integratedTerminal",
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Browser debugging",
-            "url": "http://localhost:8000",
-            "webRoot": "${workspaceFolder}/gatsby"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Gatsby develop",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "args": ["develop"],
+      "runtimeArgs": ["--inspect-brk"],
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "Gatsby build",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "args": ["build"],
+      "runtimeArgs": ["--inspect-brk"],
+      "console": "integratedTerminal",
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Browser debugging",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/gatsby"
+    }
+  ]
 }
