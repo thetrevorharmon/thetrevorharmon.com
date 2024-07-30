@@ -359,6 +359,9 @@ blockquote {
 
   ul,
   ol {
+    // no tailwind support for counter resetting
+    counter-reset: list-counter;
+
     @apply ml-0 pl-0;
     @apply list-none;
 
@@ -377,9 +380,6 @@ blockquote {
         @apply font-display;
       }
     }
-
-    // no tailwind support for counter resetting
-    counter-reset: list-counter;
 
     li {
       counter-increment: list-counter;
