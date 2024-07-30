@@ -22,6 +22,7 @@ exports.createPages = ({graphql, actions}) => {
             date(formatString: "DD MMM YYYY")
             type
             client
+            relatedReading
             image {
               source {
                 id
@@ -41,7 +42,7 @@ exports.createPages = ({graphql, actions}) => {
       }
     `).then((result) => {
       result.data.allMdx.nodes.forEach((node, _, nodes) => {
-        validateNode(node);
+        validateNode(node, nodes);
 
         const componentPath = path.resolve(`./src/templates/${node.type}.tsx`);
         const contentPath = node.internal.contentFilePath;
@@ -123,6 +124,7 @@ exports.createSchemaCustomization = ({actions}) => {
       slug: String @proxy(from: "frontmatter.slug")
       link: String @proxy(from: "frontmatter.link")
       status: String @proxy(from: "frontmatter.status")
+      relatedReading: [String] @proxy(from: "frontmatter.related_reading")
       date: Date @dateformat @proxy(from: "frontmatter.date")
       image: MdxFrontmatterImage @proxy(from: "frontmatter.image")
 

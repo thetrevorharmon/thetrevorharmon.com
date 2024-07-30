@@ -4,7 +4,7 @@ const ObjectShape = require('object-shape-validator').default;
 const STATUSES = ['Archived', 'Published', 'Draft'];
 const TYPES = ['Post', 'Project', 'Page'];
 
-const validateNode = (node) => {
+const validateNode = (node, nodes) => {
   const name = node.internal.contentFilePath;
 
   class NodeError extends Error {
@@ -81,6 +81,30 @@ const validateNode = (node) => {
       if (node.description && node.description.length > 155) {
         throw new NodeError(`Description must be 155 characters or shorter`);
       }
+    }
+
+    if (node.type === 'Post' && node.relatedReading) {
+      if (!Array.isArray(node.relatedReading)) {
+        throw new NodeError(`Related reading must be an array`);
+      }
+
+      if (node.relatedReading.length < 1) {
+        throw new NodeError(`Related reading must not be empty`);
+      }
+
+      if (node.relatedReading.length > 3) {
+        throw new NodeError(`Related reading cannot be more than 3 items`);
+      }
+
+      node.relatedReading.forEach((relatedReadingSlug) => {
+        const isExistingNode = nodes.some(
+          (node) => node.slug === relatedReadingSlug,
+        );
+
+        if (!isExistingNode) {
+          throw new NodeError(`Related reading must be an existing article`);
+        }
+      });
     }
 
     if (node.type === 'Project') {
