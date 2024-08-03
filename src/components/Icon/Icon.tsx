@@ -9,6 +9,7 @@ import x from './icons/x.svg';
 import play from './icons/play.svg';
 import loading from './icons/loading.svg';
 import circle from './icons/circle.svg';
+import arrowRight from './icons/arrow-right.svg';
 
 import './Icon.scss';
 
@@ -21,6 +22,7 @@ const mapping = {
   play,
   loading,
   circle,
+  arrowRight,
 };
 
 export type IconName = keyof typeof mapping;
@@ -36,11 +38,6 @@ const sizes = {
   normal: 'Icon-Normal',
   large: 'Icon-Large',
 };
-
-// const colors = {
-//   text: 'Icon-Text',
-//   primary: 'Icon-Primary',
-// };
 
 export const Icon = ({className, name, size}: IconProps) => {
   if (!(name in mapping)) {

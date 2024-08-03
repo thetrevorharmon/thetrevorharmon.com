@@ -20,7 +20,12 @@ function NotFoundPage() {
       </h1>
       <p>Looks like you still haven't found what you're looking for.</p>
       <p className="mb-huge">
-        <Link url={Routes.home()}>Go Home &rarr;</Link>
+        <Link
+          url={Routes.home()}
+          icon={{name: 'arrowRight', position: 'trailing'}}
+        >
+          Go Home
+        </Link>
       </p>
     </Layout>
   );

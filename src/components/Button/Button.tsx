@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
 import * as React from 'react';
+import {Icon, IconName} from '../Icon';
 
 interface ButtonProps {
   className?: string;
@@ -9,12 +10,14 @@ interface ButtonProps {
   size?: 'small' | 'regular';
   onClick?(): void;
   disabled?: boolean;
+  icon?: IconName;
 }
 
 export const Button = ({
   className,
   children,
   url,
+  icon,
   onClick,
   size = 'regular',
   disabled = false,
@@ -70,7 +73,17 @@ export const Button = ({
     disabled && 'border-stone-500 dark:border-stone-500',
     disabled && 'text-stone-500 dark:text-stone-500',
     disabled && 'hover:text-stone-500 hover:dark:text-stone-500',
+
+    icon && 'inline-flex gap-little',
   ]);
+
+  const internalMarkup = icon ? (
+    <>
+      {children} <Icon name={icon} size="normal" />
+    </>
+  ) : (
+    children
+  );
 
   const linkMarkup = (linkUrl?: string) => {
     if (linkUrl == null) {
@@ -87,11 +100,11 @@ export const Button = ({
         target={'_blank'}
         rel="noreferrer"
       >
-        {children}
+        {internalMarkup}
       </a>
     ) : (
       <GatsbyLink className={classname} to={linkUrl}>
-        {children}
+        {internalMarkup}
       </GatsbyLink>
     );
   };
@@ -103,7 +116,7 @@ export const Button = ({
 
     return (
       <button className={classname} onClick={clickHandler} disabled={disabled}>
-        {children}
+        {internalMarkup}
       </button>
     );
   };

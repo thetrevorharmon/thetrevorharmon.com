@@ -123,8 +123,12 @@ function IndexPage({data}: IndexPageProps) {
           ))}
         </div>
       </div>
-      <Button className="mt-large mb-large" url={Routes.blog()}>
-        Read more posts &rarr;
+      <Button
+        className="mt-large mb-large"
+        url={Routes.blog()}
+        icon="arrowRight"
+      >
+        Read more posts
       </Button>
     </Layout>
   );

@@ -37,7 +37,9 @@ function Article({
   );
 
   const linkPostButton = mdx.link ? (
-    <Button url={mdx.link}>View Link</Button>
+    <Button url={mdx.link} icon="arrowRight">
+      View Link
+    </Button>
   ) : null;
 
   return (
