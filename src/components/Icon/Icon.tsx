@@ -10,6 +10,7 @@ import play from './icons/play.svg';
 import loading from './icons/loading.svg';
 import circle from './icons/circle.svg';
 import arrowRight from './icons/arrow-right.svg';
+import arrowUndo from './icons/arrow-undo.svg';
 
 import './Icon.scss';
 
@@ -23,6 +24,7 @@ const mapping = {
   loading,
   circle,
   arrowRight,
+  arrowUndo,
 };
 
 export type IconName = keyof typeof mapping;

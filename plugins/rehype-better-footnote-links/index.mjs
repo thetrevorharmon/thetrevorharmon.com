@@ -7,6 +7,73 @@ const NEW_FOOTNOTE_KEY = 'footnote--';
 const NEW_REFERENCE_KEY = 'reference--';
 
 /**
+ * This icon came from the arrow-return atlas icon (originally in a circle)
+ * I removed the surrounding circle and made the arrow a bit bigger to look
+ * better on the page.
+ *
+ * I can't directly pass an SVG within rehype because at this point, all the
+ * HTML and Markdown has been parsed into an AST. I need to pass an AST version
+ * of the SVG instead.
+ *
+ * I have saved this icon as arrow-undo.svg in the repo in case it is needed
+ * in the future. I used ChatGPT to convert the svg into a rehype node.
+ */
+const ARROW_UNDO_ICON = {
+  type: 'element',
+  tagName: 'svg',
+  properties: {
+    viewBox: '0 0 24 24',
+    width: '24px',
+    height: '24px',
+    'stroke-width': '1.5',
+    xmlns: 'http://www.w3.org/2000/svg',
+  },
+  children: [
+    {
+      type: 'element',
+      tagName: 'defs',
+      children: [
+        {
+          type: 'element',
+          tagName: 'style',
+          children: [
+            {
+              type: 'text',
+              value:
+                '.cls-6374f543b67f094e4896c5c8-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'element',
+      tagName: 'path',
+      properties: {
+        className: ['cls-6374f543b67f094e4896c5c8-1'],
+        d: 'M 5.357 5.144 L 14.466 5.144 C 16.984 5.144 19.026 7.186 19.026 9.704 C 19.02 12.218 16.98 14.253 14.466 14.253 L 5.357 14.253',
+        style: '',
+        transform:
+          'matrix(0.9999999999999999, 0, 0, 0.9999999999999999, -2.220446049250313e-16, 0)',
+      },
+      children: [],
+    },
+    {
+      type: 'element',
+      tagName: 'polyline',
+      properties: {
+        className: ['cls-6374f543b67f094e4896c5c8-1'],
+        points: '9.905 18.813 5.357 14.253 9.905 9.692',
+        style: '',
+        transform:
+          'matrix(0.9999999999999999, 0, 0, 0.9999999999999999, -2.220446049250313e-16, 0)',
+      },
+      children: [],
+    },
+  ],
+};
+
+/**
  * The default implementation for footnote links in @mdx/js
  * renders the links as #user-content-fn-{name} and #user-content-fnref-{name}
  * This choice seems very programmer-y to me, and since this data is exposed to
@@ -60,6 +127,8 @@ export default function rehypeBetterFootnoteLinks() {
           REFERENCE_KEY_FROM_MDX_JS,
           NEW_REFERENCE_KEY,
         );
+
+        node.children[0] = ARROW_UNDO_ICON;
       }
     });
   };
