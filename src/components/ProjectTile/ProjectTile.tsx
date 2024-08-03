@@ -28,7 +28,12 @@ export const ProjectTile = ({project, className}: Props) => {
           <Meta date={date} />
         </div>
       </div>
-      <Link url={Routes.project(slug!)}>See More →</Link>
+      <Link
+        url={Routes.project(slug!)}
+        icon={{name: 'arrowRight', position: 'trailing'}}
+      >
+        See More
+      </Link>
     </div>
   );
 };

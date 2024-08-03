@@ -20,8 +20,7 @@ export const FeaturedTile = ({node, className}: Props) => {
     className,
   ]);
 
-  const buttonText =
-    node?.type === 'Project' ? 'See More →' : 'Continue Reading →';
+  const buttonText = node?.type === 'Project' ? 'See More' : 'Continue Reading';
 
   const route = node?.type === 'Project' ? Routes.project : Routes.blogPost;
 
@@ -44,6 +43,7 @@ export const FeaturedTile = ({node, className}: Props) => {
           <Link
             url={route(node.slug!)}
             className="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark"
+            icon={{name: 'arrowRight', position: 'trailing'}}
           >
             {buttonText}
           </Link>
