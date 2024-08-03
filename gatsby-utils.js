@@ -149,7 +149,18 @@ const buildReadingList = (node, nodes) => {
     // only choose from nodes that have opted in to be recommended
     // this does not apply to the curated picks, only unpublished nodes
     // are unavailable in that context
-    availableNodes.filter((node) => node.includeInReadingList),
+    availableNodes
+      .filter((node) => node.includeInReadingList)
+      // do not pick nodes that have already been manually included in the recommended reading
+      .filter((node) => {
+        if (node.relatedReading == null) {
+          return true;
+        }
+
+        const isInCuratedPicks = node.relatedReading.includes(node.slug);
+
+        return !isInCuratedPicks;
+      }),
     3,
   );
 
