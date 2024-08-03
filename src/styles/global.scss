@@ -447,5 +447,10 @@ blockquote {
   a.data-footnote-backref {
     @apply no-underline;
     @apply relative top-[3px];
+
+    @apply inline-block;
+
+    @apply [&>svg]:max-h-[17px];
+    @apply [&>svg]:max-w-[17px];
   }
 }
