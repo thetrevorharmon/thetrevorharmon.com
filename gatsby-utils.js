@@ -121,24 +121,46 @@ const validateNode = (node, nodes) => {
   enforceNodeFields(node);
 };
 
-const buildReadingList = (nodes) => {
-  const pickedNodes = sampleSize(nodes, 3);
-  const preparedNodes = pickedNodes
-    .map((node) => ({
-      slug: node.slug,
-      label: node.title,
-      isLinkPost: node.link != null,
-      date: node.date,
-    }))
-    .sort((firstNode, secondNode) => {
+const buildReadingList = (node, nodes) => {
+  const availableNodes = nodes
+    // sort at this step so that the curated picks can come first
+    // even if they are not in chronological order
+    .sort(function sortByNewestNodeFirst(firstNode, secondNode) {
       if (new Date(firstNode.date) > new Date(secondNode.date)) {
         return -1;
       } else {
         return 1;
       }
+    })
+    .filter(function removeUnpublishedNodes(currentNode) {
+      return (
+        currentNode.type === node.type && currentNode.status === 'Published'
+      );
+    })
+    .filter(function removeCurrentNode(currentNode) {
+      return currentNode.slug !== node.slug;
     });
 
-  return preparedNodes;
+  const curatedPicks = (node.relatedReading || [])
+    .map((slug) => availableNodes.find((node) => node.slug === slug))
+    .filter(Boolean);
+
+  const randomPicks = sampleSize(
+    // only choose from nodes that have opted in to be recommended
+    // this does not apply to the curated picks, only unpublished nodes
+    // are unavailable in that context
+    availableNodes.filter((node) => node.includeInReadingList),
+    3,
+  );
+
+  const readingList = [...curatedPicks, ...randomPicks].slice(0, 3);
+
+  return readingList.map((node) => ({
+    slug: node.slug,
+    label: node.title,
+    isLinkPost: node.link != null,
+    date: node.date,
+  }));
 };
 
 module.exports = {

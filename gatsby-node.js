@@ -59,20 +59,7 @@ exports.createPages = ({graphql, actions}) => {
         }
 
         const recommendedReading =
-          node.type === 'Page'
-            ? []
-            : buildReadingList(
-                nodes
-                  .filter(function excludeUnpublishedNodes(currentNode) {
-                    return (
-                      currentNode.type === node.type &&
-                      currentNode.status === 'Published'
-                    );
-                  })
-                  .filter(function excludeCurrentNode(currentNode) {
-                    return currentNode.slug !== node.slug;
-                  }),
-              );
+          node.type === 'Page' ? [] : buildReadingList(node, nodes);
 
         createPage({
           path: getPath(node),
