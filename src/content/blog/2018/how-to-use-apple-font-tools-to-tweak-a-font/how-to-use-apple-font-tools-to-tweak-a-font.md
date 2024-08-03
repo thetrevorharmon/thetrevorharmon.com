@@ -3,6 +3,7 @@ title: How to use Apple Font Tools to tweak a font
 slug: how-to-use-apple-font-tools-to-tweak-a-font
 date: 2018-06-19T14:13-08:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: >-
   I used Apple’s font tools to fix the line-height of a font for an iOS app.

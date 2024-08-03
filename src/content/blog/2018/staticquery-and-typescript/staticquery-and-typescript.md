@@ -3,6 +3,7 @@ title: StaticQuery and Typescript
 slug: staticquery-and-typescript
 date: 2018-11-29T15:22-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: How to use Gatsby's StaticQuery while working in a Typescript environment.
 image:

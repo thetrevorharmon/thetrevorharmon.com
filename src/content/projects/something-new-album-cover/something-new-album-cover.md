@@ -4,6 +4,7 @@ slug: something-new-album-cover
 date: '2019-12-06'
 client: Michael Barrow & the Tourists
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./Photo-Something-New-Album-Cover.png

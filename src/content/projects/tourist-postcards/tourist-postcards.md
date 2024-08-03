@@ -4,6 +4,7 @@ slug: tourist-postcards
 date: '2018-05-04'
 client: Michael Barrow & the Tourists
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./postcard---ocean---front.png

@@ -3,6 +3,7 @@ title: Configuring Jest and Enzyme in Create React App on Typescript
 slug: configuring-jest-and-enzyme-in-create-react-app-on-typescript
 date: 2019-04-02T11:17-07:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: >-
   A guide to getting around an Enzyme internal error and get testing with Jest +

@@ -4,6 +4,7 @@ slug: the-backyard-ep-album-cover
 date: '2015-12-15'
 client: Jefferson & York
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./The-Backyard-EP-Album-Art.jpg

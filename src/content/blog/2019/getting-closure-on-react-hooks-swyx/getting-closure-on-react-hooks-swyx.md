@@ -3,6 +3,7 @@ title: "Getting Closure on React Hooks\_– @swyx"
 slug: getting-closure-on-react-hooks-swyx
 date: 2019-07-22T12:00-07:00
 type: Post
+include_in_reading_list: true
 status: Published
 link: https://www.youtube.com/watch?v=KJP1E-Y-xyo
 ---

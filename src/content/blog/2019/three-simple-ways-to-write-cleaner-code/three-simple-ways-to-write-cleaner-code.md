@@ -3,6 +3,7 @@ title: Three Simple Ways to Write Cleaner Code
 slug: three-simple-ways-to-write-cleaner-code
 date: 2019-04-23T09:49-07:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: >-
   Three practices you can start today that will make your code more readable now

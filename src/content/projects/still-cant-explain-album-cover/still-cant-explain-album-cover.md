@@ -3,6 +3,7 @@ title: “Still Can't Explain” Album Cover
 slug: still-cant-explain-album-cover
 date: 2022-09-20
 type: Project
+include_in_reading_list: true
 status: Published
 client: Trevor Harmon
 image:

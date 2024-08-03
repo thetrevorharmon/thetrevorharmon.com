@@ -3,6 +3,7 @@ title: Sell things fast with Gatsby and Shopify
 slug: sell-things-fast-with-gatsby-and-shopify
 date: 2020-04-23T11:50-07:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: A starting guide to building a lightning-fast Shopify store on Gatsby. ⚡
 image:

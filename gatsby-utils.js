@@ -30,6 +30,10 @@ const validateNode = (node, nodes) => {
         TYPES.includes(value) ||
         `Must include type.\nPossible values: ${TYPES.join(', ')}`,
       slug: (value) => value === fileName || `Slug and file name must match`,
+      includeInReadingList: (value) =>
+        value !== true ||
+        value !== false ||
+        `includeInReadingList must be a boolean`,
     });
 
     basicNodeShape.validate(node).forEach(throwError);

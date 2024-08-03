@@ -3,6 +3,7 @@ title: Introducing 2.0 in 2020
 slug: introducing-2-0-in-2020
 date: 2020-01-09T10:54-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: The next version of thetrevorharmon.com
 image:

@@ -3,6 +3,7 @@ title: A developer's guide to the Open Graph protocol
 slug: a-developers-guide-to-the-open-graph-protocol
 date: 2019-02-12T12:30-08:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: >-
   Learn about the protocol behind iMessage link previews, Twitter cards, and

@@ -3,6 +3,7 @@ title: 'Code IRL: Javascript closures'
 slug: code-irl-javascript-closures
 date: 2019-05-01T10:55-07:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: A real world example of how to use Javascript closures to write better code.
 image:

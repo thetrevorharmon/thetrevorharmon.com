@@ -23,6 +23,7 @@ exports.createPages = ({graphql, actions}) => {
             type
             client
             relatedReading
+            includeInReadingList
             image {
               source {
                 id
@@ -125,6 +126,7 @@ exports.createSchemaCustomization = ({actions}) => {
       link: String @proxy(from: "frontmatter.link")
       status: String @proxy(from: "frontmatter.status")
       relatedReading: [String] @proxy(from: "frontmatter.related_reading")
+      includeInReadingList: Boolean @proxy(from: "frontmatter.include_in_reading_list")
       date: Date @dateformat @proxy(from: "frontmatter.date")
       image: MdxFrontmatterImage @proxy(from: "frontmatter.image")
 

@@ -3,6 +3,7 @@ title: How to quickly deploy a Gatsby site with Netlify
 slug: how-to-quickly-deploy-a-gatsby-site-with-netlify
 date: 2018-09-17T15:29-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: >-
   I recently started using Netlify to host my personal site, and now I don’t
