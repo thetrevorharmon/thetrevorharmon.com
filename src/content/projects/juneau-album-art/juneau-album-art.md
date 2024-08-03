@@ -1,6 +1,6 @@
 ---
-title: '“Juneau” Print Design'
-slug: juneau-print-design
+title: '“Juneau” Album Art'
+slug: juneau-album-art
 date: '2017-05-12'
 client: Michael Barrow & the Tourists
 type: Project
@@ -13,7 +13,7 @@ related_reading:
   - santa-barbara-sessions-album-cover
 ---
 
-Michael Barrow & the Tourists decided to do a limited run of physical cds with a 3-panel folding insert. I did all of the designs and provided the landscape photography. Other photography was provided by Jenna Harmon.
+Michael Barrow & the Tourists decided to do a limited run of physical cds with a 3-panel folding insert. I designed the album art and provided the landscape photography. Other photography was provided by Jenna Harmon.
 
 !["Juneau" Album Cover](./Juneau-Album-Cover.jpg)
 ![This is the back cover of the Juneau album print.](./Juneau---Back-Cover.png)

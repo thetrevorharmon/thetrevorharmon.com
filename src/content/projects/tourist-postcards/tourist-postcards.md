@@ -11,7 +11,7 @@ image:
   alt: postcard - ocean - front
 related_reading:
   - are-you-a-tourist-posts
-  - juneau-print-design
+  - juneau-album-art
 ---
 
 I did this postcard design for Michael Barrow & the Tourists as a "Tourist-related" merch design. I did two designs, and they decided to choose the ocean-theme design for their first run of postcards.
