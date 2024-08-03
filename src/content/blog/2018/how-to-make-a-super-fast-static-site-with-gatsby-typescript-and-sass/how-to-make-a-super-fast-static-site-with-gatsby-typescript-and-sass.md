@@ -3,6 +3,7 @@ title: How to make a super-fast static site with Gatsby, Typescript, and SASS
 slug: how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass
 date: 2018-09-04T16:12-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: >-
   I recently redesigned my personal site with Gatsby. Here’s how to get started

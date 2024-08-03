@@ -46,6 +46,7 @@ title: "${title}"
 date: ${today}
 slug: "${slug}"
 type: Post
+include_in_reading_list: true
 status: Draft
 description: ""
 ---

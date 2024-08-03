@@ -3,6 +3,7 @@ title: How to use S3 select to query JSON in Node.js
 slug: how-to-use-s3-select-to-query-json-in-node-js
 date: 2019-06-05T09:55-07:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: >-
   A simple example to get you started on querying JSON data out of S3 (with

@@ -4,6 +4,7 @@ slug: sweet-honey-cover-art
 date: '2019-02-01'
 client: Michael Barrow & the Tourists
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./Sweet-Honey-6-Final-Album-art.jpg

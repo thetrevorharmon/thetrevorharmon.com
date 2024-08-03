@@ -28,6 +28,7 @@ Here's an example frontmatter block for a post:
     slug: a-developers-guide-to-the-open-graph-protocol
     date: 2019-02-12T12:30-08:00
     type: Post
+    include_in_reading_list: true
     status: Published
     description: >-
       Learn about the protocol behind iMessage link previews, Twitter cards, and
@@ -48,6 +49,7 @@ And here's an empty one as a starting point:
     slug:
     date:
     type:
+    include_in_reading_list: true
     status:
     description:
     image:
@@ -90,6 +92,7 @@ Here's an example frontmatter block for a project:
     slug: are-you-a-tourist-posters
     date: '2018-05-01'
     type: Project
+    include_in_reading_list: true
     status: Published
     client: Michael Barrow & the Tourists
     image:
@@ -104,6 +107,7 @@ And here's an empty one as a starting point:
     slug:
     date:
     type:
+    include_in_reading_list: true
     status:
     client:
     image:

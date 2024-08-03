@@ -4,6 +4,7 @@ slug: are-you-a-tourist-posters
 date: '2018-05-01'
 client: Michael Barrow & the Tourists
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./Are-You-A-Tourist-Poster---Callout.png

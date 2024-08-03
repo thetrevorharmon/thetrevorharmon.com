@@ -3,6 +3,7 @@ title: What I learned from my first month working remote
 slug: what-I-learned-from-my-first-month-working-remote
 date: 2019-10-14T09:30-07:00
 type: Post
+include_in_reading_list: true
 status: Published
 description: Reflections on what I've learned and how I made my first month a success.
 image:

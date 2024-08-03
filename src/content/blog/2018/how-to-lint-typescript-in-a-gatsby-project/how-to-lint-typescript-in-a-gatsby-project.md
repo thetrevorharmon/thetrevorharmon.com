@@ -3,6 +3,7 @@ title: How to lint Typescript in a Gatsby project
 slug: how-to-lint-typescript-in-a-gatsby-project
 date: 2018-11-06T15:33-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: Linting Typescript is simple to set up in Gatsby with the help of a plugin.
 image:

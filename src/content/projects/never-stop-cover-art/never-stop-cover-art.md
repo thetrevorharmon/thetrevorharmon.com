@@ -4,6 +4,7 @@ slug: never-stop-cover-art
 date: '2019-05-01'
 client: Michael Barrow & The Tourists
 type: Project
+include_in_reading_list: true
 status: Published
 image:
   source: ./Never-Stop-Album-Cover.jpg

@@ -3,6 +3,7 @@ title: How to make a static site with flexible content (using Gatsby & Contentfu
 slug: how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful
 date: 2018-09-10T13:48-08:00
 type: Post
+include_in_reading_list: false
 status: Published
 description: >-
   I recently redesigned my portfolio site with Gatsby, and Contentful as a
