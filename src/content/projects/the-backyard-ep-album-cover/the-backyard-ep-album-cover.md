@@ -9,6 +9,8 @@ status: Published
 image:
   source: ./The-Backyard-EP-Album-Art.jpg
   alt: '"The Backyard EP" Album Art'
+related_reading:
+  - unplugged-album-cover
 ---
 
 This was for an EP for the band I was playing with at the time, Jefferson & York. I was in charge of all parts of creating this album cover.

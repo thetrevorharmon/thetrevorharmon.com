@@ -9,6 +9,8 @@ status: Published
 image:
   source: ./Are-You-A-Tourist-Poster---Callout.png
   alt: Are You A Tourist? Poster - Callout
+related_reading:
+  - tourist-postcards
 ---
 
 Michael Barrow & the Tourists did a promotional campaign featuring "Are you a tourist?" as the tagline. I created these two posters for that campaign.

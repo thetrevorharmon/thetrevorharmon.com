@@ -9,6 +9,8 @@ status: Published
 image:
   source: ./Juneau-Album-Cover.jpg
   alt: '"Juneau" Album Cover'
+related_reading:
+  - santa-barbara-sessions-album-cover
 ---
 
 Michael Barrow & the Tourists decided to do a limited run of physical cds with a 3-panel folding insert. I did all of the designs and provided the landscape photography. Other photography was provided by Jenna Harmon.
