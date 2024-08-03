@@ -10,7 +10,7 @@ image:
   source: ./Sweet-Honey-6-Final-Album-art.jpg
   alt: 'Sweet Honey 6: Final Album art'
 related_reading:
-  - never-stop-cover-art
+  - never-stop-album-cover
   - something-new-album-cover
 ---
 
