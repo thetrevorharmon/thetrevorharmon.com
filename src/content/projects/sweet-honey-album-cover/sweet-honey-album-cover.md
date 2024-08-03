@@ -1,6 +1,6 @@
 ---
-title: '“Sweet Honey” Cover Art'
-slug: sweet-honey-cover-art
+title: '“Sweet Honey” Album Cover'
+slug: sweet-honey-album-cover
 date: '2019-02-01'
 client: Michael Barrow & the Tourists
 type: Project
