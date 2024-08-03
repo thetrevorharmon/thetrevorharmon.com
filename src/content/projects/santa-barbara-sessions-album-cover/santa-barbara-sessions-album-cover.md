@@ -9,6 +9,8 @@ status: Published
 image:
   source: ./Santa-Barbara-Session-Album-Cover.jpg
   alt: Santa Barbara Session Album Cover
+related_reading:
+  - juneau-print-design
 ---
 
 This album cover was done for Michael Barrow & the Tourist's live EP "Santa Barbara Sessions". I collaborated with Zach Collier on the idea for this EP cover, and then completed the design.
