@@ -22,7 +22,7 @@ const REDIRECTS_FOR_RENAMED_PROJECTS = [
   },
 ];
 
-exports.createPages = ({graphql, actions}) => {
+exports.createPages = async ({graphql, actions}) => {
   const {createPage, createRedirect} = actions;
 
   REDIRECTS_FOR_RENAMED_PROJECTS.forEach(({from, to}) => {
@@ -32,69 +32,65 @@ exports.createPages = ({graphql, actions}) => {
     });
   });
 
-  return new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allMdx {
-          nodes {
-            slug
-            title
-            description
-            link
-            status
-            date(formatString: "DD MMM YYYY")
-            type
-            client
-            relatedReading
-            includeInReadingList
-            image {
-              source {
-                id
-              }
-              alt
-              attribution {
-                author
-                sourceName
-                sourceUrl
-              }
+  const {data} = await graphql(`
+    {
+      allMdx {
+        nodes {
+          slug
+          title
+          description
+          link
+          status
+          date(formatString: "DD MMM YYYY")
+          type
+          client
+          relatedReading
+          includeInReadingList
+          image {
+            source {
+              id
             }
-            internal {
-              contentFilePath
+            alt
+            attribution {
+              author
+              sourceName
+              sourceUrl
             }
+          }
+          internal {
+            contentFilePath
           }
         }
       }
-    `).then((result) => {
-      result.data.allMdx.nodes.forEach((node, _, nodes) => {
-        validateNode(node, nodes);
+    }
+  `);
 
-        const componentPath = path.resolve(`./src/templates/${node.type}.tsx`);
-        const contentPath = node.internal.contentFilePath;
-        const component = `${componentPath}?__contentFilePath=${contentPath}`;
+  function getPath(node) {
+    if (node.type === 'Page') {
+      return `${node.slug}`;
+    }
+    const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
 
-        function getPath(node) {
-          if (node.type === 'Page') {
-            return `${node.slug}`;
-          }
-          const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
+    return `${pathPrefix}/${node.slug}`;
+  }
 
-          return `${pathPrefix}/${node.slug}`;
-        }
+  data.allMdx.nodes.forEach((node, _, nodes) => {
+    validateNode(node, nodes);
 
-        const recommendedReading =
-          node.type === 'Page' ? [] : buildReadingList(node, nodes);
+    const componentPath = path.resolve(`./src/templates/${node.type}.tsx`);
+    const contentPath = node.internal.contentFilePath;
+    const component = `${componentPath}?__contentFilePath=${contentPath}`;
 
-        createPage({
-          path: getPath(node),
-          context: {
-            slug: node.slug,
-            recommendedReading: recommendedReading,
-          },
-          component: component,
-        });
-      });
+    const recommendedReading =
+      node.type === 'Page' ? [] : buildReadingList(node, nodes);
 
-      resolve();
+    createPage({
+      path: getPath(node),
+      context: {
+        slug: node.slug,
+        recommendedReading: recommendedReading,
+      },
+      component: component,
     });
   });
 };
