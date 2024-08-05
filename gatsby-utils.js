@@ -122,24 +122,28 @@ const validateNode = (node, nodes) => {
 };
 
 const buildReadingList = (node, nodes) => {
-  const availableNodes = nodes
-    // sort at this step so that the curated picks can come first
-    // even if they are not in chronological order
-    .sort(function sortByNewestNodeFirst(firstNode, secondNode) {
-      if (new Date(firstNode.date) > new Date(secondNode.date)) {
-        return -1;
-      } else {
-        return 1;
-      }
-    })
-    .filter(function removeUnpublishedNodes(currentNode) {
-      return (
-        currentNode.type === node.type && currentNode.status === 'Published'
-      );
-    })
-    .filter(function removeCurrentNode(currentNode) {
-      return currentNode.slug !== node.slug;
-    });
+  const availableNodes =
+    // .sort() sorts in place, which will mess with the way that
+    // gatsby-node generates the pages, so copy the array first
+    nodes
+      .slice()
+      // sort at this step so that the curated picks can come first
+      // even if they are not in chronological order
+      .sort(function sortByNewestNodeFirst(firstNode, secondNode) {
+        if (new Date(firstNode.date) > new Date(secondNode.date)) {
+          return -1;
+        } else {
+          return 1;
+        }
+      })
+      .filter(function removeUnpublishedNodes(currentNode) {
+        return (
+          currentNode.type === node.type && currentNode.status === 'Published'
+        );
+      })
+      .filter(function removeCurrentNode(currentNode) {
+        return currentNode.slug !== node.slug;
+      });
 
   const curatedPicks = (node.relatedReading || [])
     .map((slug) => availableNodes.find((node) => node.slug === slug))
