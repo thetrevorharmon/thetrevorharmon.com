@@ -1,7 +1,14 @@
 import {graphql} from 'gatsby';
 import React from 'react';
 
-import {FeaturedTile, Button, PostTile, Link, Image} from '../components';
+import {
+  FeaturedTile,
+  Button,
+  PostTile,
+  Link,
+  Image,
+  FeaturedLinkTile,
+} from '../components';
 import {Layout} from '../layouts';
 import {Routes} from '../utils';
 import {SEO} from '../utils/SEO';
@@ -110,7 +117,11 @@ function IndexPage({data}: IndexPageProps) {
       </div>
       <div className="space-y-big">
         <h2>Latest on the blog</h2>
-        <FeaturedTile node={featuredPost} />
+        {featuredPost.link != null ? (
+          <FeaturedLinkTile node={featuredPost} />
+        ) : (
+          <FeaturedTile node={featuredPost} />
+        )}
         <div className="space-y-normal">
           {posts.map((node: Mdx) => (
             <PostTile
@@ -147,6 +158,7 @@ export const query = graphql`
         title
         description
         link
+        excerpt
         date(formatString: "DD MMM YYYY")
         image {
           source {
