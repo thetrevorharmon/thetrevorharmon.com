@@ -8,7 +8,7 @@ status: Published
 link: 'https://youtu.be/8117-JmjgOA?t=5065'
 ---
 
-In every Javascript app I've worked on, the linter has enforced preference towards `let` over `const`. And yet I've always wondered why code like this is valid Javascript:
+In every Javascript app I've worked on, the linter has enforced preference towards `const` over `let`. And yet I've always wondered why code like this is valid Javascript:
 
 ```tsx
 const user = {
