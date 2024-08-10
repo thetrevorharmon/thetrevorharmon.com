@@ -1,7 +1,7 @@
 import {graphql} from 'gatsby';
 import * as React from 'react';
 
-import {FeaturedTile, PostTile} from '../components';
+import {FeaturedLinkTile, FeaturedTile, PostTile} from '../components';
 import {Layout} from '../layouts';
 import {Routes, SEO} from '../utils';
 
@@ -46,7 +46,11 @@ function BlogPage({data}: Props) {
         </div>
 
         <div>
-          <FeaturedTile node={featuredPost} />
+          {featuredPost.link != null ? (
+            <FeaturedLinkTile node={featuredPost} />
+          ) : (
+            <FeaturedTile node={featuredPost} />
+          )}
           <div className="space-y-large mt-large">
             {orderedPostsByYear.map(([year, posts]) => {
               return (
@@ -84,6 +88,7 @@ export const query = graphql`
         slug
         title
         description
+        excerpt
         link
         date(formatString: "DD MMM YYYY")
         image {
