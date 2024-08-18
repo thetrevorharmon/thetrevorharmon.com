@@ -15,17 +15,17 @@ const NEW_REFERENCE_KEY = 'reference--';
  * HTML and Markdown has been parsed into an AST. I need to pass an AST version
  * of the SVG instead.
  *
- * I have saved this icon as arrow-undo.svg in the repo in case it is needed
+ * I have saved this icon as arrow-return.svg in the repo in case it is needed
  * in the future. I used ChatGPT to convert the svg into a rehype node.
  */
-const ARROW_UNDO_ICON = {
+const ARROW_RETURN_ICON = {
   type: 'element',
   tagName: 'svg',
   properties: {
     viewBox: '0 0 24 24',
     width: '24px',
     height: '24px',
-    'stroke-width': '1.5',
+    'stroke-width': '2',
     xmlns: 'http://www.w3.org/2000/svg',
   },
   children: [
@@ -128,7 +128,7 @@ export default function rehypeBetterFootnoteLinks() {
           NEW_REFERENCE_KEY,
         );
 
-        node.children[0] = ARROW_UNDO_ICON;
+        node.children[0] = ARROW_RETURN_ICON;
       }
     });
   };
