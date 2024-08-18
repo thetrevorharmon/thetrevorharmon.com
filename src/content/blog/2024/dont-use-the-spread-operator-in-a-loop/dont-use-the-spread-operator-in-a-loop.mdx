@@ -1,0 +1,74 @@
+---
+title: "Don't use the spread operator in a loop"
+date: 2024-11-25
+slug: "dont-use-the-spread-operator-in-a-loop"
+type: Post
+include_in_reading_list: true
+status: Published
+description: "The spread operator is convenient but can have big impacts on performance."
+image:
+  alt: a train at the station in chicago with a sign that says loop
+  source: ./a-train-at-the-station-in-chicago-with-a-sign-that-says-loop.jpg
+  attribution:
+    author: Mia Harvey
+    sourceName: Unsplash
+    sourceUrl: https://unsplash.com/photos/grayscale-photo-of-train-station-289d5HMbml4
+related_reading:
+  - const-isnt-constant
+---
+
+I recently stumbled on [this article](https://jpcamara.com/2023/03/07/making-tanstack-table.html) that talks about a one line change that had a huge performance boost. The change? Removing the spread operator from within a loop.
+
+I have regularly reached for the spread operator without too much thought, since it plays very nicely with an immutable style of JS programming[^const_isnt_constant]. However, after reading the article, I decided to do some digging into the performance of the operator. Pretty quickly it becomes apparent that the spread operator essentially runs in `O(n)` time. Used one time, this isn't so bad–but when you start to use it within loops, it gets pretty bad. Take this example:
+
+```tsx
+const users = [
+  {firstName: 'Alice', lastName: 'Church', age: 32},
+  {firstName: 'Bob', lastName: 'Lloyd', age: 55},
+  {name: 'Clarence', lastName: 'Tyson', age: 24},
+];
+
+const formattedUsers = users.map((user) => {
+  const fullName = getFullName(user);
+  
+  const userWithFullName = {...user, fullName};
+
+  const createdAt = new Date();
+
+  const userWithCreationTime = {...userWithFullName, createdAt};
+
+  return userWithCreationTime;
+});
+```
+
+I separated the creation of `userWithFullName` from `userWithCreationTime` because I have seen kind of approach before (and have done it myself!). When my eyes scan this code, I think "one loop, no big deal, `O(n)`". But in reality, since there are two uses of the spread operator, it's `O(2n^2)` 😬 
+
+One fix would be to combine the two objects in one:
+
+```tsx
+const formattedUsers = users.map((user) => {
+  const fullName = getFullName(user);
+  const createdAt = new Date();
+  
+  return {
+    ...user,
+    fullName,
+    createdAt
+  }
+});
+```
+That is certainly an improvement, as it reduces the time to `O(n^2)`. But the best solution here in my opinion is to embrace mutability[^mutability_in_js]:
+```tsx
+const formattedUsers = users.map((user) => {
+  user.fullName = getFullName(user);
+  user.createdAt = new Date();
+  
+  return user;
+});
+```
+The new solution is `O(n)`.
+
+If you can help it, don't use the spread operator in a loop.
+
+[^const_isnt_constant]: "Immutable" is used loosely here since [`const` is not really immutable](/blog/const-isnt-constant/).
+[^mutability_in_js]: I realize that this isn't a cure-all; embracing mutability isn't appropriate in every situation. I recommend applying this approach judiciously.
