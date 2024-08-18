@@ -25,7 +25,7 @@ const ARROW_UNDO_ICON = {
     viewBox: '0 0 24 24',
     width: '24px',
     height: '24px',
-    'stroke-width': '1.5',
+    'stroke-width': '2',
     xmlns: 'http://www.w3.org/2000/svg',
   },
   children: [
