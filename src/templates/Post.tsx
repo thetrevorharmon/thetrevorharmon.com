@@ -48,7 +48,7 @@ function Article({
       type="Post"
       hasSignupForm
     >
-      <FeaturedImage mdx={mdx} />
+      {/*<FeaturedImage mdx={mdx} /> */}
       <div className="space-y-tiny mt-large mb-big md:mb-large">
         <h1>
           <span>{mdx.title}</span>
