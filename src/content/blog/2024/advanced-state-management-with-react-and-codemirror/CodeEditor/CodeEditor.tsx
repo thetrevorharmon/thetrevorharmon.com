@@ -112,7 +112,7 @@ const stateCoordinator = EditorState.transactionFilter.of((transaction) => {
   ];
 });
 
-export function CodeEditor() {
+export default function CodeEditor() {
   const initialValue = `\nSELECT *\nFROM customers\nWHERE customer_id in (100,11,33)\n`;
   const [state, setState] = useState<State>('valid query');
 

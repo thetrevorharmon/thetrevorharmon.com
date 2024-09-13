@@ -52,7 +52,7 @@ const midpointViewPlugin = ViewPlugin.fromClass(
   },
 );
 
-export function ViewPluginExample() {
+export default function ViewPluginExample() {
   const extensions = useMemo(() => [midpointViewPlugin], []);
 
   return (
