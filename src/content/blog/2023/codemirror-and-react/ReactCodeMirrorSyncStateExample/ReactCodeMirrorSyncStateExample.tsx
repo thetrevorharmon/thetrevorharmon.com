@@ -86,7 +86,7 @@ export function useExtensionWithDependency(
   return extension;
 }
 
-export function ReactCodeMirrorSyncStateExample() {
+export default function ReactCodeMirrorSyncStateExample() {
   const codeEditorRef = useRef<ReactCodeMirrorRef | null>(null);
 
   const [deleteCount, setDeleteCount] = useState<{

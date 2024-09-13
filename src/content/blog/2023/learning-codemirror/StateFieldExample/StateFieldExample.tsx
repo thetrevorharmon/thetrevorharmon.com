@@ -36,7 +36,7 @@ const changeCounterStateField = StateField.define<number>({
   provide: (value) => showPanel.from(value, createCounterPanel),
 });
 
-export function StateFieldExample() {
+export default function StateFieldExample() {
   const extensions = useMemo(() => [changeCounterStateField], []);
 
   return (

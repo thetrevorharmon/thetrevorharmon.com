@@ -6,7 +6,7 @@ interface Props {
   initialValue?: string;
 }
 
-export function CodeEditorWithTokens({initialValue}: Props) {
+export default function CodeEditorWithTokens({initialValue}: Props) {
   const [value, setValue] = useState(initialValue ?? '');
 
   const languageServer = useMemo(() => new LanguageServer(), []);

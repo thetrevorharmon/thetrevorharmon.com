@@ -38,7 +38,7 @@ const focusStateLogger = EditorView.updateListener.of(
 
 const tabSize = EditorState.tabSize.of(8);
 
-export function FacetExample() {
+export default function FacetExample() {
   const extensions = useMemo(
     () => [
       panel,

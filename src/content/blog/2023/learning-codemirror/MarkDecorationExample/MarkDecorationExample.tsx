@@ -57,7 +57,7 @@ const midpointWidgetStateField = StateField.define<DecorationSet>({
   provide: (f) => EditorView.decorations.from(f),
 });
 
-export function MarkDecorationExample() {
+export default function MarkDecorationExample() {
   const extensions = useMemo(() => [midpointWidgetStateField], []);
 
   return (
