@@ -48,14 +48,6 @@ const config = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `projects`,
-        path: `${__dirname}/src/content/projects`,
-      },
-      __key: 'projects',
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `pages`,
         path: `${__dirname}/src/content/pages`,
       },
