@@ -10,7 +10,7 @@ import {
   FeaturedLinkTile,
 } from '../components';
 import {Layout} from '../layouts';
-import {Routes} from '../utils';
+import {nbps, Routes} from '../utils';
 import {SEO} from '../utils/SEO';
 
 interface IndexPageProps {
@@ -78,7 +78,7 @@ function IndexPage({data}: IndexPageProps) {
                 <Link url="https://www.shopify.com/">Shopify</Link>. I've worked
                 on the{' '}
                 <Link url="https://www.shopify.com/analytics">analytics</Link>{' '}
-                team (called Optimize) for almost 5 years.
+                team for over 6{nbps}years.
               </p>
               <span>🎸</span>
               <p>
@@ -87,11 +87,6 @@ function IndexPage({data}: IndexPageProps) {
                   music
                 </Link>{' '}
                 when I'm not writing code.
-              </p>
-              <span>🎨</span>
-              <p>
-                I occasionally do{' '}
-                <Link url={Routes.projects()}>UI & graphic design</Link>.
               </p>
               <span>⛪️</span>
               <p>
