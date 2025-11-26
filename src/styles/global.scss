@@ -423,27 +423,6 @@ blockquote {
     }
   }
 
-  &.projects {
-    .gatsby-resp-image-wrapper {
-      @apply border border-img-border dark:border-img-border-dark;
-    }
-
-    span:first-of-type {
-      @apply block;
-      @apply mt-big md:mt-large;
-    }
-
-    span + span {
-      @apply mt-medium block;
-    }
-
-    span span.gatsby-resp-image-wrapper,
-    span.gatsby-resp-image-wrapper,
-    span.gatsby-resp-image-background-image {
-      @apply mt-0;
-    }
-  }
-
   a.data-footnote-backref {
     @apply no-underline;
     @apply relative top-[3px];

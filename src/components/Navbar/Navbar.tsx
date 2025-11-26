@@ -12,10 +12,6 @@ export const Navbar = () => {
       location: Routes.blog(),
     },
     {
-      display: 'Projects',
-      location: Routes.projects(),
-    },
-    {
       display: 'About',
       location: Routes.about(),
     },
