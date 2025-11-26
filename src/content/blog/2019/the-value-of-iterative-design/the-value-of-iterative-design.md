@@ -106,7 +106,7 @@ I started my first design sometime at the end of July 2018, and the final versio
 
 Iterating on creative work can be difficult, but produces better results in the end.
 
-[1]: https://thetrevorharmon.com/projects/santa-barbara-sessions-album-cover
+[1]: https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists/#santa-barbara-sessions
 [2]: https://twitter.com/zachisatourist
 [3]: https://foter.com/photos/pi/332/50s-bar-stools-4.jpg
 [4]: https://commercialtype.com/catalog/druk_text_wide
