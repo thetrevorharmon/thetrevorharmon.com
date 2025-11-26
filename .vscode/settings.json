@@ -15,7 +15,7 @@
   "[markdown]": {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 80,
+    "editor.wordWrapColumn": 120,
     "editor.quickSuggestions": {
       "other": false,
       "comments": false,
