@@ -16,8 +16,6 @@ const Routes: LinkInterface = {
   blogPost: (name: string = '') => `/blog/${name}`,
   drafts: () => '/drafts',
   home: () => '/',
-  project: (name: string = '') => `/projects/${name}`,
-  projects: () => '/projects',
 };
 
 export {ExternalLinks, Routes};
