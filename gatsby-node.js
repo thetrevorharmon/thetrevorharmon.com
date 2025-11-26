@@ -7,30 +7,8 @@ const path = require(`path`);
 const readingTime = require(`reading-time`);
 const {buildReadingList, validateNode} = require('./gatsby-utils');
 
-const REDIRECTS_FOR_RENAMED_PROJECTS = [
-  {
-    from: '/projects/sweet-honey-cover-art',
-    to: '/projects/sweet-honey-album-cover',
-  },
-  {
-    from: '/projects/never-stop-cover-art',
-    to: '/projects/never-stop-album-cover',
-  },
-  {
-    from: '/projects/juneau-print-design',
-    to: '/projects/juneau-album-art',
-  },
-];
-
 exports.createPages = async ({graphql, actions}) => {
-  const {createPage, createRedirect} = actions;
-
-  REDIRECTS_FOR_RENAMED_PROJECTS.forEach(({from, to}) => {
-    createRedirect({
-      fromPath: from,
-      toPath: to,
-    });
-  });
+  const {createPage} = actions;
 
   const {data} = await graphql(`
     {
