@@ -4,12 +4,13 @@ import {Callout} from '../Callout';
 import {TwoUp} from '../TwoUp';
 import {Link} from '../Link';
 import {Citation} from '../Citation';
+import {Breakout} from '../Breakout';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const shortcodes = {Callout, TwoUp, Link, Citation};
+const shortcodes = {Callout, TwoUp, Link, Citation, Breakout};
 
 export function MdxProvider({children}: Props) {
   return <MDXProvider components={shortcodes}>{children}</MDXProvider>;
