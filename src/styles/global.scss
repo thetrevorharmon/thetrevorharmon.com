@@ -1,8 +1,9 @@
+@import './syntaxHighlighting';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './syntaxHighlighting';
 @import './Mermaid';
 
 @import '~@fontsource/source-serif-pro/400.css';
