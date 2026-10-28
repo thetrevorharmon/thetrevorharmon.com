@@ -1,4 +1,5 @@
 .cache/*
 public/*
-src/content/blog/2019/three-simple-ways-to-write-cleaner-code/three-simple-ways-to-write-cleaner-code.md
 netlify.toml
+src/components/CodeEditor/extensions/zephyr/language/build/
+src/content/
