@@ -15,6 +15,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
     "pretty": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,mdx,json,md,css,scss}\"",
     "create-blog-post": "node ./scripts/create-blog-post.js",
     "remove-mermaid-svgs": "node ./scripts/remove-mermaid-svgs.js",
@@ -41,7 +42,6 @@
     "buffer": "^6.0.3",
     "classnames": "^2.5.1",
     "dotenv": "^16.6.1",
-    "eslint-config-react-app": "^7.0.1",
     "gatsby": "^5.16.1",
     "gatsby-plugin-feed": "^5.16.0",
     "gatsby-plugin-image": "^3.16.0",
@@ -70,11 +70,16 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9",
     "@mermaid-js/mermaid-cli": "^10.1.0",
     "@types/node": "^22",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.6.2",
+    "eslint": "^9",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.13.0",
     "lodash.samplesize": "^4.2.0",
     "netlify-plugin-cache": "^1.0.3",
     "object-shape-validator": "^1.0.4",
@@ -83,7 +88,8 @@
     "remark-gfm": "^3.0.1",
     "slugify": "^1.6.9",
     "tailwindcss": "^3.4.19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.72.1"
   },
   "resolutions": {
     "@types/react": "^18.3.31"

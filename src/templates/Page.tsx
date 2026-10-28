@@ -14,7 +14,7 @@ interface Props {
   data: Queries.PageQuery;
 }
 
-function Page({children, data: {mdx}, pageContext: {slug}}: Props) {
+function Page({children, data: {mdx}}: Props) {
   if (mdx == null || mdx?.body == null) {
     return null;
   }

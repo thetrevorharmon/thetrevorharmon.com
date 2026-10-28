@@ -27,6 +27,7 @@ export function CodeEditorWithTokens({initialValue}: Props) {
     <tr>
       {headers.map((header) => (
         <th
+          key={header}
           className={`${cellClasses} bg-stone-50 dark:bg-[#2f2f2f] border-b border-[#ccc] dark:border-[#555]`}
         >
           {header}
@@ -39,9 +40,9 @@ export function CodeEditorWithTokens({initialValue}: Props) {
     const values = Object.values(token);
 
     return (
-      <tr className="even:bg-stone-100 even:dark:bg-[#202020]">
-        {values.map((value) => (
-          <td className={`${cellClasses}`}>{value}</td>
+      <tr key={JSON.stringify(token)} className="even:bg-stone-100 even:dark:bg-[#202020]">
+        {values.map((value, index) => (
+          <td key={index} className={`${cellClasses}`}>{value}</td>
         ))}
       </tr>
     );
