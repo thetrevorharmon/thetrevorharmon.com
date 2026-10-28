@@ -19,7 +19,7 @@ export function FeaturedImage({mdx}: Props) {
     </div>
   );
 
-  const caption = mdx.image?.title ?? <Attribution mdx={mdx} /> ?? null;
+  const caption = mdx.image?.title ?? <Attribution mdx={mdx} />;
 
   if (caption == null) {
     return imageMarkup;

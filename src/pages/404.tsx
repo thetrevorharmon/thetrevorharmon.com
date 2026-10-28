@@ -18,7 +18,9 @@ function NotFoundPage() {
       <h1 className="page text-[6rem] leading-[10rem] m-0 my-normal">
         <span>404</span>
       </h1>
-      <p>Looks like you still haven't found what you're looking for.</p>
+      <p>
+        Looks like you still haven&apos;t found what you&apos;re looking for.
+      </p>
       <p className="mb-huge">
         <Link
           url={Routes.home()}

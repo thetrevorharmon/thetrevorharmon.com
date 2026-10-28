@@ -104,7 +104,7 @@ export function Head({data}: {data: Queries.ArticleQuery}) {
   const props = {
     title: data.mdx!.title!,
     description: data.mdx?.description ?? undefined,
-    url: Routes.blogPost(data.mdx?.slug!),
+    url: Routes.blogPost(data.mdx!.slug!),
     image: getImageSrc(data.mdx, siteUrl),
   };
 

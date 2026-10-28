@@ -59,7 +59,7 @@ function IndexPage({data}: IndexPageProps) {
                 <span>
                   <span id="greeting">Hi!</span>
                   <br />
-                  I'm Trevor.
+                  I&apos;m Trevor.
                 </span>
               </h1>
             </div>
@@ -75,8 +75,8 @@ function IndexPage({data}: IndexPageProps) {
               <span>👨‍💻</span>
               <p>
                 I write code for{' '}
-                <Link url="https://www.shopify.com/">Shopify</Link>. I've worked
-                on the{' '}
+                <Link url="https://www.shopify.com/">Shopify</Link>. I&apos;ve
+                worked on the{' '}
                 <Link url="https://www.shopify.com/analytics">analytics</Link>{' '}
                 team for over 6{nbps}years.
               </p>
@@ -86,11 +86,11 @@ function IndexPage({data}: IndexPageProps) {
                 <Link url="https://open.spotify.com/artist/1yO8BBQCwIuADPQA6Pvux6?si=OHbykjIhTpy-NVGXm-tAlQ">
                   music
                 </Link>{' '}
-                when I'm not writing code.
+                when I&apos;m not writing code.
               </p>
               <span>⛪️</span>
               <p>
-                I'm a devout{' '}
+                I&apos;m a devout{' '}
                 <Link url="https://www.churchofjesuschrist.org/?lang=eng">
                   Latter-day Saint
                 </Link>

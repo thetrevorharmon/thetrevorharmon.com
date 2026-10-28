@@ -68,7 +68,7 @@ function makeLinter(shouldLint: boolean) {
 export function useExtensionWithDependency(
   view: EditorView | null,
   extensionFactory: () => Extension,
-  deps: any[],
+  deps: unknown[],
 ) {
   const compartment = useMemo(() => new Compartment(), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,6 +93,7 @@ export function ReactCodeMirrorSyncStateExample() {
     count: number;
     updatedBy: 'react' | 'codemirror';
   }>({count: initialCount, updatedBy: 'codemirror'});
+  const [editorView, setEditorView] = useState<EditorView | null>(null);
   const [shouldLint, setShouldLint] = useState<boolean>(true);
 
   useEffect(() => {
@@ -105,7 +106,7 @@ export function ReactCodeMirrorSyncStateExample() {
   }, [deleteCount]);
 
   const linter = useExtensionWithDependency(
-    codeEditorRef.current?.view ?? null,
+    editorView,
     () => makeLinter(shouldLint),
     [shouldLint],
   );
@@ -163,6 +164,7 @@ export function ReactCodeMirrorSyncStateExample() {
       <div className="CodeEditor">
         <ReactCodeEditor
           ref={codeEditorRef}
+          onCreateEditor={setEditorView}
           value={INITIAL_VALUE}
           extensions={extensions}
           indentWithTab={false}

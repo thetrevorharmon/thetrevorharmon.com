@@ -5,7 +5,7 @@ import {Footer, Navbar, Container} from '../components';
 import 'normalize.css';
 import '../styles/global.scss';
 
-interface Props extends LayoutProps {}
+type Props = LayoutProps;
 
 export function PageLayout({className, children}: Props) {
   return (

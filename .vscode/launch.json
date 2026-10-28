@@ -8,7 +8,7 @@
       "program": "${workspaceRoot}/node_modules/.bin/gatsby",
       "args": ["develop", "--verbose"],
       "runtimeArgs": ["--inspect-brk"],
-      "console": "integratedTerminal",
+      "console": "integratedTerminal"
     },
     {
       "name": "Gatsby build",
@@ -17,7 +17,7 @@
       "program": "${workspaceRoot}/node_modules/.bin/gatsby",
       "args": ["build"],
       "runtimeArgs": ["--inspect-brk"],
-      "console": "integratedTerminal",
+      "console": "integratedTerminal"
     },
     {
       "type": "chrome",
