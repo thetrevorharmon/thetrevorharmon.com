@@ -25,6 +25,8 @@ jobs:
           cache: yarn
 
       - run: yarn install --frozen-lockfile
+      # Build first: Gatsby generates src/gatsby-types.d.ts (graphqlTypegen),
+      # which typecheck and lint depend on. It is gitignored, so CI lacks it.
+      - run: yarn build
       - run: yarn typecheck
       - run: yarn lint
-      - run: yarn build
