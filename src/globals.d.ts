@@ -35,7 +35,6 @@ type ImageFile = {
 } | null;
 
 type Mdx = {
-  readonly client?: string | null;
   readonly link?: string | null;
   readonly timeToRead?: number | null;
   readonly description?: string | null;
