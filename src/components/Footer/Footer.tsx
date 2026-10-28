@@ -13,8 +13,8 @@ export const Footer = ({className}: FooterProps) => {
 
   const footerLinks = [
     {
-      display: 'Twitter',
-      location: ExternalLinks.twitter(),
+      display: 'X',
+      location: ExternalLinks.x(),
     },
     {
       display: 'Github',

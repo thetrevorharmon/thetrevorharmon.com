@@ -14,7 +14,7 @@ No
 ### Checklist before merge
 
 - [ ] I have prefixed the name of the pull request with an emoji.
-- [ ] I have run `yarn tophat` locally to ensure that it builds correctly OR I have verified it builds with a deploy preview.
+- [ ] CI (`yarn typecheck`, `yarn lint`, `yarn build`) passes, and for larger changes I have also run `yarn tophat` locally or checked the deploy preview.
 
 <!--
 

@@ -3,8 +3,8 @@ interface LinkInterface {
 }
 
 const ExternalLinks: LinkInterface = {
-  github: () => 'http://github.com/thetrevorharmon',
-  twitter: () => 'http://twitter.com/thetrevorharmon',
+  github: () => 'https://github.com/thetrevorharmon',
+  x: () => 'https://x.com/thetrevorharmon',
   mailchimpSignupForm: () =>
     'https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de',
 };

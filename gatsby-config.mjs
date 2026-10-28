@@ -26,7 +26,7 @@ const config = {
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
-  graphqlTypegen: true,
+  graphqlTypegen: {generateOnBuild: true},
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
@@ -115,7 +115,12 @@ const config = {
       resolve: `gatsby-plugin-sass`,
     },
     `gatsby-plugin-react-svg`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/drafts`, `/drafts/`],
+      },
+    },
     `gatsby-plugin-robots-txt`,
     {
       resolve: 'gatsby-plugin-manifest',

@@ -28,7 +28,7 @@ The data that I'll be querying against is from the Star Wars API (I grabbed the 
 ```JSON
 {
 	"count": 61,
-	"next": "https://swapi.co/api/planets/?page=2",
+	"next": "https://swapi.dev/api/planets/?page=2",
 	"previous": null,
 	"results": [
 		{
@@ -52,7 +52,7 @@ The data that I'll be querying against is from the Star Wars API (I grabbed the 
 			],
 			"created": "2014-12-10T11:35:48.479000Z",
 			"edited": "2014-12-20T20:58:18.420000Z",
-			"url": "https://swapi.co/api/planets/2/"
+			"url": "https://swapi.dev/api/planets/2/"
 		},
 		...
 	]
@@ -220,6 +220,6 @@ If you've made it this far, it's time to run your lambda! When I run my lambda, 
 A final version of the code is on this [Github gist](https://gist.github.com/thetrevorharmon/6b831875cde98e5dc7f7458f6112b061). Hopefully by this point you have a basic, working example of getting JSON data out of S3 by using Node.js. I found this significantly easier than trying to use a managed service like Athena or manually parsing through S3 files to find the data I want. S3 Select makes getting JSON data out of S3 less painful while also making it more targeted.
 
 [1]: https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/
-[2]: https://swapi.co/api/planets/
+[2]: https://swapi.dev/api/planets/
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
 [4]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#selectObjectContent-property
