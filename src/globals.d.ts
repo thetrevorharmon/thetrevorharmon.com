@@ -4,7 +4,7 @@ declare module '*.scss' {
 }
 
 declare module '*.png' {
-  const content: any;
+  const content: string;
   export = content;
 }
 

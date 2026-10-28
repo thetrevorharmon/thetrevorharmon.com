@@ -65,7 +65,7 @@ export function Head({data}: {data: Queries.PageQuery}) {
   const props = {
     title: data.mdx!.title!,
     description: data.mdx?.description ?? undefined,
-    url: Routes.page(data.mdx?.slug!),
+    url: Routes.page(data.mdx!.slug!),
     image: getImageSrc(data.mdx, siteUrl),
   };
 

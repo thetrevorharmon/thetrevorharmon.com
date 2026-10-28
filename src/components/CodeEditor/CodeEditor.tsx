@@ -1,5 +1,6 @@
 import React, {useCallback, useState, useMemo, forwardRef} from 'react';
 import {Extension} from '@codemirror/state';
+import {EditorView} from '@codemirror/view';
 import ReactCodeEditor, {ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 import {javascript} from '@codemirror/lang-javascript';
@@ -15,6 +16,7 @@ interface Props {
   language?: 'zephyr' | 'javascript' | 'sql';
   extensions?: Extension[];
   hasFooter?: boolean;
+  onCreateEditor?: (view: EditorView) => void;
 }
 
 export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
@@ -25,6 +27,7 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
       language,
       extensions = [],
       hasFooter = false,
+      onCreateEditor,
     } = props;
 
     const theme = useTheme();
@@ -58,6 +61,7 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
       <div className={classNames('CodeEditor', hasFooter && 'HasFooter')}>
         <ReactCodeEditor
           ref={ref}
+          onCreateEditor={onCreateEditor}
           value={value}
           theme={theme}
           extensions={memoizedExtensions}
@@ -88,3 +92,5 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
     );
   },
 );
+
+CodeEditor.displayName = 'CodeEditor';

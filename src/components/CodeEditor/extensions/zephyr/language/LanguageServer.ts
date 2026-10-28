@@ -1,20 +1,17 @@
 import {CharStreams, CommonTokenStream} from 'antlr4ts';
 import {ZephyrLexer} from './build/ZephyrLexer';
 
-const supportedTokens = [
-  'const',
-  'let',
-  'semicolon',
-  'assign',
-  'blockComment',
-  'lineComment',
-  'number',
-  'string',
-  'identifier',
-  'unknown',
-] as const;
-
-export type Token = (typeof supportedTokens)[number];
+export type Token =
+  | 'const'
+  | 'let'
+  | 'semicolon'
+  | 'assign'
+  | 'blockComment'
+  | 'lineComment'
+  | 'number'
+  | 'string'
+  | 'identifier'
+  | 'unknown';
 
 const lexerTokenToTokenType: {[key: number]: Token} = {
   [ZephyrLexer.CONST]: 'const',
