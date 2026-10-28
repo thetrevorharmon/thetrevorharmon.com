@@ -33,7 +33,7 @@
     "@lezer/common": "^1.5.4",
     "@lezer/highlight": "^1.2.5",
     "@mdx-js/react": "^2.3.0",
-    "@radix-ui/react-dropdown-menu": "^2.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.2.1",
     "@uiw/react-codemirror": "^4.25.12",
     "antlr4ts": "^0.5.0-alpha.4",
     "assert": "2.0.0",
