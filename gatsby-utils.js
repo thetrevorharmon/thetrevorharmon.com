@@ -2,7 +2,7 @@ const sampleSize = require('lodash.samplesize');
 const ObjectShape = require('object-shape-validator').default;
 
 const STATUSES = ['Archived', 'Published', 'Draft'];
-const TYPES = ['Post', 'Project', 'Page'];
+const TYPES = ['Post', 'Page'];
 
 const validateNode = (node, nodes) => {
   const name = node.internal.contentFilePath;
@@ -66,15 +66,15 @@ const validateNode = (node, nodes) => {
         .forEach(throwError);
     }
 
-    if (['Post', 'Project'].includes(node.type)) {
-      const postOrProjectNodeShape = new ObjectShape({
+    if (node.type === 'Post') {
+      const postNodeShape = new ObjectShape({
         date: (value) => value != null || value !== '' || 'Must include date',
         status: (value) =>
           STATUSES.includes(value) ||
           `Must include status.\nPossible values: ${STATUSES.join(', ')}`,
       });
 
-      postOrProjectNodeShape.validate(node).forEach(throwError);
+      postNodeShape.validate(node).forEach(throwError);
     }
 
     if (node.type === 'Post') {
@@ -109,12 +109,6 @@ const validateNode = (node, nodes) => {
           throw new NodeError(`Related reading must be an existing article`);
         }
       });
-    }
-
-    if (node.type === 'Project') {
-      if (node.client == null) {
-        throw new NodeError(`Must include client`);
-      }
     }
   }
 
