@@ -28,10 +28,10 @@ export function FollowCallout() {
       <ul className="space-y-little">
         <li>
           <Link
-            url={ExternalLinks.twitter()}
-            icon={{position: 'leading', name: 'twitter'}}
+            url={ExternalLinks.x()}
+            icon={{position: 'leading', name: 'xLogo'}}
           >
-            Follow me on Twitter
+            Follow me on X
           </Link>
         </li>
         <li>

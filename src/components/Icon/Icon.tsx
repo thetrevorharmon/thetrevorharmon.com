@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import link from './icons/link.svg';
 import rss from './icons/rss.svg';
-import twitter from './icons/twitter.svg';
+import xLogo from './icons/x-logo.svg';
 import email from './icons/email.svg';
 import x from './icons/x.svg';
 import play from './icons/play.svg';
@@ -17,7 +17,7 @@ import './Icon.scss';
 const mapping = {
   link,
   rss,
-  twitter,
+  xLogo,
   email,
   x,
   play,

@@ -26,13 +26,13 @@ function Article({
     return null;
   }
 
-  const twitterUrl = `https://mobile.twitter.com/search?q=${encodeURI(
+  const twitterUrl = `https://x.com/search?q=${encodeURI(
     [site.siteUrl, Routes.blogPost(slug)].join(''),
   )}&src=typed_query&f=top`;
 
   const twitterLink = (
     <Link className="block" url={twitterUrl}>
-      Reply to this post on Twitter
+      Reply to this post on X
     </Link>
   );
 
