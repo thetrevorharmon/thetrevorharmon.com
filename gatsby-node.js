@@ -120,21 +120,6 @@ exports.createSchemaCustomization = ({actions}) => {
   `);
 };
 
-// Silence the conflicting order warning
-// https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-
-exports.onCreateWebpackConfig = ({actions}) => {
-  actions.setWebpackConfig({
-    plugins: [
-      new FilterWarningsPlugin({
-        exclude:
-          /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
-      }),
-    ],
-  });
-};
-
 // This is so I can use ANTLR in Gatsby
 // These are polyfills for Node APIs that are no longer included by default
 exports.onCreateWebpackConfig = ({actions}) => {
