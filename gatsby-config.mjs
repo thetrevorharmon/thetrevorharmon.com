@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
+import tailwindCss from 'tailwindcss';
 import remarkGfm from 'remark-gfm';
 import rehypeBetterFootnoteLinks from './plugins/rehype-better-footnote-links/index.mjs';
 
@@ -111,7 +112,12 @@ const config = {
         ],
       },
     },
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [tailwindCss],
+      },
+    },
     `gatsby-plugin-react-svg`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
