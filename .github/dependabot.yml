@@ -1,0 +1,61 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      gatsby:
+        patterns:
+          - 'gatsby*'
+          - 'babel-preset-gatsby'
+      codemirror:
+        patterns:
+          - '@codemirror/*'
+          - '@lezer/*'
+          - '@uiw/react-codemirror'
+      types:
+        patterns:
+          - '@types/*'
+      radix-ui:
+        patterns:
+          - '@radix-ui/*'
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'typescript-eslint'
+          - '@typescript-eslint/*'
+    ignore:
+      # assert must stay exactly 2.0.0: 2.1.0 breaks the webpack build.
+      - dependency-name: 'assert'
+      # Tied to MDX 2 via gatsby-plugin-mdx 5; newer majors need MDX 3.
+      - dependency-name: '@mdx-js/react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'remark-gfm'
+        update-types: ['version-update:semver-major']
+      # Used in remark plugins running inside gatsby-plugin-mdx (MDX 2); revisit with the MDX upgrade.
+      - dependency-name: 'unist-util-visit'
+        update-types: ['version-update:semver-major']
+      # Tailwind 4 has a new config/PostCSS model; deliberate migration only.
+      - dependency-name: 'tailwindcss'
+        update-types: ['version-update:semver-major']
+      # Only used for the optional mermaid SVG script; majors pull in newer puppeteer/Chromium.
+      - dependency-name: '@mermaid-js/mermaid-cli'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'puppeteer'
+        update-types: ['version-update:semver-major']
+      # Unmaintained alpha; pinned by ^0.5.0-alpha range.
+      - dependency-name: 'antlr4ts'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - '*'
