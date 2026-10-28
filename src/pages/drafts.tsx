@@ -21,16 +21,14 @@ function DraftsPage({data}: Props) {
         </div>
 
         <div className="space-y-normal">
-          {data.allMdx.nodes.map(
-            (post: Queries.BlogPageQuery['allMdx']['nodes'][number]) => (
-              <div key={post.slug!}>
-                <Link url={Routes.blogPost(post.slug!)}>{post.title}</Link>
-                <div className="text-text-muted dark:text-text-muted-dark">
-                  {post.date}
-                </div>
+          {data.allMdx.nodes.map((post) => (
+            <div key={post.slug!}>
+              <Link url={Routes.blogPost(post.slug!)}>{post.title}</Link>
+              <div className="text-text-muted dark:text-text-muted-dark">
+                {post.date}
               </div>
-            ),
-          )}
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
