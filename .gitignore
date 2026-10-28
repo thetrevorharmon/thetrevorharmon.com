@@ -138,3 +138,8 @@ public
 .cache-puppeteer/
 src/gatsby-types.d.ts
 .schema-type-definitions
+
+### Env files ###
+.env
+.env.*
+!.env.example
