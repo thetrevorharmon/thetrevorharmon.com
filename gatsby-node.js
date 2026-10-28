@@ -21,7 +21,6 @@ exports.createPages = async ({graphql, actions}) => {
           status
           date(formatString: "DD MMM YYYY")
           type
-          client
           relatedReading
           includeInReadingList
           image {
@@ -47,9 +46,7 @@ exports.createPages = async ({graphql, actions}) => {
     if (node.type === 'Page') {
       return `${node.slug}`;
     }
-    const pathPrefix = node.type === 'Post' ? 'blog' : 'projects';
-
-    return `${pathPrefix}/${node.slug}`;
+    return `blog/${node.slug}`;
   }
 
   data.allMdx.nodes.forEach((node, _, nodes) => {
@@ -114,25 +111,9 @@ exports.createSchemaCustomization = ({actions}) => {
       date: Date @dateformat @proxy(from: "frontmatter.date")
       image: MdxFrontmatterImage @proxy(from: "frontmatter.image")
 
-      client: String @proxy(from: "frontmatter.client")
       type: String @proxy(from: "frontmatter.type")
     }
   `);
-};
-
-// Silence the conflicting order warning
-// https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-
-exports.onCreateWebpackConfig = ({actions}) => {
-  actions.setWebpackConfig({
-    plugins: [
-      new FilterWarningsPlugin({
-        exclude:
-          /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
-      }),
-    ],
-  });
 };
 
 // This is so I can use ANTLR in Gatsby
