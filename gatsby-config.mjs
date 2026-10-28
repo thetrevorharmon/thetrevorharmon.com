@@ -115,7 +115,12 @@ const config = {
       resolve: `gatsby-plugin-sass`,
     },
     `gatsby-plugin-react-svg`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/drafts`, `/drafts/`],
+      },
+    },
     `gatsby-plugin-robots-txt`,
     {
       resolve: 'gatsby-plugin-manifest',
