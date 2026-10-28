@@ -12,9 +12,6 @@ command = "yarn build"
 publish = "public/"
 
 [[plugins]]
-package = "@netlify/plugin-gatsby"
-
-[[plugins]]
 package = "netlify-plugin-cache"
 [plugins.inputs]
 paths = [".cache", "public"]
