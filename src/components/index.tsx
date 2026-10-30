@@ -13,5 +13,6 @@ export {Meta} from './Meta';
 export {Image} from './Image';
 export {Container} from './Container';
 export {TwoUp} from './TwoUp';
+export {Carousel} from './Carousel';
 export {Callout} from './Callout';
 export {MdxProvider} from './MdxProvider';

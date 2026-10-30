@@ -1,0 +1,20 @@
+// gatsby-remark-images sizes each image with inline styles (a max width and a
+// padding-bottom box). Inside the carousel the photo box sets the size instead,
+// so let the image fill it and crop to fit.
+.Carousel-Image {
+  .gatsby-resp-image-figure,
+  .gatsby-resp-image-wrapper {
+    margin: 0 !important;
+    max-width: none !important;
+    height: 100%;
+  }
+
+  .gatsby-resp-image-background-image {
+    padding-bottom: 0 !important;
+    height: 100%;
+  }
+
+  .gatsby-resp-image-image {
+    object-fit: cover;
+  }
+}
