@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
 import * as React from 'react';
-import {Icon, IconName} from '../Icon';
+import {Icon, type IconName} from '../Icon';
 
 interface ButtonProps {
   className?: string;

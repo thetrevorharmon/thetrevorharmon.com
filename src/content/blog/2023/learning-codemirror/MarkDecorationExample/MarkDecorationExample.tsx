@@ -3,7 +3,7 @@ import {EditorState, StateField} from '@codemirror/state';
 import {
   EditorView,
   Decoration,
-  DecorationSet,
+  type DecorationSet,
   WidgetType,
 } from '@codemirror/view';
 

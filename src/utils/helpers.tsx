@@ -1,5 +1,5 @@
 import {getSrc} from 'gatsby-plugin-image';
-import {FileNode} from 'gatsby-plugin-image/dist/src/components/hooks';
+import {type FileNode} from 'gatsby-plugin-image/dist/src/components/hooks';
 
 const checkHttp = (link: string) => {
   const completeProtocol = /^https?/;

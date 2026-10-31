@@ -1,17 +1,13 @@
 [build.environment]
-NODE_VERSION = "22"
+NODE_VERSION = "22.23.4"
 
 [build]
-command = "yarn build"
-publish = "public/"
+command = "astro build"
+publish = "dist/"
+
 [dev]
-command = "yarn develop"
+command = "astro dev"
 
 [context.production]
-command = "yarn build"
-publish = "public/"
-
-[[plugins]]
-package = "netlify-plugin-cache"
-[plugins.inputs]
-paths = [".cache", "public"]
+command = "astro build"
+publish = "dist/"

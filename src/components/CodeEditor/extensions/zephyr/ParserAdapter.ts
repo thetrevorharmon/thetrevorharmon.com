@@ -1,4 +1,4 @@
-import {Parser, Tree, Input, PartialParse, TreeFragment} from '@lezer/common';
+import {Parser, Tree, type Input, type PartialParse, TreeFragment} from '@lezer/common';
 import {Token} from 'antlr4ts';
 import {LanguageServer} from './language';
 import {parserAdapterNodeSet, tokenToNodeType} from './constants';

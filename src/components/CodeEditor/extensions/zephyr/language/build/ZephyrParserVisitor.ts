@@ -1,6 +1,6 @@
 // Generated from src/extensions/zephyr/language/grammar/ZephyrParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
-import {ParseTreeVisitor} from 'antlr4ts/tree/ParseTreeVisitor';
+import {type ParseTreeVisitor} from 'antlr4ts/tree/ParseTreeVisitor';
 
 import {ProgramContext} from './ZephyrParser';
 import {StatementContext} from './ZephyrParser';

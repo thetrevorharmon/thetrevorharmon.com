@@ -78,12 +78,11 @@ Object.values(colors).forEach(({label, light, dark}) => {
 module.exports = {
   darkMode: 'class',
   content: [
-    './src/pages/**/*.{js,jsx,ts,tsx}',
-    './src/components/**/*.{js,jsx,ts,tsx}',
-    './src/templates/**/*.{js,jsx,ts,tsx}',
-    './src/utils/**/*.{js,jsx,ts,tsx}',
-    './src/layouts/**/*.{js,jsx,ts,tsx}',
-    './src/content/**/*.{js,jsx,ts,tsx}',
+    './src/pages/**/*.{astro,js,jsx,ts,tsx}',
+    './src/components/**/*.{astro,js,jsx,ts,tsx}',
+    './src/layouts/**/*.{astro,js,jsx,ts,tsx}',
+    './src/utils/**/*.{astro,js,jsx,ts,tsx}',
+    './src/content/**/*.{astro,js,jsx,ts,tsx,md,mdx}',
     './plugins/**/*.{js,mjs,ts,tsx}',
   ],
   theme: {

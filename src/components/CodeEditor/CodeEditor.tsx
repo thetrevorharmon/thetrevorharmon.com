@@ -1,7 +1,7 @@
 import React, {useCallback, useState, useMemo, forwardRef} from 'react';
-import {Extension} from '@codemirror/state';
+import {type Extension} from '@codemirror/state';
 import {EditorView} from '@codemirror/view';
-import ReactCodeEditor, {ReactCodeMirrorRef} from '@uiw/react-codemirror';
+import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {zephyr} from './extensions';
 import {javascript} from '@codemirror/lang-javascript';
 

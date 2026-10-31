@@ -67,10 +67,11 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 
 ### 3.2 Content collection
 
-- Create `src/content.config.ts` with the zod schema from #270 and a `glob()` loader over `src/content/blog`.
+- Create `src/content.config.ts` with the zod schema from #270 and `glob()` loaders for two collections: `blog` (41 posts) and `pages` (`about`, `pumpkins`).
+- Note: `yarn check` is yarn's own command, so run the Astro check with `yarn run check`.
 - Port `validateNode` to `src/lib/`. It runs the checks that span more than one post: the slug equals the filename, and every `related_reading` slug exists.
 - Port `buildReadingList` to `src/lib/` too, and fix its existing bug where the "already in curated picks" filter never removes anything.
-- **Validate:** all 42 entries load. If you break one frontmatter field on purpose, the build fails with a clear message. For 3 posts with `related_reading`, the curated picks come first.
+- **Validate:** all 43 entries load (41 posts in `blog`, plus `about` and `pumpkins` in `pages`, which share the schema). If you break one frontmatter field on purpose, the build fails with a clear message. For 3 posts with `related_reading`, the curated picks come first.
 
 ## Phase 4: Styles and theme (1 day)
 
@@ -171,6 +172,8 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 
 ### 8.2 Remove Gatsby and update tooling
 
+- Remove the temporary Phase 3 workarounds: `resolutions.cookie`, the `@emnapi/runtime` devDependency, and the `src/templates` exclude in `tsconfig.json`.
+- Remove the unused `lodash.samplesize` and `object-shape-validator` dependencies.
 - Remove the Gatsby dependencies, the `gatsby-*` files, `gatsby-types.d.ts`, `graphql.config.js` and `netlify-plugin-cache`.
 - Update the `package.json` scripts (`develop`, `build`, `serve`, `tophat`), `netlify.toml` (`dist/`), the README, the PR template and the Dependabot ignores.
 - Set CI to run the build, `astro check`, lint and the Playwright suite against the new build.

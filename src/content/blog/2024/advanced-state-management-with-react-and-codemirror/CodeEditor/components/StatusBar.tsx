@@ -1,6 +1,6 @@
 import React from 'react';
 import {Icon} from '../../../../../../components/Icon';
-import {State} from '../CodeEditor';
+import {type State} from '../CodeEditor';
 
 export function StatusBar({state}: {state: State}) {
   const iconClassName = 'top-[2px] mr-little relative inline-block';

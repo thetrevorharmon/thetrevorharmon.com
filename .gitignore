@@ -150,3 +150,7 @@ src/gatsby-types.d.ts
 tests/parity/__screenshots__/
 playwright-report/
 test-results/
+
+### Astro ###
+dist/
+.astro/

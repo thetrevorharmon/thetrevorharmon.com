@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import {Link as GatsbyLink} from 'gatsby';
 import * as React from 'react';
 
-import {Icon, IconName} from '../../components';
+import {Icon, type IconName} from '../../components';
 import {nbps} from '../../utils';
 
 interface LinkIconProps {

@@ -1,6 +1,6 @@
 import {NodeSet, NodeType} from '@lezer/common';
 import {styleTags, tags} from '@lezer/highlight';
-import {Token} from './language';
+import {type Token} from './language';
 import {defineLanguageFacet, languageDataProp} from '@codemirror/language';
 
 export const tokenToNodeType: {[key in Token | 'document']: NodeType} = {

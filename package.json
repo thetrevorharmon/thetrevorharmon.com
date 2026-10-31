@@ -8,21 +8,24 @@
     "node": ">=22"
   },
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "broadcast": "gatsby develop -H 0.0.0.0",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
     "typecheck": "tsc --noEmit",
+    "test": "node --test src/lib/*.test.ts",
     "test:parity": "playwright test",
     "lint": "eslint .",
     "pretty": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,mdx,json,md,css,scss}\"",
-    "create-blog-post": "node ./scripts/create-blog-post.js",
-    "remove-mermaid-svgs": "node ./scripts/remove-mermaid-svgs.js",
-    "tophat": "gatsby clean && gatsby build && gatsby serve"
+    "create-blog-post": "node ./scripts/create-blog-post.cjs",
+    "remove-mermaid-svgs": "node ./scripts/remove-mermaid-svgs.cjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^8.1.2",
+    "@astrojs/react": "^7.1.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
     "@codemirror/lang-javascript": "^6.2.5",
     "@codemirror/lang-sql": "^6.10.0",
     "@codemirror/language": "^6.13.1",
@@ -38,9 +41,10 @@
     "@radix-ui/react-dropdown-menu": "^2.2.1",
     "@uiw/react-codemirror": "^4.25.12",
     "antlr4ts": "^0.5.0-alpha.4",
-    "assert": "2.0.0",
+    "assert": "2.1.0",
+    "astro": "7.4.4",
     "babel-preset-gatsby": "^3.16.0",
-    "buffer": "^6.0.3",
+    "buffer": "6.0.3",
     "classnames": "^2.5.1",
     "dotenv": "^16.6.1",
     "gatsby": "^5.16.1",
@@ -68,9 +72,11 @@
     "reading-time": "^1.5.0",
     "sass": "^1.106.1",
     "unist-util-visit": "^5.2.0",
-    "util": "^0.12.5"
+    "util": "0.12.5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@emnapi/runtime": "^1.11.3",
     "@eslint/js": "^9",
     "@mermaid-js/mermaid-cli": "^10.1.0",
     "@playwright/test": "^1.64.1",
@@ -96,7 +102,9 @@
     "typescript-eslint": "^8.72.1"
   },
   "resolutions": {
-    "@types/react": "^19.2.0"
+    "@types/react": "^19.2.0",
+    "cookie": "^2.0.1"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22",
+  "type": "module"
 }

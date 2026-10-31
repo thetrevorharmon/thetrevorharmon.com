@@ -2,15 +2,15 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
   StateField,
   StateEffect,
-  Extension,
+  type Extension,
   Compartment,
 } from '@codemirror/state';
 import {syntaxTree} from '@codemirror/language';
-import {linter, Diagnostic} from '@codemirror/lint';
+import {linter, type Diagnostic} from '@codemirror/lint';
 
 import {EditorView, ViewUpdate} from '@codemirror/view';
 import {Button} from '../../../../../components';
-import ReactCodeEditor, {ReactCodeMirrorRef} from '@uiw/react-codemirror';
+import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {javascript} from '@codemirror/lang-javascript';
 import {BASIC_SETUP, INITIAL_VALUE} from './constants';
 import {useTheme} from '../../../../../context/ThemeContext';

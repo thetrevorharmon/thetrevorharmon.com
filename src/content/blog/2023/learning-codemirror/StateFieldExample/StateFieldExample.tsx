@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 
 import {CodeEditor} from '../../../../../components/CodeEditor';
 import {StateField} from '@codemirror/state';
-import {PanelConstructor, showPanel} from '@codemirror/view';
+import {type PanelConstructor, showPanel} from '@codemirror/view';
 
 const INITIAL_VALUE = `
 
