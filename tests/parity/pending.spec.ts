@@ -13,14 +13,6 @@ test.describe('Demos (Phase 7)', () => {
   test('demo posts', () => {});
 });
 
-test.describe('Theme (Phase 4.2)', () => {
-  test.fixme(
-    true,
-    'Needs the new theme store. Light/dark/system apply, choice survives reload and ClientRouter navigation, class on <html> before first paint, open editor follows theme (plan 4.2). The old site puts the class on <body>, the new one on <html>, so this is written against the new site.',
-  );
-  test('theme picker', () => {});
-});
-
 test.describe('Redirects (deploy preview only)', () => {
   const previewUrl = process.env.DEPLOY_PREVIEW_URL;
 

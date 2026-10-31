@@ -1,0 +1,60 @@
+---
+// The lean base layout: global styles, the router, and the no-flash theme script.
+// Phase 5's Layout builds on this and adds the navbar, footer and SEO.
+import {ClientRouter} from 'astro:transitions';
+import '../styles/global.scss';
+
+interface Props {
+  title: string;
+}
+
+const {title} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <slot name="head" />
+    <!--
+      Sets the theme class on <html> before first paint. Reads the same
+      localStorage key (`theme`) and shape as the old site. Keep in sync
+      with src/lib/theme.ts.
+    -->
+    <script is:inline>
+      (function () {
+        function resolve() {
+          var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+          try {
+            var s = JSON.parse(localStorage.getItem('theme'));
+            if (s && typeof s === 'object' && 'theme' in s && 'followSystem' in s) {
+              if (!s.followSystem) return s.theme === 'dark' ? 'dark' : 'light';
+            }
+          } catch (e) {}
+          return dark ? 'dark' : 'light';
+        }
+        function apply(doc) {
+          var root = doc.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(resolve());
+        }
+        apply(document);
+        if (window.__themeScript) return;
+        window.__themeScript = true;
+        // The incoming page has no class yet; set it before it is swapped in.
+        document.addEventListener('astro:before-swap', function (e) {
+          apply(e.newDocument);
+        });
+        // Follow the system setting live when the user has chosen "system".
+        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+          apply(document);
+        });
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -89,6 +89,10 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
   - The choice survives a reload and a ClientRouter navigation.
   - The right class is on `<html>` before the first paint, so there's no flash.
   - Changing the theme updates an editor that's already open.
+- **Done (notes):**
+  - The theme class now lives on `<html>`, not `<body>`. `global.scss` uses `html.light body` / `html.dark body`. Tailwind's `dark:` variants use `darkMode: 'class'`, so they work unchanged. Nothing else read the body class.
+  - The store is `src/lib/theme.ts`. The inline script is in `src/layouts/BaseLayout.astro`. They share the old localStorage key `theme` and `{theme, followSystem}` shape.
+  - Run the theme tests: `PARITY_TEST_PAGES=1 yarn build && yarn preview`, then `npx playwright test theme.spec.ts --project=new`. The E2E pages (`src/pages/e2e/`) only exist with `PARITY_TEST_PAGES=1`. For `--project=old`, serve the Gatsby site on :9000. Two tests skip on old by design (before-first-paint, no wrong theme during navigation).
 
 ## Phase 5: Layouts, pages and components (2-3 days)
 
@@ -107,6 +111,8 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 - Rebuild `Callout`, `TwoUp`, `Citation`, `Breakout` and `Link` as `.astro` components, and pass them to MDX through `components`.
 - Rewrite `Link`, `Button` and `Icon` without Gatsby first, early in this phase. Other components import them, and the Phase 2 spike used stubs. Do `Image` and the featured image with `astro:assets`.
 - Port the SVG icons, `PostTile`, `FeaturedTile` and `ReadingList`.
+- The `Icon` component needs an SVG approach: Vite imports `.svg` as a URL, not a component. The theme icons are already inline TSX (`ThemePicker/icons/index.tsx`).
+- Remove `src/pages/e2e/` once real posts with editors render, and point `tests/parity/theme.spec.ts` at real pages.
 - **Validate:** screenshots of the 12 MDX posts that use these components match the old ones.
 
 ## Phase 6: Markdown on Sätteri (1-1.5 days)

@@ -6,7 +6,7 @@ import {zephyr} from './extensions';
 import {javascript} from '@codemirror/lang-javascript';
 
 import './CodeEditor.scss';
-import {useTheme} from '../../context/ThemeContext';
+import {useTheme} from '../../lib/theme';
 import {sql} from '@codemirror/lang-sql';
 import classNames from 'classnames';
 

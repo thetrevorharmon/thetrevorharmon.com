@@ -3,11 +3,7 @@ import React from 'react';
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import {
-  useThemeSetting,
-  useSetThemeSetting,
-  useUpdateThemeEffect,
-} from '../../../../context/ThemeContext';
+import {useThemeSetting} from '../../../../lib/theme';
 
 import {Moon, Sun, Lighting, System} from './icons';
 
@@ -16,10 +12,7 @@ interface Props {
 }
 
 export const ThemePicker = ({className}: Props) => {
-  useUpdateThemeEffect();
-
-  const theme = useThemeSetting();
-  const setTheme = useSetThemeSetting();
+  const [theme, setTheme] = useThemeSetting();
 
   const buttonClassName = classnames([
     className,

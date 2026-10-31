@@ -6,17 +6,17 @@
 
 @import './Mermaid';
 
-@import '~@fontsource/source-serif-pro/400.css';
-@import '~@fontsource/source-serif-pro/400-italic.css';
-@import '~@fontsource/source-serif-pro/700.css';
-@import '~@fontsource/source-serif-pro/700-italic.css';
+@import '@fontsource/source-serif-pro/400.css';
+@import '@fontsource/source-serif-pro/400-italic.css';
+@import '@fontsource/source-serif-pro/700.css';
+@import '@fontsource/source-serif-pro/700-italic.css';
 
-@import '~@fontsource/montagu-slab/500.css';
-@import '~@fontsource/montagu-slab/700.css';
+@import '@fontsource/montagu-slab/500.css';
+@import '@fontsource/montagu-slab/700.css';
 
-@import '~@fontsource/jetbrains-mono/400.css';
-@import '~@fontsource/jetbrains-mono/400-italic.css';
-@import '~@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/400-italic.css';
+@import '@fontsource/jetbrains-mono/700.css';
 
 @layer components {
   .Breakout {
@@ -132,13 +132,13 @@ pre::-webkit-scrollbar-corner {
   @apply rounded-md;
 }
 
-body.light {
+html.light body {
   @apply text-text bg-body-bg;
   background-image: url('../images/noise.png');
   background-repeat: repeat;
 }
 
-body.dark {
+html.dark body {
   @apply text-text-dark bg-body-bg-dark;
   background-image: url('../images/dark-noise.png');
   background-repeat: repeat;

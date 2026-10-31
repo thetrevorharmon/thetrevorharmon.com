@@ -13,7 +13,7 @@ import {Button} from '../../../../../components';
 import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {javascript} from '@codemirror/lang-javascript';
 import {BASIC_SETUP, INITIAL_VALUE} from './constants';
-import {useTheme} from '../../../../../context/ThemeContext';
+import {useTheme} from '../../../../../lib/theme';
 
 const initialCount = 0;
 const updateDeleteCountStateEffect = StateEffect.define<number>();
