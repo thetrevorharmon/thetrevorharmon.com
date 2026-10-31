@@ -1,0 +1,25 @@
+---
+import Link from '../Link/Link.astro';
+import {Routes} from '../../utils';
+import BrandButton from './components/BrandButton/BrandButton.astro';
+import {ThemePicker} from './components/ThemePicker';
+
+const navbarLinks = [
+  {display: 'Blog', location: Routes.blog()},
+  {display: 'About', location: Routes.about()},
+];
+---
+
+<div class="flex py-small transition-all duration-200">
+  <BrandButton />
+  <ul class="flex items-center list-style-none m-0 ml-auto p-0">
+    {
+      navbarLinks.map((link) => (
+        <li class="ml-little md:ml-small first:ml-0">
+          <Link url={link.location}>{link.display}</Link>
+        </li>
+      ))
+    }
+  </ul>
+  <ThemePicker className="ml-small" client:load />
+</div>

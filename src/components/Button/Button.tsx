@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import {Link as GatsbyLink} from 'gatsby';
 import * as React from 'react';
+import {withTrailingSlash} from '../../lib/format';
 import {Icon, type IconName} from '../Icon';
 
 interface ButtonProps {
@@ -103,9 +103,9 @@ export const Button = ({
         {internalMarkup}
       </a>
     ) : (
-      <GatsbyLink className={classname} to={linkUrl}>
+      <a className={classname} href={withTrailingSlash(linkUrl)}>
         {internalMarkup}
-      </GatsbyLink>
+      </a>
     );
   };
 

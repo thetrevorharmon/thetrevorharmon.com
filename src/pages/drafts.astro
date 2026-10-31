@@ -1,0 +1,32 @@
+---
+import Link from '../components/Link/Link.astro';
+import Layout from '../layouts/Layout.astro';
+import {getDraftPosts} from '../lib/collections';
+import {formatDate} from '../lib/format';
+import {Routes} from '../utils';
+
+const drafts = await getDraftPosts();
+---
+
+<Layout title="Drafts" url={Routes.drafts()} noIndex>
+  <div class="mt-huge mb-large space-y-huge">
+    <div class="space-y-small">
+      <h1 class="featured">
+        <span>Drafts</span>
+      </h1>
+    </div>
+
+    <div class="space-y-normal">
+      {
+        drafts.map((post) => (
+          <div>
+            <Link url={Routes.blogPost(post.data.slug)}>{post.data.title}</Link>
+            <div class="text-text-muted dark:text-text-muted-dark">
+              {formatDate(post.data.date)}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

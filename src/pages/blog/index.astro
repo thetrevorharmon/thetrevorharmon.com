@@ -1,0 +1,76 @@
+---
+import FeaturedLinkTile from '../../components/FeaturedLinkTile/FeaturedLinkTile.astro';
+import FeaturedTile from '../../components/FeaturedTile/FeaturedTile.astro';
+import PostTile from '../../components/PostTile/PostTile.astro';
+import Layout from '../../layouts/Layout.astro';
+import {getPublishedPosts, type BlogEntry} from '../../lib/collections';
+import {excerpt, formatDate} from '../../lib/format';
+import {Routes} from '../../utils';
+
+const meta = {
+  title: 'Blog',
+  description:
+    'A collection of my thoughts, typically related to code or design.',
+};
+
+const [featuredPost, ...posts] = await getPublishedPosts();
+
+const postsByYear = posts.reduce<Record<number, BlogEntry[]>>((years, post) => {
+  const year = post.data.date!.getUTCFullYear();
+  (years[year] ??= []).push(post);
+  return years;
+}, {});
+
+const orderedPostsByYear = Object.entries(postsByYear).sort(
+  ([first], [second]) => Number(second) - Number(first),
+);
+---
+
+<Layout title={meta.title} description={meta.description} url={Routes.blog()}>
+  <div class="my-large md:my-huge space-y-large md:space-y-huge">
+    <div class="space-y-tiny">
+      <h1 class="featured">
+        <span>{meta.title}</span>
+      </h1>
+      <p>{meta.description}</p>
+    </div>
+
+    <div>
+      {
+        featuredPost.data.link != null ? (
+          <FeaturedLinkTile
+            title={featuredPost.data.title}
+            slug={featuredPost.data.slug}
+            excerpt={excerpt(featuredPost.body)}
+          />
+        ) : (
+          <FeaturedTile
+            title={featuredPost.data.title}
+            slug={featuredPost.data.slug}
+            description={featuredPost.data.description}
+            image={featuredPost.data.image}
+          />
+        )
+      }
+      <div class="space-y-large mt-large">
+        {
+          orderedPostsByYear.map(([year, yearPosts]) => (
+            <div class="space-y-normal">
+              <h2>{year}</h2>
+              <div class="space-y-normal">
+                {yearPosts.map((post) => (
+                  <PostTile
+                    title={post.data.title}
+                    slug={post.data.slug}
+                    isLinkPost={post.data.link != null}
+                    date={formatDate(post.data.date)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

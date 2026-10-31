@@ -1,0 +1,27 @@
+---
+import Link from '../Link/Link.astro';
+import {Routes} from '../../utils';
+
+interface Props {
+  slug?: string | null;
+  title?: string | null;
+  date?: string | null;
+  isLinkPost?: boolean;
+}
+
+const {slug, title, date, isLinkPost} = Astro.props;
+---
+
+{
+  slug != null && (
+    <div>
+      <Link
+        url={Routes.blogPost(slug)}
+        icon={isLinkPost ? {position: 'trailing', name: 'link'} : undefined}
+      >
+        {title}
+      </Link>
+      <div class="text-text-muted dark:text-text-muted-dark">{date}</div>
+    </div>
+  )
+}

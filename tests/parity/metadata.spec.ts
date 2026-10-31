@@ -1,4 +1,5 @@
 import {expect, test} from '@playwright/test';
+import {normalizeSocialImage} from './expected-differences';
 import {baseline, getFacts, PAGES, skipIfOptionalAndMissing} from './support';
 
 test.describe('Metadata', () => {
@@ -13,7 +14,14 @@ test.describe('Metadata', () => {
       expect(facts.title).toBe(expected.title);
       expect(facts.description).toBe(expected.description);
       expect(facts.canonical).toBe(expected.canonical);
-      expect(facts.meta).toEqual(expected.meta);
+      // Only the og:image hash and folder may differ (see the allowlist).
+      const withImage = (meta: Record<string, string>) => ({
+        ...meta,
+        ...(meta['og:image'] && {
+          'og:image': normalizeSocialImage(meta['og:image']),
+        }),
+      });
+      expect(withImage(facts.meta)).toEqual(withImage(expected.meta));
     });
   }
 });

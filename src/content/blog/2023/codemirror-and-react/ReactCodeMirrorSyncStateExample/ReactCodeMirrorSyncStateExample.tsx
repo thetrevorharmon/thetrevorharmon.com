@@ -9,7 +9,7 @@ import {syntaxTree} from '@codemirror/language';
 import {linter, type Diagnostic} from '@codemirror/lint';
 
 import {EditorView, ViewUpdate} from '@codemirror/view';
-import {Button} from '../../../../../components';
+import {Button} from '../../../../../components/Button';
 import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {javascript} from '@codemirror/lang-javascript';
 import {BASIC_SETUP, INITIAL_VALUE} from './constants';

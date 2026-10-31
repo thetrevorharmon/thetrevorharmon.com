@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {
   expect,
   type APIRequestContext,
@@ -27,7 +27,10 @@ export interface Baseline {
 }
 
 export const baseline: Baseline = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'baseline.json'), 'utf8'),
+  fs.readFileSync(
+    fileURLToPath(new URL('./baseline.json', import.meta.url)),
+    'utf8',
+  ),
 );
 
 /** Every page we test: the old sitemap, plus /404/ and /drafts/. */

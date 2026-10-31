@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from '../../../../../components';
+import {Button} from '../../../../../components/Button';
 import classNames from 'classnames';
 
 export function ButtonExample() {

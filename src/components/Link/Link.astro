@@ -1,0 +1,49 @@
+---
+import {Icon, type IconName} from '../Icon';
+import {withTrailingSlash} from '../../lib/format';
+import {nbps} from '../../utils';
+
+interface Props {
+  class?: string;
+  url: string;
+  target?: string;
+  isMuted?: boolean;
+  icon?: {position: 'leading' | 'trailing'; name: IconName};
+}
+
+const {url, target, class: className, isMuted, icon} = Astro.props;
+
+// Trim the label: multi-line markup around the text would otherwise put
+// spaces inside the link, which then get underlined.
+const label = (await Astro.slots.render('default')).trim();
+
+const isExternal = /^http/.test(url);
+const href = isExternal ? url : withTrailingSlash(url);
+
+// Like Gatsby's Link: mark the link to the page you are on.
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
+const isCurrent =
+  !isExternal &&
+  !href.includes('#') &&
+  normalize(href.split('?')[0]) === normalize(Astro.url.pathname);
+
+const classes = [className, isMuted && 'muted'].filter(Boolean).join(' ') || undefined;
+const linkTarget = isExternal ? target || '_blank' : target || undefined;
+const rel = isExternal ? 'noreferrer' : undefined;
+---
+
+<a
+  class={classes}
+  href={href}
+  target={linkTarget}
+  rel={rel}
+  aria-current={isCurrent ? 'page' : undefined}
+>{
+  icon == null ? (
+    <Fragment set:html={label} />
+  ) : icon.position === 'leading' ? (
+    <><Icon name={icon.name} size="normal" className="relative top-[4px] mr-little inline-block" /><Fragment set:html={label} /></>
+  ) : (
+    <span class="no-underline inline-block"><span class="underline inline"><Fragment set:html={label} /></span><span class="inline whitespace-nowrap no-underline">{nbps}<Icon name={icon.name} size="normal" className="relative top-[4px] ml-tiny inline-block" /></span></span>
+  )
+}</a>

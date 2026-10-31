@@ -9,8 +9,13 @@ export default defineConfig({
   build: {format: 'directory'},
   markdown: {
     syntaxHighlight: 'prism',
+    // The old site did not convert quotes, dashes or ellipses.
+    smartypants: false,
   },
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [react(), mdx(), sitemap({
+      // /drafts/ is author-only. Archived posts stay in, as on the old site.
+      filter: (page) => !page.endsWith('/drafts/'),
+    })],
   vite: {
     // antlr4ts (CommonJS, written for Node) requires `assert`, `util` and `buffer`.
     // Vite externalizes Node builtins for the browser, so alias them to the npm polyfills.

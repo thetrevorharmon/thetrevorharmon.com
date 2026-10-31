@@ -1,0 +1,8 @@
+---
+// Two images side by side. Markdown puts consecutive image lines in one
+// paragraph, which would make them a single grid item, so unwrap the
+// paragraphs and let each <img> be its own grid item.
+const html = (await Astro.slots.render('default')).replace(/<\/?p>/g, '');
+---
+
+<div class="grid grid-cols-2 gap-x-small TwoUp my-medium" set:html={html} />

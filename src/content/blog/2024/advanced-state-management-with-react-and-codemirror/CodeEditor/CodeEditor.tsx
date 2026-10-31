@@ -8,7 +8,7 @@ import {
 } from '@codemirror/lint';
 import {EditorView, keymap} from '@codemirror/view';
 
-import {Button} from '../../../../../components';
+import {Button} from '../../../../../components/Button';
 import {Annotation, EditorState, Facet} from '@codemirror/state';
 import {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {StatusBar} from './components/StatusBar';

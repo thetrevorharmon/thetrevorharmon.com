@@ -1,14 +1,42 @@
 ---
-// The lean base layout: global styles, the router, and the no-flash theme script.
-// Phase 5's Layout builds on this and adds the navbar, footer and SEO.
+// The base layout: global styles, the router, the no-flash theme script, and
+// the title and social meta tags (the old SEO component). Layout, PageLayout
+// and PostLayout build on this and add the navbar and footer.
 import {ClientRouter} from 'astro:transitions';
+import 'normalize.css';
 import '../styles/global.scss';
+import {siteData} from '../utils';
 
 interface Props {
-  title: string;
+  /** The page's own title. Left out on the home page. */
+  title?: string | null;
+  description?: string | null;
+  /** The page path, without a trailing slash (for example `/blog/post`). */
+  url?: string | null;
+  /** An absolute image URL for social cards. */
+  image?: string | null;
+  noIndex?: boolean;
 }
 
-const {title} = Astro.props;
+const {
+  title: pageTitle,
+  description: pageDescription,
+  url: pageUrl,
+  image: pageImage,
+  noIndex = false,
+} = Astro.props;
+
+const {
+  title: siteTitle,
+  description: siteDescription,
+  siteUrl,
+  twitterHandle,
+} = siteData;
+
+const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
+const description = pageDescription ?? siteDescription;
+const image = pageImage ?? `${siteUrl}/favicon.png`;
+const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
 ---
 
 <html lang="en">
@@ -16,6 +44,27 @@ const {title} = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <!-- Basic -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={image} />
+
+    <!-- Additional -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteTitle} />
+
+    <!-- Twitter specific -->
+    <meta
+      property="twitter:card"
+      content={pageImage ? 'summary_large_image' : 'summary'}
+    />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+
+    <!-- Hide from search engines -->
+    {noIndex && <meta name="robots" content="noindex" />}
     <slot name="head" />
     <!--
       Sets the theme class on <html> before first paint. Reads the same

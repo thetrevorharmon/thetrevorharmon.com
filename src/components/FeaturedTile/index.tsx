@@ -1,1 +1,0 @@
-export {FeaturedTile} from './FeaturedTile';

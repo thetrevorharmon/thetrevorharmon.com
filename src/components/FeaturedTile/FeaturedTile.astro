@@ -1,0 +1,46 @@
+---
+import Image from '../Image/Image.astro';
+import Link from '../Link/Link.astro';
+import {Routes} from '../../utils';
+
+interface Props {
+  title: string;
+  slug: string;
+  description?: string;
+  image?: {source: ImageMetadata; alt: string};
+}
+
+const {title, slug, description, image} = Astro.props;
+---
+
+<div
+  class="Breakout relative rounded-md overflow-hidden shadow-md dark:shadow-none isolate"
+>
+  <div
+    class="absolute -left-[20%] -right-[20%] sm:left-0 sm:right-0  h-100 bottom-0 max-h-full"
+  >
+    {image && <Image src={image.source} alt={image.alt} width={700} />}
+  </div>
+  <div
+    class="overflow-hidden relative rounded-md bg-gradient-to-r from-caption-bg-dark to-caption-bg-dark/50 py-medium md:py-large px-normal sm:px-medium md:px-breakout"
+  >
+    <div class="space-y-normal">
+      <div class="space-y-small">
+        <div class="space-y-tiny">
+          <h2 class="text-text-bold-dark sm:max-w-[85%] md:max-w-[70%]">
+            {title}
+          </h2>
+        </div>
+        <p class="text-text-dark max-w-[70%]">{description}</p>
+      </div>
+
+      <Link
+        url={Routes.blogPost(slug)}
+        class="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark"
+        icon={{name: 'arrowRight', position: 'trailing'}}
+      >
+        Continue Reading
+      </Link>
+    </div>
+  </div>
+</div>

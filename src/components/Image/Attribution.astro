@@ -1,0 +1,25 @@
+---
+import Link from '../Link/Link.astro';
+
+interface Props {
+  attribution?: {author: string; sourceName: string; sourceUrl: string};
+}
+
+const {attribution} = Astro.props;
+const show =
+  attribution != null &&
+  (attribution.sourceName === 'Unsplash' ||
+    attribution.sourceName === 'Medium');
+---
+
+{
+  show && (
+    <>
+      {`Photo by ${attribution.author} on `}
+      <Link url={attribution.sourceUrl} isMuted>
+        {attribution.sourceName}
+      </Link>
+      .
+    </>
+  )
+}

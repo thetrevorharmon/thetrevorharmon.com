@@ -1,0 +1,221 @@
+---
+// Use it in MDX by wrapping markdown images, like TwoUp. The image title
+// becomes the caption:
+//
+//   <Carousel>
+//
+//   ![Gollum pumpkin](./2026-the-hobbit-gollum.jpeg "Gollum")
+//
+//   </Carousel>
+//
+// Astro turns each markdown image into an <img> with its width and height
+// before it gets here. This component renders the slot, pulls those <img> tags
+// back out, and lays them out in a scrolling track. The photo's shape and its
+// caption are all the layout needs. The arrows are a small custom element
+// (below), so no framework island is needed and it works after a router swap.
+import {Icon} from '../Icon';
+import Breakout from '../Breakout/Breakout.astro';
+import './Carousel.scss';
+
+interface Photo {
+  imgHtml: string;
+  caption: string | null;
+  aspectRatio: number;
+}
+
+const html = await Astro.slots.render('default');
+
+const photos: Photo[] = [];
+for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
+  const attrs: Record<string, string> = {};
+  for (const [, name, value] of tag.matchAll(/([\w:-]+)="([^"]*)"/g)) {
+    attrs[name] = value;
+  }
+  const width = Number(attrs.width);
+  const height = Number(attrs.height);
+  if (!(width > 0 && height > 0)) {
+    console.warn('Carousel: image has no width and height', tag);
+    continue;
+  }
+  photos.push({
+    imgHtml: tag,
+    caption: attrs.title ?? null,
+    aspectRatio: width / height,
+  });
+}
+
+const isPortrait = (photo: Photo) => photo.aspectRatio < 1;
+
+// Matches gap-x-small, the space between photos.
+const GAP = '1rem';
+// Half the carousel, so two tall photos fill it side by side.
+const HALF_WIDTH = `calc((100cqw - ${GAP}) / 2)`;
+
+// Every photo in the carousel shares one height.
+//
+// When there are wide photos, they set the height: it's the height at which the
+// widest one fills the carousel's width. Tall photos fill half the width and
+// crop a little off the top and bottom to match. Wide photos are never cropped.
+//
+// With only tall photos, it's the height at which the widest of them fills half
+// the width, so none of them crop at the sides.
+function photoHeight(photos: Photo[]) {
+  const wide = photos.filter((photo) => !isPortrait(photo));
+  if (wide.length > 0) {
+    const widest = Math.max(...wide.map((photo) => photo.aspectRatio));
+    return `calc(100cqw / ${widest.toFixed(4)})`;
+  }
+  const widest = Math.max(...photos.map((photo) => photo.aspectRatio));
+  return `calc(${HALF_WIDTH} / ${widest.toFixed(4)})`;
+}
+
+// Set the width outright instead of leaving it to aspect-ratio. Safari
+// otherwise sizes the figure from the full-size image, so it comes out several
+// times too wide and the photos overlap.
+const photoWidth = (photo: Photo) =>
+  isPortrait(photo)
+    ? HALF_WIDTH
+    : `calc(var(--photo-height) * ${photo.aspectRatio})`;
+
+// Centered on the photos, ignoring the caption below them. Both arrows start
+// hidden; the script shows them when there is something to scroll to.
+const arrowClass = [
+  'absolute z-10 top-[calc(50%-1rem)] -translate-y-1/2',
+  'flex items-center justify-center w-[40px] h-[40px] rounded-full',
+  'bg-body-bg/90 dark:bg-body-bg-dark/90 shadow-md',
+  'text-text-bold dark:text-text-bold-dark',
+  'hover:text-primary-text dark:hover:text-primary-text-dark',
+  'transition-opacity',
+  'opacity-0 pointer-events-none',
+];
+---
+
+{
+  photos.length > 0 && (
+    <Breakout>
+      <th-carousel
+        class="block relative my-medium [container-type:inline-size]"
+        style={`--photo-height:${photoHeight(photos)}`}
+        role="region"
+        aria-roledescription="carousel"
+      >
+        <div
+          data-track
+          tabindex="0"
+          class="relative flex gap-x-small overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {photos.map((photo) => (
+            <figure
+              class="flex-none snap-start my-0"
+              style={`width:${photoWidth(photo)}`}
+              role="group"
+              aria-roledescription="slide"
+            >
+              <div
+                class="Carousel-Image w-full h-[var(--photo-height)] rounded-md overflow-hidden isolate"
+                set:html={photo.imgHtml}
+              />
+              {photo.caption != null && (
+                <figcaption class="Caption mt-little" set:html={photo.caption} />
+              )}
+            </figure>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          data-prev
+          aria-label="Previous photo"
+          class:list={[arrowClass, 'left-little']}
+        >
+          <Icon name="arrowRight" size="normal" className="rotate-180" />
+        </button>
+        <button
+          type="button"
+          data-next
+          aria-label="Next photo"
+          class:list={[arrowClass, 'right-little']}
+        >
+          <Icon name="arrowRight" size="normal" />
+        </button>
+      </th-carousel>
+    </Breakout>
+  )
+}
+
+<script>
+  class Carousel extends HTMLElement {
+    private observer?: ResizeObserver;
+
+    connectedCallback() {
+      const track = this.querySelector<HTMLElement>('[data-track]')!;
+      const prev = this.querySelector<HTMLElement>('[data-prev]')!;
+      const next = this.querySelector<HTMLElement>('[data-next]')!;
+
+      const setVisible = (arrow: HTMLElement, visible: boolean) => {
+        arrow.classList.toggle('opacity-100', visible);
+        arrow.classList.toggle('opacity-0', !visible);
+        arrow.classList.toggle('pointer-events-none', !visible);
+      };
+
+      const update = () => {
+        setVisible(prev, track.scrollLeft > 1);
+        setVisible(
+          next,
+          track.scrollLeft + track.clientWidth < track.scrollWidth - 1,
+        );
+      };
+
+      // Next brings in the first photo that isn't fully visible, lined up on
+      // the left. Near the end the browser stops at the last photo's right
+      // edge, so three tall photos give two views: 1 & 2, then 2 & 3.
+      //
+      // Previous does the reverse: it brings in the photo just off the left
+      // edge, lined up so the view ends at that photo's right edge where
+      // possible.
+      const step = (direction: 1 | -1) => {
+        const items = Array.from(track.children).map((child) => {
+          const element = child as HTMLElement;
+          return {
+            left: element.offsetLeft,
+            right: element.offsetLeft + element.offsetWidth,
+          };
+        });
+        const viewLeft = track.scrollLeft;
+        const viewRight = viewLeft + track.clientWidth;
+
+        let target = 0;
+        if (direction === 1) {
+          const nextItem = items.find((item) => item.right > viewRight + 1);
+          target = nextItem?.left ?? track.scrollWidth;
+        } else {
+          const previous = [...items]
+            .reverse()
+            .find((item) => item.left < viewLeft - 1);
+          if (previous != null) {
+            const earliest = previous.right - track.clientWidth;
+            const start = items.find((item) => item.left >= earliest - 1);
+            target = start?.left ?? previous.left;
+          }
+        }
+
+        track.scrollTo({left: target, behavior: 'smooth'});
+      };
+
+      prev.addEventListener('click', () => step(-1));
+      next.addEventListener('click', () => step(1));
+      track.addEventListener('scroll', update, {passive: true});
+      this.observer = new ResizeObserver(update);
+      this.observer.observe(track);
+      update();
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+  }
+
+  if (!customElements.get('th-carousel')) {
+    customElements.define('th-carousel', Carousel);
+  }
+</script>

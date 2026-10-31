@@ -44,6 +44,23 @@ export function normalizeAssetUrl(url: string): string {
 }
 
 /**
+ * og:image URLs point at a hashed copy of the featured image, and the hash and
+ * folder differ between the sites (`/static/<hash>/<hash>/name.jpg` vs
+ * `/_astro/name.<hash>.jpg`). Compare the file name and format only.
+ */
+export function normalizeSocialImage(
+  url: string | undefined,
+): string | undefined {
+  if (url == null) return url;
+  const {origin, pathname} = new URL(url);
+  const file = pathname.split('/').pop() ?? '';
+  const match = file.match(
+    /^(.*?)(\.[A-Za-z0-9_-]{8}_[A-Za-z0-9]+)?(\.[a-z]+)$/,
+  );
+  return match ? `${origin}/<hashed>/${match[1]}${match[3]}` : url;
+}
+
+/**
  * Console messages and failed requests that are known and accepted. Each entry
  * needs a reason. Empty on purpose: add to it only after review.
  */

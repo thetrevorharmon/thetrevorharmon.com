@@ -1,1 +1,0 @@
-export {TwoUp} from './TwoUp';

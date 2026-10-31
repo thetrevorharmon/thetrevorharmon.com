@@ -92,7 +92,7 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 - **Done (notes):**
   - The theme class now lives on `<html>`, not `<body>`. `global.scss` uses `html.light body` / `html.dark body`. Tailwind's `dark:` variants use `darkMode: 'class'`, so they work unchanged. Nothing else read the body class.
   - The store is `src/lib/theme.ts`. The inline script is in `src/layouts/BaseLayout.astro`. They share the old localStorage key `theme` and `{theme, followSystem}` shape.
-  - Run the theme tests: `PARITY_TEST_PAGES=1 yarn build && yarn preview`, then `npx playwright test theme.spec.ts --project=new`. The E2E pages (`src/pages/e2e/`) only exist with `PARITY_TEST_PAGES=1`. For `--project=old`, serve the Gatsby site on :9000. Two tests skip on old by design (before-first-paint, no wrong theme during navigation).
+  - Run the theme tests: `yarn build && yarn preview`, then `npx playwright test theme.spec.ts --project=new`. They use real pages (`/about/`, `/blog/codemirror-and-react/`); the E2E pages were removed in Phase 5. For `--project=old`, serve the Gatsby site on :9000. Two tests skip on old by design (before-first-paint, no wrong theme during navigation).
 
 ## Phase 5: Layouts, pages and components (2-3 days)
 
@@ -114,6 +114,12 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 - The `Icon` component needs an SVG approach: Vite imports `.svg` as a URL, not a component. The theme icons are already inline TSX (`ThemePicker/icons/index.tsx`).
 - Remove `src/pages/e2e/` once real posts with editors render, and point `tests/parity/theme.spec.ts` at real pages.
 - **Validate:** screenshots of the 12 MDX posts that use these components match the old ones.
+- **Done (notes):**
+  - Icons: `?raw` SVG imports inlined by `Icon.tsx` (React, so demos and `.astro` files share it). `Button` and `Icon` stay React; everything else is `.astro`. `components/index.tsx` only exports those two.
+  - `Link.astro` adds trailing slashes to internal URLs and `aria-current`. `Carousel.astro` and `TwoUp.astro` parse the slot's `<img>` tags; the carousel arrows are a `th-carousel` custom element (no island).
+  - `markdown.smartypants: false` so quotes match the old site. The reading time is a placeholder (`1`) in `blog/[slug].astro` until 6.1.
+  - `codemirror-and-react` has `client:load` on its two demos (needed for the theme test). Phase 7 does the rest.
+  - Still open for Phase 6: heading ids/links, external links, figcaptions, footnotes, mermaid, image wrappers/alt fallback, gifs, and links written without a trailing slash in markdown. `/rss.xml`, `robots.txt`, manifest and `/favicon.png` are Phase 8.
 
 ## Phase 6: Markdown on Sätteri (1-1.5 days)
 
@@ -146,6 +152,24 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 
 - Run markdown images through `astro:assets`, and handle the 4 gifs, the featured images and the OG image URL.
 - **Validate:** each page has the same image count and alt text as the baseline. The gifs still animate (they have more than one frame). OG image URLs return 200.
+
+### Phase 5 handoff (to do in Phase 6)
+
+Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carousel) match the old site pixel for pixel at 1280px and 390px, except for the items below. `/`, `/blog/`, `/404/` and `/drafts/` match exactly. `visual` is 84/188 now; every remaining diff comes from the items below.
+
+- Heading link icons (`header-link`) are missing everywhere (6.1). Headings add no height without them, so only the icon differs.
+- Figcaptions from image titles are missing (6.1).
+- Markdown images render as a bare `<img>` instead of the Gatsby wrapper. Rounded corners, spacing and page height drift (about 10-1000px on image-heavy pages: `about`, `codemirror-and-react`, `learning-codemirror`, `displaying-mermaid-charts-in-gatsby`). Full-page visual diffs on these pages stay unreadable until 6.4 lands. Also, images are not resized yet (3000px originals, so the pages are heavy).
+- Gifs are webp stills or the wrong frame (6.4). `about` TwoUp #2 shows a different frame from the old site. One gif is missing and the empty-alt fallback is still open (`content.spec`, 2 failures).
+- Mermaid diagrams are not rendered (6.3).
+- Footnote ids and links (6.2), `anchors.spec` 2 failures.
+- Reading time is a placeholder (6.1).
+- External links lack the old `rel`/`target` (6.1).
+- Inline code: Gatsby added `language-text` to inline `<code>`. Phase 5 styles `:not(pre) > code` directly in `src/styles/syntaxHighlighting.scss` instead. If 6.1 adds a class to fenced code, check that code blocks still match.
+- Callout height differs by 1-4px in 5 callouts that contain inline code or links (`loose-null-checks`, `advanced-state-management` #3, `connecting-antlr...building`, `codemirror-and-react` #2 and #3). Re-check after the plugins above. Likely the missing external-link styling.
+- Carousel caveat: the caption comes from the image `title`. The carousel parses the slot's `<img>` tags, so if 6.4 wraps images in `<figure>` or changes the markup, update `Carousel.astro` so it still finds each `<img>`, `width`, `height` and `title`. Check `/pumpkins/` at 1280px and 390px afterwards.
+- Links written without a trailing slash in markdown (about 2 internal link failures in `links.spec`, e.g. `https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup`): the old pages have the same links and the old site 301'd them. Netlify also redirects `/x` to `/x/` for directory output, so production is fine, but check this in the Phase 9 deploy preview. A small link-normalising plugin in 6.1 would fix it at the source.
+- `/rss.xml` links (41 `links.spec` failures) and `feeds.spec` (3) are Phase 8.
 
 ## Phase 7: Interactive demos (1 day)
 

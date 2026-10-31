@@ -4,16 +4,18 @@ import {expect, test, type Page} from '@playwright/test';
 //   old: the class lives on <body>, no flash protection is promised.
 //   new: the class lives on <html>, set by an inline <head> script before paint.
 //
-// The new site needs the E2E pages, which are only built with an env var:
-//   PARITY_TEST_PAGES=1 yarn build && yarn preview
-// Then:  yarn playwright test theme.spec.ts --project=new
-// The old site uses real pages (/about/ and a post with an editor).
+// Both sites use real pages: /about/ (a page with the picker in the navbar) and
+// a post with an open editor.
+//   yarn build && yarn preview
+//   npx playwright test theme.spec.ts --project=new
 
 type Site = {
   /** A page with the theme picker in the navbar. */
   home: string;
-  /** Link text and href that goes to a second page through the client router. */
+  /** Link text that goes to a second page through the client router. */
   navLinkName: string;
+  /** The path that link leads to. */
+  navTarget: string;
   /** A page with an open editor. */
   editorPage: string;
   /** Selector for the element that carries the theme class. */
@@ -22,14 +24,16 @@ type Site = {
 
 const SITES: Record<string, Site> = {
   new: {
-    home: '/e2e/theme-a/',
-    navLinkName: 'Page B',
-    editorPage: '/e2e/theme-a/',
+    home: '/about/',
+    navLinkName: 'Blog',
+    navTarget: '/blog/',
+    editorPage: '/blog/codemirror-and-react/',
     host: 'html',
   },
   old: {
     home: '/about/',
     navLinkName: 'Blog',
+    navTarget: '/blog/',
     editorPage: '/blog/codemirror-and-react/',
     host: 'body',
   },
@@ -40,10 +44,7 @@ const isNew = () => test.info().project.name === 'new';
 
 async function hostClass(page: Page) {
   const host = site().host;
-  return page.evaluate(
-    (sel) => document.querySelector(sel)!.className,
-    host,
-  );
+  return page.evaluate((sel) => document.querySelector(sel)!.className, host);
 }
 
 async function resolvedTheme(page: Page) {
@@ -172,7 +173,9 @@ test.describe('Theme', () => {
         (window as unknown as {__marker: boolean}).__marker = true;
       });
       const from = new URL(page.url()).pathname;
-      await page.getByRole('link', {name: site().navLinkName, exact: true}).click();
+      await page
+        .getByRole('link', {name: site().navLinkName, exact: true})
+        .click();
       await expect.poll(() => new URL(page.url()).pathname).not.toBe(from);
       expect(
         await page.evaluate(
@@ -193,7 +196,10 @@ test.describe('Theme', () => {
   test('the new page never shows the wrong theme during a navigation', async ({
     page,
   }) => {
-    test.skip(!isNew(), 'Needs the before-swap handling; the old site has none.');
+    test.skip(
+      !isNew(),
+      'Needs the before-swap handling; the old site has none.',
+    );
     await page.emulateMedia({colorScheme: 'light'});
     await open(page, site().home);
     await pick(page, 'dark');
@@ -205,8 +211,12 @@ test.describe('Theme', () => {
         w.__swaps.push(document.documentElement.className),
       );
     });
-    await page.getByRole('link', {name: site().navLinkName, exact: true}).click();
-    await expect.poll(() => page.url()).toContain('theme-b');
+    await page
+      .getByRole('link', {name: site().navLinkName, exact: true})
+      .click();
+    await expect
+      .poll(() => new URL(page.url()).pathname)
+      .toBe(site().navTarget);
     const swaps = await page.evaluate(
       () => (window as unknown as {__swaps: string[]}).__swaps,
     );
@@ -214,9 +224,7 @@ test.describe('Theme', () => {
     for (const cls of swaps) expect(cls.split(/\s+/)).toContain('dark');
   });
 
-  test('the right class is on <html> before first paint', async ({
-    browser,
-  }) => {
+  test('the right class is on <html> before first paint', async ({browser}) => {
     test.skip(
       !isNew(),
       'The old site sets the class from React after load, so it flashes by design.',

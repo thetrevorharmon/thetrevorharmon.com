@@ -1,13 +1,132 @@
 ---
-// Placeholder. The real home page is ported in Phase 5.
+import FeaturedLinkTile from '../components/FeaturedLinkTile/FeaturedLinkTile.astro';
+import FeaturedTile from '../components/FeaturedTile/FeaturedTile.astro';
+import Image from '../components/Image/Image.astro';
+import Link from '../components/Link/Link.astro';
+import PostTile from '../components/PostTile/PostTile.astro';
+import {Button} from '../components/Button';
+import heroImage from '../images/index-hero.jpg';
+import Layout from '../layouts/Layout.astro';
+import {getPublishedPosts} from '../lib/collections';
+import {excerpt, formatDate} from '../lib/format';
+import {nbps, Routes} from '../utils';
+
+const [featuredPost, ...posts] = (await getPublishedPosts()).slice(0, 5);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>The Trevor Harmon</title>
-  </head>
-  <body>
-    <h1>The Trevor Harmon</h1>
-  </body>
-</html>
+<Layout>
+  <div class="my-large md:my-large">
+    <div class="space-y-large">
+      <div class="Breakout relative rounded-lg sm:rounded-2xl overflow-hidden">
+        <div class="overflow-hidden rounded-lg sm:rounded-2xl">
+          <Image src={heroImage} alt="Trevor Harmon" width={800} loading="eager" />
+        </div>
+        <div
+          class="absolute grid top-0 left-0 bottom-0 right-0 items-center text-white"
+        >
+          <h1 class="mx-auto main">
+            <span>
+              <span id="greeting">Hi!</span>
+              <br />
+              I'm Trevor.
+            </span>
+          </h1>
+        </div>
+        <div
+          class="absolute bottom-tiny right-little sm:bottom-little sm:right-normal md:bottom-normal md:right-medium"
+        >
+          <button class="wave-button" data-wave>👋</button>
+        </div>
+      </div>
+      <div class="space-y-normal text-md">
+        <p>Welcome to my little space on the internet! About me:</p>
+        <div class="grid grid-cols-[auto_1fr] gap-x-little gap-y-little">
+          <span>👨‍💻</span>
+          <p>
+            I write code for{' '}
+            <Link url="https://www.shopify.com/">Shopify</Link>. I've worked on
+            the{' '}
+            <Link url="https://www.shopify.com/analytics">analytics</Link>{' '}
+            team for over 6{nbps}years.
+          </p>
+          <span>🎸</span>
+          <p>
+            I produce{' '}
+            <Link
+              url="https://open.spotify.com/artist/1yO8BBQCwIuADPQA6Pvux6?si=OHbykjIhTpy-NVGXm-tAlQ"
+            >
+              music
+            </Link>{' '}
+            when I'm not writing code.
+          </p>
+          <span>⛪️</span>
+          <p>
+            I'm a devout{' '}
+            <Link url="https://www.churchofjesuschrist.org/?lang=eng">
+              Latter-day Saint
+            </Link>
+            .
+          </p>
+          <span>📝</span>
+          <p>
+            I enjoy sharing what I learn on{' '}
+            <Link url={Routes.blog()}>my blog</Link>.
+          </p>
+        </div>
+        <p>
+          You can learn more about each of these on my{' '}
+          <Link url={Routes.about()}>about page</Link>. Thanks for stopping by!
+          👋
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-big">
+    <h2>Latest on the blog</h2>
+    {
+      featuredPost.data.link != null ? (
+        <FeaturedLinkTile
+          title={featuredPost.data.title}
+          slug={featuredPost.data.slug}
+          excerpt={excerpt(featuredPost.body)}
+        />
+      ) : (
+        <FeaturedTile
+          title={featuredPost.data.title}
+          slug={featuredPost.data.slug}
+          description={featuredPost.data.description}
+          image={featuredPost.data.image}
+        />
+      )
+    }
+    <div class="space-y-normal">
+      {
+        posts.map((post) => (
+          <PostTile
+            slug={post.data.slug}
+            title={post.data.title}
+            date={formatDate(post.data.date)}
+            isLinkPost={post.data.link != null}
+          />
+        ))
+      }
+    </div>
+  </div>
+  <Button className="mt-large mb-large" url={Routes.blog()} icon="arrowRight">
+    Read more posts
+  </Button>
+</Layout>
+
+<script>
+  // Swap the greeting for a different one. The listener is on the document so
+  // it keeps working after the router swaps pages.
+  const GREETINGS = ['Hi!', 'Hello!', 'Hi-ya!', 'Howdy!', 'Hey!'];
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target as Element | null)?.closest('[data-wave]')) return;
+    const greeting = document.getElementById('greeting');
+    if (greeting == null) return;
+    const options = GREETINGS.filter((g) => g !== greeting.innerText);
+    greeting.innerText = options[Math.floor(Math.random() * options.length)];
+  });
+</script>

@@ -2,6 +2,7 @@ import {defineCollection} from 'astro:content';
 import {glob} from 'astro/loaders';
 import type {Loader} from 'astro/loaders';
 import {z} from 'astro/zod';
+import type {ImageMetadata} from 'astro';
 import type {ContentData} from './lib/content.ts';
 import {validateEntries} from './lib/validate-content.ts';
 
@@ -11,7 +12,7 @@ const TYPES = ['Post', 'Page'] as const;
 const nonEmpty = (message: string) => z.string().min(1, message);
 
 // Frontmatter keys stay snake_case so no content has to change.
-const contentSchema = ({image}: {image: () => z.ZodTypeAny}) =>
+const contentSchema = ({image}: {image: () => z.ZodType<ImageMetadata>}) =>
   z
     .object({
       title: nonEmpty('Must include title'),
@@ -40,6 +41,7 @@ const contentSchema = ({image}: {image: () => z.ZodTypeAny}) =>
         .object({
           source: image(),
           alt: nonEmpty('Must include alt if image is passed'),
+          title: z.string().optional(),
           attribution: z
             .object({
               author: nonEmpty(

@@ -1,0 +1,37 @@
+---
+import {getCollection, render} from 'astro:content';
+import FeaturedImage from '../components/Image/FeaturedImage.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import {mdxComponents} from '../lib/mdx-components';
+import {getSocialImageUrl} from '../lib/social-image';
+import {Routes} from '../utils';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: {slug: page.data.slug},
+    props: {page},
+  }));
+}
+
+const {page} = Astro.props;
+const {data} = page;
+const {Content} = await render(page);
+---
+
+<PageLayout
+  title={data.title}
+  description={data.description}
+  url={Routes.page(data.slug)}
+  image={await getSocialImageUrl(data.image?.source)}
+>
+  <div class="space-y-large my-huge">
+    <div class="space-y-huge">
+      <h1 class="featured">{data.title}</h1>
+      <FeaturedImage image={data.image} />
+    </div>
+    <div class="body-styles">
+      <Content components={mdxComponents} />
+    </div>
+  </div>
+</PageLayout>
