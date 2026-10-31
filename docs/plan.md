@@ -38,7 +38,9 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
   - outgoing links
 - **Validate:** it contains 41 post pages plus `/about/`, `/`, `/blog/` and `/pumpkins/`. The number of sitemap entries matches the number of published HTML pages, and there are 40 RSS items (one post is Archived, so it is not in the feed).
 
-## Phase 2: Risk test (1 day)
+## Phase 2: Risk test (1 day) - done, all five passed
+
+The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Results and gotchas are in `docs/astro-migration-research.md`.
 
 ### 2.1 Test the five riskiest parts on a throwaway branch
 
@@ -58,6 +60,9 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 - Install `astro@7.4.4`, `@astrojs/react`, `@astrojs/mdx`, `@astrojs/sitemap` and `@astrojs/rss`.
 - Create `astro.config.mjs` with `site`, `trailingSlash: 'always'`, `build.format: 'directory'`, `markdown.syntaxHighlight: 'prism'`, `react()`, `mdx()` and `sitemap()`.
 - Set `.nvmrc` and `netlify.toml` to Node 22.23.4.
+- Install `util@0.12.5`, `assert@2.1.0` and `buffer@6.0.3`, and add Vite aliases for them (`vite.resolve.alias`). The ANTLR editor needs them (Phase 2, risk 1).
+- Use `.cjs` for `tailwind.config` and `postcss.config`, because the project will be `"type": "module"`. Add `./src/**/*.astro` to the Tailwind `content` globs.
+- Turn on `verbatimModuleSyntax`, run `tsc --noEmit`, and change every `TS1484` error to `import type` (about 20 in the demo files alone). Rolldown fails the build on type imports that are not marked.
 - **Validate:** `astro build` and `astro check` pass with a placeholder page.
 
 ### 3.2 Content collection
@@ -99,7 +104,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 ### 5.3 Components
 
 - Rebuild `Callout`, `TwoUp`, `Citation`, `Breakout` and `Link` as `.astro` components, and pass them to MDX through `components`.
-- Rewrite `Link`/`Button` without Gatsby, and `Image` and the featured image with `astro:assets`.
+- Rewrite `Link`, `Button` and `Icon` without Gatsby first, early in this phase. Other components import them, and the Phase 2 spike used stubs. Do `Image` and the featured image with `astro:assets`.
 - Port the SVG icons, `PostTile`, `FeaturedTile` and `ReadingList`.
 - **Validate:** screenshots of the 12 MDX posts that use these components match the old ones.
 
@@ -121,25 +126,26 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 
 ### 6.2 Footnotes
 
-- Write a custom Sätteri plugin that produces `footnote--x` / `reference--x` ids and the arrow icon.
+- Reuse `spike/plugins/better-footnote-links.mjs` from the `astro-spike` branch. It already produces `footnote--x` / `reference--x` ids and the arrow icon. Build the icon as hast elements, not raw HTML, because raw HTML fails in MDX.
 - **Validate:** footnote ids and hrefs match the baseline on every page. Clicking a footnote, and then its back arrow, scrolls to the right place.
 
 ### 6.3 Mermaid
 
-- Use `@xingwangzhe/satteri-mermaid`, or the fallback plugin that inserts the committed SVGs, depending on what Phase 2 found.
-- **Validate:** all 11 diagrams render in light and dark mode. After a visual review signs them off, add them to the allowlist.
+- Use `@xingwangzhe/satteri-mermaid@0.8.2` (pin it, with `satteri@0.10.5`). Reuse `spike/plugins/mermaid-tweaks.mjs` and the `Mermaid.scss` additions from the `astro-spike` branch. They fix `\n` in labels, the wrapper class and the theme colours. The committed-SVG fallback is not needed.
+- The 9 `mermaid` fences are the diagrams. The 1 `mermaid-code` fence in `displaying-mermaid-charts-in-gatsby` must show as a highlighted code block, so it needs a rename or a small plugin.
+- **Validate:** all 9 diagrams render in light and dark mode. After a visual review signs them off, add them to the allowlist.
 
 ### 6.4 Images
 
 - Run markdown images through `astro:assets`, and handle the 4 gifs, the featured images and the OG image URL.
 - **Validate:** each page has the same image count and alt text as the baseline. The gifs still animate (they have more than one frame). OG image URLs return 200.
 
-## Phase 7: Interactive demos (1 day, +1 if switching to `antlr4ng`)
+## Phase 7: Interactive demos (1 day)
 
 ### 7.1 Demo posts
 
 - Add `client:load` to the demo components in the 6 posts, and change type-only imports to `import type`.
-- For ANTLR, add Vite polyfills for `assert`/`buffer`/`util`, or switch to `antlr4ng`.
+- For ANTLR, the Vite aliases from Phase 3.1 are enough. `antlr4ng` is not needed.
 - **Validate (Playwright, one test per demo):**
   - The editor loads.
   - Typing produces the expected change, such as a decoration, a lint marker, tokens or synced state.
