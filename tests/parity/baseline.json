@@ -1,0 +1,4096 @@
+{
+  "site": "https://thetrevorharmon.com",
+  "counts": {
+    "htmlPaths": 48,
+    "blogPosts": 41,
+    "sitemapEntries": 45,
+    "rssItems": 40,
+    "redirects": 14
+  },
+  "htmlPaths": [
+    "/",
+    "/404.html",
+    "/404/",
+    "/about/",
+    "/blog/",
+    "/blog/a-developers-guide-to-the-open-graph-protocol/",
+    "/blog/advanced-state-management-with-react-and-codemirror/",
+    "/blog/ai-fills-in-the-blank/",
+    "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+    "/blog/building-a-shopifyql-editor/",
+    "/blog/code-irl-javascript-closures/",
+    "/blog/codemirror-and-react/",
+    "/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/",
+    "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+    "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+    "/blog/const-isnt-constant/",
+    "/blog/designing-album-artwork/",
+    "/blog/designing-for-michael-barrow-and-the-tourists/",
+    "/blog/displaying-mermaid-charts-in-gatsby/",
+    "/blog/dont-use-the-spread-operator-in-a-loop/",
+    "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+    "/blog/getting-closure-on-react-hooks-swyx/",
+    "/blog/how-to-lint-typescript-in-a-gatsby-project/",
+    "/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/",
+    "/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/",
+    "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+    "/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/",
+    "/blog/how-to-silence-false-sass-warnings-in-react/",
+    "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+    "/blog/how-to-use-s3-select-to-query-json-in-node-js/",
+    "/blog/introducing-2-0-in-2020/",
+    "/blog/introducing-gatsby-theme-shopify-manager/",
+    "/blog/learning-codemirror/",
+    "/blog/loaves-and-fishes/",
+    "/blog/loose-null-checks-in-javascript/",
+    "/blog/on-building-cougarcash/",
+    "/blog/sell-things-fast-with-gatsby-and-shopify/",
+    "/blog/staticquery-and-typescript/",
+    "/blog/the-value-of-iterative-design/",
+    "/blog/thoughts-on-building-habits/",
+    "/blog/three-simple-ways-to-write-cleaner-code/",
+    "/blog/what-I-learned-from-a-failed-startup/",
+    "/blog/what-I-learned-from-my-first-month-working-remote/",
+    "/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/",
+    "/blog/what-ive-been-up-to-lately/",
+    "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+    "/drafts/",
+    "/pumpkins/"
+  ],
+  "sitemap": [
+    "https://thetrevorharmon.com/blog/ai-fills-in-the-blank/",
+    "https://thetrevorharmon.com/blog/loose-null-checks-in-javascript/",
+    "https://thetrevorharmon.com/blog/const-isnt-constant/",
+    "https://thetrevorharmon.com/blog/thoughts-on-building-habits/",
+    "https://thetrevorharmon.com/blog/loaves-and-fishes/",
+    "https://thetrevorharmon.com/blog/dont-use-the-spread-operator-in-a-loop/",
+    "https://thetrevorharmon.com/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+    "https://thetrevorharmon.com/blog/advanced-state-management-with-react-and-codemirror/",
+    "https://thetrevorharmon.com/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+    "https://thetrevorharmon.com/blog/learning-codemirror/",
+    "https://thetrevorharmon.com/blog/what-ive-been-up-to-lately/",
+    "https://thetrevorharmon.com/blog/displaying-mermaid-charts-in-gatsby/",
+    "https://thetrevorharmon.com/blog/introducing-2-0-in-2020/",
+    "https://thetrevorharmon.com/blog/building-a-shopifyql-editor/",
+    "https://thetrevorharmon.com/blog/codemirror-and-react/",
+    "https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify/",
+    "https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+    "https://thetrevorharmon.com/blog/introducing-gatsby-theme-shopify-manager/",
+    "https://thetrevorharmon.com/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+    "https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup/",
+    "https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote/",
+    "https://thetrevorharmon.com/blog/three-simple-ways-to-write-cleaner-code/",
+    "https://thetrevorharmon.com/blog/getting-closure-on-react-hooks-swyx/",
+    "https://thetrevorharmon.com/blog/how-to-use-s3-select-to-query-json-in-node-js/",
+    "https://thetrevorharmon.com/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+    "https://thetrevorharmon.com/blog/the-value-of-iterative-design/",
+    "https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists/",
+    "https://thetrevorharmon.com/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/",
+    "https://thetrevorharmon.com/blog/designing-album-artwork/",
+    "https://thetrevorharmon.com/blog/a-developers-guide-to-the-open-graph-protocol/",
+    "https://thetrevorharmon.com/blog/code-irl-javascript-closures/",
+    "https://thetrevorharmon.com/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+    "https://thetrevorharmon.com/blog/staticquery-and-typescript/",
+    "https://thetrevorharmon.com/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+    "https://thetrevorharmon.com/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/",
+    "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react/",
+    "https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/",
+    "https://thetrevorharmon.com/blog/how-to-lint-typescript-in-a-gatsby-project/",
+    "https://thetrevorharmon.com/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/",
+    "https://thetrevorharmon.com/blog/on-building-cougarcash/",
+    "https://thetrevorharmon.com/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/",
+    "https://thetrevorharmon.com/pumpkins/",
+    "https://thetrevorharmon.com/about/",
+    "https://thetrevorharmon.com/blog/",
+    "https://thetrevorharmon.com/"
+  ],
+  "sitemapPaths": [
+    "/blog/ai-fills-in-the-blank/",
+    "/blog/loose-null-checks-in-javascript/",
+    "/blog/const-isnt-constant/",
+    "/blog/thoughts-on-building-habits/",
+    "/blog/loaves-and-fishes/",
+    "/blog/dont-use-the-spread-operator-in-a-loop/",
+    "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+    "/blog/advanced-state-management-with-react-and-codemirror/",
+    "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+    "/blog/learning-codemirror/",
+    "/blog/what-ive-been-up-to-lately/",
+    "/blog/displaying-mermaid-charts-in-gatsby/",
+    "/blog/introducing-2-0-in-2020/",
+    "/blog/building-a-shopifyql-editor/",
+    "/blog/codemirror-and-react/",
+    "/blog/sell-things-fast-with-gatsby-and-shopify/",
+    "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+    "/blog/introducing-gatsby-theme-shopify-manager/",
+    "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+    "/blog/what-I-learned-from-a-failed-startup/",
+    "/blog/what-I-learned-from-my-first-month-working-remote/",
+    "/blog/three-simple-ways-to-write-cleaner-code/",
+    "/blog/getting-closure-on-react-hooks-swyx/",
+    "/blog/how-to-use-s3-select-to-query-json-in-node-js/",
+    "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+    "/blog/the-value-of-iterative-design/",
+    "/blog/designing-for-michael-barrow-and-the-tourists/",
+    "/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/",
+    "/blog/designing-album-artwork/",
+    "/blog/a-developers-guide-to-the-open-graph-protocol/",
+    "/blog/code-irl-javascript-closures/",
+    "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+    "/blog/staticquery-and-typescript/",
+    "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+    "/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/",
+    "/blog/how-to-silence-false-sass-warnings-in-react/",
+    "/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/",
+    "/blog/how-to-lint-typescript-in-a-gatsby-project/",
+    "/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/",
+    "/blog/on-building-cougarcash/",
+    "/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/",
+    "/pumpkins/",
+    "/about/",
+    "/blog/",
+    "/"
+  ],
+  "rss": [
+    {
+      "guid": "https://thetrevorharmon.com/blog/ai-fills-in-the-blank",
+      "link": "https://thetrevorharmon.com/blog/ai-fills-in-the-blank",
+      "title": "AI fills in the blank",
+      "pubDate": "Fri, 21 Nov 2025 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/dont-use-the-spread-operator-in-a-loop",
+      "link": "https://thetrevorharmon.com/blog/dont-use-the-spread-operator-in-a-loop",
+      "title": "Don't use the spread operator in a loop",
+      "pubDate": "Mon, 25 Nov 2024 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/const-isnt-constant",
+      "link": "https://thetrevorharmon.com/blog/const-isnt-constant",
+      "title": "Const isn't constant",
+      "pubDate": "Wed, 07 Aug 2024 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/thoughts-on-building-habits",
+      "link": "https://thetrevorharmon.com/blog/thoughts-on-building-habits",
+      "title": "Thoughts on building habits",
+      "pubDate": "Tue, 30 Jul 2024 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/loaves-and-fishes",
+      "link": "https://thetrevorharmon.com/blog/loaves-and-fishes",
+      "title": "Loaves and fishes",
+      "pubDate": "Fri, 28 Jun 2024 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/loose-null-checks-in-javascript",
+      "link": "https://thetrevorharmon.com/blog/loose-null-checks-in-javascript",
+      "title": "Loose null checks in JavaScript",
+      "pubDate": "Mon, 03 Jun 2024 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/advanced-state-management-with-react-and-codemirror",
+      "link": "https://thetrevorharmon.com/blog/advanced-state-management-with-react-and-codemirror",
+      "title": "Advanced state management with React and CodeMirror",
+      "pubDate": "Mon, 25 Mar 2024 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server",
+      "link": "https://thetrevorharmon.com/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server",
+      "title": "Connecting ANTLR to CodeMirror 6: Connecting a Language Server",
+      "pubDate": "Fri, 16 Feb 2024 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/connecting-antlr-to-codemirror-6-building-a-language-server",
+      "link": "https://thetrevorharmon.com/blog/connecting-antlr-to-codemirror-6-building-a-language-server",
+      "title": "Connecting ANTLR to CodeMirror 6: Building a Language Server",
+      "pubDate": "Thu, 15 Feb 2024 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/codemirror-and-react",
+      "link": "https://thetrevorharmon.com/blog/codemirror-and-react",
+      "title": "CodeMirror and React",
+      "pubDate": "Tue, 24 Oct 2023 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/learning-codemirror",
+      "link": "https://thetrevorharmon.com/blog/learning-codemirror",
+      "title": "Learning CodeMirror",
+      "pubDate": "Wed, 20 Sep 2023 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/building-a-shopifyql-editor",
+      "link": "https://thetrevorharmon.com/blog/building-a-shopifyql-editor",
+      "title": "Building a ShopifyQL Editor",
+      "pubDate": "Thu, 14 Sep 2023 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/displaying-mermaid-charts-in-gatsby",
+      "link": "https://thetrevorharmon.com/blog/displaying-mermaid-charts-in-gatsby",
+      "title": "Displaying Mermaid charts in Gatsby",
+      "pubDate": "Thu, 24 Aug 2023 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/what-ive-been-up-to-lately",
+      "link": "https://thetrevorharmon.com/blog/what-ive-been-up-to-lately",
+      "title": "What I've been up to lately",
+      "pubDate": "Fri, 21 Jul 2023 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify",
+      "link": "https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify",
+      "title": "Sell things fast with Gatsby and Shopify",
+      "pubDate": "Thu, 23 Apr 2020 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web",
+      "link": "https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web",
+      "title": "How to prepare and use variable fonts on the web",
+      "pubDate": "Mon, 27 Jan 2020 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/introducing-2-0-in-2020",
+      "link": "https://thetrevorharmon.com/blog/introducing-2-0-in-2020",
+      "title": "Introducing 2.0 in 2020",
+      "pubDate": "Thu, 09 Jan 2020 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/designing-album-artwork",
+      "link": "https://thetrevorharmon.com/blog/designing-album-artwork",
+      "title": "Designing Album Artwork",
+      "pubDate": "Sat, 07 Dec 2019 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists",
+      "link": "https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists",
+      "title": "Designing for Michael Barrow & the Tourists",
+      "pubDate": "Fri, 06 Dec 2019 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/binary-thinking-vs-directional-thinking-danielpriestley",
+      "link": "https://thetrevorharmon.com/blog/binary-thinking-vs-directional-thinking-danielpriestley",
+      "title": "Binary Thinking vs Directional Thinking - @DanielPriestley",
+      "pubDate": "Thu, 24 Oct 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote",
+      "link": "https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote",
+      "title": "What I learned from my first month working remote",
+      "pubDate": "Mon, 14 Oct 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski",
+      "link": "https://thetrevorharmon.com/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski",
+      "title": "Why Slow Mornings May Be the Secret to Tech-Life Balance - @ajzaleski",
+      "pubDate": "Mon, 23 Sep 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/email-signup-forms-with-gatsby-and-mailchimp",
+      "link": "https://thetrevorharmon.com/blog/email-signup-forms-with-gatsby-and-mailchimp",
+      "title": "Email signup forms with Gatsby and Mailchimp",
+      "pubDate": "Wed, 24 Jul 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/getting-closure-on-react-hooks-swyx",
+      "link": "https://thetrevorharmon.com/blog/getting-closure-on-react-hooks-swyx",
+      "title": "Getting Closure on React Hooks – @swyx",
+      "pubDate": "Mon, 22 Jul 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-use-s3-select-to-query-json-in-node-js",
+      "link": "https://thetrevorharmon.com/blog/how-to-use-s3-select-to-query-json-in-node-js",
+      "title": "How to use S3 select to query JSON in Node.js",
+      "pubDate": "Wed, 05 Jun 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/code-irl-javascript-closures",
+      "link": "https://thetrevorharmon.com/blog/code-irl-javascript-closures",
+      "title": "Code IRL: Javascript closures",
+      "pubDate": "Wed, 01 May 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/three-simple-ways-to-write-cleaner-code",
+      "link": "https://thetrevorharmon.com/blog/three-simple-ways-to-write-cleaner-code",
+      "title": "Three Simple Ways to Write Cleaner Code",
+      "pubDate": "Tue, 23 Apr 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript",
+      "link": "https://thetrevorharmon.com/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript",
+      "title": "Configuring Jest and Enzyme in Create React App on Typescript",
+      "pubDate": "Tue, 02 Apr 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/the-value-of-iterative-design",
+      "link": "https://thetrevorharmon.com/blog/the-value-of-iterative-design",
+      "title": "The value of iterative design",
+      "pubDate": "Wed, 13 Mar 2019 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/a-developers-guide-to-the-open-graph-protocol",
+      "link": "https://thetrevorharmon.com/blog/a-developers-guide-to-the-open-graph-protocol",
+      "title": "A developer's guide to the Open Graph protocol",
+      "pubDate": "Tue, 12 Feb 2019 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup",
+      "link": "https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup",
+      "title": "What I learned from a failed startup",
+      "pubDate": "Tue, 29 Jan 2019 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/staticquery-and-typescript",
+      "link": "https://thetrevorharmon.com/blog/staticquery-and-typescript",
+      "title": "StaticQuery and Typescript",
+      "pubDate": "Thu, 29 Nov 2018 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react",
+      "link": "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react",
+      "title": "How to silence false SASS warnings in React",
+      "pubDate": "Tue, 27 Nov 2018 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-lint-typescript-in-a-gatsby-project",
+      "link": "https://thetrevorharmon.com/blog/how-to-lint-typescript-in-a-gatsby-project",
+      "title": "How to lint Typescript in a Gatsby project",
+      "pubDate": "Tue, 06 Nov 2018 06:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify",
+      "link": "https://thetrevorharmon.com/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify",
+      "title": "How to quickly deploy a Gatsby site with Netlify",
+      "pubDate": "Mon, 17 Sep 2018 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful",
+      "link": "https://thetrevorharmon.com/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful",
+      "title": "How to make a static site with flexible content (using Gatsby & Contentful)",
+      "pubDate": "Mon, 10 Sep 2018 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass",
+      "link": "https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass",
+      "title": "How to make a super-fast static site with Gatsby, Typescript, and SASS",
+      "pubDate": "Wed, 05 Sep 2018 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/how-to-use-apple-font-tools-to-tweak-a-font",
+      "link": "https://thetrevorharmon.com/blog/how-to-use-apple-font-tools-to-tweak-a-font",
+      "title": "How to use Apple Font Tools to tweak a font",
+      "pubDate": "Tue, 19 Jun 2018 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/what-facebook-can-teach-us-about-the-new-macbook-pro",
+      "link": "https://thetrevorharmon.com/blog/what-facebook-can-teach-us-about-the-new-macbook-pro",
+      "title": "What Facebook can teach us about the new MacBook Pro",
+      "pubDate": "Wed, 02 Nov 2016 05:00:00 GMT"
+    },
+    {
+      "guid": "https://thetrevorharmon.com/blog/on-building-cougarcash",
+      "link": "https://thetrevorharmon.com/blog/on-building-cougarcash",
+      "title": "On Building CougarCash",
+      "pubDate": "Tue, 08 Sep 2015 05:00:00 GMT"
+    }
+  ],
+  "postsNotInRss": [
+    "https://thetrevorharmon.com/blog/introducing-gatsby-theme-shopify-manager"
+  ],
+  "robotsTxt": "User-agent: *\nAllow: /\nSitemap: https://thetrevorharmon.com/sitemap-index.xml\nHost: https://thetrevorharmon.com\n",
+  "redirects": [
+    {
+      "from": "/projects/tourist-postcards",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/sweet-honey-album-cover",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/sweet-honey-cover-art",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/still-cant-explain-album-cover",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/something-new-album-cover",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/santa-barbara-sessions-album-cover",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/never-stop-album-cover",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/never-stop-cover-art",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/juneau-album-art",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/juneau-print-design",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/are-you-a-tourist-posters",
+      "to": "/blog/designing-for-michael-barrow-and-the-tourists/",
+      "status": 301
+    },
+    {
+      "from": "/projects/still-cant-explain-album-cover/",
+      "to": "/blog/designing-album-artwork/",
+      "status": 301
+    },
+    {
+      "from": "/projects/the-backyard-ep-album-cover/",
+      "to": "/blog/designing-album-artwork/",
+      "status": 301
+    },
+    {
+      "from": "/projects/the-backyard-ep-album-cover/",
+      "to": "/projects/unplugged-album-cover/",
+      "status": 301
+    }
+  ],
+  "pages": {
+    "/404.html": {
+      "title": "404 | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "404 | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/"
+      ],
+      "outgoingLinks": [
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/404/": {
+      "title": "404 | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "404 | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/"
+      ],
+      "outgoingLinks": [
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/about/": {
+      "title": "About | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "About | The Trevor Harmon",
+        "og:description": "",
+        "og:url": "https://thetrevorharmon.com/about/",
+        "og:image": "https://thetrevorharmon.com/static/68081b9fb80678d17517c5f6a6242298/20b93/trevor-standing-in-field.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "work",
+        "orders-reporting",
+        "bfcm-notebook-2021",
+        "shopifyql-notebooks",
+        "music",
+        "early-summer-2008-2010",
+        "jefferson--york-2013-2016",
+        "eliza-smith-2015",
+        "michael-barrow--the-tourists-2016-2018",
+        "the-last-seconds-2018-2019",
+        "trevor-harmon-2020-present",
+        "design",
+        "faith",
+        "mission",
+        "lay-ministry",
+        "terminology",
+        "etcs",
+        "contact"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 14,
+      "imageAlts": [
+        "Camel train going through the desert",
+        "Orders Reporting",
+        "BFCM Notebook 2021",
+        "ShopifyQL Notebooks",
+        "Early Summer",
+        "Jefferson & York",
+        "Eliza Smith",
+        "MB&T",
+        "Last seconds 1",
+        "Last seconds\n2",
+        "Personal music",
+        "teaching statue",
+        "begging",
+        "smiling"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#work",
+        "#music",
+        "#design",
+        "#faith",
+        "#etcs",
+        "#contact",
+        "#work",
+        "/blog/what-I-learned-from-my-first-month-working-remote",
+        "#orders-reporting",
+        "#bfcm-notebook-2021",
+        "#shopifyql-notebooks",
+        "#music",
+        "#early-summer-2008-2010",
+        "#jefferson--york-2013-2016",
+        "#eliza-smith-2015",
+        "#michael-barrow--the-tourists-2016-2018",
+        "#the-last-seconds-2018-2019",
+        "#trevor-harmon-2020-present",
+        "#design",
+        "/blog/designing-for-michael-barrow-and-the-tourists/",
+        "/blog/designing-album-artwork/",
+        "#faith",
+        "#mission",
+        "#lay-ministry",
+        "#terminology",
+        "#etcs",
+        "#contact"
+      ],
+      "outgoingLinks": [
+        "https://www.byu.edu/",
+        "https://www.parivedasolutions.com/",
+        "https://www.shopify.com/",
+        "https://jupyter.org/",
+        "https://shopify.engineering/building-commerce-data-models-with-shopifyql",
+        "https://jordangundersen.com/about/",
+        "https://soundcloud.com/earlysummermusic/sets/this-is-early-summer",
+        "https://open.spotify.com/artist/5n3zvKC7Mc9enZVt4bz6CK?si=zcmT0yNzSK-zG0lrPWdpbw",
+        "https://www.velourlive.com/",
+        "https://newsroom.churchofjesuschrist.org/article/mission",
+        "https://www.jordansaltmarshdrums.com/",
+        "https://soundcloud.com/jeffersonandyork/sets/unplugged-ep",
+        "https://open.spotify.com/album/0WEod59ULOzfjJiZS6AJ9F?si=LaQ0rNzoTyy0g8_IndR9gQ",
+        "https://newsroom.churchofjesuschrist.org/article/mission",
+        "https://open.spotify.com/album/0fmcPjySBBvii85gqyHSqd?si=WIl_WThqRqu-xj2Zm30gxQ",
+        "https://open.spotify.com/track/3p9cKuErP219QRv7T8xszQ?si=ae11f0dba65f4dec",
+        "https://open.spotify.com/track/7fwnuP8wfbiDuztawdhYxA?si=d972dbb957264412",
+        "https://open.spotify.com/album/6paW7rC4mJ5zUY43nWuuc4?si=R39mjrI8SZW1XFE_3nCXGw",
+        "https://open.spotify.com/album/5tt75nfPFSB9Irt84PEIR9?si=YX74BjqmTbym8MWDc9qHJA",
+        "https://aspenridgemanagement.com/units/santa-barbara-207/",
+        "https://open.spotify.com/album/1ekqkcJ1gtdyCRnkZu7H7J?si=IxFkbholSxuDr08yuAucUg",
+        "https://open.spotify.com/album/5IXCJYwqILaWOpXCVcKZBT?si=ZsSjPNwtQ3KkZnVTjZkKnw",
+        "https://open.spotify.com/album/7ePZVqwRTdt0Sjxe2Mex1a?si=tDF7o753SsqxfJeRlEiM8g",
+        "https://open.spotify.com/album/733BliNAH60CTRqwhxGezC?si=mT_Ox3iiQeiSrK3LBFE9xw",
+        "https://open.spotify.com/album/787j3LRWyQgIDwvDkfIao4?si=HU0RloEYQpKy1kv_tk1lXw",
+        "https://www.churchofjesuschrist.org/",
+        "https://newsroom.churchofjesuschrist.org/article/mission",
+        "https://newsroom.churchofjesuschrist.org/article/mormon-lay-ministry",
+        "https://churchofjesuschristtemples.org/salt-lake-temple/",
+        "https://x.com/thetrevorharmon",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/blog/a-developers-guide-to-the-open-graph-protocol/": {
+      "title": "A developer's guide to the Open Graph protocol | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "A developer's guide to the Open Graph protocol | The Trevor Harmon",
+        "og:description": "Learn about the protocol behind iMessage link previews, Twitter cards, and Facebook link previews.",
+        "og:url": "https://thetrevorharmon.com/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "og:image": "https://thetrevorharmon.com/static/08537c0a05fe48985724e385a10348eb/14f39/Camel-train-going-through-the-desert.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "whats-the-open-graph-protocol",
+        "how-do-i-use-it",
+        "general-usage",
+        "basic-metadata",
+        "optional-metadata",
+        "twitter-specific-metadata",
+        "putting-it-all-together",
+        "next-steps",
+        "tools",
+        "reading"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 3,
+      "imageAlts": [
+        "Camel train going through the desert",
+        "OpenGraph Guide Article: Open Graph Previews with Facebook",
+        "OpenGraph Guide Article: Twitter Preview of Link"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#whats-the-open-graph-protocol",
+        "#how-do-i-use-it",
+        "#general-usage",
+        "#basic-metadata",
+        "#optional-metadata",
+        "#twitter-specific-metadata",
+        "#putting-it-all-together",
+        "https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup",
+        "#next-steps",
+        "#tools",
+        "#reading",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/7V1DnVStvik",
+        "http://ogp.me",
+        "https://searchenginewatch.com/2018/06/15/a-guide-to-html-and-meta-tags-in-2018/",
+        "https://stackoverflow.com/questions/22350105/whats-the-difference-between-meta-name-and-meta-property",
+        "http://ogp.me",
+        "https://developer.apple.com/library/archive/technotes/tn2444/_index.html",
+        "http://ogp.me/#types",
+        "http://ogp.me",
+        "https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup",
+        "https://cards-dev.twitter.com/validator",
+        "https://ngrok.com",
+        "https://opengraphcheck.com",
+        "https://developers.facebook.com/tools/debug/sharing/",
+        "https://developer.apple.com/library/archive/technotes/tn2444/_index.html",
+        "http://ogp.me",
+        "https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards",
+        "https://stackoverflow.com/questions/38986140/ios10-messages-link-preview-image",
+        "https://medium.freecodecamp.org/how-to-avoid-the-shaming-look-your-site-has-on-twitter-and-facebook-f2e8f4be568d",
+        "https://medium.com/@richardoosterhof/how-to-optimize-your-site-for-rich-previews-527ed13a6d69",
+        "https://www.emergeinteractive.com/insights/detail/rich-video-previews-in-ios-macos-messages",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/a-developers-guide-to-the-open-graph-protocol&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/ai-fills-in-the-blank/",
+          "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/"
+        ],
+        "dates": [
+          "25 Nov 2024",
+          "21 Nov 2025",
+          "27 Jan 2020"
+        ]
+      }
+    },
+    "/blog/advanced-state-management-with-react-and-codemirror/": {
+      "title": "Advanced state management with React and CodeMirror | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Advanced state management with React and CodeMirror | The Trevor Harmon",
+        "og:description": "Going beyond the basics with these two libraries.",
+        "og:url": "https://thetrevorharmon.com/blog/advanced-state-management-with-react-and-codemirror/",
+        "og:image": "https://thetrevorharmon.com/static/a9ef751a0b6594298041f746c0f35cad/15c35/a-long-curvy-bookshelf-with-a-man-looking-for-a-book.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "our-sql-terminal",
+        "terminal-state",
+        "linting",
+        "describing-an-event",
+        "state-coordinator",
+        "connecting-react-state",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "a long, curvy bookshelf with a man looking for a book"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/blog/learning-codemirror",
+        "/blog/codemirror-and-react",
+        "/blog/codemirror-and-react",
+        "#our-sql-terminal",
+        "#terminal-state",
+        "/blog/codemirror-and-react/#syncing-react-state-with-codemirror-state",
+        "/blog/learning-codemirror/#facet",
+        "#linting",
+        "#describing-an-event",
+        "#state-coordinator",
+        "#connecting-react-state",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/codemirror-and-react/",
+        "/blog/learning-codemirror/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/man-looking-book-inside-library-cFUZ-6i83vs",
+        "https://codemirror.net/docs/ref/#lint.Diagnostic",
+        "https://codemirror.net/docs/ref/#lint.linter",
+        "https://codemirror.net/docs/ref/#state.EditorState%5EtransactionFilter",
+        "https://codemirror.net/docs/ref/#view.EditorView.dispatch",
+        "https://codemirror.net/docs/ref/#state.EditorState%5EtransactionFilter",
+        "https://codemirror.net/docs/ref/#state.EditorState%5EtransactionExtender",
+        "https://codemirror.net/docs/ref/#state.EditorState%5EtransactionFilter",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/advanced-state-management-with-react-and-codemirror&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/codemirror-and-react/",
+          "/blog/learning-codemirror/",
+          "/blog/dont-use-the-spread-operator-in-a-loop/"
+        ],
+        "dates": [
+          "24 Oct 2023",
+          "20 Sep 2023",
+          "25 Nov 2024"
+        ]
+      }
+    },
+    "/blog/ai-fills-in-the-blank/": {
+      "title": "AI fills in the blank | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "AI fills in the blank | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/blog/ai-fills-in-the-blank/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/"
+      ],
+      "outgoingLinks": [
+        "https://mitchellh.com/writing/non-trivial-vibing",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/what-I-learned-from-my-first-month-working-remote/",
+          "/blog/a-developers-guide-to-the-open-graph-protocol/"
+        ],
+        "dates": [
+          "25 Nov 2024",
+          "14 Oct 2019",
+          "12 Feb 2019"
+        ]
+      }
+    },
+    "/blog/binary-thinking-vs-directional-thinking-danielpriestley/": {
+      "title": "Binary Thinking vs Directional Thinking - @DanielPriestley | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Binary Thinking vs Directional Thinking - @DanielPriestley | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/"
+      ],
+      "outgoingLinks": [
+        "https://twitter.com/carolinerioux",
+        "http://www.keypersonofinfluence.com/binary-thinking-vs-directional-thinking/",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/a-developers-guide-to-the-open-graph-protocol/",
+          "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+          "/blog/dont-use-the-spread-operator-in-a-loop/"
+        ],
+        "dates": [
+          "12 Feb 2019",
+          "24 Jul 2019",
+          "25 Nov 2024"
+        ]
+      }
+    },
+    "/blog/building-a-shopifyql-editor/": {
+      "title": "Building a ShopifyQL Editor | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Building a ShopifyQL Editor | The Trevor Harmon",
+        "og:description": "How I integrated CodeMirror into ShopifyQL Notebooks.",
+        "og:url": "https://thetrevorharmon.com/blog/building-a-shopifyql-editor/",
+        "og:image": "https://thetrevorharmon.com/static/1618bbcd741d7457cdcd5d9b8cc9bd52/20b93/a-sequence-of-robots-getting-more-sophisticated.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "A sequence of three robots, with the robots becoming more sophisticated as you move left to right"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/learning-codemirror/"
+      ],
+      "outgoingLinks": [
+        "https://codemirror.net",
+        "https://apps.shopify.com/shopifyql-notebooks",
+        "https://shopify.engineering/building-a-shopifyql-code-editor",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+          "/blog/learning-codemirror/"
+        ],
+        "dates": [
+          "15 Feb 2024",
+          "16 Feb 2024",
+          "20 Sep 2023"
+        ]
+      }
+    },
+    "/blog/code-irl-javascript-closures/": {
+      "title": "Code IRL: Javascript closures | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Code IRL: Javascript closures | The Trevor Harmon",
+        "og:description": "A real world example of how to use Javascript closures to write better code.",
+        "og:url": "https://thetrevorharmon.com/blog/code-irl-javascript-closures/",
+        "og:image": "https://thetrevorharmon.com/static/931b43c4e9f345e10ca79ec14b8d92fb/3b307/A-roll-of-raffle-tickets.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "a-brief-introduction-to-closures",
+        "filtering-tickets",
+        "identifying-a-pattern",
+        "using-the-closure"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "A roll of raffle tickets"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#a-brief-introduction-to-closures",
+        "#filtering-tickets",
+        "#identifying-a-pattern",
+        "#using-the-closure",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/",
+        "/blog/codemirror-and-react/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/yB5cYEq7y2U",
+        "https://www.w3schools.com/js/js_function_closures.asp",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/code-irl-javascript-closures&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/sell-things-fast-with-gatsby-and-shopify/",
+          "/blog/codemirror-and-react/"
+        ],
+        "dates": [
+          "25 Nov 2024",
+          "23 Apr 2020",
+          "24 Oct 2023"
+        ]
+      }
+    },
+    "/blog/codemirror-and-react/": {
+      "title": "CodeMirror and React | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "CodeMirror and React | The Trevor Harmon",
+        "og:description": "A few things you need to know when integrating CodeMirror 6 with React.",
+        "og:url": "https://thetrevorharmon.com/blog/codemirror-and-react/",
+        "og:image": "https://thetrevorharmon.com/static/f1bf68a2b58ed4f8474081533be3ebae/3b307/a-hand-reaching-out-and-almost-touching-a-mirror.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "getting-an-initial-editor-working-within-react",
+        "codemirror-lifecycle",
+        "managing-state-between-react-and-codemirror",
+        "syncing-codemirror-state-to-react",
+        "syncing-react-state-with-codemirror-state",
+        "updating-an-extension-based-on-react-state",
+        "putting-it-all-together",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "a hand reaching out and almost touching a mirror"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/blog/learning-codemirror/",
+        "#getting-an-initial-editor-working-within-react",
+        "#codemirror-lifecycle",
+        "#managing-state-between-react-and-codemirror",
+        "#syncing-codemirror-state-to-react",
+        "#syncing-react-state-with-codemirror-state",
+        "#updating-an-extension-based-on-react-state",
+        "#putting-it-all-together",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/learning-codemirror/",
+        "/blog/advanced-state-management-with-react-and-codemirror/",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/OwR9cyMNe4c",
+        "https://codemirror.net/",
+        "https://codemirror.net/docs/",
+        "https://codemirror.net/docs/guide/",
+        "https://codemirror.net/docs/guide/",
+        "https://github.com/uiwjs/react-codemirror",
+        "https://uiwjs.github.io/react-codemirror/",
+        "https://codemirror.net/docs/guide/#state-and-updates",
+        "https://codemirror.net/docs/ref/#state.StateField",
+        "https://codemirror.net/docs/ref/#view.EditorView%5EupdateListener",
+        "https://codemirror.net/docs/ref/#state.StateEffect",
+        "https://codemirror.net/examples/lint/",
+        "https://codemirror.net/docs/ref/#state.Compartment",
+        "https://codemirror.net/docs/ref/#view.EditorViewConfig.dispatch",
+        "https://codemirror.net/docs/ref/#state.StateEffect",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com/blob/main/src/content/blog/2023/codemirror-and-react/ReactCodeMirrorSyncStateExample/ReactCodeMirrorSyncStateExample.tsx",
+        "https://uiwjs.github.io/react-codemirror/",
+        "https://codemirror.net/docs/ref",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/codemirror-and-react&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/learning-codemirror/",
+          "/blog/advanced-state-management-with-react-and-codemirror/",
+          "/blog/sell-things-fast-with-gatsby-and-shopify/"
+        ],
+        "dates": [
+          "20 Sep 2023",
+          "25 Mar 2024",
+          "23 Apr 2020"
+        ]
+      }
+    },
+    "/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/": {
+      "title": "Configuring Jest and Enzyme in Create React App on Typescript | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Configuring Jest and Enzyme in Create React App on Typescript | The Trevor Harmon",
+        "og:description": "A guide to getting around an Enzyme internal error and get testing with Jest + Enzyme.",
+        "og:url": "https://thetrevorharmon.com/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/",
+        "og:image": "https://thetrevorharmon.com/static/f748718ce409d9ae2e329eaff903be3e/a98ac/A-rendering-of-a-console-window-showing-two-successful-tests-in-Jest.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "a-create-react-app-gotcha",
+        "1-setup-jest-with-typescript",
+        "2-install-enzyme",
+        "3-configure-enzyme",
+        "4-test"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 3,
+      "imageAlts": [
+        "A rendering of a console window showing two successful tests in Jest",
+        "A console window showing the following error: \"Enzyme Internal Error: Enzyme expects an adapter to be configured, but found none. To configure an adapter, you should call Enzyme.configure({ adapter: new Adapter() })\"",
+        "A console window showing Jest and Enzyme snapshot tests that were successful"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#a-create-react-app-gotcha",
+        "#1-setup-jest-with-typescript",
+        "#2-install-enzyme",
+        "#3-configure-enzyme",
+        "#4-test",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+        "/blog/codemirror-and-react/",
+        "/blog/thoughts-on-building-habits/"
+      ],
+      "outgoingLinks": [
+        "https://jestjs.io",
+        "https://github.com/facebook/create-react-app#whats-included",
+        "https://github.com/basarat/typescript-book/blob/master/docs/testing/jest.md",
+        "https://github.com/basarat/",
+        "https://github.com/basarat/typescript-book/blob/master/docs/testing/jest.md#step-2-configure-jest",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+          "/blog/codemirror-and-react/",
+          "/blog/thoughts-on-building-habits/"
+        ],
+        "dates": [
+          "19 Jun 2018",
+          "24 Oct 2023",
+          "30 Jul 2024"
+        ]
+      }
+    },
+    "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/": {
+      "title": "Connecting ANTLR to CodeMirror 6: Connecting a Language Server | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Connecting ANTLR to CodeMirror 6: Connecting a Language Server | The Trevor Harmon",
+        "og:description": "Connecting my Zephyr language server to CodeMirror.",
+        "og:url": "https://thetrevorharmon.com/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "og:image": "https://thetrevorharmon.com/static/00ae6c6aa19092edef340336a50db6d8/15c35/bridge-between-two-buildings-in-Berlin.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "what-is-a-nodetype",
+        "creating-a-parser-adapter",
+        "lezer-trees--buffers",
+        "building-a-tree",
+        "completing-the-adapter",
+        "connecting-the-parser-adapter",
+        "syntax-highlighting",
+        "adding-language-data",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "bridge between two buildings in Berlin"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "#what-is-a-nodetype",
+        "#creating-a-parser-adapter",
+        "#lezer-trees--buffers",
+        "#building-a-tree",
+        "#completing-the-adapter",
+        "#connecting-the-parser-adapter",
+        "#adding-language-data",
+        "#syntax-highlighting",
+        "#adding-language-data",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/learning-codemirror/",
+        "/blog/codemirror-and-react/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/7h2YTknTSzU",
+        "https://lezer.codemirror.net/",
+        "https://lezer.codemirror.net/docs/ref/#common.NodeType",
+        "https://lezer.codemirror.net/docs/ref/#common.NodeSet",
+        "https://lezer.codemirror.net/docs/ref/#common.Parser",
+        "https://lezer.codemirror.net/docs/ref/#common.Tree",
+        "https://lezer.codemirror.net/docs/ref/#common.Tree%5Ebuild",
+        "https://lezer.codemirror.net/docs/ref/#common.BufferCursor",
+        "https://lezer.codemirror.net/docs/ref/#common.Tree%5Ebuild%5Edata.buffer",
+        "https://lezer.codemirror.net/docs/ref/#common.Tree%5Ebuild",
+        "https://lezer.codemirror.net/docs/ref/#common.Input",
+        "https://codemirror.net/docs/ref/#language.Language",
+        "https://codemirror.net/docs/ref/#language.LanguageSupport",
+        "https://codemirror.net/docs/ref/#language.syntaxHighlighting",
+        "https://lezer.codemirror.net/docs/ref/#highlight",
+        "https://lezer.codemirror.net/docs/ref/#highlight.Tag",
+        "https://lezer.codemirror.net/docs/ref/#highlight.styleTags",
+        "https://lezer.codemirror.net/docs/ref/#highlight.styleTags",
+        "https://github.com/craftzdog/cm6-themes/blob/e696f1241d42e2823388f9759ece4f1f149a7c90/packages/material-dark/src/index.ts#L117",
+        "https://codemirror.net/docs/ref/#:~:text=literal%20dollar%20sign.-,languageDataAt,-%3CT%3E",
+        "https://discuss.codemirror.net/t/language-data-not-being-recognized-on-custom-language/6310/1",
+        "https://lezer.codemirror.net/docs/ref/#common.NodeType%5Edefine%5Espec.props",
+        "https://codemirror.net/docs/ref/#language.languageDataProp",
+        "https://codemirror.net/docs/ref/#language.defineLanguageFacet",
+        "https://codemirror.net/docs/ref/#commands.defaultKeymap",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+          "/blog/learning-codemirror/",
+          "/blog/codemirror-and-react/"
+        ],
+        "dates": [
+          "15 Feb 2024",
+          "20 Sep 2023",
+          "24 Oct 2023"
+        ]
+      }
+    },
+    "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/": {
+      "title": "Connecting ANTLR to CodeMirror 6: Building a Language Server | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Connecting ANTLR to CodeMirror 6: Building a Language Server | The Trevor Harmon",
+        "og:description": "How to build a language server using an ANTLR grammar–featuring Zephyr, my toy language.",
+        "og:url": "https://thetrevorharmon.com/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "og:image": "https://thetrevorharmon.com/static/069840a61457b051f0592ddc20c72a8a/1e21a/a-group-of-tall-buildings-under-a-cloudy-blue-sky.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "lezer-codemirrors-parser-generator",
+        "what-is-antlr",
+        "the-zephyr-language",
+        "generating-antlr-files",
+        "building-the-language-server",
+        "our-first-token-stream",
+        "whats-next"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "a group of tall buildings under a cloudy blue sky"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#lezer-codemirrors-parser-generator",
+        "#what-is-antlr",
+        "#the-zephyr-language",
+        "#generating-antlr-files",
+        "#building-the-language-server",
+        "#our-first-token-stream",
+        "#whats-next",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/learning-codemirror/",
+        "/blog/codemirror-and-react/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/91AQt9p4Mo8",
+        "https://apps.shopify.com/shopifyql-notebooks",
+        "https://jupyter.org/",
+        "https://shopify.dev/docs/api/shopifyql/shopifyql-reference",
+        "https://codemirror.net/",
+        "https://www.sumologic.com/blog/building-autocomplete-antlr-codemirror/",
+        "https://codemirror.net/",
+        "https://lezer.codemirror.net/",
+        "https://marijnhaverbeke.nl/",
+        "https://github.com/lezer-parser/json/blob/main/src/json.grammar",
+        "https://www.antlr.org/",
+        "https://github.com/antlr/grammars-v4/blob/master/json/JSON.g4",
+        "https://github.com/tunnelvisionlabs/antlr4ts",
+        "https://github.com/thetrevorharmon/zephyr-demo/tree/main/src/extensions/zephyr/language/build",
+        "https://github.com/thetrevorharmon/zephyr-demo/blob/a70867d8d7ba13f751f2db5f81f07fcdc0d4c343/gatsby-node.js#L5",
+        "https://zephyr-demo.netlify.app/",
+        "https://github.com/thetrevorharmon/zephyr-demo",
+        "https://github.com/thetrevorharmon/zephyr-demo/blob/main/src/extensions/zephyr/ParserAdapter.ts",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/connecting-antlr-to-codemirror-6-building-a-language-server&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+          "/blog/learning-codemirror/",
+          "/blog/codemirror-and-react/"
+        ],
+        "dates": [
+          "16 Feb 2024",
+          "20 Sep 2023",
+          "24 Oct 2023"
+        ]
+      }
+    },
+    "/blog/const-isnt-constant/": {
+      "title": "Const isn't constant | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Const isn't constant | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/blog/const-isnt-constant/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/what-I-learned-from-a-failed-startup/",
+        "/blog/three-simple-ways-to-write-cleaner-code/",
+        "/blog/email-signup-forms-with-gatsby-and-mailchimp/"
+      ],
+      "outgoingLinks": [
+        "https://youtu.be/8117-JmjgOA?t=5065",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/what-I-learned-from-a-failed-startup/",
+          "/blog/three-simple-ways-to-write-cleaner-code/",
+          "/blog/email-signup-forms-with-gatsby-and-mailchimp/"
+        ],
+        "dates": [
+          "29 Jan 2019",
+          "23 Apr 2019",
+          "24 Jul 2019"
+        ]
+      }
+    },
+    "/blog/designing-album-artwork/": {
+      "title": "Designing Album Artwork | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Designing Album Artwork | The Trevor Harmon",
+        "og:description": "The album artwork I've designed over the years for my music endeavours\n",
+        "og:url": "https://thetrevorharmon.com/blog/designing-album-artwork/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "personal-music",
+        "all-my-memories-2024",
+        "still-cant-explain-2022",
+        "jefferson--york",
+        "the-backyard-ep-2015",
+        "unplugged-2014"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 10,
+      "imageAlts": [
+        "All My Memories EP cover",
+        "Incomplete single cover",
+        "Breathe single cover",
+        "Incomplete (demo version) single cover",
+        "Headed Home single cover",
+        "Tracing Shapes single cover",
+        "When It Rains single cover",
+        "“Still Can't Explain” album art",
+        "\"The Backyard EP\" Album Art",
+        "Unplugged Album Art"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/about/#music",
+        "/blog/designing-for-michael-barrow-and-the-tourists/",
+        "#personal-music",
+        "#all-my-memories-2024",
+        "#still-cant-explain-2022",
+        "#jefferson--york",
+        "#the-backyard-ep-2015",
+        "#unplugged-2014",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/displaying-mermaid-charts-in-gatsby/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/"
+      ],
+      "outgoingLinks": [
+        "https://open.spotify.com/album/6KikvfG00A2KQBXJdYUKZb?si=1lKwQcCLShqNkTk_QXO5tg",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/designing-album-artwork&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+          "/blog/displaying-mermaid-charts-in-gatsby/",
+          "/blog/what-I-learned-from-my-first-month-working-remote/"
+        ],
+        "dates": [
+          "24 Oct 2019",
+          "24 Aug 2023",
+          "14 Oct 2019"
+        ]
+      }
+    },
+    "/blog/designing-for-michael-barrow-and-the-tourists/": {
+      "title": "Designing for Michael Barrow & the Tourists | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Designing for Michael Barrow & the Tourists | The Trevor Harmon",
+        "og:description": "A collection of all of the visual content I produced for the band\n",
+        "og:url": "https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "album-art",
+        "juneau",
+        "something-new",
+        "santa-barbara-sessions",
+        "flyers",
+        "are-you-a-tourist-posters",
+        "merchandise",
+        "tourist-postcard"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 15,
+      "imageAlts": [
+        "\"Juneau\" Album Cover",
+        "This is the back cover of the Juneau album print.",
+        "This is the insert for the limited print run of Juneau. This is on the inside of the insert, which is revealed when you take the insert out of the case and unfold it.",
+        "This is the insert for the limited run of Juneau. The middle panel is displayed directly inside the jewel case, with the left panel folded in.",
+        "This is underneath the CD inside the jewel case.",
+        "This it the label for the physical CD inside the jewel case.",
+        "Photo: Something New Album Cover",
+        "Photo: Never Stop Album Cover",
+        "Photo: Sweet Honey Album Cover",
+        "Photo: Santa Barbara Sessions Album Cover",
+        "Are You A Tourist? Poster - Callout",
+        "Are You A Tourist Poster   Words",
+        "postcard - ocean - front",
+        "postcard   mountain   front",
+        "postcard   mountain   back"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#album-art",
+        "#juneau",
+        "#something-new",
+        "/blog/the-value-of-iterative-design",
+        "#santa-barbara-sessions",
+        "#flyers",
+        "#are-you-a-tourist-posters",
+        "#merchandise",
+        "#tourist-postcard",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/the-value-of-iterative-design/",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/code-irl-javascript-closures/"
+      ],
+      "outgoingLinks": [
+        "https://open.spotify.com/artist/1mhe70fSiQDyc16JVlhBUE?si=ZJI76VbpTvS1fMPwT5-bQg",
+        "https://open.spotify.com/album/6paW7rC4mJ5zUY43nWuuc4?si=yW3pQT-9RPCSa3pmLcm-xw",
+        "https://open.spotify.com/album/1ekqkcJ1gtdyCRnkZu7H7J?si=5wjILF9UQgy8GD_aIBIe2g",
+        "https://open.spotify.com/album/5lBfK9f7ttxIC95mdTTacq?si=TA2esT3WRfKUYz0KonCV3Q",
+        "https://open.spotify.com/album/5tt75nfPFSB9Irt84PEIR9?si=6Aui4ehbQ8eqa6jzniuOLQ",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/the-value-of-iterative-design/",
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+          "/blog/code-irl-javascript-closures/"
+        ],
+        "dates": [
+          "13 Mar 2019",
+          "24 Oct 2019",
+          "01 May 2019"
+        ]
+      }
+    },
+    "/blog/displaying-mermaid-charts-in-gatsby/": {
+      "title": "Displaying Mermaid charts in Gatsby | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Displaying Mermaid charts in Gatsby | The Trevor Harmon",
+        "og:description": "I like mermaid charts. But I didn't like any of the mermaid plugins for Gatsby. So I wrote one.",
+        "og:url": "https://thetrevorharmon.com/blog/displaying-mermaid-charts-in-gatsby/",
+        "og:image": "https://thetrevorharmon.com/static/1b18075d74d90390b4203a2b805eb606/3b307/two-people-facing-an-art-exhibit-of-a-difficult-to-follow-diagram-connecting-various-blocks-of-text.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "gatsby-remark-mermaid",
+        "mermaid-cli",
+        "creating-a-local-plugin",
+        "adding-extensibility",
+        "caching-the-generated-svgs",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Two people facing an art exhibit of a difficult to follow diagram connecting various blocks of text"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#gatsby-remark-mermaid",
+        "#mermaid-cli",
+        "#creating-a-local-plugin",
+        "#adding-extensibility",
+        "#caching-the-generated-svgs",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/what-I-learned-from-my-first-month-working-remote/",
+        "/blog/getting-closure-on-react-hooks-swyx/",
+        "/blog/the-value-of-iterative-design/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/OWkXt1ikC5g",
+        "https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/",
+        "https://mermaid.js.org/",
+        "https://www.gatsbyjs.com/plugins/gatsby-remark-mermaid/",
+        "https://github.com/remcohaszing/remark-mermaidjs",
+        "https://github.com/mermaid-js/mermaid-cli",
+        "https://github.com/mermaid-js/mermaid-cli#use-nodejs-api",
+        "https://github.com/mermaid-js/mermaid-cli#install-locally",
+        "https://www.gatsbyjs.com/docs/creating-a-local-plugin/#project-structure-for-a-local-plugin",
+        "https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/naming-a-plugin/#:~:text=gatsby%2D%5Bplugin%2Dname%5D%2D*,remark%2Dadd%2Demoji%20",
+        "https://github.com/uuidjs/uuid#readme",
+        "https://github.com/syntax-tree/unist-util-visit",
+        "https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com/blob/45c3fe18da97e79f8fb2c875218512116af22b51/plugins/gatsby-remark-mermaid-to-svg/gatsby-remark-mermaid-to-svg.mjs",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/displaying-mermaid-charts-in-gatsby&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/what-I-learned-from-my-first-month-working-remote/",
+          "/blog/getting-closure-on-react-hooks-swyx/",
+          "/blog/the-value-of-iterative-design/"
+        ],
+        "dates": [
+          "14 Oct 2019",
+          "22 Jul 2019",
+          "13 Mar 2019"
+        ]
+      }
+    },
+    "/blog/dont-use-the-spread-operator-in-a-loop/": {
+      "title": "Don't use the spread operator in a loop | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Don't use the spread operator in a loop | The Trevor Harmon",
+        "og:description": "The spread operator is convenient but can have big impacts on performance.",
+        "og:url": "https://thetrevorharmon.com/blog/dont-use-the-spread-operator-in-a-loop/",
+        "og:image": "https://thetrevorharmon.com/static/69382c368bca547838fc745cb49e4521/1e21a/a-train-at-the-station-in-chicago-with-a-sign-that-says-loop.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "footnote-label"
+      ],
+      "footnoteIds": [
+        "reference--const_isnt_constant",
+        "reference--mutability_in_js",
+        "footnote-label",
+        "footnote--const_isnt_constant",
+        "footnote--mutability_in_js"
+      ],
+      "footnoteLinks": [
+        "#footnote--const_isnt_constant",
+        "#footnote--mutability_in_js",
+        "#reference--const_isnt_constant",
+        "#reference--mutability_in_js"
+      ],
+      "imageCount": 1,
+      "imageAlts": [
+        "a train at the station in chicago with a sign that says loop"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#footnote--const_isnt_constant",
+        "#footnote--mutability_in_js",
+        "/blog/const-isnt-constant/",
+        "#reference--const_isnt_constant",
+        "#reference--mutability_in_js",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/const-isnt-constant/",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/grayscale-photo-of-train-station-289d5HMbml4",
+        "https://jpcamara.com/2023/03/07/making-tanstack-table.html",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/dont-use-the-spread-operator-in-a-loop&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/const-isnt-constant/",
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+          "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+        ],
+        "dates": [
+          "07 Aug 2024",
+          "16 Feb 2024",
+          "23 Sep 2019"
+        ]
+      }
+    },
+    "/blog/email-signup-forms-with-gatsby-and-mailchimp/": {
+      "title": "Email signup forms with Gatsby and Mailchimp | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Email signup forms with Gatsby and Mailchimp | The Trevor Harmon",
+        "og:description": "A simple tutorial, some sample code, and–you guessed it–a signup form.",
+        "og:url": "https://thetrevorharmon.com/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+        "og:image": "https://thetrevorharmon.com/static/dd767f35fdcdf0930d1308c2cd282b39/20b93/A-row-of-six-mailboxes-in-front-of-a-bush.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "find-your-mailchimp-form-action",
+        "install-the-plugin",
+        "add-the-plugin-to-your-gatsby-config-file",
+        "create-a-component",
+        "type-definitions",
+        "start-using-the-plugin",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 10,
+      "imageAlts": [
+        "A row of six mailboxes in front of a bush",
+        "Mailchimp Form - 1. Mailchimp Dashboard",
+        "Mailchimp Form - 2. Create a Landing Page",
+        "Mailchimp Form - 3. Landing Page Modal",
+        "Mailchimp Form - 4. Audience Page (Click on Signup Forms)",
+        "Mailchimp Form - 5. Signup Forms Tab (Click on Embedded Forms)",
+        "Mailchimp Form - 6. Embedded Form (Highlighted Post Action)",
+        "Mailchimp Form - 7. Signup Form (before styling)",
+        "Mailchimp Form - 8. Signup Form (after styling)",
+        "Mailchimp Form - 9. Subscribe In Action (GIF)"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#find-your-mailchimp-form-action",
+        "#install-the-plugin",
+        "#add-the-plugin-to-your-gatsby-config-file",
+        "#create-a-component",
+        "#type-definitions",
+        "#start-using-the-plugin",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/building-a-shopifyql-editor/",
+        "/blog/const-isnt-constant/",
+        "/blog/thoughts-on-building-habits/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/fb7yNPbT0l8",
+        "https://twitter.com/benhoffman_",
+        "https://login.mailchimp.com/signup/",
+        "https://github.com/benjaminhoffman/gatsby-plugin-mailchimp",
+        "https://gist.github.com/thetrevorharmon/6f308dc9f97aaa050f6e1424dce0890d",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/email-signup-forms-with-gatsby-and-mailchimp&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/building-a-shopifyql-editor/",
+          "/blog/const-isnt-constant/",
+          "/blog/thoughts-on-building-habits/"
+        ],
+        "dates": [
+          "14 Sep 2023",
+          "07 Aug 2024",
+          "30 Jul 2024"
+        ]
+      }
+    },
+    "/blog/getting-closure-on-react-hooks-swyx/": {
+      "title": "Getting Closure on React Hooks – @swyx | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Getting Closure on React Hooks – @swyx | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/blog/getting-closure-on-react-hooks-swyx/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/"
+      ],
+      "outgoingLinks": [
+        "https://twitter.com/swyx",
+        "https://reactjs.org/docs/hooks-overview.html",
+        "https://reactjs.org/docs/hooks-rules.html",
+        "https://www.youtube.com/watch?v=KJP1E-Y-xyo",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/a-developers-guide-to-the-open-graph-protocol/",
+          "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+          "/blog/what-I-learned-from-my-first-month-working-remote/"
+        ],
+        "dates": [
+          "12 Feb 2019",
+          "19 Jun 2018",
+          "14 Oct 2019"
+        ]
+      }
+    },
+    "/blog/how-to-lint-typescript-in-a-gatsby-project/": {
+      "title": "How to lint Typescript in a Gatsby project | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to lint Typescript in a Gatsby project | The Trevor Harmon",
+        "og:description": "Linting Typescript is simple to set up in Gatsby with the help of a plugin.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-lint-typescript-in-a-gatsby-project/",
+        "og:image": "https://thetrevorharmon.com/static/8ee6597b449b23c13f40f77be00c7db8/3b307/MacBook-with-Code.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-install-the-plugin--dependencies",
+        "2-add-the-lint-plugin-to-your-gatsby-configjs-file",
+        "3-generate-a-tslint-file",
+        "4-customize-the-tslint-file",
+        "5-youre-done"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 2,
+      "imageAlts": [
+        "MacBook with Code",
+        "How to lint Typescript in a Gatsby project: Console"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-install-the-plugin--dependencies",
+        "#2-add-the-lint-plugin-to-your-gatsby-configjs-file",
+        "#3-generate-a-tslint-file",
+        "#4-customize-the-tslint-file",
+        "#5-youre-done",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/what-ive-been-up-to-lately/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/taiuG8CPKAQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText",
+        "https://github.com/tdharmon/gatbsy-plugin-tslint",
+        "https://www.gatsbyjs.org/docs/gatsby-config/",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-lint-typescript-in-a-gatsby-project&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+          "/blog/what-ive-been-up-to-lately/",
+          "/blog/what-I-learned-from-my-first-month-working-remote/"
+        ],
+        "dates": [
+          "16 Feb 2024",
+          "21 Jul 2023",
+          "14 Oct 2019"
+        ]
+      }
+    },
+    "/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/": {
+      "title": "How to make a static site with flexible content (using Gatsby & Contentful) | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to make a static site with flexible content (using Gatsby & Contentful) | The Trevor Harmon",
+        "og:description": "I recently redesigned my portfolio site with Gatsby, and Contentful as a headless CMS made it dead simple to manage content. Here’s how.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/",
+        "og:image": "https://thetrevorharmon.com/static/4c265df80b9cd4f2adb69e6503560366/db40e/Gatsby--Contentful.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-get-a-contentful-account-and-add-content",
+        "creating-a-movie-content-model",
+        "adding-movies",
+        "2-connecting-contentful-to-gatsby",
+        "3-bringing-content-in-with-gatsby",
+        "4-taking-it-a-step-further",
+        "next-steps"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 13,
+      "imageAlts": [
+        "Gatsby + Contentful",
+        "How to make a static site with flexible content: Final Product",
+        "How to make a static site with flexible content: Contentful dashboard",
+        "How to make a static site with flexible content: account type",
+        "How to make a static site with flexible content: new content type screen",
+        "How to make a static site with flexible content: slug field on the item",
+        "How to make a static site with flexible content: Content Model",
+        "How to make a static site with flexible content: Item editing screen",
+        "How to make a static site with flexible content: content overview",
+        "How to make a static site with flexible content: API keys",
+        "How to make a static site with flexible content: console screen",
+        "How to make a static site with flexible content: basic content page",
+        "How to make a static site with flexible content: Final Product"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react",
+        "#1-get-a-contentful-account-and-add-content",
+        "#creating-a-movie-content-model",
+        "#adding-movies",
+        "#2-connecting-contentful-to-gatsby",
+        "https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass",
+        "#3-bringing-content-in-with-gatsby",
+        "#4-taking-it-a-step-further",
+        "#next-steps",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+        "/blog/displaying-mermaid-charts-in-gatsby/",
+        "/blog/what-ive-been-up-to-lately/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/bKOfm4KNt64",
+        "https://medium.com/@thetrevorharmon/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass-3742c00d4524",
+        "https://github.com/tdharmon/gatsby-starter-typescript-sass",
+        "https://www.gatsbyjs.org/blog/2018-1-25-building-a-site-with-react-and-contentful/",
+        "https://www.imdb.com/title/tt0076759/?ref_=nv_sr_5",
+        "https://www.imdb.com/title/tt0080684/?ref_=nv_sr_1",
+        "https://www.imdb.com/title/tt0086190/?ref_=nv_sr_1",
+        "https://github.com/tdharmon/gatsby-starter-typescript-sass",
+        "http://localhost:8000/___graphQL",
+        "https://medium.com/@thetrevorharmon/how-to-quickly-deploy-a-gatsby-site-with-netlify-aace23623f14",
+        "https://www.netlify.com/blog/2016/02/24/a-step-by-step-guide-gatsby-on-netlify/",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+          "/blog/displaying-mermaid-charts-in-gatsby/",
+          "/blog/what-ive-been-up-to-lately/"
+        ],
+        "dates": [
+          "23 Sep 2019",
+          "24 Aug 2023",
+          "21 Jul 2023"
+        ]
+      }
+    },
+    "/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/": {
+      "title": "How to make a super-fast static site with Gatsby, Typescript, and SASS | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to make a super-fast static site with Gatsby, Typescript, and SASS | The Trevor Harmon",
+        "og:description": "I recently redesigned my personal site with Gatsby. Here’s how to get started on your own.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/",
+        "og:image": "https://thetrevorharmon.com/static/346fea78eca2002b76d7c54d74390349/db40e/Gatsby--Typescript--Sass-iMac.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-create-a-new-gatsby-project",
+        "2-integrate-the-gatsby-sass-plugin",
+        "3-integrate-the-typescript-plugin",
+        "bonus-silence-typescript-warnings-for-scss-files",
+        "next-steps",
+        "update-1162018",
+        "update-11272018"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 6,
+      "imageAlts": [
+        "Gatsby + Typescript + Sass (iMac)",
+        "Gatsby Starter Tutorial: Step 1 (Hello World)",
+        "Gatsby Starter Tutorial: Step 2 (Hello World with Styles)",
+        "Gatsby Starter Tutorial: Step 3 (Hello Typescript World)",
+        "Gatsby Starter Tutorial: Success Meme",
+        "Gatsby Starter Tutorial: Typescript SCSS Errors"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-create-a-new-gatsby-project",
+        "#2-integrate-the-gatsby-sass-plugin",
+        "#3-integrate-the-typescript-plugin",
+        "#bonus-silence-typescript-warnings-for-scss-files",
+        "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react",
+        "#next-steps",
+        "#update-1162018",
+        "#update-11272018",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/advanced-state-management-with-react-and-codemirror/",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/bKOfm4KNt64",
+        "https://github.com/tdharmon/gatsby-starter-typescript-sass",
+        "https://www.gatsbyjs.org/tutorial/",
+        "https://graphql.org/learn/",
+        "https://medium.com/@thetrevorharmon/how-to-make-a-static-site-with-flexible-content-using-gatsby-contentful-f02a5faf1d",
+        "https://medium.com/@thetrevorharmon/how-to-lint-typescript-with-gatsby-1e2cbd08b73",
+        "https://medium.com/@ifrim.olivia",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/advanced-state-management-with-react-and-codemirror/",
+          "/blog/sell-things-fast-with-gatsby-and-shopify/"
+        ],
+        "dates": [
+          "25 Nov 2024",
+          "25 Mar 2024",
+          "23 Apr 2020"
+        ]
+      }
+    },
+    "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/": {
+      "title": "How to prepare and use variable fonts on the web | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to prepare and use variable fonts on the web | The Trevor Harmon",
+        "og:description": "A primer on subsetting, formatting, and CSS font features.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+        "og:image": "https://thetrevorharmon.com/static/504a51782db08a27d2830ff949d6399c/20b93/A-picture-of-a-large-letter-A-in-a-sans-serif-font-and-a-small-letter-A-in-a-serif-font.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "a-brief-introduction-to-variable-fonts",
+        "preparing-the-font",
+        "using-the-font",
+        "importing-the-font",
+        "using-variable-font-features",
+        "a-note-about-italics",
+        "using-supports-to-smooth-out-issues",
+        "putting-it-all-together",
+        "conclusion--further-reading"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "A picture of a large letter A in a sans serif font and a small letter A in a serif font"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/blog/introducing-2-0-in-2020",
+        "#a-brief-introduction-to-variable-fonts",
+        "#preparing-the-font",
+        "#using-the-font",
+        "#importing-the-font",
+        "#using-variable-font-features",
+        "#a-note-about-italics",
+        "#using-supports-to-smooth-out-issues",
+        "#putting-it-all-together",
+        "#conclusion--further-reading",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/codemirror-and-react/",
+        "/blog/what-I-learned-from-a-failed-startup/",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/zw07kVDaHPw",
+        "https://fonts.google.com/specimen/Work+Sans",
+        "https://rsms.me/inter/",
+        "https://twitter.com/rsms",
+        "https://design.tutsplus.com/articles/what-are-variable-fonts--cms-31310",
+        "https://caniuse.com/#feat=variable-fonts",
+        "https://michaeljherold.com/2015/05/04/creating-a-subset-font/",
+        "https://github.com/behdad/fonttools",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/font-style",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/@supports",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com/blob/master/src/styles/fonts.scss",
+        "https://www.axis-praxis.org/specimens/zycon",
+        "https://v-fonts.com/",
+        "http://clagnut.com/blog/2390",
+        "https://developers.google.com/web/fundamentals/design-and-ux/typography/variable-fonts",
+        "https://blog.typekit.com/2016/09/14/variable-fonts-a-new-kind-of-font-for-flexible-design/",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/codemirror-and-react/",
+          "/blog/what-I-learned-from-a-failed-startup/",
+          "/blog/a-developers-guide-to-the-open-graph-protocol/"
+        ],
+        "dates": [
+          "24 Oct 2023",
+          "29 Jan 2019",
+          "12 Feb 2019"
+        ]
+      }
+    },
+    "/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/": {
+      "title": "How to quickly deploy a Gatsby site with Netlify | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to quickly deploy a Gatsby site with Netlify | The Trevor Harmon",
+        "og:description": "I recently started using Netlify to host my personal site, and now I don’t think I’ll go back. Here’s how to get started.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/",
+        "og:image": "https://thetrevorharmon.com/static/e4ce552ddd6a22190570c9ed91b50795/db40e/Gatsby--Netlify.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-get-a-netlify-account",
+        "2-connect-a-git-repo",
+        "3-tweak-your-settings",
+        "gotcha-1-environment-variables",
+        "gotcha-2-node-version",
+        "gotcha-3-yarn-not-npm",
+        "4-let-netlify-make-your-life-easier",
+        "next-steps"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 6,
+      "imageAlts": [
+        "Gatsby + Netlify",
+        "How to quickly deploy a Gatsby site with Netlify: Create a new site",
+        "How to quickly deploy a Gatsby site with Netlify: connect a repo",
+        "How to quickly deploy a Gatsby site with Netlify: build variables",
+        "How to quickly deploy a Gatsby site with Netlify: site deploy in progress",
+        "How to quickly deploy a Gatsby site with Netlify: website is up and hosted"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-get-a-netlify-account",
+        "#2-connect-a-git-repo",
+        "#3-tweak-your-settings",
+        "#gotcha-1-environment-variables",
+        "#gotcha-2-node-version",
+        "#gotcha-3-yarn-not-npm",
+        "#4-let-netlify-make-your-life-easier",
+        "#next-steps",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/learning-codemirror/",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/const-isnt-constant/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/bKOfm4KNt64",
+        "https://medium.com/@thetrevorharmon/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass-3742c00d4524",
+        "https://github.com/tdharmon/gatsby-starter-typescript-sass",
+        "https://www.netlify.com",
+        "https://github.com/tdharmon/gatsby-example-typescript-sass-contentful",
+        "https://www.netlify.com/docs/#helpful-hints",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/learning-codemirror/",
+          "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+          "/blog/const-isnt-constant/"
+        ],
+        "dates": [
+          "20 Sep 2023",
+          "15 Feb 2024",
+          "07 Aug 2024"
+        ]
+      }
+    },
+    "/blog/how-to-silence-false-sass-warnings-in-react/": {
+      "title": "How to silence false SASS warnings in React | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to silence false SASS warnings in React | The Trevor Harmon",
+        "og:description": "Typescript on React can sometimes think that your SASS is missing. Here’s the actual problem, and how to fix it.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react/",
+        "og:image": "https://thetrevorharmon.com/static/f5c6f69b54b23793ff1d1108bc09e739/4ca35/React-False-Lint-Errors-with-SASS-and-Typescript.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "missing-type-definitions",
+        "1-add-a-tsconfig-file",
+        "2-add-type-definitions-for-your-scss-files"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 2,
+      "imageAlts": [
+        "React False Lint Errors with SASS and Typescript",
+        "Fixed React False Lint Errors with SASS and Typescript"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#missing-type-definitions",
+        "#1-add-a-tsconfig-file",
+        "#2-add-type-definitions-for-your-scss-files",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/const-isnt-constant/",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/"
+      ],
+      "outgoingLinks": [
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-silence-false-sass-warnings-in-react&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/const-isnt-constant/",
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+          "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/"
+        ],
+        "dates": [
+          "07 Aug 2024",
+          "16 Feb 2024",
+          "27 Jan 2020"
+        ]
+      }
+    },
+    "/blog/how-to-use-apple-font-tools-to-tweak-a-font/": {
+      "title": "How to use Apple Font Tools to tweak a font | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to use Apple Font Tools to tweak a font | The Trevor Harmon",
+        "og:description": "I used Apple’s font tools to fix the line-height of a font for an iOS app. Here’s how I did it.",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-download-apples-free-font-tools",
+        "2-install-the-font-tools",
+        "3-use-the-font-tools-to-modify-a-file",
+        "3a-convert-the-font-to-xml",
+        "3b-convert-the-xml-back-to-a-font",
+        "additional-reading"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-download-apples-free-font-tools",
+        "#2-install-the-font-tools",
+        "#3-use-the-font-tools-to-modify-a-file",
+        "#3a-convert-the-font-to-xml",
+        "#3b-convert-the-xml-back-to-a-font",
+        "#additional-reading",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/advanced-state-management-with-react-and-codemirror/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/building-a-shopifyql-editor/"
+      ],
+      "outgoingLinks": [
+        "http://neighbor.com/",
+        "https://itunes.apple.com/us/app/neighbor-peer-to-peer-storage/id1323303687?mt=8",
+        "https://developer.apple.com/fonts/",
+        "http://gist.github.com/thetrevorharmon/9afdeb41a74f8f32b9561eeb83b10eff",
+        "https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6hhea.html",
+        "http://shaunseo.blogspot.com/2013/05/custom-font-line-height.html",
+        "https://apple.stackexchange.com/questions/211138/apple-font-tools-cannot-install-in-macbook-pro-el-capitan",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-use-apple-font-tools-to-tweak-a-font&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/advanced-state-management-with-react-and-codemirror/",
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/building-a-shopifyql-editor/"
+        ],
+        "dates": [
+          "25 Mar 2024",
+          "25 Nov 2024",
+          "14 Sep 2023"
+        ]
+      }
+    },
+    "/blog/how-to-use-s3-select-to-query-json-in-node-js/": {
+      "title": "How to use S3 select to query JSON in Node.js | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "How to use S3 select to query JSON in Node.js | The Trevor Harmon",
+        "og:description": "A simple example to get you started on querying JSON data out of S3 (with sample code!).",
+        "og:url": "https://thetrevorharmon.com/blog/how-to-use-s3-select-to-query-json-in-node-js/",
+        "og:image": "https://thetrevorharmon.com/static/12abc0658033fa55bce9b4f0c8659cb4/3b307/A-man-selecting-a-vinyl-record-out-of-a-box-of-records.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "initial-setup",
+        "writing-the-query",
+        "initial-setup-code",
+        "3-data-function",
+        "fetch-the-data",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 4,
+      "imageAlts": [
+        "A man selecting a vinyl record out of a box of records",
+        "A screenshot of the \"Select From\" tab of S3 on AWS",
+        "A screenshot of a successful query using S3 select inside of the AWS console",
+        "A screenshot of a successful lambda call using S3 Select to query Star Wars data"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#initial-setup",
+        "#writing-the-query",
+        "#initial-setup-code",
+        "#3-data-function",
+        "#fetch-the-data",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/learning-codemirror/",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/S_bbqW4yQZA",
+        "https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/",
+        "https://swapi.dev/api/planets/",
+        "https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/",
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html",
+        "https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#selectObjectContent-property",
+        "https://gist.github.com/thetrevorharmon/6b831875cde98e5dc7f7458f6112b061",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/how-to-use-s3-select-to-query-json-in-node-js&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+          "/blog/learning-codemirror/",
+          "/blog/sell-things-fast-with-gatsby-and-shopify/"
+        ],
+        "dates": [
+          "24 Oct 2019",
+          "20 Sep 2023",
+          "23 Apr 2020"
+        ]
+      }
+    },
+    "/blog/": {
+      "title": "Blog | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Blog | The Trevor Harmon",
+        "og:description": "A collection of my thoughts, typically related to code or design.",
+        "og:url": "https://thetrevorharmon.com/blog/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/const-isnt-constant/",
+        "/blog/thoughts-on-building-habits/",
+        "/blog/loaves-and-fishes/",
+        "/blog/loose-null-checks-in-javascript/",
+        "/blog/advanced-state-management-with-react-and-codemirror/",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/codemirror-and-react/",
+        "/blog/learning-codemirror/",
+        "/blog/building-a-shopifyql-editor/",
+        "/blog/displaying-mermaid-charts-in-gatsby/",
+        "/blog/what-ive-been-up-to-lately/",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+        "/blog/introducing-2-0-in-2020/",
+        "/blog/designing-album-artwork/",
+        "/blog/designing-for-michael-barrow-and-the-tourists/",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/",
+        "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+        "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+        "/blog/getting-closure-on-react-hooks-swyx/",
+        "/blog/how-to-use-s3-select-to-query-json-in-node-js/",
+        "/blog/code-irl-javascript-closures/",
+        "/blog/three-simple-ways-to-write-cleaner-code/",
+        "/blog/configuring-jest-and-enzyme-in-create-react-app-on-typescript/",
+        "/blog/the-value-of-iterative-design/",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "/blog/what-I-learned-from-a-failed-startup/",
+        "/blog/staticquery-and-typescript/",
+        "/blog/how-to-silence-false-sass-warnings-in-react/",
+        "/blog/how-to-lint-typescript-in-a-gatsby-project/",
+        "/blog/how-to-quickly-deploy-a-gatsby-site-with-netlify/",
+        "/blog/how-to-make-a-static-site-with-flexible-content-using-gatsby-and-contentful/",
+        "/blog/how-to-make-a-super-fast-static-site-with-gatsby-typescript-and-sass/",
+        "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+        "/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/",
+        "/blog/on-building-cougarcash/"
+      ],
+      "outgoingLinks": [
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/blog/introducing-2-0-in-2020/": {
+      "title": "Introducing 2.0 in 2020 | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Introducing 2.0 in 2020 | The Trevor Harmon",
+        "og:description": "The next version of thetrevorharmon.com",
+        "og:url": "https://thetrevorharmon.com/blog/introducing-2-0-in-2020/",
+        "og:image": "https://thetrevorharmon.com/static/89a97ad8c58dc3c4b847efa6518e23ba/20b93/Sillhouette-of-a-Man-Jumping-near-a-Mountain.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "about-my-process",
+        "lessons-learned",
+        "sharing-my-work"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Sillhouette of a Man Jumping near a Mountain"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/",
+        "#about-my-process",
+        "#lessons-learned",
+        "#sharing-my-work",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/what-I-learned-from-my-first-month-working-remote/",
+        "/blog/the-value-of-iterative-design/",
+        "/blog/what-ive-been-up-to-lately/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/3yLpryRajZs",
+        "https://gatsbyjs.org",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com/issues/35",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com/pull/55",
+        "https://twitter.com/thetrevorharmon/status/1195458365389860865?s=20",
+        "https://developers.google.com/web/tools/lighthouse",
+        "https://rsms.me/inter/",
+        "https://www.swyx.io/writing/learn-in-public/",
+        "https://github.com/thetrevorharmon/thetrevorharmon.com",
+        "https://previous.thetrevorharmon.com",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/introducing-2-0-in-2020&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/what-I-learned-from-my-first-month-working-remote/",
+          "/blog/the-value-of-iterative-design/",
+          "/blog/what-ive-been-up-to-lately/"
+        ],
+        "dates": [
+          "14 Oct 2019",
+          "13 Mar 2019",
+          "21 Jul 2023"
+        ]
+      }
+    },
+    "/blog/introducing-gatsby-theme-shopify-manager/": {
+      "title": "Introducing Gatsby Theme Shopify Manager | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Introducing Gatsby Theme Shopify Manager | The Trevor Harmon",
+        "og:description": "The easiest way to build a Shopify store on Gatsby.",
+        "og:url": "https://thetrevorharmon.com/blog/introducing-gatsby-theme-shopify-manager/",
+        "og:image": "https://thetrevorharmon.com/static/0f402070ea19e0ed71757990917ccfb2/8f346/A-person-using-a-computer-that-shows-a-browser-window-open-to-view-gatsbythemeshopifymanagercom.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "my-first-gatsby-theme",
+        "why-a-theme",
+        "available-now"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 2,
+      "imageAlts": [
+        "A person using a computer that shows a browser window open to view gatsbythemeshopifymanager.com",
+        "Gatsby Theme Shopify Manager Social Header: The easiest way to build a Shopify store on Gatsby."
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#my-first-gatsby-theme",
+        "#why-a-theme",
+        "#available-now",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+        "/blog/how-to-use-apple-font-tools-to-tweak-a-font/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/wQ9VuP_Njr4",
+        "https://www.gatsbyjs.com/gatsby-days/gatsby-days-los-angeles/",
+        "https://github.com/thetrevorharmon/sell-things-fast",
+        "https://gatsbythemeshopifymanager.com",
+        "https://www.gatsbyjs.org/docs/themes/what-are-gatsby-themes/",
+        "https://www.gatsbyjs.org/packages/gatsby-source-shopify/",
+        "https://www.npmjs.com/package/shopify-buy",
+        "https://gatsbythemeshopifymanager.com",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/introducing-gatsby-theme-shopify-manager&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+          "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+          "/blog/how-to-use-apple-font-tools-to-tweak-a-font/"
+        ],
+        "dates": [
+          "24 Oct 2019",
+          "27 Jan 2020",
+          "19 Jun 2018"
+        ]
+      }
+    },
+    "/blog/learning-codemirror/": {
+      "title": "Learning CodeMirror | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Learning CodeMirror | The Trevor Harmon",
+        "og:description": "An introduction to CodeMirror, with practical examples of its primitives.",
+        "og:url": "https://thetrevorharmon.com/blog/learning-codemirror/",
+        "og:image": "https://thetrevorharmon.com/static/d3d6db9ac229a0fb901a72df8db804cc/b9721/hand-holding-a-lightbulb-that-is-not-illuminated.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "structure--lifecycle",
+        "extensions",
+        "codemirror-primitives",
+        "facet",
+        "statefield",
+        "decoration",
+        "viewplugin",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "A hand holding a lightbulb that is not illuminated"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#structure--lifecycle",
+        "#extensions",
+        "#codemirror-primitives",
+        "#facet",
+        "#statefield",
+        "#decoration",
+        "#viewplugin",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/codemirror-and-react/",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/email-signup-forms-with-gatsby-and-mailchimp/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/fIq0tET6llw",
+        "https://codemirror.net/",
+        "https://shopify.engineering/building-commerce-data-models-with-shopifyql",
+        "https://codemirror.net/docs/",
+        "https://discuss.codemirror.net/",
+        "https://codemirror.net/examples/",
+        "https://codemirror.net/docs/",
+        "https://codemirror.net/docs/guide/",
+        "https://codemirror.net/docs/guide/",
+        "https://codemirror.net/docs/ref/#state.Extension",
+        "https://codemirror.net/docs/ref/#language.Language",
+        "https://codemirror.net/docs/ref/#commands",
+        "https://codemirror.net/docs/ref/#autocomplete",
+        "https://codemirror.net/docs/ref/#lint",
+        "https://codemirror.net/docs/ref/",
+        "https://codemirror.net/docs/ref/#state.Facet",
+        "https://codemirror.net/docs/ref/#state.Facet",
+        "https://codemirror.net/docs/ref/#state.Facet.of",
+        "https://codemirror.net/docs/ref/#state.EditorState.facet",
+        "https://codemirror.net/docs/ref/#view.EditorView%5EupdateListener",
+        "https://codemirror.net/docs/ref/#view.showTooltip",
+        "https://codemirror.net/docs/ref/#view.showPanel",
+        "https://codemirror.net/docs/ref/#state.Facet%5Edefine%5Econfig",
+        "https://codemirror.net/docs/ref/#state.StateField",
+        "https://codemirror.net/docs/ref/#state.Transaction.docChanged",
+        "https://codemirror.net/docs/ref/#state.StateEffect",
+        "https://codemirror.net/docs/ref/#state.StateEffectType",
+        "https://codemirror.net/docs/ref/#view.EditorView.dispatch",
+        "https://codemirror.net/docs/ref/#state.StateField%5Edefine%5Econfig.provide",
+        "https://codemirror.net/docs/ref/#view.PanelConstructor",
+        "https://codemirror.net/docs/ref/#view.showPanel",
+        "https://codemirror.net/docs/ref/#lint.setDiagnosticsEffect",
+        "https://codemirror.net/docs/ref/#view.Decoration%5Emark",
+        "https://codemirror.net/docs/ref/#view.Decoration%5Ewidget",
+        "https://codemirror.net/docs/ref/#view.Decoration%5Ereplace",
+        "https://codemirror.net/docs/ref/#view.Decoration%5Eline",
+        "https://codemirror.net/docs/ref/#view.EditorView%5Edecorations",
+        "https://codemirror.net/docs/ref/#view.WidgetType",
+        "https://codemirror.net/docs/ref/#view.DecorationSet",
+        "https://codemirror.net/docs/ref/#view.EditorView%5Edecorations",
+        "https://codemirror.net/docs/ref/#view.Decoration%5Ewidget",
+        "https://codemirror.net/examples/decoration/",
+        "https://codemirror.net/docs/ref/#view.ViewPlugin%5Edefine",
+        "https://codemirror.net/docs/ref/#view.ViewPlugin%5EfromClass",
+        "https://codemirror.net/docs/ref/#view.EditorView.dom",
+        "https://codemirror.net/docs/guide/",
+        "https://codemirror.net/examples/",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/learning-codemirror&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/codemirror-and-react/",
+          "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+          "/blog/email-signup-forms-with-gatsby-and-mailchimp/"
+        ],
+        "dates": [
+          "24 Oct 2023",
+          "15 Feb 2024",
+          "24 Jul 2019"
+        ]
+      }
+    },
+    "/blog/loaves-and-fishes/": {
+      "title": "Loaves and fishes | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Loaves and fishes | The Trevor Harmon",
+        "og:description": "Giving our all to the Lord, no matter how simple the offering.",
+        "og:url": "https://thetrevorharmon.com/blog/loaves-and-fishes/",
+        "og:image": "https://thetrevorharmon.com/static/efcb9e987b81cf7451c7112f523907a0/3b307/two-hands-holding-out-a-circular-loaf-of-bread-wrapped-in-a-cloth.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "jesus-makes-it-possible",
+        "the-why-of-our-service",
+        "called-to-the-high-council",
+        "remember-him",
+        "conclusion",
+        "footnote-label"
+      ],
+      "footnoteIds": [
+        "reference--mark-6_33-36",
+        "reference--matthew-14_16",
+        "reference--john-6_7-niv",
+        "reference--john-6_8-9",
+        "reference--the-imperfect-harvest",
+        "reference--mark-6_41-43",
+        "reference--mosiah-2_16-17",
+        "reference--for-him",
+        "footnote-label",
+        "footnote--mark-6_33-36",
+        "footnote--matthew-14_16",
+        "footnote--john-6_7-niv",
+        "footnote--john-6_8-9",
+        "footnote--the-imperfect-harvest",
+        "footnote--mark-6_41-43",
+        "footnote--mosiah-2_16-17",
+        "footnote--for-him"
+      ],
+      "footnoteLinks": [
+        "#footnote--mark-6_33-36",
+        "#footnote--matthew-14_16",
+        "#footnote--john-6_7-niv",
+        "#footnote--john-6_8-9",
+        "#footnote--the-imperfect-harvest",
+        "#footnote--mark-6_41-43",
+        "#footnote--mosiah-2_16-17",
+        "#footnote--for-him",
+        "#reference--mark-6_33-36",
+        "#reference--matthew-14_16",
+        "#reference--john-6_7-niv",
+        "#reference--john-6_8-9",
+        "#reference--the-imperfect-harvest",
+        "#reference--mark-6_41-43",
+        "#reference--mosiah-2_16-17",
+        "#reference--for-him"
+      ],
+      "imageCount": 1,
+      "imageAlts": [
+        "two hands holding out a circular loaf of bread wrapped in a cloth"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/about/#lay-ministry",
+        "#footnote--mark-6_33-36",
+        "#footnote--matthew-14_16",
+        "#footnote--john-6_7-niv",
+        "#footnote--john-6_8-9",
+        "#footnote--the-imperfect-harvest",
+        "#footnote--mark-6_41-43",
+        "#jesus-makes-it-possible",
+        "#footnote--mosiah-2_16-17",
+        "/about/#terminology",
+        "/about/#terminology",
+        "#the-why-of-our-service",
+        "/about/#terminology",
+        "#footnote--for-him",
+        "#called-to-the-high-council",
+        "/about/#terminology",
+        "/about/#terminology",
+        "/about/#terminology",
+        "#remember-him",
+        "#conclusion",
+        "#reference--mark-6_33-36",
+        "#reference--matthew-14_16",
+        "#reference--john-6_7-niv",
+        "#reference--john-6_8-9",
+        "#reference--the-imperfect-harvest",
+        "#reference--mark-6_41-43",
+        "#reference--mosiah-2_16-17",
+        "#reference--for-him",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/advanced-state-management-with-react-and-codemirror/",
+        "/blog/building-a-shopifyql-editor/",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/person-holding-pastry-RZn4_FzNUCY",
+        "https://www.churchofjesuschrist.org/study/scriptures/nt/mark/6?lang=eng&id=p33-p36#p33",
+        "https://www.churchofjesuschrist.org/study/scriptures/nt/matt/14?lang=eng&id=p16#p16",
+        "https://www.bible.com/bible/111/jhn.6.7",
+        "https://www.churchofjesuschrist.org/study/scriptures/nt/john/6?lang=eng&id=p8-p9#p8",
+        "https://www.churchofjesuschrist.org/study/general-conference/2023/04/54stanfill?lang=eng&id=p13#p13",
+        "https://www.churchofjesuschrist.org/study/scriptures/nt/mark/6?lang=eng&id=p41-p43#p41",
+        "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=eng&id=p16-p17#p16",
+        "https://www.churchofjesuschrist.org/study/general-conference/2018/10/for-him?lang=eng&id=p4-p11#p4",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/loaves-and-fishes&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/advanced-state-management-with-react-and-codemirror/",
+          "/blog/building-a-shopifyql-editor/",
+          "/blog/a-developers-guide-to-the-open-graph-protocol/"
+        ],
+        "dates": [
+          "25 Mar 2024",
+          "14 Sep 2023",
+          "12 Feb 2019"
+        ]
+      }
+    },
+    "/blog/loose-null-checks-in-javascript/": {
+      "title": "Loose null checks in JavaScript | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Loose null checks in JavaScript | The Trevor Harmon",
+        "og:description": "Strict equality checks in JavaScript always make sense–except for null.",
+        "og:url": "https://thetrevorharmon.com/blog/loose-null-checks-in-javascript/",
+        "og:image": "https://thetrevorharmon.com/static/da0a2030408c1988cdc9eb6c9e288a97/554d7/a-mug-of-tea-sitting-next-to-a-pile-of-herbs.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "two-ways-to-express-null",
+        "handling-both-values-with-one-check",
+        "practical-example"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "a mug of tea sitting next to a pile of herbs"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#two-ways-to-express-null",
+        "#handling-both-values-with-one-check",
+        "#practical-example",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/the-value-of-iterative-design/",
+        "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+        "/blog/code-irl-javascript-closures/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/black-ceramic-mug-9r1tsx5BvSQ",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Falsy",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/null#difference_between_null_and_undefined",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/loose-null-checks-in-javascript&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/the-value-of-iterative-design/",
+          "/blog/email-signup-forms-with-gatsby-and-mailchimp/",
+          "/blog/code-irl-javascript-closures/"
+        ],
+        "dates": [
+          "13 Mar 2019",
+          "24 Jul 2019",
+          "01 May 2019"
+        ]
+      }
+    },
+    "/blog/on-building-cougarcash/": {
+      "title": "On Building CougarCash | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "On Building CougarCash | The Trevor Harmon",
+        "og:description": "How I created an app that transferred money in less than 20 seconds.",
+        "og:url": "https://thetrevorharmon.com/blog/on-building-cougarcash/",
+        "og:image": "https://thetrevorharmon.com/static/044c52aecc9975dd1ae928dd4bbbef4c/b307b/man-holding-cougarcash.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "initial-research",
+        "design--development",
+        "results"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 2,
+      "imageAlts": [
+        "man-holding-cougarcash",
+        "Cougar Cash Process Flow"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#initial-research",
+        "#design--development",
+        "#results",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/building-a-shopifyql-editor/",
+        "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+      ],
+      "outgoingLinks": [
+        "https://en.wikipedia.org/wiki/Facade_pattern",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/on-building-cougarcash&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/ai-fills-in-the-blank/",
+          "/blog/building-a-shopifyql-editor/",
+          "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+        ],
+        "dates": [
+          "21 Nov 2025",
+          "14 Sep 2023",
+          "23 Sep 2019"
+        ]
+      }
+    },
+    "/blog/sell-things-fast-with-gatsby-and-shopify/": {
+      "title": "Sell things fast with Gatsby and Shopify | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Sell things fast with Gatsby and Shopify | The Trevor Harmon",
+        "og:description": "A starting guide to building a lightning-fast Shopify store on Gatsby. ⚡",
+        "og:url": "https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify/",
+        "og:image": "https://thetrevorharmon.com/static/e81e8cbcd5966a01cce2ed574579e6cd/3b307/Trevor-Harmon-speaking-to-a-group-of-people-at-Gatsby-Days-LA.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "building-our-first-gatsby-powered-store",
+        "setting-up-a-shopify-store",
+        "bogus-gateway",
+        "new-private-app",
+        "products-options-variants",
+        "getting-data-out-of-shopify-and-into-gatsby",
+        "using-shopify-buy-to-manage-the-cart",
+        "whats-next"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 10,
+      "imageAlts": [
+        "Trevor Harmon speaking to a group of people at Gatsby Days LA",
+        "A Google Lighthouse audit report with a perfect score, showing fireworks exploding around the scores",
+        "A man holding a bucket surrounded on either side by geese in a field",
+        "A screenshot of Shopify's Bogus Gateway setup screen",
+        "A screenshot of creating a new Shopify app, enabling Storefront API permissions, including enabling 'Read Product Tags' and 'Read Customer Tags'",
+        "A screenshot of the Storefront API credentials returned after creating a new private app on Shopify",
+        "A matrix of iPhones with Size and Colors as the two axes. This demonstrates a two-dimensional way to visualize product options within Shopify.",
+        "A screenshot of the Shopify product detail page showing a Men's Down Jacket with its description and photos",
+        "A screenshot of the homepage of Only Down showing an image of a mountain with the words Only Down over it, and three down-related products (two jackets and a vest)",
+        "A Google Lighthouse audit report with a perfect score, showing fireworks exploding around the scores"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#building-our-first-gatsby-powered-store",
+        "#setting-up-a-shopify-store",
+        "#bogus-gateway",
+        "#new-private-app",
+        "#products-options-variants",
+        "#getting-data-out-of-shopify-and-into-gatsby",
+        "#using-shopify-buy-to-manage-the-cart",
+        "#whats-next",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+        "/blog/displaying-mermaid-charts-in-gatsby/",
+        "/blog/three-simple-ways-to-write-cleaner-code/"
+      ],
+      "outgoingLinks": [
+        "https://www.gigaspaces.com/blog/amazon-found-every-100ms-of-latency-cost-them-1-in-sales/",
+        "https://www.freecodecamp.org/news/how-gatsby-is-so-blazing-fast-c99a6f2d405e/",
+        "https://www.gatsbyjs.org/blog/2017-09-13-why-is-gatsby-so-fast/",
+        "https://herchel.com/2018-01-10-why-is-gatsby-fast-prpl/",
+        "https://blogwell.io/tag-performance/",
+        "https://developers.google.com/web/tools/lighthouse",
+        "https://twitter.com/thetrevorharmon/status/1158445074981650432?s=21",
+        "https://apps.shopify.com/",
+        "https://www.shopify.com/pricing",
+        "https://news.shopify.com/introducing-shopify-fulfillment-network",
+        "https://www.shopify.com/partners",
+        "https://www.google.com/search?q=bogus+gateway+shopify&oq=bogus+gatw&aqs=chrome.1.69i57j0l7.1708j1j7&sourceid=chrome&ie=UTF-8",
+        "https://www.gatsbyjs.org/packages/gatsby-source-shopify/",
+        "https://www.gatsbyjs.org/packages/gatsby-source-shopify/",
+        "https://www.gatsbyjs.org/docs/running-queries-with-graphiql/",
+        "https://www.gatsbyjs.org/docs/building-an-ecommerce-site-with-shopify/",
+        "https://github.com/thetrevorharmon/sell-things-fast/blob/master/src/pages/index.js",
+        "https://theme-ui.com/",
+        "https://shopify.github.io/js-buy-sdk/",
+        "https://github.com/thetrevorharmon/sell-things-fast/blob/master/src/context/StoreContext.js",
+        "https://github.com/thetrevorharmon/sell-things-fast/blob/master/gatsby-browser.js",
+        "https://sell-things-fast.netlify.com",
+        "https://www.youtube.com/watch?v=tUtuGAFOjYI",
+        "https://docs.google.com/presentation/d/e/2PACX-1vRW2cq1SarLP41OS5cCTIz9WKDLEUNftOCVnOlb7LLph1m0Bm_Eirs_8PLeVBbmW89Xk3NXXcBjMkKZ/pub?start=false&loop=false&delayms=3000",
+        "https://twitter.com/thetrevorharmon",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/how-to-use-apple-font-tools-to-tweak-a-font/",
+          "/blog/displaying-mermaid-charts-in-gatsby/",
+          "/blog/three-simple-ways-to-write-cleaner-code/"
+        ],
+        "dates": [
+          "19 Jun 2018",
+          "24 Aug 2023",
+          "23 Apr 2019"
+        ]
+      }
+    },
+    "/blog/staticquery-and-typescript/": {
+      "title": "StaticQuery and Typescript | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "StaticQuery and Typescript | The Trevor Harmon",
+        "og:description": "How to use Gatsby's StaticQuery while working in a Typescript environment.",
+        "og:url": "https://thetrevorharmon.com/blog/staticquery-and-typescript/",
+        "og:image": "https://thetrevorharmon.com/static/aebe167f3cbb28dd655350ff16da3faf/3b307/MacBook-Pro-with-code-on-the-screen-sitting-on-a-wooden-table-with-two-chairs.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "an-introduction-to-staticquery",
+        "what-about-with-typescript",
+        "the-finished-code",
+        "update-the-usestaticquery-hook"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "MacBook Pro with code on the screen sitting on a wooden table with two chairs"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com",
+        "#update",
+        "#an-introduction-to-staticquery",
+        "#what-about-with-typescript",
+        "#the-finished-code",
+        "#update-the-usestaticquery-hook",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/HvYy5SEefC8",
+        "https://www.gatsbyjs.org/docs/static-query/",
+        "https://github.com/wmonk/create-react-app-typescript/issues/370",
+        "https://gist.github.com/thetrevorharmon/e03f5d156660fe46da1605d9a76748f1",
+        "https://gist.github.com/thetrevorharmon/14596f8f890d9782f392dced16db148f",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/staticquery-and-typescript&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/connecting-antlr-to-codemirror-6-building-a-language-server/",
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/",
+          "/blog/dont-use-the-spread-operator-in-a-loop/"
+        ],
+        "dates": [
+          "15 Feb 2024",
+          "24 Oct 2019",
+          "25 Nov 2024"
+        ]
+      }
+    },
+    "/blog/the-value-of-iterative-design/": {
+      "title": "The value of iterative design | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "The value of iterative design | The Trevor Harmon",
+        "og:description": "My six attempts to design \"Sweet Honey\" taught me that iterating on creative work can be difficult, but produces better results in the end.",
+        "og:url": "https://thetrevorharmon.com/blog/the-value-of-iterative-design/",
+        "og:image": "https://thetrevorharmon.com/static/c4469195c1b1d24e2af0227bfe367e9f/3b307/Two-sketchbooks-on-a-table-next-to-a-coffee-mug-drawing-utensils-with-a-person-about-to-draw-on-one-of-the-sketchbooks.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "iteration-1-honeydipper",
+        "iteration-2-bit-o-honey-bus",
+        "iteration-3-vintage-television",
+        "iteration-4-dancing-in-black--white",
+        "finding-guiding-principles",
+        "iteration-5-vintage-couple",
+        "iteration-6-the-final-design",
+        "lessons-learned"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 7,
+      "imageAlts": [
+        "Two sketchbooks on a table next to a coffee mug, drawing utensils, with a person about to draw on one of the sketchbooks.",
+        "Sweet Honey 1: Honey Dipper",
+        "Sweet Honey 2: Bit-O-Honey Bus",
+        "Sweet Honey 3: Vintage TV",
+        "Sweet Honey 4: Dancing in Black & White",
+        "Sweet Honey 5: Vintage Couple",
+        "Sweet Honey 6: Final Album art"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#iteration-1-honeydipper",
+        "#iteration-2-bit-o-honey-bus",
+        "#iteration-3-vintage-television",
+        "#iteration-4-dancing-in-black--white",
+        "#finding-guiding-principles",
+        "https://thetrevorharmon.com/blog/designing-for-michael-barrow-and-the-tourists/#santa-barbara-sessions",
+        "#iteration-5-vintage-couple",
+        "#iteration-6-the-final-design",
+        "#lessons-learned",
+        "#principles",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/sell-things-fast-with-gatsby-and-shopify/",
+        "/blog/what-I-learned-from-my-first-month-working-remote/",
+        "/blog/what-I-learned-from-a-failed-startup/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/X6CZGpJBi8U",
+        "https://instagram.com/michaelbarrowandthetourists",
+        "https://open.spotify.com/track/24p3wDqcjQecwXMFxXkzYn?si=8PpfLBV0TRWN2Zc4j8r1Tw",
+        "https://twitter.com/zachisatourist",
+        "https://foter.com/photos/pi/332/50s-bar-stools-4.jpg",
+        "https://commercialtype.com/catalog/druk_text_wide",
+        "https://pixelbuddha.net/freebie/bushcraft-font-family",
+        "https://help.apple.com/itc/musicstyleguide/en.lproj/static.html",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/the-value-of-iterative-design&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/sell-things-fast-with-gatsby-and-shopify/",
+          "/blog/what-I-learned-from-my-first-month-working-remote/",
+          "/blog/what-I-learned-from-a-failed-startup/"
+        ],
+        "dates": [
+          "23 Apr 2020",
+          "14 Oct 2019",
+          "29 Jan 2019"
+        ]
+      }
+    },
+    "/blog/thoughts-on-building-habits/": {
+      "title": "Thoughts on building habits | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Thoughts on building habits | The Trevor Harmon",
+        "og:description": "How I managed to get a habit to stick for 1500+ days (and counting!)",
+        "og:url": "https://thetrevorharmon.com/blog/thoughts-on-building-habits/",
+        "og:image": "https://thetrevorharmon.com/static/7d0dd291f96237eb70042a1f05b8560e/3b307/a-sunrise-through-tall-trees-in-the-appalachians.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "effective-habits-mean-a-change-of-identity",
+        "make-the-habit-stupid-easy",
+        "track-the-habit-every-day",
+        "looking-forward"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "a sunrise through tall trees in the appalachians"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#effective-habits-mean-a-change-of-identity",
+        "https://thetrevorharmon.com/about/#faith",
+        "#make-the-habit-stupid-easy",
+        "https://thetrevorharmon.com/blog/what-ive-been-up-to-lately/",
+        "#track-the-habit-every-day",
+        "#looking-forward",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/"
+      ],
+      "outgoingLinks": [
+        "https://todoist.com/inspiration/dont-break-the-chain",
+        "https://streaksapp.com",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/thoughts-on-building-habits&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/ai-fills-in-the-blank/",
+          "/blog/a-developers-guide-to-the-open-graph-protocol/",
+          "/blog/connecting-antlr-to-code-mirror-6-connecting-a-language-server/"
+        ],
+        "dates": [
+          "21 Nov 2025",
+          "12 Feb 2019",
+          "16 Feb 2024"
+        ]
+      }
+    },
+    "/blog/three-simple-ways-to-write-cleaner-code/": {
+      "title": "Three Simple Ways to Write Cleaner Code | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Three Simple Ways to Write Cleaner Code | The Trevor Harmon",
+        "og:description": "Three practices you can start today that will make your code more readable now and easier to understand in the future.",
+        "og:url": "https://thetrevorharmon.com/blog/three-simple-ways-to-write-cleaner-code/",
+        "og:image": "https://thetrevorharmon.com/static/6b6e82b742760c06ba0fb026bb4198c4/3b307/Man-with-beard-coding-on-MacBook-Pro.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-learn-and-follow-conventions",
+        "2-use-whitespace",
+        "3-name-and-then-rename",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Man with beard coding on MacBook Pro"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-learn-and-follow-conventions",
+        "#2-use-whitespace",
+        "#3-name-and-then-rename",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/FCHlYvR5gJI",
+        "https://www.python.org/dev/peps/pep-0008/#function-and-variable-names",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "https://medium.freecodecamp.org/css-naming-conventions-that-will-save-you-hours-of-debugging-35cea737d849",
+        "http://getbem.com/introduction/",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/three-simple-ways-to-write-cleaner-code&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+          "/blog/ai-fills-in-the-blank/",
+          "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/"
+        ],
+        "dates": [
+          "27 Jan 2020",
+          "21 Nov 2025",
+          "23 Sep 2019"
+        ]
+      }
+    },
+    "/blog/what-I-learned-from-a-failed-startup/": {
+      "title": "What I learned from a failed startup | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "What I learned from a failed startup | The Trevor Harmon",
+        "og:description": "Four lessons I learned from working as an engineer for a startup that ran out of cash and went bankrupt.",
+        "og:url": "https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup/",
+        "og:image": "https://thetrevorharmon.com/static/0c8032cc98391cfe8808e7852a2aaf70/20b93/Gate-with-closed-sign-on-it.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "1-you-cant-hire-or-sell-your-way-out-of-management-problems",
+        "2-dont-buy-into-the-wrong-type-of-hype",
+        "3-frugality-is-for-companies-too",
+        "4-if-something-smells-see-where-your-nose-takes-you",
+        "looking-forward"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Gate with closed sign on it"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#1-you-cant-hire-or-sell-your-way-out-of-management-problems",
+        "#2-dont-buy-into-the-wrong-type-of-hype",
+        "#3-frugality-is-for-companies-too",
+        "#4-if-something-smells-see-where-your-nose-takes-you",
+        "#looking-forward",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/a-developers-guide-to-the-open-graph-protocol/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/iaSzwYccV28",
+        "https://www.washingtonpost.com/science/2018/08/14/solar-eclipse-was-one-most-watched-events-american-history-survey-finds/?noredirect=on&utm_term=.91e4f92b49cc",
+        "http://neighbor.com",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/a-developers-guide-to-the-open-graph-protocol/",
+          "/blog/dont-use-the-spread-operator-in-a-loop/",
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/"
+        ],
+        "dates": [
+          "12 Feb 2019",
+          "25 Nov 2024",
+          "24 Oct 2019"
+        ]
+      }
+    },
+    "/blog/what-I-learned-from-my-first-month-working-remote/": {
+      "title": "What I learned from my first month working remote | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "What I learned from my first month working remote | The Trevor Harmon",
+        "og:description": "Reflections on what I've learned and how I made my first month a success.",
+        "og:url": "https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote/",
+        "og:image": "https://thetrevorharmon.com/static/99a44af78b418b34c0da919f52b0125a/3b307/Man-working-on-his-laptop-in-a-cafe.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "remote-work-isnt-all-good-or-all-bad",
+        "your-lead-teammates-and-team-culture-matter",
+        "its-an-adjustment",
+        "tips-for-success",
+        "1-spend-time-onsite-developing-relationships-especially-with-your-teammates",
+        "2-try-to-work-similar-hours-as-those-you-work-with",
+        "3-schedule-time-to-meet-people-when-youre-not-onsite",
+        "4-be-patient-with-yourself",
+        "conclusion"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Man working on his laptop in a cafe"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#remote-work-isnt-all-good-or-all-bad",
+        "#your-lead-teammates-and-team-culture-matter",
+        "#its-an-adjustment",
+        "#tips-for-success",
+        "#1-spend-time-onsite-developing-relationships-especially-with-your-teammates",
+        "#2-try-to-work-similar-hours-as-those-you-work-with",
+        "#3-schedule-time-to-meet-people-when-youre-not-onsite",
+        "#4-be-patient-with-yourself",
+        "#conclusion",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/getting-closure-on-react-hooks-swyx/",
+        "/blog/thoughts-on-building-habits/",
+        "/blog/what-ive-been-up-to-lately/"
+      ],
+      "outgoingLinks": [
+        "https://unsplash.com/photos/I3HSXoD6TZM",
+        "https://parivedasolutions.com",
+        "https://shopify.com",
+        "https://twitter.com/asmockler",
+        "https://twitter.com/keyfermath",
+        "https://twitter.com/thetrevorharmon",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/getting-closure-on-react-hooks-swyx/",
+          "/blog/thoughts-on-building-habits/",
+          "/blog/what-ive-been-up-to-lately/"
+        ],
+        "dates": [
+          "22 Jul 2019",
+          "30 Jul 2024",
+          "21 Jul 2023"
+        ]
+      }
+    },
+    "/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/": {
+      "title": "What Facebook can teach us about the new MacBook Pro | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "What Facebook can teach us about the new MacBook Pro | The Trevor Harmon",
+        "og:description": "Why the radical redesign isn't such a bad thing.",
+        "og:url": "https://thetrevorharmon.com/blog/what-facebook-can-teach-us-about-the-new-macbook-pro/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "apples-slow-touchscreen-phone",
+        "apples-underpowered-laptop",
+        "what-about-the-new-macbookpro",
+        "what-does-this-have-to-do-with-facebook"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 5,
+      "imageAlts": [
+        "Facebook profile in 2007",
+        "Facebook feed in 2008",
+        "Steve Jobs holding the original iPhone",
+        "Macbook Air",
+        "MacBook pro announced in 2016"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#apples-slow-touchscreen-phone",
+        "#apples-underpowered-laptop",
+        "#what-about-the-new-macbookpro",
+        "#what-does-this-have-to-do-with-facebook",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/getting-closure-on-react-hooks-swyx/",
+        "/blog/displaying-mermaid-charts-in-gatsby/",
+        "/blog/advanced-state-management-with-react-and-codemirror/"
+      ],
+      "outgoingLinks": [
+        "https://techcrunch.com/2008/09/16/dont-let-facebook-force-the-new-profile-on-you-heres-how-to-get-the-old-one-back/",
+        "https://www.reddit.com/r/apple/comments/59yrxg/the_true_reason_the_mbp_doesnt_come_with_ddr4_or/",
+        "https://daringfireball.net/linked/2016/10/31/intel-mbp-ram",
+        "https://www.chuq.me/2016/10/how-apple-could-have-avoided-much-of-the-controversy/",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/what-facebook-can-teach-us-about-the-new-macbook-pro&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/getting-closure-on-react-hooks-swyx/",
+          "/blog/displaying-mermaid-charts-in-gatsby/",
+          "/blog/advanced-state-management-with-react-and-codemirror/"
+        ],
+        "dates": [
+          "22 Jul 2019",
+          "24 Aug 2023",
+          "25 Mar 2024"
+        ]
+      }
+    },
+    "/blog/what-ive-been-up-to-lately/": {
+      "title": "What I've been up to lately | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "What I've been up to lately | The Trevor Harmon",
+        "og:description": "I took a break from my blog for 3 years. What did I do in the meantime?",
+        "og:url": "https://thetrevorharmon.com/blog/what-ive-been-up-to-lately/",
+        "og:image": "https://thetrevorharmon.com/static/e793c1099dade84a5137e1f92eca5792/554d7/clingmans-dome.jpg",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary_large_image",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "looking-forward"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 8,
+      "imageAlts": [
+        "A view from clingman's dome overlooking the smoky mountains and a path leading up to the lookout spot.",
+        "A sunset with the sun going behind the pacific ocean with the Redondo Beach pier in view",
+        "A sunset with the sun going behind tall trees",
+        "A picture of Trevor Harmon in front of the manhattan bridge",
+        "poppy inside the house",
+        "poppy on the lawn",
+        "A picture of Trevor Harmon recording acoustic guitar",
+        "A picture of Trent and Trevor Harmon standing next to the sign at the top of Mount Mitchell"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/blog/sell-things-fast-with-gatsby-and-shopify/",
+        "https://thetrevorharmon.com/blog/what-I-learned-from-my-first-month-working-remote/",
+        "#looking-forward",
+        "https://thetrevorharmon.com/rss.xml",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/three-simple-ways-to-write-cleaner-code/",
+        "/blog/codemirror-and-react/",
+        "/blog/binary-thinking-vs-directional-thinking-danielpriestley/"
+      ],
+      "outgoingLinks": [
+        "https://github.com/thetrevorharmon/gatsby-theme-shopify-manager",
+        "https://www.fool.com/investing/2020/05/22/shopify-is-going-all-in-on-remote-work.aspx",
+        "https://shopify.engineering/shopify-in-context-analytics",
+        "https://twitter.com/Shopify/status/1466152432392675333?s=20",
+        "https://www.shopify.com/editions/winter2023",
+        "https://open.spotify.com/album/0WEod59ULOzfjJiZS6AJ9F?si=-hVsyye_QLeaPltQvAvMyA",
+        "https://open.spotify.com/artist/1mhe70fSiQDyc16JVlhBUE?si=iVc7DmhoTCKsPTFIa9N5xg",
+        "https://open.spotify.com/album/7ePZVqwRTdt0Sjxe2Mex1a?si=EOa0v7OdRruqd40pCHKxfQ",
+        "https://open.spotify.com/track/3jS2MJ4fkQWBsvCWCfVMoh?si=JziYmQiVQeieX-TFTRuOrg",
+        "https://open.spotify.com/track/2sYkRzFX9tBCzTCfzE07Y8?si=Ae2tsmFETK2dYWDZ4D2LrA",
+        "https://marriott.byu.edu/infosys/mism/what-will-i-study/program-overview/",
+        "https://www.churchofjesuschrist.org/?lang=eng",
+        "https://www.churchofjesuschrist.org/study/general-conference/2018/10/the-correct-name-of-the-church?lang=eng",
+        "https://twitter.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/search?q=https://thetrevorharmon.com/blog/what-ive-been-up-to-lately&src=typed_query&f=top",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/three-simple-ways-to-write-cleaner-code/",
+          "/blog/codemirror-and-react/",
+          "/blog/binary-thinking-vs-directional-thinking-danielpriestley/"
+        ],
+        "dates": [
+          "23 Apr 2019",
+          "24 Oct 2023",
+          "24 Oct 2019"
+        ]
+      }
+    },
+    "/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/": {
+      "title": "Why Slow Mornings May Be the Secret to Tech-Life Balance - @ajzaleski | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Why Slow Mornings May Be the Secret to Tech-Life Balance - @ajzaleski | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/blog/why-slow-mornings-may-be-the-secret-to-tech-life-balance-ajzaleski/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "https://thetrevorharmon.com/rss.xml",
+        "/blog/thoughts-on-building-habits/",
+        "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+        "/blog/what-ive-been-up-to-lately/"
+      ],
+      "outgoingLinks": [
+        "https://twitter.com/ajzaleski",
+        "https://t.co/iuCK0FuHLG?amp=1",
+        "https://x.com/thetrevorharmon",
+        "https://thetrevorharmon.us18.list-manage.com/subscribe?u=564c646304e7c3dcd08710731&id=03c1d4d9de",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": {
+        "heading": "Want to keep reading?",
+        "description": "If you enjoyed this article, you might enjoy one of these:",
+        "count": 3,
+        "links": [
+          "/blog/thoughts-on-building-habits/",
+          "/blog/how-to-prepare-and-use-variable-fonts-on-the-web/",
+          "/blog/what-ive-been-up-to-lately/"
+        ],
+        "dates": [
+          "30 Jul 2024",
+          "27 Jan 2020",
+          "21 Jul 2023"
+        ]
+      }
+    },
+    "/drafts/": {
+      "title": "Drafts | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Drafts | The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com/drafts/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 0,
+      "imageAlts": [],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/"
+      ],
+      "outgoingLinks": [
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/": {
+      "title": "The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "The Trevor Harmon",
+        "og:description": "The blog & portfolio of Trevor Harmon.",
+        "og:url": "https://thetrevorharmon.com",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 1,
+      "imageAlts": [
+        "Trevor Harmon"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "/blog/",
+        "/about/",
+        "/blog/ai-fills-in-the-blank/",
+        "/blog/dont-use-the-spread-operator-in-a-loop/",
+        "/blog/const-isnt-constant/",
+        "/blog/thoughts-on-building-habits/",
+        "/blog/loaves-and-fishes/",
+        "/blog/"
+      ],
+      "outgoingLinks": [
+        "https://www.shopify.com/",
+        "https://www.shopify.com/analytics",
+        "https://open.spotify.com/artist/1yO8BBQCwIuADPQA6Pvux6?si=OHbykjIhTpy-NVGXm-tAlQ",
+        "https://www.churchofjesuschrist.org/?lang=eng",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    },
+    "/pumpkins/": {
+      "title": "Pumpkins | The Trevor Harmon",
+      "description": null,
+      "canonical": null,
+      "meta": {
+        "og:title": "Pumpkins | The Trevor Harmon",
+        "og:description": "",
+        "og:url": "https://thetrevorharmon.com/pumpkins/",
+        "og:image": "https://thetrevorharmon.com/favicon.png",
+        "og:type": "website",
+        "og:site_name": "The Trevor Harmon",
+        "twitter:card": "summary",
+        "twitter:site": "@thetrevorharmon",
+        "twitter:creator": "@thetrevorharmon"
+      },
+      "headingIds": [
+        "2026--the-hobbit",
+        "2025--ghostbusters",
+        "2024--animals",
+        "2023--mandalorian",
+        "2022--bob-ross",
+        "2021--harry-potter--teachers",
+        "2020--harry-potter--crest",
+        "2019--star-wars--episode-1",
+        "2018--nightmare-before-christmas",
+        "2017--stranger-things",
+        "2016--emojis",
+        "2015--star-wars",
+        "2014--mario-characters",
+        "2013--disney-villains",
+        "2012--avengers",
+        "2009--fantasy"
+      ],
+      "footnoteIds": [],
+      "footnoteLinks": [],
+      "imageCount": 49,
+      "imageAlts": [
+        "The Hobbit pumpkins",
+        "Gandalf pumpkin",
+        "Gollum pumpkin",
+        "Ghostbusters pumpkin",
+        "Slimer pumpkin",
+        "Stay Puft pumpkin",
+        "Animals pumpkin",
+        "Giraffe pumpkin",
+        "Lion pumpkin",
+        "Mandalorian pumpkin",
+        "Helmet pumpkin",
+        "Mythosaur pumpkin",
+        "Bob Ross pumpkin",
+        "Costume pumpkin",
+        "Harry Potter Teachers pumpkin",
+        "Mad Eye Moody pumpkin",
+        "Snape pumpkin",
+        "Harry Potter Crest pumpkin",
+        "Star Wars Episode 1 pumpkin",
+        "Darth Maul pumpkin",
+        "Jar Jar Binks pumpkin",
+        "Nightmare Before Christmas pumpkin",
+        "Jack Skellington pumpkin",
+        "Oogie boogie pumpkin",
+        "Stranger Things pumpkin",
+        "Barb pumpkin",
+        "Demigorgon pumpkin",
+        "Emojis pumpkin",
+        "Star Wars pumpkin",
+        "Boba Fett pumpkin",
+        "Stormtrooper pumpkin",
+        "Logo pumpkin",
+        "Vader pumpkin",
+        "Yoda pumpkin",
+        "Mario pumpkin",
+        "Characters pumpkin",
+        "Disney Villains pumpkin",
+        "Hades pumpkin",
+        "Hook pumpkin",
+        "Jafar pumpkin",
+        "Maleficent pumpkin",
+        "Wicked Queen Disguised pumpkin",
+        "Wicked Queen Normal pumpkin",
+        "Avengers pumpkin",
+        "Captain America pumpkin",
+        "Iron Man pumpkin",
+        "Logo pumpkin",
+        "unicorn pumpkin",
+        "wizard pumpkin"
+      ],
+      "internalLinks": [
+        "/",
+        "/blog/",
+        "/about/",
+        "#2026--the-hobbit",
+        "#2025--ghostbusters",
+        "#2024--animals",
+        "#2023--mandalorian",
+        "#2022--bob-ross",
+        "#2021--harry-potter--teachers",
+        "#2020--harry-potter--crest",
+        "#2019--star-wars--episode-1",
+        "#2018--nightmare-before-christmas",
+        "#2017--stranger-things",
+        "#2016--emojis",
+        "#2015--star-wars",
+        "#2014--mario-characters",
+        "#2013--disney-villains",
+        "#2012--avengers",
+        "#2009--fantasy"
+      ],
+      "outgoingLinks": [
+        "https://www.amazon.com/dp/141694737X?lv=shuf&channelId=500&plpRedirect=mhFallback",
+        "https://x.com/thetrevorharmon",
+        "https://github.com/thetrevorharmon"
+      ],
+      "readingList": null
+    }
+  }
+}

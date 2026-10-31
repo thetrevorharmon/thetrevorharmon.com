@@ -7,6 +7,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 - Do the work on the `astra-migration` branch. `main` stays on Gatsby until the cut-over.
 - **Old** means the Gatsby site from the tag `gatsby-final`. It's built in a separate worktree and served at `http://localhost:9000` (`yarn build && yarn serve`).
 - **New** means the Astro site, served with `astro build && astro preview` at `http://localhost:4321`.
+- The shell's default Node is too old. Run `export PATH=~/.nvm/versions/node/v22.23.4/bin:$PATH` before any `node`, `yarn` or `npx` command.
 - The regression suite (task 1.2) is built first and tested against the old site, so you can trust it before any Astro code exists.
 - Differences we expect and accept go in one allowlist file, `tests/parity/expected-differences.ts`. Those are the reading-time numbers, the hashed asset URLs, `/drafts` and how the mermaid diagrams render. Any other difference is a regression.
 
@@ -35,7 +36,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
   - heading ids and footnote ids
   - image count and alt text
   - outgoing links
-- **Validate:** it contains 41 post pages plus `/about/`, `/` and `/blog/`. The number of sitemap entries matches the number of published HTML pages, and there are 41 RSS items.
+- **Validate:** it contains 41 post pages plus `/about/`, `/`, `/blog/` and `/pumpkins/`. The number of sitemap entries matches the number of published HTML pages, and there are 40 RSS items (one post is Archived, so it is not in the feed).
 
 ## Phase 2: Risk test (1 day)
 
@@ -126,7 +127,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 ### 6.3 Mermaid
 
 - Use `@xingwangzhe/satteri-mermaid`, or the fallback plugin that inserts the committed SVGs, depending on what Phase 2 found.
-- **Validate:** all 9 diagrams render in light and dark mode. After a visual review signs them off, add them to the allowlist.
+- **Validate:** all 11 diagrams render in light and dark mode. After a visual review signs them off, add them to the allowlist.
 
 ### 6.4 Images
 
