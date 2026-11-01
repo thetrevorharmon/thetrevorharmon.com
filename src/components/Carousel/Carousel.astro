@@ -38,9 +38,15 @@ for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
     console.warn('Carousel: image has no width and height', tag);
     continue;
   }
+  const portrait = (ratio > 0 ? ratio : width / height) < 1;
   photos.push({
     // The body styles for markdown images (max-width and so on) don't apply here.
-    imgHtml: tag.replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, ''),
+    // Tall photos only fill half the carousel, so they get a half-width `sizes`
+    // (the markdown default would load a srcset image twice as wide as needed).
+    imgHtml: (portrait
+      ? tag.replace(/\ssizes="[^"]*"/, ' sizes="(min-width: 800px) 400px, 50vw"')
+      : tag
+    ).replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, ''),
     caption: attrs.title ?? null,
     aspectRatio: ratio > 0 ? ratio : width / height,
   });

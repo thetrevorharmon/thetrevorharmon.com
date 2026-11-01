@@ -19,7 +19,18 @@ const {image} = Astro.props;
 
 <div class="space-y-little">
   <div class="Breakout shadow-sm rounded-md overflow-hidden isolate">
-    {image && <Image src={image.source} alt={image.alt} width={800} />}
+    {
+      image && (
+        // The first thing on the page, so it is the LCP element: load it now.
+        <Image
+          src={image.source}
+          alt={image.alt}
+          width={800}
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
   </div>
   <div class="Caption">
     {image?.title ?? <Attribution attribution={image?.attribution} />}

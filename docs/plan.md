@@ -277,6 +277,99 @@ Run the whole Playwright suite with `OLD_URL=http://localhost:9000` and `NEW_URL
 
 - **Validate:** the suite is green, someone has reviewed the HTML report, and every visual difference is signed off.
 
+### Phase 9 results: local half (done)
+
+Run on `astra-migration` with `gatsby serve` on :9000 and `astro preview` on :4321. The deploy-preview half is still pending (below).
+
+**Suite.** `OLD_URL=http://localhost:9000 NEW_URL=http://localhost:4321 npx playwright test --project=new`: 544 passed, 14 skipped (the redirect tests, which need `DEPLOY_PREVIEW_URL`), 0 failed. Visual is 188/188 and console is green on every page. With `DEPLOY_PREVIEW_URL=http://localhost:8888` (`netlify dev --dir dist --command "tail -f /dev/null" --offline`), the 14 redirect tests pass too (558 passed, 0 skipped). Re-verified in a second pass. The HTML report is in `playwright-report/` (gitignored). `yarn run check`, `yarn typecheck`, `yarn lint` and `yarn test` are green.
+
+**Lighthouse.** `yarn lighthouse` (`scripts/parity/lighthouse.mjs`, lighthouse 12.8.2, Playwright's chromium via `CHROME_PATH`, mobile and desktop presets, median of 3 runs). Old and new were measured in the same session; new numbers are after the fixes below. Transfer is uncompressed on both servers (neither compresses), so compare it only between rows.
+
+| Preset  | Page                         | Site | Perf | A11y | BP  | SEO | LCP ms | CLS   | TBT ms | KB   |
+| ------- | ---------------------------- | ---- | ---- | ---- | --- | --- | ------ | ----- | ------ | ---- |
+| mobile  | `/`                          | old  | 78   | 100  | 100 | 92  | 4614   | 0.000 | 0      | 710  |
+| mobile  | `/`                          | new  | 95   | 100  | 100 | 92  | 2860   | 0.000 | 0      | 299  |
+| mobile  | image-heavy (michael-barrow) | old  | 75   | 100  | 100 | 92  | 5288   | 0.000 | 0      | 854  |
+| mobile  | image-heavy (michael-barrow) | new  | 94   | 100  | 100 | 92  | 3009   | 0.000 | 0      | 495  |
+| mobile  | `learning-codemirror`        | old  | 75   | 93   | 100 | 92  | 4532   | 0.000 | 105    | 1049 |
+| mobile  | `learning-codemirror`        | new  | 90   | 93   | 100 | 92  | 3164   | 0.000 | 23     | 611  |
+| desktop | `/`                          | old  | 99   | 100  | 100 | 92  | 951    | 0.000 | 0      | 710  |
+| desktop | `/`                          | new  | 100  | 100  | 100 | 92  | 609    | 0.000 | 0      | 299  |
+| desktop | image-heavy (michael-barrow) | old  | 99   | 100  | 100 | 92  | 952    | 0.001 | 0      | 790  |
+| desktop | image-heavy (michael-barrow) | new  | 100  | 100  | 100 | 92  | 589    | 0.003 | 0      | 431  |
+| desktop | `learning-codemirror`        | old  | 99   | 93   | 100 | 92  | 763    | 0.000 | 0      | 1049 |
+| desktop | `learning-codemirror`        | new  | 100  | 93   | 100 | 92  | 697    | 0.000 | 0      | 611  |
+
+New is the same or better on every score, LCP, TBT and size. The one exception is desktop CLS on the image-heavy post, 0.003 against 0.001 (the other pages are 0.000 on both): it is 30x under the 0.1 "good" limit. Cause (found in the Lighthouse trace): the HTML streams, the first paint happens before the page is tall enough for a scrollbar, then the scrollbar appears and the centred column moves 7.5px. It only shows in Lighthouse's desktop run, on the long post. `scrollbar-gutter: stable` removes it (CLS 0.000) but changes every screenshot (188 visual failures), so it was reverted and the 0.003 is accepted. Accessibility 93 on `learning-codemirror` and SEO 92 everywhere are the same on both sites (same audits fail), so they are inherited, not new. The image-heavy post is `designing-for-michael-barrow-and-the-tourists` (15 images, the most in `baseline.json`).
+
+**Fixes made from Lighthouse** (decisions recorded; all kept visual 188/188):
+
+- Navbar CLS (was 0.016-0.018 on desktop, intermittent): the theme picker island appeared after first paint and pushed the links 38px left. `Navbar.astro` now wraps it in a fixed-width box (`1.25rem`), so the width is reserved. Also preloaded the three above-the-fold font files in `BaseLayout.astro` (Montagu Slab 500 and 700, Source Serif 400, latin) to remove the font-swap part of the shift.
+- LCP on posts: the featured image at the top of every post and page was `loading="lazy"`. `FeaturedImage.astro` now passes `loading="eager"` and `fetchpriority="high"` (new `fetchpriority` prop on `Image.astro`). `learning-codemirror` mobile LCP went from 4817 to 3164 ms (old: 4532).
+- Image weight: Astro's sharp default quality is 80; gatsby-plugin-image used 50. At 80 an image-heavy post loaded 752 KB of images against 454 KB on the old site. `src/markdown/image-service.mjs` now defaults to quality 50 (an explicit `quality` still wins): 478 KB, level with the old site. No visual tolerance had to change.
+- Carousel `sizes`: tall photos fill half the carousel, but reused the full-width `sizes`, so `/pumpkins/` loaded 349 KB against 224 KB on the old site (1280px). `Carousel.astro` gives tall photos `sizes="(min-width: 800px) 400px, 50vw"`: 228 KB at 1280px, 165 KB at 390px @2x (old: 233 / 186 KB).
+- `learning-codemirror` hydration shift: editors 1 and 2 grew 45px and editor 3 grew 7.7px when they mounted (bottom panels, an inline widget). `CodeEditor` has a new `extraHeight` prop (CSS length) that adds to the reserved `min-height`; the three examples pass `45.3px`, `45.3px` and `7.7px`. Heights before and after hydration now match to 0.1px for all 4 editors, and total page height is 19873 in both states.
+
+**Earlier known gaps, closed:**
+
+- WebP vs JPEG: the old site also served WebP; the size gap was quality (fixed above). Visual tests pass at quality 50.
+- favicon / og fallback: `/favicon.png` is 200 (`image/png`) on new; it was 404 on the old site even though the old pages linked it. Pages without a featured image use it as `og:image`; posts with one point at the `/_astro/` copy (200, `image/jpeg`).
+- Redirect shadowing in production `_redirects` (two unreachable rules): unchanged, still for the user to decide.
+- RSS excerpts: the 4 of 40 differing `content:encoded` excerpts are unchanged and still accepted.
+
+**JS payload** (`node scripts/parity/js-payload.mjs`, every JS response on first load, gzipped at level 9 by the script):
+
+| Page                         | Old                | New           |
+| ---------------------------- | ------------------ | ------------- |
+| `/`                          | 199.5 KB (8 files) | 103.7 KB (8)  |
+| `/blog/`                     | 137.3 KB (5)       | 103.7 KB (8)  |
+| `/about/`                    | 213.3 KB (8)       | 103.7 KB (8)  |
+| `/blog/learning-codemirror/` | 490.9 KB (11)      | 369.9 KB (14) |
+
+The research doc's claim of "about 4.8 KB on pages without demos" does not hold. 4.8-5.5 KB is the `ClientRouter` script alone. Every page also loads the `ThemePicker` island, which pulls in React, react-dom and Radix (`client.*.js` 63 KB plus `index.*.js` 29 KB gzipped). The new site is still 25-50% lighter than the old one on every page, so the pass condition holds. Decision: not rewritten now. Replacing Radix with a small vanilla dropdown would take the non-demo pages to about 6 KB, but it changes keyboard and focus behavior that `theme.spec` only partly covers. Do it as a separate change if wanted.
+
+**Accepted-differences audit** (`tests/parity/expected-differences.ts`):
+
+- `optionalOnNew` (`/drafts/`): stale, removed. The new site serves `/drafts/` and it passes every check with the entry gone. The export stays as an empty array.
+- `readingTimePattern`: still needed. 22 of 41 posts show a different number (for example 13 vs 7 min), because the old site counted the compiled MDX body and the new one counts prose.
+- `mermaidMaskSelectors`, `mermaidBoxHeight`: still needed. Diagram heights still differ by up to 43px between renderers.
+- `animatedMaskSelectors`: still needed. The gifs are still present and animated on both sites.
+- `imageResamplingTolerance` (two pages, 0.4%): still needed. With the entries removed, 4 of the 8 screenshots on those pages fail at the 0.2% default.
+- `normalizeAssetUrl`, `normalizeSocialImage`, `ignoredRssChannelFields`: still needed (hashed URLs and the missing `generator` / `lastBuildDate`).
+- `allowedConsoleIssues`: empty, and console is green.
+- `knownBrokenLinks` (`#update`, `#principles`): still needed. Both ids are still missing on the new pages and the links are still there.
+- `pending.spec.ts`: the Lighthouse placeholder is removed. Lighthouse is `yarn lighthouse`, not a Playwright test.
+
+**Still pending for the deploy preview** (needs a push, so not done):
+
+- A real GitHub Actions run of `.github/workflows/ci.yml`.
+- The Netlify preview build (`netlify.toml`, `dist/`).
+- Redirects on the preview: the 14 tests pass locally against `netlify dev`, but check them on the real build, including no-slash links such as `/blog/what-I-learned-from-a-failed-startup` getting a 301 to the slash URL.
+- `/_astro/*` `Cache-Control`: `netlify dev` showed `public, max-age=0` for a `/_astro/` file again. Check the real header is `public, max-age=31536000, immutable`.
+- Compression and caching: re-run Lighthouse against the preview URL, where transfer sizes are real.
+- The suite against the preview URL, and a look at the HTML report.
+
+Commands for that half (use Node 22: `export PATH=~/.nvm/versions/node/v22.23.4/bin:$PATH`):
+
+```sh
+# the old site, for comparison
+cd ../thetrevorharmon.com-gatsby && yarn serve    # :9000
+
+# suite, old vs deploy preview (replace the URL)
+OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app \
+  DEPLOY_PREVIEW_URL=https://<preview>.netlify.app \
+  npx playwright test --project=new
+
+# headers
+curl -sI https://<preview>.netlify.app/_astro/<any-file> | grep -i cache-control
+curl -sI https://<preview>.netlify.app/blog/what-I-learned-from-a-failed-startup | head -3
+
+# performance and JS payload
+export CHROME_PATH="$HOME/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app yarn lighthouse
+OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app yarn js-payload
+```
+
 ## Phase 10: Cut-over (0.25 day)
 
 - Merge `astra-migration` and watch the production deploy.
@@ -289,6 +382,7 @@ Run the whole Playwright suite with `OLD_URL=http://localhost:9000` and `NEW_URL
 ## After the migration (separate work)
 
 - Tailwind 4 (about 1 day).
+- Rewrite `ThemePicker` without React/Radix (vanilla island or small script) to bring non-demo pages from about 104 KB to about 6 KB of gzipped JS. Keep the keyboard and focus behavior (open, arrow keys, Escape, focus return), and extend `theme.spec` to cover all of it first.
 - Remove `antlr4ts` if it was replaced.
 - After a few weeks, delete the `gatsby-final` worktree but keep the tag.
 - About once a year, check how often the Netlify/Vercel adapters and Astro are releasing.

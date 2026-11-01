@@ -19,6 +19,8 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test src/lib/*.test.ts",
     "test:parity": "playwright test",
+    "lighthouse": "node scripts/parity/lighthouse.mjs",
+    "js-payload": "node scripts/parity/js-payload.mjs",
     "lint": "eslint .",
     "pretty": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,mdx,json,md,css,scss}\"",
     "create-blog-post": "node ./scripts/create-blog-post.cjs",

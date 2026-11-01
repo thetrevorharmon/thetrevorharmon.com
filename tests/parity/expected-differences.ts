@@ -3,11 +3,11 @@
 // See docs/plan.md, "Ground rules".
 
 /**
- * Pages that may be missing on the new site. If the new site serves them they
- * are compared like any other page; if it returns 404 their tests are skipped.
- * Reason: /drafts is an author-only page and may be dropped or rebuilt.
+ * Pages that may be missing on the new site (their tests are skipped on a 404).
+ * Empty since Phase 9: /drafts/ is served by the new site and passes every
+ * check. Add a path here only if you drop a page on purpose.
  */
-export const optionalOnNew = ['/drafts/'];
+export const optionalOnNew: string[] = [];
 
 /**
  * Reading-time numbers ("5 min read") are computed by different code in the

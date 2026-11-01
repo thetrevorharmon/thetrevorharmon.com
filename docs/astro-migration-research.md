@@ -38,7 +38,7 @@ Hugo and VitePress are out because they don't run React. VitePress also hasn't h
 - Most of the security warnings gone. This is expected but not yet verified.
 - MDX 3. Tailwind 4 becomes its own job of about 1 day.
 - Typed content: the rules in `gatsby-utils.js` become a zod schema. No GraphQL layer and no `gatsby-types.d.ts`.
-- Much less JavaScript. Pages without demos ship about 4.8 KB gzipped (the `<ClientRouter />` script), compared to about 98 KB on `/blog/` today.
+- Less JavaScript. The `<ClientRouter />` script alone is about 4.8 KB gzipped, but every page also loads the `ThemePicker` island, which pulls in React, react-dom and Radix. Measured in Phase 9 (`scripts/parity/js-payload.mjs`), pages without demos ship about 104 KB gzipped (`/blog/`: 103.7 KB new, 137.3 KB old), and `learning-codemirror` ships about 370 KB (old: 491 KB). That is 25-50% lighter than Gatsby, but not the 4.8 KB first estimated. Rewriting `ThemePicker` without React/Radix would bring non-demo pages down to about 6 KB (see "After the migration" in `docs/plan.md`).
 - Automatic image optimization for the 107 markdown images and the featured images.
 - Official RSS and sitemap integrations that produce the same file names.
 - Faster builds, since Vite replaces webpack + Babel. The flash of the wrong theme on page load probably gets fixed too.

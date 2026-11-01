@@ -10,7 +10,7 @@
   // line-height (1.4em) per line, plus the 4px top and bottom padding of
   // .cm-content. It stops applying as soon as CodeMirror adds its DOM.
   > [class^='cm-theme']:empty {
-    min-height: calc(var(--cm-lines, 1) * 1.4em + 8px);
+    min-height: calc(var(--cm-lines, 1) * 1.4em + 8px + var(--cm-extra, 0px));
   }
 
   .cm-cursor {

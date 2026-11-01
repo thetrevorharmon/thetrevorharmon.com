@@ -1,9 +1,8 @@
 import {test} from '@playwright/test';
 import {baseline} from './support';
 
-// These checks need code that does not exist yet, or a different environment.
-// They are listed here so Phase 9 has a place to fill in. Each one is skipped
-// with the reason, so the report shows them as "skipped", not "passed".
+// These checks need a different environment (a Netlify deploy preview). They are
+// skipped with the reason, so the report shows "skipped", not "passed".
 
 test.describe('Redirects (deploy preview only)', () => {
   const previewUrl = process.env.DEPLOY_PREVIEW_URL;
@@ -41,10 +40,5 @@ test.describe('Redirects (deploy preview only)', () => {
   }
 });
 
-test.describe('Performance (Phase 9)', () => {
-  test.fixme(
-    true,
-    'Lighthouse for /, an image-heavy post and a demo post, old vs new. Run by hand in Phase 9; not part of this suite.',
-  );
-  test('lighthouse', () => {});
-});
+// Performance is not a Playwright test: run `yarn lighthouse` (scripts/parity/lighthouse.mjs)
+// and `node scripts/parity/js-payload.mjs`. Results are in docs/plan.md, Phase 9.

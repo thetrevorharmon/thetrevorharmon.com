@@ -6,6 +6,12 @@ import {ClientRouter} from 'astro:transitions';
 import 'normalize.css';
 import '../styles/global.scss';
 import {siteData} from '../utils';
+// Preload the latin subsets used above the fold so the font swap doesn't move
+// the navbar (Phase 9: desktop CLS 0.016 on `/` without these).
+import montagu500 from '@fontsource/montagu-slab/files/montagu-slab-latin-500-normal.woff2?url';
+import montagu700 from '@fontsource/montagu-slab/files/montagu-slab-latin-700-normal.woff2?url';
+import sourceSerif400 from '@fontsource/source-serif-pro/files/source-serif-pro-latin-400-normal.woff2?url';
+const preloadFonts = [montagu500, montagu700, sourceSerif400];
 
 interface Props {
   /** The page's own title. Left out on the home page. */
@@ -63,6 +69,9 @@ const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
     <meta name="twitter:site" content={twitterHandle} />
     <meta name="twitter:creator" content={twitterHandle} />
 
+    {preloadFonts.map((href) => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon-32x32.png?v=b062c9b96c2d8bcc7604b9c110640def" type="image/png" />
     <link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous" />

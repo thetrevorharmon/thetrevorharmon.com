@@ -63,6 +63,7 @@ export function MarkDecorationExample() {
   return (
     <div className="Breakout">
       <CodeEditor
+        extraHeight="7.7px"
         language="javascript"
         initialValue={INITIAL_VALUE}
         extensions={extensions}

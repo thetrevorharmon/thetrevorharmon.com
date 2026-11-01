@@ -21,5 +21,9 @@ const navbarLinks = [
       ))
     }
   </ul>
-  <ThemePicker className="ml-small" client:load />
+  {/* The wrapper reserves the button's width (1.25rem) while the HTML streams in,
+      so the links don't jump left when the picker appears (Phase 9, CLS). */}
+  <div class="ml-small flex w-[1.25rem] shrink-0">
+    <ThemePicker client:load />
+  </div>
 </div>

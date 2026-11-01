@@ -17,6 +17,8 @@ interface Props {
   language?: 'zephyr' | 'javascript' | 'sql';
   extensions?: Extension[];
   hasFooter?: boolean;
+  /** CSS length the mounted editor adds beyond its lines (a panel, a tall widget). Reserved before mount so hydration doesn't shift the page. */
+  extraHeight?: string;
   onCreateEditor?: (view: EditorView) => void;
 }
 
@@ -28,6 +30,7 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
       language,
       extensions = [],
       hasFooter = false,
+      extraHeight = '0px',
       onCreateEditor,
     } = props;
 
@@ -61,7 +64,12 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
     return (
       <div
         className={classNames('CodeEditor', hasFooter && 'HasFooter')}
-        style={{'--cm-lines': lineCount(initialValue)} as CSSProperties}
+        style={
+          {
+            '--cm-lines': lineCount(initialValue),
+            '--cm-extra': extraHeight,
+          } as CSSProperties
+        }
       >
         <ReactCodeEditor
           ref={ref}

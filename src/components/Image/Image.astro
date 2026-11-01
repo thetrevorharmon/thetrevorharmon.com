@@ -10,10 +10,11 @@ interface Props {
   /** The widest the image is shown, in pixels. */
   width?: number;
   loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
   class?: string;
 }
 
-const {src, alt, width = 800, loading = 'lazy', class: className} = Astro.props;
+const {src, alt, width = 800, loading = 'lazy', fetchpriority, class: className} = Astro.props;
 
 const displayWidth = Math.min(width, src.width);
 // Round the height the way the old image component did, so the layout below
@@ -35,6 +36,7 @@ const widths = [displayWidth / 2, displayWidth, displayWidth * 2].filter(
     widths={widths}
     sizes={`(min-width: ${displayWidth}px) ${displayWidth}px, 100vw`}
     loading={loading}
+    fetchpriority={fetchpriority}
     class="absolute inset-0 m-0 h-full w-full max-w-none object-cover"
   />
 </div>
