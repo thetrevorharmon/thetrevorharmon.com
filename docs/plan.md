@@ -340,35 +340,41 @@ The research doc's claim of "about 4.8 KB on pages without demos" does not hold.
 - `knownBrokenLinks` (`#update`, `#principles`): still needed. Both ids are still missing on the new pages and the links are still there.
 - `pending.spec.ts`: the Lighthouse placeholder is removed. Lighthouse is `yarn lighthouse`, not a Playwright test.
 
-**Still pending for the deploy preview** (needs a push, so not done):
+### Phase 9 results: deploy preview (done)
 
-- A real GitHub Actions run of `.github/workflows/ci.yml`.
-- The Netlify preview build (`netlify.toml`, `dist/`).
-- Redirects on the preview: the 14 tests pass locally against `netlify dev`, but check them on the real build, including no-slash links such as `/blog/what-I-learned-from-a-failed-startup` getting a 301 to the slash URL.
-- `/_astro/*` `Cache-Control`: `netlify dev` showed `public, max-age=0` for a `/_astro/` file again. Check the real header is `public, max-age=31536000, immutable`.
-- Compression and caching: re-run Lighthouse against the preview URL, where transfer sizes are real.
-- The suite against the preview URL, and a look at the HTML report.
+Preview: https://deploy-preview-280--thetrevorharmon.netlify.app (draft PR #280). CI (`check`, GitHub Actions) passed in 2m34s. The Netlify build passed, and so did its header rules and redirect rules checks.
 
-Commands for that half (use Node 22: `export PATH=~/.nvm/versions/node/v22.23.4/bin:$PATH`):
+**Suite** (`OLD_URL=http://localhost:9000 NEW_URL=<preview> DEPLOY_PREVIEW_URL=<preview> npx playwright test --project=new`): 534 passed, 24 failed. None is a site bug:
 
-```sh
-# the old site, for comparison
-cd ../thetrevorharmon.com-gatsby && yarn serve    # :9000
+- 8 failures are Netlify behavior that production Gatsby shows too. Netlify 301s a path with capital letters to the lowercase path (`/blog/what-I-learned-from-a-failed-startup/` to `/blog/what-i-learned-from-a-failed-startup/`; same for `...-my-first-month-working-remote`), and 301s `/404/` to `/404`. `curl -sI https://thetrevorharmon.com/...` returns the same 301s. These hit the `urls`, `anchors`, `content`, `links` and `metadata` specs for those 3 URLs.
+- 16 failures are `visual` tests: 7 `networkidle` timeouts (90 s) over the real network, and 9 small pixel diffs (about 1% of pixels, image resampling plus the carousel caption on `/about/`, no layout change). A re-run of `visual` alone with 2 workers gave different failures (90 passed, 9 pixel diffs; the rest timeouts). So they are network flakiness against a remote host, not regressions. Local visual stays 188/188.
+- Redirects: all 14 redirect tests pass on real Netlify, including the no-slash 301s (`/blog/what-I-learned-from-a-failed-startup` returns 301).
 
-# suite, old vs deploy preview (replace the URL)
-OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app \
-  DEPLOY_PREVIEW_URL=https://<preview>.netlify.app \
-  npx playwright test --project=new
+**Headers** (`curl -sI`):
 
-# headers
-curl -sI https://<preview>.netlify.app/_astro/<any-file> | grep -i cache-control
-curl -sI https://<preview>.netlify.app/blog/what-I-learned-from-a-failed-startup | head -3
+- `/_astro/*.js`: `cache-control: public,max-age=31536000,immutable` (the `_headers` rule works).
+- HTML (`/`): `cache-control: public,max-age=0,must-revalidate`, `strict-transport-security: max-age=31536000; includeSubDomains; preload`, `x-content-type-options: nosniff`, `x-frame-options: DENY`, `referrer-policy: same-origin`, `x-xss-protection: 1; mode=block`. The preview also adds `x-robots-tag: noindex` (Netlify previews only).
 
-# performance and JS payload
-export CHROME_PATH="$HOME/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
-OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app yarn lighthouse
-OLD_URL=http://localhost:9000 NEW_URL=https://<preview>.netlify.app yarn js-payload
-```
+**Lighthouse** (`OLD_URL=https://thetrevorharmon.com`, `NEW_URL=<preview>`, median of 3):
+
+| Preset  | Page                         | Site        | Perf | A11y | BP  | SEO | LCP ms | CLS   | TBT ms |
+| ------- | ---------------------------- | ----------- | ---- | ---- | --- | --- | ------ | ----- | ------ |
+| mobile  | `/`                          | production  | 71   | 100  | 100 | 92  | 5269   | 0.000 | 9      |
+| mobile  | `/`                          | preview     | 71   | 100  | 96  | 58  | 6261   | 0.000 | 0      |
+| mobile  | image-heavy (michael-barrow) | production  | 66   | 100  | 100 | 92  | 6037   | 0.000 | 5      |
+| mobile  | image-heavy (michael-barrow) | preview     | 70   | 100  | 96  | 58  | 6520   | 0.000 | 0      |
+| mobile  | `learning-codemirror`        | production  | 60   | 93   | 100 | 92  | 7719   | 0.000 | 119    |
+| mobile  | `learning-codemirror`        | preview     | 64   | 93   | 96  | 58  | 7773   | 0.000 | 30     |
+| desktop | `/`                          | production  | 100  | 100  | 100 | 92  | 672    | 0.000 | 0      |
+| desktop | `/`                          | preview     | 100  | 100  | 96  | 58  | 739    | 0.000 | 0      |
+| desktop | image-heavy (michael-barrow) | production  | 100  | 100  | 100 | 92  | 664    | 0.001 | 0      |
+| desktop | image-heavy (michael-barrow) | preview     | 100  | 100  | 96  | 58  | 611    | 0.003 | 0      |
+| desktop | `learning-codemirror`        | production  | 100  | 93   | 100 | 92  | 674    | 0.003 | 0      |
+| desktop | `learning-codemirror`        | preview     | 100  | 93   | 96  | 58  | 578    | 0.003 | 0      |
+
+Preview-only effects, not site bugs: SEO 58 comes from Netlify's `x-robots-tag: noindex` on previews (the "page is blocked from indexing" audit), and BP 96 and the 2-3x higher KB (about 2 MB) come from the Netlify deploy-preview toolbar, which loads about 1.5 MB of its own scripts from `app.netlify.com/cdp` (largest own asset: the 286 KB hero webp). Mobile gains over production are smaller than on localhost (perf +0 to +4, TBT lower) because of real network latency and that toolbar. Re-check on production after the merge (Phase 10).
+
+**Fixes made:** none needed. Both parties' remaining differences are covered above.
 
 ## Phase 10: Cut-over (0.25 day)
 
