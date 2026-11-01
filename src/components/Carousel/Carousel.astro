@@ -25,14 +25,15 @@ interface Photo {
 
 const html = await Astro.slots.render('default');
 
-// `background:url(data:...) center/cover no-repeat` out of an img's style.
-const placeholderStyle = (style = '') => {
-  const background = style.match(/background:url\([^)]*\)[^;"]*/)?.[0];
-  return background ? ` style="${background}"` : '';
-};
+// `background:url(data:...) center/cover no-repeat` out of a wrapper's style.
+const placeholderStyle = (style = '') =>
+  style.match(/background:url\([^)]*\)[^;"]*/)?.[0];
 
 const photos: Photo[] = [];
-for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
+// An <img>, with its placeholder wrapper (<span data-blur-up>) when it has one.
+for (const [, wrapper, tag] of html.matchAll(
+  /(<span\b[^>]*\bdata-blur-up[^>]*>\s*)?(<img\b[^>]*>)/g,
+)) {
   const attrs: Record<string, string> = {};
   for (const [, name, value] of tag.matchAll(/([\w:-]+)="([^"]*)"/g)) {
     attrs[name] = value;
@@ -45,17 +46,20 @@ for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
     continue;
   }
   const portrait = (ratio > 0 ? ratio : width / height) < 1;
-  photos.push({
-    // The body styles for markdown images (max-width and so on) don't apply here.
-    // Tall photos only fill half the carousel, so they get a half-width `sizes`
-    // (the markdown default would load a srcset image twice as wide as needed).
-    // The blurred placeholder is a `background` in the style; keep that part.
-    imgHtml: (portrait
+  const placeholder = placeholderStyle(wrapper?.match(/style="([^"]*)"/)?.[1]);
+  // The body styles for markdown images (max-width and so on) don't apply here.
+  // Tall photos only fill half the carousel, so they get a half-width `sizes`
+  // (the markdown default would load a srcset image twice as wide as needed).
+  const imgHtml = (
+    portrait
       ? tag.replace(/\ssizes="[^"]*"/, ' sizes="(min-width: 800px) 400px, 50vw"')
       : tag
-    )
-      .replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, '')
-      .replace(/^<img\b/, `<img${placeholderStyle(attrs.style)}`),
+  ).replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, '');
+  photos.push({
+    // The blurred placeholder is the wrapper's `background`; keep that part.
+    imgHtml: placeholder
+      ? `<span data-blur-up style="${placeholder}">${imgHtml}</span>`
+      : imgHtml,
     caption: attrs.title ?? null,
     aspectRatio: ratio > 0 ? ratio : width / height,
   });

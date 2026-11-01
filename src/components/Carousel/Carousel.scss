@@ -11,3 +11,9 @@
     object-fit: cover;
   }
 }
+
+// A photo with a placeholder is wrapped in a span (global.scss) that fills the box.
+.Carousel-Image [data-blur-up] {
+  width: 100%;
+  height: 100%;
+}

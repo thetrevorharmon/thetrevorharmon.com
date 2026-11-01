@@ -3,6 +3,10 @@
 //  - an image with a title becomes <figure><img><figcaption>title</figcaption></figure>,
 //  - an empty alt falls back to the file name (`My-Photo.png` -> `My Photo`),
 //  - the image is shown at most 800px wide (src) with a 200-1600px srcset, never enlarged.
+// An image that gets a blurred placeholder (src/lib/lqip.mjs) is wrapped in a
+// <span data-blur-up> that holds the box (max-width, aspect-ratio) and the
+// placeholder as its background; the <img> fills the span and fades in over it
+// once it has loaded (global.scss, and the script in BaseLayout.astro).
 // Astro does the resizing: the props set here (including `data-widths`, for the
 // srcset) go to `getImage()` through its `__ASTRO_IMAGE_` marker. Animated gifs are not resized or converted; see
 // src/markdown/image-service.mjs.
@@ -11,6 +15,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import probe from 'probe-image-size';
 import {defineHastPlugin} from 'satteri';
+import {lqip, lqipBackground} from '../lib/lqip.mjs';
 
 const MAX_WIDTH = 800;
 const SRCSET_WIDTHS = [200, 400, 800, 1600];
@@ -37,7 +42,7 @@ function naturalSize(filePath) {
   }
 }
 
-function enhance(img, fileURL, {styled}) {
+async function enhance(img, fileURL, {styled}) {
   const props = {...img.properties};
   // A data attribute, because the image marker would also emit `className` as a
   // second, React-style attribute.
@@ -91,8 +96,24 @@ function enhance(img, fileURL, {styled}) {
     if (styled) props.style = `max-width:${width}px;${box}`;
     else if (ext !== '.gif') props.style = box;
   }
-  return {...img, properties: props};
+  const placeholder = await lqip(file);
+  if (placeholder == null) return {...img, properties: props};
+  // The box moves to the wrapper; the image fills it.
+  const {style, 'data-md-image': mdImage, ...imgProps} = props;
+  return {
+    type: 'element',
+    tagName: 'span',
+    properties: {
+      'data-blur-up': '',
+      ...(mdImage != null && {'data-md-image': ''}),
+      style: [style, lqipBackground(placeholder)].filter(Boolean).join(';'),
+    },
+    children: [{...img, properties: imgProps}],
+  };
 }
+
+// The <img> in an enhanced node (which is a wrapper when it has a placeholder).
+const imgOf = (node) => (node.tagName === 'span' ? node.children[0] : node);
 
 export const markdownImages = () =>
   defineHastPlugin({
@@ -102,12 +123,18 @@ export const markdownImages = () =>
         // Images that are not alone in a paragraph, like the ones inside
         // `<TwoUp>![a](a.png) ![b](b.png)</TwoUp>`.
         filter: ['img'],
-        visit(img, ctx) {
+        async visit(img, ctx) {
           // Images in a paragraph are handled with the paragraph, below.
           const parent = ctx.parent(img);
           if (parent?.tagName === 'p' && onlyImages(parent)) return;
-          const enhanced = enhance(img, ctx.fileURL, {styled: false});
+          // Already wrapped.
+          if (parent?.properties?.['data-blur-up'] != null) return;
+          const enhanced = await enhance(img, ctx.fileURL, {styled: false});
           if (enhanced === img) return;
+          if (enhanced.tagName === 'span') {
+            ctx.replaceNode(img, enhanced);
+            return;
+          }
           for (const [key, value] of Object.entries(enhanced.properties)) {
             if (img.properties?.[key] !== value)
               ctx.setProperty(img, key, value);
@@ -116,16 +143,18 @@ export const markdownImages = () =>
       },
       {
         filter: ['p'],
-        visit(p, ctx) {
+        async visit(p, ctx) {
           if (!onlyImages(p)) return;
           const content = p.children.filter((child) => !isWhitespace(child));
-          const images = content.map((img) =>
-            enhance(img, ctx.fileURL, {styled: !isGif(img)}),
+          const images = await Promise.all(
+            content.map((img) =>
+              enhance(img, ctx.fileURL, {styled: !isGif(img)}),
+            ),
           );
           if (
             images.length === 1 &&
-            images[0].properties?.title &&
-            !isGif(images[0])
+            imgOf(images[0]).properties?.title &&
+            !isGif(imgOf(images[0]))
           ) {
             const [img] = images;
             ctx.replaceNode(p, {
@@ -139,7 +168,7 @@ export const markdownImages = () =>
                   tagName: 'figcaption',
                   properties: {},
                   children: [
-                    {type: 'text', value: String(img.properties.title)},
+                    {type: 'text', value: String(imgOf(img).properties.title)},
                   ],
                 },
               ],

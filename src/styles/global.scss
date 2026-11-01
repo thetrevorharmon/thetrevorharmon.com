@@ -292,6 +292,53 @@ blockquote {
   }
 }
 
+// Blurred placeholders (src/lib/lqip.mjs). The wrapper holds the box and the
+// placeholder as its background; the image fills it. The image starts
+// transparent and a script (BaseLayout.astro) sets `data-loaded` once it has
+// loaded and decoded, so it fades in on top of the blur, as gatsby-plugin-image
+// did (250ms, linear). Without scripting the image just shows.
+[data-blur-up] {
+  @apply block relative overflow-hidden;
+}
+
+html [data-blur-up] > img {
+  @apply absolute inset-0 m-0 h-full w-full max-w-none object-cover;
+  background: none;
+}
+
+@media (scripting: enabled) {
+  [data-blur-up] > img:not([data-loaded]) {
+    opacity: 0;
+  }
+
+  [data-blur-up] > img {
+    transition: opacity 250ms linear;
+    will-change: opacity;
+  }
+}
+
+// Markdown images faded in over half a second, eased, on the old site.
+@media (scripting: enabled) {
+  [data-blur-up][data-md-image] > img {
+    transition-duration: 500ms;
+    transition-timing-function: ease;
+  }
+}
+
+@media print {
+  [data-blur-up] > img {
+    opacity: 1 !important;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-blur-up] > img,
+  [data-blur-up][data-md-image] > img {
+    transition: none;
+  }
+}
+
 .body-styles {
   h2 {
     @apply mt-large mb-small;
@@ -416,6 +463,11 @@ blockquote {
     @apply my-medium;
   }
 
+  // Two-up images with a placeholder: the wrapper is the rounded box.
+  .TwoUp > [data-blur-up] {
+    @apply rounded-md;
+  }
+
   // Plain images with no wrapper (gifs, as on the old site).
   > img {
     @apply rounded-md overflow-hidden;
@@ -424,6 +476,7 @@ blockquote {
   }
 
   .TwoUp > img,
+  .TwoUp > [data-blur-up],
   .TwoUp [data-md-image] {
     @apply my-0;
   }

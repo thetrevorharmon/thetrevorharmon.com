@@ -123,6 +123,43 @@ const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
         });
       })();
     </script>
+    <!--
+      Reveals images that have a blurred placeholder (`[data-blur-up] > img`, see
+      global.scss): once an image has loaded and decoded, `data-loaded` lets it
+      fade in over the blur, as gatsby-plugin-image did. One capturing listener
+      on the document sees every image, including ones swapped in by the router,
+      so nothing needs re-initializing. The sweep catches images that finished
+      before the listener or the router swap got there.
+    -->
+    <script is:inline>
+      (function () {
+        if (window.__blurUp) return;
+        window.__blurUp = true;
+        function show(img) {
+          if (!img.matches || !img.matches('[data-blur-up] > img')) return;
+          function reveal() {
+            img.setAttribute('data-loaded', '');
+          }
+          // Decode first, so the fade is not janky; show it either way.
+          if (img.decode) img.decode().then(reveal, reveal);
+          else reveal();
+        }
+        document.addEventListener('load', function (e) { show(e.target); }, true);
+        document.addEventListener('error', function (e) {
+          if (e.target.matches && e.target.matches('[data-blur-up] > img')) {
+            e.target.setAttribute('data-loaded', '');
+          }
+        }, true);
+        function sweep() {
+          var imgs = document.querySelectorAll('[data-blur-up] > img:not([data-loaded])');
+          for (var i = 0; i < imgs.length; i++) {
+            if (imgs[i].complete && imgs[i].naturalWidth > 0) show(imgs[i]);
+          }
+        }
+        document.addEventListener('DOMContentLoaded', sweep);
+        document.addEventListener('astro:page-load', sweep);
+      })();
+    </script>
     <ClientRouter />
   </head>
   <body>

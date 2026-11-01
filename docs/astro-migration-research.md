@@ -232,9 +232,13 @@ No Sätteri plugin does this. Nothing fits the markdown path cleanly, and `sharp
 **Decision:** a custom placeholder with sharp, matching what Gatsby did.
 
 - `src/lib/lqip.mjs` makes a 16px WebP (quality 25) data URI of 100-250 bytes. Cached per file.
-- Our image service (`src/markdown/image-service.mjs`) adds it to every `<img>` as a `background`. This is the one place that both markdown images and `<Image>` pass through, so markdown, carousel and TwoUp images need no extra code. The real image paints over it. No JS, no extra elements, like `gatsby-remark-images`.
-- `Image.astro` puts it on its wrapper instead (it marks its own `<img>` `data-no-lqip` so there is only one). The image paints over it. There is no fade: the old `GatsbyImage` faded, but a fade delays the LCP image and adds a script or `onload` handler for little gain.
-- Skipped on purpose: gifs, SVGs, and images with real transparency (the placeholder would show through them). Both would also be a visible change from the old site.
+- Every placeholder image is a wrapper with the blur as its `background` and the `<img>` filling it, like `GatsbyImage`. The image starts at `opacity: 0` and fades to 1 on top of the blur once it has loaded, so the blur seems to fade into the sharp image. An `<img>` cannot do this alone: its own `background` fades with it.
+  - Markdown, TwoUp and carousel images: `src/markdown/images.mjs` wraps the `<img>` in `<span data-blur-up>`, which takes over the box (`max-width`, `aspect-ratio`) and the background. `Carousel.astro` keeps the wrapper.
+  - `Image.astro` (featured, hero, tiles): its wrapper `<div>` gets `data-blur-up`.
+  - Timing matches the old site: 250ms linear (`GatsbyImage`), and 500ms ease for markdown images (`gatsby-remark-images`). `prefers-reduced-motion`: no fade. Print: always visible.
+  - The rules are in `src/styles/global.scss`. The image is only hidden inside `@media (scripting: enabled)`, so without JS it simply shows.
+  - A small inline script in `BaseLayout.astro` sets `data-loaded` on the image after `load` and `decode()` (also on `error`). It is one capturing listener on `document`, so it needs no re-init after `<ClientRouter />` navigations; a sweep on `DOMContentLoaded` and `astro:page-load` catches images that finished first. Cached images fade too (the old `GatsbyImage` did; its markdown images snapped).
+  - The featured image fades as well, at the cost of LCP: see `docs/plan.md`.
 - Layout reservation (width/height, aspect-ratio box) is unchanged.
 - `sharp` is imported directly, so it is declared in `package.json`, pinned to the version Astro resolves (0.35.5).
 
