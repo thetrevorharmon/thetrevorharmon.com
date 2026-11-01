@@ -257,7 +257,7 @@ Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carouse
   - Verified by a second pass from a fresh `node_modules`: build, `yarn run check`, typecheck, lint, test and `test:ci` (356) pass; `yarn audit` 0; full local old-vs-new parity 544 passed (visual 188/188, feeds 3/3, links 94/94), 15 skipped (14 redirects without a deploy preview, 1 Lighthouse).
   - **Not validated yet (Phase 9):** a real GitHub Actions run, a Netlify deploy preview build, and the `/_astro/*` `Cache-Control` in production (`netlify dev` showed `max-age=0` for a `/_astro/` file but does serve the security headers, so it may override cache headers locally).
 
-## Phase 9: Full regression run, old vs new (0.5-1 day)
+## Phase 9: Full regression run, old vs new (0.5-1 day) - done
 
 Run the whole Playwright suite with `OLD_URL=http://localhost:9000` and `NEW_URL=http://localhost:4321`. Then run it again with `NEW_URL` pointing at the Netlify deploy preview.
 
@@ -357,24 +357,24 @@ Preview: https://deploy-preview-280--thetrevorharmon.netlify.app (draft PR #280)
 
 **Lighthouse** (`OLD_URL=https://thetrevorharmon.com`, `NEW_URL=<preview>`, median of 3):
 
-| Preset  | Page                         | Site        | Perf | A11y | BP  | SEO | LCP ms | CLS   | TBT ms |
-| ------- | ---------------------------- | ----------- | ---- | ---- | --- | --- | ------ | ----- | ------ |
-| mobile  | `/`                          | production  | 71   | 100  | 100 | 92  | 5269   | 0.000 | 9      |
-| mobile  | `/`                          | preview     | 71   | 100  | 96  | 58  | 6261   | 0.000 | 0      |
-| mobile  | image-heavy (michael-barrow) | production  | 66   | 100  | 100 | 92  | 6037   | 0.000 | 5      |
-| mobile  | image-heavy (michael-barrow) | preview     | 70   | 100  | 96  | 58  | 6520   | 0.000 | 0      |
-| mobile  | `learning-codemirror`        | production  | 60   | 93   | 100 | 92  | 7719   | 0.000 | 119    |
-| mobile  | `learning-codemirror`        | preview     | 64   | 93   | 96  | 58  | 7773   | 0.000 | 30     |
-| desktop | `/`                          | production  | 100  | 100  | 100 | 92  | 672    | 0.000 | 0      |
-| desktop | `/`                          | preview     | 100  | 100  | 96  | 58  | 739    | 0.000 | 0      |
-| desktop | image-heavy (michael-barrow) | production  | 100  | 100  | 100 | 92  | 664    | 0.001 | 0      |
-| desktop | image-heavy (michael-barrow) | preview     | 100  | 100  | 96  | 58  | 611    | 0.003 | 0      |
-| desktop | `learning-codemirror`        | production  | 100  | 93   | 100 | 92  | 674    | 0.003 | 0      |
-| desktop | `learning-codemirror`        | preview     | 100  | 93   | 96  | 58  | 578    | 0.003 | 0      |
+| Preset  | Page                         | Site       | Perf | A11y | BP  | SEO | LCP ms | CLS   | TBT ms |
+| ------- | ---------------------------- | ---------- | ---- | ---- | --- | --- | ------ | ----- | ------ |
+| mobile  | `/`                          | production | 71   | 100  | 100 | 92  | 5269   | 0.000 | 9      |
+| mobile  | `/`                          | preview    | 71   | 100  | 96  | 58  | 6261   | 0.000 | 0      |
+| mobile  | image-heavy (michael-barrow) | production | 66   | 100  | 100 | 92  | 6037   | 0.000 | 5      |
+| mobile  | image-heavy (michael-barrow) | preview    | 70   | 100  | 96  | 58  | 6520   | 0.000 | 0      |
+| mobile  | `learning-codemirror`        | production | 60   | 93   | 100 | 92  | 7719   | 0.000 | 119    |
+| mobile  | `learning-codemirror`        | preview    | 64   | 93   | 96  | 58  | 7773   | 0.000 | 30     |
+| desktop | `/`                          | production | 100  | 100  | 100 | 92  | 672    | 0.000 | 0      |
+| desktop | `/`                          | preview    | 100  | 100  | 96  | 58  | 739    | 0.000 | 0      |
+| desktop | image-heavy (michael-barrow) | production | 100  | 100  | 100 | 92  | 664    | 0.001 | 0      |
+| desktop | image-heavy (michael-barrow) | preview    | 100  | 100  | 96  | 58  | 611    | 0.003 | 0      |
+| desktop | `learning-codemirror`        | production | 100  | 93   | 100 | 92  | 674    | 0.003 | 0      |
+| desktop | `learning-codemirror`        | preview    | 100  | 93   | 96  | 58  | 578    | 0.003 | 0      |
 
 Preview-only effects, not site bugs: SEO 58 comes from Netlify's `x-robots-tag: noindex` on previews (the "page is blocked from indexing" audit), and BP 96 and the 2-3x higher KB (about 2 MB) come from the Netlify deploy-preview toolbar, which loads about 1.5 MB of its own scripts from `app.netlify.com/cdp` (largest own asset: the 286 KB hero webp). Mobile gains over production are smaller than on localhost (perf +0 to +4, TBT lower) because of real network latency and that toolbar. Re-check on production after the merge (Phase 10).
 
-**Fixes made:** none needed. Both parties' remaining differences are covered above.
+**Fixes made:** none needed.
 
 ## Phase 10: Cut-over (0.25 day)
 
