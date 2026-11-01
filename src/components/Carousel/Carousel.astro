@@ -31,6 +31,7 @@ for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
   for (const [, name, value] of tag.matchAll(/([\w:-]+)="([^"]*)"/g)) {
     attrs[name] = value;
   }
+  const ratio = Number(attrs['data-ratio']);
   const width = Number(attrs.width);
   const height = Number(attrs.height);
   if (!(width > 0 && height > 0)) {
@@ -38,9 +39,10 @@ for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
     continue;
   }
   photos.push({
-    imgHtml: tag,
+    // The body styles for markdown images (max-width and so on) don't apply here.
+    imgHtml: tag.replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, ''),
     caption: attrs.title ?? null,
-    aspectRatio: width / height,
+    aspectRatio: ratio > 0 ? ratio : width / height,
   });
 }
 

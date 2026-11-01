@@ -25,10 +25,33 @@ export const readingTimePattern = /\b\d+ min read\b/;
 export const mermaidMaskSelectors = ['.Mermaid', 'svg[id^="mermaid"]'];
 
 /**
+ * The new renderer (Merman) draws each diagram 0-30px taller or shorter than
+ * mermaid-cli did (taller nodes, slightly different spacing). That would move
+ * everything below a diagram and fail the whole page, so the visual tests set
+ * every `.Mermaid` box to this height on BOTH sites before the screenshot.
+ * The diagrams themselves were reviewed by eye in light and dark in Phase 6.3.
+ */
+export const mermaidBoxHeight = 320;
+
+/**
  * Animated gifs show a different frame on each run, so they are masked in
  * screenshots. (Phase 6.4 checks separately that they still animate.)
  */
 export const animatedMaskSelectors = ['img[src*=".gif"]'];
+
+/**
+ * Pages whose screenshots are mostly screenshots-of-text (images of terminals
+ * and web apps). The new site resizes them to 800px with a different encoder
+ * than Gatsby (WebP vs JPEG), and the browser then scales them down again, so
+ * the glyph edges inside the images differ by a little. Layout is identical
+ * (checked block by block to 0.02px); only the pixels inside the images move.
+ * Measured: 0.21-0.29% of pixels differ on these pages, against 0.2% allowed
+ * everywhere else. These pages get 0.4%. Not a global change.
+ */
+export const imageResamplingTolerance: Record<string, number> = {
+  '/blog/how-to-use-s3-select-to-query-json-in-node-js/': 0.004,
+  '/blog/email-signup-forms-with-gatsby-and-mailchimp/': 0.004,
+};
 
 /**
  * Hashed asset URLs (`/static/<hash>/...`, `/_astro/name.<hash>.ext`) change on

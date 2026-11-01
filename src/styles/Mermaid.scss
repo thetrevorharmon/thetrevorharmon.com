@@ -142,3 +142,33 @@
     fill: #333;
   }
 }
+
+// Merman (satteri-mermaid) emits an inline `background-color:white` and a max-width on the <svg>.
+.Mermaid > svg {
+  background-color: transparent !important;
+}
+
+// Merman scopes its CSS with the svg's #id, which outranks the `.Mermaid .cluster rect` rules above
+// (they only worked on mermaid-cli SVGs). Re-assert the cluster look with !important.
+.Mermaid .cluster rect {
+  fill: theme('colors.stone.50') !important;
+  stroke: theme('colors.stone.300') !important;
+}
+.dark .Mermaid .cluster rect {
+  fill: theme('colors.stone.900') !important;
+  stroke: theme('colors.stone.700') !important;
+}
+.Mermaid .cluster-label text,
+.Mermaid .cluster text {
+  fill: theme('colors.stone.800') !important;
+}
+.dark .Mermaid .cluster-label text,
+.dark .Mermaid .cluster text {
+  fill: theme('colors.stone.200') !important;
+}
+
+// Merman draws the edge-label box at 50% opacity, which leaves white label text on a pale box in
+// light mode. The old diagrams used a solid box.
+.Mermaid .edgeLabel rect {
+  opacity: 1 !important;
+}

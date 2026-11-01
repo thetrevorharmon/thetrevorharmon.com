@@ -83,7 +83,7 @@ Hugo and VitePress are out because they don't run React. VitePress also hasn't h
 | `plugins/rehype-better-footnote-links`         | Custom Sätteri plugin (about 30 lines). It must keep the `footnote--x` / `reference--x` ids and the arrow icon                               | -                             |
 | `plugins/gatsby-remark-mermaid-to-svg`         | Try `@xingwangzhe/satteri-mermaid` (314/week) on the 9 diagrams. Fallback: a custom plugin of about 30 lines that inserts the committed SVGs | -                             |
 
-**Watch out:** `@xingwangzhe/satteri-mermaid` 0.8.2 only works with `satteri` 0.10.x. Astro 7.4.4 uses `satteri ^0.10.5`, so it works today. If Astro moves to Sätteri 0.11, the plugin needs an update first.
+**Watch out:** `@xingwangzhe/satteri-mermaid` 0.8.2 only works with `satteri` 0.10.x. Astro 7.4.4 uses `satteri ^0.10.5`, so it works today. If Astro moves to Sätteri 0.11, the plugin needs an update first. Also, `satteri-slug` and `satteri-autolink-headings` peer-require `satteri ^0.11.5`, while we pin 0.10.5. They work with 0.10.5 today (the peer warning is expected); re-check when Astro moves to 0.11.
 
 ## Hosting
 

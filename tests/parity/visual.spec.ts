@@ -1,4 +1,5 @@
 import {expect, test} from '@playwright/test';
+import {imageResamplingTolerance} from './expected-differences';
 import {
   neutralize,
   PAGES,
@@ -41,7 +42,13 @@ test.describe('Visual', () => {
           await neutralize(page);
           await expect(page).toHaveScreenshot(
             `${slugFor(pagePath)}-${scheme}-${viewport.name}.png`,
-            {fullPage: true, mask: screenshotMasks(page)},
+            {
+              fullPage: true,
+              mask: screenshotMasks(page),
+              ...(imageResamplingTolerance[pagePath] != null && {
+                maxDiffPixelRatio: imageResamplingTolerance[pagePath],
+              }),
+            },
           );
         });
       }

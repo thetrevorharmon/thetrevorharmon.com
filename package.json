@@ -22,6 +22,7 @@
     "remove-mermaid-svgs": "node ./scripts/remove-mermaid-svgs.cjs"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.6",
     "@astrojs/mdx": "^8.1.2",
     "@astrojs/react": "^7.1.2",
     "@astrojs/rss": "^4.0.19",
@@ -40,6 +41,8 @@
     "@mdx-js/react": "^2.3.0",
     "@radix-ui/react-dropdown-menu": "^2.2.1",
     "@uiw/react-codemirror": "^4.25.12",
+    "@xingwangzhe/satteri-mermaid": "0.8.2",
+    "@xsynaptic/satteri-reading-time": "0.3.2",
     "antlr4ts": "^0.5.0-alpha.4",
     "assert": "2.1.0",
     "astro": "7.4.4",
@@ -67,10 +70,15 @@
     "gatsby-transformer-sharp": "^5.16.0",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.30.0",
+    "probe-image-size": "7.2.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "reading-time": "^1.5.0",
     "sass": "^1.106.1",
+    "satteri": "0.10.5",
+    "satteri-autolink-headings": "0.3.0",
+    "satteri-external-links": "0.1.1",
+    "satteri-slug": "0.3.0",
     "unist-util-visit": "^5.2.0",
     "util": "0.12.5"
   },

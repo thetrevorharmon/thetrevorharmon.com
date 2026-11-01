@@ -21,14 +21,14 @@ export async function getStaticPaths() {
 
 const {post, recommendedReading} = Astro.props;
 const {data} = post;
-const {Content} = await render(post);
+const {Content, remarkPluginFrontmatter} = await render(post);
 
 const twitterUrl = `https://x.com/search?q=${encodeURI(
   [siteData.siteUrl, Routes.blogPost(data.slug)].join(''),
 )}&src=typed_query&f=top`;
 
-// TODO(Phase 6.1): replace with the real number from the reading-time plugin.
-const timeToRead = 1;
+// Set by the reading-time plugin; posts with no prose at all would have none.
+const timeToRead: number = remarkPluginFrontmatter.minutesRead ?? 1;
 ---
 
 <PostLayout

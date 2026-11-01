@@ -9,6 +9,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 - **New** means the Astro site, served with `astro build && astro preview` at `http://localhost:4321`.
 - The shell's default Node is too old. Run `export PATH=~/.nvm/versions/node/v22.23.4/bin:$PATH` before any `node`, `yarn` or `npx` command.
 - The regression suite (task 1.2) is built first and tested against the old site, so you can trust it before any Astro code exists.
+- **Stale cache:** Astro's content cache ignores markdown plugin changes. After editing anything in `src/markdown/` or the processor config, build with `rm -rf .astro node_modules/.astro dist && yarn build`, or you test old output.
 - Differences we expect and accept go in one allowlist file, `tests/parity/expected-differences.ts`. Those are the reading-time numbers, the hashed asset URLs, `/drafts` and how the mermaid diagrams render. Any other difference is a regression.
 
 ## Phase 1: Baseline (0.5-1 day)
@@ -121,7 +122,7 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
   - `codemirror-and-react` has `client:load` on its two demos (needed for the theme test). Phase 7 does the rest.
   - Still open for Phase 6: heading ids/links, external links, figcaptions, footnotes, mermaid, image wrappers/alt fallback, gifs, and links written without a trailing slash in markdown. `/rss.xml`, `robots.txt`, manifest and `/favicon.png` are Phase 8.
 
-## Phase 6: Markdown on Sätteri (1-1.5 days)
+## Phase 6: Markdown on Sätteri (1-1.5 days) - done
 
 ### 6.1 Community plugins
 
@@ -152,6 +153,26 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 
 - Run markdown images through `astro:assets`, and handle the 4 gifs, the featured images and the OG image URL.
 - **Validate:** each page has the same image count and alt text as the baseline. The gifs still animate (they have more than one frame). OG image URLs return 200.
+- **Done (notes):**
+  - Custom plugins are in `src/markdown/` (headings, links, images, image-service, footnotes, mermaid, code-lines); community plugins are pinned in `package.json`. The one `.md` to `.mdx` rename (`sell-things-fast-with-gatsby-and-shopify`) is the only content change; slug, URL and frontmatter are the same.
+  - Images: at most 800px for `src`, with a 200/400/800/1600 srcset and `sizes="(min-width: 800px) 800px, 100vw"`, same as the old site. A hast property can't carry a list, so `images.mjs` sets `data-widths="200,400,..."` and `image-service.mjs` turns it into `widths`. Gifs pass through untouched (still animate).
+  - Mermaid: all 9 diagrams reviewed by eye in light and dark and signed off. The visual tests force `.Mermaid` boxes to 320px on both sites. Edge-label boxes were made solid in `Mermaid.scss`.
+  - Allowlist: `maxDiffPixelRatio` 0.004 on two pages of screenshots-of-text (`s3-select`, `email-signup`); only pixels inside the screenshot images differ. The 0.2% default is unchanged.
+  - Footnote clicks checked in a browser with ClientRouter: ref to footnote and back arrow both scroll to the right place, with no reload and no console errors.
+  - Parity: visual 168/188 (the 20 are the CodeMirror demo pages, Phase 7), anchors 47/47, content 47/47, links fail only on `/rss.xml` (41, Phase 8), feeds 0/3 (Phase 8).
+  - **For Phase 9 (Lighthouse and quality):** no srcset gap for body images. Images are WebP where the old site used JPEG, so check sizes in Lighthouse. Carousel photos reuse the content-column `sizes`, so they may load larger than needed.
+
+### Phase 6 handoff (to Phase 7)
+
+Demo editors (`.cm-editor`) height, old vs new, on the 5 demo pages. Only `codemirror-and-react` mounts editors today.
+
+- `learning-codemirror`: old 195, 175, 157, 129px; new not mounted (page 19844 vs 19217px).
+- `codemirror-and-react`: old 170px, new 198px for the one mounted editor (172 vs 198 in the visual diff; page 17057 vs 17183px). Check the editor's padding or status bar.
+- `advanced-state-management-with-react-and-codemirror`: old 109, 109px; new not mounted (page 12172 vs 11997px).
+- `connecting-antlr-to-codemirror-6-building-a-language-server`: old 69px; new not mounted.
+- `connecting-antlr-to-code-mirror-6-connecting-a-language-server`: old 109px; new not mounted.
+- Add `client:load` to the demos; the 20 failing visual tests should then pass once the heights match.
+- srcset gap: none for body images (see the Phase 9 note above).
 
 ### Phase 5 handoff (to do in Phase 6)
 

@@ -9,6 +9,7 @@ import {
 import {extractPage, type PageFacts} from '../../scripts/parity/extract.mjs';
 import {
   animatedMaskSelectors,
+  mermaidBoxHeight,
   mermaidMaskSelectors,
   optionalOnNew,
   readingTimePattern,
@@ -119,11 +120,23 @@ export async function settle(page: Page) {
  * - hides the random reading-list tiles (heading and intro stay visible, and
  *   their structure is checked separately in content.spec.ts)
  * - rewrites "N min read" to "0 min read" (allowlisted difference)
+ * - gives each Mermaid diagram box the same fixed height on both sites, because
+ *   the two renderers lay a diagram out at slightly different heights (see
+ *   `mermaidBoxHeight`); the box is masked in the screenshot
  */
 export async function neutralize(page: Page) {
   await page.evaluate(
-    ({readingTime}) => {
+    ({readingTime, mermaid}) => {
       const re = new RegExp(readingTime.source);
+      document.querySelectorAll<HTMLElement>(mermaid.selector).forEach((el) => {
+        el.style.height = `${mermaid.height}px`;
+        el.style.overflow = 'hidden';
+        // Masks use an element's full size even when it is clipped, so a tall
+        // diagram would mask the text below its box.
+        el.querySelectorAll<SVGElement>('svg').forEach((svg) => {
+          svg.style.display = 'none';
+        });
+      });
       document.querySelectorAll('h2').forEach((h2) => {
         if (
           /^Want to (keep reading|see more)\?$/.test(
@@ -150,7 +163,10 @@ export async function neutralize(page: Page) {
         }
       }
     },
-    {readingTime: {source: readingTimePattern.source}},
+    {
+      readingTime: {source: readingTimePattern.source},
+      mermaid: {selector: '.Mermaid', height: mermaidBoxHeight},
+    },
   );
 }
 

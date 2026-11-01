@@ -4290,6 +4290,24 @@
     "@webassemblyjs/ast" "1.14.1"
     "@xtuc/long" "4.2.2"
 
+"@xingwangzhe/satteri-mermaid@0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@xingwangzhe/satteri-mermaid/-/satteri-mermaid-0.8.2.tgz#2980e322b9fa9f067eabb930330ed80a2a633f22"
+  integrity sha512-gBDptvOMzTFlHSbKWbkArsE/lHwQZo8FlH4OX5TWpSUOcMbeWCnVVpwDZgabyl6tSno3k246dNeUocAgtvA0yg==
+
+"@xsynaptic/satteri-reading-time@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@xsynaptic/satteri-reading-time/-/satteri-reading-time-0.3.2.tgz#9079255ead55beeef0f11dc8cf0bf44333e3f833"
+  integrity sha512-NPIZCP95n8yQEYh7JEoOD9wfb7u6B3kGd87JqZxPu9p2OHovMgNTlusvwVC1hpDQ5yQn79a9ukA83K6z7PnIDg==
+  dependencies:
+    "@xsynaptic/word-count" "^1.0.0"
+    zod "^4.6.7"
+
+"@xsynaptic/word-count@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@xsynaptic/word-count/-/word-count-1.0.0.tgz#367df12020266698c364afba4382f9e23c0518da"
+  integrity sha512-fpWM+G6dNGPhzoftFs1HNs+9o0nTQriXNJ+4MaD0CzVlgYwahHHnBN+ciKsDeV+8hRvRFWmKqB4tdRslAQfJ5w==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -13212,7 +13230,7 @@ prismjs@^1.30.0:
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.30.0.tgz#d9709969d9d4e16403f6f348c63553b19f0975a9"
   integrity sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==
 
-probe-image-size@^7.2.3:
+probe-image-size@7.2.3, probe-image-size@^7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/probe-image-size/-/probe-image-size-7.2.3.tgz#d49c64be540ec8edea538f6f585f65a9b3ab4309"
   integrity sha512-HubhG4Rb2UH8YtV4ba0Vp5bQ7L78RTONYu/ujmCu5nBI8wGv24s4E9xSKBi0N1MowRpxk76pFCpJtW0KPzOK0w==
@@ -14157,7 +14175,24 @@ sass@^1.106.1:
   optionalDependencies:
     "@parcel/watcher" "^2.4.1"
 
-satteri@^0.10.5:
+satteri-autolink-headings@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/satteri-autolink-headings/-/satteri-autolink-headings-0.3.0.tgz#738b1d7882b1cd55a7198682c5e4758700b6e511"
+  integrity sha512-mWHVXVuvBzX5tFEhOsxDn+/rts+0j4sog93gYnMD3kKuwDLgZPc2Dr2uVv45rvZVYbpTjr/RM6pV+CmV/zSq+g==
+
+satteri-external-links@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/satteri-external-links/-/satteri-external-links-0.1.1.tgz#784b36b67dcda8aed4e9580634078df095903c1e"
+  integrity sha512-E9jTXX4eYPLO2XaEQxd+/Ulhi4Q9ZA42ig+i4ZgnutNp9XomqN+wN8TFlyaEf8XT//D8jrW2NFwtKb0bHE0xiw==
+
+satteri-slug@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/satteri-slug/-/satteri-slug-0.3.0.tgz#46e4f496de5b6d889c5364fcd338a81bb2846119"
+  integrity sha512-Hr9FNO9QJsTUJTphx2Nmmhp5v4o8HyEOsw7in7RJARTkLHlgOCnDtMKu73F0VUP6ywhNyyyN7hPixp0PYo12Qg==
+  dependencies:
+    github-slugger "^2.0.0"
+
+satteri@0.10.5, satteri@^0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/satteri/-/satteri-0.10.5.tgz#4b44a4f0e22e6439648e065ddfc134863fd28c31"
   integrity sha512-Ao1LKpAEa9Wdg0otgbVKViZHEq9ebdXe4DMrp3s9vQAU0HNIuHnFEuMuOcm0ZIXyV0Yzxj91NvhLpvXZJO/5ZQ==
@@ -16881,7 +16916,7 @@ yurnalist@^2.1.0:
   resolved "https://registry.yarnpkg.com/zod-validation-error/-/zod-validation-error-4.0.2.tgz#bc605eba49ce0fcd598c127fee1c236be3f22918"
   integrity sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==
 
-"zod@^3.25.0 || ^4.0.0", zod@^4.3.6, zod@^4.6.6:
+"zod@^3.25.0 || ^4.0.0", zod@^4.3.6, zod@^4.6.6, zod@^4.6.7:
   version "4.6.7"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.6.7.tgz#e806cf64a7f4e37635ce9f2f52c04c3766f75e5b"
   integrity sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==
