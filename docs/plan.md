@@ -213,7 +213,7 @@ Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carouse
   - `tests/parity/demos.spec.ts`: 10 tests (load, type/click changes state, no console errors, soft navigation with a window marker then re-test, theme on a live editor). Pass 10/10 on old and new. Removing `client:load` from one demo makes its test fail.
   - Parity on new: visual 188/188; only failures are 41 `/rss.xml` links and feeds 0/3 (Phase 8). `pending.spec.ts` keeps only the redirect and Lighthouse placeholders.
 
-## Phase 8: Generated files, cleanup and CI (0.5-1 day)
+## Phase 8: Generated files, cleanup and CI (0.5-1 day) - done
 
 ### 8.1 Feeds and static files
 
@@ -237,6 +237,25 @@ Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carouse
 - Update the `package.json` scripts (`develop`, `build`, `serve`, `tophat`), `netlify.toml` (`dist/`), the README, the PR template and the Dependabot ignores.
 - Set CI to run the build, `astro check`, lint and the Playwright suite against the new build.
 - **Validate:** the `yarn audit` count is near zero (write the number down). CI is green, and a Netlify deploy preview builds.
+
+- **Done (notes):**
+  - Static files: `public/` holds `_redirects` (moved from `static/`, unchanged), `_headers`, `robots.txt`, `manifest.webmanifest` and `icons/` (copied byte-for-byte from the old build), `favicon-32x32.png`, and `favicon.png` (from `src/images/favicon.png`; the old site linked it as the og:image but never served it). `<head>` has the same sitemap, icon, manifest, apple-touch-icon and RSS links as the old site.
+  - `_headers` has a `/_astro/*` immutable one-year cache rule, plus the four security headers that `gatsby-plugin-netlify` used to generate on `/*`. The old per-file `Link:` preload headers are not carried over.
+  - `src/pages/rss.xml.ts`: 40 Published posts, `guid` and `link` without a trailing slash, `pubDate` at midnight US Central (the old build machine's zone), the old namespaces, and `content:encoded` as a 140-character excerpt. The excerpt is a best-effort copy of Gatsby's MDX excerpt: 4 of 40 teasers differ by a word or a full stop, and the old channel had `<generator>` and `<lastBuildDate>`, which `@astrojs/rss` does not write.
+  - Sitemap: same 45 `<loc>` values as the old site, in a different order.
+  - `@emnapi/runtime` stays as a devDependency: without it `astro check` fails (`@astrojs/astro2tsx > @napi-rs/wasm-runtime` cannot load it).
+  - Also removed as unused: `@mdx-js/react`, `dotenv`, `remark-gfm`, `unist-util-visit`, `reading-time`, `prismjs`, `@mermaid-js/mermaid-cli`, `plugins/`, `scripts/remove-mermaid-svgs.cjs` and the 9 committed `diagrams/*.svg` files. Added `commander` (used by `create-blog-post`; it only worked before because Gatsby installed it).
+  - `yarn audit`: 339 vulnerabilities before, 0 after. Fixed by dropping Gatsby, bumping `probe-image-size` to 7.5, refreshing five stale lockfile entries, and a `minimatch` ^11 resolution.
+  - CI (`.github/workflows/ci.yml`): `yarn build`, `yarn run check`, `yarn typecheck`, `yarn lint`, `yarn test`, then `yarn test:ci`. `test:ci` runs the specs that only need `baseline.json` (urls, metadata, anchors, links, content, feeds, console, theme, demos) against `astro preview`. `visual.spec.ts` is not run in CI because its screenshots are about 520 MB and gitignored; it and the old-vs-new run stay a local pre-merge check (documented in the README). `yarn check` is a built-in yarn command, so scripts and CI use `yarn run check`.
+  - `astro preview` goes to the background when it detects an AI agent, so the Playwright `webServer` command uses `--ignore-lock`.
+  - Netlify, checked locally: `netlify dev --dir dist --command "tail -f /dev/null" --offline` applies `_redirects` and `_headers` without logging in. All 14 redirect tests pass against :8888 (`DEPLOY_PREVIEW_URL=http://localhost:8888 npx playwright test --project=new pending`).
+  - Redirect tests model Netlify's first-match rule: `pending.spec.ts` expects the earlier rule's target when a later rule has the same path (a no-slash rule also matches the slash path). `_redirects` is unchanged and byte-identical to production.
+  - **Likely pre-existing bug in production `_redirects` (for the user to decide):** two rules are unreachable.
+    - `/projects/still-cant-explain-album-cover/` (line 12, later rule) was meant to go to `/blog/designing-album-artwork/`. The earlier no-slash rule (line 4) wins, so it goes to `/blog/designing-for-michael-barrow-and-the-tourists/`.
+    - `/projects/the-backyard-ep-album-cover/` has two rules. The first (line 13) wins and goes to `/blog/designing-album-artwork/`. The second (line 14), to `/projects/unplugged-album-cover/`, is never reached.
+  - Accepted RSS difference: 4 of 40 `content:encoded` excerpts differ slightly from Gatsby (a word or a full stop). Guids, links, titles and pubDates are identical. Also, `<generator>`, `<lastBuildDate>` and CDATA wrappers are gone (the feed is valid XML with escaped text).
+  - Verified by a second pass from a fresh `node_modules`: build, `yarn run check`, typecheck, lint, test and `test:ci` (356) pass; `yarn audit` 0; full local old-vs-new parity 544 passed (visual 188/188, feeds 3/3, links 94/94), 15 skipped (14 redirects without a deploy preview, 1 Lighthouse).
+  - **Not validated yet (Phase 9):** a real GitHub Actions run, a Netlify deploy preview build, and the `/_astro/*` `Cache-Control` in production (`netlify dev` showed `max-age=0` for a `/_astro/` file but does serve the security headers, so it may override cache headers locally).
 
 ## Phase 9: Full regression run, old vs new (0.5-1 day)
 

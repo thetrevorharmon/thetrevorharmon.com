@@ -2,19 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Gatsby develop",
+      "name": "Astro dev",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
-      "args": ["develop", "--verbose"],
+      "program": "${workspaceRoot}/node_modules/.bin/astro",
+      "args": ["dev"],
       "runtimeArgs": ["--inspect-brk"],
       "console": "integratedTerminal"
     },
     {
-      "name": "Gatsby build",
+      "name": "Astro build",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "program": "${workspaceRoot}/node_modules/.bin/astro",
       "args": ["build"],
       "runtimeArgs": ["--inspect-brk"],
       "console": "integratedTerminal"
@@ -23,8 +23,8 @@
       "type": "chrome",
       "request": "launch",
       "name": "Browser debugging",
-      "url": "http://localhost:8000",
-      "webRoot": "${workspaceFolder}/gatsby"
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

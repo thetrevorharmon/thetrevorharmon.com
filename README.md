@@ -1,6 +1,6 @@
 # thetrevorharmon.com
 
-Hi there! 👋 This is the repo for my blog & portfolio site. It's built on [Gatsby](https://www.gatsbyjs.com) 5 with React 19 and written in TypeScript. Styling is Tailwind CSS 3 plus Sass, and content is MDX files in `src/content` (via `gatsby-plugin-mdx`). The site is hosted on Netlify. 💪
+Hi there! 👋 This is the repo for my blog & portfolio site. It's built on [Astro](https://astro.build) 7 with React 19 islands and written in TypeScript. Styling is Tailwind CSS 3 plus Sass, and content is Markdown and MDX files in `src/content` (rendered with Sätteri). The site is hosted on Netlify. 💪
 
 ## Getting Started
 
@@ -10,23 +10,36 @@ You need Node 22 (see `.nvmrc`) and [Yarn 1](https://classic.yarnpkg.com/).
 1. `yarn install`.
 1. `yarn start`.
 
-That's it! The site runs at http://localhost:8000.
+That's it! The site runs at http://localhost:4321.
 
 ## Scripts
 
-- `yarn start` / `yarn develop`: run the dev server (`yarn broadcast` exposes it on your network).
-- `yarn build`: production build into `public/`.
-- `yarn serve`: serve the production build locally.
-- `yarn clean`: clear the Gatsby `.cache` and `public/`.
+- `yarn start` / `yarn dev`: run the dev server (`yarn broadcast` exposes it on your network).
+- `yarn build`: production build into `dist/`.
+- `yarn preview`: serve the production build locally.
+- `yarn clean`: remove `.astro/` and `dist/`.
+- `yarn tophat`: clean, build and preview, to check a production build locally.
+- `yarn run check`: run `astro check` (use `yarn run`; plain `yarn check` is a built-in yarn command).
 - `yarn typecheck`: run `tsc --noEmit`.
 - `yarn lint`: run ESLint.
+- `yarn test`: run the unit tests.
+- `yarn test:ci`: run the Playwright specs that only need `tests/parity/baseline.json` against `yarn preview` (build first).
 - `yarn pretty`: format with Prettier.
-- `yarn tophat`: clean, build and serve, to check a production build locally.
 - `yarn create-blog-post`: scaffold a new post (see `src/content/README.md`).
 
 ## Continuous integration
 
-GitHub Actions (`.github/workflows/ci.yml`) runs `yarn typecheck`, `yarn lint` and `yarn build` on every pull request and on pushes to `main`. Dependabot (`.github/dependabot.yml`) opens weekly grouped dependency updates. A few packages are deliberately held back; the reasons are commented in that file.
+GitHub Actions (`.github/workflows/ci.yml`) runs `yarn build`, `yarn run check`, `yarn typecheck`, `yarn lint`, `yarn test` and `yarn test:ci` on every pull request and on pushes to `main`. Dependabot (`.github/dependabot.yml`) opens weekly grouped dependency updates. A few packages are deliberately held back; the reasons are commented in that file.
+
+## Parity suite (migration from Gatsby)
+
+`tests/parity` checks the Astro site against the old Gatsby site (the `gatsby-final` tag). CI runs the specs that only need `tests/parity/baseline.json`: `urls`, `metadata`, `anchors`, `links`, `content`, `feeds`, `console`, `theme` and `demos`. It does not run `visual.spec.ts` (screenshots of the old site are about 520 MB and gitignored) or compare against a live old site. Before merging a large change, run the whole suite locally:
+
+1. Build and serve the old site from the `gatsby-final` worktree (`yarn serve`, port 9000).
+1. `yarn build && yarn preview` here (port 4321).
+1. `OLD_URL=http://localhost:9000 NEW_URL=http://localhost:4321 npx playwright test --project=new`.
+
+To redo the screenshots: `npx playwright test --project=old --update-snapshots=all visual.spec.ts`.
 
 ## Hosting
 

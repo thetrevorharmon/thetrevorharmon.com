@@ -3,7 +3,9 @@ import {defineConfig} from '@playwright/test';
 // The same suite runs against two sites:
 //   old = the Gatsby site (gatsby-final worktree, `yarn serve` on :9000)
 //   new = the Astro site (`astro preview` on :4321)
-// Start the servers yourself; this config does not.
+// Start the servers yourself; this config does not, unless you set
+// START_PREVIEW=1 (CI does): then it runs `yarn preview` for the new site.
+// The new site must be built first.
 const OLD_URL = process.env.OLD_URL ?? 'http://localhost:9000';
 const NEW_URL = process.env.NEW_URL ?? 'http://localhost:4321';
 
@@ -34,6 +36,15 @@ export default defineConfig({
   use: {
     trace: 'off',
   },
+  webServer: process.env.START_PREVIEW
+    ? {
+        // --ignore-lock keeps astro in the foreground (it daemonizes when it detects an AI agent).
+        command: 'yarn preview --port 4321 --ignore-lock',
+        url: NEW_URL,
+        reuseExistingServer: false,
+        timeout: 60_000,
+      }
+    : undefined,
   projects: [
     {name: 'old', use: {baseURL: OLD_URL}},
     {name: 'new', use: {baseURL: NEW_URL}},

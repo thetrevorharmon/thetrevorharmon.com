@@ -17,10 +17,9 @@
   "include": [
     ".astro/types.d.ts",
     "./src/**/*",
-    "./plugins/**/*",
     "./tests/**/*",
     "./scripts/**/*",
     "./playwright.config.ts"
   ],
-  "exclude": ["./src/templates", "dist", "node_modules"]
+  "exclude": ["dist", "node_modules"]
 }

@@ -2,12 +2,9 @@
 NODE_VERSION = "22.23.4"
 
 [build]
-command = "astro build"
+command = "yarn build"
 publish = "dist/"
 
 [dev]
-command = "astro dev"
-
-[context.production]
-command = "astro build"
-publish = "dist/"
+command = "yarn dev"
+targetPort = 4321

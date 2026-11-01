@@ -63,6 +63,19 @@ const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
     <meta name="twitter:site" content={twitterHandle} />
     <meta name="twitter:creator" content={twitterHandle} />
 
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon-32x32.png?v=b062c9b96c2d8bcc7604b9c110640def" type="image/png" />
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous" />
+    <link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="alternate" type="application/rss+xml" title="Trevor Harmon's Blog" href="/rss.xml" />
+
     <!-- Hide from search engines -->
     {noIndex && <meta name="robots" content="noindex" />}
     <slot name="head" />
