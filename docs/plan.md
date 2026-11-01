@@ -102,6 +102,7 @@ The spike code is on branch `astro-spike` (commit `a183d89`, in `spike/`). Resul
 
 - Port `Layout`, `PostLayout`, `PageLayout`, `Navbar`, `Footer`, and SEO/meta into `<head>`. Add `<ClientRouter />` to the base layout. `useSiteData` becomes a constant.
 - **Validate:** each page's title, description, canonical and OG tags match `baseline.json`.
+- Page swaps have no animation, at the user's request: `transition:animate="none"` on `<html>` in `BaseLayout.astro`. `ClientRouter` stays, so swaps are still soft. `theme.spec` checks that no `::view-transition` animation runs.
 
 ### 5.2 Pages
 

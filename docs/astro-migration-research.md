@@ -54,7 +54,7 @@ Hugo and VitePress are out because they don't run React. VitePress also hasn't h
 
 ## Decisions
 
-1. **Page navigation: use `<ClientRouter />`.** Measured on Astro 7.4.4, it's about 4.8 KB gzipped and cached across pages. Prefetch on its own is about 1.2 KB. It gives Gatsby-style page swaps plus transitions. The cost is about half a day of extra testing, so the theme script and demos restart correctly on page swaps (`astro:page-load`).
+1. **Page navigation: use `<ClientRouter />`.** Measured on Astro 7.4.4, it's about 4.8 KB gzipped and cached across pages. Prefetch on its own is about 1.2 KB. It gives Gatsby-style page swaps plus transitions. The cost is about half a day of extra testing, so the theme script and demos restart correctly on page swaps (`astro:page-load`). Page swaps have no animation, at the user's request: `transition:animate="none"` on `<html>` in `BaseLayout.astro` turns off both the native cross-fade and the fallback animation.
 2. **Shared state: use a small store for the theme.** Islands don't share React context. No demos share state today. If a future demo needs shared state, use nanostores (about 1 KB).
 3. **Markdown: use Sätteri, not unified.** Sätteri is Astro 7's default processor. Use existing community plugins wherever possible (see the plugin map below).
 4. **Syntax highlighting: keep Prism.** `@astrojs/markdown-satteri` 0.4.6 supports `syntaxHighlight: 'prism'`, so `syntaxHighlighting.scss` stays. Expressive Code is optional.

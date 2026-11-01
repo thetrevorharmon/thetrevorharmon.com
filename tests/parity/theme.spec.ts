@@ -39,6 +39,13 @@ const SITES: Record<string, Site> = {
   },
 };
 
+/** Fields the view-transition test puts on window in the browser. */
+type Probe = {
+  __soft: boolean;
+  __swaps: number;
+  __transitionAnimations: string[];
+};
+
 const site = (): Site => SITES[test.info().project.name];
 const isNew = () => test.info().project.name === 'new';
 
@@ -283,5 +290,58 @@ test.describe('Theme', () => {
     await expect(editor).toHaveClass(/cm-theme-dark/);
     await pick(page, 'light');
     await expect(editor).toHaveClass(/cm-theme-light/);
+  });
+  test('a client-side navigation runs no view-transition animation', async ({
+    page,
+  }) => {
+    test.skip(!isNew(), 'Gatsby has no view transitions');
+    await open(page, site().home);
+
+    // Soft-swap marker: survives only if the document is not reloaded.
+    // Watcher: records every animation on a ::view-transition pseudo-element
+    // (native) and every data-astro-transition-fallback attribute (fallback).
+    await page.evaluate(() => {
+      const w = window as unknown as Probe;
+      w.__soft = true;
+      w.__swaps = 0;
+      w.__transitionAnimations = [] as string[];
+      document.addEventListener('astro:after-swap', () => w.__swaps++);
+      const watch = () => {
+        for (const a of document.getAnimations()) {
+          const pseudo = (a.effect as KeyframeEffect | null)?.pseudoElement;
+          if (pseudo?.startsWith('::view-transition')) {
+            w.__transitionAnimations.push(pseudo);
+          }
+        }
+        if (
+          document.documentElement.hasAttribute(
+            'data-astro-transition-fallback',
+          )
+        ) {
+          w.__transitionAnimations.push('fallback');
+        }
+        requestAnimationFrame(watch);
+      };
+      watch();
+    });
+
+    await page
+      .getByRole('link', {name: site().navLinkName, exact: true})
+      .first()
+      .click();
+    await page.waitForURL(`**${site().navTarget}`);
+    await expect
+      .poll(() => page.evaluate(() => (window as unknown as Probe).__swaps))
+      .toBe(1);
+    // Let any late animation start.
+    await page.waitForTimeout(500);
+
+    const result = await page.evaluate(() => ({
+      soft: (window as unknown as Probe).__soft === true,
+      animations: (window as unknown as Probe)
+        .__transitionAnimations as string[],
+    }));
+    expect(result.soft, 'page was reloaded, not soft-swapped').toBe(true);
+    expect(result.animations).toEqual([]);
   });
 });
