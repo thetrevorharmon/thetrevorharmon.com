@@ -377,6 +377,25 @@ Preview-only effects, not site bugs: SEO 58 comes from Netlify's `x-robots-tag: 
 
 **Fixes made:** none needed.
 
+### Phase 9 follow-up: blurred image placeholders (done)
+
+The old site showed a tiny blurred image first, then the sharp one. Astro 7.4.4 has no built-in support for this (`astro:assets` has `layout`, `priority` and `fit`, but nothing like `placeholder`), so we added it. The decision and the numbers are in `docs/astro-migration-research.md` ("Blurred image placeholders").
+
+- **What the old site did:**
+  - Markdown images (`gatsby-remark-images`): a `<span>` with an inline base64 JPEG (about 20px wide, 600-1700 bytes) as `background-image`, with the real `<img>` over it. No fade.
+  - `GatsbyImage` (featured and hero): a second `<img data-placeholder-image>` with the base64 placeholder, the main image at `opacity: 0`, and a 250ms fade once a tiny module script saw its `load` event. A `<noscript>` rule showed the image without JS. We did not copy the fade (see below).
+  - Gifs got nothing. The reserved box (padding-bottom) is what stopped layout shift.
+- **What we built:**
+  - `src/lib/lqip.mjs`: sharp makes a 16px-wide WebP at quality 25 (100-250 bytes) as a data URI. Images that really have transparency, gifs and SVGs get none.
+  - Markdown, carousel and TwoUp images: `src/markdown/image-service.mjs` adds the placeholder to the `<img>` as an inline `background` (in `getHTMLAttributes`, so every image that goes through the service gets it). No extra elements and no JS. `Carousel.astro` keeps that `background` when it cleans up the `<img>` tag.
+  - `Image.astro` (featured, hero, tiles): the placeholder is on the wrapper and the image paints over it. **No fade**: it would delay the LCP image (a trial added about 75ms to the featured post's LCP) and needs an `onload` handler and a `<noscript>` rule, so we left it out. It marks its own `<img>` `data-no-lqip` so the placeholder is only on the wrapper.
+  - `sharp` is declared in `package.json` (pinned to 0.35.5, what Astro resolves).
+- **Results:**
+  - Reserved boxes did not change; visual 188/188, `content` image count and alt unchanged (the placeholder adds no `<img>` elements). Full local suite 549 passed (14 skipped redirects), `yarn test:ci` 361 passed.
+  - Added HTML on `designing-for-michael-barrow-and-the-tourists`: 14 placeholders, 1,754 base64 characters, so the HTML went from 37,980 to 38,934 bytes (+954 bytes, +2.5%, before compression).
+  - New `tests/parity/images.spec.ts` (4 tests; also in `test:ci`). A negative check (placeholder removed from the image service) made them fail; reverted.
+  - Lighthouse mobile, median of 3 (before / after): `/` LCP 3008 / 3007 ms; Michael Barrow post 3010 / 3083 ms; `learning-codemirror` 3313 / 3313 ms. CLS 0 everywhere. The Michael Barrow LCP element is a paragraph, not an image, and the same build gave 5028 or 5102 ms in repeated runs on another server, so the 73 ms step is Lighthouse noise.
+
 ## Phase 10: Cut-over (0.25 day)
 
 - Merge `astra-migration` and watch the production deploy.

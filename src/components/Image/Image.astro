@@ -3,6 +3,7 @@
 // pixels wide. Replaces the Gatsby `GatsbyImage` wrapper, with the same box
 // behavior: the wrapper holds the aspect ratio and the image covers it.
 import {Image as OptimizedImage} from 'astro:assets';
+import {lqip, lqipBackground} from '../../lib/lqip.mjs';
 
 interface Props {
   src: ImageMetadata;
@@ -23,11 +24,15 @@ const displayHeight = Math.round((displayWidth * src.height) / src.width);
 const widths = [displayWidth / 2, displayWidth, displayWidth * 2].filter(
   (w) => w <= src.width,
 );
+// The blurred placeholder sits on the wrapper; the image paints over it once
+// it arrives (no fade, so the LCP image is not delayed).
+const placeholder = await lqip((src as {fsPath?: string}).fsPath);
 ---
 
 <div
   class:list={['relative overflow-hidden', className]}
-  style={`max-width:${displayWidth}px;aspect-ratio:${displayWidth}/${displayHeight}`}
+  style={`max-width:${displayWidth}px;aspect-ratio:${displayWidth}/${displayHeight}` +
+    (placeholder ? `;${lqipBackground(placeholder)}` : '')}
 >
   <OptimizedImage
     src={src}
@@ -37,6 +42,7 @@ const widths = [displayWidth / 2, displayWidth, displayWidth * 2].filter(
     sizes={`(min-width: ${displayWidth}px) ${displayWidth}px, 100vw`}
     loading={loading}
     fetchpriority={fetchpriority}
+    data-no-lqip
     class="absolute inset-0 m-0 h-full w-full max-w-none object-cover"
   />
 </div>

@@ -24,7 +24,7 @@
     "lint": "eslint .",
     "pretty": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,mdx,json,md,css,scss}\"",
     "create-blog-post": "node ./scripts/create-blog-post.cjs",
-    "test:ci": "START_PREVIEW=1 playwright test --project=new urls metadata anchors links content feeds console theme demos"
+    "test:ci": "START_PREVIEW=1 playwright test --project=new urls metadata anchors links content feeds console theme demos images"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.6",
@@ -61,6 +61,7 @@
     "satteri-autolink-headings": "0.3.0",
     "satteri-external-links": "0.1.1",
     "satteri-slug": "0.3.0",
+    "sharp": "0.35.5",
     "util": "0.12.5"
   },
   "devDependencies": {

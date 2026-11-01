@@ -25,6 +25,12 @@ interface Photo {
 
 const html = await Astro.slots.render('default');
 
+// `background:url(data:...) center/cover no-repeat` out of an img's style.
+const placeholderStyle = (style = '') => {
+  const background = style.match(/background:url\([^)]*\)[^;"]*/)?.[0];
+  return background ? ` style="${background}"` : '';
+};
+
 const photos: Photo[] = [];
 for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
   const attrs: Record<string, string> = {};
@@ -43,10 +49,13 @@ for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
     // The body styles for markdown images (max-width and so on) don't apply here.
     // Tall photos only fill half the carousel, so they get a half-width `sizes`
     // (the markdown default would load a srcset image twice as wide as needed).
+    // The blurred placeholder is a `background` in the style; keep that part.
     imgHtml: (portrait
       ? tag.replace(/\ssizes="[^"]*"/, ' sizes="(min-width: 800px) 400px, 50vw"')
       : tag
-    ).replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, ''),
+    )
+      .replace(/\s(?:class|style|data-ratio)="[^"]*"|\sdata-md-image(?:="[^"]*")?(?=[\s>])/g, '')
+      .replace(/^<img\b/, `<img${placeholderStyle(attrs.style)}`),
     caption: attrs.title ?? null,
     aspectRatio: ratio > 0 ? ratio : width / height,
   });

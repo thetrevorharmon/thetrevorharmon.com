@@ -210,6 +210,36 @@ Result: the final diagrams match the old ones closely in layout, colours, font, 
 - **Build speed:** the spike builds 5 pages in about 1 second. Tailwind's `content` globs need `./src/**/*.astro` added.
 - **Not tested in the spike:** `astro dev` (only `build` and `preview`), heading ids/links, external links, images and captions, RSS and sitemap, and the `Callout`/`Citation` components as `.astro` files (the spike passes the existing React ones through `components={{...}}`, which works).
 
+## Blurred image placeholders
+
+The old site showed a small blurred image first and then the sharp one, with no layout shift. This is how we got the same thing in Astro.
+
+**Is it built in?** No. Astro 7.4.4 (`astro:assets` and `node_modules/astro/dist/assets`) has responsive-image `layout`, `fit` and `priority`, but no placeholder or LQIP option.
+
+**Plugins checked** (npm, weekly downloads and last release as of late 2026):
+
+| Package                                                      | Downloads / week | Last release | Fits?                                                                                                                     |
+| ------------------------------------------------------------ | ---------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `astro-lqip` 2.0.2                                           | about 500        | 2026-10      | Components only (replaces `<Image>`/`<Picture>`). Does not reach markdown images that our hast plugin turns into `<img>`. |
+| `@unpic/astro` 1.0.2                                         | about 7,100      | 2025-12      | A CDN image component, not a placeholder tool.                                                                            |
+| `lqip-modern` 3.0.0                                          | about 11,700     | 2026-08      | A library that makes a placeholder from a file. It does what 25 lines of sharp do, and we would still need the wiring.    |
+| `plaiceholder` 3.0.0                                         | about 95,000     | 2023-05      | Unmaintained for 3 years.                                                                                                 |
+| `thumbhash`                                                  | about 970,000    | 2023-03      | Needs a canvas or JS decoder in the page.                                                                                 |
+| `astro-blurhash`, `astro-placeholder`, `@zadkiel/astro-lqip` | not on npm       |              |                                                                                                                           |
+
+No Sätteri plugin does this. Nothing fits the markdown path cleanly, and `sharp` is already installed (Astro depends on it), so we wrote about 30 lines.
+
+**Decision:** a custom placeholder with sharp, matching what Gatsby did.
+
+- `src/lib/lqip.mjs` makes a 16px WebP (quality 25) data URI of 100-250 bytes. Cached per file.
+- Our image service (`src/markdown/image-service.mjs`) adds it to every `<img>` as a `background`. This is the one place that both markdown images and `<Image>` pass through, so markdown, carousel and TwoUp images need no extra code. The real image paints over it. No JS, no extra elements, like `gatsby-remark-images`.
+- `Image.astro` puts it on its wrapper instead (it marks its own `<img>` `data-no-lqip` so there is only one). The image paints over it. There is no fade: the old `GatsbyImage` faded, but a fade delays the LCP image and adds a script or `onload` handler for little gain.
+- Skipped on purpose: gifs, SVGs, and images with real transparency (the placeholder would show through them). Both would also be a visible change from the old site.
+- Layout reservation (width/height, aspect-ratio box) is unchanged.
+- `sharp` is imported directly, so it is declared in `package.json`, pinned to the version Astro resolves (0.35.5).
+
+Numbers and test results are in `docs/plan.md` ("Phase 9 follow-up").
+
 ## Untested risks
 
 | #   | What                                                          | Status after Phase 2                                                           | If it fails                                                 |
