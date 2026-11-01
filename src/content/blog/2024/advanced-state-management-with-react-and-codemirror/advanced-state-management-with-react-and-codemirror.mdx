@@ -38,7 +38,7 @@ Here's the final version of what we are building:
 
 import {CodeEditor} from './CodeEditor';
 
-<CodeEditor />
+<CodeEditor client:load />
 
 We face a few challenges in building this editor:
 
@@ -310,7 +310,7 @@ Like our keyboard shortcut code, this calls at `view.dispatch`, but sets the eve
 
 With our React state connection in place, we now have a working editor that covers all of the use cases:
 
-<CodeEditor />
+<CodeEditor client:load />
 
 Because of our state coordinator, we have successfully eliminated the race condition. We can be sure that we won't ever run a query that has a wildcard in it, no matter when or how the query is triggered.
 

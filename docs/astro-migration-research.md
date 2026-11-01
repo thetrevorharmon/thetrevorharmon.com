@@ -6,7 +6,7 @@ This is the research on moving this site from Gatsby to Astro, plus the decision
 
 ## Summary
 
-Move to Astro 7 and output a static site only. This should take 6-9 focused days, plus about 1 day if the ANTLR editor needs `antlr4ng`. Posts stay where they are. The only edit to post content is adding `client:load` to the demo components in 6 posts.
+Move to Astro 7 and output a static site only. This should take 6-9 focused days, plus about 1 day if the ANTLR editor needs `antlr4ng`. Posts stay where they are. The only edit to post content is adding `client:load` to the demo components in 5 posts.
 
 ## Why move
 
@@ -47,7 +47,7 @@ Hugo and VitePress are out because they don't run React. VitePress also hasn't h
 
 - Rewrite the Gatsby-specific code: 3 layouts, 2 templates, 4 pages, `Link`/`Button`, SEO/meta, `Image`, the SVG icon imports, and the `gatsby-*` config files.
 - Rebuild `Callout`, `TwoUp`, `Citation`, `Breakout` and `Link` as `.astro` components. Pass them to MDX through a `components` map instead of `MdxProvider`.
-- Add `client:load` to the demo components in the 6 interactive posts (about 10 lines). Change type-only imports to `import type`.
+- Add `client:load` to the demo components in the 5 interactive posts (about 10 lines). Change type-only imports to `import type`.
 - Replace `ThemeContext` with a small shared store and an inline `<head>` script (about 0.5-1 day). It's the only shared React context, and it's used by `ThemePicker`, `CodeEditor` and `ReactCodeMirrorSyncStateExample`.
 - Get the ANTLR/Zephyr editor working under Vite. That means polyfills for `assert`/`buffer`/`util`, or switching to `antlr4ng`.
 - Update `netlify.toml` (`dist/` and the new build command), and use Node >= 22.23.4.

@@ -5,14 +5,6 @@ import {baseline} from './support';
 // They are listed here so Phase 9 has a place to fill in. Each one is skipped
 // with the reason, so the report shows them as "skipped", not "passed".
 
-test.describe('Demos (Phase 7)', () => {
-  test.fixme(
-    true,
-    'Needs the demo components to work on the new site. One test per demo: editor loads, typing changes state, no console errors, survives ClientRouter navigation, follows theme (plan 7.1).',
-  );
-  test('demo posts', () => {});
-});
-
 test.describe('Redirects (deploy preview only)', () => {
   const previewUrl = process.env.DEPLOY_PREVIEW_URL;
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useMemo, forwardRef} from 'react';
+import React, {type CSSProperties, useCallback, useState, useMemo, forwardRef} from 'react';
 import {type Extension} from '@codemirror/state';
 import {EditorView} from '@codemirror/view';
 import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
@@ -9,6 +9,7 @@ import './CodeEditor.scss';
 import {useTheme} from '../../lib/theme';
 import {sql} from '@codemirror/lang-sql';
 import classNames from 'classnames';
+import {lineCount} from './lineCount';
 
 interface Props {
   initialValue?: string;
@@ -58,7 +59,10 @@ export const CodeEditor = forwardRef<ReactCodeMirrorRef, Props>(
     }, [language, extensions]);
 
     return (
-      <div className={classNames('CodeEditor', hasFooter && 'HasFooter')}>
+      <div
+        className={classNames('CodeEditor', hasFooter && 'HasFooter')}
+        style={{'--cm-lines': lineCount(initialValue)} as CSSProperties}
+      >
         <ReactCodeEditor
           ref={ref}
           onCreateEditor={onCreateEditor}

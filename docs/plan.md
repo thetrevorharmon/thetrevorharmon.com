@@ -10,6 +10,7 @@ These are the tasks for moving this site from Gatsby to Astro 7, start to finish
 - The shell's default Node is too old. Run `export PATH=~/.nvm/versions/node/v22.23.4/bin:$PATH` before any `node`, `yarn` or `npx` command.
 - The regression suite (task 1.2) is built first and tested against the old site, so you can trust it before any Astro code exists.
 - **Stale cache:** Astro's content cache ignores markdown plugin changes. After editing anything in `src/markdown/` or the processor config, build with `rm -rf .astro node_modules/.astro dist && yarn build`, or you test old output.
+- **Scoped CSS:** Gatsby made every imported `.scss` global. Astro only ships a stylesheet on pages whose components import it (or via `global.scss`). A component that uses a class must import the stylesheet that defines it. Audit at Phase 7: `global.scss` pulls in `syntaxHighlighting` and `Mermaid`; `Carousel.astro`, `Icon.tsx` and `CodeEditor.tsx` import their own. Only `ReactCodeMirrorSyncStateExample` was missing one (fixed).
 - Differences we expect and accept go in one allowlist file, `tests/parity/expected-differences.ts`. Those are the reading-time numbers, the hashed asset URLs, `/drafts` and how the mermaid diagrams render. Any other difference is a regression.
 
 ## Phase 1: Baseline (0.5-1 day)
@@ -192,11 +193,11 @@ Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carouse
 - Links written without a trailing slash in markdown (about 2 internal link failures in `links.spec`, e.g. `https://thetrevorharmon.com/blog/what-I-learned-from-a-failed-startup`): the old pages have the same links and the old site 301'd them. Netlify also redirects `/x` to `/x/` for directory output, so production is fine, but check this in the Phase 9 deploy preview. A small link-normalising plugin in 6.1 would fix it at the source.
 - `/rss.xml` links (41 `links.spec` failures) and `feeds.spec` (3) are Phase 8.
 
-## Phase 7: Interactive demos (1 day)
+## Phase 7: Interactive demos (1 day) - done
 
 ### 7.1 Demo posts
 
-- Add `client:load` to the demo components in the 6 posts, and change type-only imports to `import type`.
+- Add `client:load` to the demo components in the 5 posts, and change type-only imports to `import type`.
 - For ANTLR, the Vite aliases from Phase 3.1 are enough. `antlr4ng` is not needed.
 - **Validate (Playwright, one test per demo):**
   - The editor loads.
@@ -204,6 +205,13 @@ Verified in Phase 5: the components (Callout, Citation, Breakout, TwoUp, Carouse
   - There are no console errors.
   - It still works after navigating away and back with ClientRouter.
   - The editor follows theme changes.
+- **Done (notes):**
+  - 5 demo posts (not 6), 11 components, all `client:load`. Content changes are directives only. ANTLR works with the Phase 3.1 aliases.
+  - Height gap root cause: `ReactCodeMirrorSyncStateExample.tsx` never imported `CodeEditor.scss`, so its page did not get the editor styles (see the scoped-CSS rule in Ground rules). Fixed by adding the import.
+  - Layout shift: `CodeEditor` sets `--cm-lines` (from `lineCount.ts`) and `CodeEditor.scss` reserves `min-height` on the `:empty` theme wrapper only, so it stops applying once CodeMirror mounts.
+  - **Known, accepted gap (for Phase 9 Lighthouse/CLS):** `learning-codemirror` still shifts 20-46px per editor on hydration, because extension panels are not reserved.
+  - `tests/parity/demos.spec.ts`: 10 tests (load, type/click changes state, no console errors, soft navigation with a window marker then re-test, theme on a live editor). Pass 10/10 on old and new. Removing `client:load` from one demo makes its test fail.
+  - Parity on new: visual 188/188; only failures are 41 `/rss.xml` links and feeds 0/3 (Phase 8). `pending.spec.ts` keeps only the redirect and Lighthouse placeholders.
 
 ## Phase 8: Generated files, cleanup and CI (0.5-1 day)
 
