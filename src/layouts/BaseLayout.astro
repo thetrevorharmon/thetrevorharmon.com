@@ -126,36 +126,88 @@ const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
     <!--
       Reveals images that have a blurred placeholder (`[data-blur-up] > img`, see
       global.scss): once an image has loaded and decoded, `data-loaded` lets it
-      fade in over the blur, as gatsby-plugin-image did. One capturing listener
-      on the document sees every image, including ones swapped in by the router,
-      so nothing needs re-initializing. The sweep catches images that finished
-      before the listener or the router swap got there.
+      fade in over the blur, as gatsby-plugin-image did. The fade is for the
+      first load only. An image that comes from a cache is shown at once
+      (`data-instant` turns the transition off), because there is no wait to
+      hide. An image counts as cached when:
+        - it is already complete when first seen (memory cache, the same image
+          used on an earlier page, back/forward). A MutationObserver and
+          `astro:after-swap` look at each image as it is inserted, before it can
+          paint, so these never show the blur at all;
+        - its URL has already loaded in this tab (`window.__blurUpSeen`, which
+          survives router swaps);
+        - Resource Timing says the bytes did not come over the network:
+          `deliveryType === 'cache'`, or fewer bytes transferred than the body
+          holds (none for a cache hit), or a body of 0 bytes (a 304 revalidation
+          reports headers only).
+      One capturing listener on the document sees every `load`, including images
+      swapped in by the router, so nothing needs re-initializing. The sweep
+      catches images that finished before the listeners got there.
     -->
     <script is:inline>
       (function () {
         if (window.__blurUp) return;
         window.__blurUp = true;
-        function show(img) {
-          if (!img.matches || !img.matches('[data-blur-up] > img')) return;
-          function reveal() {
-            img.setAttribute('data-loaded', '');
-          }
+        var SEL = '[data-blur-up] > img';
+        var handled = new WeakSet();
+        var seen = (window.__blurUpSeen = new Set());
+        function fromCache(img, done) {
+          var url = img.currentSrc || img.src;
+          if (seen.has(url)) return true;
+          var list = performance.getEntriesByName(url, 'resource');
+          var e = list[list.length - 1];
+          // No entry: an image already complete came from an earlier document's
+          // memory cache; one still loading is unknown, so it fades.
+          if (!e) return done;
+          return (
+            e.deliveryType === 'cache' ||
+            e.encodedBodySize === 0 ||
+            e.transferSize < e.encodedBodySize
+          );
+        }
+        function reveal(img, instant) {
+          if (instant) img.setAttribute('data-instant', '');
+          img.setAttribute('data-loaded', '');
+          seen.add(img.currentSrc || img.src);
+        }
+        function show(img, done) {
+          // Once per image: a sweep must not re-decide while decode() is pending.
+          if (handled.has(img) || img.hasAttribute('data-loaded')) return;
+          handled.add(img);
+          var instant = fromCache(img, done);
           // Decode first, so the fade is not janky; show it either way.
-          if (img.decode) img.decode().then(reveal, reveal);
-          else reveal();
+          if (img.decode) {
+            img.decode().then(
+              function () { reveal(img, instant); },
+              function () { reveal(img, instant); }
+            );
+          } else reveal(img, instant);
         }
-        document.addEventListener('load', function (e) { show(e.target); }, true);
-        document.addEventListener('error', function (e) {
-          if (e.target.matches && e.target.matches('[data-blur-up] > img')) {
-            e.target.setAttribute('data-loaded', '');
-          }
-        }, true);
-        function sweep() {
-          var imgs = document.querySelectorAll('[data-blur-up] > img:not([data-loaded])');
+        function look(root) {
+          if (root.nodeType !== 1) return;
+          var imgs = root.matches(SEL) ? [root] : root.querySelectorAll(SEL);
           for (var i = 0; i < imgs.length; i++) {
-            if (imgs[i].complete && imgs[i].naturalWidth > 0) show(imgs[i]);
+            var img = imgs[i];
+            // Already there when first seen: no wait to hide.
+            if (img.complete && img.naturalWidth > 0) show(img, true);
           }
         }
+        document.addEventListener('load', function (e) {
+          var t = e.target;
+          if (t.matches && t.matches(SEL)) show(t);
+        }, true);
+        document.addEventListener('error', function (e) {
+          var t = e.target;
+          if (t.matches && t.matches(SEL)) t.setAttribute('data-loaded', '');
+        }, true);
+        new MutationObserver(function (records) {
+          for (var i = 0; i < records.length; i++) {
+            var added = records[i].addedNodes;
+            for (var j = 0; j < added.length; j++) look(added[j]);
+          }
+        }).observe(document, {childList: true, subtree: true});
+        function sweep() { look(document.documentElement); }
+        document.addEventListener('astro:after-swap', sweep);
         document.addEventListener('DOMContentLoaded', sweep);
         document.addEventListener('astro:page-load', sweep);
       })();

@@ -296,7 +296,9 @@ blockquote {
 // placeholder as its background; the image fills it. The image starts
 // transparent and a script (BaseLayout.astro) sets `data-loaded` once it has
 // loaded and decoded, so it fades in on top of the blur, as gatsby-plugin-image
-// did (250ms, linear). Without scripting the image just shows.
+// did (250ms, linear). Without scripting the image just shows. The fade is for
+// the first load: an image that came from a cache gets `data-instant` along
+// with `data-loaded` and shows with no transition.
 [data-blur-up] {
   @apply block relative overflow-hidden;
 }
@@ -322,6 +324,13 @@ html [data-blur-up] > img {
   [data-blur-up][data-md-image] > img {
     transition-duration: 500ms;
     transition-timing-function: ease;
+  }
+}
+
+@media (scripting: enabled) {
+  [data-blur-up] > img[data-instant],
+  [data-blur-up][data-md-image] > img[data-instant] {
+    transition: none;
   }
 }
 
