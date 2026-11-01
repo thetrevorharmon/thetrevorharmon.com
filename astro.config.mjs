@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import {satteri} from '@astrojs/markdown-satteri';
 import {readingTime} from '@xsynaptic/satteri-reading-time';
 import {mermaidMdast, mermaidHast} from '@xingwangzhe/satteri-mermaid';
+import {markdownCacheKey} from './src/markdown/cache-key.mjs';
 import {codeLineHighlights} from './src/markdown/code-lines.mjs';
 import {betterFootnoteLinks} from './src/markdown/footnotes.mjs';
 import {headingLinks} from './src/markdown/headings.mjs';
@@ -62,6 +63,10 @@ export default defineConfig({
         externalLinks(),
         internalLinkSlashes(),
         markdownImages(),
+        // Astro's content cache drops functions when it hashes this config, so edits to a
+        // plugin would reuse stale HTML. The name carries a hash of the plugin sources, which
+        // changes the config digest and clears the cache (see src/markdown/cache-key.mjs).
+        {name: `markdown-cache-key-${markdownCacheKey()}`},
       ],
     }),
   },
