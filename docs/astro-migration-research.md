@@ -106,13 +106,13 @@ These can change: `/drafts`, the reading-time numbers and the hashed asset URLs.
 
 The spike ran on a throwaway branch, `astro-spike` (commit `a183d89`, not pushed), in the worktree `../thetrevorharmon.com-spike`. It is a minimal Astro 7.4.4 project in `spike/` with 4 real posts, Sätteri, `syntaxHighlight: 'prism'`, `<ClientRouter />`, and the real `syntaxHighlighting.scss`, `Mermaid.scss`, `CodeEditor` and demo components. Every check below ran in Chromium through Playwright against `astro build && astro preview`, and was compared with the old Gatsby site served from `../thetrevorharmon.com-gatsby`. Scripts, logs and screenshots are in `spike-evidence/` on that branch.
 
-| #   | Risk                                 | Result                            | Fallback used                                                                   |
-| --- | ------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------- |
-| 1   | ANTLR/Zephyr editor under Vite       | **Pass, after a one-line fix**    | Vite aliases for `assert`/`util`/`buffer`. `antlr4ng` is not needed             |
-| 2   | Demos and `<ClientRouter />`         | **Pass**                          | None needed. Islands restart on their own after page swaps                      |
-| 3   | Footnote ids on Sätteri              | **Pass**                          | Custom hast plugin (about 50 lines, mostly the icon)                            |
-| 4   | `satteri-mermaid` diagrams           | **Pass, with 3 small shims**      | Stayed on `satteri-mermaid`. The committed-SVG plugin is not needed             |
-| 5   | Prism output vs `syntaxHighlighting.scss` | **Pass, no changes**         | None needed                                                                     |
+| #   | Risk                                      | Result                         | Fallback used                                                       |
+| --- | ----------------------------------------- | ------------------------------ | ------------------------------------------------------------------- |
+| 1   | ANTLR/Zephyr editor under Vite            | **Pass, after a one-line fix** | Vite aliases for `assert`/`util`/`buffer`. `antlr4ng` is not needed |
+| 2   | Demos and `<ClientRouter />`              | **Pass**                       | None needed. Islands restart on their own after page swaps          |
+| 3   | Footnote ids on Sätteri                   | **Pass**                       | Custom hast plugin (about 50 lines, mostly the icon)                |
+| 4   | `satteri-mermaid` diagrams                | **Pass, with 3 small shims**   | Stayed on `satteri-mermaid`. The committed-SVG plugin is not needed |
+| 5   | Prism output vs `syntaxHighlighting.scss` | **Pass, no changes**           | None needed                                                         |
 
 ### 1. ANTLR/Zephyr editor: pass, with Vite aliases
 
@@ -131,6 +131,7 @@ The spike ran on a throwaway branch, `astro-spike` (commit `a183d89`, not pushed
   ```
 
   After this the warnings are gone. The `fs` require in `antlr4ts` is only on a Node-only path and never runs.
+
 - **Evidence** (`spike-evidence/logs/demos-new-astro-clientrouter.log`): the editor mounts, 4 highlighted token spans with 4 distinct classes (`text-fuchsia-700`, `text-blue-600`, `text-orange-700`, `text-lime-600`), the same as Gatsby. Typing `let answer = 42; // hi` takes the token table from 6 to 12 rows and the highlighted spans from 4 to 9, the same numbers as Gatsby. There are no console errors.
 - **Tolerated console noise:** ANTLR's default error listener logs `token recognition error at: '/\n'` when you type a single `/` on the way to `//`. Gatsby does exactly the same, so the tests ignore that one message.
 - **For Phase 7:** use the aliases. Do not switch to `antlr4ng`, so the +1 day is not needed. The generated lexer/parser in `src/components/CodeEditor/extensions/zephyr/language/build/` works as is, apart from the `import type` fixes described below.
@@ -206,6 +207,7 @@ Result: the final diagrams match the old ones closely in layout, colours, font, 
   ```
 
   Plugin order matters: `mermaidNewlines` before `mermaidMdast`, and `mermaidWrapperClass` after `mermaidHast`.
+
 - **Tailwind 3 + SCSS on Vite 8 (risk 6) worked** with `tailwind.config.cjs` and `postcss.config.cjs` copied over (the spike is `"type": "module"`, so the configs need `.cjs`), and `global.scss` compiled with `@apply`. Sass prints `@import` deprecation warnings. The `~@fontsource/...` imports in `global.scss` must become plain package imports (the spike just dropped them).
 - **Build speed:** the spike builds 5 pages in about 1 second. Tailwind's `content` globs need `./src/**/*.astro` added.
 - **Not tested in the spike:** `astro dev` (only `build` and `preview`), heading ids/links, external links, images and captions, RSS and sitemap, and the `Callout`/`Citation` components as `.astro` files (the spike passes the existing React ones through `components={{...}}`, which works).
@@ -237,7 +239,7 @@ No Sätteri plugin does this. Nothing fits the markdown path cleanly, and `sharp
   - `Image.astro` (featured, hero, tiles): its wrapper `<div>` gets `data-blur-up`.
   - Timing matches the old site: 250ms linear (`GatsbyImage`), and 500ms ease for markdown images (`gatsby-remark-images`). `prefers-reduced-motion`: no fade. Print: always visible.
   - The rules are in `src/styles/global.scss`. The image is only hidden inside `@media (scripting: enabled)`, so without JS it simply shows.
-  - A small inline script in `BaseLayout.astro` sets `data-loaded` on the image after `load` and `decode()` (also on `error`). It is one capturing listener on `document`, so it needs no re-init after `<ClientRouter />` navigations; a sweep on `DOMContentLoaded` and `astro:page-load` catches images that finished first. Cached images fade too (the old `GatsbyImage` did; its markdown images snapped).
+  - A small inline script in `BaseLayout.astro` sets `data-loaded` on the image after `load` and `decode()` (also on `error`). It is one capturing listener on `document`, so it needs no re-init after `<ClientRouter />` navigations; a sweep on `DOMContentLoaded` and `astro:page-load` catches images that finished first. Only first loads fade: an image that comes from a cache gets `data-instant` and shows with no transition (the old `GatsbyImage` faded cached images too; its markdown images snapped). Cached means: already `complete` when first seen (checked at insertion by a `MutationObserver` and on `astro:after-swap`, before it can paint), already loaded in this tab (`window.__blurUpSeen`), or Resource Timing shows no body came over the network (`deliveryType === 'cache'`, `transferSize < encodedBodySize`, or `encodedBodySize === 0` for a 304). `astro preview` sends `no-cache` for `/_astro/*`, so a reload there revalidates; Netlify sends `immutable`. Both are tested. A reload served from the HTTP cache shows one frame of blur before the image snaps in; router trips, back/forward and memory-cached images show none.
   - The featured image fades as well, at the cost of LCP: see `docs/plan.md`.
 - Layout reservation (width/height, aspect-ratio box) is unchanged.
 - `sharp` is imported directly, so it is declared in `package.json`, pinned to the version Astro resolves (0.35.5).
@@ -246,17 +248,17 @@ Numbers and test results are in `docs/plan.md` ("Phase 9 follow-up").
 
 ## Untested risks
 
-| #   | What                                                          | Status after Phase 2                                                           | If it fails                                                 |
-| --- | ------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------- |
-| 1   | The ANTLR/Zephyr editor under Vite                            | **Passed.** Needs Vite aliases for `assert`/`util`/`buffer`. No `antlr4ng`     | -                                                           |
-| 2   | Demos working in a browser, and `<ClientRouter />` page swaps | **Passed.** Needs `import type` cleanup and `client:load`                      | -                                                           |
-| 3   | Footnote ids on Sätteri                                       | **Passed.** Custom hast plugin, ids and icon match                             | -                                                           |
-| 4   | `satteri-mermaid` on the 9 diagrams                           | **Passed with 3 shims** (`\n`, wrapper class, theme variables + CSS)           | Use the custom plugin with the committed SVGs               |
-| 5   | Prism on Sätteri matching `syntaxHighlighting.scss`           | **Passed.** Identical classes and colours, no changes                          | -                                                           |
-| 6   | Tailwind 3 + SCSS on Vite 8                                   | Worked in the spike (needs `.cjs` configs). Still to do properly in Phase 4    | Small config fixes                                          |
-| 7   | Heading anchors matching                                      | Untested                                                                       | Adjust the plugin options                                   |
-| 8   | Images: optimization, the 4 gifs, captions, featured/OG image | Untested                                                                       | Custom caption plugin, or move the gifs to `public/`        |
-| 9   | RSS and sitemap matching                                      | Untested                                                                       | Adjust the RSS endpoint                                     |
+| #   | What                                                          | Status after Phase 2                                                        | If it fails                                          |
+| --- | ------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------- |
+| 1   | The ANTLR/Zephyr editor under Vite                            | **Passed.** Needs Vite aliases for `assert`/`util`/`buffer`. No `antlr4ng`  | -                                                    |
+| 2   | Demos working in a browser, and `<ClientRouter />` page swaps | **Passed.** Needs `import type` cleanup and `client:load`                   | -                                                    |
+| 3   | Footnote ids on Sätteri                                       | **Passed.** Custom hast plugin, ids and icon match                          | -                                                    |
+| 4   | `satteri-mermaid` on the 9 diagrams                           | **Passed with 3 shims** (`\n`, wrapper class, theme variables + CSS)        | Use the custom plugin with the committed SVGs        |
+| 5   | Prism on Sätteri matching `syntaxHighlighting.scss`           | **Passed.** Identical classes and colours, no changes                       | -                                                    |
+| 6   | Tailwind 3 + SCSS on Vite 8                                   | Worked in the spike (needs `.cjs` configs). Still to do properly in Phase 4 | Small config fixes                                   |
+| 7   | Heading anchors matching                                      | Untested                                                                    | Adjust the plugin options                            |
+| 8   | Images: optimization, the 4 gifs, captions, featured/OG image | Untested                                                                    | Custom caption plugin, or move the gifs to `public/` |
+| 9   | RSS and sitemap matching                                      | Untested                                                                    | Adjust the RSS endpoint                              |
 
 **Next step:** go. Continue with the full staged plan in #270 (Phase 3 onward). `docs/plan.md` already has the spike's findings folded in: the Vite aliases, `.cjs` configs and `import type` pass in Phase 3.1, `Link`/`Button`/`Icon` first in Phase 5, the footnote and mermaid plugins reused from the `astro-spike` branch in Phase 6, and no `antlr4ng` in Phase 7.
 
