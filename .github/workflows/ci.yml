@@ -32,17 +32,3 @@ jobs:
       - run: yarn lint
       - run: yarn test
 
-      # The parity specs that only need tests/parity/baseline.json, run against
-      # the build above (`yarn test:ci` starts `yarn preview` itself). The visual
-      # and old-vs-new checks are not run here: they need screenshots of the old
-      # Gatsby site, which are gitignored (about 520 MB). Run those locally
-      # before merging (see the README).
-      - run: npx playwright install --with-deps chromium
-      - run: yarn test:ci
-
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: playwright-report
-          path: playwright-report
-          retention-days: 7

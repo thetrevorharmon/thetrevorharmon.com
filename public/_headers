@@ -1,4 +1,4 @@
-# Same security headers gatsby-plugin-netlify generated on the old site.
+# Security headers.
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block

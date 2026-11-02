@@ -137,13 +137,6 @@ $RECYCLE.BIN/
 .env.*
 !.env.example
 
-### Playwright parity suite ###
-# Screenshots are ~520 MB. They are regenerated from the frozen gatsby-final
-# build: `yarn playwright test --project=old --update-snapshots=all visual.spec.ts`
-tests/parity/__screenshots__/
-playwright-report/
-test-results/
-
 ### Astro ###
 dist/
 .astro/
