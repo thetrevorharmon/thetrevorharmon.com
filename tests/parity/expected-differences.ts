@@ -115,3 +115,39 @@ export const knownBrokenLinks: {page: string; href: string; reason: string}[] =
       reason: 'No element with id "principles" on the old site.',
     },
   ];
+
+/**
+ * Redirects where the new site intentionally differs from production (Gatsby).
+ * Production's `public/_redirects` had rules that Netlify's first-match rule
+ * made unreachable. The new file fixes them, so these paths now go to the
+ * target below. `pending.spec.ts` expects these over the baseline. Paths are
+ * compared without a trailing slash.
+ */
+export const expectedRedirectDifferences: {
+  from: string;
+  to: string;
+  status: number;
+  reason: string;
+}[] = [
+  {
+    from: '/projects/still-cant-explain-album-cover',
+    to: '/blog/designing-album-artwork/',
+    status: 301,
+    reason:
+      'Production sent this to the Michael Barrow post (the no-slash rule shadowed the slash rule). The no-slash rule was removed.',
+  },
+  {
+    from: '/projects/the-backyard-ep-album-cover',
+    to: '/blog/designing-album-artwork/',
+    status: 301,
+    reason:
+      'Same target as production. Listed because the unreachable second rule (to /projects/unplugged-album-cover/) was removed.',
+  },
+  {
+    from: '/projects/unplugged-album-cover',
+    to: '/blog/designing-album-artwork/',
+    status: 301,
+    reason:
+      'Production had no working rule (it was a typo on the backyard path, so this URL returned 404). Now redirects to the album artwork post.',
+  },
+];
