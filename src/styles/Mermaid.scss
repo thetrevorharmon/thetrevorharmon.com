@@ -172,3 +172,11 @@
 .Mermaid .edgeLabel rect {
   opacity: 1 !important;
 }
+
+// Merman writes edge-label text with text-anchor="middle" at x=0, but sizes the box (`rect.background`)
+// to start at x=-2 and run right, assuming start anchoring. Left unfixed, "Yes"/"No" sit half outside
+// their box. Anchor them at the start so text and box line up like the old diagrams.
+.Mermaid .edgeLabel text,
+.Mermaid .edgeLabel tspan {
+  text-anchor: start !important;
+}
