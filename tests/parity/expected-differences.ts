@@ -1,6 +1,6 @@
 // The one place where we accept a difference between the old (Gatsby) and new
 // (Astro) site. Anything that differs and is NOT listed here is a regression.
-// See docs/plan.md, "Ground rules".
+// Add an entry only with a documented reason.
 
 /**
  * Pages that may be missing on the new site (their tests are skipped on a 404).

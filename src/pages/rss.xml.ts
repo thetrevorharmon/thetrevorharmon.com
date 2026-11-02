@@ -8,7 +8,7 @@ const EXCERPT_LENGTH = 140;
 function excerpt(body: string | undefined) {
   // Gatsby's excerpt was empty when a post opens with a one-line component, or
   // with a component whose children are not indented. This is a best-effort
-  // match for what its MDX excerpt did; see docs/plan.md (Phase 8 notes).
+  // match for what its MDX excerpt did.
   const [first = '', second = ''] = (body ?? '').trimStart().split('\n');
   if (/^<(\w+)[^\n]*<\/\1>\s*$/.test(first)) return '';
   if (/^<\w+[^>]*>\s*$/.test(first) && /^\S/.test(second)) return '';

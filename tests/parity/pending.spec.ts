@@ -49,4 +49,4 @@ test.describe('Redirects (deploy preview only)', () => {
 });
 
 // Performance is not a Playwright test: run `yarn lighthouse` (scripts/parity/lighthouse.mjs)
-// and `node scripts/parity/js-payload.mjs`. Results are in docs/plan.md, Phase 9.
+// and `node scripts/parity/js-payload.mjs`.

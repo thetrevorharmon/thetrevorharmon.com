@@ -36,7 +36,7 @@ updates:
       - dependency-name: 'assert'
       - dependency-name: 'util'
       - dependency-name: 'buffer'
-      # Sätteri and its Astro/Mermaid plugins are pinned together (see docs/plan.md).
+      # Sätteri and its Astro/Mermaid plugins are pinned together (upgrade them together).
       - dependency-name: 'satteri'
       - dependency-name: '@xingwangzhe/satteri-mermaid'
       - dependency-name: '@astrojs/markdown-satteri'

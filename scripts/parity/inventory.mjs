@@ -117,7 +117,7 @@ const baseline = {
 
 fs.writeFileSync(outFile, `${JSON.stringify(baseline, null, 2)}\n`);
 
-// Plan checks (docs/plan.md, task 1.3).
+// Sanity checks on the recorded inventory.
 const published = htmlPaths.filter(
   (p) => p !== '/404/' && p !== '/404.html' && p !== '/drafts/',
 );
