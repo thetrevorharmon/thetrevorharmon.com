@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://thetrevorharmon.com/sitemap-index.xml
+Host: https://thetrevorharmon.com

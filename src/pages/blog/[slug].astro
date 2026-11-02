@@ -1,0 +1,71 @@
+---
+import {render} from 'astro:content';
+import {Button} from '../../components/Button';
+import FeaturedImage from '../../components/Image/FeaturedImage.astro';
+import Link from '../../components/Link/Link.astro';
+import Meta from '../../components/Meta/Meta.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
+import {getAllPosts, getReadingList} from '../../lib/collections';
+import {formatDate} from '../../lib/format';
+import {mdxComponents} from '../../lib/mdx-components';
+import {getSocialImageUrl} from '../../lib/social-image';
+import {Routes, siteData} from '../../utils';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    params: {slug: post.data.slug},
+    props: {post, recommendedReading: getReadingList(post, posts)},
+  }));
+}
+
+const {post, recommendedReading} = Astro.props;
+const {data} = post;
+const {Content, remarkPluginFrontmatter} = await render(post);
+
+const twitterUrl = `https://x.com/search?q=${encodeURI(
+  [siteData.siteUrl, Routes.blogPost(data.slug)].join(''),
+)}&src=typed_query&f=top`;
+
+// Set by the reading-time plugin; posts with no prose at all would have none.
+const timeToRead: number = remarkPluginFrontmatter.minutesRead ?? 1;
+---
+
+<PostLayout
+  recommendedReading={recommendedReading}
+  type="Post"
+  hasSignupForm
+  title={data.title}
+  description={data.description}
+  url={Routes.blogPost(data.slug)}
+  image={await getSocialImageUrl(data.image?.source)}
+  noIndex={data.status !== 'Published'}
+>
+  <FeaturedImage image={data.image} />
+  <div class="space-y-tiny mt-large mb-big md:mb-large">
+    <h1>
+      <span>{data.title}</span>
+    </h1>
+    <Meta
+      date={formatDate(data.date)}
+      timeToRead={timeToRead}
+      isLinkPost={data.link != null}
+    />
+  </div>
+  <div class="space-y-medium">
+    <div class="body-styles">
+      <Content components={mdxComponents} />
+    </div>
+    {
+      data.link ? (
+        <Button url={data.link} icon="arrowRight">
+          View Link
+        </Button>
+      ) : (
+        <Link class="block" url={twitterUrl}>
+          Reply to this post on X
+        </Link>
+      )
+    }
+  </div>
+</PostLayout>

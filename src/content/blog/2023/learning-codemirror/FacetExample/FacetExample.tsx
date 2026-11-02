@@ -52,6 +52,7 @@ export function FacetExample() {
   return (
     <div className="Breakout">
       <CodeEditor
+        extraHeight="45.3px"
         language="javascript"
         initialValue={INITIAL_VALUE}
         extensions={extensions}

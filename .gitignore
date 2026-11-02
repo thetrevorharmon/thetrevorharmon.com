@@ -132,14 +132,14 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/osx,vim,node,windows,visualstudiocode
 
-### Gatsby ###
-public
-.cache/
-.cache-puppeteer/
-src/gatsby-types.d.ts
-.schema-type-definitions
-
 ### Env files ###
 .env
 .env.*
 !.env.example
+
+### Astro ###
+dist/
+.astro/
+
+# Local Netlify folder
+.netlify

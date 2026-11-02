@@ -1,0 +1,46 @@
+---
+import {Icon} from '../Icon';
+
+interface Props {
+  class?: string;
+  date?: string | null;
+  isLinkPost?: boolean;
+  timeToRead?: number | null;
+  client?: string | null;
+}
+
+const {
+  class: className,
+  date,
+  isLinkPost = false,
+  timeToRead: timeToReadMinutes,
+  client,
+} = Astro.props;
+
+const timeToRead = timeToReadMinutes ? `${timeToReadMinutes} min read` : null;
+const meta = [date, timeToRead, client].filter(Boolean).join(' • ');
+---
+
+{
+  meta && (
+    <p
+      class:list={[
+        className,
+        'text-[0.86666667rem]',
+        'uppercase tracking-[3px]',
+        'block',
+        'text-text-muted dark:text-text-muted-dark',
+        'fill-text-muted dark:fill-text-muted-dark',
+      ]}
+    >
+      {meta}
+      {isLinkPost && (
+        <Icon
+          name="link"
+          size="small"
+          className="top-[3px] ml-tiny relative inline-block"
+        />
+      )}
+    </p>
+  )
+}

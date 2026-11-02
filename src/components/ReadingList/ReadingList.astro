@@ -1,0 +1,40 @@
+---
+import PostTile from '../PostTile/PostTile.astro';
+import {formatDate} from '../../lib/format';
+import type {ReadingListItem} from '../../lib/reading-list';
+
+interface Props {
+  recommendedReading: ReadingListItem[];
+  type: 'Post' | 'Page';
+}
+
+const {recommendedReading, type} = Astro.props;
+
+const title = type === 'Post' ? `Want to keep reading?` : 'Want to see more?';
+const description = `If you enjoyed this ${
+  type === 'Post' ? 'article' : 'design'
+}, you might enjoy one of these:`;
+---
+
+{
+  recommendedReading.length > 0 && (
+    <div class="space-y-medium w-full">
+      <div class="space-y-tiny">
+        <h2>{title}</h2>
+        <div>
+          <p>{description}</p>
+        </div>
+      </div>
+      <div class="space-y-small">
+        {recommendedReading.map(({slug, label, date, isLinkPost}) => (
+          <PostTile
+            title={label}
+            slug={slug}
+            date={formatDate(date)}
+            isLinkPost={isLinkPost}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}

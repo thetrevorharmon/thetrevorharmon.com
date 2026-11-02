@@ -1,19 +1,21 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {type CSSProperties, useEffect, useMemo, useRef, useState} from 'react';
 import {
   StateField,
   StateEffect,
-  Extension,
+  type Extension,
   Compartment,
 } from '@codemirror/state';
 import {syntaxTree} from '@codemirror/language';
-import {linter, Diagnostic} from '@codemirror/lint';
+import {linter, type Diagnostic} from '@codemirror/lint';
 
 import {EditorView, ViewUpdate} from '@codemirror/view';
-import {Button} from '../../../../../components';
-import ReactCodeEditor, {ReactCodeMirrorRef} from '@uiw/react-codemirror';
+import {Button} from '../../../../../components/Button';
+import ReactCodeEditor, {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {javascript} from '@codemirror/lang-javascript';
 import {BASIC_SETUP, INITIAL_VALUE} from './constants';
-import {useTheme} from '../../../../../context/ThemeContext';
+import {useTheme} from '../../../../../lib/theme';
+import '../../../../../components/CodeEditor/CodeEditor.scss';
+import {lineCount} from '../../../../../components/CodeEditor/lineCount';
 
 const initialCount = 0;
 const updateDeleteCountStateEffect = StateEffect.define<number>();
@@ -161,7 +163,10 @@ export function ReactCodeMirrorSyncStateExample() {
           </Button>
         </div>
       </div>
-      <div className="CodeEditor">
+      <div
+        className="CodeEditor"
+        style={{'--cm-lines': lineCount(INITIAL_VALUE)} as CSSProperties}
+      >
         <ReactCodeEditor
           ref={codeEditorRef}
           onCreateEditor={setEditorView}

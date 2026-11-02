@@ -1,0 +1,49 @@
+---
+// A responsive image that fills a box of the source's shape, up to `width`
+// pixels wide. Replaces the Gatsby `GatsbyImage` wrapper, with the same box
+// behavior: the wrapper holds the aspect ratio and the image covers it.
+import {Image as OptimizedImage} from 'astro:assets';
+import {lqip, lqipBackground} from '../../lib/lqip.mjs';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  /** The widest the image is shown, in pixels. */
+  width?: number;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+}
+
+const {src, alt, width = 800, loading = 'lazy', fetchpriority, class: className} = Astro.props;
+
+const displayWidth = Math.min(width, src.width);
+// Round the height the way the old image component did, so the layout below
+// the image lands on the same pixel.
+const displayHeight = Math.round((displayWidth * src.height) / src.width);
+const widths = [displayWidth / 2, displayWidth, displayWidth * 2].filter(
+  (w) => w <= src.width,
+);
+// The blurred placeholder is the wrapper's background; the image fades in over
+// it once it has loaded (`data-blur-up`: global.scss, and the script in
+// BaseLayout.astro).
+const placeholder = await lqip((src as {fsPath?: string}).fsPath);
+---
+
+<div
+  data-blur-up={placeholder ? '' : undefined}
+  class:list={['relative overflow-hidden', className]}
+  style={`max-width:${displayWidth}px;aspect-ratio:${displayWidth}/${displayHeight}` +
+    (placeholder ? `;${lqipBackground(placeholder)}` : '')}
+>
+  <OptimizedImage
+    src={src}
+    alt={alt}
+    width={displayWidth}
+    widths={widths}
+    sizes={`(min-width: ${displayWidth}px) ${displayWidth}px, 100vw`}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    class="absolute inset-0 m-0 h-full w-full max-w-none object-cover"
+  />
+</div>

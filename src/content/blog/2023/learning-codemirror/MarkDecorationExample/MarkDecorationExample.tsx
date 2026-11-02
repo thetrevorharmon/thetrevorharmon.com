@@ -3,7 +3,7 @@ import {EditorState, StateField} from '@codemirror/state';
 import {
   EditorView,
   Decoration,
-  DecorationSet,
+  type DecorationSet,
   WidgetType,
 } from '@codemirror/view';
 
@@ -63,6 +63,7 @@ export function MarkDecorationExample() {
   return (
     <div className="Breakout">
       <CodeEditor
+        extraHeight="7.7px"
         language="javascript"
         initialValue={INITIAL_VALUE}
         extensions={extensions}

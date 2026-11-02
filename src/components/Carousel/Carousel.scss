@@ -1,20 +1,19 @@
-// gatsby-remark-images sizes each image with inline styles (a max width and a
-// padding-bottom box). Inside the carousel the photo box sets the size instead,
-// so let the image fill it and crop to fit.
+// Inside the carousel, the photo box sets the size, so the image fills it and
+// crops to fit. (Markdown images carry their own width and height attributes
+// and the body styles give them margins and rounded corners; reset those.)
 .Carousel-Image {
-  .gatsby-resp-image-figure,
-  .gatsby-resp-image-wrapper {
-    margin: 0 !important;
-    max-width: none !important;
+  img {
+    display: block;
+    width: 100%;
     height: 100%;
-  }
-
-  .gatsby-resp-image-background-image {
-    padding-bottom: 0 !important;
-    height: 100%;
-  }
-
-  .gatsby-resp-image-image {
+    margin: 0;
+    max-width: none;
     object-fit: cover;
   }
+}
+
+// A photo with a placeholder is wrapped in a span (global.scss) that fills the box.
+.Carousel-Image [data-blur-up] {
+  width: 100%;
+  height: 100%;
 }

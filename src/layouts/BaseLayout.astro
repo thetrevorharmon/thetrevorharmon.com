@@ -1,0 +1,220 @@
+---
+// The base layout: global styles, the router, the no-flash theme script, and
+// the title and social meta tags (the old SEO component). Layout, PageLayout
+// and PostLayout build on this and add the navbar and footer.
+import {ClientRouter} from 'astro:transitions';
+import 'normalize.css';
+import '../styles/global.scss';
+import {siteData} from '../utils';
+// Preload the latin subsets used above the fold so the font swap doesn't move
+// the navbar (Phase 9: desktop CLS 0.016 on `/` without these).
+import montagu500 from '@fontsource/montagu-slab/files/montagu-slab-latin-500-normal.woff2?url';
+import montagu700 from '@fontsource/montagu-slab/files/montagu-slab-latin-700-normal.woff2?url';
+import sourceSerif400 from '@fontsource/source-serif-pro/files/source-serif-pro-latin-400-normal.woff2?url';
+const preloadFonts = [montagu500, montagu700, sourceSerif400];
+
+interface Props {
+  /** The page's own title. Left out on the home page. */
+  title?: string | null;
+  description?: string | null;
+  /** The page path, without a trailing slash (for example `/blog/post`). */
+  url?: string | null;
+  /** An absolute image URL for social cards. */
+  image?: string | null;
+  noIndex?: boolean;
+}
+
+const {
+  title: pageTitle,
+  description: pageDescription,
+  url: pageUrl,
+  image: pageImage,
+  noIndex = false,
+} = Astro.props;
+
+const {
+  title: siteTitle,
+  description: siteDescription,
+  siteUrl,
+  twitterHandle,
+} = siteData;
+
+const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
+const description = pageDescription ?? siteDescription;
+const image = pageImage ?? `${siteUrl}/favicon.png`;
+const url = pageUrl ? `${siteUrl}${pageUrl}/` : siteUrl;
+---
+
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <!-- Basic -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={image} />
+
+    <!-- Additional -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteTitle} />
+
+    <!-- Twitter specific -->
+    <meta
+      property="twitter:card"
+      content={pageImage ? 'summary_large_image' : 'summary'}
+    />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+
+    {preloadFonts.map((href) => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon-32x32.png?v=b062c9b96c2d8bcc7604b9c110640def" type="image/png" />
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous" />
+    <link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=b062c9b96c2d8bcc7604b9c110640def" />
+    <link rel="alternate" type="application/rss+xml" title="Trevor Harmon's Blog" href="/rss.xml" />
+
+    <!-- Hide from search engines -->
+    {noIndex && <meta name="robots" content="noindex" />}
+    <slot name="head" />
+    <!--
+      Sets the theme class on <html> before first paint. Reads the same
+      localStorage key (`theme`) and shape as the old site. Keep in sync
+      with src/lib/theme.ts.
+    -->
+    <script is:inline>
+      (function () {
+        function resolve() {
+          var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+          try {
+            var s = JSON.parse(localStorage.getItem('theme'));
+            if (s && typeof s === 'object' && 'theme' in s && 'followSystem' in s) {
+              if (!s.followSystem) return s.theme === 'dark' ? 'dark' : 'light';
+            }
+          } catch (e) {}
+          return dark ? 'dark' : 'light';
+        }
+        function apply(doc) {
+          var root = doc.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(resolve());
+        }
+        apply(document);
+        if (window.__themeScript) return;
+        window.__themeScript = true;
+        // The incoming page has no class yet; set it before it is swapped in.
+        document.addEventListener('astro:before-swap', function (e) {
+          apply(e.newDocument);
+        });
+        // Follow the system setting live when the user has chosen "system".
+        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+          apply(document);
+        });
+      })();
+    </script>
+    <!--
+      Reveals images that have a blurred placeholder (`[data-blur-up] > img`, see
+      global.scss): once an image has loaded and decoded, `data-loaded` lets it
+      fade in over the blur, as gatsby-plugin-image did. The fade is for the
+      first load only. An image that comes from a cache is shown at once
+      (`data-instant` turns the transition off), because there is no wait to
+      hide. An image counts as cached when:
+        - it is already complete when first seen (memory cache, the same image
+          used on an earlier page, back/forward). A MutationObserver and
+          `astro:after-swap` look at each image as it is inserted, before it can
+          paint, so these never show the blur at all;
+        - its URL has already loaded in this tab (`window.__blurUpSeen`, which
+          survives router swaps);
+        - Resource Timing says the bytes did not come over the network:
+          `deliveryType === 'cache'`, or fewer bytes transferred than the body
+          holds (none for a cache hit), or a body of 0 bytes (a 304 revalidation
+          reports headers only).
+      One capturing listener on the document sees every `load`, including images
+      swapped in by the router, so nothing needs re-initializing. The sweep
+      catches images that finished before the listeners got there.
+    -->
+    <script is:inline>
+      (function () {
+        if (window.__blurUp) return;
+        window.__blurUp = true;
+        var SEL = '[data-blur-up] > img';
+        var handled = new WeakSet();
+        var seen = (window.__blurUpSeen = new Set());
+        function fromCache(img, done) {
+          var url = img.currentSrc || img.src;
+          if (seen.has(url)) return true;
+          var list = performance.getEntriesByName(url, 'resource');
+          var e = list[list.length - 1];
+          // No entry: an image already complete came from an earlier document's
+          // memory cache; one still loading is unknown, so it fades.
+          if (!e) return done;
+          return (
+            e.deliveryType === 'cache' ||
+            e.encodedBodySize === 0 ||
+            e.transferSize < e.encodedBodySize
+          );
+        }
+        function reveal(img, instant) {
+          if (instant) img.setAttribute('data-instant', '');
+          img.setAttribute('data-loaded', '');
+          seen.add(img.currentSrc || img.src);
+        }
+        function show(img, done) {
+          // Once per image: a sweep must not re-decide while decode() is pending.
+          if (handled.has(img) || img.hasAttribute('data-loaded')) return;
+          handled.add(img);
+          var instant = fromCache(img, done);
+          // Decode first, so the fade is not janky; show it either way.
+          if (img.decode) {
+            img.decode().then(
+              function () { reveal(img, instant); },
+              function () { reveal(img, instant); }
+            );
+          } else reveal(img, instant);
+        }
+        function look(root) {
+          if (root.nodeType !== 1) return;
+          var imgs = root.matches(SEL) ? [root] : root.querySelectorAll(SEL);
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i];
+            // Already there when first seen: no wait to hide.
+            if (img.complete && img.naturalWidth > 0) show(img, true);
+          }
+        }
+        document.addEventListener('load', function (e) {
+          var t = e.target;
+          if (t.matches && t.matches(SEL)) show(t);
+        }, true);
+        document.addEventListener('error', function (e) {
+          var t = e.target;
+          if (t.matches && t.matches(SEL)) t.setAttribute('data-loaded', '');
+        }, true);
+        new MutationObserver(function (records) {
+          for (var i = 0; i < records.length; i++) {
+            var added = records[i].addedNodes;
+            for (var j = 0; j < added.length; j++) look(added[j]);
+          }
+        }).observe(document, {childList: true, subtree: true});
+        function sweep() { look(document.documentElement); }
+        document.addEventListener('astro:after-swap', sweep);
+        document.addEventListener('DOMContentLoaded', sweep);
+        document.addEventListener('astro:page-load', sweep);
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

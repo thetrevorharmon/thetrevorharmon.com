@@ -1,13 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .CodeEditor {
   @apply border border-[#ddd] dark:border-[#555];
   @apply rounded-md;
   @apply overflow-hidden;
   @apply font-mono;
   @apply text-[0.85rem];
+
+  // Before the editor mounts (server render, and until the island hydrates) the
+  // wrapper is empty. Reserve the height the mounted editor will have: one
+  // line-height (1.4em) per line, plus the 4px top and bottom padding of
+  // .cm-content. It stops applying as soon as CodeMirror adds its DOM.
+  > [class^='cm-theme']:empty {
+    min-height: calc(var(--cm-lines, 1) * 1.4em + 8px + var(--cm-extra, 0px));
+  }
 
   .cm-cursor {
     @apply border-l-text-bold dark:border-l-text-bold-dark;

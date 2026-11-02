@@ -2,15 +2,15 @@ import React, {useRef, useState} from 'react';
 import {CodeEditor as GlobalCodeEditor} from '../../../../../components/CodeEditor';
 import {
   linter,
-  Diagnostic,
+  type Diagnostic,
   setDiagnosticsEffect,
   diagnosticCount,
 } from '@codemirror/lint';
 import {EditorView, keymap} from '@codemirror/view';
 
-import {Button} from '../../../../../components';
+import {Button} from '../../../../../components/Button';
 import {Annotation, EditorState, Facet} from '@codemirror/state';
-import {ReactCodeMirrorRef} from '@uiw/react-codemirror';
+import {type ReactCodeMirrorRef} from '@uiw/react-codemirror';
 import {StatusBar} from './components/StatusBar';
 
 export type State = 'valid query' | 'query executed' | 'error' | 'loading';

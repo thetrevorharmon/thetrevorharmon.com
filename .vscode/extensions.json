@@ -5,7 +5,7 @@
     "esbenp.prettier-vscode",
     "ms-vscode.sublime-keybindings",
     "unifiedjs.vscode-mdx",
-    "graphql.vscode-graphql-syntax",
+    "astro-build.astro-vscode",
     "compulim.compulim-vscode-closetag",
     "be5invis.toml",
     "bpruitt-goddard.mermaid-markdown-syntax-highlighting"

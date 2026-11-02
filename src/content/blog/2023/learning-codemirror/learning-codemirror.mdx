@@ -174,7 +174,7 @@ To put this all together, here's an editor with a `tabSize` facet, a panel that 
 
 import {FacetExample} from './FacetExample';
 
-<FacetExample />
+<FacetExample client:load />
 
 Facets cover a wide range of functionality within CodeMirror, but I have observed that there tends to be two types of facets (illustrated by the exmaples above):
 
@@ -324,7 +324,7 @@ We're using the [`showPanel`](https://codemirror.net/docs/ref/#view.showPanel) f
 
 import {StateFieldExample} from './StateFieldExample';
 
-<StateFieldExample />
+<StateFieldExample client:load />
 
 As a final example, let's make a new state field that consumes a state effect that CodeMirror exports. Imagine that we want to keep a running list of all of the linter errors (of type `Diagnostic`) in our editor. We can make use of the [`setDiagnosticsEffect`](https://codemirror.net/docs/ref/#lint.setDiagnosticsEffect) state effect type that CodeMirror exposes to us. The code to track the diagnostics would look like this:
 
@@ -416,7 +416,7 @@ Because the range fundamentally changes every time the document is edited (the m
 
 import {MarkDecorationExample} from './MarkDecorationExample';
 
-<MarkDecorationExample />
+<MarkDecorationExample client:load />
 
 This really only scratches the surface of what you can do with decorations–if you want to learn more, the [CodeMirror Decoration Example](https://codemirror.net/examples/decoration/) page is a great place to start.
 
@@ -522,7 +522,7 @@ Our update function updates the text every time the document changes with a new 
 
 import {ViewPluginExample} from './ViewPluginExample';
 
-<ViewPluginExample />
+<ViewPluginExample client:load />
 
 ## Conclusion
 

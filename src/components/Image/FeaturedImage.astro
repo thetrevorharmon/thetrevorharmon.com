@@ -1,0 +1,38 @@
+---
+// The image at the top of a post or page, with its caption. Posts without an
+// image keep the empty wrapper and caption, as the old site did, so spacing
+// is the same.
+import Image from './Image.astro';
+import Attribution from './Attribution.astro';
+
+interface Props {
+  image?: {
+    source: ImageMetadata;
+    alt: string;
+    title?: string;
+    attribution?: {author: string; sourceName: string; sourceUrl: string};
+  };
+}
+
+const {image} = Astro.props;
+---
+
+<div class="space-y-little">
+  <div class="Breakout shadow-sm rounded-md overflow-hidden isolate">
+    {
+      image && (
+        // The first thing on the page, so it is the LCP element: load it now.
+        <Image
+          src={image.source}
+          alt={image.alt}
+          width={800}
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
+  </div>
+  <div class="Caption">
+    {image?.title ?? <Attribution attribution={image?.attribution} />}
+  </div>
+</div>

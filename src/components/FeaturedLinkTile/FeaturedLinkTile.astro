@@ -1,0 +1,42 @@
+---
+import {Icon} from '../Icon';
+import Link from '../Link/Link.astro';
+import {Routes} from '../../utils';
+
+interface Props {
+  title: string;
+  slug: string;
+  excerpt: string;
+}
+
+const {title, slug, excerpt} = Astro.props;
+---
+
+<div
+  class="Breakout rounded-md overflow-hidden shadow-md dark:shadow-none isolate"
+>
+  <div
+    class="overflow-hidden py-medium md:py-big px-normal sm:px-medium md:px-breakout rounded-md border border-solid bg-gradient-to-r border-stone-700 dark:border-stone-500 from-stone-800/80 to-stone-600/80 dark:from-stone-600/50 dark:to-stone-500/10"
+  >
+    <div class="space-y-little">
+      <div class="space-y-little">
+        <h2 class="text-text-bold-dark inline-flex gap-little items-center">
+          {title}<Icon name="link" size="large" />
+        </h2>
+        <p
+          class="text-text-bold-dark whitespace-nowrap overflow-hidden text-ellipsis"
+        >
+          {excerpt}
+        </p>
+      </div>
+
+      <Link
+        url={Routes.blogPost(slug)}
+        class="block text-primary-text-dark hover:text-primary-text-focus-dark focus:text-primary-text-focus-dark"
+        icon={{name: 'arrowRight', position: 'trailing'}}
+      >
+        Continue Reading
+      </Link>
+    </div>
+  </div>
+</div>

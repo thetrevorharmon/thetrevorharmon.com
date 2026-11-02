@@ -548,7 +548,7 @@ So with all of that–we now have working code editor that supports Zephyr, our 
 import {CodeEditor} from '../../../../components/CodeEditor';
 
 <div className="Breakout">
-  <CodeEditor 
+  <CodeEditor client:load
     initialValue={`\n\nconst hello = 'world';\n\n`}
     language="zephyr" 
   />

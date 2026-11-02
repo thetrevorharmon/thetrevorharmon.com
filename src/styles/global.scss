@@ -6,17 +6,17 @@
 
 @import './Mermaid';
 
-@import '~@fontsource/source-serif-pro/400.css';
-@import '~@fontsource/source-serif-pro/400-italic.css';
-@import '~@fontsource/source-serif-pro/700.css';
-@import '~@fontsource/source-serif-pro/700-italic.css';
+@import '@fontsource/source-serif-pro/400.css';
+@import '@fontsource/source-serif-pro/400-italic.css';
+@import '@fontsource/source-serif-pro/700.css';
+@import '@fontsource/source-serif-pro/700-italic.css';
 
-@import '~@fontsource/montagu-slab/500.css';
-@import '~@fontsource/montagu-slab/700.css';
+@import '@fontsource/montagu-slab/500.css';
+@import '@fontsource/montagu-slab/700.css';
 
-@import '~@fontsource/jetbrains-mono/400.css';
-@import '~@fontsource/jetbrains-mono/400-italic.css';
-@import '~@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/400-italic.css';
+@import '@fontsource/jetbrains-mono/700.css';
 
 @layer components {
   .Breakout {
@@ -132,13 +132,13 @@ pre::-webkit-scrollbar-corner {
   @apply rounded-md;
 }
 
-body.light {
+html.light body {
   @apply text-text bg-body-bg;
   background-image: url('../images/noise.png');
   background-repeat: repeat;
 }
 
-body.dark {
+html.dark body {
   @apply text-text-dark bg-body-bg-dark;
   background-image: url('../images/dark-noise.png');
   background-repeat: repeat;
@@ -292,6 +292,62 @@ blockquote {
   }
 }
 
+// Blurred placeholders (src/lib/lqip.mjs). The wrapper holds the box and the
+// placeholder as its background; the image fills it. The image starts
+// transparent and a script (BaseLayout.astro) sets `data-loaded` once it has
+// loaded and decoded, so it fades in on top of the blur, as gatsby-plugin-image
+// did (250ms, linear). Without scripting the image just shows. The fade is for
+// the first load: an image that came from a cache gets `data-instant` along
+// with `data-loaded` and shows with no transition.
+[data-blur-up] {
+  @apply block relative overflow-hidden;
+}
+
+html [data-blur-up] > img {
+  @apply absolute inset-0 m-0 h-full w-full max-w-none object-cover;
+  background: none;
+}
+
+@media (scripting: enabled) {
+  [data-blur-up] > img:not([data-loaded]) {
+    opacity: 0;
+  }
+
+  [data-blur-up] > img {
+    transition: opacity 250ms linear;
+    will-change: opacity;
+  }
+}
+
+// Markdown images faded in over half a second, eased, on the old site.
+@media (scripting: enabled) {
+  [data-blur-up][data-md-image] > img {
+    transition-duration: 500ms;
+    transition-timing-function: ease;
+  }
+}
+
+@media (scripting: enabled) {
+  [data-blur-up] > img[data-instant],
+  [data-blur-up][data-md-image] > img[data-instant] {
+    transition: none;
+  }
+}
+
+@media print {
+  [data-blur-up] > img {
+    opacity: 1 !important;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-blur-up] > img,
+  [data-blur-up][data-md-image] > img {
+    transition: none;
+  }
+}
+
 .body-styles {
   h2 {
     @apply mt-large mb-small;
@@ -301,13 +357,23 @@ blockquote {
     @apply mt-medium mb-small;
   }
 
+  // After a block that the old site wrapped in a <span> (images, code, diagrams).
   span + h3,
-  img + h3 {
+  img + h3,
+  figure + h3,
+  pre + h3,
+  .Mermaid + h3 {
     @apply mt-large;
   }
 
   .header-link {
     @apply hidden md:block;
+
+    // Sits in the left margin, out of the heading's height (the old
+    // gatsby-remark-autolink-headers `before` style).
+    &.before {
+      @apply absolute top-0 left-0 -translate-x-full pr-[4px];
+    }
 
     @apply text-text-muted dark:text-text-muted;
     @apply opacity-50;
@@ -398,27 +464,41 @@ blockquote {
     @apply pl-[6px];
   }
 
-  .gatsby-resp-image-wrapper,
+  // Markdown images (src/markdown/images.mjs). The image is at most 800px wide
+  // (set inline as max-width) and centered, as the old image wrapper was.
+  [data-md-image] {
+    @apply block w-full h-auto mx-auto;
+    @apply rounded-md object-cover;
+    @apply my-medium;
+  }
+
+  // Two-up images with a placeholder: the wrapper is the rounded box.
+  .TwoUp > [data-blur-up] {
+    @apply rounded-md;
+  }
+
+  // Plain images with no wrapper (gifs, as on the old site).
   > img {
     @apply rounded-md overflow-hidden;
     @apply isolate;
     @apply my-medium;
   }
 
-  .TwoUp {
-    .gatsby-resp-image-wrapper,
-    > img {
-      @apply my-0;
-    }
+  .TwoUp > img,
+  .TwoUp > [data-blur-up],
+  .TwoUp [data-md-image] {
+    @apply my-0;
   }
-  .gatsby-resp-image-figure {
+
+  // An image with a title: the title is the caption.
+  .md-figure {
     @apply my-medium;
 
-    .gatsby-resp-image-wrapper {
+    [data-md-image] {
       @apply mt-0 mb-little;
     }
 
-    .gatsby-resp-image-figcaption {
+    figcaption {
       @apply Caption;
     }
   }
